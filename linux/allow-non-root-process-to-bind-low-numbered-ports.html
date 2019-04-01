@@ -1,4 +1,1092 @@
-<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2"><meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU"><meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277"><meta name="yandex-verification" content="4d238d70128aa114"><meta name="baidu-site-verification" content="M3sM0Zbhyh"><link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=7.0.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png?v=7.0.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png?v=7.0.1"><link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png?v=7.0.1"><link rel="mask-icon" href="/images/common/safari-pinned-tab.svg?v=7.0.1" color="#222"><link rel="manifest" href="/images/common/manifest.json"><meta name="msapplication-config" content="/images/common/browserconfig.xml"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.1",sidebar:{position:"left",display:"post",offset:12,onmobile:!1,dimmer:!1},back2top:!0,back2top_sidebar:!1,fancybox:!0,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。"><meta name="keywords" content="setcap,low numbered ports"><meta property="og:type" content="article"><meta property="og:title" content="如何允许非root进程绑定低位端口"><meta property="og:url" content="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html"><meta property="og:site_name" content="Code Life"><meta property="og:description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-03-22T03:51:19.087Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="如何允许非root进程绑定低位端口"><meta name="twitter:description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。"><link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml"><link rel="canonical" href="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>如何允许非root进程绑定低位端口 | Code Life</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Code Life</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Boris Zhao"><meta itemprop="description" content="码农pilot的个人博客"><meta itemprop="image" content="/images/common/avatar.jpeg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Code Life"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">如何允许非root进程绑定低位端口</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2018-08-23 10:30:31" itemprop="dateCreated datePublished" datetime="2018-08-23T10:30:31+08:00">2018-08-23</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><p>众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，<code>setcap</code>命令。</p><a id="more"></a><h1 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h1><p>TL;DR，使用如下命令给这个程序赋予<code>CAP_NET_BIND_SERVICE</code>能力即可。注意，这条命令需要以root身份执行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">setcap</span> CAP_NET_BIND_SERVICE=+eip /path/to/binary</span><br></pre></td></tr></table></figure><h1 id="这到底在干嘛"><a href="#这到底在干嘛" class="headerlink" title="这到底在干嘛"></a>这到底在干嘛</h1><p>接下来，我就把上面这条命令一点点拆开，解释清楚它到底干了什么。</p><h2 id="Capabilities"><a href="#Capabilities" class="headerlink" title="Capabilities"></a>Capabilities</h2><p>首先介绍一下<code>capabilities</code>(能力)这个东西。</p><p>在Linux内核版本2.2开始，Linux将一系列的超级管理员权限细分成了一个个可以单独开启关闭的单元，以提供更细粒度的权限控制，这些单元，就被称之为<code>capabilities</code>。详细的<code>capabilities</code>列表可以参考<a href="#ref_1">Man Page Capabilities(7)</a>。</p><h2 id="CAP-NET-BIND-SERVICE"><a href="#CAP-NET-BIND-SERVICE" class="headerlink" title="CAP_NET_BIND_SERVICE"></a>CAP_NET_BIND_SERVICE</h2><p>拥有这个<code>capability</code>的程序，就可以绑定端口号在1024以下的特权端口。</p><h2 id="setcap"><a href="#setcap" class="headerlink" title="setcap"></a>setcap</h2><p>那么，该如何控制每个<code>capability</code>呢？答案就是<code>setcap</code>命令。上文所提到的命令，就是给指定的这个二进制程序增加<code>CAP_NET_BIND_SERVICE</code>这个<code>capability</code>。</p><p>在<code>capability</code>名后面，用加号相连接的，则是开启这个<code>capability</code>的模式。模式有如下三种：</p><ul><li>e: Effective，意为这个<code>capability</code>是启用的。</li><li>p: Permitted，意为这个<code>capability</code>是允许被使用的。</li><li>i: inherited，意为这个<code>capability</code>可以被其子进程继承。</li></ul><p>在<code>setcap</code>命令中，使用加号来开启这个模式，或者使用减号来关闭这个模式。</p><h1 id="有什么副作用"><a href="#有什么副作用" class="headerlink" title="有什么副作用"></a>有什么副作用</h1><p>这个方法确实有一些副作用，或者说是限制：</p><ol><li>这个方法对脚本无效。如果要使某个脚本拥有这个能力，则需要为其解释器赋予这个能力，而这明显是一个巨大的安全隐患。</li><li>Linux会为使用了<code>setcap</code>或<code>suid</code>的程序禁用掉<code>LD_LIBRARY_PATH</code>。</li></ol><h1 id="除了手动指定，还有没有其他办法"><a href="#除了手动指定，还有没有其他办法" class="headerlink" title="除了手动指定，还有没有其他办法"></a>除了手动指定，还有没有其他办法</h1><p><code>Systemd</code>也支持在<code>service</code>的配置文件中指定<code>capabilities</code>，其用法示例如下：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 该服务仅可以使用哪些capabilities</span></span><br><span class="line"><span class="attr">CapabilityBoundingSet</span>=CAP_NET_BIND_SERVICE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以非特权用户运行程序时需要设定此参数</span></span><br><span class="line"><span class="attr">AmbientCapabilities</span>=CAP_NET_BIND_SERVICE</span><br></pre></td></tr></table></figure><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li><a id="ref_1"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi83L2NhcGFiaWxpdGllcw==" title="https://linux.die.net/man/7/capabilities">Man Page Capabilities(7)<i class="fa fa-external-link"></i></span></a></li><li><a id="ref_2"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi84L3NldGNhcA==" title="https://linux.die.net/man/8/setcap">Man Page setcap(8)<i class="fa fa-external-link"></i></span></a></li><li><a id="ref_3"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi8zL2NhcF9mcm9tX3RleHQ=" title="https://linux.die.net/man/3/cap_from_text">Man Page cap_from_text(3)<i class="fa fa-external-link"></i></span></a></li><li><a id="ref_4"><span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zZWN1cmUud3MvbGludXgvZ2V0Y2FwX3NldGNhcC5odG1s" title="https://www.insecure.ws/linux/getcap_setcap.html">getcap, setcap and file capabilities - insecure.ws<i class="fa fa-external-link"></i></span></a></li><li><a id="ref_5"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQxNDI1OC8zODMzODU4" title="https://stackoverflow.com/a/414258/3833858">Is there a way for non-root processes to bind to “privileged” ports on Linux? - Stack Overflow<i class="fa fa-external-link"></i></span></a></li><li><a id="ref_6"><span class="exturl" data-url="aHR0cDovL3JrNzAwLmdpdGh1Yi5pby8yMDE2LzEwLzI2L2xpbnV4LWNhcGFiaWxpdGllcy8=" title="http://rk700.github.io/2016/10/26/linux-capabilities/">Linux的capabilities机制<i class="fa fa-external-link"></i></span></a></li></ol></div><footer class="post-footer"><div class="post-tags"><a href="/tags/setcap/" rel="tag"># setcap</a> <a href="/tags/low-numbered-ports/" rel="tag"># low numbered ports</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/database/oracle/uninstall-oracle-12c.html" rel="next" title="卸载Oracle Database 12c"><i class="fa fa-chevron-left"></i> 卸载Oracle Database 12c</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/linux/linux-server-security-measures.html" rel="prev" title="购买新的Linux服务器后需要做的安全措施">购买新的Linux服务器后需要做的安全措施 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/common/avatar.jpeg" alt="Boris Zhao"><p class="site-author-name" itemprop="name">Boris Zhao</p><div class="site-description motion-element" itemprop="description">码农pilot的个人博客</div></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">41</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">20</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">48</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span> </span><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span></span></div><div class="cc-license motion-element" itemprop="license"><span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC8="><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么做"><span class="nav-number">1.</span> <span class="nav-text">怎么做</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这到底在干嘛"><span class="nav-number">2.</span> <span class="nav-text">这到底在干嘛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Capabilities"><span class="nav-number">2.1.</span> <span class="nav-text">Capabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAP-NET-BIND-SERVICE"><span class="nav-number">2.2.</span> <span class="nav-text">CAP_NET_BIND_SERVICE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setcap"><span class="nav-number">2.3.</span> <span class="nav-text">setcap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有什么副作用"><span class="nav-number">3.</span> <span class="nav-text">有什么副作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除了手动指定，还有没有其他办法"><span class="nav-number">4.</span> <span class="nav-text">除了手动指定，还有没有其他办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div></div></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">Boris Zhao</span></div><div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.8.0</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.0.1</div><div class="footer-custom"><p>根据相关法律法规，本站不对欧盟用户提供服务。<br>According to regulations, this site does not provide services to users living in EU.</p></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script><script src="/js/src/utils.js?v=7.0.1"></script><script src="/js/src/motion.js?v=7.0.1"></script><script src="/js/src/affix.js?v=7.0.1"></script><script src="/js/src/schemes/pisces.js?v=7.0.1"></script><script src="/js/src/scrollspy.js?v=7.0.1"></script><script src="/js/src/post-details.js?v=7.0.1"></script><script src="/js/src/next-boot.js?v=7.0.1"></script><script src="/js/src/js.cookie.js?v=7.0.1"></script><script src="/js/src/scroll-cookie.js?v=7.0.1"></script><script src="/js/src/exturl.js?v=7.0.1"></script><script>// Popup Window;
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+
+
+
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+
+
+
+  <meta name="yandex-verification" content="4d238d70128aa114">
+
+
+
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg?v=7.0.1" color="#222">
+
+
+  <link rel="manifest" href="/images/common/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/common/browserconfig.xml">
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。">
+<meta name="keywords" content="setcap,low numbered ports">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何允许非root进程绑定低位端口">
+<meta property="og:url" content="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-22T03:51:19.087Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何允许非root进程绑定低位端口">
+<meta name="twitter:description" content="众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，setcap命令。">
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>如何允许非root进程绑定低位端口 | Code Life</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.tk/linux/allow-non-root-process-to-bind-low-numbered-ports.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">如何允许非root进程绑定低位端口
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-23 10:30:31" itemprop="dateCreated datePublished" datetime="2018-08-23T10:30:31+08:00">2018-08-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，<code>setcap</code>命令。</p>
+<a id="more"></a>
+<h1 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h1><p>TL;DR，使用如下命令给这个程序赋予<code>CAP_NET_BIND_SERVICE</code>能力即可。注意，这条命令需要以root身份执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">setcap</span> CAP_NET_BIND_SERVICE=+eip /path/to/binary</span><br></pre></td></tr></table></figure>
+<h1 id="这到底在干嘛"><a href="#这到底在干嘛" class="headerlink" title="这到底在干嘛"></a>这到底在干嘛</h1><p>接下来，我就把上面这条命令一点点拆开，解释清楚它到底干了什么。</p>
+<h2 id="Capabilities"><a href="#Capabilities" class="headerlink" title="Capabilities"></a>Capabilities</h2><p>首先介绍一下<code>capabilities</code>(能力)这个东西。</p>
+<p>在Linux内核版本2.2开始，Linux将一系列的超级管理员权限细分成了一个个可以单独开启关闭的单元，以提供更细粒度的权限控制，这些单元，就被称之为<code>capabilities</code>。详细的<code>capabilities</code>列表可以参考<a href="#ref_1">Man Page Capabilities(7)</a>。</p>
+<h2 id="CAP-NET-BIND-SERVICE"><a href="#CAP-NET-BIND-SERVICE" class="headerlink" title="CAP_NET_BIND_SERVICE"></a>CAP_NET_BIND_SERVICE</h2><p>拥有这个<code>capability</code>的程序，就可以绑定端口号在1024以下的特权端口。</p>
+<h2 id="setcap"><a href="#setcap" class="headerlink" title="setcap"></a>setcap</h2><p>那么，该如何控制每个<code>capability</code>呢？答案就是<code>setcap</code>命令。上文所提到的命令，就是给指定的这个二进制程序增加<code>CAP_NET_BIND_SERVICE</code>这个<code>capability</code>。</p>
+<p>在<code>capability</code>名后面，用加号相连接的，则是开启这个<code>capability</code>的模式。模式有如下三种：</p>
+<ul>
+<li>e: Effective，意为这个<code>capability</code>是启用的。</li>
+<li>p: Permitted，意为这个<code>capability</code>是允许被使用的。</li>
+<li>i: inherited，意为这个<code>capability</code>可以被其子进程继承。 </li>
+</ul>
+<p>在<code>setcap</code>命令中，使用加号来开启这个模式，或者使用减号来关闭这个模式。</p>
+<h1 id="有什么副作用"><a href="#有什么副作用" class="headerlink" title="有什么副作用"></a>有什么副作用</h1><p>这个方法确实有一些副作用，或者说是限制：</p>
+<ol>
+<li>这个方法对脚本无效。如果要使某个脚本拥有这个能力，则需要为其解释器赋予这个能力，而这明显是一个巨大的安全隐患。</li>
+<li>Linux会为使用了<code>setcap</code>或<code>suid</code>的程序禁用掉<code>LD_LIBRARY_PATH</code>。</li>
+</ol>
+<h1 id="除了手动指定，还有没有其他办法"><a href="#除了手动指定，还有没有其他办法" class="headerlink" title="除了手动指定，还有没有其他办法"></a>除了手动指定，还有没有其他办法</h1><p><code>Systemd</code>也支持在<code>service</code>的配置文件中指定<code>capabilities</code>，其用法示例如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 该服务仅可以使用哪些capabilities</span></span><br><span class="line"><span class="attr">CapabilityBoundingSet</span>=CAP_NET_BIND_SERVICE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以非特权用户运行程序时需要设定此参数</span></span><br><span class="line"><span class="attr">AmbientCapabilities</span>=CAP_NET_BIND_SERVICE</span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a id="ref_1"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi83L2NhcGFiaWxpdGllcw==" title="https://linux.die.net/man/7/capabilities">Man Page Capabilities(7)<i class="fa fa-external-link"></i></span></a></li>
+<li><a id="ref_2"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi84L3NldGNhcA==" title="https://linux.die.net/man/8/setcap">Man Page setcap(8)<i class="fa fa-external-link"></i></span></a></li>
+<li><a id="ref_3"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi8zL2NhcF9mcm9tX3RleHQ=" title="https://linux.die.net/man/3/cap_from_text">Man Page cap_from_text(3)<i class="fa fa-external-link"></i></span></a></li>
+<li><a id="ref_4"><span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zZWN1cmUud3MvbGludXgvZ2V0Y2FwX3NldGNhcC5odG1s" title="https://www.insecure.ws/linux/getcap_setcap.html">getcap, setcap and file capabilities - insecure.ws<i class="fa fa-external-link"></i></span></a></li>
+<li><a id="ref_5"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQxNDI1OC8zODMzODU4" title="https://stackoverflow.com/a/414258/3833858">Is there a way for non-root processes to bind to “privileged” ports on Linux? - Stack Overflow<i class="fa fa-external-link"></i></span></a></li>
+<li><a id="ref_6"><span class="exturl" data-url="aHR0cDovL3JrNzAwLmdpdGh1Yi5pby8yMDE2LzEwLzI2L2xpbnV4LWNhcGFiaWxpdGllcy8=" title="http://rk700.github.io/2016/10/26/linux-capabilities/">Linux的capabilities机制<i class="fa fa-external-link"></i></span></a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/setcap/" rel="tag"># setcap</a>
+          
+            <a href="/tags/low-numbered-ports/" rel="tag"># low numbered ports</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/database/oracle/uninstall-oracle-12c.html" rel="next" title="卸载Oracle Database 12c">
+                <i class="fa fa-chevron-left"></i> 卸载Oracle Database 12c
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/linux-server-security-measures.html" rel="prev" title="购买新的Linux服务器后需要做的安全措施">
+                购买新的Linux服务器后需要做的安全措施 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/common/avatar.jpeg" alt="Boris Zhao">
+            
+              <p class="site-author-name" itemprop="name">Boris Zhao</p>
+              <div class="site-description motion-element" itemprop="description">码农pilot的个人博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC8="><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么做"><span class="nav-number">1.</span> <span class="nav-text">怎么做</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这到底在干嘛"><span class="nav-number">2.</span> <span class="nav-text">这到底在干嘛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Capabilities"><span class="nav-number">2.1.</span> <span class="nav-text">Capabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAP-NET-BIND-SERVICE"><span class="nav-number">2.2.</span> <span class="nav-text">CAP_NET_BIND_SERVICE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setcap"><span class="nav-number">2.3.</span> <span class="nav-text">setcap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有什么副作用"><span class="nav-number">3.</span> <span class="nav-text">有什么副作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除了手动指定，还有没有其他办法"><span class="nav-number">4.</span> <span class="nav-text">除了手动指定，还有没有其他办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.0.1</div>
+
+
+
+  <div class="footer-custom"><p>根据相关法律法规，本站不对欧盟用户提供服务。<br>According to regulations, this site does not provide services to users living in EU.</p></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  <script src="/js/src/js.cookie.js?v=7.0.1"></script>
+  <script src="/js/src/scroll-cookie.js?v=7.0.1"></script>
+
+
+  
+  <script src="/js/src/exturl.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
     var isfetched = false;
     var isXml = true;
     // Search DB path;
@@ -314,4 +1402,90 @@
       if (shouldDismissSearchPopup) {
         onPopupClose();
       }
-    });</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script><script>pangu.spacingPage()</script><script>$(".highlight").each(function(t,e){var n=$("<div>").addClass("highlight-wrap");$(e).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(t){var e=$(this).parent().find(".code").find(".line").map(function(t,e){return $(e).text()}).toArray().join("\n"),n=document.createElement("textarea"),o=window.pageYOffset||document.documentElement.scrollTop;n.style.top=o+"px",n.style.position="absolute",n.style.opacity="0",n.readOnly=!0,n.value=e,document.body.appendChild(n),n.select(),n.setSelectionRange(0,e.length),n.readOnly=!1,document.execCommand("copy")?$(this).text("复制成功"):$(this).text("复制失败"),n.blur(),$(this).blur()})).on("mouseleave",function(t){var e=$(this).find(".copy-btn");setTimeout(function(){e.text("复制")},300)}).append(e)})</script></body></html>
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script>pangu.spacingPage();</script>
+
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
