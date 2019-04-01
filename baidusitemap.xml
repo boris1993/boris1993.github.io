@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.tk/projects/java/fundamentals/java-gc-algorithms.html</loc>
+    <lastmod>2019-04-01</lastmod>
+  </url>  <url>
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
     <lastmod>2019-03-27</lastmod>
   </url>  <url>
@@ -52,16 +55,16 @@
     <loc>https://www.boris1993.tk/tools/ssh/macos-install-x11-client.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-5-filter.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
     <loc>https://www.boris1993.tk/database/jdbc-transaction-and-isolation-level.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-5-filter.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
+    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
@@ -94,13 +97,13 @@
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-customized-annotations.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-es.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-logstash.html</loc>

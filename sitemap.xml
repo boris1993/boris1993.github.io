@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.tk/projects/java/fundamentals/java-gc-algorithms.html</loc>
+    
+    <lastmod>2019-04-01T07:47:24.780Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
     
     <lastmod>2019-03-27T08:49:45.199Z</lastmod>
@@ -156,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-5-filter.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.tk/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
@@ -170,7 +170,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -178,6 +178,13 @@
   
   <url>
     <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -254,7 +261,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
