@@ -52,10 +52,10 @@
     <loc>https://www.boris1993.tk/projects/java/spring/learning-spring-mvc.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/linux/linux-server-security-measures.html</loc>
+    <loc>https://www.boris1993.tk/tools/ssh/macos-install-x11-client.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.tk/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.tk/linux/linux-server-security-measures.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/projects/java/Servlet/java-servlet-5-filter.html</loc>
@@ -100,6 +100,9 @@
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-customized-annotations.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
+    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
@@ -107,9 +110,6 @@
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-logstash.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
-    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.tk/tools/dnsmasq/build-dns-server-on-macos.html</loc>
