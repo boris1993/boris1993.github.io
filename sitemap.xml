@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.boris1993.tk/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
     
-    <lastmod>2019-04-02T08:12:05.335Z</lastmod>
+    <lastmod>2019-04-02T09:41:49.488Z</lastmod>
     
   </url>
   
@@ -268,13 +268,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
@@ -290,6 +283,13 @@
   
   <url>
     <loc>https://www.boris1993.tk/tools/elk/install-elk-part-logstash.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.tk/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
