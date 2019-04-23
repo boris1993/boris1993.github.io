@@ -8,5 +8,5 @@ Disallow: /vendors/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
-Sitemap: https://www.boris1993.tk/sitemap.xml
-Sitemap: https://www.boris1993.tk/baidusitemap.xml
+Sitemap: https://www.boris1993.com/sitemap.xml
+Sitemap: https://www.boris1993.com/baidusitemap.xml

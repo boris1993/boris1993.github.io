@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/images/common/manifest.json</loc>
+    
+    <lastmod>2019-04-23T05:44:05.882Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
     
     <lastmod>2019-04-03T03:19:47.328Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://www.boris1993.com/tags/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/images/common/manifest.json</loc>
-    
-    <lastmod>2019-03-22T03:51:19.121Z</lastmod>
     
   </url>
   
@@ -170,14 +170,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -275,14 +275,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
