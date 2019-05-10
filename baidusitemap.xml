@@ -28,13 +28,13 @@
     <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
     <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
@@ -58,10 +58,10 @@
     <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
@@ -103,10 +103,10 @@
     <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
