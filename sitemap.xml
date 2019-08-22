@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
+    
+    <lastmod>2019-08-22T07:28:35.262Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
     
     <lastmod>2019-08-19T03:50:52.567Z</lastmod>
@@ -65,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
-    
-    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tags/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
@@ -79,9 +79,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
+    <loc>https://www.boris1993.com/manifest.json</loc>
     
-    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
     
   </url>
   
@@ -93,9 +93,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
   </url>
   
@@ -121,16 +121,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
@@ -149,9 +142,16 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -170,7 +170,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/spring/learning-spring-mvc.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
@@ -184,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/spring/learning-spring-mvc.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -205,7 +212,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -240,6 +247,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
@@ -254,14 +268,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -282,21 +296,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
@@ -317,14 +324,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/projects/java/building-ssm-project-1-env-prep.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/building-ssm-project-1-env-prep.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
