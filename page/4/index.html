@@ -333,7 +333,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近开始学习Oracle数据库，在这里记录一下在<code>openSuSE Leap 15</code>上安装<code>Oracle Database 12c</code>的过程。</p><p>本文内容目前仅仅是一个大致的安装步骤的介绍，可能会在将来持续补充完善。</p>
+          <p>最近开始学习Oracle数据库，在这里记录一下在<code>openSuSE Leap 15</code>上安装<code>Oracle Database 12c</code>的过程。</p>
+<p>本文内容目前仅仅是一个大致的安装步骤的介绍，可能会在将来持续补充完善。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1221,7 +1222,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>有两种方法可以实现将项目部署到Tomcat的根下。</p><ol><li><p>删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war</p></li><li><p>将项目正常部署(假设war包名为your_project.war)，然后修改<code>conf/server.xml</code>中的<span class="exturl" data-url="aHR0cHM6Ly90b21jYXQuYXBhY2hlLm9yZy90b21jYXQtOC4wLWRvYy9jb25maWcvY29udGV4dC5odG1s" title="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html">Context Root<i class="fa fa-external-link"></i></span>为如下内容：</p></li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"your_project"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure><p>参考文献：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzUzMjg2MzYvMzgzMzg1OA==" title="https://stackoverflow.com/a/5328636/3833858">https://stackoverflow.com/questions/5328518/deploying-my-application-at-the-root-in-tomcat<i class="fa fa-external-link"></i></span></p>
+          <p>有两种方法可以实现将项目部署到Tomcat的根下。</p>
+<ol>
+<li><p>删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war</p>
+</li>
+<li><p>将项目正常部署(假设war包名为your_project.war)，然后修改<code>conf/server.xml</code>中的<span class="exturl" data-url="aHR0cHM6Ly90b21jYXQuYXBhY2hlLm9yZy90b21jYXQtOC4wLWRvYy9jb25maWcvY29udGV4dC5odG1s" title="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html">Context Root<i class="fa fa-external-link"></i></span>为如下内容：</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"your_project"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考文献：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzUzMjg2MzYvMzgzMzg1OA==" title="https://stackoverflow.com/a/5328636/3833858">https://stackoverflow.com/questions/5328518/deploying-my-application-at-the-root-in-tomcat<i class="fa fa-external-link"></i></span></p>
+
         
       
     </div>

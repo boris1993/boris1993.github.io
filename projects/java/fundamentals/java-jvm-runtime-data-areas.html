@@ -61,18 +61,18 @@
   };
 </script>
 
-  <meta name="description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：线程专有pc(program counter)寄存器JVM栈本地方法栈线程间共享堆方法区运行时常量池">
+  <meta name="description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有 pc(program counter)寄存器 JVM栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM运行时的数据区域">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：线程专有pc(program counter)寄存器JVM栈本地方法栈线程间共享堆方法区运行时常量池">
+<meta property="og:description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有 pc(program counter)寄存器 JVM栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-01T08:41:48.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM运行时的数据区域">
-<meta name="twitter:description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：线程专有pc(program counter)寄存器JVM栈本地方法栈线程间共享堆方法区运行时常量池">
+<meta name="twitter:description" content="JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有 pc(program counter)寄存器 JVM栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
   <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
   <link rel="canonical" href="https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas">
 
@@ -342,7 +342,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p><ul><li>线程专有<ul><li><a href="#pc-register">pc(program counter)寄存器</a></li><li><a href="#jvm-stacks">JVM栈</a></li><li><a href="#jvm-native-method-stack">本地方法栈</a></li></ul></li><li>线程间共享<ul><li><a href="#jvm-heap">堆</a></li><li><a href="#jvm-method-area">方法区</a><ul><li><a href="#jvm-constant-pool">运行时常量池</a></li></ul></li></ul></li></ul><a id="more"></a><h1 id="pc-program-counter-寄存器"><a href="#pc-program-counter-寄存器" class="headerlink" title="pc(program counter)寄存器"></a><a name="pc-register"></a>pc(program counter)寄存器</h1><p>JVM允许同时运行多个线程，每个线程都有它自己的PC寄存器。在任意时刻，每个JVM线程都在执行一个方法中的某条语句，而这个正在被执行的方法，就叫做这个线程的“当前方法”。</p><p>如果当前方法不是一个本地(native)方法，那么PC寄存器的内容是当前正在执行的指令的地址；如果当前方法是本地方法，那么PC寄存器的值则是空(undefined)的。</p><h1 id="JVM栈"><a href="#JVM栈" class="headerlink" title="JVM栈"></a><a name="jvm-stacks"></a>JVM栈</h1><p>每个JVM都会在其启动时创建自己私有的JVM栈，栈之中存储的是<a href="/projects/java/fundamentals/java-jvm-stack-frame.html">栈帧</a>，用于存储局部变量和方法调用信息。</p><p>规范中允许栈的深度可以是固定的，也可以根据要求动态的扩展和收缩。如果是固定深度的栈，那么每个栈的深度会在其创建时按照需要独立指定。</p><p>当请求创建的栈大于所允许的深度，那么JVM会抛出<code>StackOverflowError</code>异常；当程序试图扩大一个可以动态伸缩的栈，或者试图为新的线程创建一个栈，但是可用内存不足以完成这个操作时，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p><h1 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a><a name="jvm-native-method-stack"></a>本地方法栈</h1><p>本地方法栈与JVM栈类似，保存了本地方法的调用信息。</p><p>本地方法栈的空间可以是固定的，也可以是动态伸缩的。</p><p>当程序申请了大于所允许的本地方法栈空间，那么JVM会抛出<code>StackOverflowError</code>异常；如果程序申请扩展一个可以动态伸缩的本地方法栈，或者试图创建一个栈，但是可用内存不足以满足要求时，JVM会抛出<code>OutOfMemoryError</code>异常。</p><h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a><a name="jvm-heap"></a>堆</h1><p>在JVM启动时，会创建一个共享于所有线程的堆空间，其中存放着所有的对象，和被分配好空间的数组。用于存放对象的空间由一个自动化的存储空间管理机制，即垃圾回收机制(garbage collector)，来进行管理。堆空间可以是固定大小的，也可以是按需伸缩的。</p><p>如果程序试图申请扩大堆空间，但是存储管理机制无法满足需求时，JVM会抛出<code>OutOfMemory</code>异常。</p><p>在堆中，JVM又根据作用不同，将内存空间分为如下几部分：</p><h2 id="新生代-New-generation"><a href="#新生代-New-generation" class="headerlink" title="新生代(New generation)"></a>新生代(New generation)</h2><p>新生代保留的是生命周期短，并且很快就会被回收掉的对象。其中的空间又随着“复制算法”这一垃圾回收算法而被分为<code>Eden Space</code>和<code>Survivor Space</code>。具体可以参考<a href="/projects/java/fundamentals/java-gc-algorithms.html">Java的垃圾回收算法</a>这篇博文。</p><h2 id="老年代-Tenured-generation"><a href="#老年代-Tenured-generation" class="headerlink" title="老年代(Tenured generation)"></a>老年代(Tenured generation)</h2><p>在多次垃圾回收后仍然存活的对象，将会被放到老年代空间中。因此可以认为，老年代中的对象的生命周期都是比较长的。</p><h1 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a><a name="jvm-method-area"></a>方法区</h1><p>方法区(method area)是一个共享于所有JVM线程的空间，创建于JVM启动时，其中存放着各个类的结构，如运行时常量池、属性、方法，以及方法和<a href="/projects/java/fundamentals/java-jvm-special-methods.html">特殊方法(special methods)</a>的代码。</p><p>方法区的大小可以是固定的，也可以是按需伸缩的，但是根据虚拟机实现的不同，垃圾回收机制可能不会回收或压缩方法区的空间。</p><p>如果方法区的可用内存无法满足一次申请空间的请求，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p><h1 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a><a name="jvm-constant-pool"></a>运行时常量池</h1><p>运行时常量池对应class文件中的<a href="/projects/java/fundamentals/java-jvm-constant-pool.html"><code>constant_pool</code>表</a>。</p><p>运行时常量池中包含了数值常量和属性的引用。每个运行时常量池的空间都会在类或接口被创建时生成，并且从方法区中分配空间。在创建运行时方法区时，如果申请的空间大于方法区可提供的空间，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《The Java Virtual Machine Specification (Java SE 8 Edition)》 - 2.5 Run-Time Data Areas</p>
+        <p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
+<ul>
+<li>线程专有<ul>
+<li><a href="#pc-register">pc(program counter)寄存器</a></li>
+<li><a href="#jvm-stacks">JVM栈</a></li>
+<li><a href="#jvm-native-method-stack">本地方法栈</a></li>
+</ul>
+</li>
+<li>线程间共享<ul>
+<li><a href="#jvm-heap">堆</a></li>
+<li><a href="#jvm-method-area">方法区</a><ul>
+<li><a href="#jvm-constant-pool">运行时常量池</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="pc-program-counter-寄存器"><a href="#pc-program-counter-寄存器" class="headerlink" title="pc(program counter)寄存器"></a><a name="pc-register"></a>pc(program counter)寄存器</h1><p>JVM允许同时运行多个线程，每个线程都有它自己的PC寄存器。在任意时刻，每个JVM线程都在执行一个方法中的某条语句，而这个正在被执行的方法，就叫做这个线程的“当前方法”。</p>
+<p>如果当前方法不是一个本地(native)方法，那么PC寄存器的内容是当前正在执行的指令的地址；如果当前方法是本地方法，那么PC寄存器的值则是空(undefined)的。</p>
+<h1 id="JVM栈"><a href="#JVM栈" class="headerlink" title="JVM栈"></a><a name="jvm-stacks"></a>JVM栈</h1><p>每个JVM都会在其启动时创建自己私有的JVM栈，栈之中存储的是<a href="/projects/java/fundamentals/java-jvm-stack-frame.html">栈帧</a>，用于存储局部变量和方法调用信息。</p>
+<p>规范中允许栈的深度可以是固定的，也可以根据要求动态的扩展和收缩。如果是固定深度的栈，那么每个栈的深度会在其创建时按照需要独立指定。</p>
+<p>当请求创建的栈大于所允许的深度，那么JVM会抛出<code>StackOverflowError</code>异常；当程序试图扩大一个可以动态伸缩的栈，或者试图为新的线程创建一个栈，但是可用内存不足以完成这个操作时，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p>
+<h1 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a><a name="jvm-native-method-stack"></a>本地方法栈</h1><p>本地方法栈与JVM栈类似，保存了本地方法的调用信息。</p>
+<p>本地方法栈的空间可以是固定的，也可以是动态伸缩的。</p>
+<p>当程序申请了大于所允许的本地方法栈空间，那么JVM会抛出<code>StackOverflowError</code>异常；如果程序申请扩展一个可以动态伸缩的本地方法栈，或者试图创建一个栈，但是可用内存不足以满足要求时，JVM会抛出<code>OutOfMemoryError</code>异常。</p>
+<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a><a name="jvm-heap"></a>堆</h1><p>在JVM启动时，会创建一个共享于所有线程的堆空间，其中存放着所有的对象，和被分配好空间的数组。用于存放对象的空间由一个自动化的存储空间管理机制，即垃圾回收机制(garbage collector)，来进行管理。堆空间可以是固定大小的，也可以是按需伸缩的。</p>
+<p>如果程序试图申请扩大堆空间，但是存储管理机制无法满足需求时，JVM会抛出<code>OutOfMemory</code>异常。</p>
+<p>在堆中，JVM又根据作用不同，将内存空间分为如下几部分：</p>
+<h2 id="新生代-New-generation"><a href="#新生代-New-generation" class="headerlink" title="新生代(New generation)"></a>新生代(New generation)</h2><p>新生代保留的是生命周期短，并且很快就会被回收掉的对象。其中的空间又随着“复制算法”这一垃圾回收算法而被分为<code>Eden Space</code>和<code>Survivor Space</code>。具体可以参考<a href="/projects/java/fundamentals/java-gc-algorithms.html">Java的垃圾回收算法</a>这篇博文。</p>
+<h2 id="老年代-Tenured-generation"><a href="#老年代-Tenured-generation" class="headerlink" title="老年代(Tenured generation)"></a>老年代(Tenured generation)</h2><p>在多次垃圾回收后仍然存活的对象，将会被放到老年代空间中。因此可以认为，老年代中的对象的生命周期都是比较长的。</p>
+<h1 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a><a name="jvm-method-area"></a>方法区</h1><p>方法区(method area)是一个共享于所有JVM线程的空间，创建于JVM启动时，其中存放着各个类的结构，如运行时常量池、属性、方法，以及方法和<a href="/projects/java/fundamentals/java-jvm-special-methods.html">特殊方法(special methods)</a>的代码。</p>
+<p>方法区的大小可以是固定的，也可以是按需伸缩的，但是根据虚拟机实现的不同，垃圾回收机制可能不会回收或压缩方法区的空间。</p>
+<p>如果方法区的可用内存无法满足一次申请空间的请求，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p>
+<h1 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a><a name="jvm-constant-pool"></a>运行时常量池</h1><p>运行时常量池对应class文件中的<a href="/projects/java/fundamentals/java-jvm-constant-pool.html"><code>constant_pool</code>表</a>。</p>
+<p>运行时常量池中包含了数值常量和属性的引用。每个运行时常量池的空间都会在类或接口被创建时生成，并且从方法区中分配空间。在创建运行时方法区时，如果申请的空间大于方法区可提供的空间，那么JVM会抛出<code>OutOfMemoryError</code>异常。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《The Java Virtual Machine Specification (Java SE 8 Edition)》 - 2.5 Run-Time Data Areas</p>
+
     </div>
 
     

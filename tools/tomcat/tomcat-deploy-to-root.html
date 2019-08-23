@@ -61,18 +61,18 @@
   };
 </script>
 
-  <meta name="description" content="有两种方法可以实现将项目部署到Tomcat的根下。删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reloadable=&quot;t">
+  <meta name="description" content="有两种方法可以实现将项目部署到Tomcat的根下。  删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war  将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：   1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reload">
 <meta name="keywords" content="Tomcat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何将项目部署至Tomcat的根下">
 <meta property="og:url" content="https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="有两种方法可以实现将项目部署到Tomcat的根下。删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reloadable=&quot;t">
+<meta property="og:description" content="有两种方法可以实现将项目部署到Tomcat的根下。  删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war  将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：   1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reload">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-03-22T03:51:19.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何将项目部署至Tomcat的根下">
-<meta name="twitter:description" content="有两种方法可以实现将项目部署到Tomcat的根下。删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reloadable=&quot;t">
+<meta name="twitter:description" content="有两种方法可以实现将项目部署到Tomcat的根下。  删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war  将项目正常部署(假设war包名为your_project.war)，然后修改conf/server.xml中的Context Root为如下内容：   1&amp;lt;Context path=&quot;&quot; docBase=&quot;your_project&quot; debug=&quot;0&quot; reload">
   <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
   <link rel="canonical" href="https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root">
 
@@ -335,7 +335,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>有两种方法可以实现将项目部署到Tomcat的根下。</p><ol><li><p>删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war</p></li><li><p>将项目正常部署(假设war包名为your_project.war)，然后修改<code>conf/server.xml</code>中的<span class="exturl" data-url="aHR0cHM6Ly90b21jYXQuYXBhY2hlLm9yZy90b21jYXQtOC4wLWRvYy9jb25maWcvY29udGV4dC5odG1s" title="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html">Context Root<i class="fa fa-external-link"></i></span>为如下内容：</p></li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"your_project"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure><p>参考文献：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzUzMjg2MzYvMzgzMzg1OA==" title="https://stackoverflow.com/a/5328636/3833858">https://stackoverflow.com/questions/5328518/deploying-my-application-at-the-root-in-tomcat<i class="fa fa-external-link"></i></span></p>
+        <p>有两种方法可以实现将项目部署到Tomcat的根下。</p>
+<ol>
+<li><p>删掉自带的ROOT/目录，然后将项目的war包重命名为ROOT.war</p>
+</li>
+<li><p>将项目正常部署(假设war包名为your_project.war)，然后修改<code>conf/server.xml</code>中的<span class="exturl" data-url="aHR0cHM6Ly90b21jYXQuYXBhY2hlLm9yZy90b21jYXQtOC4wLWRvYy9jb25maWcvY29udGV4dC5odG1s" title="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html">Context Root<i class="fa fa-external-link"></i></span>为如下内容：</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"your_project"</span> <span class="attr">debug</span>=<span class="string">"0"</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考文献：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzUzMjg2MzYvMzgzMzg1OA==" title="https://stackoverflow.com/a/5328636/3833858">https://stackoverflow.com/questions/5328518/deploying-my-application-at-the-root-in-tomcat<i class="fa fa-external-link"></i></span></p>
+
     </div>
 
     

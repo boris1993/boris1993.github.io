@@ -1,1 +1,52 @@
-window.addEventListener("DOMContentLoaded",()=>{"use strict";var e=()=>{localStorage.setItem("bookmark"+location.pathname,window.scrollY)},t=()=>{var e=localStorage.getItem("bookmark"+location.pathname);e=parseInt(e,10),isNaN(e)||""!==location.hash||$(document.documentElement).animate({scrollTop:e},"fast")};!function(o){var a=document.querySelector(".book-mark-link");window.addEventListener("scroll",()=>{0===window.scrollY?a.classList.add("book-mark-link-fixed"):a.classList.remove("book-mark-link-fixed")}),"auto"===o&&(addEventListener("beforeunload",e),addEventListener("pjax:send",e)),a.addEventListener("click",t=>{t.preventDefault(),e(),$(a).animate({top:-30},"fast",()=>{setTimeout(()=>{a.style.top=""},400)})}),t(),window.addEventListener("pjax:success",t)}(CONFIG.bookmark.save)});
+/* global CONFIG */
+
+window.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+
+  var doSaveScroll = () => {
+    localStorage.setItem('bookmark' + location.pathname, window.scrollY);
+  };
+
+  var scrollToMark = () => {
+    var top = localStorage.getItem('bookmark' + location.pathname);
+    top = parseInt(top, 10);
+    // If the page opens with a specific hash, just jump out
+    if (!isNaN(top) && location.hash === '') {
+      // Auto scroll to the position
+      $(document.documentElement).animate({
+        scrollTop: top
+      }, 'fast');
+    }
+  };
+  // Register everything
+  var init = function(trigger) {
+    // Create a link element
+    var link = document.querySelector('.book-mark-link');
+    // Scroll event
+    window.addEventListener('scroll', () => {
+      window.scrollY === 0 ? link.classList.add('book-mark-link-fixed') : link.classList.remove('book-mark-link-fixed');
+    });
+    // Register beforeunload event when the trigger is auto
+    if (trigger === 'auto') {
+      // Register beforeunload event
+      addEventListener('beforeunload', doSaveScroll);
+      addEventListener('pjax:send', doSaveScroll);
+    }
+    // Save the position by clicking the icon
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      doSaveScroll();
+      $(link).animate({
+        top: -30
+      }, 'fast', () => {
+        setTimeout(() => {
+          link.style.top = '';
+        }, 400);
+      });
+    });
+    scrollToMark();
+    window.addEventListener('pjax:success', scrollToMark);
+  };
+
+  init(CONFIG.bookmark.save);
+});

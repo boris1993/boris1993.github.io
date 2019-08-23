@@ -443,7 +443,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></table></figure><p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>
+          <p>使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
+<p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>
+
         
       
     </div>
@@ -530,7 +534,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>刚才久违的暴哭了一场。</p><p>嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。</p><p>无奈，最近一段时间里，发生了太多闹心的事。</p><p>有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。</p><p>已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。</p><p>我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。</p><p>当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。</p><p>您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。</p>
+          <p>刚才久违的暴哭了一场。</p>
+<p>嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。</p>
+<p>无奈，最近一段时间里，发生了太多闹心的事。</p>
+<p>有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。</p>
+<p>已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。</p>
+<p>我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。</p>
+<p>当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。</p>
+<p>您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1106,7 +1117,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p><ul><li>线程专有<ul><li><a href="#pc-register">pc(program counter)寄存器</a></li><li><a href="#jvm-stacks">JVM栈</a></li><li><a href="#jvm-native-method-stack">本地方法栈</a></li></ul></li><li>线程间共享<ul><li><a href="#jvm-heap">堆</a></li><li><a href="#jvm-method-area">方法区</a><ul><li><a href="#jvm-constant-pool">运行时常量池</a></li></ul></li></ul></li></ul>
+          <p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
+<ul>
+<li>线程专有<ul>
+<li><a href="#pc-register">pc(program counter)寄存器</a></li>
+<li><a href="#jvm-stacks">JVM栈</a></li>
+<li><a href="#jvm-native-method-stack">本地方法栈</a></li>
+</ul>
+</li>
+<li>线程间共享<ul>
+<li><a href="#jvm-heap">堆</a></li>
+<li><a href="#jvm-method-area">方法区</a><ul>
+<li><a href="#jvm-constant-pool">运行时常量池</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1224,7 +1251,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p><p>这次就来阅读一下<code>ArrayList</code>的源码。</p>
+          <p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p>
+<p>这次就来阅读一下<code>ArrayList</code>的源码。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1342,7 +1370,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>注解是Java 5引入的一个新特性，它提供了一个用来将信息和元数据与程序元素相关联的能力，其作用如同一个修饰符，本身并不包含任何程序逻辑。</p><p>本文将介绍如何创建和使用自定义的注解。</p>
+          <p>注解是Java 5引入的一个新特性，它提供了一个用来将信息和元数据与程序元素相关联的能力，其作用如同一个修饰符，本身并不包含任何程序逻辑。</p>
+<p>本文将介绍如何创建和使用自定义的注解。</p>
           <!--noindex-->
           
             <div class="post-button text-center">

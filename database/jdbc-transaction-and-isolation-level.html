@@ -328,7 +328,125 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p><a id="more"></a><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是DBMS执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即<code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code>和查询语句。<br>通常来说，事务会依照如下的流程执行：</p><ol><li><p>开始一个事务</p></li><li><p>执行一系列操作或查询语句</p></li><li><p>如果没有发生错误，则提交这个事务，并将其结束</p></li><li><p>如果发生了错误，则回滚这个事务，并将其结束。</p></li></ol><h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><ul><li>Atomic</li></ul><p>原子性，即一个事务内的所有操作都被作为一个整体看待，要么全部成功，要么全部失败</p><ul><li>Consistency</li></ul><p>一致性，即事务中有操作失败时，这个事务所更改的数据都必须回滚至操作前的状态。</p><ul><li>Isolation</li></ul><p>隔离性，即事务所查看到的数据，要么是一个事务提交前的状态，要么是一个事务提交后的状态，而不可能是事务在执行中的状态。</p><ul><li>Durability</li></ul><p>持久性，即事务对系统的影响是永久的。</p><h2 id="读现象"><a href="#读现象" class="headerlink" title="读现象"></a>读现象</h2><ul><li>脏读</li></ul><p>当一个事务允许读取另一个事务修改但尚未提交的数据时，就有可能发生脏读。</p><ul><li>不可重复读</li></ul><p>在一次事务中，对一行数据的两次读取获得了不同的结果。<br>该现象发生于在执行<code>SELECT</code>时没有获得读锁，或者在读取完毕后立刻释放了读锁。</p><ul><li>幻读</li></ul><p>在事务执行过程中，两个完全一样的查询得到了不同的结果集，即是幻读。它是不可重复读的一个特殊场景。<br>当事务1在执行两次<code>SELECT ... WHERE</code>操作中间，事务2在这个表中生成了一行新数据，而这条新数据正好满足事务1的<code>WHERE</code>条件，导致事务1的两次查询得到了不同的结果集。</p><h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="NONE"><a href="#NONE" class="headerlink" title="NONE"></a><code>NONE</code></h2><p><code>NONE</code>是一个特殊的级别，代表<code>JDBC</code>驱动不支持事务。</p><h2 id="未提交读-READ-UNCOMMITED"><a href="#未提交读-READ-UNCOMMITED" class="headerlink" title="未提交读(READ UNCOMMITED)"></a>未提交读(<code>READ UNCOMMITED</code>)</h2><p>这个是最低的隔离级别。<br>这个隔离级别允许事务读取到其他事务尚未提交(commit)的数据，即允许脏读。</p><h2 id="提交读-READ-COMMITED"><a href="#提交读-READ-COMMITED" class="headerlink" title="提交读(READ COMMITED)"></a>提交读(<code>READ COMMITED</code>)</h2><p>这个隔离级别中，DBMS需要选定对象的写锁一直保持到事务结束，但是读锁会在<code>SELECT</code>操作完成后马上释放，所以有可能会发生“不可重复读”。</p><h2 id="可重复读-REPEATABLE-READ"><a href="#可重复读-REPEATABLE-READ" class="headerlink" title="可重复读(REPEATABLE READ)"></a>可重复读(<code>REPEATABLE READ</code>)</h2><p>在这个隔离级别下，DBMS需要对选定对象的读锁和写锁一直保持到事务结束，但是不要求范围锁，所以有可能发生幻读。</p><h2 id="可串行化-SERIALIZABLE"><a href="#可串行化-SERIALIZABLE" class="headerlink" title="可串行化(SERIALIZABLE)"></a>可串行化(<code>SERIALIZABLE</code>)</h2><p>这是最高的隔离级别。<br>在这个隔离级别下，要求DBMS在选定对象上的读锁和写锁一直保持到事务结束，如果使用了<code>WHERE</code>来描述范围时，则应当获取一个范围锁。这个隔离级别可以防止幻读。</p><h1 id="隔离级别与读现象"><a href="#隔离级别与读现象" class="headerlink" title="隔离级别与读现象"></a>隔离级别与读现象</h1><table><thead><tr><th style="text-align:left">隔离级别</th><th style="text-align:left">脏读</th><th style="text-align:left">不可重复读</th><th style="text-align:left">幻读</th></tr></thead><tbody><tr><td style="text-align:left">未提交读</td><td style="text-align:left">可能发生</td><td style="text-align:left">可能发生</td><td style="text-align:left">可能发生</td></tr><tr><td style="text-align:left">提交读</td><td style="text-align:left">不会发生</td><td style="text-align:left">可能发生</td><td style="text-align:left">可能发生</td></tr><tr><td style="text-align:left">可重复读</td><td style="text-align:left">不会发生</td><td style="text-align:left">不会发生</td><td style="text-align:left">可能发生</td></tr><tr><td style="text-align:left">可串行化</td><td style="text-align:left">不会发生</td><td style="text-align:left">不会发生</td><td style="text-align:left">不会发生</td></tr></tbody></table><h1 id="隔离级别与锁持续时间"><a href="#隔离级别与锁持续时间" class="headerlink" title="隔离级别与锁持续时间"></a>隔离级别与锁持续时间</h1><table><thead><tr><th style="text-align:left">隔离级别</th><th style="text-align:left">写操作</th><th style="text-align:left">读操作</th><th style="text-align:left">范围操作</th></tr></thead><tbody><tr><td style="text-align:left">未提交读</td><td style="text-align:left">当前语句执行完毕</td><td style="text-align:left">当前语句执行完毕</td><td style="text-align:left">当前语句执行完毕</td></tr><tr><td style="text-align:left">提交读</td><td style="text-align:left">当前事务提交</td><td style="text-align:left">当前语句执行完毕</td><td style="text-align:left">当前语句执行完毕</td></tr><tr><td style="text-align:left">可重复读</td><td style="text-align:left">当前事务提交</td><td style="text-align:left">当前事务提交</td><td style="text-align:left">当前语句执行完毕</td></tr><tr><td style="text-align:left">可串行化</td><td style="text-align:left">当前事务提交</td><td style="text-align:left">当前事务提交</td><td style="text-align:left">当前事务提交</td></tr></tbody></table>
+        <p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p>
+<a id="more"></a>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是DBMS执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即<code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code>和查询语句。<br>通常来说，事务会依照如下的流程执行：</p>
+<ol>
+<li><p>开始一个事务</p>
+</li>
+<li><p>执行一系列操作或查询语句</p>
+</li>
+<li><p>如果没有发生错误，则提交这个事务，并将其结束</p>
+</li>
+<li><p>如果发生了错误，则回滚这个事务，并将其结束。</p>
+</li>
+</ol>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><ul>
+<li>Atomic</li>
+</ul>
+<p>原子性，即一个事务内的所有操作都被作为一个整体看待，要么全部成功，要么全部失败</p>
+<ul>
+<li>Consistency</li>
+</ul>
+<p>一致性，即事务中有操作失败时，这个事务所更改的数据都必须回滚至操作前的状态。</p>
+<ul>
+<li>Isolation</li>
+</ul>
+<p>隔离性，即事务所查看到的数据，要么是一个事务提交前的状态，要么是一个事务提交后的状态，而不可能是事务在执行中的状态。</p>
+<ul>
+<li>Durability</li>
+</ul>
+<p>持久性，即事务对系统的影响是永久的。</p>
+<h2 id="读现象"><a href="#读现象" class="headerlink" title="读现象"></a>读现象</h2><ul>
+<li>脏读</li>
+</ul>
+<p>当一个事务允许读取另一个事务修改但尚未提交的数据时，就有可能发生脏读。</p>
+<ul>
+<li>不可重复读</li>
+</ul>
+<p>在一次事务中，对一行数据的两次读取获得了不同的结果。<br>该现象发生于在执行<code>SELECT</code>时没有获得读锁，或者在读取完毕后立刻释放了读锁。</p>
+<ul>
+<li>幻读</li>
+</ul>
+<p>在事务执行过程中，两个完全一样的查询得到了不同的结果集，即是幻读。它是不可重复读的一个特殊场景。<br>当事务1在执行两次<code>SELECT ... WHERE</code>操作中间，事务2在这个表中生成了一行新数据，而这条新数据正好满足事务1的<code>WHERE</code>条件，导致事务1的两次查询得到了不同的结果集。</p>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="NONE"><a href="#NONE" class="headerlink" title="NONE"></a><code>NONE</code></h2><p><code>NONE</code>是一个特殊的级别，代表<code>JDBC</code>驱动不支持事务。</p>
+<h2 id="未提交读-READ-UNCOMMITED"><a href="#未提交读-READ-UNCOMMITED" class="headerlink" title="未提交读(READ UNCOMMITED)"></a>未提交读(<code>READ UNCOMMITED</code>)</h2><p>这个是最低的隔离级别。<br>这个隔离级别允许事务读取到其他事务尚未提交(commit)的数据，即允许脏读。</p>
+<h2 id="提交读-READ-COMMITED"><a href="#提交读-READ-COMMITED" class="headerlink" title="提交读(READ COMMITED)"></a>提交读(<code>READ COMMITED</code>)</h2><p>这个隔离级别中，DBMS需要选定对象的写锁一直保持到事务结束，但是读锁会在<code>SELECT</code>操作完成后马上释放，所以有可能会发生“不可重复读”。</p>
+<h2 id="可重复读-REPEATABLE-READ"><a href="#可重复读-REPEATABLE-READ" class="headerlink" title="可重复读(REPEATABLE READ)"></a>可重复读(<code>REPEATABLE READ</code>)</h2><p>在这个隔离级别下，DBMS需要对选定对象的读锁和写锁一直保持到事务结束，但是不要求范围锁，所以有可能发生幻读。</p>
+<h2 id="可串行化-SERIALIZABLE"><a href="#可串行化-SERIALIZABLE" class="headerlink" title="可串行化(SERIALIZABLE)"></a>可串行化(<code>SERIALIZABLE</code>)</h2><p>这是最高的隔离级别。<br>在这个隔离级别下，要求DBMS在选定对象上的读锁和写锁一直保持到事务结束，如果使用了<code>WHERE</code>来描述范围时，则应当获取一个范围锁。这个隔离级别可以防止幻读。</p>
+<h1 id="隔离级别与读现象"><a href="#隔离级别与读现象" class="headerlink" title="隔离级别与读现象"></a>隔离级别与读现象</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">隔离级别</th>
+<th style="text-align:left">脏读</th>
+<th style="text-align:left">不可重复读</th>
+<th style="text-align:left">幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">未提交读</td>
+<td style="text-align:left">可能发生</td>
+<td style="text-align:left">可能发生</td>
+<td style="text-align:left">可能发生</td>
+</tr>
+<tr>
+<td style="text-align:left">提交读</td>
+<td style="text-align:left">不会发生</td>
+<td style="text-align:left">可能发生</td>
+<td style="text-align:left">可能发生</td>
+</tr>
+<tr>
+<td style="text-align:left">可重复读</td>
+<td style="text-align:left">不会发生</td>
+<td style="text-align:left">不会发生</td>
+<td style="text-align:left">可能发生</td>
+</tr>
+<tr>
+<td style="text-align:left">可串行化</td>
+<td style="text-align:left">不会发生</td>
+<td style="text-align:left">不会发生</td>
+<td style="text-align:left">不会发生</td>
+</tr>
+</tbody>
+</table>
+<h1 id="隔离级别与锁持续时间"><a href="#隔离级别与锁持续时间" class="headerlink" title="隔离级别与锁持续时间"></a>隔离级别与锁持续时间</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">隔离级别</th>
+<th style="text-align:left">写操作</th>
+<th style="text-align:left">读操作</th>
+<th style="text-align:left">范围操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">未提交读</td>
+<td style="text-align:left">当前语句执行完毕</td>
+<td style="text-align:left">当前语句执行完毕</td>
+<td style="text-align:left">当前语句执行完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">提交读</td>
+<td style="text-align:left">当前事务提交</td>
+<td style="text-align:left">当前语句执行完毕</td>
+<td style="text-align:left">当前语句执行完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">可重复读</td>
+<td style="text-align:left">当前事务提交</td>
+<td style="text-align:left">当前事务提交</td>
+<td style="text-align:left">当前语句执行完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">可串行化</td>
+<td style="text-align:left">当前事务提交</td>
+<td style="text-align:left">当前事务提交</td>
+<td style="text-align:left">当前事务提交</td>
+</tr>
+</tbody>
+</table>
+
     </div>
 
     
