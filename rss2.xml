@@ -8,7 +8,7 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>码农pilot的个人博客</description>
-    <pubDate>Thu, 22 Aug 2019 12:09:17 GMT</pubDate>
+    <pubDate>Fri, 23 Aug 2019 06:43:28 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,11 +18,11 @@
       <pubDate>Thu, 22 Aug 2019 09:43:46 GMT</pubDate>
       <description>
       
-        &lt;p&gt;最近项目开发时遇到了一个错误，内容是&lt;code&gt;Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &amp;#39;=&amp;#39;&lt;/code&gt;，经查是关联查询时两个表的排序规则(collation)不同导致的。&lt;/p&gt;
+        &lt;p&gt;最近项目开发时遇到了一个错误，内容是&lt;br&gt;&lt;code&gt;Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &amp;#39;=&amp;#39;&lt;/code&gt;&lt;br&gt;经查是关联查询时两个表的排序规则(collation)不同导致的。&lt;/p&gt;
       
       </description>
       
-      <content:encoded><![CDATA[<p>最近项目开发时遇到了一个错误，内容是<code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code>，经查是关联查询时两个表的排序规则(collation)不同导致的。</p><a id="more"></a><p>解决方法也很简单，有两种方法：</p><p>一种是在查询的SQL中指定另一张表的collation，这是一种权宜之计，治标不治本。代码是这样的：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设左表的排序规则是 utf8_general_ci,</span></span><br><span class="line"><span class="comment">-- 而右表的排序规则是 utf8_unicode_ci</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="string">`a`</span>.<span class="string">`column1`</span>,</span><br><span class="line">    <span class="string">`b`</span>.<span class="string">`column2`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_1`</span> <span class="keyword">AS</span> <span class="string">`a`</span></span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="string">`table_2`</span> <span class="keyword">AS</span> <span class="string">`b`</span></span><br><span class="line">    <span class="keyword">ON</span> <span class="string">`a`</span>.<span class="string">`id`</span> = <span class="string">`b`</span>.<span class="string">`id`</span></span><br><span class="line">    <span class="keyword">COLLATE</span> <span class="string">`utf8_general_ci`</span></span><br></pre></td></tr></table></figure><p>另一种方法是修改表和列的排序规则，将其统一。这个方法从根本上解决了这个问题。操作方法可以参考<a href="/database/mysql/mysql-convert-tables-and-columns-collation.html">在 MySQL 中修改表和列的排序规则 </a>。</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code><br>经查是关联查询时两个表的排序规则(collation)不同导致的。</p><a id="more"></a><p>解决方法也很简单，有两种方法：</p><p>一种是在查询的SQL中指定另一张表的collation，这是一种权宜之计，治标不治本。代码是这样的：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设左表的排序规则是 utf8_general_ci,</span></span><br><span class="line"><span class="comment">-- 而右表的排序规则是 utf8_unicode_ci</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="string">`a`</span>.<span class="string">`column1`</span>,</span><br><span class="line">    <span class="string">`b`</span>.<span class="string">`column2`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_1`</span> <span class="keyword">AS</span> <span class="string">`a`</span></span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="string">`table_2`</span> <span class="keyword">AS</span> <span class="string">`b`</span></span><br><span class="line">    <span class="keyword">ON</span> <span class="string">`a`</span>.<span class="string">`id`</span> = <span class="string">`b`</span>.<span class="string">`id`</span></span><br><span class="line">    <span class="keyword">COLLATE</span> <span class="string">`utf8_general_ci`</span></span><br></pre></td></tr></table></figure><p>另一种方法是修改表和列的排序规则，将其统一。这个方法从根本上解决了这个问题。操作方法可以参考<a href="/database/mysql/mysql-convert-tables-and-columns-collation.html">在 MySQL 中修改表和列的排序规则 </a>。</p>]]></content:encoded>
       
       <comments>https://www.boris1993.com/projects/java/jdbc/illegal-mix-of-collations.html#disqus_thread</comments>
     </item>
@@ -36,7 +36,8 @@
       
         
         
-          &lt;p&gt;使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：&lt;/p&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin
+          &lt;p&gt;使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;li
         
       
       </description>
@@ -53,7 +54,14 @@
       <pubDate>Sun, 18 Aug 2019 02:55:00 GMT</pubDate>
       <description>
       
-        &lt;p&gt;刚才久违的暴哭了一场。&lt;/p&gt;&lt;p&gt;嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。&lt;/p&gt;&lt;p&gt;无奈，最近一段时间里，发生了太多闹心的事。&lt;/p&gt;&lt;p&gt;有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。&lt;/p&gt;&lt;p&gt;已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。&lt;/p&gt;&lt;p&gt;我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。&lt;/p&gt;&lt;p&gt;当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。&lt;/p&gt;&lt;p&gt;您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。&lt;/p&gt;
+        &lt;p&gt;刚才久违的暴哭了一场。&lt;/p&gt;
+&lt;p&gt;嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。&lt;/p&gt;
+&lt;p&gt;无奈，最近一段时间里，发生了太多闹心的事。&lt;/p&gt;
+&lt;p&gt;有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。&lt;/p&gt;
+&lt;p&gt;已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。&lt;/p&gt;
+&lt;p&gt;我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。&lt;/p&gt;
+&lt;p&gt;当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。&lt;/p&gt;
+&lt;p&gt;您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。&lt;/p&gt;
       
       </description>
       
@@ -133,7 +141,23 @@
       <pubDate>Wed, 27 Mar 2019 02:19:51 GMT</pubDate>
       <description>
       
-        &lt;p&gt;JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：&lt;/p&gt;&lt;ul&gt;&lt;li&gt;线程专有&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#pc-register&quot;&gt;pc(program counter)寄存器&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#jvm-stacks&quot;&gt;JVM栈&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#jvm-native-method-stack&quot;&gt;本地方法栈&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;线程间共享&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#jvm-heap&quot;&gt;堆&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#jvm-method-area&quot;&gt;方法区&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#jvm-constant-pool&quot;&gt;运行时常量池&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+        &lt;p&gt;JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程专有&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#pc-register&quot;&gt;pc(program counter)寄存器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#jvm-stacks&quot;&gt;JVM栈&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#jvm-native-method-stack&quot;&gt;本地方法栈&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;线程间共享&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#jvm-heap&quot;&gt;堆&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#jvm-method-area&quot;&gt;方法区&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#jvm-constant-pool&quot;&gt;运行时常量池&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
       
       </description>
       
@@ -149,7 +173,8 @@
       <pubDate>Fri, 22 Mar 2019 08:07:27 GMT</pubDate>
       <description>
       
-        &lt;p&gt;做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。&lt;/p&gt;&lt;p&gt;这次就来阅读一下&lt;code&gt;ArrayList&lt;/code&gt;的源码。&lt;/p&gt;
+        &lt;p&gt;做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。&lt;/p&gt;
+&lt;p&gt;这次就来阅读一下&lt;code&gt;ArrayList&lt;/code&gt;的源码。&lt;/p&gt;
       
       </description>
       
@@ -165,7 +190,8 @@
       <pubDate>Fri, 15 Mar 2019 01:49:15 GMT</pubDate>
       <description>
       
-        &lt;p&gt;注解是Java 5引入的一个新特性，它提供了一个用来将信息和元数据与程序元素相关联的能力，其作用如同一个修饰符，本身并不包含任何程序逻辑。&lt;/p&gt;&lt;p&gt;本文将介绍如何创建和使用自定义的注解。&lt;/p&gt;
+        &lt;p&gt;注解是Java 5引入的一个新特性，它提供了一个用来将信息和元数据与程序元素相关联的能力，其作用如同一个修饰符，本身并不包含任何程序逻辑。&lt;/p&gt;
+&lt;p&gt;本文将介绍如何创建和使用自定义的注解。&lt;/p&gt;
       
       </description>
       
@@ -181,7 +207,8 @@
       <pubDate>Wed, 13 Mar 2019 07:47:21 GMT</pubDate>
       <description>
       
-        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;&lt;p&gt;这篇博文将演示如何创建和使用filter。&lt;/p&gt;
+        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;
+&lt;p&gt;这篇博文将演示如何创建和使用filter。&lt;/p&gt;
       
       </description>
       
@@ -197,7 +224,8 @@
       <pubDate>Tue, 12 Mar 2019 03:26:11 GMT</pubDate>
       <description>
       
-        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;&lt;p&gt;这篇博文将演示如何使用&lt;code&gt;cookie&lt;/code&gt;和&lt;code&gt;session&lt;/code&gt;进行会话追踪。&lt;/p&gt;
+        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;
+&lt;p&gt;这篇博文将演示如何使用&lt;code&gt;cookie&lt;/code&gt;和&lt;code&gt;session&lt;/code&gt;进行会话追踪。&lt;/p&gt;
       
       </description>
       
@@ -213,7 +241,10 @@
       <pubDate>Mon, 11 Mar 2019 06:33:27 GMT</pubDate>
       <description>
       
-        &lt;p&gt;生产者与消费者问题(Producer-consumer problem)，也叫有限缓冲问题(Bounded-buffer problem)，是一个经典的多线程同步问题案例。&lt;/p&gt;&lt;p&gt;该问题中有两个线程共享一个固定大小的缓冲区，一个线程作为生产者，负责向缓冲区中放入数据；另一个线程作为消费者，负责从缓冲区中取出数据。该问题的重点在于，要保证当缓冲区满时，生产者不能继续向其中放入数据，而当缓冲区空时，消费者也不能从缓冲区中取出数据。&lt;/p&gt;&lt;p&gt;那么要保证以上两点，需要在缓冲区空时休眠消费者线程，并当缓冲区有数据之后唤醒消费者线程；以及当缓冲区满时休眠生产者线程，在缓冲区有空闲空间后唤醒生产者线程，或者直接在缓冲区满时放弃未存入缓冲区的数据。&lt;/p&gt;&lt;p&gt;这个问题的难点在于可能会产生死锁。当陷入死锁时，生产者和消费者都会处于休眠状态，并等待对方唤醒自己。&lt;/p&gt;
+        &lt;p&gt;生产者与消费者问题(Producer-consumer problem)，也叫有限缓冲问题(Bounded-buffer problem)，是一个经典的多线程同步问题案例。&lt;/p&gt;
+&lt;p&gt;该问题中有两个线程共享一个固定大小的缓冲区，一个线程作为生产者，负责向缓冲区中放入数据；另一个线程作为消费者，负责从缓冲区中取出数据。该问题的重点在于，要保证当缓冲区满时，生产者不能继续向其中放入数据，而当缓冲区空时，消费者也不能从缓冲区中取出数据。&lt;/p&gt;
+&lt;p&gt;那么要保证以上两点，需要在缓冲区空时休眠消费者线程，并当缓冲区有数据之后唤醒消费者线程；以及当缓冲区满时休眠生产者线程，在缓冲区有空闲空间后唤醒生产者线程，或者直接在缓冲区满时放弃未存入缓冲区的数据。&lt;/p&gt;
+&lt;p&gt;这个问题的难点在于可能会产生死锁。当陷入死锁时，生产者和消费者都会处于休眠状态，并等待对方唤醒自己。&lt;/p&gt;
       
       </description>
       
@@ -229,7 +260,8 @@
       <pubDate>Fri, 08 Mar 2019 03:13:44 GMT</pubDate>
       <description>
       
-        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;&lt;p&gt;这篇博文将演示如何分别处理&lt;code&gt;GET&lt;/code&gt;和&lt;code&gt;POST&lt;/code&gt;请求，以及处理请求中的参数。&lt;/p&gt;
+        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;
+&lt;p&gt;这篇博文将演示如何分别处理&lt;code&gt;GET&lt;/code&gt;和&lt;code&gt;POST&lt;/code&gt;请求，以及处理请求中的参数。&lt;/p&gt;
       
       </description>
       
@@ -245,7 +277,8 @@
       <pubDate>Wed, 06 Mar 2019 02:04:38 GMT</pubDate>
       <description>
       
-        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;&lt;p&gt;这篇博文将介绍一些后面会用到的接口和类。&lt;/p&gt;
+        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;
+&lt;p&gt;这篇博文将介绍一些后面会用到的接口和类。&lt;/p&gt;
       
       </description>
       
@@ -261,7 +294,8 @@
       <pubDate>Wed, 06 Mar 2019 02:04:38 GMT</pubDate>
       <description>
       
-        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;&lt;p&gt;这篇博文将演示如何创建一个servlet。&lt;/p&gt;
+        &lt;p&gt;Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。&lt;/p&gt;
+&lt;p&gt;这篇博文将演示如何创建一个servlet。&lt;/p&gt;
       
       </description>
       
@@ -330,7 +364,8 @@
       
         
         
-          &lt;p&gt;在&lt;code&gt;context.xml&lt;/code&gt;的&lt;code&gt;Context&lt;/code&gt;标签中，设定&lt;code&gt;reloadable=&amp;quot;true&amp;quot;&lt;/code&gt;即可。&lt;/p&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;
+          &lt;p&gt;在&lt;code&gt;context.xml&lt;/code&gt;的&lt;code&gt;Context&lt;/code&gt;标签中，设定&lt;code&gt;reloadable=&amp;quot;true&amp;quot;&lt;/code&gt;即可。&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;
         
       
       </description>
