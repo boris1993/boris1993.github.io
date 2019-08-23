@@ -1,1 +1,777 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="X-UA-Compatible" content="IE=edge"><link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png?v=7.3.0"><link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png?v=7.3.0"><link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png?v=7.3.0"><link rel="mask-icon" href="/images/common/safari-pinned-tab.svg?v=7.3.0" color="#222"><link rel="manifest" href="/images/common/manifest.json"><meta name="msapplication-config" content="/images/common/browserconfig.xml"><meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU"><meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277"><meta name="yandex-verification" content="4d238d70128aa114"><meta name="baidu-site-verification" content="M3sM0Zbhyh"><link rel="stylesheet" href="/css/main.css?v=7.3.0"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.3.0",exturl:!0,sidebar:{position:"left",display:"post",offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!0,algolia:{appID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},path:"search.xml",motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},translation:{copy_button:"复制",copy_success:"复制成功",copy_failure:"复制失败"}}</script><meta name="description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。"><meta name="keywords" content="Redis"><meta property="og:type" content="article"><meta property="og:title" content="使用Docker配置Redis主从复制"><meta property="og:url" content="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html"><meta property="og:site_name" content="Code Life"><meta property="og:description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-08-19T03:19:53.970Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="使用Docker配置Redis主从复制"><meta name="twitter:description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。"><link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml"><link rel="canonical" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,isPage:!1,isArchive:!1}</script><title>使用Docker配置Redis主从复制 | Code Life</title><meta name="generator" content="Hexo 3.8.0"><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container use-motion"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Code Life</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul></nav><div class="site-search"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-wrapper"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"></div></div><div class="search-pop-overlay"></div></div></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content page-post-detail"><div id="posts" class="posts-expand"><article class="post" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Boris Zhao"><meta itemprop="description" content="码农pilot的个人博客"><meta itemprop="image" content="/images/common/avatar.jpeg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Code Life"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">使用Docker配置Redis主从复制</h2><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2019-05-23 15:22:03" itemprop="dateCreated datePublished" datetime="2019-05-23T15:22:03+08:00">2019-05-23</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-08-19 11:19:53" itemprop="dateModified" datetime="2019-08-19T11:19:53+08:00">2019-08-19</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><p>这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、<code>docker-compose.yml</code>的编写，以及结果的验证。</p><a id="more"></a><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>本文将采用如下的目录结构，其中<code>data</code>目录将用于存放各个容器的数据，<code>server</code>目录存放<code>docker-compose.yml</code>以及针对<code>master</code>和<code>slave</code>节点的配置文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    ├── redis-slave1.conf</span><br><span class="line">    └── redis-slave2.conf</span><br></pre></td></tr></table></figure><h2 id="配置Redis节点"><a href="#配置Redis节点" class="headerlink" title="配置Redis节点"></a>配置Redis节点</h2><h3 id="配置master节点"><a href="#配置master节点" class="headerlink" title="配置master节点"></a>配置<code>master</code>节点</h3><p>编辑<code>redis-master.conf</code>，修改下列配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 监听来自外部的连接</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6379</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br></pre></td></tr></table></figure><h3 id="配置slave节点"><a href="#配置slave节点" class="headerlink" title="配置slave节点"></a>配置<code>slave</code>节点</h3><p>创建<code>redis-slave1.conf</code>，修改下列配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 监听来自外部的连接</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6380</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br><span class="line"></span><br><span class="line"># 配置master节点信息</span><br><span class="line"># 格式：</span><br><span class="line">#slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"># 此处masterip所指定的redis-server-master是运行master节点的容器名</span><br><span class="line"># Docker容器间可以使用容器名代替实际的IP地址来通信</span><br><span class="line">slaveof redis-server-master 6379</span><br><span class="line"></span><br><span class="line"># 设定连接主节点所使用的密码</span><br><span class="line">masterauth &quot;redis&quot;</span><br></pre></td></tr></table></figure><p>创建<code>redis-slave2.conf</code>，修改监听端口号为<code>6381</code>，其余配置与<code>redis-slave1.conf</code>相同。</p><h2 id="配置及启动容器"><a href="#配置及启动容器" class="headerlink" title="配置及启动容器"></a>配置及启动容器</h2><h3 id="编写docker-compose-yml"><a href="#编写docker-compose-yml" class="headerlink" title="编写docker-compose.yml"></a>编写<code>docker-compose.yml</code></h3><p>本例中使用<code>docker-compose</code>编排相关容器。要说为什么不用<code>Kubernetes</code>，那是因为对于一个示例来说这玩意太重了。<del>说的一套一套的还不是因为不会用</del></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 主节点的容器</span></span><br><span class="line"><span class="attr">  redis-server-master:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6379</span><span class="string">:6379</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line">        <span class="comment"># 为容器指定一个静态IP</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.2</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line">      <span class="comment"># 映射配置文件和数据目录</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-master.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-master:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="comment"># 必要的内核参数</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line">  <span class="comment"># 从节点1的容器</span></span><br><span class="line"><span class="attr">  redis-server-slave-1:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-slave-1</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6380</span><span class="string">:6380</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.3</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-slave1.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-slave-1:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line">  <span class="comment"># 从节点2的容器</span></span><br><span class="line"><span class="attr">  redis-server-slave-2:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-slave-2</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6381</span><span class="string">:6381</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.4</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-slave2.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-slave-2:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  redis-cluster:</span></span><br><span class="line">    <span class="comment"># IP Address Management</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line">        <span class="comment"># 为容器分配一个独立的子网，用来方便为容器指定静态IP</span></span><br><span class="line">        <span class="comment"># 使用独立的子网可以避免IP地址冲突的问题</span></span><br><span class="line"><span class="attr">        - subnet:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span></span><br></pre></td></tr></table></figure><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>在<code>docker-compose.yml</code>所在位置执行<code>docker-compose up</code>即可启动上述三个容器，<code>docker-compose</code>会将容器日志打印到终端，在日志中可以看到三个<code>Redis</code>服务器在启动过程中的动作，以及从节点加入主节点的信息。</p><p>启动成功后，可以在本机使用<code>redis-cli</code>连接至主节点。连接成功后，可以使用<code>info replication</code>命令检查主从复制的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; info replication</span><br><span class="line"># Replication</span><br><span class="line">role:master</span><br><span class="line">connected_slaves:2</span><br><span class="line">slave0:ip=10.1.0.3,port=6380,state=online,offset=476,lag=1</span><br><span class="line">slave1:ip=10.1.0.4,port=6381,state=online,offset=476,lag=0</span><br><span class="line">master_replid:f29d9059a286deb4bbe5360f9c673a2484370205</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:476</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:1</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:1</span><br><span class="line">repl_backlog_histlen:476</span><br></pre></td></tr></table></figure><p>其中第6行的<code>role:master</code>指示该节点为主节点，第7行的<code>connected_slaves:2</code>说明当前有2个从节点，第8、9行则是两个从节点的信息，包括它们的地址、端口号，和状态。</p><p>如果此时查看该项目的目录结构，则可以发现在<code>data</code>目录中增加了三个Redis服务器的数据目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│   ├── redis-master</span><br><span class="line">│   │   └── dump.rdb</span><br><span class="line">│   ├── redis-slave-1</span><br><span class="line">│   │   └── dump.rdb</span><br><span class="line">│   └── redis-slave-2</span><br><span class="line">│       └── dump.rdb</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    └── redis-slave.conf</span><br></pre></td></tr></table></figure><h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p>光是启动成功还不够，还需要测试一下从节点是否能同步主节点的数据。</p><p>首先连接到主节点，新增一个set：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set foo bar</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br></pre></td></tr></table></figure><p>好的，在主节点里面成功添加了一条数据。那么接下来连接到<code>slave-1</code>，看一下数据有没有同步过去：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br><span class="line">127.0.0.1:6380&gt; set foo baz</span><br><span class="line">(error) READONLY You can&apos;t write against a read only replica.</span><br></pre></td></tr></table></figure><p>看来<code>slave-1</code>成功的从主节点同步了数据，并且这个节点也按照设定，是一个只读的节点。那么<code>slave-2</code>呢？</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6381&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br><span class="line">127.0.0.1:6381&gt; set foo baz</span><br><span class="line">(error) READONLY You can&apos;t write against a read only replica.</span><br></pre></td></tr></table></figure><p>OK，<code>slave-2</code>也成功的同步了数据，并且正在作为一个只读节点运行着。</p><h2 id="系列博文"><a href="#系列博文" class="headerlink" title="系列博文"></a>系列博文</h2><ul><li><a href="/database/Redis/redis-replication-in-docker.html">使用Docker配置Redis主从复制</a></li><li><a href="/database/Redis/redis-sentinel-in-docker.html">使用Docker配置Redis哨兵</a></li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Redis/" rel="tag"># Redis</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/projects/java/fundamentals/java-jvm-stack-frame.html" rel="next" title="JVM的栈帧"><i class="fa fa-chevron-left"></i> JVM的栈帧</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/database/Redis/redis-sentinel-in-docker.html" rel="prev" title="使用Docker配置Redis哨兵">使用Docker配置Redis哨兵 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Redis节点"><span class="nav-number">2.</span> <span class="nav-text">配置Redis节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置master节点"><span class="nav-number">2.1.</span> <span class="nav-text">配置master节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置slave节点"><span class="nav-number">2.2.</span> <span class="nav-text">配置slave节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置及启动容器"><span class="nav-number">3.</span> <span class="nav-text">配置及启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编写docker-compose-yml"><span class="nav-number">3.1.</span> <span class="nav-text">编写docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.2.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试一下"><span class="nav-number">3.3.</span> <span class="nav-text">测试一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系列博文"><span class="nav-number">4.</span> <span class="nav-text">系列博文</span></a></li></ol></div></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/common/avatar.jpeg" alt="Boris Zhao"><p class="site-author-name" itemprop="name">Boris Zhao</p><div class="site-description motion-element" itemprop="description">码农pilot的个人博客</div></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">47</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">23</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">51</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i>RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span> </span><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span></span></div><div class="cc-license motion-element" itemprop="license"><span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC8="><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span></div></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">Boris Zhao</span></div><div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.8.0</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.3.0</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div></div><script src="/lib/jquery/index.js?v=3.4.1"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script><script src="/js/schemes/pisces.js?v=7.3.0"></script><script src="/js/next-boot.js?v=7.3.0"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/js/local-search.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script></body></html>
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg?v=7.3.0" color="#222">
+  <link rel="manifest" href="/images/common/manifest.json">
+  <meta name="msapplication-config" content="/images/common/browserconfig.xml">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Docker配置Redis主从复制">
+<meta property="og:url" content="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-19T03:19:53.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Docker配置Redis主从复制">
+<meta name="twitter:description" content="这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、docker-compose.yml的编写，以及结果的验证。">
+  <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
+  <link rel="canonical" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>使用Docker配置Redis主从复制 | Code Life</title>
+  <meta name="generator" content="Hexo 3.8.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">使用Docker配置Redis主从复制
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-23 15:22:03" itemprop="dateCreated datePublished" datetime="2019-05-23T15:22:03+08:00">2019-05-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-19 11:19:53" itemprop="dateModified" datetime="2019-08-19T11:19:53+08:00">2019-08-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、<code>docker-compose.yml</code>的编写，以及结果的验证。</p><a id="more"></a><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>本文将采用如下的目录结构，其中<code>data</code>目录将用于存放各个容器的数据，<code>server</code>目录存放<code>docker-compose.yml</code>以及针对<code>master</code>和<code>slave</code>节点的配置文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    ├── redis-slave1.conf</span><br><span class="line">    └── redis-slave2.conf</span><br></pre></td></tr></table></figure><h2 id="配置Redis节点"><a href="#配置Redis节点" class="headerlink" title="配置Redis节点"></a>配置Redis节点</h2><h3 id="配置master节点"><a href="#配置master节点" class="headerlink" title="配置master节点"></a>配置<code>master</code>节点</h3><p>编辑<code>redis-master.conf</code>，修改下列配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 监听来自外部的连接</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6379</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br></pre></td></tr></table></figure><h3 id="配置slave节点"><a href="#配置slave节点" class="headerlink" title="配置slave节点"></a>配置<code>slave</code>节点</h3><p>创建<code>redis-slave1.conf</code>，修改下列配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 监听来自外部的连接</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6380</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br><span class="line"></span><br><span class="line"># 配置master节点信息</span><br><span class="line"># 格式：</span><br><span class="line">#slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"># 此处masterip所指定的redis-server-master是运行master节点的容器名</span><br><span class="line"># Docker容器间可以使用容器名代替实际的IP地址来通信</span><br><span class="line">slaveof redis-server-master 6379</span><br><span class="line"></span><br><span class="line"># 设定连接主节点所使用的密码</span><br><span class="line">masterauth &quot;redis&quot;</span><br></pre></td></tr></table></figure><p>创建<code>redis-slave2.conf</code>，修改监听端口号为<code>6381</code>，其余配置与<code>redis-slave1.conf</code>相同。</p><h2 id="配置及启动容器"><a href="#配置及启动容器" class="headerlink" title="配置及启动容器"></a>配置及启动容器</h2><h3 id="编写docker-compose-yml"><a href="#编写docker-compose-yml" class="headerlink" title="编写docker-compose.yml"></a>编写<code>docker-compose.yml</code></h3><p>本例中使用<code>docker-compose</code>编排相关容器。要说为什么不用<code>Kubernetes</code>，那是因为对于一个示例来说这玩意太重了。<del>说的一套一套的还不是因为不会用</del></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 主节点的容器</span></span><br><span class="line"><span class="attr">  redis-server-master:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6379</span><span class="string">:6379</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line">        <span class="comment"># 为容器指定一个静态IP</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.2</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line">      <span class="comment"># 映射配置文件和数据目录</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-master.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-master:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="comment"># 必要的内核参数</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line">  <span class="comment"># 从节点1的容器</span></span><br><span class="line"><span class="attr">  redis-server-slave-1:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-slave-1</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6380</span><span class="string">:6380</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.3</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-slave1.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-slave-1:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line">  <span class="comment"># 从节点2的容器</span></span><br><span class="line"><span class="attr">  redis-server-slave-2:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">redis-server-slave-2</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">redis-server-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">6381</span><span class="string">:6381</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      redis-cluster:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.4</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./redis-slave2.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">../data/redis-slave-2:/data</span></span><br><span class="line"><span class="attr">    sysctls:</span></span><br><span class="line">      <span class="string">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">["redis-server",</span> <span class="string">"/usr/local/etc/redis/redis.conf"</span><span class="string">]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  redis-cluster:</span></span><br><span class="line">    <span class="comment"># IP Address Management</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line">        <span class="comment"># 为容器分配一个独立的子网，用来方便为容器指定静态IP</span></span><br><span class="line">        <span class="comment"># 使用独立的子网可以避免IP地址冲突的问题</span></span><br><span class="line"><span class="attr">        - subnet:</span> <span class="number">10.1</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span></span><br></pre></td></tr></table></figure><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>在<code>docker-compose.yml</code>所在位置执行<code>docker-compose up</code>即可启动上述三个容器，<code>docker-compose</code>会将容器日志打印到终端，在日志中可以看到三个<code>Redis</code>服务器在启动过程中的动作，以及从节点加入主节点的信息。</p><p>启动成功后，可以在本机使用<code>redis-cli</code>连接至主节点。连接成功后，可以使用<code>info replication</code>命令检查主从复制的信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; info replication</span><br><span class="line"># Replication</span><br><span class="line">role:master</span><br><span class="line">connected_slaves:2</span><br><span class="line">slave0:ip=10.1.0.3,port=6380,state=online,offset=476,lag=1</span><br><span class="line">slave1:ip=10.1.0.4,port=6381,state=online,offset=476,lag=0</span><br><span class="line">master_replid:f29d9059a286deb4bbe5360f9c673a2484370205</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:476</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:1</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:1</span><br><span class="line">repl_backlog_histlen:476</span><br></pre></td></tr></table></figure><p>其中第6行的<code>role:master</code>指示该节点为主节点，第7行的<code>connected_slaves:2</code>说明当前有2个从节点，第8、9行则是两个从节点的信息，包括它们的地址、端口号，和状态。</p><p>如果此时查看该项目的目录结构，则可以发现在<code>data</code>目录中增加了三个Redis服务器的数据目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│   ├── redis-master</span><br><span class="line">│   │   └── dump.rdb</span><br><span class="line">│   ├── redis-slave-1</span><br><span class="line">│   │   └── dump.rdb</span><br><span class="line">│   └── redis-slave-2</span><br><span class="line">│       └── dump.rdb</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    └── redis-slave.conf</span><br></pre></td></tr></table></figure><h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p>光是启动成功还不够，还需要测试一下从节点是否能同步主节点的数据。</p><p>首先连接到主节点，新增一个set：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set foo bar</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br></pre></td></tr></table></figure><p>好的，在主节点里面成功添加了一条数据。那么接下来连接到<code>slave-1</code>，看一下数据有没有同步过去：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br><span class="line">127.0.0.1:6380&gt; set foo baz</span><br><span class="line">(error) READONLY You can&apos;t write against a read only replica.</span><br></pre></td></tr></table></figure><p>看来<code>slave-1</code>成功的从主节点同步了数据，并且这个节点也按照设定，是一个只读的节点。那么<code>slave-2</code>呢？</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6381&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; get foo</span><br><span class="line">&quot;bar&quot;</span><br><span class="line">127.0.0.1:6381&gt; set foo baz</span><br><span class="line">(error) READONLY You can&apos;t write against a read only replica.</span><br></pre></td></tr></table></figure><p>OK，<code>slave-2</code>也成功的同步了数据，并且正在作为一个只读节点运行着。</p><h2 id="系列博文"><a href="#系列博文" class="headerlink" title="系列博文"></a>系列博文</h2><ul><li><a href="/database/Redis/redis-replication-in-docker.html">使用Docker配置Redis主从复制</a></li><li><a href="/database/Redis/redis-sentinel-in-docker.html">使用Docker配置Redis哨兵</a></li></ul>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/projects/java/fundamentals/java-jvm-stack-frame.html" rel="next" title="JVM的栈帧">
+                  <i class="fa fa-chevron-left"></i> JVM的栈帧
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/database/Redis/redis-sentinel-in-docker.html" rel="prev" title="使用Docker配置Redis哨兵">
+                  使用Docker配置Redis哨兵 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Redis节点"><span class="nav-number">2.</span> <span class="nav-text">配置Redis节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置master节点"><span class="nav-number">2.1.</span> <span class="nav-text">配置master节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置slave节点"><span class="nav-number">2.2.</span> <span class="nav-text">配置slave节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置及启动容器"><span class="nav-number">3.</span> <span class="nav-text">配置及启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编写docker-compose-yml"><span class="nav-number">3.1.</span> <span class="nav-text">编写docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.2.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试一下"><span class="nav-number">3.3.</span> <span class="nav-text">测试一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系列博文"><span class="nav-number">4.</span> <span class="nav-text">系列博文</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" src="/images/common/avatar.jpeg" alt="Boris Zhao">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description motion-element" itemprop="description">码农pilot的个人博客</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/rss2.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC8="><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.8.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
