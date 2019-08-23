@@ -107,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
@@ -135,14 +128,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -163,6 +163,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
@@ -177,9 +184,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
+    <loc>https://www.boris1993.com/projects/java/spring/learning-spring-mvc.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
@@ -198,14 +205,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/spring/learning-spring-mvc.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -219,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -261,13 +261,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
@@ -275,21 +268,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -303,7 +289,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
@@ -317,13 +317,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
@@ -331,7 +324,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/building-ssm-project-1-env-prep.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.088Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
@@ -345,14 +352,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/building-ssm-project-1-env-prep.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.088Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
