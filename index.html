@@ -292,7 +292,7 @@
                 
               
 
-              <time title="创建时间：2019-09-12 15:27:27 / 修改时间：15:29:16" itemprop="dateCreated datePublished" datetime="2019-09-12T15:27:27+08:00">2019-09-12</time>
+              <time title="创建时间：2019-09-12 15:27:27 / 修改时间：16:23:01" itemprop="dateCreated datePublished" datetime="2019-09-12T15:27:27+08:00">2019-09-12</time>
             </span>
           
             
@@ -331,7 +331,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <p>在使用MyBatis查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
+<p>在这种情况下，或许可以考虑将相关的数据一次性全部查询出来，然后根据某一列作为key，将其存放在一个Map中，把这个Map当成一个临时的缓存。</p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
