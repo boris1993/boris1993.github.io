@@ -8,8 +8,20 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>码农pilot的个人博客</description>
-    <pubDate>Fri, 23 Aug 2019 06:43:28 GMT</pubDate>
+    <pubDate>Thu, 12 Sep 2019 07:29:16 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>让MyBatis把查询结果以Map形式返回</title>
+      <link>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html</link>
+      <guid>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html</guid>
+      <pubDate>Thu, 12 Sep 2019 07:27:27 GMT</pubDate>
+      <description>
+      
+      </description>
+      
+      <comments>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>JDBC错误Illegal mix of collations解决方法</title>
@@ -353,26 +365,6 @@
       <content:encoded><![CDATA[<p>要给某个webapp设定单独的<code>context.xml</code>，只需要在<code>${WEBAPP_ROOT}/webapp</code>目录下新建一个<code>META-INF</code>目录，并将<code>context.xml</code>放进去，就可以了。</p>]]></content:encoded>
       
       <comments>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>配置Tomcat监控class和lib变更并自动重新加载</title>
-      <link>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</link>
-      <guid>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</guid>
-      <pubDate>Fri, 01 Mar 2019 05:21:37 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;p&gt;在&lt;code&gt;context.xml&lt;/code&gt;的&lt;code&gt;Context&lt;/code&gt;标签中，设定&lt;code&gt;reloadable=&amp;quot;true&amp;quot;&lt;/code&gt;即可。&lt;/p&gt;
-&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;
-        
-      
-      </description>
-      
-      <content:encoded><![CDATA[<p>在<code>context.xml</code>的<code>Context</code>标签中，设定<code>reloadable=&quot;true&quot;</code>即可。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Other configurations --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure><p>配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会自动重新加载这个webapp。</p><p>但是这个功能会显著增加Tomcat的性能消耗，故不建议在生产环境中使用。</p>]]></content:encoded>
-      
-      <comments>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html#disqus_thread</comments>
     </item>
     
   </channel>

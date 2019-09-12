@@ -13,9 +13,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // If the page opens with a specific hash, just jump out
     if (!isNaN(top) && location.hash === '') {
       // Auto scroll to the position
-      $(document.documentElement).animate({
+      window.anime({
+        targets  : document.documentElement,
+        duration : 200,
+        easing   : 'linear',
         scrollTop: top
-      }, 'fast');
+      });
     }
   };
   // Register everything
@@ -29,19 +32,23 @@ window.addEventListener('DOMContentLoaded', () => {
     // Register beforeunload event when the trigger is auto
     if (trigger === 'auto') {
       // Register beforeunload event
-      addEventListener('beforeunload', doSaveScroll);
-      addEventListener('pjax:send', doSaveScroll);
+      window.addEventListener('beforeunload', doSaveScroll);
+      window.addEventListener('pjax:send', doSaveScroll);
     }
     // Save the position by clicking the icon
     link.addEventListener('click', event => {
       event.preventDefault();
       doSaveScroll();
-      $(link).animate({
-        top: -30
-      }, 'fast', () => {
-        setTimeout(() => {
-          link.style.top = '';
-        }, 400);
+      window.anime({
+        targets : link,
+        duration: 200,
+        easing  : 'linear',
+        top     : -30,
+        complete: () => {
+          setTimeout(() => {
+            link.style.top = '';
+          }, 400);
+        }
       });
     });
     scrollToMark();

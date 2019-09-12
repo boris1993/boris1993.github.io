@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>让MyBatis把查询结果以Map形式返回</title>
+      <link href="/projects/mybatis/mybatis-return-query-results-in-a-map.html"/>
+      <url>/projects/mybatis/mybatis-return-query-results-in-a-map.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习记录 </category>
+          
+          <category> MyBatis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> MyBatis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JDBC错误Illegal mix of collations解决方法</title>
       <link href="/projects/java/jdbc/illegal-mix-of-collations.html"/>
       <url>/projects/java/jdbc/illegal-mix-of-collations.html</url>
