@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
+    
+    <lastmod>2019-09-12T07:23:02.815Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
     
     <lastmod>2019-08-23T10:08:22.556Z</lastmod>
@@ -107,14 +114,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -128,7 +128,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -163,7 +170,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
@@ -173,20 +180,6 @@
     <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/spring/learning-spring-mvc.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
@@ -205,13 +198,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
@@ -220,6 +206,13 @@
   
   <url>
     <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -254,6 +247,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
@@ -268,21 +268,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -327,13 +320,6 @@
     <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/building-ssm-project-1-env-prep.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
   </url>
   
