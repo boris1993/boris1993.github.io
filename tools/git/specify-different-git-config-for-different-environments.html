@@ -63,19 +63,19 @@
   };
 </script>
 
-  <meta name="description" content="这里简单写一下我对JDBC的事务和隔离级别的理解。">
-<meta name="keywords" content="Java,JDBC,Transaction,Isolation level">
+  <meta name="description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDBC的事务和隔离级别">
-<meta property="og:url" content="https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html">
+<meta property="og:title" content="分环境为Git指定单独的配置">
+<meta property="og:url" content="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="这里简单写一下我对JDBC的事务和隔离级别的理解。">
+<meta property="og:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T03:51:19.093Z">
+<meta property="og:updated_time" content="2019-09-18T09:19:16.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JDBC的事务和隔离级别">
-<meta name="twitter:description" content="这里简单写一下我对JDBC的事务和隔离级别的理解。">
-  <link rel="canonical" href="https://www.boris1993.com/database/jdbc-transaction-and-isolation-level">
+<meta name="twitter:title" content="分环境为Git指定单独的配置">
+<meta name="twitter:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+  <link rel="canonical" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments">
 
 
 <script id="page-configurations">
@@ -89,7 +89,7 @@
   };
 </script>
 
-  <title>JDBC的事务和隔离级别 | Code Life</title>
+  <title>分环境为Git指定单独的配置 | Code Life</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Boris Zhao">
@@ -278,7 +278,7 @@
       <meta itemprop="name" content="Code Life">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">JDBC的事务和隔离级别
+        <h2 class="post-title" itemprop="name headline">分环境为Git指定单独的配置
 
           
         </h2>
@@ -294,19 +294,11 @@
                 
               
 
-              <time title="创建时间：2019-02-27 16:14:58" itemprop="dateCreated datePublished" datetime="2019-02-27T16:14:58+08:00">2019-02-27</time>
+              <time title="创建时间：2019-09-18 15:42:07 / 修改时间：17:19:16" itemprop="dateCreated datePublished" datetime="2019-09-18T15:42:07+08:00">2019-09-18</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -315,7 +307,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
 
                 
                 
@@ -334,124 +333,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p>
+        <p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
+<p>在<code>2.13</code>版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在<code>2.13</code>这个版本中，Git引入了一个名为“按条件引入”(Conditional includes)的功能。这个功能允许用户通过指定一定的条件，来使Git从不同的配置文件中取得配置项。</p>
 <a id="more"></a>
-<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是DBMS执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即<code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code>和查询语句。<br>通常来说，事务会依照如下的流程执行：</p>
-<ol>
-<li><p>开始一个事务</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>“按条件引入”功能可以根据<strong>目录</strong>或者<strong>分支</strong>来决定使用哪个配置，显然根据分支无法区分工作环境和私人环境，所以首先需要分别为工作环境和私人环境创建各自的目录。比如将目录划分为这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">projects</span><br><span class="line">├── work     &lt;== 工作相关</span><br><span class="line">└── personal &lt;== 私人项目</span><br></pre></td></tr></table></figure>
+<h2 id="拆分配置"><a href="#拆分配置" class="headerlink" title="拆分配置"></a>拆分配置</h2><p>接下来，需要为全局、工作、私人分别编写配置文件。本文中，全局配置文件<code>.gitconfig</code>位于<code>$HOME</code>下，各环境的配置文件位于<code>~/.config/git</code>下。</p>
+<h3 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[core]</span></span><br><span class="line">  excludesfile = ~/.gitignore_global</span><br><span class="line">  editor = vim</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/work/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-work</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/personal/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-personal</span><br></pre></td></tr></table></figure>
+<p>第4行和第6行的<code>includeIf</code>段，就是“按条件引入”的配置。在这里需要注意这几点：</p>
+<ul>
+<li><code>gitdir:</code>参数用于匹配本地Git仓库的路径。<ul>
+<li>如果文件系统是大小写不敏感的，并且路径同时包含大写和小写字母，那么需要使用<code>gitdir/i:</code>来匹配。</li>
+<li>如果要匹配某个目录下面的所有子目录，那么在路径最后需要加上<code>/</code>或者<code>/**</code>。（实际上，Git会自动在末尾的<code>/</code>后面附加<code>**</code>）</li>
+<li>反之，如果只要匹配到某一个目录，而不递归包含其下面的所有子目录，那么路径末尾就不要有<code>/</code>。</li>
+</ul>
 </li>
-<li><p>执行一系列操作或查询语句</p>
-</li>
-<li><p>如果没有发生错误，则提交这个事务，并将其结束</p>
-</li>
-<li><p>如果发生了错误，则回滚这个事务，并将其结束。</p>
-</li>
-</ol>
-<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><ul>
-<li>Atomic</li>
+<li><code>path</code>指定了在满足条件时要使用的配置文件</li>
 </ul>
-<p>原子性，即一个事务内的所有操作都被作为一个整体看待，要么全部成功，要么全部失败</p>
-<ul>
-<li>Consistency</li>
+<p>综上所述，位于<code>~/projects/work/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-work</code>中的配置；位于<code>~/projects/personal/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-personal</code>中的配置。</p>
+<h3 id="私人环境和工作环境的配置文件"><a href="#私人环境和工作环境的配置文件" class="headerlink" title="私人环境和工作环境的配置文件"></a>私人环境和工作环境的配置文件</h3><p>这两个环境各自的配置文件就没有什么新鲜的东西了，就只有面向各个环境的身份信息、GPG签名信息等。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[user]</span></span><br><span class="line">  signingkey = 1122334455667788</span><br><span class="line">  name = Your Name</span><br><span class="line">  email = test@example.com</span><br><span class="line"><span class="section">[commit]</span></span><br><span class="line">  gpgsign = true</span><br><span class="line">  template = ~/.stCommitMsg</span><br><span class="line"><span class="section">[gpg]</span></span><br><span class="line">  program = /usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+<h2 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h2><p>写完了配置文件，还是要检查一下是不是生效了的。首先，在一个不包含任何Git仓库的位置执行<code>git config -l</code>，返回的信息中就只有全局配置中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br></pre></td></tr></table></figure>
+<p>然后，进入私人环境的某个Git仓库，再执行<code>git config -l</code>，就可以看到私人环境相关的配置文件被引入了。（仓库自己的配置其实也会被显示出来，这里为了减小篇幅将其略掉了）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br><span class="line">user.signingkey=1122334455667788</span><br><span class="line">user.name=Your Name</span><br><span class="line">user.email=test@example.com</span><br><span class="line">commit.gpgsign=true</span><br><span class="line">commit.template=~/.stCommitMsg</span><br><span class="line">gpg.program=/usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1jb25maWcjX2luY2x1ZGVz" title="https://git-scm.com/docs/git-config#_includes">Git官方文档的<code>Includes</code>部分<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuYmxvZy8yMDE3LTA1LTEwLWdpdC0yLTEzLWhhcy1iZWVuLXJlbGVhc2VkLw==" title="https://github.blog/2017-05-10-git-2-13-has-been-released/">Git 2.13 有趣的新功能介绍 - GitHub<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubW90b3dpbGxpYW1zLmNvbS9jb25kaXRpb25hbC1pbmNsdWRlcy1mb3ItZ2l0LWNvbmZpZw==" title="https://www.motowilliams.com/conditional-includes-for-git-config">Conditional Includes For Git Config<i class="fa fa-external-link"></i></span></li>
 </ul>
-<p>一致性，即事务中有操作失败时，这个事务所更改的数据都必须回滚至操作前的状态。</p>
-<ul>
-<li>Isolation</li>
-</ul>
-<p>隔离性，即事务所查看到的数据，要么是一个事务提交前的状态，要么是一个事务提交后的状态，而不可能是事务在执行中的状态。</p>
-<ul>
-<li>Durability</li>
-</ul>
-<p>持久性，即事务对系统的影响是永久的。</p>
-<h2 id="读现象"><a href="#读现象" class="headerlink" title="读现象"></a>读现象</h2><ul>
-<li>脏读</li>
-</ul>
-<p>当一个事务允许读取另一个事务修改但尚未提交的数据时，就有可能发生脏读。</p>
-<ul>
-<li>不可重复读</li>
-</ul>
-<p>在一次事务中，对一行数据的两次读取获得了不同的结果。<br>该现象发生于在执行<code>SELECT</code>时没有获得读锁，或者在读取完毕后立刻释放了读锁。</p>
-<ul>
-<li>幻读</li>
-</ul>
-<p>在事务执行过程中，两个完全一样的查询得到了不同的结果集，即是幻读。它是不可重复读的一个特殊场景。<br>当事务1在执行两次<code>SELECT ... WHERE</code>操作中间，事务2在这个表中生成了一行新数据，而这条新数据正好满足事务1的<code>WHERE</code>条件，导致事务1的两次查询得到了不同的结果集。</p>
-<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="NONE"><a href="#NONE" class="headerlink" title="NONE"></a><code>NONE</code></h2><p><code>NONE</code>是一个特殊的级别，代表<code>JDBC</code>驱动不支持事务。</p>
-<h2 id="未提交读-READ-UNCOMMITED"><a href="#未提交读-READ-UNCOMMITED" class="headerlink" title="未提交读(READ UNCOMMITED)"></a>未提交读(<code>READ UNCOMMITED</code>)</h2><p>这个是最低的隔离级别。<br>这个隔离级别允许事务读取到其他事务尚未提交(commit)的数据，即允许脏读。</p>
-<h2 id="提交读-READ-COMMITED"><a href="#提交读-READ-COMMITED" class="headerlink" title="提交读(READ COMMITED)"></a>提交读(<code>READ COMMITED</code>)</h2><p>这个隔离级别中，DBMS需要选定对象的写锁一直保持到事务结束，但是读锁会在<code>SELECT</code>操作完成后马上释放，所以有可能会发生“不可重复读”。</p>
-<h2 id="可重复读-REPEATABLE-READ"><a href="#可重复读-REPEATABLE-READ" class="headerlink" title="可重复读(REPEATABLE READ)"></a>可重复读(<code>REPEATABLE READ</code>)</h2><p>在这个隔离级别下，DBMS需要对选定对象的读锁和写锁一直保持到事务结束，但是不要求范围锁，所以有可能发生幻读。</p>
-<h2 id="可串行化-SERIALIZABLE"><a href="#可串行化-SERIALIZABLE" class="headerlink" title="可串行化(SERIALIZABLE)"></a>可串行化(<code>SERIALIZABLE</code>)</h2><p>这是最高的隔离级别。<br>在这个隔离级别下，要求DBMS在选定对象上的读锁和写锁一直保持到事务结束，如果使用了<code>WHERE</code>来描述范围时，则应当获取一个范围锁。这个隔离级别可以防止幻读。</p>
-<h1 id="隔离级别与读现象"><a href="#隔离级别与读现象" class="headerlink" title="隔离级别与读现象"></a>隔离级别与读现象</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">隔离级别</th>
-<th style="text-align:left">脏读</th>
-<th style="text-align:left">不可重复读</th>
-<th style="text-align:left">幻读</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">未提交读</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
-</tr>
-<tr>
-<td style="text-align:left">提交读</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
-</tr>
-<tr>
-<td style="text-align:left">可重复读</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">可能发生</td>
-</tr>
-<tr>
-<td style="text-align:left">可串行化</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
-</tr>
-</tbody>
-</table>
-<h1 id="隔离级别与锁持续时间"><a href="#隔离级别与锁持续时间" class="headerlink" title="隔离级别与锁持续时间"></a>隔离级别与锁持续时间</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">隔离级别</th>
-<th style="text-align:left">写操作</th>
-<th style="text-align:left">读操作</th>
-<th style="text-align:left">范围操作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">未提交读</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
-</tr>
-<tr>
-<td style="text-align:left">提交读</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
-</tr>
-<tr>
-<td style="text-align:left">可重复读</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前语句执行完毕</td>
-</tr>
-<tr>
-<td style="text-align:left">可串行化</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
-</tr>
-</tbody>
-</table>
 
     </div>
 
@@ -467,13 +377,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/Java/" rel="tag"># Java</a>
-            
-              <a href="/tags/JDBC/" rel="tag"># JDBC</a>
-            
-              <a href="/tags/Transaction/" rel="tag"># Transaction</a>
-            
-              <a href="/tags/Isolation-level/" rel="tag"># Isolation level</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
             
           </div>
         
@@ -483,8 +387,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/linux/shell-set-ex.html" rel="next" title="Shell脚本中 set -ex 命令的作用">
-                  <i class="fa fa-chevron-left"></i> Shell脚本中 set -ex 命令的作用
+                <a href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" rel="next" title="让MyBatis把查询结果以Map形式返回">
+                  <i class="fa fa-chevron-left"></i> 让MyBatis把查询结果以Map形式返回
                 </a>
               
             </div>
@@ -492,10 +396,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/projects/java/fundamentals/java-multi-threading-how-to.html" rel="prev" title="Java如何创建和运行多线程">
-                  Java如何创建和运行多线程 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -544,7 +444,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#名词解释"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读现象"><span class="nav-number">1.3.</span> <span class="nav-text">读现象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别"><span class="nav-number">2.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NONE"><span class="nav-number">2.1.</span> <span class="nav-text">NONE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未提交读-READ-UNCOMMITED"><span class="nav-number">2.2.</span> <span class="nav-text">未提交读(READ UNCOMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交读-READ-COMMITED"><span class="nav-number">2.3.</span> <span class="nav-text">提交读(READ COMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重复读-REPEATABLE-READ"><span class="nav-number">2.4.</span> <span class="nav-text">可重复读(REPEATABLE READ)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可串行化-SERIALIZABLE"><span class="nav-number">2.5.</span> <span class="nav-text">可串行化(SERIALIZABLE)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别与读现象"><span class="nav-number">3.</span> <span class="nav-text">隔离级别与读现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别与锁持续时间"><span class="nav-number">4.</span> <span class="nav-text">隔离级别与锁持续时间</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分配置"><span class="nav-number">2.</span> <span class="nav-text">拆分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">全局配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人环境和工作环境的配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">私人环境和工作环境的配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查配置"><span class="nav-number">3.</span> <span class="nav-text">检查配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

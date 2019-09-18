@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html</loc>
+    
+    <lastmod>2019-09-18T09:19:16.321Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html</loc>
     
     <lastmod>2019-09-12T08:23:01.718Z</lastmod>
@@ -121,21 +128,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -149,7 +142,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -170,16 +177,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
   </url>
   
@@ -191,14 +191,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
@@ -219,13 +226,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
@@ -233,9 +233,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
@@ -254,7 +254,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -282,14 +289,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -331,7 +338,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
@@ -345,7 +352,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
