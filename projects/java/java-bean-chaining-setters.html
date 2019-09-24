@@ -63,19 +63,19 @@
   };
 </script>
 
-  <meta name="description" content="有时候我们可能会需要push到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。 保险起见在操作之前请先做好备份工作，毕竟数据无价。">
-<meta name="keywords" content="Git">
+  <meta name="description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
+<meta name="keywords" content="Java,代码技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git连接多个远程仓库">
-<meta property="og:url" content="https://www.boris1993.com/tools/git/push-to-multi-git-repo.html">
+<meta property="og:title" content="在Java bean中实现setter的链式调用">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/java-bean-chaining-setters.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="有时候我们可能会需要push到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。 保险起见在操作之前请先做好备份工作，毕竟数据无价。">
+<meta property="og:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T03:51:19.095Z">
+<meta property="og:updated_time" content="2019-09-24T08:10:52.083Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git连接多个远程仓库">
-<meta name="twitter:description" content="有时候我们可能会需要push到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。 保险起见在操作之前请先做好备份工作，毕竟数据无价。">
-  <link rel="canonical" href="https://www.boris1993.com/tools/git/push-to-multi-git-repo">
+<meta name="twitter:title" content="在Java bean中实现setter的链式调用">
+<meta name="twitter:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
+  <link rel="canonical" href="https://www.boris1993.com/projects/java/java-bean-chaining-setters">
 
 
 <script id="page-configurations">
@@ -89,7 +89,7 @@
   };
 </script>
 
-  <title>Git连接多个远程仓库 | Code Life</title>
+  <title>在Java bean中实现setter的链式调用 | Code Life</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/push-to-multi-git-repo.html">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/java-bean-chaining-setters.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Boris Zhao">
@@ -278,7 +278,7 @@
       <meta itemprop="name" content="Code Life">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">Git连接多个远程仓库
+        <h2 class="post-title" itemprop="name headline">在Java bean中实现setter的链式调用
 
           
         </h2>
@@ -294,19 +294,11 @@
                 
               
 
-              <time title="创建时间：2017-12-12 11:35:50" itemprop="dateCreated datePublished" datetime="2017-12-12T11:35:50+08:00">2017-12-12</time>
+              <time title="创建时间：2019-09-24 15:08:36 / 修改时间：16:10:52" itemprop="dateCreated datePublished" datetime="2019-09-24T15:08:36+08:00">2019-09-24</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -315,14 +307,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -341,17 +333,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>有时候我们可能会需要push到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。</p>
-<p>保险起见在操作之前请先做好备份工作，毕竟数据无价。</p>
+        <p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code>方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
 <a id="more"></a>
-<h1 id="方法1-添加多个远程仓库"><a href="#方法1-添加多个远程仓库" class="headerlink" title="方法1 - 添加多个远程仓库"></a>方法1 - 添加多个远程仓库</h1><p>比如要链接两个 Github 仓库，分别是 github1 和 github2，那么：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加 github1</span></span><br><span class="line">git remote add github1 https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 github2</span></span><br><span class="line">git remote add github2 https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github1</span></span><br><span class="line">git push github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github2</span></span><br><span class="line">git push github2 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github1 更新</span></span><br><span class="line">git pull github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github2 更新</span></span><br><span class="line">git pull github2 master</span><br></pre></td></tr></table></figure>
-<h1 id="方法2-添加同名多个远程仓库"><a href="#方法2-添加同名多个远程仓库" class="headerlink" title="方法2 - 添加同名多个远程仓库"></a>方法2 - 添加同名多个远程仓库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一个远程仓库</span></span><br><span class="line">git remote add origin https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后分别设定push URL</span></span><br><span class="line">git remote <span class="built_in">set</span>-url --add --push origin https://github.com/username/github1.git</span><br><span class="line">git remote <span class="built_in">set</span>-url --add --push origin https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查远程仓库配置</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若配置正确，则结果应当包含一个fetch路径和两个push路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 向所有远程仓库推送</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<h1 id="方法3-直接修改-git-config文件"><a href="#方法3-直接修改-git-config文件" class="headerlink" title="方法3 - 直接修改.git/config文件"></a>方法3 - 直接修改.git/config文件</h1><p>用文本编辑器打开本地仓库的 .git/config 文件，然后修改其中的远程仓库配置</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设当前的远程仓库名为 origin</span></span><br><span class="line"><span class="section">[remote "origin"]</span></span><br><span class="line">    url = https://github.com/username/github1.git</span><br><span class="line">    fetch = +refs/heads/*:refs/remotes/github/*</span><br><span class="line">    pushurl = https://github.com/username/github1.git</span><br><span class="line">    pushurl = https://github.com/username/github2.git</span><br></pre></td></tr></table></figure>
-<p>然后直接使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<p>即可提交至所有版本库</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常来说，一个POJO大致上会是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Integer score;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getScore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setScore</span><span class="params">(Integer score)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，在赋值的时候，会是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student james = <span class="keyword">new</span> Student();</span><br><span class="line">james.setName(<span class="string">"James"</span>);</span><br><span class="line">james.setAge(<span class="number">22</span>);</span><br><span class="line">james.setScore(<span class="number">80</span>);</span><br></pre></td></tr></table></figure>
+<p>上面这三行set方法，本来没干什么事，却要写3行代码六十多个字，是不是看起来很难受，写起来很费劲？</p>
+<p>那么，这时候就可以通过链式调用setter来显著减少代码行数。</p>
+<h2 id="Setter的链式调用"><a href="#Setter的链式调用" class="headerlink" title="Setter的链式调用"></a>Setter的链式调用</h2><p>首先，要实现链式调用setter，就得稍微修改一下setter方法。放心，改动量是很小的，对业务是没有影响的，操作也是一劳永逸的。</p>
+<p>具体做法呢，就是让setter返回这个POJO类型，而不是void，然后将<code>this</code>返回，比如这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setScore</span><span class="params">(Integer score)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.score = score;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，在创建对象的时候，就可以这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student().setName(<span class="string">"james"</span>).setAge(<span class="number">22</span>).setScore(<span class="number">80</span>);</span><br></pre></td></tr></table></figure>
+<p>怎么样？是不是突然变得很短很简洁？写起来是不是很方便？</p>
+<p>但是，要一个个改那么多setter，也挺麻烦的，特别是IDE里面还不一定能自动化，有没有更好的办法？</p>
+<p>答案是，有！</p>
+<p>是啥呢？</p>
+<p>Lombok！</p>
+<h2 id="用Lombok实现setter的链式调用"><a href="#用Lombok实现setter的链式调用" class="headerlink" title="用Lombok实现setter的链式调用"></a>用Lombok实现setter的链式调用</h2><p>Lombok是一个自动生成模版代码的工具，像构造方法啊、getter和setter啊，都可以用一个或多个注解来代替，然后在编译期由Lombok替你写这部分的代码。如果你还没用过，那么请务必学习和试用一下，它可以为你省下那些浪费在模版代码上的时间。</p>
+<p>在引入了Lombok之后，你就可以把上文的<code>Student</code>类重构成这样子了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Accessors</span>(chain = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Integer score;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是的，你不再需要去写getter和setter了，更不需要一个个的去修改来让它支持链式调用了。只需要两个注解，就可以完成上面的一大片工作。</p>
+<p>第一行的<code>@Data</code>注解，是一系列注解的集合，用来生成一系列的模版代码。由于这不是本文重点，所以就不再展开说了。</p>
+<p>第二行的<code>@Accessors</code>注解，就是这里的重点了，它用来设定Lombok应该怎样生成setter和getter代码。而其中的<code>chain</code>属性，就是打开链式setter的开关，将它打开之后，就可以生成支持链式调用的setter方法。</p>
+<p>然后，你就可以像上文一样，去享受链式调用了。</p>
 
     </div>
 
@@ -367,7 +373,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+            
+              <a href="/tags/代码技巧/" rel="tag"># 代码技巧</a>
             
           </div>
         
@@ -377,8 +385,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/tools/maven/maven-configure-mirrors.html" rel="next" title="为Maven配置阿里云镜像和代理服务器">
-                  <i class="fa fa-chevron-left"></i> 为Maven配置阿里云镜像和代理服务器
+                <a href="/tools/git/specify-different-git-config-for-different-environments.html" rel="next" title="分环境为Git指定单独的配置">
+                  <i class="fa fa-chevron-left"></i> 分环境为Git指定单独的配置
                 </a>
               
             </div>
@@ -386,10 +394,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/linux/useful-lsof-commands.html" rel="prev" title="常用lsof命令备忘">
-                  常用lsof命令备忘 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -438,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法1-添加多个远程仓库"><span class="nav-number">1.</span> <span class="nav-text">方法1 - 添加多个远程仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法2-添加同名多个远程仓库"><span class="nav-number">2.</span> <span class="nav-text">方法2 - 添加同名多个远程仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法3-直接修改-git-config文件"><span class="nav-number">3.</span> <span class="nav-text">方法3 - 直接修改.git/config文件</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter的链式调用"><span class="nav-number">2.</span> <span class="nav-text">Setter的链式调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Lombok实现setter的链式调用"><span class="nav-number">3.</span> <span class="nav-text">用Lombok实现setter的链式调用</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
