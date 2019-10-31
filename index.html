@@ -1,31 +1,25 @@
 <!DOCTYPE html>
-
-
-
-
-
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png?v=7.4.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png?v=7.4.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png?v=7.4.0">
-  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg?v=7.4.0" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/common/manifest.json">
   <meta name="msapplication-config" content="/images/common/browserconfig.xml">
-  <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
   <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
   <meta name="yandex-verification" content="4d238d70128aa114">
   <meta name="baidu-site-verification" content="M3sM0Zbhyh">
 
-<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 
@@ -34,7 +28,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.4.0',
+    version: '7.4.2',
     exturl: true,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":null},
@@ -73,7 +67,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code Life">
 <meta name="twitter:description" content="码农pilot的个人博客">
-  <link rel="canonical" href="https://www.boris1993.com/">
+
+<link rel="canonical" href="https://www.boris1993.com/">
 
 
 <script id="page-configurations">
@@ -95,8 +90,6 @@
 
 
 
-
-
   <noscript>
   <style>
   .use-motion .brand,
@@ -109,7 +102,6 @@
   .use-motion .post-body,
   .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -123,11 +115,11 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
@@ -143,11 +135,11 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -155,67 +147,35 @@
 <nav class="site-nav">
   
   <ul id="menu" class="menu">
-      
-      
-      
-        
         <li class="menu-item menu-item-home">
-      
-    
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-archives">
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-about">
-      
-    
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-tags">
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-categories">
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
-        
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
       </li>
-    
   </ul>
 
 </nav>
@@ -250,25 +210,25 @@
   </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+
+          <div class="content">
             
 
-          <div id="content" class="content">
-            
-  <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/flatten-a-group-of-data-by-flatmap.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -276,9 +236,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/projects/java/flatten-a-group-of-data-by-flatmap.html" class="post-title-link" itemprop="url">使用FlatMap“展平”一系列数据</a>
           
+            <a href="/projects/java/flatten-a-group-of-data-by-flatmap.html" class="post-title-link" itemprop="url">使用FlatMap“展平”一系列数据</a>
         </h2>
 
         <div class="post-meta">
@@ -287,38 +246,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-09-26 16:30:56 / 修改时间：17:16:32" itemprop="dateCreated datePublished" datetime="2019-09-26T16:30:56+08:00">2019-09-26</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -333,13 +281,11 @@
       
           <p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的<code>FlatMap</code>简化这个操作。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/projects/java/flatten-a-group-of-data-by-flatmap.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/projects/java/flatten-a-group-of-data-by-flatmap.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -349,27 +295,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/java-bean-chaining-setters.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -377,9 +319,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/projects/java/java-bean-chaining-setters.html" class="post-title-link" itemprop="url">在Java bean中实现setter的链式调用</a>
           
+            <a href="/projects/java/java-bean-chaining-setters.html" class="post-title-link" itemprop="url">在Java bean中实现setter的链式调用</a>
         </h2>
 
         <div class="post-meta">
@@ -388,38 +329,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-09-24 15:08:36 / 修改时间：16:10:52" itemprop="dateCreated datePublished" datetime="2019-09-24T15:08:36+08:00">2019-09-24</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -434,13 +364,11 @@
       
           <p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code>方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/projects/java/java-bean-chaining-setters.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/projects/java/java-bean-chaining-setters.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -450,27 +378,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -478,9 +402,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/tools/git/specify-different-git-config-for-different-environments.html" class="post-title-link" itemprop="url">分环境为Git指定单独的配置</a>
           
+            <a href="/tools/git/specify-different-git-config-for-different-environments.html" class="post-title-link" itemprop="url">分环境为Git指定单独的配置</a>
         </h2>
 
         <div class="post-meta">
@@ -489,38 +412,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-09-18 15:42:07 / 修改时间：17:19:16" itemprop="dateCreated datePublished" datetime="2019-09-18T15:42:07+08:00">2019-09-18</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -536,13 +448,11 @@
           <p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
 <p>在<code>2.13</code>版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在<code>2.13</code>这个版本中，Git引入了一个名为“按条件引入”(Conditional includes)的功能。这个功能允许用户通过指定一定的条件，来使Git从不同的配置文件中取得配置项。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/tools/git/specify-different-git-config-for-different-environments.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/tools/git/specify-different-git-config-for-different-environments.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -552,27 +462,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -580,9 +486,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" class="post-title-link" itemprop="url">让MyBatis把查询结果以Map形式返回</a>
           
+            <a href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" class="post-title-link" itemprop="url">让MyBatis把查询结果以Map形式返回</a>
         </h2>
 
         <div class="post-meta">
@@ -591,38 +496,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-09-12 15:27:27 / 修改时间：16:23:01" itemprop="dateCreated datePublished" datetime="2019-09-12T15:27:27+08:00">2019-09-12</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/mybatis/" itemprop="url" rel="index"><span itemprop="name">MyBatis</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">MyBatis</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -638,13 +532,11 @@
           <p>在使用MyBatis查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
 <p>在这种情况下，或许可以考虑将相关的数据一次性全部查询出来，然后根据某一列作为key，将其存放在一个Map中，把这个Map当成一个临时的缓存。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/projects/mybatis/mybatis-return-query-results-in-a-map.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -654,27 +546,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/jdbc/illegal-mix-of-collations.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -682,9 +570,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/projects/java/jdbc/illegal-mix-of-collations.html" class="post-title-link" itemprop="url">JDBC错误Illegal mix of collations解决方法</a>
           
+            <a href="/projects/java/jdbc/illegal-mix-of-collations.html" class="post-title-link" itemprop="url">JDBC错误Illegal mix of collations解决方法</a>
         </h2>
 
         <div class="post-meta">
@@ -694,16 +581,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2019-08-22 17:43:46" itemprop="dateCreated datePublished" datetime="2019-08-22T17:43:46+08:00">2019-08-22</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -711,35 +590,29 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-23 14:43:28" itemprop="dateModified" datetime="2019-08-23T14:43:28+08:00">2019-08-23</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/jdbc/" itemprop="url" rel="index"><span itemprop="name">JDBC</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/jdbc/" itemprop="url" rel="index">
+                    <span itemprop="name">JDBC</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -754,13 +627,11 @@
       
           <p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code><br>经查是关联查询时两个表的排序规则(collation)不同导致的。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/projects/java/jdbc/illegal-mix-of-collations.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/projects/java/jdbc/illegal-mix-of-collations.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -770,27 +641,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -798,9 +665,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/database/mysql/mysql-convert-tables-and-columns-collation.html" class="post-title-link" itemprop="url">在MySQL中修改表和列的排序规则</a>
           
+            <a href="/database/mysql/mysql-convert-tables-and-columns-collation.html" class="post-title-link" itemprop="url">在MySQL中修改表和列的排序规则</a>
         </h2>
 
         <div class="post-meta">
@@ -809,38 +675,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-08-22 11:33:45 / 修改时间：15:28:35" itemprop="dateCreated datePublished" datetime="2019-08-22T11:33:45+08:00">2019-08-22</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -858,7 +713,6 @@
 <p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>
 
-        
       
     </div>
 
@@ -866,27 +720,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/others/i-just-cried.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -894,9 +744,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/others/i-just-cried.html" class="post-title-link" itemprop="url">突然情绪爆发，暴哭了一场</a>
           
+            <a href="/others/i-just-cried.html" class="post-title-link" itemprop="url">突然情绪爆发，暴哭了一场</a>
         </h2>
 
         <div class="post-meta">
@@ -905,31 +754,21 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-08-18 10:55:00 / 修改时间：11:09:55" itemprop="dateCreated datePublished" datetime="2019-08-18T10:55:00+08:00">2019-08-18</time>
             </span>
-          
-            
-
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -951,13 +790,11 @@
 <p>当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。</p>
 <p>您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/others/i-just-cried.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/others/i-just-cried.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -967,27 +804,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -995,9 +828,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/database/Redis/redis-sentinel-in-docker.html" class="post-title-link" itemprop="url">使用Docker配置Redis哨兵</a>
           
+            <a href="/database/Redis/redis-sentinel-in-docker.html" class="post-title-link" itemprop="url">使用Docker配置Redis哨兵</a>
         </h2>
 
         <div class="post-meta">
@@ -1007,16 +839,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2019-06-05 10:08:10" itemprop="dateCreated datePublished" datetime="2019-06-05T10:08:10+08:00">2019-06-05</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -1024,28 +848,23 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-23 18:08:22" itemprop="dateModified" datetime="2019-08-23T18:08:22+08:00">2019-08-23</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -1060,13 +879,11 @@
       
           <p>接上文<a href="/database/Redis/redis-replication-in-docker.html">使用Docker配置Redis主从复制</a>完成之后，这篇文章主要介绍如何使用Docker在本机搭建Redis的哨兵，内容包括涉及的目录结构、<code>docker-compose.yml</code>的编写。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/database/Redis/redis-sentinel-in-docker.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/database/Redis/redis-sentinel-in-docker.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -1076,27 +893,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1104,9 +917,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/database/Redis/redis-replication-in-docker.html" class="post-title-link" itemprop="url">使用Docker配置Redis主从复制</a>
           
+            <a href="/database/Redis/redis-replication-in-docker.html" class="post-title-link" itemprop="url">使用Docker配置Redis主从复制</a>
         </h2>
 
         <div class="post-meta">
@@ -1116,16 +928,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2019-05-23 15:22:03" itemprop="dateCreated datePublished" datetime="2019-05-23T15:22:03+08:00">2019-05-23</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -1133,28 +937,23 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-19 11:19:53" itemprop="dateModified" datetime="2019-08-19T11:19:53+08:00">2019-08-19</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -1169,13 +968,11 @@
       
           <p>这篇文章主要介绍如何使用Docker在本机搭建一个带有主从复制功能的Redis环境，内容包括涉及的目录结构、<code>docker-compose.yml</code>的编写，以及结果的验证。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/database/Redis/redis-replication-in-docker.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/database/Redis/redis-replication-in-docker.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -1185,27 +982,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
       <meta itemprop="name" content="Boris Zhao">
       <meta itemprop="description" content="码农pilot的个人博客">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1213,9 +1006,8 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/projects/java/fundamentals/java-jvm-stack-frame.html" class="post-title-link" itemprop="url">JVM的栈帧</a>
           
+            <a href="/projects/java/fundamentals/java-jvm-stack-frame.html" class="post-title-link" itemprop="url">JVM的栈帧</a>
         </h2>
 
         <div class="post-meta">
@@ -1225,16 +1017,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
               <time title="创建时间：2019-04-02 10:08:33" itemprop="dateCreated datePublished" datetime="2019-04-02T10:08:33+08:00">2019-04-02</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
@@ -1242,35 +1026,29 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-04-03 11:19:47" itemprop="dateModified" datetime="2019-04-03T11:19:47+08:00">2019-04-03</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
             </span>
-          
 
           
 
@@ -1285,13 +1063,11 @@
       
           <p>栈帧是支持JVM进行方法调用和执行的数据结构，它是<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/projects/java/fundamentals/java-jvm-stack-frame.html" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/projects/java/fundamentals/java-jvm-stack-frame.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -1301,16 +1077,13 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
   </div>
 
   
@@ -1319,18 +1092,17 @@
   </nav>
 
 
+
           </div>
           
 
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
   <aside class="sidebar">
@@ -1352,82 +1124,44 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/images/common/avatar.jpeg"
-      alt="Boris Zhao">
+  <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+    src="/images/common/avatar.jpeg">
   <p class="site-author-name" itemprop="name">Boris Zhao</p>
   <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
           <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-categories">
-        
-          
             <a href="/categories/">
           
-        
         <span class="site-state-item-count">24</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-tags">
-        
-          
             <a href="/tags/">
           
-        
         <span class="site-state-item-count">53</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
+        <span class="site-state-item-name">标签</span></a>
       </div>
-    
   </nav>
-  <div class="feed-link motion-element">
-    <a href="/rss2.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
+</div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
-    
       <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
         <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span>
       </span>
-    
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    
-  
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC8="><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9udWxs"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
@@ -1442,17 +1176,24 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.4.0</div>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> v7.4.2
+  </div>
 
         
 
@@ -1473,17 +1214,15 @@
   </div>
 
   
-
-
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/pisces.js?v=7.4.0"></script>
-<script src="/js/next-boot.js?v=7.4.0"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1492,12 +1231,7 @@
 
 
 
-
-
-
-
-  <script src="/js/local-search.js?v=7.4.0"></script>
-
+  <script src="/js/local-search.js"></script>
 
 
 
@@ -1510,8 +1244,6 @@
 
 
 
-
-  
 
   
 
