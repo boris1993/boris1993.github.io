@@ -128,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
@@ -142,21 +135,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -170,9 +156,16 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
@@ -198,9 +191,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -212,9 +205,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
   </url>
   
@@ -226,14 +219,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -275,6 +275,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
@@ -283,13 +290,6 @@
   
   <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -310,14 +310,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-with-obfs.html</loc>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -359,14 +359,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
