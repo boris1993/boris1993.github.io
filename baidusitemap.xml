@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
+    <lastmod>2019-11-11</lastmod>
+  </url>  <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
+    <lastmod>2019-11-11</lastmod>
+  </url>  <url>
     <loc>https://www.boris1993.com/others/i-cried-just-now.html</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
@@ -19,17 +25,11 @@
     <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
     <lastmod>2019-09-12</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
-    <lastmod>2019-08-23</lastmod>
-  </url>  <url>
     <loc>https://www.boris1993.com/projects/java/jdbc/illegal-mix-of-collations.html</loc>
     <lastmod>2019-08-23</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
     <lastmod>2019-08-22</lastmod>
-  </url>  <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
-    <lastmod>2019-08-19</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
     <lastmod>2019-04-03</lastmod>
@@ -46,7 +46,7 @@
     <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
@@ -55,16 +55,16 @@
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
@@ -88,10 +88,10 @@
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
+    
+    <lastmod>2019-11-11T07:00:48.691Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
+    
+    <lastmod>2019-11-11T06:27:06.080Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/others/i-cried-just-now.html</loc>
     
     <lastmod>2019-11-07T09:53:43.984Z</lastmod>
@@ -44,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
-    
-    <lastmod>2019-08-23T10:08:22.556Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/jdbc/illegal-mix-of-collations.html</loc>
     
     <lastmod>2019-08-23T06:43:28.395Z</lastmod>
@@ -61,13 +68,6 @@
     <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
     
     <lastmod>2019-08-22T07:28:35.262Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
-    
-    <lastmod>2019-08-19T03:19:53.970Z</lastmod>
     
   </url>
   
@@ -142,7 +142,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -163,16 +163,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -185,6 +178,13 @@
   
   <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
