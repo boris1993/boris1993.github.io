@@ -363,8 +363,8 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html" rel="next" title="循序渐进写一个Servlet(1) - 介绍相关的接口和类">
-                  <i class="fa fa-chevron-left"></i> 循序渐进写一个Servlet(1) - 介绍相关的接口和类
+                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="next" title="循序渐进写一个Servlet(2) - 第一个servlet">
+                  <i class="fa fa-chevron-left"></i> 循序渐进写一个Servlet(2) - 第一个servlet
                 </a>
             </div>
 
@@ -388,6 +388,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
         </div>
           
@@ -556,6 +557,24 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '6b7fe48ef603811b48fd',
+      clientSecret: 'fb5e26cabf35b7fb6443f6237501e0d4c804a349',
+      repo: 'boris1993.github.io',
+      owner: 'boris1993',
+      admin: ['boris1993'],
+      id: '61890bef5952b5ab0f49fb7df2ac5cae',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>

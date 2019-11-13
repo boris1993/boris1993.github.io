@@ -341,6 +341,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
         </div>
           
@@ -508,6 +509,24 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '6b7fe48ef603811b48fd',
+      clientSecret: 'fb5e26cabf35b7fb6443f6237501e0d4c804a349',
+      repo: 'boris1993.github.io',
+      owner: 'boris1993',
+      admin: ['boris1993'],
+      id: 'b127038a1f7b6bd59d1b5e0bda6880e8',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>
