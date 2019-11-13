@@ -297,6 +297,20 @@
             </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -365,16 +379,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/projects/java/fundamentals/java-multi-threading-thread-pool.html" rel="next" title="Java线程池">
-                  <i class="fa fa-chevron-left"></i> Java线程池
+                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="next" title="循序渐进写一个Servlet(2) - 第一个servlet">
+                  <i class="fa fa-chevron-left"></i> 循序渐进写一个Servlet(2) - 第一个servlet
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="prev" title="循序渐进写一个Servlet(2) - 第一个servlet">
-                  循序渐进写一个Servlet(2) - 第一个servlet <i class="fa fa-chevron-right"></i>
+                <a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html" rel="prev" title="循序渐进写一个Servlet(3) - 分别处理GET和POST">
+                  循序渐进写一个Servlet(3) - 分别处理GET和POST <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -390,7 +404,7 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -560,22 +574,31 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: '6b7fe48ef603811b48fd',
-      clientSecret: 'fb5e26cabf35b7fb6443f6237501e0d4c804a349',
-      repo: 'boris1993.github.io',
-      owner: 'boris1993',
-      admin: ['boris1993'],
-      id: '8ed3c1b14768ad7ba540c26471048d55',
-        language: 'zh-CN',
-      distractionFreeMode: 'true'
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+    appKey: 'pVk2DoFATdaFCPPaFBVcVhsz',
+    placeholder: "说点什么？",
+    avatar: 'retro',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
 </script>
 
 </body>

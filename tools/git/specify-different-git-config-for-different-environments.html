@@ -285,6 +285,20 @@
             </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/tools/git/specify-different-git-config-for-different-environments.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/tools/git/specify-different-git-config-for-different-environments.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -365,7 +379,7 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -535,22 +549,31 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: '6b7fe48ef603811b48fd',
-      clientSecret: 'fb5e26cabf35b7fb6443f6237501e0d4c804a349',
-      repo: 'boris1993.github.io',
-      owner: 'boris1993',
-      admin: ['boris1993'],
-      id: 'a1abc213b28bbaf696c953036437bd28',
-        language: 'zh-CN',
-      distractionFreeMode: 'true'
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+    appKey: 'pVk2DoFATdaFCPPaFBVcVhsz',
+    placeholder: "说点什么？",
+    avatar: 'retro',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
 </script>
 
 </body>
