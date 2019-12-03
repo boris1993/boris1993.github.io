@@ -322,27 +322,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>上回书说道，我们已经安装好了Elastic Search。那么这次，我们继续安装Logstash。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>上回书说道，我们已经安装好了Elastic Search。那么这次，我们继续安装Logstash。</p>
 <a id="more"></a>
+
 <h1 id="安装Logstash"><a href="#安装Logstash" class="headerlink" title="安装Logstash"></a>安装Logstash</h1><p>为了安装方便，本次依旧选择使用RPM包安装。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh logstash-6.2.2.rpm</span><br></pre></td></tr></table></figure>
+
 <p>安装结束后，运行Logstash以检查安装是否成功。使用如下命令启动Logstash，并配置输入源为基本输入(stdin)，以及输出到基本输出(stdout)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 因为使用RPM方式安装，导致/usr/share/logstash/data仅root才可写入，所以需要使用sudo环境</span></span><br><span class="line">sudo /usr/share/logstash/bin/logstash -e <span class="string">'input&#123; stdin&#123;&#125; &#125; output&#123; stdout&#123;&#125; &#125;'</span></span><br></pre></td></tr></table></figure>
+
 <p>在日志滚动停止后，随意输入一些字符串，比如”hello world”，并回车，检查输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello world</span><br><span class="line">2018-02-26T07:18:07.904Z localhost.localdomain hello world</span><br></pre></td></tr></table></figure>
+
 <p>可见Logstash成功从stdin读取到了输入，并打印到了stdout，证实安装成功。</p>
 <h1 id="配置Logstash"><a href="#配置Logstash" class="headerlink" title="配置Logstash"></a>配置Logstash</h1><h2 id="Logstash系统配置"><a href="#Logstash系统配置" class="headerlink" title="Logstash系统配置"></a>Logstash系统配置</h2><p>编辑<code>/etc/logstash/logstash.yml</code>，修改Logstash系统级配置。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置节点名，若未配置则默认取本机主机名作为节点名</span></span><br><span class="line"><span class="string">node.name:</span> <span class="string">elk-logstash-node-0</span></span><br></pre></td></tr></table></figure>
+
 <p>其他配置项略，如有需要请参考Logstash Reference。</p>
 <h2 id="日志输入输出配置"><a href="#日志输入输出配置" class="headerlink" title="日志输入输出配置"></a>日志输入输出配置</h2><p>这里我们配置让Logstash接收Cent OS的系统日志。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  file &#123;</span><br><span class="line">    path =&gt; &quot;/var/log/messages*&quot;</span><br><span class="line">    type =&gt; &quot;syslog&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Filter not needed. Commented out.</span><br><span class="line">#filter &#123;</span><br><span class="line">#</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; &quot;localhost:9200&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>另外，本例中还需要配置Logstash以root权限运行以读取系统日志(messages文件默认权限为600)，实际使用时需要按照实际需求配置。</p>
 <p>编辑<code>/etc/systemd/system/logstash.service</code>，修改user和group为root</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=logstash</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">User</span>=root</span><br><span class="line"><span class="attr">Group</span>=root</span><br><span class="line"><span class="comment"># Load env vars from /etc/default/ and /etc/sysconfig/ if they exist.</span></span><br><span class="line"><span class="comment"># Prefixing the path with '-' makes it try to load, but if the file doesn't</span></span><br><span class="line"><span class="comment"># exist, it continues onward.</span></span><br><span class="line"><span class="attr">EnvironmentFile</span>=-/etc/default/logstash</span><br><span class="line"><span class="attr">EnvironmentFile</span>=-/etc/sysconfig/logstash</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/share/logstash/bin/logstash <span class="string">"--path.settings"</span> <span class="string">"/etc/logstash"</span></span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="attr">WorkingDirectory</span>=/</span><br><span class="line"><span class="attr">Nice</span>=<span class="number">19</span></span><br><span class="line"><span class="attr">LimitNOFILE</span>=<span class="number">16384</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+
 <p>然后使systemd重新加载配置文件并重新启动Logstash</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart logstash</span><br></pre></td></tr></table></figure>
+
 <h2 id="使Logstash开机自启动"><a href="#使Logstash开机自启动" class="headerlink" title="使Logstash开机自启动"></a>使Logstash开机自启动</h2><p>由于RPM包安装时已经放好了自启动的配置文件，我们只需要在systemd中激活它就可以了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> logstash</span><br><span class="line">sudo systemctl start logstash</span><br></pre></td></tr></table></figure>
+
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxhc3RpYy5jby9ndWlkZS9lbi9sb2dzdGFzaC9jdXJyZW50L2luZGV4Lmh0bWw=" title="https://www.elastic.co/guide/en/logstash/current/index.html">Logstash Reference<i class="fa fa-external-link"></i></span></p>
 
     </div>
@@ -427,20 +436,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

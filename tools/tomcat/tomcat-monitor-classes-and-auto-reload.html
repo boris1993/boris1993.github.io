@@ -62,18 +62,18 @@
   };
 </script>
 
-  <meta name="description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt; 配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会自">
+  <meta name="description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt;  配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会">
 <meta name="keywords" content="Tomcat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置Tomcat监控class和lib变更并自动重新加载">
 <meta property="og:url" content="https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt; 配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会自">
+<meta property="og:description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt;  配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-03-22T03:51:19.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置Tomcat监控class和lib变更并自动重新加载">
-<meta name="twitter:description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt; 配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会自">
+<meta name="twitter:description" content="在context.xml的Context标签中，设定reloadable=&amp;quot;true&amp;quot;即可。 123&amp;lt;Context reloadable=&quot;true&quot;&amp;gt;    &amp;lt;!-- Other configurations --&amp;gt;&amp;lt;/Context&amp;gt;  配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会">
 
 <link rel="canonical" href="https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html">
 
@@ -322,8 +322,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在<code>context.xml</code>的<code>Context</code>标签中，设定<code>reloadable=&quot;true&quot;</code>即可。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在<code>context.xml</code>的<code>Context</code>标签中，设定<code>reloadable=&quot;true&quot;</code>即可。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Other configurations --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>配置完毕后重启Tomcat使配置生效，然后Tomcat在监控到项目的class或lib有变化后，就会自动重新加载这个webapp。</p>
 <p>但是这个功能会显著增加Tomcat的性能消耗，故不建议在生产环境中使用。</p>
 
@@ -407,20 +408,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

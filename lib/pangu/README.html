@@ -1,15 +1,13 @@
 <h1 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h1><p><a href="https://www.npmjs.com/package/hexo-generator-searchdb"><img src="https://img.shields.io/npm/v/hexo-generator-searchdb?style=flat-square" alt="npm-image"></a><br><a href="https://nodejs.org/en/download/releases"><img src="https://img.shields.io/node/v/hexo-generator-searchdb?style=flat-square" alt="node-image"></a><br><a href="https://hexo.io"><img src="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square" alt="hexo-image"></a><br><a href="LICENSE"><img src="https://img.shields.io/npm/l/hexo-generator-searchdb?style=flat-square" alt="lic-image"></a></p>
 <p>Generate search data for Hexo 3.0. This plugin is used for generating a search index file, which contains all the neccessary data of your articles that you can use to write a local search engine for your blog. Supports both XML and JSON format output.</p>
-<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>![size-image]<br><a href="https://www.npmjs.com/package/hexo-generator-searchdb"><img src="https://img.shields.io/npm/dm/hexo-generator-searchdb?style=flat-square" alt="dm-image"></a><br><a href="https://www.npmjs.com/package/hexo-generator-searchdb"><img src="https://img.shields.io/npm/dt/hexo-generator-searchdb?style=flat-square" alt="dt-image"></a></p>
-<pre><code class="bash">$ npm install hexo-generator-searchdb
-</code></pre>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p><img src="https://img.shields.io/github/languages/code-size/theme-next/hexo-generator-searchdb?style=flat-square" alt="size-image"><br><a href="https://www.npmjs.com/package/hexo-generator-searchdb"><img src="https://img.shields.io/npm/dm/hexo-generator-searchdb?style=flat-square" alt="dm-image"></a><br><a href="https://www.npmjs.com/package/hexo-generator-searchdb"><img src="https://img.shields.io/npm/dt/hexo-generator-searchdb?style=flat-square" alt="dt-image"></a></p>
+<pre><code class="bash">$ npm install hexo-generator-searchdb</code></pre>
 <h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><p>You can configure this plugin in your root <code>_config.yml</code>. All the arguments are optional.</p>
 <pre><code class="yaml"><span class="attr">search:</span>
-<span class="attr">  path:</span> <span class="string">search.xml</span>
-<span class="attr">  field:</span> <span class="string">post</span>
-<span class="attr">  content:</span> <span class="literal">true</span>
-<span class="attr">  format:</span> <span class="string">html</span>
-</code></pre>
+  <span class="attr">path:</span> <span class="string">search.xml</span>
+  <span class="attr">field:</span> <span class="string">post</span>
+  <span class="attr">content:</span> <span class="literal">true</span>
+  <span class="attr">format:</span> <span class="string">html</span></code></pre>
 <ul>
 <li><strong>path</strong> - file path. By default is <code>search.xml</code>. If the file extension is <code>.json</code>, the output format will be JSON. Otherwise XML format file will be exported.</li>
 <li><strong>field</strong> - the search scope you want to search, you can chose:<ul>

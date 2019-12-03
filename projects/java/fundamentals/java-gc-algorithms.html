@@ -332,8 +332,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM运行时的数据区域</a>中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM运行时的数据区域</a>中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。</p>
 <a id="more"></a>
+
 <h1 id="哪些内存需要回收"><a href="#哪些内存需要回收" class="headerlink" title="哪些内存需要回收"></a>哪些内存需要回收</h1><p>在Java中，GC的对象是堆和方法区。栈中的栈帧随着方法的调用和退出，会自行完成压栈和出栈操作，每个栈帧所需的内存空间也是在类结构确定下来时就已知的，所以不怎么需要考虑内存的回收问题。但是堆和方法区则不一样，这部分的空间是动态分配和回收的，同时也只有在运行时才可得知要生成哪些对象以及需要多少空间。</p>
 <p>判断对象是否可以被回收通常有两种算法：<code>引用计数法</code>和<code>可达性分析法</code>。</p>
 <h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p>引用计数法会给每个对象添加一个引用计数器，每当有一个地方引用它时，计数器就会加一；反之，每当一个引用失效时，计数器就会减一。任何时候，如果引用计数为0，则说明这个对象可以被回收。</p>
@@ -455,20 +456,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

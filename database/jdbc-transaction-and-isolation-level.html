@@ -316,8 +316,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p>
 <a id="more"></a>
+
 <h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是DBMS执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即<code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code>和查询语句。<br>通常来说，事务会依照如下的流程执行：</p>
 <ol>
 <li><p>开始一个事务</p>
@@ -365,75 +366,71 @@
 <h1 id="隔离级别与读现象"><a href="#隔离级别与读现象" class="headerlink" title="隔离级别与读现象"></a>隔离级别与读现象</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">隔离级别</th>
-<th style="text-align:left">脏读</th>
-<th style="text-align:left">不可重复读</th>
-<th style="text-align:left">幻读</th>
+<th align="left">隔离级别</th>
+<th align="left">脏读</th>
+<th align="left">不可重复读</th>
+<th align="left">幻读</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">未提交读</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
+<tbody><tr>
+<td align="left">未提交读</td>
+<td align="left">可能发生</td>
+<td align="left">可能发生</td>
+<td align="left">可能发生</td>
 </tr>
 <tr>
-<td style="text-align:left">提交读</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">可能发生</td>
-<td style="text-align:left">可能发生</td>
+<td align="left">提交读</td>
+<td align="left">不会发生</td>
+<td align="left">可能发生</td>
+<td align="left">可能发生</td>
 </tr>
 <tr>
-<td style="text-align:left">可重复读</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">可能发生</td>
+<td align="left">可重复读</td>
+<td align="left">不会发生</td>
+<td align="left">不会发生</td>
+<td align="left">可能发生</td>
 </tr>
 <tr>
-<td style="text-align:left">可串行化</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
-<td style="text-align:left">不会发生</td>
+<td align="left">可串行化</td>
+<td align="left">不会发生</td>
+<td align="left">不会发生</td>
+<td align="left">不会发生</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h1 id="隔离级别与锁持续时间"><a href="#隔离级别与锁持续时间" class="headerlink" title="隔离级别与锁持续时间"></a>隔离级别与锁持续时间</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">隔离级别</th>
-<th style="text-align:left">写操作</th>
-<th style="text-align:left">读操作</th>
-<th style="text-align:left">范围操作</th>
+<th align="left">隔离级别</th>
+<th align="left">写操作</th>
+<th align="left">读操作</th>
+<th align="left">范围操作</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">未提交读</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
+<tbody><tr>
+<td align="left">未提交读</td>
+<td align="left">当前语句执行完毕</td>
+<td align="left">当前语句执行完毕</td>
+<td align="left">当前语句执行完毕</td>
 </tr>
 <tr>
-<td style="text-align:left">提交读</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前语句执行完毕</td>
-<td style="text-align:left">当前语句执行完毕</td>
+<td align="left">提交读</td>
+<td align="left">当前事务提交</td>
+<td align="left">当前语句执行完毕</td>
+<td align="left">当前语句执行完毕</td>
 </tr>
 <tr>
-<td style="text-align:left">可重复读</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前语句执行完毕</td>
+<td align="left">可重复读</td>
+<td align="left">当前事务提交</td>
+<td align="left">当前事务提交</td>
+<td align="left">当前语句执行完毕</td>
 </tr>
 <tr>
-<td style="text-align:left">可串行化</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
-<td style="text-align:left">当前事务提交</td>
+<td align="left">可串行化</td>
+<td align="left">当前事务提交</td>
+<td align="left">当前事务提交</td>
+<td align="left">当前事务提交</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
     </div>
 
@@ -519,20 +516,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

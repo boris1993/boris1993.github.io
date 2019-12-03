@@ -328,11 +328,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code><br>经查是关联查询时两个表的排序规则(collation)不同导致的。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code><br>经查是关联查询时两个表的排序规则(collation)不同导致的。</p>
 <a id="more"></a>
+
 <p>解决方法也很简单，有两种方法：</p>
 <p>一种是在查询的SQL中指定另一张表的collation，这是一种权宜之计，治标不治本。代码是这样的：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设左表的排序规则是 utf8_general_ci,</span></span><br><span class="line"><span class="comment">-- 而右表的排序规则是 utf8_unicode_ci</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="string">`a`</span>.<span class="string">`column1`</span>,</span><br><span class="line">    <span class="string">`b`</span>.<span class="string">`column2`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_1`</span> <span class="keyword">AS</span> <span class="string">`a`</span></span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="string">`table_2`</span> <span class="keyword">AS</span> <span class="string">`b`</span></span><br><span class="line">    <span class="keyword">ON</span> <span class="string">`a`</span>.<span class="string">`id`</span> = <span class="string">`b`</span>.<span class="string">`id`</span></span><br><span class="line">    <span class="keyword">COLLATE</span> <span class="string">`utf8_general_ci`</span></span><br></pre></td></tr></table></figure>
+
 <p>另一种方法是修改表和列的排序规则，将其统一。这个方法从根本上解决了这个问题。操作方法可以参考<a href="/database/mysql/mysql-convert-tables-and-columns-collation.html">在 MySQL 中修改表和列的排序规则
 </a>。</p>
 
@@ -417,20 +419,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

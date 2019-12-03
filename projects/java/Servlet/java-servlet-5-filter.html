@@ -331,9 +331,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
 <p>这篇博文将演示如何创建和使用filter。</p>
 <a id="more"></a>
+
 <h1 id="什么是Filter"><a href="#什么是Filter" class="headerlink" title="什么是Filter"></a>什么是<code>Filter</code></h1><p>当客户端向servlet容器发送请求时，请求通常会直接发送到servlet进行处理，就像下图这样：</p>
 <p><img src="/images/java-servlet-5-filter/request-flow-without-filter.png" alt="Request flow without Filter"></p>
 <p>但是，如果希望在请求被servlet处理之前和之后，再进行一些附加的处理，就可以使用<code>Filter</code>完成。</p>
@@ -347,8 +348,10 @@
 <li><code>destroy()</code>，用于定义在停止这个filter时要执行的操作，只会在一个filter被销毁时执行。</li>
 </ol>
 <h2 id="创建一个实现Filter接口的类"><a href="#创建一个实现Filter接口的类" class="headerlink" title="创建一个实现Filter接口的类"></a>创建一个实现<code>Filter</code>接口的类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Filter1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="定义这个filter的行为"><a href="#定义这个filter的行为" class="headerlink" title="定义这个filter的行为"></a>定义这个filter的行为</h2><p>在<code>doFilter()</code>方法内定义这个filter的行为。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在处理请求前打印信息</span></span><br><span class="line">    System.out.println(<span class="string">"Request passing through Filter 1"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 交由FilterChain将请求交给下一个filter或交给servlet处理</span></span><br><span class="line">    chain.doFilter(request, response);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// servlet发送响应后打印信息</span></span><br><span class="line">    System.out.println(<span class="string">"Response passing througe Filter 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="在容器中注册filter"><a href="#在容器中注册filter" class="headerlink" title="在容器中注册filter"></a>在容器中注册filter</h2><p>与servlet一样，filter也需要在容器中注册之后才能发挥作用。注册filter也有两种方式：通过<code>web.xml</code>，或者通过<code>@WebFilter</code>注解。</p>
 <p>这里有一点需要注意，虽然filter之间没有依赖关系，但是如果要保证filter的执行顺序，那么必须使用<code>web.xml</code>来注册。</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5vcmFjbGUuY29tL290bmRvY3MvamNwL3NlcnZsZXQtMy4wLWZyLWV2YWwtb3RoLUpTcGVjLw==" title="https://download.oracle.com/otndocs/jcp/servlet-3.0-fr-eval-oth-JSpec/">Servlet 3.0 规范<i class="fa fa-external-link"></i></span>的<code>8.2.3</code>节中有如下说明：</p>
@@ -363,14 +366,17 @@
 <p>为了演示filter的执行顺序，这里再增加一个名为<code>Filter2</code>的filter，内容与<code>Filter1</code>类似。</p>
 <h3 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a><code>web.xml</code></h3><p>在<code>web.xml</code>中增加如下配置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>filter1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.boris.tomcatlistener.filter.Filter1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>filter1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demoServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>filter2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.boris.tomcatlistener.filter.Filter2<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>filter2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demoServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p><code>filter</code>标签描述了一个filter的基本信息，其中filter名称(<code>filter-name</code>)和filter所在类(<code>filter-class</code>)为必填项。</p>
 <p><code>filter-mapping</code>标签描述了一个filter将与哪个URL或者与哪个servlet绑定，<code>filter-name</code>指定使用哪个filter处理请求，<code>url-pattern</code>指定发往哪个URL的请求会触发这个filter，<code>servlet-name</code>指定发往哪个servlet的请求会触发这个filter。<code>url-pattern</code>和<code>servlet-name</code>可以同时存在，也可以同时存在多个。</p>
 <p><code>filter-mapping</code>标签的先后顺序，将决定filter链中各个filter被调用的先后顺序。如上文中先配置了<code>filter1</code>后配置了<code>filter2</code>，那么在请求到达时，会先执行<code>filter1</code>然后再执行<code>filter2</code>。</p>
 <p>配置完毕后部署并运行该项目，向<code>http://localhost:8080/servletdemo/DemoServlet</code>发送一个请求，在控制台可以看到如下输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Request passing through Filter 1</span><br><span class="line">Request passing through Filter 2</span><br><span class="line">Response passing througe Filter 2</span><br><span class="line">Response passing througe Filter 1</span><br></pre></td></tr></table></figure>
+
 <h3 id="WebFilter注解"><a href="#WebFilter注解" class="headerlink" title="@WebFilter注解"></a><code>@WebFilter</code>注解</h3><p><code>@WebFilter</code>是<code>Servlet 3.0</code>中新增的特性，在<code>Tomcat 7</code>及以前版本中将无法工作。</p>
 <p>以<code>Filter1</code>为例，为其添加如下注解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(</span><br><span class="line">    filterName = <span class="string">"filter1"</span>,</span><br><span class="line">    urlPatterns = <span class="string">"/demoServlet"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <p><code>filter-name</code>属性指定了这个filter的名称。</p>
 <p>有三个属性可以指定filter的触发条件：</p>
 <ol>
@@ -381,6 +387,7 @@
 <p>以上三个属性都可以接受一个字符串，或者用大括号包括起来的多个字符串。</p>
 <p>在注解只有一个参数，并且该参数是指定要匹配的URL时，建议使用<code>value</code>属性，比如这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// value为默认的属性</span></span><br><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/demoServlet"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显式指定value属性</span></span><br><span class="line"><span class="meta">@WebFilter</span>(value = <span class="string">"/demoServlet"</span>)</span><br></pre></td></tr></table></figure>
+
 <p>否则，建议使用<code>urlPatterns</code>属性和<code>servletNames</code>属性。不允许<code>value</code>和<code>urlPatterns</code>同时出现。</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5vcmFjbGUuY29tL290bmRvY3MvamNwL3NlcnZsZXQtMy4wLWZyLWV2YWwtb3RoLUpTcGVjLw==" title="https://download.oracle.com/otndocs/jcp/servlet-3.0-fr-eval-oth-JSpec/">Servlet 3.0 规范<i class="fa fa-external-link"></i></span>的<code>8.1.2 @WebFilter</code>节中说明原文如下：</p>
 <blockquote>
@@ -388,6 +395,7 @@
 </blockquote>
 <p>配置完毕后部署并运行该项目，向<code>http://localhost:8080/servletdemo/DemoServlet</code>发送一个请求，在控制台可以看到如下输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Request passing through Filter 1</span><br><span class="line">Response passing througe Filter 1</span><br></pre></td></tr></table></figure>
+
 <h1 id="系列博文"><a href="#系列博文" class="headerlink" title="系列博文"></a>系列博文</h1><ul>
 <li><a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html">循序渐进写一个Servlet(1) - 介绍相关的接口和类</a></li>
 <li><a href="/projects/java/Servlet/java-servlet-2-first-servlet.html">循序渐进写一个Servlet(2) - 第一个servlet</a></li>
@@ -478,20 +486,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

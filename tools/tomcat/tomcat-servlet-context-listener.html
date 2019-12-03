@@ -322,17 +322,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>当<code>Servlet</code>容器启动或终止Web应用时，会触发<code>ServletContextEvent</code>事件，该事件由<code>ServletContextListener</code>来处理。在<code>Servlet API</code>中有一个<code>ServletContextListener</code>接口，接口中定义了处理<code>ServletContextEvent</code>事件的两个方法，它能够监听<code>ServletContext</code>对象的生命周期，实际上就是监听Web应用的生命周期。我们可以通过实现这两个方法，来实现在<code>Tomcat</code>启动和停止时执行一定的操作。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>当<code>Servlet</code>容器启动或终止Web应用时，会触发<code>ServletContextEvent</code>事件，该事件由<code>ServletContextListener</code>来处理。在<code>Servlet API</code>中有一个<code>ServletContextListener</code>接口，接口中定义了处理<code>ServletContextEvent</code>事件的两个方法，它能够监听<code>ServletContext</code>对象的生命周期，实际上就是监听Web应用的生命周期。我们可以通过实现这两个方法，来实现在<code>Tomcat</code>启动和停止时执行一定的操作。</p>
 <a id="more"></a>
+
 <h1 id="监听器类编写"><a href="#监听器类编写" class="headerlink" title="监听器类编写"></a>监听器类编写</h1><p>新建一个监听器类<code>TomcatListener</code>并实现<code>ServletContextListener</code>接口</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Tomcat Started"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Tomcat Destroyed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="配置web-xml"><a href="#配置web-xml" class="headerlink" title="配置web.xml"></a>配置web.xml</h1><p>在<code>web.xml</code>中添加<code>listener</code>条目</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>com.project.name.listener.DemoListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>将WAR包部署到<code>Tomcat</code>并启动，检查<code>catalina.out</code></p>
 <p>在<code>Tomcat</code>启动时看到如下日志：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">15-Aug-2018 15:58:44.632 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/usr/local/Cellar/tomcat@8/8.5.28/libexec/webapps/tomcatlistener.war]</span><br><span class="line">Tomcat Started</span><br></pre></td></tr></table></figure>
+
 <p>在<code>Tomcat</code>停止时看到如下日志：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">15-Aug-2018 16:02:22.582 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]</span><br><span class="line">Tomcat Destroyed</span><br></pre></td></tr></table></figure>
+
 <p>输出内容与<code>TomcatListener</code>所写内容一致，Q.E.D.</p>
 
     </div>
@@ -416,20 +421,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -328,8 +328,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>栈帧是支持JVM进行方法调用和执行的数据结构，它是<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>栈帧是支持JVM进行方法调用和执行的数据结构，它是<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。</p>
 <a id="more"></a>
+
 <p>局部变量表和操作数栈的空间，在编译期就已经可以确定下来，并会随着方法表的code属性一并提供给JVM，所以每个栈帧的空间不会受运行时数据的影响，而仅取决于JVM的实现。</p>
 <p>每当一个方法被调用都会生成一个栈帧，并在方法执行完毕后被销毁，并且对于每个活动的线程，只有栈顶的栈帧是活动的，这个栈帧被称为“活动栈帧”，与其相关联的方法被称为“活动方法”，以及与其相关联的类被称为“活动类”。</p>
 <h1 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h1><p>每个栈帧中都会有一个被称为“局部变量表”的数组，其中保存着方法的局部变量。局部变量表的大小在编译期就已经确定下来，并保存在class文件的code区。各个变量可通过数组下标的方式被定位到，对于需要占用两个元素的数据类型，比如<code>long</code>和<code>double</code>，其对应的下标使用较小的那个值。</p>
@@ -426,20 +427,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

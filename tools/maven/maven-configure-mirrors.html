@@ -322,10 +322,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Maven中央仓库在国内的速度简直是感人，好在阿里云提供了Maven中央仓库的镜像，配置方法在此记录备用。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Maven中央仓库在国内的速度简直是感人，好在阿里云提供了Maven中央仓库的镜像，配置方法在此记录备用。</p>
 <a id="more"></a>
+
 <p>打开Maven的用户配置文件(默认位置在 <code>~/.m2/settings.xml</code>)，在<code>mirrrors</code>段加入如下内容：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 镜像ID，自行定义 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 该镜像对应的仓库名，central即中央仓库 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 个人建议不要将其设为星号 [注] --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 镜像名，自行定义 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 镜像的地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>[注]</strong> 有些教程在 <code>mirrorOf</code> 字段中填写的是星号，但根据<span class="exturl" data-url="aHR0cHM6Ly9tYXZlbi5hcGFjaGUub3JnL2d1aWRlcy9taW5pL2d1aWRlLW1pcnJvci1zZXR0aW5ncy5odG1s" title="https://maven.apache.org/guides/mini/guide-mirror-settings.html">Using Mirrors for Repositories<i class="fa fa-external-link"></i></span>中 <code>Using A Single Repository</code> 一段的解释，这将会强制使用该镜像处理所有的仓库请求，而阿里云镜像并不能达到这样的效果，所以个人建议仅使用该镜像代理中央仓库的请求。</p>
 
     </div>
@@ -408,20 +410,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

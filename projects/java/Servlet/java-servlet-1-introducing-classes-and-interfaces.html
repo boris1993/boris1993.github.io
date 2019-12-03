@@ -328,9 +328,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
 <p>这篇博文将介绍一些后面会用到的接口和类。</p>
 <a id="more"></a>
+
 <h1 id="常用的类和接口"><a href="#常用的类和接口" class="headerlink" title="常用的类和接口"></a>常用的类和接口</h1><h2 id="javax-servlet-Servlet"><a href="#javax-servlet-Servlet" class="headerlink" title="javax.servlet.Servlet"></a><code>javax.servlet.Servlet</code></h2><p><code>javax.servlet.Servlet</code>是一个接口，它定义了一个servlet必须要实现的方法，包括如何初始化一个servlet，如何让这个servlet处理请求，以及如何将这个servlet从容器中移除，即“生命周期方法”。它们被调用的顺序，即servlet的生命周期，是这样的：</p>
 <ol>
 <li>容器生成这个servlet的对象，然后调用其<code>init()</code>方法完成初始化步骤</li>
@@ -386,16 +387,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/projects/java/fundamentals/java-multi-threading-thread-pool.html" rel="next" title="Java线程池">
-                  <i class="fa fa-chevron-left"></i> Java线程池
+                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="next" title="循序渐进写一个Servlet(2) - 第一个servlet">
+                  <i class="fa fa-chevron-left"></i> 循序渐进写一个Servlet(2) - 第一个servlet
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="prev" title="循序渐进写一个Servlet(2) - 第一个servlet">
-                  循序渐进写一个Servlet(2) - 第一个servlet <i class="fa fa-chevron-right"></i>
+                <a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html" rel="prev" title="循序渐进写一个Servlet(3) - 分别处理GET和POST">
+                  循序渐进写一个Servlet(3) - 分别处理GET和POST <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -452,20 +453,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -323,8 +323,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的<code>FlatMap</code>简化这个操作。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的<code>FlatMap</code>简化这个操作。</p>
 <a id="more"></a>
+
 <h2 id="介绍需求"><a href="#介绍需求" class="headerlink" title="介绍需求"></a>介绍需求</h2><p>假设现在有这样子的一个排班信息：</p>
 <table>
 <thead>
@@ -333,8 +334,7 @@
 <th>班组</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>2019-01-02</td>
 <td>Unit-2, Unit-3</td>
 </tr>
@@ -366,15 +366,17 @@
 <td>2019-01-08</td>
 <td>Unit-2, Unit-3</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>而目标是，从中取出这个表中的所有班组，并去重和排序，即最终的结果是<code>Unit-1, Unit-2, Unit-3</code>。</p>
 <h2 id="准备示例数据"><a href="#准备示例数据" class="headerlink" title="准备示例数据"></a>准备示例数据</h2><p>在代码中，我们这样来构造这些数据：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 准备假数据</span></span><br><span class="line">WorkSchedule workSchedule1 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-01"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule2 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-02"</span>, <span class="string">"Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule3 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-03"</span>, <span class="string">"Unit-1, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule4 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-04"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule5 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-05"</span>, <span class="string">"Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule6 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-06"</span>, <span class="string">"Unit-1, Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule7 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-07"</span>, <span class="string">"Unit-1"</span>);</span><br><span class="line">WorkSchedule workSchedule8 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-08"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;WorkSchedule&gt; workSchedules = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">8</span>);</span><br><span class="line">workSchedules.add(workSchedule1);</span><br><span class="line">workSchedules.add(workSchedule2);</span><br><span class="line">workSchedules.add(workSchedule3);</span><br><span class="line">workSchedules.add(workSchedule4);</span><br><span class="line">workSchedules.add(workSchedule5);</span><br><span class="line">workSchedules.add(workSchedule6);</span><br><span class="line">workSchedules.add(workSchedule7);</span><br><span class="line">workSchedules.add(workSchedule8);</span><br></pre></td></tr></table></figure>
+
 <h2 id="不使用流的做法"><a href="#不使用流的做法" class="headerlink" title="不使用流的做法"></a>不使用流的做法</h2><p>如果不使用流，那么我们可以通过<code>for</code>循环取数据，和使用<code>TreeSet</code>实现去重和排序。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;String&gt; unitNames = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (WorkSchedule workSchedule : workSchedules) &#123;</span><br><span class="line">    String[] arrUnitName = workSchedule.getUnits().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String unitName : arrUnitName) &#123;</span><br><span class="line">        unitNames.add(unitName.trim());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="使用流的做法"><a href="#使用流的做法" class="headerlink" title="使用流的做法"></a>使用流的做法</h2><p>如果使用流，则可以这样做：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
 <p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢<code>Intellij IDEA</code>提供了这个强大的功能)</p>
 <p>首先，在<code>map</code>方法中，<code>List</code>的每个元素都会根据逗号分隔，并生成一个<code>String[]</code>对象。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
@@ -411,6 +413,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" rel="prev" title="IDEA警告Field injection is not recommended">
+                  IDEA警告Field injection is not recommended <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -466,20 +471,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

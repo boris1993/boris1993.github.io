@@ -316,13 +316,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
 <p>在<code>2.13</code>版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在<code>2.13</code>这个版本中，Git引入了一个名为“按条件引入”(Conditional includes)的功能。这个功能允许用户通过指定一定的条件，来使Git从不同的配置文件中取得配置项。</p>
 <a id="more"></a>
+
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>“按条件引入”功能可以根据<strong>目录</strong>或者<strong>分支</strong>来决定使用哪个配置，显然根据分支无法区分工作环境和私人环境，所以首先需要分别为工作环境和私人环境创建各自的目录。比如将目录划分为这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">projects</span><br><span class="line">├── work     &lt;== 工作相关</span><br><span class="line">└── personal &lt;== 私人项目</span><br></pre></td></tr></table></figure>
+
 <h2 id="拆分配置"><a href="#拆分配置" class="headerlink" title="拆分配置"></a>拆分配置</h2><p>接下来，需要为全局、工作、私人分别编写配置文件。本文中，全局配置文件<code>.gitconfig</code>位于<code>$HOME</code>下，各环境的配置文件位于<code>~/.config/git</code>下。</p>
 <h3 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[core]</span></span><br><span class="line">  excludesfile = ~/.gitignore_global</span><br><span class="line">  editor = vim</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/work/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-work</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/personal/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-personal</span><br></pre></td></tr></table></figure>
+
 <p>第4行和第6行的<code>includeIf</code>段，就是“按条件引入”的配置。在这里需要注意这几点：</p>
 <ul>
 <li><code>gitdir:</code>参数用于匹配本地Git仓库的路径。<ul>
@@ -336,10 +339,13 @@
 <p>综上所述，位于<code>~/projects/work/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-work</code>中的配置；位于<code>~/projects/personal/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-personal</code>中的配置。</p>
 <h3 id="私人环境和工作环境的配置文件"><a href="#私人环境和工作环境的配置文件" class="headerlink" title="私人环境和工作环境的配置文件"></a>私人环境和工作环境的配置文件</h3><p>这两个环境各自的配置文件就没有什么新鲜的东西了，就只有面向各个环境的身份信息、GPG签名信息等。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[user]</span></span><br><span class="line">  signingkey = 1122334455667788</span><br><span class="line">  name = Your Name</span><br><span class="line">  email = test@example.com</span><br><span class="line"><span class="section">[commit]</span></span><br><span class="line">  gpgsign = true</span><br><span class="line">  template = ~/.stCommitMsg</span><br><span class="line"><span class="section">[gpg]</span></span><br><span class="line">  program = /usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+
 <h2 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h2><p>写完了配置文件，还是要检查一下是不是生效了的。首先，在一个不包含任何Git仓库的位置执行<code>git config -l</code>，返回的信息中就只有全局配置中的值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br></pre></td></tr></table></figure>
+
 <p>然后，进入私人环境的某个Git仓库，再执行<code>git config -l</code>，就可以看到私人环境相关的配置文件被引入了。（仓库自己的配置其实也会被显示出来，这里为了减小篇幅将其略掉了）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br><span class="line">user.signingkey=1122334455667788</span><br><span class="line">user.name=Your Name</span><br><span class="line">user.email=test@example.com</span><br><span class="line">commit.gpgsign=true</span><br><span class="line">commit.template=~/.stCommitMsg</span><br><span class="line">gpg.program=/usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1jb25maWcjX2luY2x1ZGVz" title="https://git-scm.com/docs/git-config#_includes">Git官方文档的<code>Includes</code>部分<i class="fa fa-external-link"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuYmxvZy8yMDE3LTA1LTEwLWdpdC0yLTEzLWhhcy1iZWVuLXJlbGVhc2VkLw==" title="https://github.blog/2017-05-10-git-2-13-has-been-released/">Git 2.13 有趣的新功能介绍 - GitHub<i class="fa fa-external-link"></i></span></li>
@@ -427,20 +433,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

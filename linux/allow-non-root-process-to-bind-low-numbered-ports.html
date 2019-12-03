@@ -316,10 +316,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，<code>setcap</code>命令。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>众所周知，在Linux中，要想绑定端口号在1024以下的低位端口，是需要root权限的。但是，如果我又想绑定低位端口，又不想以root身份运行程序，该怎么办？答案是，<code>setcap</code>命令。</p>
 <a id="more"></a>
+
 <h1 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h1><p>TL;DR，使用如下命令给这个程序赋予<code>CAP_NET_BIND_SERVICE</code>能力即可。注意，这条命令需要以root身份执行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">setcap</span> CAP_NET_BIND_SERVICE=+eip /path/to/binary</span><br></pre></td></tr></table></figure>
+
 <h1 id="这到底在干嘛"><a href="#这到底在干嘛" class="headerlink" title="这到底在干嘛"></a>这到底在干嘛</h1><p>接下来，我就把上面这条命令一点点拆开，解释清楚它到底干了什么。</p>
 <h2 id="Capabilities"><a href="#Capabilities" class="headerlink" title="Capabilities"></a>Capabilities</h2><p>首先介绍一下<code>capabilities</code>(能力)这个东西。</p>
 <p>在Linux内核版本2.2开始，Linux将一系列的超级管理员权限细分成了一个个可以单独开启关闭的单元，以提供更细粒度的权限控制，这些单元，就被称之为<code>capabilities</code>。详细的<code>capabilities</code>列表可以参考<a href="#ref_1">Man Page Capabilities(7)</a>。</p>
@@ -339,6 +341,7 @@
 </ol>
 <h1 id="除了手动指定，还有没有其他办法"><a href="#除了手动指定，还有没有其他办法" class="headerlink" title="除了手动指定，还有没有其他办法"></a>除了手动指定，还有没有其他办法</h1><p><code>Systemd</code>也支持在<code>service</code>的配置文件中指定<code>capabilities</code>，其用法示例如下：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 该服务仅可以使用哪些capabilities</span></span><br><span class="line"><span class="attr">CapabilityBoundingSet</span>=CAP_NET_BIND_SERVICE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以非特权用户运行程序时需要设定此参数</span></span><br><span class="line"><span class="attr">AmbientCapabilities</span>=CAP_NET_BIND_SERVICE</span><br></pre></td></tr></table></figure>
+
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li><a id="ref_1"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi83L2NhcGFiaWxpdGllcw==" title="https://linux.die.net/man/7/capabilities">Man Page Capabilities(7)<i class="fa fa-external-link"></i></span></a></li>
 <li><a id="ref_2"><span class="exturl" data-url="aHR0cHM6Ly9saW51eC5kaWUubmV0L21hbi84L3NldGNhcA==" title="https://linux.die.net/man/8/setcap">Man Page setcap(8)<i class="fa fa-external-link"></i></span></a></li>
@@ -430,20 +433,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

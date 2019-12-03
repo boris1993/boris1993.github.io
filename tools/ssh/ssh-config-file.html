@@ -322,21 +322,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>如果你有很多的服务器要连接，如果对你来说记住那些服务器的地址、端口实在是一种痛苦，如果你一直在寻找一种能够简化在命令行下连接SSH服务器的办法，那么，本文将给你提供一种解决问题的思路，那就是，使用SSH的config文件。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果你有很多的服务器要连接，如果对你来说记住那些服务器的地址、端口实在是一种痛苦，如果你一直在寻找一种能够简化在命令行下连接SSH服务器的办法，那么，本文将给你提供一种解决问题的思路，那就是，使用SSH的config文件。</p>
 <a id="more"></a>
+
 <h1 id="SSH-config文件是什么"><a href="#SSH-config文件是什么" class="headerlink" title="SSH config文件是什么"></a>SSH config文件是什么</h1><p>Open SSH客户端配置文件，允许你以配置项的形式，记录各个服务器的连接信息，并允许你使用一个定义好的别名来代替其对应的ssh命令参数。</p>
 <h1 id="SSH-config文件该怎么用"><a href="#SSH-config文件该怎么用" class="headerlink" title="SSH config文件该怎么用"></a>SSH config文件该怎么用</h1><h2 id="创建SSH-config文件"><a href="#创建SSH-config文件" class="headerlink" title="创建SSH config文件"></a>创建SSH config文件</h2><p>通常来说，该文件会出现在两个地方，一个是<code>/etc/ssh/ssh_config</code>，一个是<code>~/.ssh/config</code>。</p>
 <p><code>/etc/ssh/ssh_config</code>文件通常用来定义全局范围上的SSH客户端参数，而<code>~/.ssh/config</code>则被用来定义每个用户自己的SSH客户端的配置。我们将要修改的，就是位于用户目录下的config文件。</p>
 <p>如果<code>~/.ssh/config</code>文件不存在，那么也不用着急，这是正常的，只需要执行如下命令，即可新建一个空白的config文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/.ssh/config</span><br></pre></td></tr></table></figure>
+
 <h2 id="编写config条目"><a href="#编写config条目" class="headerlink" title="编写config条目"></a>编写config条目</h2><p>假如说，我们想连接到一台服务器，它的地址是example.server.com，端口号是2222，以用户admin登陆，并使用~/.ssh/id_rsa这个私钥验证身份。那么，我们需要在命令行里输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh admin@example.server.com -p 2222 -i ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
 <p>嗯好吧，-i参数可以省略，但即使这样，命令还是很长，对吧？</p>
 <p>那么我们把这个服务器的连接参数写到config文件里，就变成了这个样子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 此处我为了美观起见，给每个子条目都缩进了一层，实际使用时缩进不影响文件的效果。</span><br><span class="line"></span><br><span class="line">Host sample</span><br><span class="line">    Hostname example.server.com</span><br><span class="line">    Port 2222</span><br><span class="line">    User admin</span><br><span class="line">    Identityfile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
 <p>嗯，在这里，它还有了一个新名字，叫<code>sample</code>。</p>
 <p>然后，我们只需要：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh sample</span><br></pre></td></tr></table></figure>
+
 <p>就可以连接到这台主机了。</p>
 <h1 id="这玩意有意思，我还想了解更多！"><a href="#这玩意有意思，我还想了解更多！" class="headerlink" title="这玩意有意思，我还想了解更多！"></a>这玩意有意思，我还想了解更多！</h1><p>好吧，为了满足你的好奇心，我这里为你提供了3篇博客供你参考。当然，这三篇博客也是我编写本文时的参考文档。</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cuenlidWx1by5jb20veWFuZ2ZjaDMvbm90ZS8xNzIxMjA=" title="https://www.zybuluo.com/yangfch3/note/172120">多个 SSH KEY 的管理<i class="fa fa-external-link"></i></span></p>
@@ -426,20 +431,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

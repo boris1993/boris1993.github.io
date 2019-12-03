@@ -316,9 +316,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在使用MyBatis查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用MyBatis查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
 <p>在这种情况下，或许可以考虑将相关的数据一次性全部查询出来，然后根据某一列作为key，将其存放在一个Map中，把这个Map当成一个临时的缓存。</p>
 <a id="more"></a>
+
 <h2 id="示例数据"><a href="#示例数据" class="headerlink" title="示例数据"></a>示例数据</h2><p>假设有这样的一组数据，其中保存了某公司的一系列基地的信息，包括基地名称、基地代号，和基地所在的区。</p>
 <table>
 <thead>
@@ -329,8 +330,7 @@
 <th>location</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>1</td>
 <td>梅陇</td>
 <td>ML</td>
@@ -366,16 +366,19 @@
 <td>SLL</td>
 <td>闵行区</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>MyBatis查询的代码还是同往常一样，一个SELECT查询，返回类型就是这个表对应的实体类。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryBaseByNameInMap"</span> <span class="attr">resultType</span>=<span class="string">"com.boris1993.demoapp.entity.BaseDTO"</span>&gt;</span></span><br><span class="line">    SELECT</span><br><span class="line">        `id`,</span><br><span class="line">        `base_name`,</span><br><span class="line">        `base_code`,</span><br><span class="line">        `location`</span><br><span class="line">        FROM `base`</span><br><span class="line">        WHERE del_flag = '0'</span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"baseName != null and baseName != ''"</span>&gt;</span></span><br><span class="line">            AND `base_name` = #&#123;baseName&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>但是在Mapper接口中，需要在对应的方法上面加上<code>@MapKey()</code>注解。这个注解向MyBatis指明了使用<strong>实体的哪一个属性</strong>(而不是列名)作为Map的key。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapKey</span>(<span class="string">"baseName"</span>)</span><br><span class="line"><span class="function">Map&lt;String, BaseDTO&gt; <span class="title">queryBaseByNameInMap</span><span class="params">(@Param(<span class="string">"baseName"</span>)</span> String baseName)</span>;</span><br></pre></td></tr></table></figure>
+
 <h2 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果"></a>执行结果</h2><p>编写service、controller等部分不是本文重点，按下不表。在不传递<code>baseName</code>时，就可以查出这样子的数据了：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"北翟路"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"4"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"北翟路"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"BDL"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"普陀区"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"龙阳路"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"3"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"龙阳路"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"LYL"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"浦东新区"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"梅陇"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"梅陇"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"ML"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"徐汇区"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"富锦路"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"富锦路"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"FJL"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"宝山区"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"石龙路"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"6"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"石龙路"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"SLL"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"闵行区"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"川沙"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"5"</span>,</span><br><span class="line">    <span class="attr">"baseName"</span>: <span class="string">"川沙"</span>,</span><br><span class="line">    <span class="attr">"baseCode"</span>: <span class="string">"CS"</span>,</span><br><span class="line">    <span class="attr">"location"</span>: <span class="string">"浦东新区"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="有什么用呢"><a href="#有什么用呢" class="headerlink" title="有什么用呢"></a>有什么用呢</h2><p>试想一下，在某个表中，只保存了相关基地的名字，但是在业务中又需要返回这个基地的代号等信息，那么就可以这么做了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先，调用另一个微服务的接口，把这些基地的信息取出来</span></span><br><span class="line">Map&lt;String, BaseDTO&gt; bases = baseDataFeignClient.queryBaseByNameInMap();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接下来，按照业务需要，查询出了一个List</span></span><br><span class="line"><span class="comment">// 在这个List中，就包含了一系列的基地的名称</span></span><br><span class="line">List&lt;SomethingOutputVO&gt; aListOfSomething = fetchAListOfSomething();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接下来，遍历这个List，逐个从bases中取得基地的代号</span></span><br><span class="line"><span class="keyword">for</span> (SomethingOutputVO item : aListOfSomething) &#123;</span><br><span class="line">    item.setBaseCode(bases.get(item.getBaseName()).get(<span class="string">"baseCode"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>此时，这个Map就变成了一个小的缓存，避免了在循环中反复查询数据库或者反复调用微服务接口的问题。</p>
 
     </div>
@@ -460,20 +463,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

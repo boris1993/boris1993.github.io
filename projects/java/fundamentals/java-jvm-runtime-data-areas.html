@@ -328,7 +328,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>JVM在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随JVM起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
 <ul>
 <li>线程专有<ul>
 <li><a href="#pc-register">pc(program counter)寄存器</a></li>
@@ -346,6 +346,7 @@
 </li>
 </ul>
 <a id="more"></a>
+
 <h1 id="pc-program-counter-寄存器"><a href="#pc-program-counter-寄存器" class="headerlink" title="pc(program counter)寄存器"></a><a name="pc-register"></a>pc(program counter)寄存器</h1><p>JVM允许同时运行多个线程，每个线程都有它自己的PC寄存器。在任意时刻，每个JVM线程都在执行一个方法中的某条语句，而这个正在被执行的方法，就叫做这个线程的“当前方法”。</p>
 <p>如果当前方法不是一个本地(native)方法，那么PC寄存器的内容是当前正在执行的指令的地址；如果当前方法是本地方法，那么PC寄存器的值则是空(undefined)的。</p>
 <h1 id="JVM栈"><a href="#JVM栈" class="headerlink" title="JVM栈"></a><a name="jvm-stacks"></a>JVM栈</h1><p>每个JVM都会在其启动时创建自己私有的JVM栈，栈之中存储的是<a href="/projects/java/fundamentals/java-jvm-stack-frame.html">栈帧</a>，用于存储局部变量和方法调用信息。</p>
@@ -448,20 +449,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

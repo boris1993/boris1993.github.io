@@ -316,15 +316,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>记录lsof命令常见用法备忘</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录lsof命令常见用法备忘</p>
 <a id="more"></a>
+
 <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示所有网络连接</span></span><br><span class="line">lsof -i</span><br></pre></td></tr></table></figure>
+
 <h2 id="根据协议类型筛选"><a href="#根据协议类型筛选" class="headerlink" title="根据协议类型筛选"></a>根据协议类型筛选</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅显示IPv4网络连接</span></span><br><span class="line">lsof -i 4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示IPv6网络连接</span></span><br><span class="line">lsof -i 6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示TCP连接</span></span><br><span class="line">lsof -iTCP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示UDP连接</span></span><br><span class="line">lsof -iUDP</span><br></pre></td></tr></table></figure>
+
 <h2 id="根据目标地址和端口号筛选"><a href="#根据目标地址和端口号筛选" class="headerlink" title="根据目标地址和端口号筛选"></a>根据目标地址和端口号筛选</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据目标地址筛选</span></span><br><span class="line">lsof -i@<span class="variable">$&#123;HOSTNAME_OR_IP_ADDRESS&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据端口号筛选</span></span><br><span class="line">lsof -i :<span class="variable">$&#123;PORT_NUMBER&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合</span></span><br><span class="line">lsof -i@<span class="variable">$&#123;HOSTNAME_OR_IP_ADDRESS&#125;</span>:<span class="variable">$&#123;PORT_NUMBER&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="根据端口状态筛选"><a href="#根据端口状态筛选" class="headerlink" title="根据端口状态筛选"></a>根据端口状态筛选</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsof -i -sTCP:<span class="variable">$&#123;STATE&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">lsof -i -sTCP:LISTEN</span><br><span class="line">lsof -i -sTCP:ESTABLISHED</span><br></pre></td></tr></table></figure>
+
 <h2 id="查看某进程端口占用"><a href="#查看某进程端口占用" class="headerlink" title="查看某进程端口占用"></a>查看某进程端口占用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -p <span class="variable">$&#123;PID&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前用户打开的文件</span></span><br><span class="line">lsof -u <span class="variable">$&#123;USER&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示除当前用户以外的用户打开的文件</span></span><br><span class="line">lsof -u ^<span class="variable">$&#123;USER&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅显示PID而不是所有输出信息</span></span><br><span class="line">lsof -t</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据程序名筛选</span></span><br><span class="line">lsof -c <span class="variable">$&#123;COMMAND&#125;</span></span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -408,20 +416,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
