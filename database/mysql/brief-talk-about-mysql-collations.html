@@ -62,18 +62,20 @@
   };
 </script>
 
-  <meta name="description" content="码农pilot的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code Life">
-<meta property="og:url" content="https://www.boris1993.com/archives/2019/page/2/index.html">
+  <meta name="description" content="在我们开发过程中，最常见到的三种校对规则(collation)就是utf8mb4_general_ci、utf8mb4_unicode_ci，和utf8mb4_bin。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。">
+<meta name="keywords" content="MySQL,collation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈MySQL中的校对规则(collation)">
+<meta property="og:url" content="https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="码农pilot的个人博客">
+<meta property="og:description" content="在我们开发过程中，最常见到的三种校对规则(collation)就是utf8mb4_general_ci、utf8mb4_unicode_ci，和utf8mb4_bin。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-14T03:18:41.910Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code Life">
-<meta name="twitter:description" content="码农pilot的个人博客">
+<meta name="twitter:title" content="浅谈MySQL中的校对规则(collation)">
+<meta name="twitter:description" content="在我们开发过程中，最常见到的三种校对规则(collation)就是utf8mb4_general_ci、utf8mb4_unicode_ci，和utf8mb4_bin。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。">
 
-<link rel="canonical" href="https://www.boris1993.com/archives/2019/page/2/">
+<link rel="canonical" href="https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html">
 
 
 <script id="page-configurations">
@@ -81,13 +83,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | Code Life</title>
+  <title>浅谈MySQL中的校对规则(collation) | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -233,237 +235,146 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          浅谈MySQL中的校对规则(collation)
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-14 10:07:11 / 修改时间：11:18:41" itemprop="dateCreated datePublished" datetime="2019-12-14T10:07:11+08:00">2019-12-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/database/mysql/brief-talk-about-mysql-collations.html" class="post-meta-item leancloud_visitors" data-flag-title="浅谈MySQL中的校对规则(collation)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 50 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/database/mysql/brief-talk-about-mysql-collations.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/database/mysql/brief-talk-about-mysql-collations.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2019</h2>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在我们开发过程中，最常见到的三种校对规则(collation)就是<code>utf8mb4_general_ci</code>、<code>utf8mb4_unicode_ci</code>，和<code>utf8mb4_bin</code>。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。</p>
+<a id="more"></a>
+
+<h2 id="校对规则不会导致乱码"><a href="#校对规则不会导致乱码" class="headerlink" title="校对规则不会导致乱码"></a>校对规则不会导致乱码</h2><p>之前听到一名同事说，“这个东西(collation)你再研究下，搞不好中文会乱码的”。显然这位同事没搞清楚字符编码(encoding)和校对规则(collation)的区别。</p>
+<p>字符集是一套符号和编码，它实实在在决定了每个字符应当以怎样的规则被编码为二进制数据，以及在取出一系列二进制数据之后，又应当以怎样的规则还原为字符。比如我们喜闻乐见的“锟斤拷”就是因为GBK编码与Unicode编码之间转换出现问题导致的乱码。</p>
+<p>而校对规则本身并不会参与字符的编码，所以它当然不会产生文字乱码的问题。当然，使用了不合适的校对规则，也会对数据产生一定的影响，具体有什么影响后面我们慢慢说。</p>
+<h2 id="校对规则是什么"><a href="#校对规则是什么" class="headerlink" title="校对规则是什么"></a>校对规则是什么</h2><p>校对规则是一套规范，它指明了数据在数据库中应当以哪种方式被比较和排序，包括排序的规则、是否大小写敏感，以及是否对重音标记敏感。</p>
+<p>在<code>MySQL</code>中，校对规则通常按照<code>字符集_语言或地区_字符敏感特性</code>的规则来命名。</p>
+<h2 id="这三种校对规则有什么区别"><a href="#这三种校对规则有什么区别" class="headerlink" title="这三种校对规则有什么区别"></a>这三种校对规则有什么区别</h2><p>首先，根据它们的后缀<code>_ci</code>可以知道，这三种校对规则都是对大小写不敏感(Case Insensitive)的。</p>
+<p><code>utf8mb4_general_ci</code>是对大小写和重音字符都不敏感的。比如，拉丁字符<code>ÀÁÅåāă</code>是等同于字符<code>a</code>的。</p>
+<p><code>utf8mb4_unicode_ci</code>是大小写不敏感，但是对重音字符敏感的。即，拉丁字符<code>Å</code>和<code>å</code>是等同的，但是和<code>a</code>是不同的。</p>
+<p><code>utf8mb4_bin</code>则是直接比较每个字符的Unicode码点(code point)。</p>
+<p>从效率上来讲，<code>utf8mb4_bin</code> &gt; <code>utf8mb4_general_ci</code> &gt; <code>utf8mb4_unicode_ci</code>。</p>
+<h2 id="校对规则会产生什么影响"><a href="#校对规则会产生什么影响" class="headerlink" title="校对规则会产生什么影响"></a>校对规则会产生什么影响</h2><p>不同的排序规则，不仅对大小写和重音字符的处理不同，对于一些语言中特有的字符的处理也是不同的。</p>
+<p>比如一个斯洛伐克人，他向数据库中插入了两条数据，其主键分别是<code>poistný</code>和<code>poistny</code>。但是因为他用了重音不敏感的<code>utf8mb4_general_ci</code>，导致数据库判定这两个字符串是一样的，而抛出了重复主键的错误。<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[斯洛伐克人的例子](https://stackoverflow.com/a/35482707/3833858)
+">[3]</span></a></sup></p>
+<p>另一个例子是，对于德语中的<code>ß</code>，如果使用<code>utf8mb4_general_ci</code>，那么它等同于<code>s</code>，而如果使用<code>utf8mb4_unicode_ci</code>，它则等同于<code>ss</code>。</p>
+<p>所以，如果数据涉及的语言中包含有特殊的字符或者重音符号，而其比对结果的正确性又很重要时，那么就应当选择<code>unicode_ci</code>系列的校对规则，否则，<code>general_ci</code>就够用了。当然，在必要的情况下，也可以选择这个语言对应的规则，比如<code>utf8_swedish_ci</code>。</p>
+<p>对于中文来说，我在网上并没有找到相关的文章，同时根据自己的开发经验，<code>general_ci</code>和<code>unicode_ci</code>对于中文都没有什么明显的问题，所以两个都可以用。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9mb3J1bXMubXlzcWwuY29tL3JlYWQucGhwPzEwMywxODcwNDgsMTg4NzQ4" title="https://forums.mysql.com/read.php?103,187048,188748">Re: utf8_unicode_ci vs utf8_general_ci - MySQL Forums<i class="fa fa-external-link"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cDovL2NvbGxhdGlvbi1jaGFydHMub3JnL215c3FsNjAv" title="http://collation-charts.org/mysql60/">MySQL collation charts<i class="fa fa-external-link"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzM1NDgyNzA3LzM4MzM4NTg=" title="https://stackoverflow.com/a/35482707/3833858">斯洛伐克人的例子<i class="fa fa-external-link"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-23T15:22:03+08:00"
-              content="2019-05-23">
-          05-23
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/collation/" rel="tag"># collation</a>
+          </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/database/Redis/redis-replication-in-docker.html" itemprop="url">
-            <span itemprop="name">使用Docker配置Redis主从复制</span>
-          </a>
-      </h3>
+        
 
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" rel="next" title="IDEA警告Field injection is not recommended">
+                  <i class="fa fa-chevron-left"></i> IDEA警告Field injection is not recommended
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-02T10:08:33+08:00"
-              content="2019-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-jvm-stack-frame.html" itemprop="url">
-            <span itemprop="name">JVM的栈帧</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-28T14:29:41+08:00"
-              content="2019-03-28">
-          03-28
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-gc-algorithms.html" itemprop="url">
-            <span itemprop="name">Java的垃圾回收算法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-27T10:19:51+08:00"
-              content="2019-03-27">
-          03-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html" itemprop="url">
-            <span itemprop="name">JVM运行时的数据区域</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-22T16:07:27+08:00"
-              content="2019-03-22">
-          03-22
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/源码阅读/java-read-src-arraylist.html" itemprop="url">
-            <span itemprop="name">Java源码阅读 - ArrayList</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-15T09:49:15+08:00"
-              content="2019-03-15">
-          03-15
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-customized-annotations.html" itemprop="url">
-            <span itemprop="name">Java自定义注解</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-13T15:47:21+08:00"
-              content="2019-03-13">
-          03-13
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/Servlet/java-servlet-5-filter.html" itemprop="url">
-            <span itemprop="name">循序渐进写一个Servlet(5) - Filter</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-12T11:26:11+08:00"
-              content="2019-03-12">
-          03-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/Servlet/java-servlet-4-session-tracking.html" itemprop="url">
-            <span itemprop="name">循序渐进写一个Servlet(4) - 会话追踪</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-11T14:33:27+08:00"
-              content="2019-03-11">
-          03-11
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html" itemprop="url">
-            <span itemprop="name">生产者与消费者问题在Java中的实现</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-08T11:13:44+08:00"
-              content="2019-03-08">
-          03-08
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html" itemprop="url">
-            <span itemprop="name">循序渐进写一个Servlet(3) - 分别处理GET和POST</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -488,6 +399,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#校对规则不会导致乱码"><span class="nav-number">1.</span> <span class="nav-text">校对规则不会导致乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#校对规则是什么"><span class="nav-number">2.</span> <span class="nav-text">校对规则是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这三种校对规则有什么区别"><span class="nav-number">3.</span> <span class="nav-text">这三种校对规则有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#校对规则会产生什么影响"><span class="nav-number">4.</span> <span class="nav-text">校对规则会产生什么影响</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
