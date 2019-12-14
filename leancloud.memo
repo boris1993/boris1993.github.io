@@ -3,6 +3,7 @@
 {"title":"使用Docker配置Redis哨兵","url":"/database/Redis/redis-sentinel-in-docker.html"},
 {"title":"JDBC的事务和隔离级别","url":"/database/jdbc-transaction-and-isolation-level.html"},
 {"title":"浅谈MySQL中的校对规则(collation)","url":"/database/mysql/brief-talk-about-mysql-collations.html"},
+{"title":"MySQL Workbench中各个列属性的含义","url":"/database/mysql/column-flags-in-mysql-workbench.html"},
 {"title":"在MySQL中修改表和列的排序规则","url":"/database/mysql/mysql-convert-tables-and-columns-collation.html"},
 {"title":"在SuSE Linux上安装Oracle Database 12c手记","url":"/database/oracle/install-oracle-12c-on-suse-linux.html"},
 {"title":"卸载Oracle Database 12c","url":"/database/oracle/uninstall-oracle-12c.html"},
