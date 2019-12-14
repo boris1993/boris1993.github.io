@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>MySQL Workbench中各个列属性的含义</title>
+      <link href="/database/mysql/column-flags-in-mysql-workbench.html"/>
+      <url>/database/mysql/column-flags-in-mysql-workbench.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul><li><code>PK</code>: 主键(Primary Key)</li><li><code>NN</code>: 非空(Not Null)</li><li><code>UQ</code>: 唯一索引(Unique Index)</li><li><code>BIN</code>: 二进制(Binary) 将数据储存为二进制字符串</li><li><code>UN</code>: 无符号的(Unsigned)</li><li><code>ZF</code>: 零填充的(Zero Fill) 如：INT(5)的列中，<code>12</code>会被填充为<code>00012</code></li><li><code>AI</code>: 自增长的(Auto Increment)</li><li><code>G</code>: 生成出来的(Generated) 如：根据公式从其它列中生成的数据</li></ul><a id="more"></a><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzM2NjM5NzEvMzgzMzg1OA==" title="https://stackoverflow.com/a/3663971/3833858">What do column flags mean in MySQL Workbench?<i class="fa fa-external-link"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy93b3JrYmVuY2gvZW4vd2ItdGFibGUtZWRpdG9yLWNvbHVtbnMtdGFiLmh0bWw=" title="https://dev.mysql.com/doc/workbench/en/wb-table-editor-columns-tab.html">Columns Tab - MySQL Workbench Manual<i class="fa fa-external-link"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> column flag </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浅谈MySQL中的校对规则(collation)</title>
       <link href="/database/mysql/brief-talk-about-mysql-collations.html"/>
       <url>/database/mysql/brief-talk-about-mysql-collations.html</url>
@@ -1273,9 +1302,9 @@
       
         <tags>
             
-            <tag> Shell </tag>
-            
             <tag> SSH </tag>
+            
+            <tag> Shell </tag>
             
         </tags>
       

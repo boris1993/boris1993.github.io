@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/database/mysql/column-flags-in-mysql-workbench.html</loc>
+    
+    <lastmod>2019-12-14T03:30:15.681Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html</loc>
     
     <lastmod>2019-12-14T03:18:41.910Z</lastmod>
@@ -128,14 +135,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
+    <loc>https://www.boris1993.com/manifest.json</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
     
@@ -163,14 +170,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -184,21 +191,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -212,9 +205,16 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -226,14 +226,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
@@ -247,14 +254,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -282,16 +289,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
@@ -310,7 +310,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -324,9 +331,16 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
@@ -352,14 +366,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
@@ -373,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
