@@ -30,6 +30,7 @@
 {"title":"生产者与消费者问题在Java中的实现","url":"/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html"},
 {"title":"Java线程池","url":"/projects/java/fundamentals/java-multi-threading-thread-pool.html"},
 {"title":"在Java bean中实现setter的链式调用","url":"/projects/java/java-bean-chaining-setters.html"},
+{"title":"去掉自定义异常中的堆栈跟踪信息","url":"/projects/java/java-remove-stack-trace-in-customized-exceptions.html"},
 {"title":"JDBC错误Illegal mix of collations解决方法","url":"/projects/java/jdbc/illegal-mix-of-collations.html"},
 {"title":"Java源码阅读 - ArrayList","url":"/projects/java/源码阅读/java-read-src-arraylist.html"},
 {"title":"让MyBatis把查询结果以Map形式返回","url":"/projects/mybatis/mybatis-return-query-results-in-a-map.html"},
