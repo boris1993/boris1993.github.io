@@ -62,20 +62,20 @@
   };
 </script>
 
-  <meta name="description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
-<meta name="keywords" content="Git">
+  <meta name="description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
+<meta name="keywords" content="Java,代码技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分环境为Git指定单独的配置">
-<meta property="og:url" content="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+<meta property="og:title" content="在Java bean中实现setter的链式调用">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/java-bean-chaining-setters.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+<meta property="og:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-18T09:19:16.321Z">
+<meta property="og:updated_time" content="2019-12-17T07:01:44.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分环境为Git指定单独的配置">
-<meta name="twitter:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+<meta name="twitter:title" content="在Java bean中实现setter的链式调用">
+<meta name="twitter:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
 
-<link rel="canonical" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+<link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/java-bean-chaining-setters.html">
 
 
 <script id="page-configurations">
@@ -89,7 +89,7 @@
   };
 </script>
 
-  <title>分环境为Git指定单独的配置 | Code Life</title>
+  <title>在Java bean中实现setter的链式调用 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -240,7 +240,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/java-bean-chaining-setters.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/common/avatar.jpeg">
@@ -253,7 +253,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          分环境为Git指定单独的配置
+          在Java bean中实现setter的链式调用
         </h2>
 
         <div class="post-meta">
@@ -262,30 +262,42 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-09-18 15:42:07 / 修改时间：17:19:16" itemprop="dateCreated datePublished" datetime="2019-09-18T15:42:07+08:00">2019-09-18</time>
+              <time title="创建时间：2019-09-24 15:08:36" itemprop="dateCreated datePublished" datetime="2019-09-24T15:08:36+08:00">2019-09-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-17 15:01:44" itemprop="dateModified" datetime="2019-12-17T15:01:44+08:00">2019-12-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index">
+                    <span itemprop="name">代码技巧</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/tools/git/specify-different-git-config-for-different-environments.html" class="post-meta-item leancloud_visitors" data-flag-title="分环境为Git指定单独的配置" title="阅读次数">
+            <span id="/projects/java/coding-tips/java-bean-chaining-setters.html" class="post-meta-item leancloud_visitors" data-flag-title="在Java bean中实现setter的链式调用" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -300,8 +312,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/tools/git/specify-different-git-config-for-different-environments.html#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/tools/git/specify-different-git-config-for-different-environments.html" itemprop="commentCount"></span>
+    <a title="valine" href="/projects/java/coding-tips/java-bean-chaining-setters.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/java-bean-chaining-setters.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -316,41 +328,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
-<p>在<code>2.13</code>版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在<code>2.13</code>这个版本中，Git引入了一个名为“按条件引入”(Conditional includes)的功能。这个功能允许用户通过指定一定的条件，来使Git从不同的配置文件中取得配置项。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code>方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
 <a id="more"></a>
 
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>“按条件引入”功能可以根据<strong>目录</strong>或者<strong>分支</strong>来决定使用哪个配置，显然根据分支无法区分工作环境和私人环境，所以首先需要分别为工作环境和私人环境创建各自的目录。比如将目录划分为这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">projects</span><br><span class="line">├── work     &lt;== 工作相关</span><br><span class="line">└── personal &lt;== 私人项目</span><br></pre></td></tr></table></figure>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常来说，一个POJO大致上会是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Integer score;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getScore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setScore</span><span class="params">(Integer score)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="拆分配置"><a href="#拆分配置" class="headerlink" title="拆分配置"></a>拆分配置</h2><p>接下来，需要为全局、工作、私人分别编写配置文件。本文中，全局配置文件<code>.gitconfig</code>位于<code>$HOME</code>下，各环境的配置文件位于<code>~/.config/git</code>下。</p>
-<h3 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[core]</span></span><br><span class="line">  excludesfile = ~/.gitignore_global</span><br><span class="line">  editor = vim</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/work/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-work</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/personal/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-personal</span><br></pre></td></tr></table></figure>
+<p>然后，在赋值的时候，会是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student james = <span class="keyword">new</span> Student();</span><br><span class="line">james.setName(<span class="string">"James"</span>);</span><br><span class="line">james.setAge(<span class="number">22</span>);</span><br><span class="line">james.setScore(<span class="number">80</span>);</span><br></pre></td></tr></table></figure>
 
-<p>第4行和第6行的<code>includeIf</code>段，就是“按条件引入”的配置。在这里需要注意这几点：</p>
-<ul>
-<li><code>gitdir:</code>参数用于匹配本地Git仓库的路径。<ul>
-<li>如果文件系统是大小写不敏感的，并且路径同时包含大写和小写字母，那么需要使用<code>gitdir/i:</code>来匹配。</li>
-<li>如果要匹配某个目录下面的所有子目录，那么在路径最后需要加上<code>/</code>或者<code>/**</code>。（实际上，Git会自动在末尾的<code>/</code>后面附加<code>**</code>）</li>
-<li>反之，如果只要匹配到某一个目录，而不递归包含其下面的所有子目录，那么路径末尾就不要有<code>/</code>。</li>
-</ul>
-</li>
-<li><code>path</code>指定了在满足条件时要使用的配置文件</li>
-</ul>
-<p>综上所述，位于<code>~/projects/work/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-work</code>中的配置；位于<code>~/projects/personal/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-personal</code>中的配置。</p>
-<h3 id="私人环境和工作环境的配置文件"><a href="#私人环境和工作环境的配置文件" class="headerlink" title="私人环境和工作环境的配置文件"></a>私人环境和工作环境的配置文件</h3><p>这两个环境各自的配置文件就没有什么新鲜的东西了，就只有面向各个环境的身份信息、GPG签名信息等。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[user]</span></span><br><span class="line">  signingkey = 1122334455667788</span><br><span class="line">  name = Your Name</span><br><span class="line">  email = test@example.com</span><br><span class="line"><span class="section">[commit]</span></span><br><span class="line">  gpgsign = true</span><br><span class="line">  template = ~/.stCommitMsg</span><br><span class="line"><span class="section">[gpg]</span></span><br><span class="line">  program = /usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+<p>上面这三行set方法，本来没干什么事，却要写3行代码六十多个字，是不是看起来很难受，写起来很费劲？</p>
+<p>那么，这时候就可以通过链式调用setter来显著减少代码行数。</p>
+<h2 id="Setter的链式调用"><a href="#Setter的链式调用" class="headerlink" title="Setter的链式调用"></a>Setter的链式调用</h2><p>首先，要实现链式调用setter，就得稍微修改一下setter方法。放心，改动量是很小的，对业务是没有影响的，操作也是一劳永逸的。</p>
+<p>具体做法呢，就是让setter返回这个POJO类型，而不是void，然后将<code>this</code>返回，比如这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">setScore</span><span class="params">(Integer score)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.score = score;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h2><p>写完了配置文件，还是要检查一下是不是生效了的。首先，在一个不包含任何Git仓库的位置执行<code>git config -l</code>，返回的信息中就只有全局配置中的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br></pre></td></tr></table></figure>
+<p>然后，在创建对象的时候，就可以这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student().setName(<span class="string">"james"</span>).setAge(<span class="number">22</span>).setScore(<span class="number">80</span>);</span><br></pre></td></tr></table></figure>
 
-<p>然后，进入私人环境的某个Git仓库，再执行<code>git config -l</code>，就可以看到私人环境相关的配置文件被引入了。（仓库自己的配置其实也会被显示出来，这里为了减小篇幅将其略掉了）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br><span class="line">user.signingkey=1122334455667788</span><br><span class="line">user.name=Your Name</span><br><span class="line">user.email=test@example.com</span><br><span class="line">commit.gpgsign=true</span><br><span class="line">commit.template=~/.stCommitMsg</span><br><span class="line">gpg.program=/usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+<p>怎么样？是不是突然变得很短很简洁？写起来是不是很方便？</p>
+<p>但是，要一个个改那么多setter，也挺麻烦的，特别是IDE里面还不一定能自动化，有没有更好的办法？</p>
+<p>答案是，有！</p>
+<p>是啥呢？</p>
+<p>Lombok！</p>
+<h2 id="用Lombok实现setter的链式调用"><a href="#用Lombok实现setter的链式调用" class="headerlink" title="用Lombok实现setter的链式调用"></a>用Lombok实现setter的链式调用</h2><p>Lombok是一个自动生成模版代码的工具，像构造方法啊、getter和setter啊，都可以用一个或多个注解来代替，然后在编译期由Lombok替你写这部分的代码。如果你还没用过，那么请务必学习和试用一下，它可以为你省下那些浪费在模版代码上的时间。</p>
+<p>在引入了Lombok之后，你就可以把上文的<code>Student</code>类重构成这样子了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Accessors</span>(chain = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Integer score;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1jb25maWcjX2luY2x1ZGVz" title="https://git-scm.com/docs/git-config#_includes">Git官方文档的<code>Includes</code>部分<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuYmxvZy8yMDE3LTA1LTEwLWdpdC0yLTEzLWhhcy1iZWVuLXJlbGVhc2VkLw==" title="https://github.blog/2017-05-10-git-2-13-has-been-released/">Git 2.13 有趣的新功能介绍 - GitHub<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubW90b3dpbGxpYW1zLmNvbS9jb25kaXRpb25hbC1pbmNsdWRlcy1mb3ItZ2l0LWNvbmZpZw==" title="https://www.motowilliams.com/conditional-includes-for-git-config">Conditional Includes For Git Config<i class="fa fa-external-link"></i></span></li>
-</ul>
+<p>是的，你不再需要去写getter和setter了，更不需要一个个的去修改来让它支持链式调用了。只需要两个注解，就可以完成上面的一大片工作。</p>
+<p>第一行的<code>@Data</code>注解，是一系列注解的集合，用来生成一系列的模版代码。由于这不是本文重点，所以就不再展开说了。</p>
+<p>第二行的<code>@Accessors</code>注解，就是这里的重点了，它用来设定Lombok应该怎样生成setter和getter代码。而其中的<code>chain</code>属性，就是打开链式setter的开关，将它打开之后，就可以生成支持链式调用的setter方法。</p>
+<p>然后，你就可以像上文一样，去享受链式调用了。</p>
 
     </div>
 
@@ -360,23 +368,24 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/代码技巧/" rel="tag"># 代码技巧</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" rel="next" title="让MyBatis把查询结果以Map形式返回">
-                  <i class="fa fa-chevron-left"></i> 让MyBatis把查询结果以Map形式返回
+                <a href="/tools/git/specify-different-git-config-for-different-environments.html" rel="next" title="分环境为Git指定单独的配置">
+                  <i class="fa fa-chevron-left"></i> 分环境为Git指定单独的配置
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/projects/java/coding-tips/java-bean-chaining-setters.html" rel="prev" title="在Java bean中实现setter的链式调用">
-                  在Java bean中实现setter的链式调用 <i class="fa fa-chevron-right"></i>
+                <a href="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" rel="prev" title="使用FlatMap“展平”一系列数据">
+                  使用FlatMap“展平”一系列数据 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -417,7 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分配置"><span class="nav-number">2.</span> <span class="nav-text">拆分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">全局配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人环境和工作环境的配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">私人环境和工作环境的配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查配置"><span class="nav-number">3.</span> <span class="nav-text">检查配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter的链式调用"><span class="nav-number">2.</span> <span class="nav-text">Setter的链式调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Lombok实现setter的链式调用"><span class="nav-number">3.</span> <span class="nav-text">用Lombok实现setter的链式调用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

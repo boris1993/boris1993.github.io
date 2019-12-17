@@ -62,20 +62,27 @@
   };
 </script>
 
-  <meta name="description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
-<meta name="keywords" content="Git">
+  <meta name="description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
+<meta name="keywords" content="Java,代码技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分环境为Git指定单独的配置">
-<meta property="og:url" content="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+<meta property="og:title" content="使用FlatMap“展平”一系列数据">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+<meta property="og:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-18T09:19:16.321Z">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/2-trim.png">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/3-distinct.png">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/4-sort.png">
+<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/5-collect.png">
+<meta property="og:updated_time" content="2019-12-17T07:01:03.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分环境为Git指定单独的配置">
-<meta name="twitter:description" content="有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。 在2.13版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在2.13这个版本中，Git引入了一个名为“按条件引入”(Co">
+<meta name="twitter:title" content="使用FlatMap“展平”一系列数据">
+<meta name="twitter:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
+<meta name="twitter:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
 
-<link rel="canonical" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+<link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 
 
 <script id="page-configurations">
@@ -89,7 +96,7 @@
   };
 </script>
 
-  <title>分环境为Git指定单独的配置 | Code Life</title>
+  <title>使用FlatMap“展平”一系列数据 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -240,7 +247,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/common/avatar.jpeg">
@@ -253,7 +260,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          分环境为Git指定单独的配置
+          使用FlatMap“展平”一系列数据
         </h2>
 
         <div class="post-meta">
@@ -262,30 +269,42 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-09-18 15:42:07 / 修改时间：17:19:16" itemprop="dateCreated datePublished" datetime="2019-09-18T15:42:07+08:00">2019-09-18</time>
+              <time title="创建时间：2019-09-26 16:30:56" itemprop="dateCreated datePublished" datetime="2019-09-26T16:30:56+08:00">2019-09-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-17 15:01:03" itemprop="dateModified" datetime="2019-12-17T15:01:03+08:00">2019-12-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index">
+                    <span itemprop="name">代码技巧</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/tools/git/specify-different-git-config-for-different-environments.html" class="post-meta-item leancloud_visitors" data-flag-title="分环境为Git指定单独的配置" title="阅读次数">
+            <span id="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" class="post-meta-item leancloud_visitors" data-flag-title="使用FlatMap“展平”一系列数据" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -300,8 +319,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/tools/git/specify-different-git-config-for-different-environments.html#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/tools/git/specify-different-git-config-for-different-environments.html" itemprop="commentCount"></span>
+    <a title="valine" href="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -316,41 +335,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有的小伙伴，在公司需要使用公司的Git来干活，同时自己也有些托管在GitHub等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的GPG签名。</p>
-<p>在<code>2.13</code>版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在<code>2.13</code>这个版本中，Git引入了一个名为“按条件引入”(Conditional includes)的功能。这个功能允许用户通过指定一定的条件，来使Git从不同的配置文件中取得配置项。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的<code>FlatMap</code>简化这个操作。</p>
 <a id="more"></a>
 
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>“按条件引入”功能可以根据<strong>目录</strong>或者<strong>分支</strong>来决定使用哪个配置，显然根据分支无法区分工作环境和私人环境，所以首先需要分别为工作环境和私人环境创建各自的目录。比如将目录划分为这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">projects</span><br><span class="line">├── work     &lt;== 工作相关</span><br><span class="line">└── personal &lt;== 私人项目</span><br></pre></td></tr></table></figure>
+<h2 id="介绍需求"><a href="#介绍需求" class="headerlink" title="介绍需求"></a>介绍需求</h2><p>假设现在有这样子的一个排班信息：</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>班组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2019-01-02</td>
+<td>Unit-2, Unit-3</td>
+</tr>
+<tr>
+<td>2019-01-03</td>
+<td>Unit-2</td>
+</tr>
+<tr>
+<td>2019-01-04</td>
+<td>Unit-1, Unit-3</td>
+</tr>
+<tr>
+<td>2019-01-01</td>
+<td>Unit-2, Unit-3</td>
+</tr>
+<tr>
+<td>2019-01-05</td>
+<td>Unit-3</td>
+</tr>
+<tr>
+<td>2019-01-06</td>
+<td>Unit-1, Unit-2</td>
+</tr>
+<tr>
+<td>2019-01-07</td>
+<td>Unit-1</td>
+</tr>
+<tr>
+<td>2019-01-08</td>
+<td>Unit-2, Unit-3</td>
+</tr>
+</tbody></table>
+<p>而目标是，从中取出这个表中的所有班组，并去重和排序，即最终的结果是<code>Unit-1, Unit-2, Unit-3</code>。</p>
+<h2 id="准备示例数据"><a href="#准备示例数据" class="headerlink" title="准备示例数据"></a>准备示例数据</h2><p>在代码中，我们这样来构造这些数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 准备假数据</span></span><br><span class="line">WorkSchedule workSchedule1 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-01"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule2 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-02"</span>, <span class="string">"Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule3 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-03"</span>, <span class="string">"Unit-1, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule4 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-04"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule5 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-05"</span>, <span class="string">"Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule6 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-06"</span>, <span class="string">"Unit-1, Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule7 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-07"</span>, <span class="string">"Unit-1"</span>);</span><br><span class="line">WorkSchedule workSchedule8 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-08"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;WorkSchedule&gt; workSchedules = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">8</span>);</span><br><span class="line">workSchedules.add(workSchedule1);</span><br><span class="line">workSchedules.add(workSchedule2);</span><br><span class="line">workSchedules.add(workSchedule3);</span><br><span class="line">workSchedules.add(workSchedule4);</span><br><span class="line">workSchedules.add(workSchedule5);</span><br><span class="line">workSchedules.add(workSchedule6);</span><br><span class="line">workSchedules.add(workSchedule7);</span><br><span class="line">workSchedules.add(workSchedule8);</span><br></pre></td></tr></table></figure>
 
-<h2 id="拆分配置"><a href="#拆分配置" class="headerlink" title="拆分配置"></a>拆分配置</h2><p>接下来，需要为全局、工作、私人分别编写配置文件。本文中，全局配置文件<code>.gitconfig</code>位于<code>$HOME</code>下，各环境的配置文件位于<code>~/.config/git</code>下。</p>
-<h3 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[core]</span></span><br><span class="line">  excludesfile = ~/.gitignore_global</span><br><span class="line">  editor = vim</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/work/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-work</span><br><span class="line"><span class="section">[includeIf "gitdir:~/projects/personal/"]</span></span><br><span class="line">  path = ~/.config/git/gitconfig-personal</span><br></pre></td></tr></table></figure>
+<h2 id="不使用流的做法"><a href="#不使用流的做法" class="headerlink" title="不使用流的做法"></a>不使用流的做法</h2><p>如果不使用流，那么我们可以通过<code>for</code>循环取数据，和使用<code>TreeSet</code>实现去重和排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;String&gt; unitNames = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (WorkSchedule workSchedule : workSchedules) &#123;</span><br><span class="line">    String[] arrUnitName = workSchedule.getUnits().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String unitName : arrUnitName) &#123;</span><br><span class="line">        unitNames.add(unitName.trim());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>第4行和第6行的<code>includeIf</code>段，就是“按条件引入”的配置。在这里需要注意这几点：</p>
-<ul>
-<li><code>gitdir:</code>参数用于匹配本地Git仓库的路径。<ul>
-<li>如果文件系统是大小写不敏感的，并且路径同时包含大写和小写字母，那么需要使用<code>gitdir/i:</code>来匹配。</li>
-<li>如果要匹配某个目录下面的所有子目录，那么在路径最后需要加上<code>/</code>或者<code>/**</code>。（实际上，Git会自动在末尾的<code>/</code>后面附加<code>**</code>）</li>
-<li>反之，如果只要匹配到某一个目录，而不递归包含其下面的所有子目录，那么路径末尾就不要有<code>/</code>。</li>
-</ul>
-</li>
-<li><code>path</code>指定了在满足条件时要使用的配置文件</li>
-</ul>
-<p>综上所述，位于<code>~/projects/work/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-work</code>中的配置；位于<code>~/projects/personal/</code>下的所有Git仓库，都套用<code>~/.config/git/gitconfig-personal</code>中的配置。</p>
-<h3 id="私人环境和工作环境的配置文件"><a href="#私人环境和工作环境的配置文件" class="headerlink" title="私人环境和工作环境的配置文件"></a>私人环境和工作环境的配置文件</h3><p>这两个环境各自的配置文件就没有什么新鲜的东西了，就只有面向各个环境的身份信息、GPG签名信息等。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[user]</span></span><br><span class="line">  signingkey = 1122334455667788</span><br><span class="line">  name = Your Name</span><br><span class="line">  email = test@example.com</span><br><span class="line"><span class="section">[commit]</span></span><br><span class="line">  gpgsign = true</span><br><span class="line">  template = ~/.stCommitMsg</span><br><span class="line"><span class="section">[gpg]</span></span><br><span class="line">  program = /usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
+<h2 id="使用流的做法"><a href="#使用流的做法" class="headerlink" title="使用流的做法"></a>使用流的做法</h2><p>如果使用流，则可以这样做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
 
-<h2 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h2><p>写完了配置文件，还是要检查一下是不是生效了的。首先，在一个不包含任何Git仓库的位置执行<code>git config -l</code>，返回的信息中就只有全局配置中的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br></pre></td></tr></table></figure>
-
-<p>然后，进入私人环境的某个Git仓库，再执行<code>git config -l</code>，就可以看到私人环境相关的配置文件被引入了。（仓库自己的配置其实也会被显示出来，这里为了减小篇幅将其略掉了）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">core.excludesfile=~/.gitignore_global</span><br><span class="line">core.editor=vim</span><br><span class="line">includeif.gitdir:~/projects/mininglamp/.path=~/.config/git/gitconfig-mininglamp</span><br><span class="line">includeif.gitdir:~/projects/personal/.path=~/.config/git/gitconfig-default</span><br><span class="line">user.signingkey=1122334455667788</span><br><span class="line">user.name=Your Name</span><br><span class="line">user.email=test@example.com</span><br><span class="line">commit.gpgsign=true</span><br><span class="line">commit.template=~/.stCommitMsg</span><br><span class="line">gpg.program=/usr/local/bin/gpg</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1jb25maWcjX2luY2x1ZGVz" title="https://git-scm.com/docs/git-config#_includes">Git官方文档的<code>Includes</code>部分<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuYmxvZy8yMDE3LTA1LTEwLWdpdC0yLTEzLWhhcy1iZWVuLXJlbGVhc2VkLw==" title="https://github.blog/2017-05-10-git-2-13-has-been-released/">Git 2.13 有趣的新功能介绍 - GitHub<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubW90b3dpbGxpYW1zLmNvbS9jb25kaXRpb25hbC1pbmNsdWRlcy1mb3ItZ2l0LWNvbmZpZw==" title="https://www.motowilliams.com/conditional-includes-for-git-config">Conditional Includes For Git Config<i class="fa fa-external-link"></i></span></li>
-</ul>
+<p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢<code>Intellij IDEA</code>提供了这个强大的功能)</p>
+<p>首先，在<code>map</code>方法中，<code>List</code>的每个元素都会根据逗号分隔，并生成一个<code>String[]</code>对象。</p>
+<p><img src="/images/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
+<p><code>flatmap</code>方法会将上面<code>map</code>方法返回的各个流“拼接”成为一个流，即“展平”。</p>
+<p><img src="/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
+<p>接下来继续使用<code>map</code>方法，对流中的每个元素进行<code>trim</code>操作。</p>
+<p><img src="/images/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
+<p>然后调用<code>distinct</code>和<code>sorted</code>方法实现去重和排序。</p>
+<p><img src="/images/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img src="/images/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
+<p>最后，使用<code>collect</code>方法，将流中的数据“收集”到一个<code>List</code>中。</p>
+<p><img src="/images/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
 
     </div>
 
@@ -360,23 +409,24 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/代码技巧/" rel="tag"># 代码技巧</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" rel="next" title="让MyBatis把查询结果以Map形式返回">
-                  <i class="fa fa-chevron-left"></i> 让MyBatis把查询结果以Map形式返回
+                <a href="/projects/java/coding-tips/java-bean-chaining-setters.html" rel="next" title="在Java bean中实现setter的链式调用">
+                  <i class="fa fa-chevron-left"></i> 在Java bean中实现setter的链式调用
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/projects/java/coding-tips/java-bean-chaining-setters.html" rel="prev" title="在Java bean中实现setter的链式调用">
-                  在Java bean中实现setter的链式调用 <i class="fa fa-chevron-right"></i>
+                <a href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" rel="prev" title="IDEA警告Field injection is not recommended">
+                  IDEA警告Field injection is not recommended <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -417,7 +467,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分配置"><span class="nav-number">2.</span> <span class="nav-text">拆分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">全局配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人环境和工作环境的配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">私人环境和工作环境的配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查配置"><span class="nav-number">3.</span> <span class="nav-text">检查配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍需求"><span class="nav-number">1.</span> <span class="nav-text">介绍需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备示例数据"><span class="nav-number">2.</span> <span class="nav-text">准备示例数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用流的做法"><span class="nav-number">3.</span> <span class="nav-text">不使用流的做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用流的做法"><span class="nav-number">4.</span> <span class="nav-text">使用流的做法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
