@@ -62,18 +62,20 @@
   };
 </script>
 
-  <meta name="description" content="码农pilot的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code Life">
-<meta property="og:url" content="https://www.boris1993.com/categories/tools/maven/index.html">
+  <meta name="description" content="在application.yml中添加如下配置，即可在Spring Boot项目中开启HTTPS。 12345678910111213server:  # 如果有需要的话，配置应用监听HTTPS的默认端口  port: 443  ssl:    # 我把证书放在了 resources/cert/certificate.pfx下    # 使用时需要按照实际情况修改下面的路径    key-stor">
+<meta name="keywords" content="Java,Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Spring Boot应用中启用HTTPS">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/spring-boot-enable-https.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="码农pilot的个人博客">
+<meta property="og:description" content="在application.yml中添加如下配置，即可在Spring Boot项目中开启HTTPS。 12345678910111213server:  # 如果有需要的话，配置应用监听HTTPS的默认端口  port: 443  ssl:    # 我把证书放在了 resources/cert/certificate.pfx下    # 使用时需要按照实际情况修改下面的路径    key-stor">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-21T07:43:36.878Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code Life">
-<meta name="twitter:description" content="码农pilot的个人博客">
+<meta name="twitter:title" content="在Spring Boot应用中启用HTTPS">
+<meta name="twitter:description" content="在application.yml中添加如下配置，即可在Spring Boot项目中开启HTTPS。 12345678910111213server:  # 如果有需要的话，配置应用监听HTTPS的默认端口  port: 443  ssl:    # 我把证书放在了 resources/cert/certificate.pfx下    # 使用时需要按照实际情况修改下面的路径    key-stor">
 
-<link rel="canonical" href="https://www.boris1993.com/categories/tools/maven/">
+<link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/spring-boot-enable-https.html">
 
 
 <script id="page-configurations">
@@ -81,13 +83,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: Maven | Code Life</title>
+  <title>在Spring Boot应用中启用HTTPS | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -233,54 +235,147 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Maven
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/spring-boot-enable-https.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          在Spring Boot应用中启用HTTPS
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-17 14:45:39" itemprop="dateCreated datePublished" datetime="2019-12-17T14:45:39+08:00">2019-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-21 15:43:36" itemprop="dateModified" datetime="2019-12-21T15:43:36+08:00">2019-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index">
+                    <span itemprop="name">代码技巧</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/projects/java/coding-tips/spring-boot-enable-https.html" class="post-meta-item leancloud_visitors" data-flag-title="在Spring Boot应用中启用HTTPS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/projects/java/coding-tips/spring-boot-enable-https.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/spring-boot-enable-https.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2017</h2>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在<code>application.yml</code>中添加如下配置，即可在Spring Boot项目中开启HTTPS。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 如果有需要的话，配置应用监听HTTPS的默认端口</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">  ssl:</span></span><br><span class="line">    <span class="comment"># 我把证书放在了 resources/cert/certificate.pfx下</span></span><br><span class="line">    <span class="comment"># 使用时需要按照实际情况修改下面的路径</span></span><br><span class="line"><span class="attr">    key-store:</span> <span class="attr">classpath:cert/certificate.pfx</span></span><br><span class="line"><span class="attr">    key-store-password:</span> <span class="string">pA55w0Rd</span></span><br><span class="line">    <span class="comment"># 证书类型需要按照实际类型填写</span></span><br><span class="line">    <span class="comment"># 本例使用PKCS12格式，所以写PKCS12。如果是JKS格式，那么需要填写JKS</span></span><br><span class="line">    <span class="comment"># 因为PKCS12比JKS有更好的通用型，所以个人建议使用PKCS12格式</span></span><br><span class="line"><span class="attr">    key-store-type:</span> <span class="string">PKCS12</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>使用如下命令即可将JKS证书转换为PKCS12证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.pfx -deststoretype pkcs12</span><br></pre></td></tr></table></figure>
+
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly93d3cudGhvbWFzdml0YWxlLmNvbS9odHRwcy1zcHJpbmctYm9vdC1zc2wtY2VydGlmaWNhdGUv" title="https://www.thomasvitale.com/https-spring-boot-ssl-certificate/">How to enable HTTPS in a Spring Boot Java application<i class="fa fa-external-link"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmctYm9vdC9kb2NzLzIuMi4yLlJFTEVBU0UvcmVmZXJlbmNlL2h0bWwvaG93dG8uaHRtbCNob3d0by1jb25maWd1cmUtc3Ns" title="https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/html/howto.html#howto-configure-ssl">Spring Boot Docs - Configure SSL<i class="fa fa-external-link"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-12-11T14:41:50+08:00"
-              content="2017-12-11">
-          12-11
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+          </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/tools/maven/maven-configure-mirrors.html" itemprop="url">
-            <span itemprop="name">为Maven配置阿里云镜像和代理服务器</span>
-          </a>
-      </h3>
+        
 
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html" rel="next" title="去掉自定义异常中的堆栈跟踪信息">
+                  <i class="fa fa-chevron-left"></i> 去掉自定义异常中的堆栈跟踪信息
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
