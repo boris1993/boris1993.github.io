@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/common/manifest.json">
+  <meta name="msapplication-config" content="/images/common/browserconfig.xml">
+  <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在前后端分离的架构下，后端通常是一个RESTFul的接口，而因为HTTP的响应码数量有限，无法灵活的反映出接口执行的各种结果，在这种情况下，就需要通过自定义的结构来表达接口最终的状态和返回的信息。而我正好最近在一个项目中实现了一个基于ControllerAdvice的统一请求响应的功能，在这里记录一下实现的方式。">
+<meta name="keywords" content="Java,Spring Boot,统一响应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Spring Boot应用中配置统一的请求响应">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="在前后端分离的架构下，后端通常是一个RESTFul的接口，而因为HTTP的响应码数量有限，无法灵活的反映出接口执行的各种结果，在这种情况下，就需要通过自定义的结构来表达接口最终的状态和返回的信息。而我正好最近在一个项目中实现了一个基于ControllerAdvice的统一请求响应的功能，在这里记录一下实现的方式。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-25T03:45:02.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Spring Boot应用中配置统一的请求响应">
+<meta name="twitter:description" content="在前后端分离的架构下，后端通常是一个RESTFul的接口，而因为HTTP的响应码数量有限，无法灵活的反映出接口执行的各种结果，在这种情况下，就需要通过自定义的结构来表达接口最终的状态和返回的信息。而我正好最近在一个项目中实现了一个基于ControllerAdvice的统一请求响应的功能，在这里记录一下实现的方式。">
+
+<link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>在Spring Boot应用中配置统一的请求响应 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-136879050-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          在Spring Boot应用中配置统一的请求响应
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-21 15:46:42" itemprop="dateCreated datePublished" datetime="2019-12-21T15:46:42+08:00">2019-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-25 11:45:02" itemprop="dateModified" datetime="2019-12-25T11:45:02+08:00">2019-12-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index">
+                    <span itemprop="name">代码技巧</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html" class="post-meta-item leancloud_visitors" data-flag-title="在Spring Boot应用中配置统一的请求响应" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在前后端分离的架构下，后端通常是一个RESTFul的接口，而因为HTTP的响应码数量有限，无法灵活的反映出接口执行的各种结果，在这种情况下，就需要通过自定义的结构来表达接口最终的状态和返回的信息。而我正好最近在一个项目中实现了一个基于<code>ControllerAdvice</code>的统一请求响应的功能，在这里记录一下实现的方式。</p>
+<a id="more"></a>
+
+<h2 id="创建common模块"><a href="#创建common模块" class="headerlink" title="创建common模块"></a>创建common模块</h2><p>因为这是一个公共的功能，所以需要创建一个新的Maven模块，并被所有项目引用为依赖。具体操作这里不再赘述。以下的所有代码，如无特殊说明，都将存在于这个common模块中。</p>
+<h2 id="定义全局的错误码"><a href="#定义全局的错误码" class="headerlink" title="定义全局的错误码"></a>定义全局的错误码</h2><p>首先我们需要定义一个全局的错误码，使得项目中的所有模块都可以使用统一的一套返回码来表达自己接口的状态。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 接口返回码和描述</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Boris Zhao</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ReturnCode &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 成功</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    OK(<span class="string">"0000"</span>, <span class="string">"成功"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 服务端异常，当发生未知异常时使用该错误码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    FAIL(<span class="string">"9999"</span>, <span class="string">"失败"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 请求参数中包含无效参数或请求体为空</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    INVALID_REQUEST_PARAM(<span class="string">"0001"</span>, <span class="string">"请求参数中包含无效参数或请求体为空"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新数据的主键与已有数据重复</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    DUPLICATED_RECORD(<span class="string">"0002"</span>, <span class="string">"新数据的主键与已有数据重复"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 未找到对应记录</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    NON_EXISTENT_RECORD(<span class="string">"0003"</span>, <span class="string">"未找到对应记录，请检查主键或操作流水号"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 签名校验失败</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    SIGNATURE_VERIFICATION_FAIL(<span class="string">"0004"</span>, <span class="string">"签名校验失败"</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以下为各模块自定义的错误码</span></span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    ReturnCode(<span class="keyword">final</span> String code, <span class="keyword">final</span> String message) &#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据状态码获取其错误信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> code 状态码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 错误码对应的错误信息。如果没有找到则返回&#123;<span class="doctag">@code</span> null&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMessageByCode</span><span class="params">(String code)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (ReturnCode item : values()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (item.code.equals(code)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.message;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义统一响应结构"><a href="#定义统一响应结构" class="headerlink" title="定义统一响应结构"></a>定义统一响应结构</h2><p>在这个项目中，我选择在这个结构中定义三个字段：错误码<code>errCode</code>，错误信息<code>errMessage</code>，和返回的数据<code>data</code>。</p>
+<p>同时，用于构造响应体的类应该同时兼顾数据合法性和灵活性，所以我决定不允许通过构造方法或者setter来填充信息，而是使用定义好了的静态方法来完成构造。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 公共响应参数&lt;br&gt;</span></span><br><span class="line"><span class="comment"> * 成功的返回通过&#123;<span class="doctag">@link</span> CommonResponseParams#ofSuccessful()&#125;或&#123;<span class="doctag">@link</span> CommonResponseParams#ofSuccessful(Object)&#125;生成&lt;br&gt;</span></span><br><span class="line"><span class="comment"> * 失败的返回通过&#123;<span class="doctag">@link</span> CommonResponseParams#ofFailure()&#125;或&#123;<span class="doctag">@link</span> CommonResponseParams#ofFailure(ReturnCode)&#125;生成</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Boris Zhao</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonResponseParams</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回码 - 必填</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String errCode;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回描述 - 必填</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String errMessage;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务数据 - 必填</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Object data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造一个&#123;<span class="doctag">@link</span> CommonResponseParams&#125;对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> errCode    返回码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> errMessage 返回描述</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> data    业务数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">CommonResponseParams</span><span class="params">(<span class="keyword">final</span> String errCode, <span class="keyword">final</span> String errMessage, <span class="keyword">final</span> Object data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.errCode = errCode;</span><br><span class="line">        <span class="keyword">this</span>.errMessage = errMessage;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回成功结果，没有响应数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 公共响应参数实体</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CommonResponseParams <span class="title">ofSuccessful</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ofSuccessful(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回成功结果</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content 返回的数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;     返回的数据的类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 公共响应参数实体</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">CommonResponseParams <span class="title">ofSuccessful</span><span class="params">(<span class="keyword">final</span> T content)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResponseParams(</span><br><span class="line">                ReturnCode.OK.getCode(),</span><br><span class="line">                ReturnCode.OK.getMessage(),</span><br><span class="line">                JSONArray.toJSON(content));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回失败结果</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 公共响应参数实体</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CommonResponseParams <span class="title">ofFailure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResponseParams(</span><br><span class="line">                ReturnCode.FAIL.getCode(),</span><br><span class="line">                ReturnCode.FAIL.getMessage(),</span><br><span class="line">                <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CommonResponseParams <span class="title">ofFailure</span><span class="params">(String errMessage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResponseParams(</span><br><span class="line">                ReturnCode.FAIL.getCode(),</span><br><span class="line">                errMessage,</span><br><span class="line">                <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回失败结果</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> returnCode 错误的返回码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 公共响应参数实体</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CommonResponseParams <span class="title">ofFailure</span><span class="params">(ReturnCode returnCode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResponseParams(</span><br><span class="line">                returnCode.getCode(),</span><br><span class="line">                returnCode.getMessage(),</span><br><span class="line">                <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回带有自定义错误信息的失败结果</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> returnCode 错误相关的返回码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> errMessage 自定义的错误信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 公共响应参数实体</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CommonResponseParams <span class="title">ofFailure</span><span class="params">(ReturnCode returnCode, String errMessage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResponseParams(</span><br><span class="line">                returnCode.getCode(),</span><br><span class="line">                errMessage,</span><br><span class="line">                <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义统一的业务异常基类"><a href="#定义统一的业务异常基类" class="headerlink" title="定义统一的业务异常基类"></a>定义统一的业务异常基类</h2><p>为了减少不必要的<code>try-catch</code>模版代码，业务异常必须不能为受检异常；而为了与其它的运行时异常区分开来，业务异常类就不能直接继承<code>RuntimeException</code>，而是需要继承于一个自定义的基类。同时，这个业务异常基类不能被直接使用，所以必须是一个抽象类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 业务异常基类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Boris Zhao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-12-13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseBizException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> ReturnCode returnCode = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseBizException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseBizException</span><span class="params">(ReturnCode returnCode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(returnCode.getMessage());</span><br><span class="line">        <span class="keyword">this</span>.returnCode = returnCode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务异常不记录stack trace</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Throwable <span class="title">fillInStackTrace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义统一的异常处理方法"><a href="#定义统一的异常处理方法" class="headerlink" title="定义统一的异常处理方法"></a>定义统一的异常处理方法</h2><p>在上面的准备工作全部完成后，就可以开始着手配置统一的异常处理方法。之所以选择不使用<code>AOP</code>实现，是因为在这个情况下，业务接口必须返回<code>Object</code>类型，而这样一来，会降低代码层面的可读性。使用<code>ControllerAdvice</code>注解实现则没有这个限制，业务接口可以自由选择自己合适的数据类型。</p>
+<p>需要注意的是，因为我们所有的controller类都会带有<code>RestController</code>注解，所以在<code>ControllerAdvice</code>注解中，我们使用<code>annotations</code>参数指定了这个配置类仅针对带有<code>RestController</code>的类启用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一异常处理配置类&lt;br&gt;</span></span><br><span class="line"><span class="comment"> * 包装格式见&#123;<span class="doctag">@link</span> CommonResponseParams&#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Boris Zhao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-12-13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span>(annotations = RestController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnifiedExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理数据库连接失败抛出的异常</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 带有数据库连接失败信息的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(CannotCreateTransactionException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleCannotCreateTransactionException</span><span class="params">(CannotCreateTransactionException e)</span> </span>&#123;</span><br><span class="line">        log.error(e.getMessage(), e);</span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofFailure(<span class="string">"数据库连接失败"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理未知的运行时错误</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 默认的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(RuntimeException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleUnknownRuntimeExceptions</span><span class="params">(RuntimeException e)</span> </span>&#123;</span><br><span class="line">        log.error(e.getMessage(), e);</span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofFailure(e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理公共请求参数校验失败异常</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e 参数校验失败抛出的异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 带有校验失败原因提示信息的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(MethodArgumentNotValidException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleRequestParamValidationExceptions</span><span class="params">(MethodArgumentNotValidException e)</span> </span>&#123;</span><br><span class="line">        String errMessage = Optional.ofNullable(e.getBindingResult().getFieldError())</span><br><span class="line">                .map(FieldError::getDefaultMessage)</span><br><span class="line">                .orElse(ReturnCode.INVALID_REQUEST_PARAM.getMessage());</span><br><span class="line"></span><br><span class="line">        log.error(e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofFailure(ReturnCode.INVALID_REQUEST_PARAM, errMessage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理请求body为空的异常</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 带有请求体无效错误的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(HttpMessageNotReadableException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleHttpMessageNotReadableException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofFailure(ReturnCode.INVALID_REQUEST_PARAM);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理新增数据主键重复异常</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 带有主键重复错误的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(DuplicateKeyException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleDuplicateKeyException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofFailure(ReturnCode.DUPLICATED_RECORD);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理业务异常</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 业务异常对应的失败返回</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(BaseBizException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResponseParams <span class="title">handleBizExceptions</span><span class="params">(BaseBizException e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (e.getReturnCode() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            ReturnCode returnCode = e.getReturnCode();</span><br><span class="line">            log.error(returnCode.getMessage());</span><br><span class="line">            <span class="keyword">return</span> CommonResponseParams.ofFailure(returnCode);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (StringUtils.isNotBlank(e.getMessage())) &#123;</span><br><span class="line">            log.error(e.getMessage());</span><br><span class="line">            <span class="keyword">return</span> CommonResponseParams.ofFailure(e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            log.error(e.getMessage());</span><br><span class="line">            <span class="keyword">return</span> CommonResponseParams.ofFailure();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里详细说一下各个方法的作用。</p>
+<p>第一个方法用于处理<code>CannotCreateTransactionException</code>异常类，这个异常会在应用无法成功连接数据库时被抛出。处理方式就是返回一个错误信息为“数据库连接失败”的失败结果。</p>
+<p>第二个方法用于处理<code>RuntimeException</code>异常，这个方法的意义在于，我们无法预见所有可能出现的异常，所以使用这个方法作为一个兜底的处理方法。</p>
+<p>第三个方法用于处理<code>MethodArgumentNotValidException</code>异常。因为这个项目中我们选择使用<code>javax.validation.constraints</code>包中的注解实现输入参数合法性的校验，而当校验失败时会抛出<code>MethodArgumentNotValidException</code>异常，并且在异常中会包含具体的校验失败的原因。同时为了保证方法的健壮性，在代码中也保证了如果无法获取到校验失败信息，就会选择<code>INVALID_REQUEST_PARAM</code>这个错误码作为兜底的错误信息。</p>
+<p>第四个方法用于处理<code>HttpMessageNotReadableException</code>异常。如果一个接口方法的参数中存在被<code>@RequestBody</code>标记的参数，但是在请求该接口时body为空时，就会抛出这个异常。在出现了这个异常后，就会返回带有<code>INVALID_REQUEST_PARAM</code>错误信息的失败结果。</p>
+<p>第五个方法用于处理<code>DuplicateKeyException</code>异常。因为这个项目中一部分数据的主键是由请求发起方生成的，同时数据库中也会将这一列定为主键来实现插入接口的幂等性。一旦出现网络状况不佳的情况时，发起方会尝试再次调用接口。而在重发请求时，可能数据已经在上一个请求中就已经成功插入了，只是因为网络不佳导致发起方没能接收到返回，在第二次请求中重复插入相同主键的数据，就会抛出这个异常。为了最终接口返回信息的可读性，我们选择在这里返回一个用户友好的信息。</p>
+<p>最后一个方法就是这里的主角了，它用于处理所有继承了<code>BaseBizException</code>的业务异常。这个方法中，我们对应着<code>CommonResponseParams</code>中不同的静态方法，实现了对应的错误处理逻辑。</p>
+<h2 id="定义统一的成功响应处理方法"><a href="#定义统一的成功响应处理方法" class="headerlink" title="定义统一的成功响应处理方法"></a>定义统一的成功响应处理方法</h2><p>上面洋洋洒洒写了一堆针对异常的处理逻辑，但是接口成功执行的处理逻辑也不能落下。这里我们使用<code>RestControllerAdvice</code>表示这是一个接口增强类，同时实现了<code>ResponseBodyAdvice</code>接口，用于实现实际的处理逻辑。</p>
+<p>在这个配置类上，我们也指定了该配置类仅针对被<code>RestController</code>标记的类生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一响应格式配置类&lt;br&gt;</span></span><br><span class="line"><span class="comment"> * 包装格式见&#123;<span class="doctag">@link</span> CommonResponseParams&#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Boris Zhao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-12-13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@RestControllerAdvice</span>(annotations = RestController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnifiedReturnConfig</span> <span class="keyword">implements</span> <span class="title">ResponseBodyAdvice</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(MethodParameter returnType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">beforeBodyWrite</span><span class="params">(Object body,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  MediaType selectedContentType,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; selectedConverterType,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  ServerHttpRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  ServerHttpResponse response)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (body <span class="keyword">instanceof</span> CommonResponseParams) &#123;</span><br><span class="line">            <span class="keyword">return</span> body;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> CommonResponseParams.ofSuccessful(body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码的重点是在<code>beforeBodyWrite</code>方法中。这个方法会在<code>HttpMessageConverter#write()</code>方法执行前，也就是返回被发出去之前被调用。借助这个功能，我们就可以实现在业务接口返回之后，将返回信息重新包装。</p>
+<p>实现逻辑很简单，如果返回信息是一个<code>CommonResponseParams</code>对象，那么就认为这个返回信息已经被包装好了，所以不再进行二次包装，直接返回；否则就通过<code>CommonResponseParams#ofSuccessful()</code>方法，将返回信息包装为一个成功响应的格式，再返回到客户端。</p>
+<h2 id="最后的一点配置"><a href="#最后的一点配置" class="headerlink" title="最后的一点配置"></a>最后的一点配置</h2><p>在上文中，统一返回格式的配置已经完成了。但是有的人可能会发现，虽然在自己的项目中引用了这个模块，但是实际上却没有生效，这是因为上面的配置类都存在于另一个jar包中，导致在应用启动时这些请求并没有被自动发现。解决方法也很简单，在项目的启动类(即<code>xxxApplication</code>)中加上<code>@ComponentScan</code>注解，并在注解参数中加上<code>UnifiedReturnConfig</code>和<code>UnifiedExceptionHandler</code>所在的包名即可。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/统一响应/" rel="tag"># 统一响应</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/projects/java/coding-tips/spring-boot-enable-https.html" rel="next" title="在Spring Boot应用中启用HTTPS">
+                  <i class="fa fa-chevron-left"></i> 在Spring Boot应用中启用HTTPS
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建common模块"><span class="nav-number">1.</span> <span class="nav-text">创建common模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义全局的错误码"><span class="nav-number">2.</span> <span class="nav-text">定义全局的错误码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义统一响应结构"><span class="nav-number">3.</span> <span class="nav-text">定义统一响应结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义统一的业务异常基类"><span class="nav-number">4.</span> <span class="nav-text">定义统一的业务异常基类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义统一的异常处理方法"><span class="nav-number">5.</span> <span class="nav-text">定义统一的异常处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义统一的成功响应处理方法"><span class="nav-number">6.</span> <span class="nav-text">定义统一的成功响应处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后的一点配置"><span class="nav-number">7.</span> <span class="nav-text">最后的一点配置</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+    src="/images/common/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/rss2.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+            'X-LC-Key': 'pVk2DoFATdaFCPPaFBVcVhsz',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+    appKey: 'pVk2DoFATdaFCPPaFBVcVhsz',
+    placeholder: "说点什么？",
+    avatar: 'retro',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
