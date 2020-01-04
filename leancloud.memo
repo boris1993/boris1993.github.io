@@ -20,6 +20,7 @@
 {"title":"循序渐进写一个Servlet(4) - 会话追踪","url":"/projects/java/Servlet/java-servlet-4-session-tracking.html"},
 {"title":"循序渐进写一个Servlet(5) - Filter","url":"/projects/java/Servlet/java-servlet-5-filter.html"},
 {"title":"使用FlatMap“展平”一系列数据","url":"/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html"},
+{"title":"在Spring Boot应用中配置统一的请求响应","url":"/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html"},
 {"title":"IDEA警告Field injection is not recommended","url":"/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html"},
 {"title":"在Java bean中实现setter的链式调用","url":"/projects/java/coding-tips/java-bean-chaining-setters.html"},
 {"title":"去掉自定义异常中的堆栈跟踪信息","url":"/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html"},
