@@ -336,7 +336,7 @@
 
 <p>可见Logstash成功从stdin读取到了输入，并打印到了stdout，证实安装成功。</p>
 <h1 id="配置Logstash"><a href="#配置Logstash" class="headerlink" title="配置Logstash"></a>配置Logstash</h1><h2 id="Logstash系统配置"><a href="#Logstash系统配置" class="headerlink" title="Logstash系统配置"></a>Logstash系统配置</h2><p>编辑<code>/etc/logstash/logstash.yml</code>，修改Logstash系统级配置。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置节点名，若未配置则默认取本机主机名作为节点名</span></span><br><span class="line"><span class="string">node.name:</span> <span class="string">elk-logstash-node-0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置节点名，若未配置则默认取本机主机名作为节点名</span></span><br><span class="line"><span class="attr">node.name:</span> <span class="string">elk-logstash-node-0</span></span><br></pre></td></tr></table></figure>
 
 <p>其他配置项略，如有需要请参考Logstash Reference。</p>
 <h2 id="日志输入输出配置"><a href="#日志输入输出配置" class="headerlink" title="日志输入输出配置"></a>日志输入输出配置</h2><p>这里我们配置让Logstash接收Cent OS的系统日志。</p>

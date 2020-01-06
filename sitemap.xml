@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/manifest.json</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
@@ -191,9 +184,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
     
   </url>
   
@@ -205,7 +198,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -219,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -387,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
