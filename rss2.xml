@@ -45,7 +45,7 @@
     </item>
     
     <item>
-      <title>让nohup不输出&quot;appending output to &#39;nohup.out&#39;&quot;</title>
+      <title>让nohup不输出 appending output to &#39;nohup.out&#39;</title>
       <link>https://www.boris1993.com/linux/suppress-appending-to-nohup-out-message.html</link>
       <guid>https://www.boris1993.com/linux/suppress-appending-to-nohup-out-message.html</guid>
       <pubDate>Fri, 27 Dec 2019 07:22:52 GMT</pubDate>
