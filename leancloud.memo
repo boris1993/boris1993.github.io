@@ -38,6 +38,7 @@
 {"title":"JDBC错误Illegal mix of collations解决方法","url":"/projects/java/jdbc/illegal-mix-of-collations.html"},
 {"title":"Java源码阅读 - ArrayList","url":"/projects/java/源码阅读/java-read-src-arraylist.html"},
 {"title":"Java源码阅读 - equals和hashCode方法","url":"/projects/java/源码阅读/java-read-src-hashcode-and-equals.html"},
+{"title":"Java源码阅读 - HashMap","url":"/projects/java/源码阅读/java-read-src-hashmap.html"},
 {"title":"Java源码阅读 - LinkedList","url":"/projects/java/源码阅读/java-read-src-linkedlist.html"},
 {"title":"让MyBatis把查询结果以Map形式返回","url":"/projects/mybatis/mybatis-return-query-results-in-a-map.html"},
 {"title":"微信小程序scroll-view填满剩余可用高度","url":"/projects/wxapp/scroll-view-auto-fit-height.html"},

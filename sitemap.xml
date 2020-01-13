@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
     
-    <lastmod>2020-01-12T05:35:40.405Z</lastmod>
+    <lastmod>2020-01-13T02:55:49.538Z</lastmod>
     
   </url>
   
@@ -247,7 +247,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -303,7 +303,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -317,13 +317,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
@@ -331,14 +324,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -359,13 +359,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
@@ -373,14 +366,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -422,14 +422,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
