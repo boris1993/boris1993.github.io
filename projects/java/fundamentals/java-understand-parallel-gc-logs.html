@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/common/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/common/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/common/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/common/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/common/manifest.json">
+  <meta name="msapplication-config" content="/images/common/browserconfig.xml">
+  <link rel="alternate" href="/rss2.xml" title="Code Life" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。">
+<meta name="keywords" content="Java,垃圾回收,GC,JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="看懂ParallelGC的日志">
+<meta property="og:url" content="https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-06T06:31:31.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="看懂ParallelGC的日志">
+<meta name="twitter:description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。">
+
+<link rel="canonical" href="https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>看懂ParallelGC的日志 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-136879050-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">码农pilot的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          看懂ParallelGC的日志
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-05 14:45:25" itemprop="dateCreated datePublished" datetime="2020-02-05T14:45:25+08:00">2020-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-06 14:31:31" itemprop="dateModified" datetime="2020-02-06T14:31:31+08:00">2020-02-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/projects/java/fundamentals/java-understand-parallel-gc-logs.html" class="post-meta-item leancloud_visitors" data-flag-title="看懂ParallelGC的日志" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/projects/java/fundamentals/java-understand-parallel-gc-logs.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/fundamentals/java-understand-parallel-gc-logs.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。</p>
+<a id="more"></a>
+
+<h2 id="JDK版本"><a href="#JDK版本" class="headerlink" title="JDK版本"></a>JDK版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openjdk version &quot;1.8.0_232&quot;</span><br><span class="line">OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_232-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.232-b09, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>在演示过程中，我们将通过在死循环中构造大对象的方式来触发垃圾回收</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GCExample</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] strings;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            strings = <span class="keyword">new</span> String[<span class="number">1024</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时，为了让垃圾回收更早的开始，我们还需要指定一个较小的堆内存，比如我选择只分配10MB的空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xmx10m</span><br><span class="line">-Xms10m</span><br></pre></td></tr></table></figure>
+
+<h2 id="GC日志相关的JVM参数"><a href="#GC日志相关的JVM参数" class="headerlink" title="GC日志相关的JVM参数"></a>GC日志相关的JVM参数</h2><p>与GC日志相关的JVM参数有如下8个：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+PrintGC</td>
+<td>输出简要GC日志</td>
+</tr>
+<tr>
+<td>-verbose:gc</td>
+<td>等同于 -XX:+PrintGC</td>
+</tr>
+<tr>
+<td>-XX:+PrintGCDetails</td>
+<td>输出详细GC日志</td>
+</tr>
+<tr>
+<td>-Xloggc:gc.log</td>
+<td>输出GC日志到文件gc.log</td>
+</tr>
+<tr>
+<td>-XX:+PrintGCTimeStamps</td>
+<td>输出GC的时间戳（以JVM启动到当期的总时长的时间戳形式）</td>
+</tr>
+<tr>
+<td>-XX:+PrintGCDateStamps</td>
+<td>输出GC的时间戳（以日期的形式，如 2013-05-04T21:53:59.234+0800）</td>
+</tr>
+<tr>
+<td>-XX:+PrintHeapAtGC</td>
+<td>在进行GC的前后打印出堆的信息</td>
+</tr>
+<tr>
+<td>-XX:+PrintReferenceGC</td>
+<td>打印年轻代各个引用的数量以及时长</td>
+</tr>
+</tbody></table>
+<h3 id="XX-PrintGC与-verbose-gc"><a href="#XX-PrintGC与-verbose-gc" class="headerlink" title="-XX:+PrintGC与-verbose:gc"></a><code>-XX:+PrintGC</code>与<code>-verbose:gc</code></h3><p>虽然上面说这两个参数是等价的，但是，<code>-verbose:gc</code>是一个标准的参数，而<code>-XX:+PrintGC</code>则在JDK 9之后被标为废弃的(deprecated)，所以建议使用<code>-verbose:gc</code>代替<code>-XX:+PrintGC</code>。</p>
+<h2 id="打开-verbose-gc"><a href="#打开-verbose-gc" class="headerlink" title="打开-verbose:gc"></a>打开<code>-verbose:gc</code></h2><p>使用这个参数将会打开简略的GC日志。打开这个参数并运行程序，很快就可以看到这样的GC日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure)  2520K-&gt;472K(9728K), 0.0005722 secs]</span><br></pre></td></tr></table></figure>
+
+<p>我们将上面的日志拆分开来：</p>
+<ul>
+<li><code>GC</code>代表这次垃圾回收的类型。<code>GC</code>代表发生了<code>Minor GC</code>，<code>Full GC</code>代表发生了<code>Full GC</code></li>
+<li><code>Allocation Failure</code>简述了发生GC的原因。在这个例子中，是因为在年轻代中没有合适的空间导致新的对象分配失败，从而发生GC</li>
+<li><code>2520K-&gt;472K</code>说明了年轻代的占用量变化。在这个例子中，年轻代的使用量从2520KB减少到了472KB</li>
+<li><code>9728K</code>表示整个堆的大小</li>
+<li><code>0.0005722 secs</code>表示了本次GC消耗的时间</li>
+</ul>
+<h2 id="打开-XX-PrintGCDetails"><a href="#打开-XX-PrintGCDetails" class="headerlink" title="打开-XX:+PrintGCDetails"></a>打开<code>-XX:+PrintGCDetails</code></h2><p>使用这个参数后，将会打印详细的GC日志，它打印的内容包含了<code>-verbose:gc</code>参数打印的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 2500K-&gt;452K(9728K), 0.0003785 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+
+<p>这个参数打印的日志与上一个参数打印的日志有一部分重合，这里我们关注新增的内容：</p>
+<ul>
+<li><code>[PSYoungGen: 2048K-&gt;0K(2560K)]</code>表明了使用的垃圾回收器、年轻代的占用量变化，和年轻代的大小</li>
+<li><code>2500K-&gt;452K(9728K)</code>表明了整个堆的占用量变化，和整个堆的大小</li>
+<li><code>[Times: user=0.00 sys=0.00, real=0.00 secs]</code>表示本次GC消耗的时间<ul>
+<li><code>user</code>代表垃圾回收器消耗的CPU时间</li>
+<li><code>sys</code>代表系统调用或等待系统事件消耗的时间</li>
+<li><code>real</code>代表应用实际停止的时间，近似于<code>(user + sys) / 垃圾回收器使用的线程数</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="打开-XX-PrintGCTimeStamps"><a href="#打开-XX-PrintGCTimeStamps" class="headerlink" title="打开-XX:+PrintGCTimeStamps"></a>打开<code>-XX:+PrintGCTimeStamps</code></h2><p>这个参数不影响日志的详细程度，在打开之后，日志中会出现从JVM启动到出现日志时的毫秒数，比如下面例子的<code>1.523</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.523: [GC (Allocation Failure) [PSYoungGen: 2141K-&gt;96K(2560K)] 4805K-&gt;2776K(9728K), 0.0004359 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开-XX-PrintGCDateStamps"><a href="#打开-XX-PrintGCDateStamps" class="headerlink" title="打开-XX:+PrintGCDateStamps"></a>打开<code>-XX:+PrintGCDateStamps</code></h2><p>这个参数也不影响日志的详细程度，在打开之后，日志头部会加上打印日志的时间和时区，比如下面例子的<code>2020-02-06T10:13:08.634-0800</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2020-02-06T10:13:08.634-0800: 1.122: [GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 3328K-&gt;1280K(9728K), 0.0004243 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开-XX-PrintHeapAtGC"><a href="#打开-XX-PrintHeapAtGC" class="headerlink" title="打开-XX:+PrintHeapAtGC"></a>打开<code>-XX:+PrintHeapAtGC</code></h2><p>使用这个参数后，在打印GC日志时，会同时打印出堆在GC前后的信息，即根据不同的内存区域，分别显示在垃圾回收前后的空间使用情况。同时，日志中还以<code>[bottom,top,end)</code>的格式展现出了各个内存区域的地址，其中<code>bottom</code>为这个区域的起始位置，<code>top</code>为这个区域当前的顶部位置，<code>end</code>为这个区域可使用的地址上限<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Meaning of heap memory addresses in GC logs using -XX:+PrintHeapAtGC?](https://stackoverflow.com/questions/28344451/meaning-of-heap-memory-addresses-in-gc-logs-using-xxprintheapatgc)
+">[1]</span></a></sup>。</p>
+<p>此外，日志中关于<code>Metaspace</code>相关的信息可以参考注脚4<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Understanding metaspace line in JVM heap printout](https://stackoverflow.com/questions/40891433/understanding-metaspace-line-in-jvm-heap-printout)
+">[4]</span></a></sup>指向的那篇回答。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;Heap before GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 2047K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 99% used [0x00000007bfd00000,0x00000007bfeffe78,0x00000007bff00000)</span><br><span class="line">  from space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007bff80000)</span><br><span class="line"> ParOldGen       total 7168K, used 0K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf600000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">2020-02-06T10:21:05.317-0800: 0.219: [GC (Allocation Failure) [PSYoungGen: 2047K-&gt;496K(2560K)] 2047K-&gt;512K(9728K), 0.0019061 secs] [Times: user=0.01 sys=0.00, real=0.00 secs]</span><br><span class="line">Heap after GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 496K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 0% used [0x00000007bfd00000,0x00000007bfd00000,0x00000007bff00000)</span><br><span class="line">  from space 512K, 96% used [0x00000007bff00000,0x00000007bff7c010,0x00000007bff80000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line"> ParOldGen       total 7168K, used 16K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf604000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开-XX-PrintReferenceGC"><a href="#打开-XX-PrintReferenceGC" class="headerlink" title="打开-XX:+PrintReferenceGC"></a>打开<code>-XX:+PrintReferenceGC</code></h2><p>打开这个参数后，就可以看到各种引用的数量，以及对其垃圾回收所消耗的时长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [SoftReference, 0 refs, 0.0000125 secs][WeakReference, 0 refs, 0.0000054 secs][FinalReference, 0 refs, 0.0000045 secs][PhantomReference, 0 refs, 0 refs, 0.0000222 secs][JNI Weak Reference, 0.0000037 secs][PSYoungGen: 2112K-&gt;64K(2560K)] 3488K-&gt;1456K(9728K), 0.0005389 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjgzNDQ0NTEvbWVhbmluZy1vZi1oZWFwLW1lbW9yeS1hZGRyZXNzZXMtaW4tZ2MtbG9ncy11c2luZy14eHByaW50aGVhcGF0Z2M=" title="https://stackoverflow.com/questions/28344451/meaning-of-heap-memory-addresses-in-gc-logs-using-xxprintheapatgc">Meaning of heap memory addresses in GC logs using -XX:+PrintHeapAtGC?<i class="fa fa-external-link"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9wbHVtYnIuaW8vaGFuZGJvb2svZ2FyYmFnZS1jb2xsZWN0aW9uLWFsZ29yaXRobXMtaW1wbGVtZW50YXRpb25zL3BhcmFsbGVsLWdj" title="https://plumbr.io/handbook/garbage-collection-algorithms-implementations/parallel-gc">Parallel GC - Plumber<i class="fa fa-external-link"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9wbHVtYnIuaW8vaGFuZGJvb2svZ2FyYmFnZS1jb2xsZWN0aW9uLWFsZ29yaXRobXMtaW1wbGVtZW50YXRpb25zL3BhcmFsbGVsLWdjL3BhcmFsbGVsLWZ1bGwtZ2M=" title="https://plumbr.io/handbook/garbage-collection-algorithms-implementations/parallel-gc/parallel-full-gc">Parallel Full GC - Plumber<i class="fa fa-external-link"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNDA4OTE0MzMvdW5kZXJzdGFuZGluZy1tZXRhc3BhY2UtbGluZS1pbi1qdm0taGVhcC1wcmludG91dA==" title="https://stackoverflow.com/questions/40891433/understanding-metaspace-line-in-jvm-heap-printout">Understanding metaspace line in JVM heap printout<i class="fa fa-external-link"></i></span><a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/垃圾回收/" rel="tag"># 垃圾回收</a>
+              <a href="/tags/GC/" rel="tag"># GC</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/projects/java/源码阅读/java-read-src-hashmap.html" rel="next" title="Java源码阅读 - HashMap">
+                  <i class="fa fa-chevron-left"></i> Java源码阅读 - HashMap
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK版本"><span class="nav-number">1.</span> <span class="nav-text">JDK版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例代码"><span class="nav-number">2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC日志相关的JVM参数"><span class="nav-number">3.</span> <span class="nav-text">GC日志相关的JVM参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XX-PrintGC与-verbose-gc"><span class="nav-number">3.1.</span> <span class="nav-text">-XX:+PrintGC与-verbose:gc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-verbose-gc"><span class="nav-number">4.</span> <span class="nav-text">打开-verbose:gc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-XX-PrintGCDetails"><span class="nav-number">5.</span> <span class="nav-text">打开-XX:+PrintGCDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-XX-PrintGCTimeStamps"><span class="nav-number">6.</span> <span class="nav-text">打开-XX:+PrintGCTimeStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-XX-PrintGCDateStamps"><span class="nav-number">7.</span> <span class="nav-text">打开-XX:+PrintGCDateStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-XX-PrintHeapAtGC"><span class="nav-number">8.</span> <span class="nav-text">打开-XX:+PrintHeapAtGC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开-XX-PrintReferenceGC"><span class="nav-number">9.</span> <span class="nav-text">打开-XX:+PrintReferenceGC</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+    src="/images/common/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/rss2.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub &rarr; https://github.com/boris1993"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow &rarr; https://stackoverflow.com/users/3833858/boris1993"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+            'X-LC-Key': 'pVk2DoFATdaFCPPaFBVcVhsz',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'KtWeNMp4vQrN2FfLoRWTBbRK-gzGzoHsz',
+    appKey: 'pVk2DoFATdaFCPPaFBVcVhsz',
+    placeholder: "说点什么？",
+    avatar: 'retro',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
