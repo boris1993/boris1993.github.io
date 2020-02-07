@@ -35,6 +35,7 @@
 {"title":"Java如何创建和运行多线程","url":"/projects/java/fundamentals/java-multi-threading-how-to.html"},
 {"title":"生产者与消费者问题在Java中的实现","url":"/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html"},
 {"title":"Java线程池","url":"/projects/java/fundamentals/java-multi-threading-thread-pool.html"},
+{"title":"看懂ParallelGC的日志","url":"/projects/java/fundamentals/java-understand-parallel-gc-logs.html"},
 {"title":"JDBC错误Illegal mix of collations解决方法","url":"/projects/java/jdbc/illegal-mix-of-collations.html"},
 {"title":"Java源码阅读 - ArrayList","url":"/projects/java/源码阅读/java-read-src-arraylist.html"},
 {"title":"Java源码阅读 - equals和hashCode方法","url":"/projects/java/源码阅读/java-read-src-hashcode-and-equals.html"},

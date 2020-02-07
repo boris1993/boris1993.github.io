@@ -238,6 +238,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/projects/java/fundamentals/java-jvm-reference.html" class="post-title-link" itemprop="url">简谈JVM中的几种引用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-07 11:36:26 / 修改时间：13:48:37" itemprop="dateCreated datePublished" datetime="2020-02-07T11:36:26+08:00">2020-02-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/projects/java/fundamentals/java-jvm-reference.html" class="post-meta-item leancloud_visitors" data-flag-title="简谈JVM中的几种引用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在<a href="/projects/java/fundamentals/java-gc-algorithms.html">Java的垃圾回收算法</a>一文中，我们知道JVM是根据一个对象有没有被引用来判断要不要对其进行垃圾回收的。但是，如果我们为了提升垃圾回收的效率，想要再把垃圾回收的条件更细化一些，比如只在内存非常紧张的时候才回收某些对象，那么光靠一个粗略的“引用”，就显得心有余而力不足了。所以，在<code>JDK 1.2</code>版本之后，Java扩充了引用的概念，将其扩充成了<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code>四个更细化的概念。</p>
+<p>本文将参考《深入理解Java虚拟机(第3版)》中<code>再谈引用</code>一节，简述一下这四种引用的概念，以及被引用的对象何时会被垃圾回收器回收。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/projects/java/fundamentals/java-jvm-reference.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1134,112 +1233,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/mysql/column-flags-in-mysql-workbench.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-      <meta itemprop="description" content="码农pilot的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/database/mysql/column-flags-in-mysql-workbench.html" class="post-title-link" itemprop="url">MySQL Workbench中各个列属性的含义</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-14 11:22:29 / 修改时间：11:30:15" itemprop="dateCreated datePublished" datetime="2019-12-14T11:22:29+08:00">2019-12-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/database/mysql/column-flags-in-mysql-workbench.html" class="post-meta-item leancloud_visitors" data-flag-title="MySQL Workbench中各个列属性的含义" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><code>PK</code>: 主键(Primary Key)</li>
-<li><code>NN</code>: 非空(Not Null)</li>
-<li><code>UQ</code>: 唯一索引(Unique Index)</li>
-<li><code>BIN</code>: 二进制(Binary) 将数据储存为二进制字符串</li>
-<li><code>UN</code>: 无符号的(Unsigned)</li>
-<li><code>ZF</code>: 零填充的(Zero Fill) 如：INT(5)的列中，<code>12</code>会被填充为<code>00012</code></li>
-<li><code>AI</code>: 自增长的(Auto Increment)</li>
-<li><code>G</code>: 生成出来的(Generated) 如：根据公式从其它列中生成的数据</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/database/mysql/column-flags-in-mysql-workbench.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1285,7 +1283,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
