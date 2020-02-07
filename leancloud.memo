@@ -29,6 +29,7 @@
 {"title":"在Spring Boot应用中启用HTTPS","url":"/projects/java/coding-tips/spring-boot-enable-https.html"},
 {"title":"Java自定义注解","url":"/projects/java/fundamentals/java-customized-annotations.html"},
 {"title":"Java的垃圾回收算法","url":"/projects/java/fundamentals/java-gc-algorithms.html"},
+{"title":"简谈JVM中的几种引用","url":"/projects/java/fundamentals/java-jvm-reference.html"},
 {"title":"JVM运行时的数据区域","url":"/projects/java/fundamentals/java-jvm-runtime-data-areas.html"},
 {"title":"JVM的栈帧","url":"/projects/java/fundamentals/java-jvm-stack-frame.html"},
 {"title":"Java多线程概念","url":"/projects/java/fundamentals/java-multi-threading-concepts.html"},
