@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
@@ -79,25 +82,19 @@
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
     <lastmod>2019-04-03</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
-    <lastmod>2019-04-01</lastmod>
-  </url>  <url>
     <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
@@ -107,6 +104,9 @@
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    <lastmod>2019-03-22</lastmod>
+  </url>  <url>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
@@ -124,10 +124,10 @@
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
@@ -136,10 +136,10 @@
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
@@ -151,10 +151,10 @@
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/shadowsocks/install-shadowsocks-on-macosx.html</loc>
@@ -163,22 +163,22 @@
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>

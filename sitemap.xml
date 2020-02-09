@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
+    
+    <lastmod>2020-02-09T08:27:32.599Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/about/index.html</loc>
     
     <lastmod>2020-02-07T08:04:36.254Z</lastmod>
@@ -198,13 +205,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
-    
-    <lastmod>2019-04-01T08:41:48.744Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tags/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
@@ -233,7 +233,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -247,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
@@ -261,9 +254,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
@@ -283,6 +276,13 @@
   
   <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -324,14 +324,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -387,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
@@ -415,14 +415,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
@@ -436,7 +436,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
@@ -450,7 +450,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
