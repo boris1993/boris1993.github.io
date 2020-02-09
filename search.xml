@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>使用VisualVM监控应用GC</title>
+      <link href="/projects/java/coding-tips/monitor-gc-with-visual-vm.html"/>
+      <url>/projects/java/coding-tips/monitor-gc-with-visual-vm.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件<code>Visual GC</code>来监控Java应用的垃圾回收情况。</p><a id="more"></a><h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装<code>Visual GC</code>插件</h2><p>因为<code>Visual GC</code>插件并不是随VisualVM附带的，需要到插件商店下载。</p><p>点击<code>Tools</code>–&gt;<code>Plugins</code>打开插件管理窗口，进入<code>Available Plugins</code>，在左侧窗格中勾选<code>Visual GC</code>，点击<code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启VisualVM。</p><p><img src="/images/monitor-gc-with-visualvm/install-visual-gc.png" alt="Install Visual GC"></p><h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在VisualVM的<code>Applications</code>窗格中双击要监控的应用，然后在右侧窗格中进入<code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p><p><img src="/images/monitor-gc-with-visualvm/monitor-gc.png" alt="Monitor GC"></p><p>窗格中的<code>Spaces</code>部分展示的是当前各个区域的占用情况；<code>Graphs</code>部分则包括：</p><ul><li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li><li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类(<code>loaded</code>)，卸载了多少个类(<code>unloaded</code>)，和累计用于类加载的时间</li><li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li><li><code>Eden Space</code>：Eden区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Survivor 0</code>和<code>Survivor 1</code>：两个<code>Survivor</code>区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li><li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Metaspace</code>：Metaspace的空间(如果使用的是Java 1.7及之前版本，这里则是<code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习记录 </category>
+          
+          <category> Java </category>
+          
+          <category> 代码技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> VisualVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>简谈JVM中的几种引用</title>
       <link href="/projects/java/fundamentals/java-jvm-reference.html"/>
       <url>/projects/java/fundamentals/java-jvm-reference.html</url>
@@ -57,11 +88,11 @@
             
             <tag> Java </tag>
             
-            <tag> JVM </tag>
-            
             <tag> 垃圾回收 </tag>
             
             <tag> GC </tag>
+            
+            <tag> JVM </tag>
             
         </tags>
       

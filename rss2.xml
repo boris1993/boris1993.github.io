@@ -8,8 +8,24 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>码农pilot的个人博客</description>
-    <pubDate>Fri, 07 Feb 2020 05:48:37 GMT</pubDate>
+    <pubDate>Sun, 09 Feb 2020 10:15:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>使用VisualVM监控应用GC</title>
+      <link>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</link>
+      <guid>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</guid>
+      <pubDate>Sun, 09 Feb 2020 09:38:42 GMT</pubDate>
+      <description>
+      
+        &lt;p&gt;我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件&lt;code&gt;Visual GC&lt;/code&gt;来监控Java应用的垃圾回收情况。&lt;/p&gt;
+      
+      </description>
+      
+      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件<code>Visual GC</code>来监控Java应用的垃圾回收情况。</p><a id="more"></a><h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装<code>Visual GC</code>插件</h2><p>因为<code>Visual GC</code>插件并不是随VisualVM附带的，需要到插件商店下载。</p><p>点击<code>Tools</code>–&gt;<code>Plugins</code>打开插件管理窗口，进入<code>Available Plugins</code>，在左侧窗格中勾选<code>Visual GC</code>，点击<code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启VisualVM。</p><p><img src="/images/monitor-gc-with-visualvm/install-visual-gc.png" alt="Install Visual GC"></p><h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在VisualVM的<code>Applications</code>窗格中双击要监控的应用，然后在右侧窗格中进入<code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p><p><img src="/images/monitor-gc-with-visualvm/monitor-gc.png" alt="Monitor GC"></p><p>窗格中的<code>Spaces</code>部分展示的是当前各个区域的占用情况；<code>Graphs</code>部分则包括：</p><ul><li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li><li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类(<code>loaded</code>)，卸载了多少个类(<code>unloaded</code>)，和累计用于类加载的时间</li><li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li><li><code>Eden Space</code>：Eden区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Survivor 0</code>和<code>Survivor 1</code>：两个<code>Survivor</code>区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li><li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Metaspace</code>：Metaspace的空间(如果使用的是Java 1.7及之前版本，这里则是<code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li></ul>]]></content:encoded>
+      
+      <comments>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>简谈JVM中的几种引用</title>
@@ -338,29 +354,6 @@
       <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></table></figure><p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>]]></content:encoded>
       
       <comments>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>突然情绪爆发，暴哭了一场</title>
-      <link>https://www.boris1993.com/others/i-cried-just-now.html</link>
-      <guid>https://www.boris1993.com/others/i-cried-just-now.html</guid>
-      <pubDate>Sun, 18 Aug 2019 02:55:00 GMT</pubDate>
-      <description>
-      
-        &lt;p&gt;刚才久违的暴哭了一场。&lt;/p&gt;
-&lt;p&gt;嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。&lt;/p&gt;
-&lt;p&gt;无奈，最近一段时间里，发生了太多闹心的事。&lt;/p&gt;
-&lt;p&gt;有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。&lt;/p&gt;
-&lt;p&gt;已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。&lt;/p&gt;
-&lt;p&gt;我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。&lt;/p&gt;
-&lt;p&gt;当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。&lt;/p&gt;
-&lt;p&gt;您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。&lt;/p&gt;
-      
-      </description>
-      
-      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>刚才久违的暴哭了一场。</p><p>嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。</p><p>无奈，最近一段时间里，发生了太多闹心的事。</p><p>有多闹心呢？你想想，能让一个网瘾少年连游戏都不想玩了，你就想这是有多闹心吧。</p><p>已经不记得上次哭是什么时候了，甚至，已经忘了该怎么哭了。</p><p>我说我连该怎么引导自己哭出来，都是查的知乎，你信吗。</p><p>当然也不是没来由的就哭了，主要还是最近心力交瘁，最后因为一件屁事情绪爆发了。</p><p>您要是想看个来龙去脉呢，那就继续往下，看我这个祥林嫂的絮叨吧。</p><a id="more"></a><p>起初呢，是年中那会，经过哥们啊、领导们啊、当然还有我自己的努力，争取到了一个外派的机会</p><p>嗯，这里插句嘴，其实现在我心里都抱着一点歉意的，因为当时领导也是有在挽留的，怎奈当时王八吃秤砣，铁了心的要出去看看这个大世界，最后就还是出来了。</p><p>那既然外派出来了，那当然是想要好好的干啊。一方面呢，当时本来就是奔着这边有没玩过的技术，我是来学习的；另一方面呢，我毕竟是外派出来的，也挂着咱老东家的脸呢，出来混，丢啥不能丢老东家的脸呐。</p><p>头先派我俩活，一个我忘了是啥了，另一个是给现有的一个系统设计并新增一个功能。</p><p>这两次呢，也没跟我规定啥时候交货。我寻思着，按照这个难度，我设计啊编码啊给你做的精细点，一星期也差不多吧。</p><p>结果周五验收的时候，负责人表示，我觉得你时间有点太长了。</p><p>第一个活，负责人表示我快了一天就搞定，最慢也就三天，按你这效率我不如不要你了。</p><p>第二个呢，负责人表示，这个应该四天就能解决的。</p><p>这就不太对了吧。开始的时候也没有定一个deadline，可最后又说你不应该花这么多时间，这是什么操作啊？</p><p>第二个活呢，我当时上交设计文档的时候，负责人表示没有什么要修改的，那么我就按照我自己的设计稿去做了。可到了交货的时候，却砍了一个功能。</p><p>为啥我要把这个被砍了的功能拎出来说呢？因为那天上午，我就是在写这个功能。如果一开始就砍了不要，那我真的确确实实就只花了四天就完成了。</p><p>当时想，算了算了，屁大点事，懒得反驳了，没劲。大不了我后面再证明我自己嘛。</p><p>但是我错了。</p><p>在上面发生的事情之后不久，我们开始从头设计和开发一个新的系统。而今天这次暴走，也是从这时候开始埋下了雷。</p><p>在这个新项目开始不久，某一天，老东家那边的领导跟我讲，这边对我的效率好像不太满意，有一点不想再要我的意思。</p><p>我一听，这不行啊。真就这么给我踹回去了，我无所谓，可是这多少会影响那哥们，和老东家的面子啊。</p><p>你看啊，咱哥们，又是拼缝，又是联系，里外里没少折腾，最后就整进来这么个怂蛋，这要是后面咱哥们再想介绍谁过来，那他领导不也得犯嘀咕，他可别再给我整个怂蛋来啊。</p><p>再看咱老东家，也是费劲巴拉的没少折腾了，结果这废物没干几天就让踹回去了，脸上也不好看啊。</p><p>那咋整呢？废话，更玩命的干呗。豁出去命挣个脸皮呗。</p><p>可事实整明，我还是 too young too naive 了。脸皮没那么好挣，但是精神却可以消耗的很快。</p><p>从谈话之后，我就开始5*8的满负载工作。去卫生间，要快。喝水，要快。任何事，都不能影响我的进度。</p><p>然后，有一天，就在临下班的时候，突然一阵头晕，我发现我的右眼的上半部分，看不见了。</p><p>具体是什么症状呢？就像是一张损坏的图片。下半部分还是画面本来的样子。而上半部分，只剩下一片灰色。</p><p>所幸，不是永久的。它只持续了不到一分钟。</p><p>但是，我很害怕。我怕下次，就变成了一只眼睛半只瞎。我怕下次，就变成了两只眼睛一只瞎。</p><p>当天挂了眼科急诊，第二天又挂了眼科门诊。好在经过各种检查，眼睛没有任何问题，诊断是一时性的供血不足。而且时间很短，没有对眼睛造成什么永久性的损伤。</p><p>但是大夫后面说了一句话，让我不淡定了。</p><p>“这种一过性的症状，通常不是眼睛的病变，而有可能是脑部的问题。”</p><p>啥？老子年纪轻轻的，脑子就坏了？老子不答应！</p><p>可我不答应没用啊，还是得拿诊断结果说话。再联系到那段时间总有右脑隐隐的偏头疼，所以也害怕是有肿瘤或者血栓在里面。</p><p>于是就先后做了脑CT和MRI。</p><p>又是各种请假。而且都这种情况了，我个废物还在考虑会不会拖团队的后腿。</p><p>最后结果出来，也算是意料之中，检查都是正常。</p><p>脑子里没有什么不该有的东西。血管也很通畅。死不掉，也瘫不了。悬下的心，算是放下了。</p><p>既然没事了，那就继续干活吧。</p><p>可是好景不长，没过一两天，右耳开始感觉耳鸣。</p><p>一开始没管它，结果越是不管，声音越是大。正巧那两天虫子开始叫起来。我一时分不清是真的耳鸣，还是虫子太响。</p><p>既然有疑惑，那就得去查。越拖着，疑心越重，没病都能拖出癔症。</p><p>其实我是个很胆小的人。我害怕的，不是虫子骑脸，不是被疯子攮了。我怕的是，突然生大病，让远在半个中国以北的爹妈操碎心。</p><p>看耳朵的时候，大夫倒是干脆，直接就说，耳屎太多了。开了瓶药，滴两天，把耳屎泡软了之后，找大夫给我取出来，就解决了。</p><p>但是这事吧，它就不能平平稳稳的过去。</p><p>取耳屎的前一天晚上，滴完了药之后，耳朵眼里开始觉得肿胀，而且，右耳几乎听不见了。</p><p>我干哦！最后一天晚上都不让我好好过吗？而且急诊又没有耳鼻喉科！玩我呢吧！</p><p>没办法求助万能的网络，结果是，耳屎彻底泡发了，涨起来堵住了耳道，造成传导性耳聋。</p><p>哦。耳屎堵了啊。好吧睡觉。明天给孙子掏出来。</p><p>第二天，也就是昨天，一大早心事重重的就醒了。赶了早班车，挂最早的号，去掏耳屎。</p><p>中间发生了一个插曲。大夫掏耳屎用的是一个吸气的管子，来把耳屎吸出来。而这个管子，让我弄堵住了。是的耳屎太多把管子堵了。</p><p>大夫都一脸很受不了的表情，说这玩意都给堵了。</p><p>吸完右耳吸左耳。你以为吸完了就完了？右耳里面，还有块钉子户你敢信？</p><p>我还得滴两天药水，再过来掏一次。</p><p>然后一整天去体检、去退还光猫，这些杂事就按下不表。</p><p>晚上回去之后，也不知道是心太累，还是天太热，只觉得心烦意乱。哥几个联机打游戏，我都没法专心的去玩，不知道思绪在哪，一团乱麻。</p><p>想着，也到了吃饭的时候了吧，于是就去做饭。做饭的时候，也是心神不宁。</p><p>菜出来了，吃了一口，咸，没法吃。</p><p>这时候，突然情绪就爆发了。</p><p>为什么？为什么就这么多破事？为什么工作也干不好，身体也养不好，就连菜都炒不好？</p><p>当时就觉得想哭。但是，又哭不出来。</p><p>就像前两天，上海一位住户，住着数百万的房子，却在台风天坏了马桶，蹲地痛哭。区别只是，我没哭出来。</p><p>忍着恶心，扔掉饭菜，出门觅食。虽然当时一点胃口都没有，但还是强迫自己吃了一碗小馄饨。</p><p>因为，任由自己的坏心情折腾自己，只会让自己离抑郁更近一步。老子，不答应。老子，要乐呵的活着。</p><p>然后就是一觉醒来，到了今天5点。时间是睡饱了，可是精神还是没有恢复。</p><p>早饭是逼着自己吃的。想出去走走，结果隔一分钟换一个目的地。</p><p>而且，还是半憋着想哭。</p><p>这不是个事，这样下去，解决不了。这样下去，老子要崩。</p><p>果断掉头回住处。上网搜，“想哭哭不出来”。嗯，网络就是好，各路大神给支招。</p><p>挑了个简单的，只需要三步。</p><p>刚做完一步半，感觉就上来了。眼泪啊，kua的一下，就出来了。</p><p>来的快，去的也快。感觉已经哭爽了，再也哭不出来之后，整理思绪，写下了这些絮絮叨叨的东西。</p><p>果然啊，心情不好的时候，哭一场，就什么都过去了。</p><p>谢谢您耐着性子，跟着这个胆小的家伙，回顾了一下这段波折的人生。</p><p>我写这么多呢，就是为了发泄一下。您呢，就当看了一篇文笔拙劣的小说吧。</p><p>$EOF.</p>]]></content:encoded>
-      
-      <comments>https://www.boris1993.com/others/i-cried-just-now.html#disqus_thread</comments>
     </item>
     
   </channel>
