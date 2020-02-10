@@ -62,18 +62,20 @@
   };
 </script>
 
-  <meta name="description" content="码农pilot的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code Life">
-<meta property="og:url" content="https://www.boris1993.com/archives/2019/page/2/index.html">
+  <meta name="description" content="在用Git管理包含中文的文件时，会出现类似这样的“乱码”： 123456789$ git statusOn branch masterYour branch is up to date with &apos;origin/master&apos;.Untracked files:  (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed)">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决命令行中Git显示中文文件名乱码">
+<meta property="og:url" content="https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="码农pilot的个人博客">
+<meta property="og:description" content="在用Git管理包含中文的文件时，会出现类似这样的“乱码”： 123456789$ git statusOn branch masterYour branch is up to date with &apos;origin/master&apos;.Untracked files:  (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed)">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-10T02:22:49.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code Life">
-<meta name="twitter:description" content="码农pilot的个人博客">
+<meta name="twitter:title" content="解决命令行中Git显示中文文件名乱码">
+<meta name="twitter:description" content="在用Git管理包含中文的文件时，会出现类似这样的“乱码”： 123456789$ git statusOn branch masterYour branch is up to date with &apos;origin/master&apos;.Untracked files:  (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed)">
 
-<link rel="canonical" href="https://www.boris1993.com/archives/2019/page/2/">
+<link rel="canonical" href="https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html">
 
 
 <script id="page-configurations">
@@ -81,13 +83,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | Code Life</title>
+  <title>解决命令行中Git显示中文文件名乱码 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -233,237 +235,132 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          解决命令行中Git显示中文文件名乱码
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-10 10:15:34 / 修改时间：10:22:49" itemprop="dateCreated datePublished" datetime="2020-02-10T10:15:34+08:00">2020-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/tools/git/git-commandline-unescape-chinese-characters.html" class="post-meta-item leancloud_visitors" data-flag-title="解决命令行中Git显示中文文件名乱码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">不错! 目前共计 63 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/tools/git/git-commandline-unescape-chinese-characters.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/tools/git/git-commandline-unescape-chinese-characters.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2019</h2>
-    </div>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在用Git管理包含中文的文件时，会出现类似这样的“乱码”：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">    <span class="string">"\345\271\277\345\221\212\345\220\214\346\255\245\345\271\263\345\217\260\346\216\245\345\217\243\346\226\207\346\241\2432.0.docx.new"</span></span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-09-18T15:42:07+08:00"
-              content="2019-09-18">
-          09-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/tools/git/specify-different-git-config-for-different-environments.html" itemprop="url">
-            <span itemprop="name">分环境为Git指定单独的配置</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-09-12T15:27:27+08:00"
-              content="2019-09-12">
-          09-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/mybatis/mybatis-return-query-results-in-a-map.html" itemprop="url">
-            <span itemprop="name">让MyBatis把查询结果以Map形式返回</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-22T17:43:46+08:00"
-              content="2019-08-22">
-          08-22
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/jdbc/illegal-mix-of-collations.html" itemprop="url">
-            <span itemprop="name">JDBC错误Illegal mix of collations解决方法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-22T11:33:45+08:00"
-              content="2019-08-22">
-          08-22
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/database/mysql/mysql-convert-tables-and-columns-collation.html" itemprop="url">
-            <span itemprop="name">在MySQL中修改表和列的排序规则</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-18T10:55:00+08:00"
-              content="2019-08-18">
-          08-18
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/others/i-cried-just-now.html" itemprop="url">
-            <span itemprop="name">突然情绪爆发，暴哭了一场</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-05T10:08:10+08:00"
-              content="2019-06-05">
-          06-05
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/database/Redis/redis-sentinel-in-docker.html" itemprop="url">
-            <span itemprop="name">使用Docker配置Redis哨兵</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-23T15:22:03+08:00"
-              content="2019-05-23">
-          05-23
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/database/Redis/redis-replication-in-docker.html" itemprop="url">
-            <span itemprop="name">使用Docker配置Redis主从复制</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-02T10:08:33+08:00"
-              content="2019-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-jvm-stack-frame.html" itemprop="url">
-            <span itemprop="name">JVM的栈帧</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-28T14:29:41+08:00"
-              content="2019-03-28">
-          03-28
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-gc-algorithms.html" itemprop="url">
-            <span itemprop="name">Java的垃圾回收算法</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-27T10:19:51+08:00"
-              content="2019-03-27">
-          03-27
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html" itemprop="url">
-            <span itemprop="name">JVM运行时的数据区域</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
+<p>解决方法是配置Git的全局属性<code>core.quotepath</code>为<code>false</code>，即执行命令<code>git config --global core.quotepath false</code>，然后再执行<code>git status</code>，就可以看到中文正常显示了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">    广告同步平台接口文档2.0.docx.new</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>
 
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/projects/java/coding-tips/monitor-gc-with-visual-vm.html" rel="next" title="使用VisualVM监控应用GC">
+                  <i class="fa fa-chevron-left"></i> 使用VisualVM监控应用GC
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="page-number" href="/archives/2019/page/4/">4</a><a class="extend next" rel="next" href="/archives/2019/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           

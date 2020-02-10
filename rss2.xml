@@ -8,8 +8,28 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>码农pilot的个人博客</description>
-    <pubDate>Sun, 09 Feb 2020 10:15:45 GMT</pubDate>
+    <pubDate>Mon, 10 Feb 2020 02:22:49 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>解决命令行中Git显示中文文件名乱码</title>
+      <link>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html</link>
+      <guid>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html</guid>
+      <pubDate>Mon, 10 Feb 2020 02:15:34 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;在用Git管理包含中文的文件时，会出现类似这样的“乱码”：&lt;/p&gt;
+&lt;fig
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在用Git管理包含中文的文件时，会出现类似这样的“乱码”：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">    <span class="string">"\345\271\277\345\221\212\345\220\214\346\255\245\345\271\263\345\217\260\346\216\245\345\217\243\346\226\207\346\241\2432.0.docx.new"</span></span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure><p>解决方法是配置Git的全局属性<code>core.quotepath</code>为<code>false</code>，即执行命令<code>git config --global core.quotepath false</code>，然后再执行<code>git status</code>，就可以看到中文正常显示了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with <span class="string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">    广告同步平台接口文档2.0.docx.new</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      <comments>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>使用VisualVM监控应用GC</title>
@@ -335,25 +355,6 @@
       <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation &#39;=&#39;</code><br>经查是关联查询时两个表的排序规则(collation)不同导致的。</p><a id="more"></a><p>解决方法也很简单，有两种方法：</p><p>一种是在查询的SQL中指定另一张表的collation，这是一种权宜之计，治标不治本。代码是这样的：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设左表的排序规则是 utf8_general_ci,</span></span><br><span class="line"><span class="comment">-- 而右表的排序规则是 utf8_unicode_ci</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="string">`a`</span>.<span class="string">`column1`</span>,</span><br><span class="line">    <span class="string">`b`</span>.<span class="string">`column2`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_1`</span> <span class="keyword">AS</span> <span class="string">`a`</span></span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="string">`table_2`</span> <span class="keyword">AS</span> <span class="string">`b`</span></span><br><span class="line">    <span class="keyword">ON</span> <span class="string">`a`</span>.<span class="string">`id`</span> = <span class="string">`b`</span>.<span class="string">`id`</span></span><br><span class="line">    <span class="keyword">COLLATE</span> <span class="string">`utf8_general_ci`</span></span><br></pre></td></tr></table></figure><p>另一种方法是修改表和列的排序规则，将其统一。这个方法从根本上解决了这个问题。操作方法可以参考<a href="/database/mysql/mysql-convert-tables-and-columns-collation.html">在 MySQL 中修改表和列的排序规则</a>。</p>]]></content:encoded>
       
       <comments>https://www.boris1993.com/projects/java/jdbc/illegal-mix-of-collations.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>在MySQL中修改表和列的排序规则</title>
-      <link>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</link>
-      <guid>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</guid>
-      <pubDate>Thu, 22 Aug 2019 03:33:45 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;使用如下SQL语句即可更新一张表的字符集(character set)和排序
-        
-      
-      </description>
-      
-      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></table></figure><p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      <comments>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html#disqus_thread</comments>
     </item>
     
   </channel>

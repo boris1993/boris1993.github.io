@@ -238,6 +238,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/spring-boot-enable-https.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/common/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+      <meta itemprop="description" content="码农pilot的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/projects/java/coding-tips/spring-boot-enable-https.html" class="post-title-link" itemprop="url">在Spring Boot应用中启用HTTPS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-17 14:45:39" itemprop="dateCreated datePublished" datetime="2019-12-17T14:45:39+08:00">2019-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-21 15:43:36" itemprop="dateModified" datetime="2019-12-21T15:43:36+08:00">2019-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index">
+                    <span itemprop="name">代码技巧</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/projects/java/coding-tips/spring-boot-enable-https.html" class="post-meta-item leancloud_visitors" data-flag-title="在Spring Boot应用中启用HTTPS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在<code>application.yml</code>中添加如下配置，即可在Spring Boot项目中开启HTTPS。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 如果有需要的话，配置应用监听HTTPS的默认端口</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">  <span class="attr">ssl:</span></span><br><span class="line">    <span class="comment"># 我把证书放在了 resources/cert/certificate.pfx下</span></span><br><span class="line">    <span class="comment"># 使用时需要按照实际情况修改下面的路径</span></span><br><span class="line">    <span class="attr">key-store:</span> <span class="string">classpath:cert/certificate.pfx</span></span><br><span class="line">    <span class="attr">key-store-password:</span> <span class="string">pA55w0Rd</span></span><br><span class="line">    <span class="comment"># 证书类型需要按照实际类型填写</span></span><br><span class="line">    <span class="comment"># 本例使用PKCS12格式，所以写PKCS12。如果是JKS格式，那么需要填写JKS</span></span><br><span class="line">    <span class="comment"># 因为PKCS12比JKS有更好的通用型，所以个人建议使用PKCS12格式</span></span><br><span class="line">    <span class="attr">key-store-type:</span> <span class="string">PKCS12</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/projects/java/coding-tips/spring-boot-enable-https.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1121,96 +1226,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/common/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-      <meta itemprop="description" content="码农pilot的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/database/mysql/mysql-convert-tables-and-columns-collation.html" class="post-title-link" itemprop="url">在MySQL中修改表和列的排序规则</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-08-22 11:33:45 / 修改时间：15:28:35" itemprop="dateCreated datePublished" datetime="2019-08-22T11:33:45+08:00">2019-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/database/mysql/mysql-convert-tables-and-columns-collation.html" class="post-meta-item leancloud_visitors" data-flag-title="在MySQL中修改表和列的排序规则" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>使用如下SQL语句即可更新一张表的字符集(character set)和排序规则(collation)：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table_name`</span> <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
-
-<p>然后可以使用如下SQL查询表和列的字符集和排序规则是否修改成功：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询表的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`TABLE_COLLATION`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`TABLES`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询表中每个列的信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">`TABLE_SCHEMA`</span>, <span class="string">`TABLE_NAME`</span>, <span class="string">`COLUMN_NAME`</span>, <span class="string">`COLLATION_NAME`</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`information_schema`</span>.<span class="string">`COLUMNS`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="string">`TABLE_NAME`</span> = <span class="string">'table_name'</span>;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1261,7 +1276,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

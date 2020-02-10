@@ -25,6 +25,7 @@
 {"title":"IDEA警告Field injection is not recommended","url":"/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html"},
 {"title":"在Java bean中实现setter的链式调用","url":"/projects/java/coding-tips/java-bean-chaining-setters.html"},
 {"title":"去掉自定义异常中的堆栈跟踪信息","url":"/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html"},
+{"title":"使用VisualVM监控应用GC","url":"/projects/java/coding-tips/monitor-gc-with-visual-vm.html"},
 {"title":"手动编写代码调用JSR-303 Bean Validation","url":"/projects/java/coding-tips/programatically-call-jsr-303.html"},
 {"title":"在Spring Boot应用中启用HTTPS","url":"/projects/java/coding-tips/spring-boot-enable-https.html"},
 {"title":"Java自定义注解","url":"/projects/java/fundamentals/java-customized-annotations.html"},
