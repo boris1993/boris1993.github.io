@@ -51,6 +51,7 @@
 {"title":"搭建ELK日志平台 - 安装Elastic Search","url":"/tools/elk/install-elk-part-es.html"},
 {"title":"搭建ELK日志平台 - 安装Kibana","url":"/tools/elk/install-elk-part-kibana.html"},
 {"title":"搭建ELK日志平台 - 安装Logstash","url":"/tools/elk/install-elk-part-logstash.html"},
+{"title":"解决命令行中Git显示中文文件名乱码","url":"/tools/git/git-commandline-unescape-chinese-characters.html"},
 {"title":"Git连接多个远程仓库","url":"/tools/git/push-to-multi-git-repo.html"},
 {"title":"分环境为Git指定单独的配置","url":"/tools/git/specify-different-git-config-for-different-environments.html"},
 {"title":"为Maven配置阿里云镜像和代理服务器","url":"/tools/maven/maven-configure-mirrors.html"},
