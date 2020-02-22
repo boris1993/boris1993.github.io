@@ -44,6 +44,7 @@
 {"title":"Java源码阅读 - HashMap","url":"/projects/java/源码阅读/java-read-src-hashmap.html"},
 {"title":"Java源码阅读 - LinkedList","url":"/projects/java/源码阅读/java-read-src-linkedlist.html"},
 {"title":"让MyBatis把查询结果以Map形式返回","url":"/projects/mybatis/mybatis-return-query-results-in-a-map.html"},
+{"title":"Spring Boot 自动配置的原理","url":"/projects/spring/java-spring-autoconfiguration.html"},
 {"title":"微信小程序scroll-view填满剩余可用高度","url":"/projects/wxapp/scroll-view-auto-fit-height.html"},
 {"title":"记一个Caddy和GitHub自定义域名的坑","url":"/tools/caddy/caddy-and-github-custom-domain.html"},
 {"title":"配置Caddy作为静态网站服务器和前置代理","url":"/tools/caddy/set-up-caddy-server.html"},
