@@ -247,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/manifest.json</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
@@ -261,14 +254,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
+    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
@@ -303,20 +303,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
@@ -331,14 +317,28 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
@@ -355,6 +355,13 @@
     <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
     
     <lastmod>2019-03-22T03:51:19.094Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
@@ -380,9 +387,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
   </url>
   
@@ -401,9 +408,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
@@ -422,20 +429,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.091Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
@@ -443,9 +436,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
     
   </url>
   
@@ -458,6 +451,13 @@
   
   <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
