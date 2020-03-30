@@ -70,7 +70,7 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="今天我在从公司的Maven私库上下载依赖时，Maven报出了unable to find valid certification path to requested target的问题，经查询是因为没有将私库使用的自签名证书导入到Java的keystore。这里写一下我解决的过程，方便发生了同样问题的人参考。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-30T03:52:23.115Z">
+<meta property="og:updated_time" content="2020-03-30T03:59:50.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Maven的unable to find valid certification path to requested target错误">
 <meta name="twitter:description" content="今天我在从公司的Maven私库上下载依赖时，Maven报出了unable to find valid certification path to requested target的问题，经查询是因为没有将私库使用的自签名证书导入到Java的keystore。这里写一下我解决的过程，方便发生了同样问题的人参考。">
@@ -264,7 +264,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-30 11:13:30 / 修改时间：11:52:23" itemprop="dateCreated datePublished" datetime="2020-03-30T11:13:30+08:00">2020-03-30</time>
+              <time title="创建时间：2020-03-30 11:13:30 / 修改时间：11:59:50" itemprop="dateCreated datePublished" datetime="2020-03-30T11:13:30+08:00">2020-03-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -329,7 +329,8 @@
 <p>接下来，我们需要使用<code>keytool</code>把这个证书导入到Java的keystore中，命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo keytool \</span><br><span class="line">    -importcert \</span><br><span class="line">    <span class="comment"># keystore文件位置需要修改成实际的位置</span></span><br><span class="line">    -keystore /usr/<span class="built_in">local</span>/java/jdk1.8.0_60/jre/lib/security/cacerts \</span><br><span class="line">    <span class="comment"># keystore密码需要修改成实际的密码，默认密码是changeit</span></span><br><span class="line">    -storepass changeit \</span><br><span class="line">    <span class="comment"># 要导入的证书，就是刚才保存的那个，注意使用实际的位置</span></span><br><span class="line">    -file ~/Downloads/root.crt \</span><br><span class="line">    <span class="comment"># 给证书起个名字</span></span><br><span class="line">    -<span class="built_in">alias</span> <span class="string">"mavenrepository-mycompany"</span></span><br></pre></td></tr></table></figure>
 
-<p>执行后keytool会询问是否信任这个证书，输入<code>yes</code>来信任。导入完成后，Maven就可以从这个私库下载依赖了。</p>
+<p>执行后keytool会询问是否信任这个证书，输入<code>yes</code>来信任。</p>
+<p>导入完成后，Maven就可以从这个私库下载依赖了。如果你使用IDEA的话，那么可能需要重新启动一下IDEA才会使新的keystore生效。</p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9qZnJvZy5jb20va25vd2xlZGdlLWJhc2UvaG93LXRvLXJlc29sdmUtdW5hYmxlLXRvLWZpbmQtdmFsaWQtY2VydGlmaWNhdGlvbi1wYXRoLXRvLXJlcXVlc3RlZC10YXJnZXQtZXJyb3Iv" title="https://jfrog.com/knowledge-base/how-to-resolve-unable-to-find-valid-certification-path-to-requested-target-error/">How to resolve “unable to find valid certification path to requested target” error? - JFrog<i class="fa fa-external-link"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 

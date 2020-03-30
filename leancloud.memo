@@ -60,6 +60,7 @@
 {"title":"Git连接多个远程仓库","url":"/tools/git/push-to-multi-git-repo.html"},
 {"title":"分环境为Git指定单独的配置","url":"/tools/git/specify-different-git-config-for-different-environments.html"},
 {"title":"为Maven配置阿里云镜像和代理服务器","url":"/tools/maven/maven-configure-mirrors.html"},
+{"title":"解决Maven的unable to find valid certification path to requested target错误","url":"/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html"},
 {"title":"在macOS中安装shadowsocks-libev和simple-obfs","url":"/tools/shadowsocks/install-shadowsocks-on-macosx.html"},
 {"title":"在macOS中通过SSH进行X11转发","url":"/tools/ssh/macos-install-x11-client.html"},
 {"title":"使用SSH config简化SSH连接","url":"/tools/ssh/ssh-config-file.html"},
