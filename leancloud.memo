@@ -51,6 +51,7 @@
 {"title":"记一个Caddy和GitHub自定义域名的坑","url":"/tools/caddy/caddy-and-github-custom-domain.html"},
 {"title":"配置Caddy作为静态网站服务器和前置代理","url":"/tools/caddy/set-up-caddy-server.html"},
 {"title":"学习Concourse CI - 快速入门","url":"/tools/concourse/concourse-quick-start.html"},
+{"title":"学习Concourse CI - 使用变量","url":"/tools/concourse/concourse-using-vars.html"},
 {"title":"在macOS中搭建自己的DNS服务器","url":"/tools/dnsmasq/build-dns-server-on-macos.html"},
 {"title":"搭建ELK日志平台 - 安装Elastic Search","url":"/tools/elk/install-elk-part-es.html"},
 {"title":"搭建ELK日志平台 - 安装Kibana","url":"/tools/elk/install-elk-part-kibana.html"},

@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
+    <loc>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</loc>
     
-    <lastmod>2020-03-25T03:57:03.269Z</lastmod>
+    <lastmod>2020-03-25T07:10:36.274Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</loc>
+    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
     
-    <lastmod>2020-03-12T09:39:06.582Z</lastmod>
+    <lastmod>2020-03-25T03:57:03.269Z</lastmod>
     
   </url>
   
@@ -254,13 +254,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/manifest.json</loc>
     
     <lastmod>2019-03-22T03:51:19.154Z</lastmod>
@@ -268,9 +261,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
     
   </url>
   
@@ -282,14 +275,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.098Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -303,7 +303,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -324,13 +324,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
@@ -338,9 +331,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -352,9 +345,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
     
   </url>
   
@@ -366,9 +359,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
@@ -381,6 +374,13 @@
   
   <url>
     <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
@@ -401,13 +401,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
@@ -415,14 +408,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -436,13 +436,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
     
     <lastmod>2019-03-22T03:51:19.090Z</lastmod>
@@ -450,14 +443,21 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.090Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
@@ -471,7 +471,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
