@@ -261,10 +261,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-30 11:13:30 / 修改时间：11:59:50" itemprop="dateCreated datePublished" datetime="2020-03-30T11:13:30+08:00">2020-03-30</time>
+              <time title="创建时间：2020-03-30 11:13:30" itemprop="dateCreated datePublished" datetime="2020-03-30T11:13:30+08:00">2020-03-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-31 10:23:19" itemprop="dateModified" datetime="2020-03-31T10:23:19+08:00">2020-03-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -303,7 +309,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>今天我在从公司的Maven私库上下载依赖时，Maven报出了<code>unable to find valid certification path to requested target</code>的问题，经查询是因为没有将私库使用的自签名证书导入到Java的keystore。这里写一下我解决的过程，方便发生了同样问题的人参考。</p>
+          <p>今天我在从公司的Maven私库上下载依赖时，Maven报出了<code>unable to find valid certification path to requested target</code>的问题，经查询是因为没有将私库使用的自签名证书导入到Java的keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html#more" rel="contents">
