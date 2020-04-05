@@ -13,6 +13,7 @@
 {"title":"让nohup不输出 appending output to 'nohup.out'","url":"/linux/suppress-appending-to-nohup-out-message.html"},
 {"title":"常用lsof命令备忘","url":"/linux/useful-lsof-commands.html"},
 {"title":"更改Google Play市场使用的区域","url":"/others/change-google-play-market-location.html"},
+{"title":"在NeXT主题中接入Google AdSense","url":"/others/hexo-next-enable-google-adsense.html"},
 {"title":"突然情绪爆发，暴哭了一场","url":"/others/i-cried-just-now.html"},
 {"title":"使用TRANSMIT和RECEIVE命令打包、解包文件","url":"/others/zos-xmit.html"},
 {"title":"循序渐进写一个Servlet(1) - 介绍相关的接口和类","url":"/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html"},
