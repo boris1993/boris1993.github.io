@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/about/index.html</loc>
+    
+    <lastmod>2020-04-05T09:00:54.160Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</loc>
+    
+    <lastmod>2020-04-05T08:24:23.454Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/manifest.json</loc>
+    
+    <lastmod>2020-04-05T08:16:09.575Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
     
     <lastmod>2020-03-31T02:23:19.131Z</lastmod>
@@ -33,13 +54,6 @@
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
     
     <lastmod>2020-03-10T06:45:28.595Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/about/index.html</loc>
-    
-    <lastmod>2020-02-23T09:41:02.974Z</lastmod>
     
   </url>
   
@@ -247,7 +261,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/images/common/manifest.json</loc>
+    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
     
     <lastmod>2019-04-23T05:44:05.882Z</lastmod>
     
@@ -268,13 +282,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
-    
-    <lastmod>2019-03-22T03:51:19.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/categories/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
@@ -289,14 +296,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -310,7 +310,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -345,6 +352,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
     
     <lastmod>2019-03-22T03:51:19.095Z</lastmod>
@@ -352,9 +366,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.095Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
     
   </url>
   
@@ -366,9 +380,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.094Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
     
   </url>
   
@@ -394,14 +408,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.093Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -415,7 +422,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -429,14 +436,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -457,20 +464,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
@@ -485,14 +478,28 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
     
     <lastmod>2019-03-22T03:51:19.088Z</lastmod>
     
