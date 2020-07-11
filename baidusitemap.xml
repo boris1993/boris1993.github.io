@@ -112,7 +112,7 @@
     <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
@@ -121,7 +121,7 @@
     <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
@@ -142,10 +142,10 @@
     <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
+    <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/database/jdbc-transaction-and-isolation-level.html</loc>
@@ -184,13 +184,13 @@
     <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>  <url>
     <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
