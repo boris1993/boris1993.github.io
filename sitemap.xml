@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</loc>
     
-    <lastmod>2020-07-11T09:15:36.680Z</lastmod>
+    <lastmod>2020-07-11T13:51:46.739Z</lastmod>
     
   </url>
   
@@ -296,20 +296,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
@@ -317,7 +303,21 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
     
@@ -429,7 +429,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
@@ -443,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2019-03-22T03:51:19.091Z</lastmod>
     
