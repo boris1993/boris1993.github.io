@@ -30,14 +30,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
     
     <lastmod>2020-08-30T10:52:19.190Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
     
     <lastmod>2020-08-30T10:52:19.190Z</lastmod>
     
@@ -51,14 +51,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
     
     <lastmod>2020-08-30T10:52:19.186Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
     
     <lastmod>2020-08-30T10:52:19.186Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
+    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
     
     <lastmod>2019-03-22T03:51:19.098Z</lastmod>
     
@@ -380,6 +380,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
     
     <lastmod>2019-03-22T03:51:19.097Z</lastmod>
@@ -387,9 +394,9 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
-    <lastmod>2019-03-22T03:51:19.097Z</lastmod>
+    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
   </url>
   
@@ -402,13 +409,6 @@
   
   <url>
     <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
     
     <lastmod>2019-03-22T03:51:19.096Z</lastmod>
     
@@ -443,6 +443,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    
+    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
@@ -451,13 +458,6 @@
   
   <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
-    
-    <lastmod>2019-03-22T03:51:19.092Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     
     <lastmod>2019-03-22T03:51:19.092Z</lastmod>
     
@@ -478,14 +478,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/elk/install-elk-part-logstash.html</loc>
+    <loc>https://www.boris1993.com/tools/elk/install-elk-part-kibana.html</loc>
     
     <lastmod>2019-03-22T03:51:19.089Z</lastmod>
     
