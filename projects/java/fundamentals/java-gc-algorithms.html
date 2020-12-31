@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,37 +22,39 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="在JVM运行时的数据区域中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。">
-<meta name="keywords" content="Java,垃圾回收,GC">
+<meta name="description" content="在 JVM 运行时的数据区域中了解到了 JVM 的内存模型，那么既然使用了内存，就要考虑如何回收内存。与 C 语言不同，Java 不需要开发人员人工回收内存，而是交给 Java 的垃圾回收机制来完成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的垃圾回收算法">
+<meta property="og:title" content="Java 的垃圾回收算法">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在JVM运行时的数据区域中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="在 JVM 运行时的数据区域中了解到了 JVM 的内存模型，那么既然使用了内存，就要考虑如何回收内存。与 C 语言不同，Java 不需要开发人员人工回收内存，而是交给 Java 的垃圾回收机制来完成。">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.boris1993.com/images/java-gc-algorithms/reference-counter.png">
 <meta property="og:image" content="https://www.boris1993.com/images/java-gc-algorithms/circular-reference.png">
 <meta property="og:image" content="https://www.boris1993.com/images/java-gc-algorithms/circular-reference.png">
-<meta property="og:updated_time" content="2020-08-30T10:52:19.185Z">
+<meta property="article:published_time" content="2019-03-28T06:29:41.000Z">
+<meta property="article:modified_time" content="2020-08-30T10:52:19.185Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="垃圾回收">
+<meta property="article:tag" content="GC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的垃圾回收算法">
-<meta name="twitter:description" content="在JVM运行时的数据区域中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。">
 <meta name="twitter:image" content="https://www.boris1993.com/images/java-gc-algorithms/reference-counter.png">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -59,9 +62,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>Java的垃圾回收算法 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Java 的垃圾回收算法 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -75,54 +77,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -136,17 +147,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -164,6 +169,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -179,13 +189,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -193,9 +202,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -203,6 +212,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E5%86%85%E5%AD%98%E9%9C%80%E8%A6%81%E5%9B%9E%E6%94%B6"><span class="nav-number">1.</span> <span class="nav-text">哪些内存需要回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E6%B3%95-%E6%A0%B9%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">可达性分析法 (根搜索算法)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%94%B6"><span class="nav-number">2.</span> <span class="nav-text">如何进行回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">标记 - 清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">标记 - 整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">分代收集算法</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -211,19 +318,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,65 +347,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java的垃圾回收算法
+          Java 的垃圾回收算法
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-28 14:29:41" itemprop="dateCreated datePublished" datetime="2019-03-28T14:29:41+08:00">2019-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/fundamentals/java-gc-algorithms.html" class="post-meta-item leancloud_visitors" data-flag-title="Java的垃圾回收算法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/fundamentals/java-gc-algorithms.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/fundamentals/java-gc-algorithms.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-28 14:29:41" itemprop="dateCreated datePublished" datetime="2019-03-28T14:29:41+08:00">2019-03-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/fundamentals/java-gc-algorithms.html" class="post-meta-item leancloud_visitors" data-flag-title="Java 的垃圾回收算法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -304,54 +402,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在<a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM运行时的数据区域</a>中了解到了JVM的内存模型，那么既然使用了内存，就要考虑如何回收内存。与C语言不同，Java不需要开发人员人工回收内存，而是交给Java的垃圾回收机制来完成。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>中了解到了 JVM 的内存模型，那么既然使用了内存，就要考虑如何回收内存。与 C 语言不同，Java 不需要开发人员人工回收内存，而是交给 Java 的垃圾回收机制来完成。</p>
 <a id="more"></a>
 
-<h2 id="哪些内存需要回收"><a href="#哪些内存需要回收" class="headerlink" title="哪些内存需要回收"></a>哪些内存需要回收</h2><p>在Java中，GC的对象是堆和方法区。栈中的栈帧随着方法的调用和退出，会自行完成压栈和出栈操作，每个栈帧所需的内存空间也是在类结构确定下来时就已知的，所以不怎么需要考虑内存的回收问题。但是堆和方法区则不一样，这部分的空间是动态分配和回收的，同时也只有在运行时才可得知要生成哪些对象以及需要多少空间。</p>
+<h2 id="哪些内存需要回收"><a href="#哪些内存需要回收" class="headerlink" title="哪些内存需要回收"></a>哪些内存需要回收</h2><p>在 Java 中，GC 的对象是堆和方法区。栈中的栈帧随着方法的调用和退出，会自行完成压栈和出栈操作，每个栈帧所需的内存空间也是在类结构确定下来时就已知的，所以不怎么需要考虑内存的回收问题。但是堆和方法区则不一样，这部分的空间是动态分配和回收的，同时也只有在运行时才可得知要生成哪些对象以及需要多少空间。</p>
 <p>判断对象是否可以被回收通常有两种算法：<code>引用计数法</code>和<code>可达性分析法</code>。</p>
-<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法会给每个对象添加一个引用计数器，每当有一个地方引用它时，计数器就会加一；反之，每当一个引用失效时，计数器就会减一。任何时候，如果引用计数为0，则说明这个对象可以被回收。</p>
+<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法会给每个对象添加一个引用计数器，每当有一个地方引用它时，计数器就会加一；反之，每当一个引用失效时，计数器就会减一。任何时候，如果引用计数为 0，则说明这个对象可以被回收。</p>
 <p><img src="/images/java-gc-algorithms/reference-counter.png" alt="Reference counter"></p>
 <p>但是，这个算法有一个问题，那就是无法处理循环引用，即这样：</p>
 <p><img src="/images/java-gc-algorithms/circular-reference.png" alt="Circular reference"></p>
-<p>此时，<code>对象1</code>，<code>对象2</code>，<code>对象3</code>都是不可达状态，理论上这三个对象都应该被回收，但是因为它们三个形成循环引用，引用计数器不为零，导致GC不会回收它们的空间。所以实际上，JVM并没有采用这种判断方法。</p>
-<h3 id="可达性分析法-根搜索算法"><a href="#可达性分析法-根搜索算法" class="headerlink" title="可达性分析法(根搜索算法)"></a>可达性分析法(根搜索算法)</h3><p>可达性分析法的原理是，从根对象(GC Root)开始向下搜索，搜索走过的路径称为“引用链”，对象与引用链可以形成一个图，当任一个对象没有到根对象的引用链，即在这个图中该对象是不可达的，那么就判定这个对象是可以被回收的。</p>
-<p>Java语言使用如下几种GC Root对象：</p>
+<p>此时，<code>对象1</code>，<code>对象2</code>，<code>对象3</code> 都是不可达状态，理论上这三个对象都应该被回收，但是因为它们三个形成循环引用，引用计数器不为零，导致 GC 不会回收它们的空间。所以实际上，JVM 并没有采用这种判断方法。</p>
+<h3 id="可达性分析法-根搜索算法"><a href="#可达性分析法-根搜索算法" class="headerlink" title="可达性分析法(根搜索算法)"></a>可达性分析法 (根搜索算法)</h3><p>可达性分析法的原理是，从根对象 (GC Root) 开始向下搜索，搜索走过的路径称为 “引用链”，对象与引用链可以形成一个图，当任一个对象没有到根对象的引用链，即在这个图中该对象是不可达的，那么就判定这个对象是可以被回收的。</p>
+<p>Java 语言使用如下几种 GC Root 对象：</p>
 <blockquote>
 <ol>
-<li>虚拟机栈(栈帧中的本地变量表)中引用的对象</li>
+<li>虚拟机栈 (栈帧中的本地变量表) 中引用的对象</li>
 <li>方法区中静态属性引用的对象</li>
 <li>方法区中常量引用的对象</li>
-<li>本地方法栈中JNI引用的对象</li>
+<li>本地方法栈中 JNI 引用的对象</li>
 </ol>
 </blockquote>
 <p>还是用上面这个循环引用作为示例：</p>
 <p><img src="/images/java-gc-algorithms/circular-reference.png" alt="Circular reference"></p>
-<p>此时虽然<code>对象1</code>、<code>对象2</code>、<code>对象3</code>互相之间存在引用，但是从根对象开始无法找到到达它们的路径，即它们三个都是<code>不可达</code>的，也就是可以被回收的。</p>
+<p>此时虽然<code>对象1</code>、<code>对象2</code>、<code>对象3</code> 互相之间存在引用，但是从根对象开始无法找到到达它们的路径，即它们三个都是<code>不可达</code>的，也就是可以被回收的。</p>
 <h2 id="如何进行回收"><a href="#如何进行回收" class="headerlink" title="如何进行回收"></a>如何进行回收</h2><p>在根搜索算法的基础上，现代虚拟机中实现了三种算法：<code>标记-清除算法</code>，<code>复制算法</code>，<code>标记-整理算法</code>。</p>
-<h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>标记-清除算法把垃圾回收过程分成标记和清除两个阶段。在标记阶段，通过根节点标记所有可达的对象，也就是说，未被标记的对象都是不可达的对象。然后在清除阶段回收所有未被标记的对象。详细来说的话，就是当堆中的有效内存空间被耗尽时，就会停止整个程序(stop the world)，然后逐步开始标记和清除工作。</p>
-<p>标记的过程，实际上是遍历所有的GC Roots，并标记所有可达的对象。而清除的过程，则是遍历堆中所有的对象，并清除没有被标记的对象。</p>
+<h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记 - 清除算法</h3><p>标记 - 清除算法把垃圾回收过程分成标记和清除两个阶段。在标记阶段，通过根节点标记所有可达的对象，也就是说，未被标记的对象都是不可达的对象。然后在清除阶段回收所有未被标记的对象。详细来说的话，就是当堆中的有效内存空间被耗尽时，就会停止整个程序 (stop the world)，然后逐步开始标记和清除工作。</p>
+<p>标记的过程，实际上是遍历所有的 GC Roots，并标记所有可达的对象。而清除的过程，则是遍历堆中所有的对象，并清除没有被标记的对象。</p>
 <p>在回收过程中一定要停止程序运行的原因，是为了避免在标记完成而尚未开始清除时，有新的可达的对象被创建出来。一旦出现这种情况，因为新创建的对象没有被标记，所以在清除阶段这个对象又会被清除。如果停止了程序的运行，那么在清除过程中，对象的状态不会发生变化，也就不会发生前面说的这种问题。</p>
 <p>这个算法尽管可以有效的回收内存，但是也有两个比较大的缺点：</p>
 <ol>
 <li>遍历所有对象的效率比较低，导致程序停止运行的时间比较长</li>
-<li>这种方法清理出的内存空间是不连续的，会造成空闲空间碎片化，并会影响数组分配空间。同时为了得知哪些空间是可用的，JVM还需要额外维护内存闲置空间的信息。</li>
+<li>这种方法清理出的内存空间是不连续的，会造成空闲空间碎片化，并会影响数组分配空间。同时为了得知哪些空间是可用的，JVM 还需要额外维护内存闲置空间的信息。</li>
 </ol>
 <h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>复制算法的思想，是将原有的内存空间分成两部分，每次只使用其中一部分。在垃圾回收时，会从正在使用的部分中，将标记的对象复制到另一块内存中，然后清除正在使用的内存块，并交换两块内存的角色，来完成空间的回收。</p>
-<p>该算法比标记-清除算法的效率高，但是该算法不适合活动对象较多的场合，比如老年代空间。此外，该算法会造成一定程度的内存空间浪费，因为总是有一片内存空间是被闲置的。为了节省空间，考虑到新生代空间中的对象存活时间大多不会很长，所以虚拟机可以选择不将内存对半分，而是将内存分割成一块比较大的Eden空间和两块比较小的Survivor空间(<code>From Survivor</code>和<code>To Survivor</code>)，每次同时使用Eden和其中一个Survivor。比如HotSpot虚拟机默认为Eden分配80%的空间，为两个Survivor各分配10%的空间。</p>
-<p>Eden区，如其名字“伊甸园”一般，对象在被创建时，首先会放在这个区域；Survivor区，也如其名字“幸存者区”一样，存放的是每次垃圾回收后被保留下来的对象。</p>
-<p>在每次垃圾回收时，Eden区中不能被回收的对象，和From Survivor区中不能被回收的对象，都将被复制到To Survivor区中，然后回收Eden区和From Survivor区的空间，并且幸存下来的对象的age属性会加一，最后From Survivor和To Survivor两者的角色对调。如果发生Survivor空间不足以存放所有活动对象时，则会使用老年代来进行分配担保，大的对象会跳过Survivor区直接进入老年代。</p>
-<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><p>因为复制算法在活动对象较多时，会发生很多的复制操作，导致算法效率比较低，而老年代的特点就是活动的对象比较多。“标记-整理”算法就是为了应对这一情况而诞生的。</p>
-<p>标记-整理算法把垃圾回收过程分成标记和整理两个阶段。标记阶段的做法与“标记-清除”算法一样，遍历所有的GC Roots并标记出活动的对象；而在整理阶段，所有的活动对象都会向内存空间的一端移动(比如全部从内存空间的其实位置开始排列)，然后将边界以外的内存直接清理。</p>
+<p>该算法比标记 - 清除算法的效率高，但是该算法不适合活动对象较多的场合，比如老年代空间。此外，该算法会造成一定程度的内存空间浪费，因为总是有一片内存空间是被闲置的。为了节省空间，考虑到新生代空间中的对象存活时间大多不会很长，所以虚拟机可以选择不将内存对半分，而是将内存分割成一块比较大的 Eden 空间和两块比较小的 Survivor 空间 (<code>From Survivor</code> 和 <code>To Survivor</code>)，每次同时使用 Eden 和其中一个 Survivor。比如 HotSpot 虚拟机默认为 Eden 分配 80% 的空间，为两个 Survivor 各分配 10% 的空间。</p>
+<p>Eden 区，如其名字 “伊甸园” 一般，对象在被创建时，首先会放在这个区域；Survivor 区，也如其名字 “幸存者区” 一样，存放的是每次垃圾回收后被保留下来的对象。</p>
+<p>在每次垃圾回收时，Eden 区中不能被回收的对象，和 From Survivor 区中不能被回收的对象，都将被复制到 To Survivor 区中，然后回收 Eden 区和 From Survivor 区的空间，并且幸存下来的对象的 age 属性会加一，最后 From Survivor 和 To Survivor 两者的角色对调。如果发生 Survivor 空间不足以存放所有活动对象时，则会使用老年代来进行分配担保，大的对象会跳过 Survivor 区直接进入老年代。</p>
+<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记 - 整理算法</h3><p>因为复制算法在活动对象较多时，会发生很多的复制操作，导致算法效率比较低，而老年代的特点就是活动的对象比较多。“标记 - 整理” 算法就是为了应对这一情况而诞生的。</p>
+<p>标记 - 整理算法把垃圾回收过程分成标记和整理两个阶段。标记阶段的做法与 “标记 - 清除” 算法一样，遍历所有的 GC Roots 并标记出活动的对象；而在整理阶段，所有的活动对象都会向内存空间的一端移动 (比如全部从内存空间的其实位置开始排列)，然后将边界以外的内存直接清理。</p>
 <p>该算法的另一个优点是，因为该算法不会分割内存空间，而且每次回收后对象占用的空间肯定小于回收前所占用的空间，所以不再需要额外的空间进行分配担保。</p>
-<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>分代收集算法实际上就是根据不同内存空间的特性，一般是将堆分为新生代和老年代，并根据其各自的特点，在新生代使用复制算法回收，在老年代使用标记-整理算法回收。</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>分代收集算法实际上就是根据不同内存空间的特性，一般是将堆分为新生代和老年代，并根据其各自的特点，在新生代使用复制算法回收，在老年代使用标记 - 整理算法回收。</p>
 
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -361,60 +459,53 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/垃圾回收/" rel="tag"># 垃圾回收</a>
+              <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" rel="tag"># 垃圾回收</a>
               <a href="/tags/GC/" rel="tag"># GC</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html" rel="prev" title="JVM运行时的数据区域">
-      <i class="fa fa-chevron-left"></i> JVM运行时的数据区域
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/fundamentals/java-jvm-stack-frame.html" rel="next" title="JVM的栈帧">
-      JVM的栈帧 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html" rel="prev" title="JVM 运行时的数据区域">
+                  <i class="fa fa-chevron-left"></i> JVM 运行时的数据区域
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/fundamentals/java-jvm-stack-frame.html" rel="next" title="JVM 的栈帧">
+                  JVM 的栈帧 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -423,7 +514,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -432,121 +523,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#哪些内存需要回收"><span class="nav-number">1.</span> <span class="nav-text">哪些内存需要回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析法-根搜索算法"><span class="nav-number">1.2.</span> <span class="nav-text">可达性分析法(根搜索算法)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何进行回收"><span class="nav-number">2.</span> <span class="nav-text">如何进行回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清除算法"><span class="nav-number">2.1.</span> <span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制算法"><span class="nav-number">2.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">2.3.</span> <span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-number">2.4.</span> <span class="nav-text">分代收集算法</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -554,72 +543,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -628,36 +576,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

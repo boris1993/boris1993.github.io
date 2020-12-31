@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,33 +22,34 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。">
-<meta name="keywords" content="Java,Spring Boot">
+<meta name="description" content="在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring bean的作用域">
+<meta property="og:title" content="Spring bean 的作用域">
 <meta property="og:url" content="https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-10T06:45:28.597Z">
+<meta property="og:description" content="在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-22T03:00:12.000Z">
+<meta property="article:modified_time" content="2020-03-10T06:45:28.597Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring bean的作用域">
-<meta name="twitter:description" content="在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,9 +57,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>Spring bean的作用域 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Spring bean 的作用域 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -71,54 +72,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -132,17 +142,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -160,6 +164,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -175,13 +184,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -189,9 +197,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -199,6 +207,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">支持的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9Abean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">指定 bean 的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#singleton%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">singleton 作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">prototype 作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91singleton-bean%E6%B3%A8%E5%85%A5prototype-bean"><span class="nav-number">5.</span> <span class="nav-text">向 singleton bean 注入 prototype bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request%E3%80%81session%E3%80%81global-session%E3%80%81application%E5%92%8Cwebsocket%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">request、session、global session、application 和 websocket 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.1.</span> <span class="nav-text">request 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.2.</span> <span class="nav-text">session 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#globalSession%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.3.</span> <span class="nav-text">globalSession 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.4.</span> <span class="nav-text">application 作用域</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -207,19 +313,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,61 +342,49 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring bean的作用域
+          Spring bean 的作用域
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-22 11:00:12" itemprop="dateCreated datePublished" datetime="2020-02-22T11:00:12+08:00">2020-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-10 14:45:28" itemprop="dateModified" datetime="2020-03-10T14:45:28+08:00">2020-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/spring/java-spring-bean-scopes.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring bean的作用域" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/spring/java-spring-bean-scopes.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/spring/java-spring-bean-scopes.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-22 11:00:12" itemprop="dateCreated datePublished" datetime="2020-02-22T11:00:12+08:00">2020-02-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-03-10 14:45:28" itemprop="dateModified" datetime="2020-03-10T14:45:28+08:00">2020-03-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/spring/java-spring-bean-scopes.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring bean 的作用域" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -296,12 +393,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。</p>
 <a id="more"></a>
 
-<h2 id="支持的作用域"><a href="#支持的作用域" class="headerlink" title="支持的作用域"></a>支持的作用域</h2><p>我们先来看一下Spring支持哪些作用域。</p>
+<h2 id="支持的作用域"><a href="#支持的作用域" class="headerlink" title="支持的作用域"></a>支持的作用域</h2><p>我们先来看一下 Spring 支持哪些作用域。</p>
 <table>
 <thead>
 <tr>
@@ -310,68 +405,67 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="right">singleton</td>
-<td>在Spring容器中仅存在一个bean的实例，bean以单例形式存在。这是默认的作用域</td>
+<td align="right"> singleton</td>
+<td> 在 Spring 容器中仅存在一个 bean 的实例，bean 以单例形式存在。这是默认的作用域</td>
 </tr>
 <tr>
-<td align="right">prototype</td>
-<td>每次从容器中获取bean时，都将生成一个新的实例，即相当于每次都执行<code>new xxxBean()</code></td>
+<td align="right"> prototype</td>
+<td> 每次从容器中获取 bean 时，都将生成一个新的实例，即相当于每次都执行 <code>new xxxBean()</code></td>
 </tr>
 <tr>
 <td align="right">request</td>
-<td>在HTTP请求(request)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicatonContext</code>环境</td>
+<td> 在 HTTP 请求 (request) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicatonContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">session</td>
-<td>在HTTP会话(session)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td align="right"> session</td>
+<td> 在 HTTP 会话 (session) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">globalSession</td>
-<td>在全局的HTTP会话(session)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境，且通常只能用在<code>Portlet</code>环境中。</td>
+<td align="right"> globalSession</td>
+<td> 在全局的 HTTP 会话 (session) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境，且通常只能用在 <code>Portlet</code> 环境中。</td>
 </tr>
 <tr>
 <td align="right">application</td>
-<td>在<code>ServletContext</code>的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td> 在 <code>ServletContext</code> 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">websocket</td>
-<td>在<code>WebSocket</code>的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td align="right"> websocket</td>
+<td> 在 <code>WebSocket</code> 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 </tbody></table>
-<h2 id="指定bean的作用域"><a href="#指定bean的作用域" class="headerlink" title="指定bean的作用域"></a>指定bean的作用域</h2><p>要指定一个bean的作用域，我们可以通过XML的方式或注解的方式来设定。</p>
-<p>使用XML指定配置bean时，可以通过<code>scope</code>属性来指定作用域：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someBean"</span> <span class="attr">class</span>=<span class="string">"com.demo.SomeClass"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用注解方式配置bean时，可以通过<code>@Scope</code>注解来指定作用域：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope</span>(ConfigurableBeanFactory.SCOPE_SINGLETON)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，如果使用注解方式配置作用域，Spring也提供了一系列常量值来方便我们配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line">String SCOPE_SINGLETON = <span class="string">"singleton"</span>;</span><br><span class="line">String SCOPE_PROTOTYPE = <span class="string">"prototype"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line">String SCOPE_REQUEST = <span class="string">"request"</span>;</span><br><span class="line">String SCOPE_SESSION = <span class="string">"session"</span>;</span><br><span class="line">String SCOPE_APPLICATION = <span class="string">"application"</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="singleton作用域"><a href="#singleton作用域" class="headerlink" title="singleton作用域"></a>singleton作用域</h2><p><code>singleton</code>是Spring容器中的默认作用域。这个作用域下，容器中只创建各管理一个bean实例，实例存在于缓存中，并在后续对该bean的请求中都返回这个实例。</p>
-<h2 id="prototype作用域"><a href="#prototype作用域" class="headerlink" title="prototype作用域"></a>prototype作用域</h2><p>与<code>singleton</code>正相反，每次对<code>prototype</code>作用域的bean的请求，Spring都会生成一个新的实例，即类似我们手动使用<code>new XxxBean()</code>方式创建实例。</p>
-<p>需要注意的是，Spring不会完整的管理一个<code>prototype</code>的bean的生命周期。容器在初始化、配置，并将bean交由请求方(client)之后，就撒手不管了。也就是说，在销毁一个<code>prototype</code>的bean时，销毁bean的回调方法是不会被调用的，所以在销毁一个<code>prototype</code>的bean时，开发者必须手动释放它所使用的资源，或者可以尝试使用一个自定义的<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-extension-bpp" target="_blank" rel="noopener"><code>bean post-processor</code></a>来让Spring做这些事。</p>
-<p>对于有状态的bean，应当使用<code>prototype</code>作用域；对于无状态的bean，则应当使用<code>singleton</code>作用域。</p>
-<h2 id="向singleton-bean注入prototype-bean"><a href="#向singleton-bean注入prototype-bean" class="headerlink" title="向singleton bean注入prototype bean"></a>向singleton bean注入prototype bean</h2><p>因为bean的依赖关系在实例化bean时才会被解析，所以通常来说，我们不可以将一个prototype bean注入到一个singleton bean中。</p>
-<p>如果我们向一个singleton bean中注入一个prototype bean，因为这个singleton bean只会被实例化一次，使得它的依赖也只会被注入一次，最终导致它依赖的那个singleton bean也只存在一个实例。</p>
-<h2 id="request、session、global-session、application和websocket作用域"><a href="#request、session、global-session、application和websocket作用域" class="headerlink" title="request、session、global session、application和websocket作用域"></a>request、session、global session、application和websocket作用域</h2><p>这几种作用域只能用在<code>web-aware</code>的Spring上下文中，比如<code>XmlWebApplicationContext</code>。如果用在一般的IoC容器中，比如<code>ClassPathXmlApplicationContext</code>中，那么容器会抛出一个<code>IllegalStateException</code>。</p>
-<p>要使用这几个作用域，你可能需要对你的应用进行一些配置。因为这些内容与本文无关，所以在这里就不详细说明了。感兴趣的话可以看<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcy1vdGhlci13ZWItY29uZmlndXJhdGlvbg==">Spring参考手册中的内容<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>注：<code>web-aware</code>这个词，我也不知道怎么翻译才合适。查阅了一些资料之后，感觉一个<code>web-aware</code>的Spring应用就是一个运行在web容器(比如Tomcat)中的应用，因为上面提到的这些作用域也是与web应用相关的。如果有好的理解，请一定在留言区写下来让在下知道。</p>
-<h3 id="request作用域"><a href="#request作用域" class="headerlink" title="request作用域"></a>request作用域</h3><p><code>request</code>作用域下的bean，在每次HTTP请求中，都会创建一个新的实例。当请求完成时，对应的bean就会被销毁。对一个实例的任何更改，对其他的所有实例来说都是不可见的。</p>
-<h3 id="session作用域"><a href="#session作用域" class="headerlink" title="session作用域"></a>session作用域</h3><p><code>session</code>作用域下的bean，在每个活动的HTTP会话中，都有一个独自的实例，而当会话结束后，对应的bean就会被销毁。对一个实例的任何更改，对其他所有的实例来说都是不可见的。</p>
-<h3 id="globalSession作用域"><a href="#globalSession作用域" class="headerlink" title="globalSession作用域"></a>globalSession作用域</h3><p>这个作用域只能用在<code>portlet</code>应用中。一个<code>portlet</code>站点中可能有多个<code>portlet</code>应用，而它们相关的session中都会共享同一个<code>globalSession</code>作用域的bean。</p>
-<p>注：其实我也不知道<code>portlet</code>到底是个啥，就算看过维基百科的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmF2YV9Qb3J0bGV0X1NwZWNpZmljYXRpb24=">Portlet条目<i class="fa fa-external-link-alt"></i></span>也没看明白。</p>
-<h3 id="application作用域"><a href="#application作用域" class="headerlink" title="application作用域"></a>application作用域</h3><p>在整个应用范围内，容器为每个web应用程序运行时创建一个实例。这个作用域与<code>singleton</code>很类似，但是还是有两个不同点：</p>
+<h2 id="指定bean的作用域"><a href="#指定bean的作用域" class="headerlink" title="指定bean的作用域"></a>指定 bean 的作用域</h2><p>要指定一个 bean 的作用域，我们可以通过 XML 的方式或注解的方式来设定。</p>
+<p>使用 XML 指定配置 bean 时，可以通过 <code>scope</code> 属性来指定作用域：</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someBean"</span> <span class="attr">class</span>=<span class="string">"com.demo.SomeClass"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>/&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>使用注解方式配置 bean 时，可以通过 <code>@Scope</code> 注解来指定作用域：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>{</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>此外，如果使用注解方式配置作用域，Spring 也提供了一系列常量值来方便我们配置：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line">String SCOPE_SINGLETON = <span class="string">"singleton"</span>;</span><br><span class="line">String SCOPE_PROTOTYPE = <span class="string">"prototype"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line">String SCOPE_REQUEST = <span class="string">"request"</span>;</span><br><span class="line">String SCOPE_SESSION = <span class="string">"session"</span>;</span><br><span class="line">String SCOPE_APPLICATION = <span class="string">"application"</span>;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="singleton作用域"><a href="#singleton作用域" class="headerlink" title="singleton作用域"></a>singleton 作用域</h2><p><code>singleton</code> 是 Spring 容器中的默认作用域。这个作用域下，容器中只创建各管理一个 bean 实例，实例存在于缓存中，并在后续对该 bean 的请求中都返回这个实例。</p>
+<h2 id="prototype作用域"><a href="#prototype作用域" class="headerlink" title="prototype作用域"></a>prototype 作用域</h2><p>与 <code>singleton</code> 正相反，每次对 <code>prototype</code> 作用域的 bean 的请求，Spring 都会生成一个新的实例，即类似我们手动使用 <code>new XxxBean()</code> 方式创建实例。</p>
+<p>需要注意的是，Spring 不会完整的管理一个 <code>prototype</code> 的 bean 的生命周期。容器在初始化、配置，并将 bean 交由请求方 (client) 之后，就撒手不管了。也就是说，在销毁一个 <code>prototype</code> 的 bean 时，销毁 bean 的回调方法是不会被调用的，所以在销毁一个 <code>prototype</code> 的 bean 时，开发者必须手动释放它所使用的资源，或者可以尝试使用一个自定义的 <a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-extension-bpp"><code>bean post-processor</code></a>来让 Spring 做这些事。</p>
+<p>对于有状态的 bean，应当使用 <code>prototype</code> 作用域；对于无状态的 bean，则应当使用 <code>singleton</code> 作用域。</p>
+<h2 id="向singleton-bean注入prototype-bean"><a href="#向singleton-bean注入prototype-bean" class="headerlink" title="向singleton bean注入prototype bean"></a>向 singleton bean 注入 prototype bean</h2><p>因为 bean 的依赖关系在实例化 bean 时才会被解析，所以通常来说，我们不可以将一个 prototype bean 注入到一个 singleton bean 中。</p>
+<p>如果我们向一个 singleton bean 中注入一个 prototype bean，因为这个 singleton bean 只会被实例化一次，使得它的依赖也只会被注入一次，最终导致它依赖的那个 singleton bean 也只存在一个实例。</p>
+<h2 id="request、session、global-session、application和websocket作用域"><a href="#request、session、global-session、application和websocket作用域" class="headerlink" title="request、session、global session、application和websocket作用域"></a>request、session、global session、application 和 websocket 作用域</h2><p>这几种作用域只能用在 <code>web-aware</code> 的 Spring 上下文中，比如 <code>XmlWebApplicationContext</code>。如果用在一般的 IoC 容器中，比如 <code>ClassPathXmlApplicationContext</code> 中，那么容器会抛出一个 <code>IllegalStateException</code>。</p>
+<p>要使用这几个作用域，你可能需要对你的应用进行一些配置。因为这些内容与本文无关，所以在这里就不详细说明了。感兴趣的话可以看<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcy1vdGhlci13ZWItY29uZmlndXJhdGlvbg=="> Spring 参考手册中的内容<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>注：<code>web-aware</code> 这个词，我也不知道怎么翻译才合适。查阅了一些资料之后，感觉一个 <code>web-aware</code> 的 Spring 应用就是一个运行在 web 容器 (比如 Tomcat) 中的应用，因为上面提到的这些作用域也是与 web 应用相关的。如果有好的理解，请一定在留言区写下来让在下知道。</p>
+<h3 id="request作用域"><a href="#request作用域" class="headerlink" title="request作用域"></a>request 作用域</h3><p><code>request</code> 作用域下的 bean，在每次 HTTP 请求中，都会创建一个新的实例。当请求完成时，对应的 bean 就会被销毁。对一个实例的任何更改，对其他的所有实例来说都是不可见的。</p>
+<h3 id="session作用域"><a href="#session作用域" class="headerlink" title="session作用域"></a>session 作用域</h3><p><code>session</code> 作用域下的 bean，在每个活动的 HTTP 会话中，都有一个独自的实例，而当会话结束后，对应的 bean 就会被销毁。对一个实例的任何更改，对其他所有的实例来说都是不可见的。</p>
+<h3 id="globalSession作用域"><a href="#globalSession作用域" class="headerlink" title="globalSession作用域"></a>globalSession 作用域</h3><p>这个作用域只能用在 <code>portlet</code> 应用中。一个 <code>portlet</code> 站点中可能有多个 <code>portlet</code> 应用，而它们相关的 session 中都会共享同一个 <code>globalSession</code> 作用域的 bean。</p>
+<p>注：其实我也不知道 <code>portlet</code> 到底是个啥，就算看过维基百科的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmF2YV9Qb3J0bGV0X1NwZWNpZmljYXRpb24="> Portlet 条目<i class="fa fa-external-link-alt"></i></span>也没看明白。</p>
+<h3 id="application作用域"><a href="#application作用域" class="headerlink" title="application作用域"></a>application 作用域</h3><p>在整个应用范围内，容器为每个 web 应用程序运行时创建一个实例。这个作用域与 <code>singleton</code> 很类似，但是还是有两个不同点：</p>
 <ul>
-<li>在不同<code>ServletContext</code>中有不同的bean单例对象；singleton作用域的bean是每个<code>ApplicationContext</code>的单例对象。而一个应用可能有多个<code>ApplicationContext</code></li>
-<li>bean作为<code>ServletContext</code>属性可见</li>
+<li>在不同 <code>ServletContext</code> 中有不同的 bean 单例对象；singleton 作用域的 bean 是每个 <code>ApplicationContext</code> 的单例对象。而一个应用可能有多个 <code>ApplicationContext</code></li>
+<li>bean 作为 <code>ServletContext</code> 属性可见</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcw==">Bean Scopes - The IoC container<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFkMTQ1NWYyNjVkYTViNjAwNmZhNmE=">Spring系列四：Bean Scopes作用域<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ljYXJ1c193YW5nL2FydGljbGUvZGV0YWlscy81MTU4Njc3Ng==">Spring学习（十五）Spring Bean 的5种作用域介绍<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcw==">Bean Scopes - The IoC container<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFkMTQ1NWYyNjVkYTViNjAwNmZhNmE=">Spring 系列四：Bean Scopes 作用域<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ljYXJ1c193YW5nL2FydGljbGUvZGV0YWlscy81MTU4Njc3Ng==">Spring 学习（十五）Spring Bean 的 5 种作用域介绍<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -381,28 +475,24 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
@@ -410,30 +500,27 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/spring/java-spring-autoconfiguration.html" rel="prev" title="Spring Boot 自动配置的原理">
-      <i class="fa fa-chevron-left"></i> Spring Boot 自动配置的原理
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/fundamentals/java-inner-class-and-private-identifier.html" rel="next" title="Java的内部类和private修饰符">
-      Java的内部类和private修饰符 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/spring/java-spring-autoconfiguration.html" rel="prev" title="Spring Boot 自动配置的原理">
+                  <i class="fa fa-chevron-left"></i> Spring Boot 自动配置的原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/fundamentals/java-inner-class-and-private-identifier.html" rel="next" title="Java 的内部类和 private 修饰符">
+                  Java 的内部类和 private 修饰符 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -442,7 +529,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -451,121 +538,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#支持的作用域"><span class="nav-number">1.</span> <span class="nav-text">支持的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定bean的作用域"><span class="nav-number">2.</span> <span class="nav-text">指定bean的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#singleton作用域"><span class="nav-number">3.</span> <span class="nav-text">singleton作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype作用域"><span class="nav-number">4.</span> <span class="nav-text">prototype作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向singleton-bean注入prototype-bean"><span class="nav-number">5.</span> <span class="nav-text">向singleton bean注入prototype bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request、session、global-session、application和websocket作用域"><span class="nav-number">6.</span> <span class="nav-text">request、session、global session、application和websocket作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request作用域"><span class="nav-number">6.1.</span> <span class="nav-text">request作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session作用域"><span class="nav-number">6.2.</span> <span class="nav-text">session作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#globalSession作用域"><span class="nav-number">6.3.</span> <span class="nav-text">globalSession作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application作用域"><span class="nav-number">6.4.</span> <span class="nav-text">application作用域</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -573,72 +558,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -647,36 +591,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

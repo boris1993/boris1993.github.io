@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,36 +22,38 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种“用爱发电”的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入Google AdSense。 在使用本文介绍的方法前，请检查您的NexT主题版本是否为v6.0.2或后续版本，因为本文涉及的功能是在v6.0.2引入的。">
-<meta name="keywords" content="hexo,NexT,adsense">
+<meta name="description" content="这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。 在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 v6.0.2 或后续版本，因为本文涉及的功能是在 v6.0.2 引入的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在NexT主题中接入Google AdSense">
+<meta property="og:title" content="在 NexT 主题中接入 Google AdSense">
 <meta property="og:url" content="https://www.boris1993.com/others/hexo-next-enable-google-adsense.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种“用爱发电”的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入Google AdSense。 在使用本文介绍的方法前，请检查您的NexT主题版本是否为v6.0.2或后续版本，因为本文涉及的功能是在v6.0.2引入的。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。 在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 v6.0.2 或后续版本，因为本文涉及的功能是在 v6.0.2 引入的。">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.boris1993.com/images/hexo-next-enable-google-adsense/adsense-conf-ad-module.png">
 <meta property="og:image" content="https://www.boris1993.com/images/hexo-next-enable-google-adsense/adsense-conf-ad-module-sidebar.png">
-<meta property="og:updated_time" content="2020-08-30T10:52:19.177Z">
+<meta property="article:published_time" content="2020-04-05T06:58:01.000Z">
+<meta property="article:modified_time" content="2020-08-30T10:52:19.177Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="NexT">
+<meta property="article:tag" content="adsense">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在NexT主题中接入Google AdSense">
-<meta name="twitter:description" content="这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种“用爱发电”的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入Google AdSense。 在使用本文介绍的方法前，请检查您的NexT主题版本是否为v6.0.2或后续版本，因为本文涉及的功能是在v6.0.2引入的。">
 <meta name="twitter:image" content="https://www.boris1993.com/images/hexo-next-enable-google-adsense/adsense-conf-ad-module.png">
+
 
 <link rel="canonical" href="https://www.boris1993.com/others/hexo-next-enable-google-adsense.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -58,9 +61,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>在NexT主题中接入Google AdSense | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>在 NexT 主题中接入 Google AdSense | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -74,54 +76,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -135,17 +146,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -163,6 +168,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -178,13 +188,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -192,9 +201,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -202,6 +211,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CGoogle-AdSense"><span class="nav-number">1.</span> <span class="nav-text">注册 Google AdSense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0AdSense%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">添加 AdSense 代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%B9%BF%E5%91%8A%E6%A8%A1%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">配置广告模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%B9%BF%E5%91%8A%E6%A8%A1%E5%9D%97"><span class="nav-number">3.1.</span> <span class="nav-text">添加广告模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">配置博客页面</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -210,19 +317,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/others/hexo-next-enable-google-adsense.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -236,57 +346,45 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在NexT主题中接入Google AdSense
+          在 NexT 主题中接入 Google AdSense
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-05 14:58:01" itemprop="dateCreated datePublished" datetime="2020-04-05T14:58:01+08:00">2020-04-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/others/hexo-next-enable-google-adsense.html" class="post-meta-item leancloud_visitors" data-flag-title="在NexT主题中接入Google AdSense" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/others/hexo-next-enable-google-adsense.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/others/hexo-next-enable-google-adsense.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-05 14:58:01" itemprop="dateCreated datePublished" datetime="2020-04-05T14:58:01+08:00">2020-04-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/others/hexo-next-enable-google-adsense.html" class="post-meta-item leancloud_visitors" data-flag-title="在 NexT 主题中接入 Google AdSense" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -295,55 +393,50 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种“用爱发电”的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入Google AdSense。</p>
-<p>在使用本文介绍的方法前，请检查您的NexT主题版本是否为<code>v6.0.2</code>或后续版本，因为本文涉及的功能是在<code>v6.0.2</code>引入的。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。</p>
+<p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 <code>v6.0.2</code> 或后续版本，因为本文涉及的功能是在 <code>v6.0.2</code> 引入的。</p>
 <a id="more"></a>
 
-<p>虽然网上已经有很多类似的博文了，我为什么还要再写一篇呢？主要是因为，很多文章在添加认证代码的时候，都是直接修改<code>themes/next/layout/_partials/head.swig</code>或者<code>themes/next/layout/_custom/google_adsense.ejs</code>等位置，说白了就是在NexT主题所在的目录动手了，而我并不喜欢这种侵入性强的操作。经过一点简单的搜索，我发现是可以通过数据文件来实现非侵入性的修改的，所以就想讲一下我的做法。<del>当然借此机会还能水一篇博文何乐而不为 /滑稽</del></p>
+<p>虽然网上已经有很多类似的博文了，我为什么还要再写一篇呢？主要是因为，很多文章在添加认证代码的时候，都是直接修改 <code>themes/next/layout/_partials/head.swig</code> 或者 <code>themes/next/layout/_custom/google_adsense.ejs</code> 等位置，说白了就是在 NexT 主题所在的目录动手了，而我并不喜欢这种侵入性强的操作。经过一点简单的搜索，我发现是可以通过数据文件来实现非侵入性的修改的，所以就想讲一下我的做法。<del>当然借此机会还能水一篇博文何乐而不为 / 滑稽</del></p>
 <p>那么言归正传，一起来看一下我是怎么配置的吧。</p>
-<h2 id="注册Google-AdSense"><a href="#注册Google-AdSense" class="headerlink" title="注册Google AdSense"></a>注册Google AdSense</h2><p>要接入AdSense，那当然要有一个AdSense的账户。进入<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNuL2Fkc2Vuc2Uvc3RhcnQv">Google AdSense<i class="fa fa-external-link-alt"></i></span>主页，点击“开始使用”，跟随页面提示填好各项信息，这部分操作很简单，就不多废话了。</p>
-<p>但是这里可能有一个坑，就是我只能接入一个裸域名，不知道是我的问题还是AdSense就是这么要求的。我的博客地址是<code>https://www.boris1993.com</code>，但是在页面上输入网站地址之后，AdSense会把<code>www</code>这个二级域名去掉，变成裸域名<code>https://boris1993.com</code>，所以我只好把裸域名也关联到了我的博客站上。你们在配置的时候，记得注意一下这个地方。如果你知道具体的原因，或者解决方案，那么也请不吝赐教，在留言区告诉我。</p>
-<h2 id="添加AdSense代码"><a href="#添加AdSense代码" class="headerlink" title="添加AdSense代码"></a>添加AdSense代码</h2><p>在注册完成后，AdSense会给你一串代码，并要求你把这串代码放在<code>&lt;head&gt;&lt;/head&gt;</code>标记中。注意这里就是我跟他们不一样的地方了。</p>
-<p>同时再次提醒确认你的NexT主题的版本是不是<code>v6.0.2</code>或后续版本。如果不是的话，你要么考虑升级，要么可以点❌关闭了。</p>
-<p>首先，我们需要在主题配置文件中指定自定义layout文件的位置。当然，这步也是在数据文件中操作的。什么？你还没有用数据文件这个功能？那你赶紧学习并且用起来吧，省的每次更新主题还要担心丢配置。</p>
-<p>在<code>source/_data/next.yml</code>中增加如下配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置的原文可以在themes/next/_config.yml的24行找到(针对v7.5.0)</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment"># 因为我们只需要自定义head部分，所以就只配置head这一个属性，其他都保持默认</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.swig</span></span><br></pre></td></tr></table></figure>
-
-<p>指定好<code>head.swig</code>的位置之后，我们继续在<code>source/_data</code>中创建<code>head.swig</code>文件，并把AdSense给我们的那串代码放在<code>head.swig</code>里面，就像这样：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-ad-client</span>=<span class="string">"██████████"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后可以重新启动一下本地的Hexo环境，检查<code>&lt;head&gt;&lt;/head&gt;</code>标记中有没有出现刚才添加的代码。检查没有问题之后，就可以部署到生产环境使上面的修改生效了。为了保险起见，在生产环境上也要检查一下<code>&lt;head&gt;&lt;/head&gt;</code>标记中有没有出现刚才添加的代码。确认没有问题之后，就可以回到AdSense页面中点击验证按钮了。</p>
-<p>注意，如果AdSense告诉你检查不通过，你一定不要频繁点击再次检查，一定要先确定检查不通过的原因，并在排除问题之后再重新检查，因为每天检查次数是有限制的，如果超过限制，就只能等24小时之后再检查了<del>（别问我是怎么知道的</del>。</p>
-<p>然后AdSense会开始审核阶段，这期间我们静静等待审核结果的邮件就好了。</p>
-<p><del>因为在写这篇博文的时候，我也在等AdSense审核，所以这篇文章暂且先告一段落，等有了结果我再更新后面的内容。</del></p>
-<p>等了这么久，终于收到Google的邮件说我通过了审核，可以开始投放广告了。那么，我们也可以开始继续完成后面的工作了。</p>
-<h2 id="配置广告模块"><a href="#配置广告模块" class="headerlink" title="配置广告模块"></a>配置广告模块</h2><p>进入AdSense管理后台之后，进入侧边栏的<code>广告 -&gt; 概览</code>。在这里我们可以配置广告会在什么位置展示了。</p>
+<h2 id="注册Google-AdSense"><a href="#注册Google-AdSense" class="headerlink" title="注册Google AdSense"></a>注册 Google AdSense</h2><p>要接入 AdSense，那当然要有一个 AdSense 的账户。进入<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNuL2Fkc2Vuc2Uvc3RhcnQv"> Google AdSense<i class="fa fa-external-link-alt"></i></span>主页，点击 “开始使用”，跟随页面提示填好各项信息，这部分操作很简单，就不多废话了。</p>
+<p>但是这里可能有一个坑，就是我只能接入一个裸域名，不知道是我的问题还是 AdSense 就是这么要求的。我的博客地址是 <code>https://www.boris1993.com</code>，但是在页面上输入网站地址之后，AdSense 会把 <code>www</code> 这个二级域名去掉，变成裸域名 <code>https://boris1993.com</code>，所以我只好把裸域名也关联到了我的博客站上。你们在配置的时候，记得注意一下这个地方。如果你知道具体的原因，或者解决方案，那么也请不吝赐教，在留言区告诉我。</p>
+<h2 id="添加AdSense代码"><a href="#添加AdSense代码" class="headerlink" title="添加AdSense代码"></a>添加 AdSense 代码</h2><p>在注册完成后，AdSense 会给你一串代码，并要求你把这串代码放在 <code>&lt;head&gt;&lt;/head&gt;</code> 标记中。注意这里就是我跟他们不一样的地方了。</p>
+<p>同时再次提醒确认你的 NexT 主题的版本是不是 <code>v6.0.2</code> 或后续版本。如果不是的话，你要么考虑升级，要么可以点❌关闭了。</p>
+<p>首先，我们需要在主题配置文件中指定自定义 layout 文件的位置。当然，这步也是在数据文件中操作的。什么？你还没有用数据文件这个功能？那你赶紧学习并且用起来吧，省的每次更新主题还要担心丢配置。</p>
+<p>在 <code>source/_data/next.yml</code> 中增加如下配置：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置的原文可以在themes/next/_config.yml的24行找到(针对v7.5.0)</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment"># 因为我们只需要自定义head部分，所以就只配置head这一个属性，其他都保持默认</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.swig</span></span><br></pre></td></tr></tbody></table></figure>
+<p>指定好 <code>head.swig</code> 的位置之后，我们继续在 <code>source/_data</code> 中创建 <code>head.swig</code> 文件，并把 AdSense 给我们的那串代码放在 <code>head.swig</code> 里面，就像这样：</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-ad-client</span>=<span class="string">"██████████"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后可以重新启动一下本地的 Hexo 环境，检查 <code>&lt;head&gt;&lt;/head&gt;</code> 标记中有没有出现刚才添加的代码。检查没有问题之后，就可以部署到生产环境使上面的修改生效了。为了保险起见，在生产环境上也要检查一下 <code>&lt;head&gt;&lt;/head&gt;</code> 标记中有没有出现刚才添加的代码。确认没有问题之后，就可以回到 AdSense 页面中点击验证按钮了。</p>
+<p>注意，如果 AdSense 告诉你检查不通过，你一定不要频繁点击再次检查，一定要先确定检查不通过的原因，并在排除问题之后再重新检查，因为每天检查次数是有限制的，如果超过限制，就只能等 24 小时之后再检查了<del>（别问我是怎么知道的</del>。</p>
+<p>然后 AdSense 会开始审核阶段，这期间我们静静等待审核结果的邮件就好了。</p>
+<p><del>因为在写这篇博文的时候，我也在等 AdSense 审核，所以这篇文章暂且先告一段落，等有了结果我再更新后面的内容。</del></p>
+<p>等了这么久，终于收到 Google 的邮件说我通过了审核，可以开始投放广告了。那么，我们也可以开始继续完成后面的工作了。</p>
+<h2 id="配置广告模块"><a href="#配置广告模块" class="headerlink" title="配置广告模块"></a>配置广告模块</h2><p>进入 AdSense 管理后台之后，进入侧边栏的<code>广告 -&gt; 概览</code>。在这里我们可以配置广告会在什么位置展示了。</p>
 <p>因为我并不希望让我的网站满地都是广告，而影响正常内容的展示，而是，只在首页左侧边栏最下面，和在每篇博文结束的位置，各放置一个广告。所以我就需要到<code>按广告单元</code>这个页面手动配置两个广告模块。在这个截图里我们可以看到已经有了两个广告模块，那是因为我已经配置好了。</p>
 <p><img src="/images/hexo-next-enable-google-adsense/adsense-conf-ad-module.png" alt="Configuring ad modules"></p>
-<h3 id="添加广告模块"><a href="#添加广告模块" class="headerlink" title="添加广告模块"></a>添加广告模块</h3><p>点击<code>展示广告</code>按钮来新建一个类型为<code>展示</code>的广告。在顶部文本框填入广告模块的名字，比如<code>side ad</code>，然后在右边栏选择广告的尺寸，是自适应的，还是固定长宽的。如果是自适应尺寸，那么还需要选择广告的大致形状。配置完毕后，点击<code>保存</code>按钮，一个广告模块就配置好了。</p>
+<h3 id="添加广告模块"><a href="#添加广告模块" class="headerlink" title="添加广告模块"></a>添加广告模块</h3><p>点击<code>展示广告</code>按钮来新建一个类型为<code>展示</code>的广告。在顶部文本框填入广告模块的名字，比如 <code>side ad</code>，然后在右边栏选择广告的尺寸，是自适应的，还是固定长宽的。如果是自适应尺寸，那么还需要选择广告的大致形状。配置完毕后，点击<code>保存</code>按钮，一个广告模块就配置好了。</p>
 <p><img src="/images/hexo-next-enable-google-adsense/adsense-conf-ad-module-sidebar.png" alt="Sidebar ad module"></p>
-<p>按照同样的操作，继续添加一个名为<code>bottom ad</code>的展示广告。这样，我们就添加好了两个广告模块。</p>
+<p>按照同样的操作，继续添加一个名为 <code>bottom ad</code> 的展示广告。这样，我们就添加好了两个广告模块。</p>
 <h3 id="配置博客页面"><a href="#配置博客页面" class="headerlink" title="配置博客页面"></a>配置博客页面</h3><p>广告模块是创建好了，但是我们还需要配置广告展示的位置。这里我依旧使用数据文件功能，来实现非侵入性的修改。</p>
-<p>首先，在<code>source/_data/</code>目录新建两个文件，分别命名为<code>sidebar.swig</code>和<code>post-body-end.swig</code>，分别用来存放侧边栏广告和文章底部广告的代码。</p>
-<p>还记得刚才添加完广告模块之后弹出的那一片代码吗？把它们原样默写到这两个文件里就好啦。开玩笑的，谁记得住那一大堆东西啊。回到<code>按广告单元</code>这个页面，在刚才添加的广告单元那里，有一个形似<code>&lt;&gt;</code>的按钮，点击它，就可以看到这个广告单元的配置代码了。</p>
-<p>把<code>side ad</code>的代码复制到<code>sidebar.swig</code>中，来把这个侧边栏广告真正的放到侧边栏上。比如我的广告代码是这样的：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- side ad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"████████████████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"██████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">     // 因为直接执行AdSense的代码会出现 No slot size for availableWidth=0 的错误</span><br><span class="line">     // 并且这个广告位会无法正常展示</span><br><span class="line">     // 所以加一个 event listener，在页面加载完毕之后再执行</span><br><span class="line">     // 参考：https://stackoverflow.com/a/37822404/3833858</span><br><span class="line">     window.addEventListener('load', function() &#123;</span><br><span class="line">          (adsbygoogle = window.adsbygoogle || []).push(&#123;&#125;);</span><br><span class="line">     &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后把<code>bottom ad</code>的代码复制到<code>post-body-end.swig</code>，来把这个广告放到文章底部。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bottom ad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"████████████████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"██████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">     (adsbygoogle = window.adsbygoogle || []).push(&#123;&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>接下来继续修改<code>source/_data/next.yml</code>中<code>custom_file_path</code>的配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.swig</span></span><br><span class="line">  <span class="comment"># 加入下面两行</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="string">source/_data/sidebar.swig</span> <span class="comment"># 侧边栏广告</span></span><br><span class="line">  <span class="attr">postBodyEnd:</span> <span class="string">source/_data/post-body-end.swig</span> <span class="comment"># 博文末尾广告</span></span><br></pre></td></tr></table></figure>
-
+<p>首先，在 <code>source/_data/</code> 目录新建两个文件，分别命名为 <code>sidebar.swig</code> 和 <code>post-body-end.swig</code>，分别用来存放侧边栏广告和文章底部广告的代码。</p>
+<p>还记得刚才添加完广告模块之后弹出的那一片代码吗？把它们原样默写到这两个文件里就好啦。开玩笑的，谁记得住那一大堆东西啊。回到<code>按广告单元</code>这个页面，在刚才添加的广告单元那里，有一个形似 <code>&lt;&gt;</code> 的按钮，点击它，就可以看到这个广告单元的配置代码了。</p>
+<p>把 <code>side ad</code> 的代码复制到 <code>sidebar.swig</code> 中，来把这个侧边栏广告真正的放到侧边栏上。比如我的广告代码是这样的：</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- side ad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"████████████████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"██████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">     <span class="comment">// 因为直接执行AdSense的代码会出现 No slot size for availableWidth=0 的错误</span></span></span><br><span class="line"><span class="javascript">     <span class="comment">// 并且这个广告位会无法正常展示</span></span></span><br><span class="line"><span class="javascript">     <span class="comment">// 所以加一个 event listener，在页面加载完毕之后再执行</span></span></span><br><span class="line"><span class="javascript">     <span class="comment">// 参考：https://stackoverflow.com/a/37822404/3833858</span></span></span><br><span class="line"><span class="javascript">     <span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span></span><br><span class="line"><span class="javascript">          (adsbygoogle = <span class="built_in">window</span>.adsbygoogle || []).push({});</span></span><br><span class="line">     });</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后把 <code>bottom ad</code> 的代码复制到 <code>post-body-end.swig</code>，来把这个广告放到文章底部。</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bottom ad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"████████████████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"██████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">     (adsbygoogle = <span class="built_in">window</span>.adsbygoogle || []).push({});</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>接下来继续修改 <code>source/_data/next.yml</code> 中 <code>custom_file_path</code> 的配置：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.swig</span></span><br><span class="line">  <span class="comment"># 加入下面两行</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="string">source/_data/sidebar.swig</span> <span class="comment"># 侧边栏广告</span></span><br><span class="line">  <span class="attr">postBodyEnd:</span> <span class="string">source/_data/post-body-end.swig</span> <span class="comment"># 博文末尾广告</span></span><br></pre></td></tr></tbody></table></figure>
 <p>这样，广告就放置好了。接下来，把博客发布上去，就可以开始打广告了。</p>
 
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -353,28 +446,24 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/hexo/" rel="tag"># hexo</a>
               <a href="/tags/NexT/" rel="tag"># NexT</a>
@@ -383,30 +472,27 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html" rel="prev" title="解决Maven的unable to find valid certification path to requested target错误">
-      <i class="fa fa-chevron-left"></i> 解决Maven的unable to find valid certification path to requested target错误
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html" rel="next" title="在Spring中通过配置类注入配置文件的值">
-      在Spring中通过配置类注入配置文件的值 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html" rel="prev" title="解决 Maven 的 unable to find valid certification path to requested target 错误">
+                  <i class="fa fa-chevron-left"></i> 解决 Maven 的 unable to find valid certification path to requested target 错误
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html" rel="next" title="在 Spring 中通过配置类注入配置文件的值">
+                  在 Spring 中通过配置类注入配置文件的值 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -415,7 +501,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -424,121 +510,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册Google-AdSense"><span class="nav-number">1.</span> <span class="nav-text">注册Google AdSense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加AdSense代码"><span class="nav-number">2.</span> <span class="nav-text">添加AdSense代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置广告模块"><span class="nav-number">3.</span> <span class="nav-text">配置广告模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加广告模块"><span class="nav-number">3.1.</span> <span class="nav-text">添加广告模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置博客页面"><span class="nav-number">3.2.</span> <span class="nav-text">配置博客页面</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -546,72 +530,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -620,36 +563,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

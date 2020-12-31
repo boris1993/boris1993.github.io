@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,37 +22,38 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。 这篇博文将演示如何使用cookie和session进行会话追踪。">
-<meta name="keywords" content="Java,Servlet">
+<meta name="description" content="Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。 这篇博文将演示如何使用 cookie 和 session 进行会话追踪。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="循序渐进写一个Servlet(4) - 会话追踪">
+<meta property="og:title" content="循序渐进写一个 Servlet (4) - 会话追踪">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。 这篇博文将演示如何使用cookie和session进行会话追踪。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。 这篇博文将演示如何使用 cookie 和 session 进行会话追踪。">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.boris1993.com/images/java-servlet-4-session-tracking/post-request-with-cookie.png">
 <meta property="og:image" content="https://www.boris1993.com/images/java-servlet-4-session-tracking/get-request-with-cookie.png">
 <meta property="og:image" content="https://www.boris1993.com/images/java-servlet-4-session-tracking/get-request-with-session-attribute.png">
-<meta property="og:updated_time" content="2020-08-30T10:52:19.190Z">
+<meta property="article:published_time" content="2019-03-12T03:26:11.000Z">
+<meta property="article:modified_time" content="2020-08-30T10:52:19.190Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Servlet">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="循序渐进写一个Servlet(4) - 会话追踪">
-<meta name="twitter:description" content="Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。 这篇博文将演示如何使用cookie和session进行会话追踪。">
 <meta name="twitter:image" content="https://www.boris1993.com/images/java-servlet-4-session-tracking/post-request-with-cookie.png">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -59,9 +61,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>循序渐进写一个Servlet(4) - 会话追踪 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>循序渐进写一个 Servlet (4) - 会话追踪 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -75,54 +76,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -136,17 +146,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -164,6 +168,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -179,13 +188,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -193,9 +201,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -203,6 +211,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie"><span class="nav-number">1.</span> <span class="nav-text">Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFcookie"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98cookie"><span class="nav-number">1.2.</span> <span class="nav-text">保存 cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8cookie"><span class="nav-number">1.3.</span> <span class="nav-text">使用 cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4cookie"><span class="nav-number">1.4.</span> <span class="nav-text">删除 cookie</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HttpSession"><span class="nav-number">2.</span> <span class="nav-text">HttpSession</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFsession"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98attribute"><span class="nav-number">2.2.</span> <span class="nav-text">保存 attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E5%87%BAattribute"><span class="nav-number">2.3.</span> <span class="nav-text">取出 attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4attribute"><span class="nav-number">2.4.</span> <span class="nav-text">删除 attribute</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E5%88%97%E5%8D%9A%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">系列博文</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -211,19 +317,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,65 +346,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          循序渐进写一个Servlet(4) - 会话追踪
+          循序渐进写一个 Servlet (4) - 会话追踪
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-12 11:26:11" itemprop="dateCreated datePublished" datetime="2019-03-12T11:26:11+08:00">2019-03-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/Servlet/" itemprop="url" rel="index"><span itemprop="name">Servlet</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/Servlet/java-servlet-4-session-tracking.html" class="post-meta-item leancloud_visitors" data-flag-title="循序渐进写一个Servlet(4) - 会话追踪" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/Servlet/java-servlet-4-session-tracking.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/Servlet/java-servlet-4-session-tracking.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-12 11:26:11" itemprop="dateCreated datePublished" datetime="2019-03-12T11:26:11+08:00">2019-03-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/Servlet/" itemprop="url" rel="index"><span itemprop="name">Servlet</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/Servlet/java-servlet-4-session-tracking.html" class="post-meta-item leancloud_visitors" data-flag-title="循序渐进写一个 Servlet (4) - 会话追踪" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -304,71 +401,65 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
-<p>这篇博文将演示如何使用<code>cookie</code>和<code>session</code>进行会话追踪。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
+<p>这篇博文将演示如何使用 <code>cookie</code> 和 <code>session</code> 进行会话追踪。</p>
 <a id="more"></a>
 
-<p>HTTP协议是一个无状态的协议，也就是说，在服务器眼中，每一个HTTP请求都是一个全新的请求，每个请求之间没有关联。所以我们需要一个可以管理请求中携带的用户信息的方法。而会话追踪就是一个可以管理用户信息的方法。</p>
+<p>HTTP 协议是一个无状态的协议，也就是说，在服务器眼中，每一个 HTTP 请求都是一个全新的请求，每个请求之间没有关联。所以我们需要一个可以管理请求中携带的用户信息的方法。而会话追踪就是一个可以管理用户信息的方法。</p>
 <p>会话追踪可以通过下列几个方式实现：</p>
 <ol>
 <li>Cookie</li>
-<li>表单隐藏域</li>
-<li>URL改写</li>
-<li>HttpSession</li>
+<li> 表单隐藏域</li>
+<li> URL 改写</li>
+<li> HttpSession</li>
 </ol>
-<p>本文将主要演示<code>Cookie</code>和<code>HttpSession</code>的用法。</p>
-<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a><code>Cookie</code></h1><h2 id="什么是cookie"><a href="#什么是cookie" class="headerlink" title="什么是cookie"></a>什么是cookie</h2><p><code>Cookie</code>是一串可以持久化于各个请求之间的信息片段。每个cookie都有一个名字，并有一个值，同时可以包含备注、路径、域名、过期时间、版本等附加信息。</p>
-<p>Cookie有两种：</p>
+<p>本文将主要演示 <code>Cookie</code> 和 <code>HttpSession</code> 的用法。</p>
+<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a><code>Cookie</code></h1><h2 id="什么是cookie"><a href="#什么是cookie" class="headerlink" title="什么是cookie"></a>什么是 cookie</h2><p><code>Cookie</code> 是一串可以持久化于各个请求之间的信息片段。每个 cookie 都有一个名字，并有一个值，同时可以包含备注、路径、域名、过期时间、版本等附加信息。</p>
+<p>Cookie 有两种：</p>
 <ol>
-<li>非持久cookie，这种cookie只在会话中存留，并且不具有过期时间属性，一旦用户关闭浏览器(或者标签页)，也就是使这个会话失效，这个cookie就会丢失。</li>
-<li>持久化cookie，这种cookie可以被用于多个会话中，而且只会在到达过期时间，或者用户主动使该cookie失效后，才会被删除。</li>
+<li>非持久 cookie，这种 cookie 只在会话中存留，并且不具有过期时间属性，一旦用户关闭浏览器 (或者标签页)，也就是使这个会话失效，这个 cookie 就会丢失。</li>
+<li>持久化 cookie，这种 cookie 可以被用于多个会话中，而且只会在到达过期时间，或者用户主动使该 cookie 失效后，才会被删除。</li>
 </ol>
-<p>可以使用<code>HttpServletResponse#addCookie(Cookie)</code>方法在HTTP响应中携带cookie。</p>
-<h2 id="保存cookie"><a href="#保存cookie" class="headerlink" title="保存cookie"></a>保存cookie</h2><p>首先修改前文中的<code>doPost()</code>方法，将请求中的参数取出来，并存入cookie。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有参数，得到一个Map</span></span><br><span class="line">    Map parameterMap = request.getParameterMap();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doPost()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历parameterMap</span></span><br><span class="line">        parameterMap.forEach((k, v) -&gt; &#123;</span><br><span class="line">            <span class="comment">// 将参数以 key = value 形式输出</span></span><br><span class="line">            writer.print(k + <span class="string">" = "</span> + ((String[]) v)[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将参数的key作为cookie的name，参数的value作为cookie的value</span></span><br><span class="line">            response.addCookie(<span class="keyword">new</span> Cookie(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]));</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后发送一个<code>POST</code>请求，在返回中可以看到请求中的参数已经被放到cookie中，并返回到了客户端。</p>
+<p>可以使用 <code>HttpServletResponse#addCookie(Cookie)</code> 方法在 HTTP 响应中携带 cookie。</p>
+<h2 id="保存cookie"><a href="#保存cookie" class="headerlink" title="保存cookie"></a>保存 cookie</h2><p>首先修改前文中的 <code>doPost()</code> 方法，将请求中的参数取出来，并存入 cookie。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有参数，得到一个Map</span></span><br><span class="line">    Map parameterMap = request.getParameterMap();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) {</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doPost()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历parameterMap</span></span><br><span class="line">        parameterMap.forEach((k, v) -&gt; {</span><br><span class="line">            <span class="comment">// 将参数以 key = value 形式输出</span></span><br><span class="line">            writer.print(k + <span class="string">" = "</span> + ((String[]) v)[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将参数的key作为cookie的name，参数的value作为cookie的value</span></span><br><span class="line">            response.addCookie(<span class="keyword">new</span> Cookie(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]));</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>然后发送一个 <code>POST</code> 请求，在返回中可以看到请求中的参数已经被放到 cookie 中，并返回到了客户端。</p>
 <p><img src="/images/java-servlet-4-session-tracking/post-request-with-cookie.png" alt="POST request with cookie"></p>
-<h2 id="使用cookie"><a href="#使用cookie" class="headerlink" title="使用cookie"></a>使用cookie</h2><p>一旦cookie被保存到了客户端，那么在下次访问这个cookie所对应的地址时，客户端就会自动将相关的cookie带入请求一并发送到服务端。所以客户端不需要对cookie主动做任何操作。</p>
-<p>修改前文中的<code>doGet()</code>方法，使其可以取出cookie的值，并输出到页面上。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用Optional类简化null判断</span></span><br><span class="line">    Optional&lt;String&gt; optionalQueryString = Optional.ofNullable(request.getQueryString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出每个参数</span></span><br><span class="line">    String[] queryStrings = optionalQueryString.isPresent() ? optionalQueryString.get().split(<span class="string">"&amp;"</span>) : <span class="keyword">new</span> String[]&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doGet()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Parameters: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每个参数</span></span><br><span class="line">        <span class="keyword">for</span> (String query : queryStrings) &#123;</span><br><span class="line">            <span class="comment">// 取出参数的key和value</span></span><br><span class="line">            String[] q = query.split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">            writer.print(q[<span class="number">0</span>] + <span class="string">" = "</span> + q[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Cookies:&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从request中取出cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历各个cookie</span></span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">            <span class="comment">// 输出其name和value</span></span><br><span class="line">            writer.print(cookie.getName() + <span class="string">" = "</span> + cookie.getValue());</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后发送一个<code>GET</code>请求，在返回中可以看到cookie中的内容已经被输出到页面上。</p>
+<h2 id="使用cookie"><a href="#使用cookie" class="headerlink" title="使用cookie"></a>使用 cookie</h2><p>一旦 cookie 被保存到了客户端，那么在下次访问这个 cookie 所对应的地址时，客户端就会自动将相关的 cookie 带入请求一并发送到服务端。所以客户端不需要对 cookie 主动做任何操作。</p>
+<p>修改前文中的 <code>doGet()</code> 方法，使其可以取出 cookie 的值，并输出到页面上。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用Optional类简化null判断</span></span><br><span class="line">    Optional&lt;String&gt; optionalQueryString = Optional.ofNullable(request.getQueryString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出每个参数</span></span><br><span class="line">    String[] queryStrings = optionalQueryString.isPresent() ? optionalQueryString.get().split(<span class="string">"&amp;"</span>) : <span class="keyword">new</span> String[]{};</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) {</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doGet()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Parameters: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每个参数</span></span><br><span class="line">        <span class="keyword">for</span> (String query : queryStrings) {</span><br><span class="line">            <span class="comment">// 取出参数的key和value</span></span><br><span class="line">            String[] q = query.split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">            writer.print(q[<span class="number">0</span>] + <span class="string">" = "</span> + q[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Cookies:&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从request中取出cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历各个cookie</span></span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) {</span><br><span class="line">            <span class="comment">// 输出其name和value</span></span><br><span class="line">            writer.print(cookie.getName() + <span class="string">" = "</span> + cookie.getValue());</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>然后发送一个 <code>GET</code> 请求，在返回中可以看到 cookie 中的内容已经被输出到页面上。</p>
 <p><img src="/images/java-servlet-4-session-tracking/get-request-with-cookie.png" alt="GET request with cookie"></p>
-<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><p>将cookie的存活时间设为0，并返回到客户端，即可从客户端中删除这个cookie。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDelete</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    Cookie[] cookies = req.getCookies();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">        <span class="comment">// JSESSIONID存放的是当前session的ID</span></span><br><span class="line">        <span class="comment">// 如果删掉这个cookie，那么当前的session也会被丢弃</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"JSESSIONID"</span>.equalsIgnoreCase(cookie.getName())) &#123;</span><br><span class="line">            <span class="comment">// 设定存活时间为0秒</span></span><br><span class="line">            cookie.setMaxAge(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将修改过的cookie放入响应中返回到客户端</span></span><br><span class="line">            resp.addCookie(cookie);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = resp.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 因为response需要输出到客户端，才可以使新的cookie被送到客户端</span></span><br><span class="line">        <span class="comment">// 但是又懒得输出那么多东西了</span></span><br><span class="line">        <span class="comment">// 所以就输出了一个空字符串</span></span><br><span class="line">        <span class="comment">// 实际上输出内容不影响对cookie的操作</span></span><br><span class="line">        writer.print(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="HttpSession"><a href="#HttpSession" class="headerlink" title="HttpSession"></a><code>HttpSession</code></h1><h2 id="什么是session"><a href="#什么是session" class="headerlink" title="什么是session"></a>什么是session</h2><p>Session记录着一次会话相关的信息。</p>
-<p>当一个请求到达服务器后，服务器会检查请求中是否包含session ID信息，比如在Tomcat中就是检查有无<code>JSESSIONID</code>这个cookie，或者URL中有无<code>JSESSIONID</code>这个查询字符串。如果找到了对应的session，则服务器会将这个session检索出来使用；请求中没有包含session ID，或者对应的session已经被销毁，则服务器会创建一个新的session并返回其ID。</p>
-<p>Session ID通常以cookie的形式返回到客户端，如果客户端禁用了cookie，那么服务端则会使用URL重写技术将session ID写到URL中。</p>
-<p>Session中可以键值对的形式保存附加数据，称为attributes。</p>
-<p>与cookie不同，session保存于服务器端，而且它能保存的数据也不仅限于字符串。</p>
-<h2 id="保存attribute"><a href="#保存attribute" class="headerlink" title="保存attribute"></a>保存attribute</h2><p>修改<code>doPost()</code>方法，编写修改session的代码。修改完成后发送一个带有参数的<code>POST</code>请求，以向session中写入一些数据。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有参数，得到一个Map</span></span><br><span class="line">    Map parameterMap = request.getParameterMap();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    <span class="comment">// 如果没有，则会新建一个session并返回其ID</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doPost()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历parameterMap</span></span><br><span class="line">        parameterMap.forEach((k, v) -&gt; &#123;</span><br><span class="line">            <span class="comment">// 将参数以 key = value 形式输出</span></span><br><span class="line">            writer.print(k + <span class="string">" = "</span> + ((String[]) v)[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将参数的key作为cookie的name，参数的value作为cookie的value</span></span><br><span class="line">            Cookie cookie = <span class="keyword">new</span> Cookie(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]);</span><br><span class="line">            response.addCookie(cookie);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将各个参数放到session的attributes中</span></span><br><span class="line">            session.setAttribute(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="取出attribute"><a href="#取出attribute" class="headerlink" title="取出attribute"></a>取出attribute</h2><p>修改<code>doGet()</code>方法，使其可以从session中取出attributes并显示在页面上。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用Optional类简化null判断</span></span><br><span class="line">    Optional&lt;String&gt; optionalQueryString = Optional.ofNullable(request.getQueryString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有attribute的name</span></span><br><span class="line">    Enumeration&lt;String&gt; attributeNames = session.getAttributeNames();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出每个参数</span></span><br><span class="line">    String[] queryStrings = optionalQueryString.isPresent() ? optionalQueryString.get().split(<span class="string">"&amp;"</span>) : <span class="keyword">new</span> String[]&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doGet()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Parameters: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每个参数</span></span><br><span class="line">        <span class="keyword">for</span> (String query : queryStrings) &#123;</span><br><span class="line">            <span class="comment">// 取出参数的key和value</span></span><br><span class="line">            String[] q = query.split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">            writer.print(q[<span class="number">0</span>] + <span class="string">" = "</span> + q[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Cookies:&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从request中取出cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历各个cookie</span></span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">            <span class="comment">// 输出其name和value</span></span><br><span class="line">            writer.print(cookie.getName() + <span class="string">" = "</span> + cookie.getValue());</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Attributes: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历attribute的各个name</span></span><br><span class="line">        <span class="keyword">while</span>(attributeNames.hasMoreElements()) &#123;</span><br><span class="line">            String key = attributeNames.nextElement();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 取出attribute的值</span></span><br><span class="line">            String value = String.valueOf(session.getAttribute(key));</span><br><span class="line"></span><br><span class="line">            writer.print(key + <span class="string">" = "</span> + value);</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后发送一个<code>GET</code>请求，在返回中就可以看到刚才保存在session中的数据：</p>
+<h2 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除 cookie</h2><p>将 cookie 的存活时间设为 0，并返回到客户端，即可从客户端中删除这个 cookie。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDelete</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>{</span><br><span class="line">    Cookie[] cookies = req.getCookies();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Cookie cookie : cookies) {</span><br><span class="line">        <span class="comment">// JSESSIONID存放的是当前session的ID</span></span><br><span class="line">        <span class="comment">// 如果删掉这个cookie，那么当前的session也会被丢弃</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"JSESSIONID"</span>.equalsIgnoreCase(cookie.getName())) {</span><br><span class="line">            <span class="comment">// 设定存活时间为0秒</span></span><br><span class="line">            cookie.setMaxAge(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将修改过的cookie放入响应中返回到客户端</span></span><br><span class="line">            resp.addCookie(cookie);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = resp.getWriter()) {</span><br><span class="line">        <span class="comment">// 因为response需要输出到客户端，才可以使新的cookie被送到客户端</span></span><br><span class="line">        <span class="comment">// 但是又懒得输出那么多东西了</span></span><br><span class="line">        <span class="comment">// 所以就输出了一个空字符串</span></span><br><span class="line">        <span class="comment">// 实际上输出内容不影响对cookie的操作</span></span><br><span class="line">        writer.print(<span class="string">""</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="HttpSession"><a href="#HttpSession" class="headerlink" title="HttpSession"></a><code>HttpSession</code></h1><h2 id="什么是session"><a href="#什么是session" class="headerlink" title="什么是session"></a>什么是 session</h2><p>Session 记录着一次会话相关的信息。</p>
+<p>当一个请求到达服务器后，服务器会检查请求中是否包含 session ID 信息，比如在 Tomcat 中就是检查有无 <code>JSESSIONID</code> 这个 cookie，或者 URL 中有无 <code>JSESSIONID</code> 这个查询字符串。如果找到了对应的 session，则服务器会将这个 session 检索出来使用；请求中没有包含 session ID，或者对应的 session 已经被销毁，则服务器会创建一个新的 session 并返回其 ID。</p>
+<p>Session ID 通常以 cookie 的形式返回到客户端，如果客户端禁用了 cookie，那么服务端则会使用 URL 重写技术将 session ID 写到 URL 中。</p>
+<p>Session 中可以键值对的形式保存附加数据，称为 attributes。</p>
+<p>与 cookie 不同，session 保存于服务器端，而且它能保存的数据也不仅限于字符串。</p>
+<h2 id="保存attribute"><a href="#保存attribute" class="headerlink" title="保存attribute"></a>保存 attribute</h2><p>修改 <code>doPost()</code> 方法，编写修改 session 的代码。修改完成后发送一个带有参数的 <code>POST</code> 请求，以向 session 中写入一些数据。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有参数，得到一个Map</span></span><br><span class="line">    Map parameterMap = request.getParameterMap();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    <span class="comment">// 如果没有，则会新建一个session并返回其ID</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) {</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doPost()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历parameterMap</span></span><br><span class="line">        parameterMap.forEach((k, v) -&gt; {</span><br><span class="line">            <span class="comment">// 将参数以 key = value 形式输出</span></span><br><span class="line">            writer.print(k + <span class="string">" = "</span> + ((String[]) v)[<span class="number">0</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将参数的key作为cookie的name，参数的value作为cookie的value</span></span><br><span class="line">            Cookie cookie = <span class="keyword">new</span> Cookie(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]);</span><br><span class="line">            response.addCookie(cookie);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将各个参数放到session的attributes中</span></span><br><span class="line">            session.setAttribute(String.valueOf(k), ((String[]) v)[<span class="number">0</span>]);</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="取出attribute"><a href="#取出attribute" class="headerlink" title="取出attribute"></a>取出 attribute</h2><p>修改 <code>doGet()</code> 方法，使其可以从 session 中取出 attributes 并显示在页面上。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="comment">// 设定返回内容的MIME类型</span></span><br><span class="line">    response.setContentType(<span class="string">"text/html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定内容以UTF-8编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用Optional类简化null判断</span></span><br><span class="line">    Optional&lt;String&gt; optionalQueryString = Optional.ofNullable(request.getQueryString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出所有attribute的name</span></span><br><span class="line">    Enumeration&lt;String&gt; attributeNames = session.getAttributeNames();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出每个参数</span></span><br><span class="line">    String[] queryStrings = optionalQueryString.isPresent() ? optionalQueryString.get().split(<span class="string">"&amp;"</span>) : <span class="keyword">new</span> String[]{};</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = response.getWriter()) {</span><br><span class="line">        <span class="comment">// 开始输出HTML文本</span></span><br><span class="line">        writer.print(<span class="string">"&lt;html lang=\"en\"&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Response from DemoServlet&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Handled by &lt;code&gt;doGet()&lt;/code&gt;&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前session的ID</span></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Session ID: "</span> + request.getSession().getId() + <span class="string">"&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Parameters: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历每个参数</span></span><br><span class="line">        <span class="keyword">for</span> (String query : queryStrings) {</span><br><span class="line">            <span class="comment">// 取出参数的key和value</span></span><br><span class="line">            String[] q = query.split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">            writer.print(q[<span class="number">0</span>] + <span class="string">" = "</span> + q[<span class="number">1</span>] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Cookies:&lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从request中取出cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历各个cookie</span></span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) {</span><br><span class="line">            <span class="comment">// 输出其name和value</span></span><br><span class="line">            writer.print(cookie.getName() + <span class="string">" = "</span> + cookie.getValue());</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;b&gt;Attributes: &lt;/b&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历attribute的各个name</span></span><br><span class="line">        <span class="keyword">while</span>(attributeNames.hasMoreElements()) {</span><br><span class="line">            String key = attributeNames.nextElement();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 取出attribute的值</span></span><br><span class="line">            String value = String.valueOf(session.getAttribute(key));</span><br><span class="line"></span><br><span class="line">            writer.print(key + <span class="string">" = "</span> + value);</span><br><span class="line">            writer.print(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        writer.print(<span class="string">"&lt;/body&gt;"</span>);</span><br><span class="line">        writer.print(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>然后发送一个 <code>GET</code> 请求，在返回中就可以看到刚才保存在 session 中的数据：</p>
 <p><img src="/images/java-servlet-4-session-tracking/get-request-with-session-attribute.png" alt="GET request with session attribute"></p>
-<h2 id="删除attribute"><a href="#删除attribute" class="headerlink" title="删除attribute"></a>删除attribute</h2><p>此外<code>HttpSession</code>类提供了<code>removeAttribute()</code>方法用于删除一个attribute。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDelete</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    Cookie[] cookies = req.getCookies();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    HttpSession session = req.getSession();</span><br><span class="line"></span><br><span class="line">    Enumeration&lt;String&gt; attributeNames = session.getAttributeNames();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">        <span class="comment">// JSESSIONID存放的是当前session的ID</span></span><br><span class="line">        <span class="comment">// 如果删掉这个cookie，那么当前的session也会被丢弃</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"JSESSIONID"</span>.equalsIgnoreCase(cookie.getName())) &#123;</span><br><span class="line">            <span class="comment">// 设定存活时间为0秒</span></span><br><span class="line">            cookie.setMaxAge(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将修改过的cookie放入响应中返回到客户端</span></span><br><span class="line">            resp.addCookie(cookie);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历attribute names</span></span><br><span class="line">        <span class="keyword">while</span>(attributeNames.hasMoreElements()) &#123;</span><br><span class="line">            String key = attributeNames.nextElement();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将其从session中移除</span></span><br><span class="line">            session.removeAttribute(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = resp.getWriter()) &#123;</span><br><span class="line">        <span class="comment">// 因为response需要输出到客户端，才可以使新的cookie被送到客户端</span></span><br><span class="line">        <span class="comment">// 但是又懒得输出那么多东西了</span></span><br><span class="line">        <span class="comment">// 所以就输出了一个空字符串</span></span><br><span class="line">        <span class="comment">// 实际上输出内容不影响对cookie的操作</span></span><br><span class="line">        writer.print(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="删除attribute"><a href="#删除attribute" class="headerlink" title="删除attribute"></a>删除 attribute</h2><p>此外 <code>HttpSession</code> 类提供了 <code>removeAttribute()</code> 方法用于删除一个 attribute。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDelete</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>{</span><br><span class="line">    Cookie[] cookies = req.getCookies();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取当前会话的session</span></span><br><span class="line">    HttpSession session = req.getSession();</span><br><span class="line"></span><br><span class="line">    Enumeration&lt;String&gt; attributeNames = session.getAttributeNames();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Cookie cookie : cookies) {</span><br><span class="line">        <span class="comment">// JSESSIONID存放的是当前session的ID</span></span><br><span class="line">        <span class="comment">// 如果删掉这个cookie，那么当前的session也会被丢弃</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"JSESSIONID"</span>.equalsIgnoreCase(cookie.getName())) {</span><br><span class="line">            <span class="comment">// 设定存活时间为0秒</span></span><br><span class="line">            cookie.setMaxAge(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将修改过的cookie放入响应中返回到客户端</span></span><br><span class="line">            resp.addCookie(cookie);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历attribute names</span></span><br><span class="line">        <span class="keyword">while</span>(attributeNames.hasMoreElements()) {</span><br><span class="line">            String key = attributeNames.nextElement();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将其从session中移除</span></span><br><span class="line">            session.removeAttribute(key);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (PrintWriter writer = resp.getWriter()) {</span><br><span class="line">        <span class="comment">// 因为response需要输出到客户端，才可以使新的cookie被送到客户端</span></span><br><span class="line">        <span class="comment">// 但是又懒得输出那么多东西了</span></span><br><span class="line">        <span class="comment">// 所以就输出了一个空字符串</span></span><br><span class="line">        <span class="comment">// 实际上输出内容不影响对cookie的操作</span></span><br><span class="line">        writer.print(<span class="string">""</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h1 id="系列博文"><a href="#系列博文" class="headerlink" title="系列博文"></a>系列博文</h1><ul>
-<li><a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html">循序渐进写一个Servlet(1) - 介绍相关的接口和类</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-2-first-servlet.html">循序渐进写一个Servlet(2) - 第一个servlet</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html">循序渐进写一个Servlet(3) - 分别处理GET和POST</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-4-session-tracking.html">循序渐进写一个Servlet(4) - 会话追踪</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-5-filter.html">循序渐进写一个Servlet(5) - Filter</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html">循序渐进写一个 Servlet (1) - 介绍相关的接口和类</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-2-first-servlet.html">循序渐进写一个 Servlet (2) - 第一个 servlet</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html">循序渐进写一个 Servlet (3) - 分别处理 GET 和 POST</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-4-session-tracking.html">循序渐进写一个 Servlet (4) - 会话追踪</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-5-filter.html">循序渐进写一个 Servlet (5) - Filter</a></li>
 </ul>
 
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -378,28 +469,24 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/Servlet/" rel="tag"># Servlet</a>
@@ -407,30 +494,27 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html" rel="prev" title="生产者与消费者问题在Java中的实现">
-      <i class="fa fa-chevron-left"></i> 生产者与消费者问题在Java中的实现
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/Servlet/java-servlet-5-filter.html" rel="next" title="循序渐进写一个Servlet(5) - Filter">
-      循序渐进写一个Servlet(5) - Filter <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html" rel="prev" title="生产者与消费者问题在 Java 中的实现">
+                  <i class="fa fa-chevron-left"></i> 生产者与消费者问题在 Java 中的实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/Servlet/java-servlet-5-filter.html" rel="next" title="循序渐进写一个 Servlet (5) - Filter">
+                  循序渐进写一个 Servlet (5) - Filter <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -439,7 +523,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -448,121 +532,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie"><span class="nav-number">1.</span> <span class="nav-text">Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是cookie"><span class="nav-number">1.1.</span> <span class="nav-text">什么是cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存cookie"><span class="nav-number">1.2.</span> <span class="nav-text">保存cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用cookie"><span class="nav-number">1.3.</span> <span class="nav-text">使用cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除cookie"><span class="nav-number">1.4.</span> <span class="nav-text">删除cookie</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HttpSession"><span class="nav-number">2.</span> <span class="nav-text">HttpSession</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是session"><span class="nav-number">2.1.</span> <span class="nav-text">什么是session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存attribute"><span class="nav-number">2.2.</span> <span class="nav-text">保存attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取出attribute"><span class="nav-number">2.3.</span> <span class="nav-text">取出attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除attribute"><span class="nav-number">2.4.</span> <span class="nav-text">删除attribute</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系列博文"><span class="nav-number">3.</span> <span class="nav-text">系列博文</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -570,72 +552,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -644,36 +585,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,33 +22,34 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="一个private属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让private修饰符“失效”，以及它为什么会“失效”。">
-<meta name="keywords" content="Java,内部类">
+<meta name="description" content="一个 private 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让 private 修饰符 “失效”，以及它为什么会 “失效”。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的内部类和private修饰符">
+<meta property="og:title" content="Java 的内部类和 private 修饰符">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="一个private属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让private修饰符“失效”，以及它为什么会“失效”。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-10T06:45:28.595Z">
+<meta property="og:description" content="一个 private 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让 private 修饰符 “失效”，以及它为什么会 “失效”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-24T13:38:32.000Z">
+<meta property="article:modified_time" content="2020-03-10T06:45:28.595Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="内部类">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的内部类和private修饰符">
-<meta name="twitter:description" content="一个private属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让private修饰符“失效”，以及它为什么会“失效”。">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,9 +57,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>Java的内部类和private修饰符 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Java 的内部类和 private 修饰符 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -71,54 +72,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -132,17 +142,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -160,6 +164,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -175,13 +184,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -189,9 +197,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -199,6 +207,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%A4%96%E9%83%A8%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">反编译外部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">反编译内部类</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -207,19 +313,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,65 +342,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java的内部类和private修饰符
+          Java 的内部类和 private 修饰符
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-24 21:38:32" itemprop="dateCreated datePublished" datetime="2020-02-24T21:38:32+08:00">2020-02-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-10 14:45:28" itemprop="dateModified" datetime="2020-03-10T14:45:28+08:00">2020-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/fundamentals/java-inner-class-and-private-identifier.html" class="post-meta-item leancloud_visitors" data-flag-title="Java的内部类和private修饰符" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/fundamentals/java-inner-class-and-private-identifier.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/fundamentals/java-inner-class-and-private-identifier.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-24 21:38:32" itemprop="dateCreated datePublished" datetime="2020-02-24T21:38:32+08:00">2020-02-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-03-10 14:45:28" itemprop="dateModified" datetime="2020-03-10T14:45:28+08:00">2020-03-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/fundamentals/java-inner-class-and-private-identifier.html" class="post-meta-item leancloud_visitors" data-flag-title="Java 的内部类和 private 修饰符" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -300,31 +397,28 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个<code>private</code>属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
-<p>本文将通过一个小例子，来演示怎么让<code>private</code>修饰符“失效”，以及它为什么会“失效”。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
+<p>本文将通过一个小例子，来演示怎么让 <code>private</code> 修饰符 “失效”，以及它为什么会 “失效”。</p>
 <a id="more"></a>
 
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>废话不多说，先写一段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String outerClassName = <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printOuterClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line">        OuterClass.InnerClass innerClass = outerClass.<span class="keyword">new</span> InnerClass();</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码是不是感觉有一丝异样？为什么在内部类里，能直接访问到外部类的<code>private</code>属性？难道<code>private</code>修饰符真的“失效”了？</p>
-<p>别急，待我们把这个class反编译了，从字节码层面来看看它到底有什么猫腻。毕竟，字节码可不会骗人。</p>
-<h2 id="反编译外部类"><a href="#反编译外部类" class="headerlink" title="反编译外部类"></a>反编译外部类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$ javap -c OuterClass.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass &#123;</span><br><span class="line">  public com.boris1993.OuterClass();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       4: aload_0</span><br><span class="line">       5: ldc           <span class="comment">#3                  // String outerClass</span></span><br><span class="line">       7: putfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">      10: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           <span class="comment">#4                  // class com/boris1993/OuterClass</span></span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial <span class="comment">#5                  // Method "&lt;init&gt;":()V</span></span><br><span class="line">       7: astore_1</span><br><span class="line">       8: new           <span class="comment">#6                  // class com/boris1993/OuterClass$InnerClass</span></span><br><span class="line">      11: dup</span><br><span class="line">      12: aload_1</span><br><span class="line">      13: dup</span><br><span class="line">      14: invokevirtual <span class="comment">#7                  // Method java/lang/Object.getClass:()Ljava/lang/Class;</span></span><br><span class="line">      17: pop</span><br><span class="line">      18: invokespecial <span class="comment">#8                  // Method com/boris1993/OuterClass$InnerClass."&lt;init&gt;":(Lcom/boris1993/OuterClass;)V</span></span><br><span class="line">      21: astore_2</span><br><span class="line">      22: aload_2</span><br><span class="line">      23: invokevirtual <span class="comment">#9                  // Method com/boris1993/OuterClass$InnerClass.printOuterClassName:()V</span></span><br><span class="line">      26: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  static java.lang.String access<span class="variable">$000</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: getfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">       4: areturn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有没有发现，78行出现了一个我们没有写过的方法<code>access$000</code>？而且从注释来看，它接受一个<code>OuterClass</code>类型的参数，而且返回的正是外部类的<code>outerClassName</code>的值。</p>
-<p>既然我们没定义这个方法，那就是编译器偷偷的给咱整了点活。至于为啥编译器要这么干，结合上面这个例子，也不难猜出来：这就是给内部类访问它的<code>private</code>属性用的。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String outerClassName = <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>{</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printOuterClassName</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line">        OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面的代码是不是感觉有一丝异样？为什么在内部类里，能直接访问到外部类的 <code>private</code> 属性？难道 <code>private</code> 修饰符真的 “失效” 了？</p>
+<p>别急，待我们把这个 class 反编译了，从字节码层面来看看它到底有什么猫腻。毕竟，字节码可不会骗人。</p>
+<h2 id="反编译外部类"><a href="#反编译外部类" class="headerlink" title="反编译外部类"></a>反编译外部类</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$ javap -c OuterClass.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass {</span><br><span class="line">  public com.boris1993.OuterClass();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       4: aload_0</span><br><span class="line">       5: ldc           <span class="comment">#3                  // String outerClass</span></span><br><span class="line">       7: putfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">      10: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           <span class="comment">#4                  // class com/boris1993/OuterClass</span></span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial <span class="comment">#5                  // Method "&lt;init&gt;":()V</span></span><br><span class="line">       7: astore_1</span><br><span class="line">       8: new           <span class="comment">#6                  // class com/boris1993/OuterClass$InnerClass</span></span><br><span class="line">      11: dup</span><br><span class="line">      12: aload_1</span><br><span class="line">      13: dup</span><br><span class="line">      14: invokevirtual <span class="comment">#7                  // Method java/lang/Object.getClass:()Ljava/lang/Class;</span></span><br><span class="line">      17: pop</span><br><span class="line">      18: invokespecial <span class="comment">#8                  // Method com/boris1993/OuterClass$InnerClass."&lt;init&gt;":(Lcom/boris1993/OuterClass;)V</span></span><br><span class="line">      21: astore_2</span><br><span class="line">      22: aload_2</span><br><span class="line">      23: invokevirtual <span class="comment">#9                  // Method com/boris1993/OuterClass$InnerClass.printOuterClassName:()V</span></span><br><span class="line">      26: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  static java.lang.String access<span class="variable">$000</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: getfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">       4: areturn</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>有没有发现，78 行出现了一个我们没有写过的方法 <code>access$000</code>？而且从注释来看，它接受一个 <code>OuterClass</code> 类型的参数，而且返回的正是外部类的 <code>outerClassName</code> 的值。</p>
+<p>既然我们没定义这个方法，那就是编译器偷偷的给咱整了点活。至于为啥编译器要这么干，结合上面这个例子，也不难猜出来：这就是给内部类访问它的 <code>private</code> 属性用的。</p>
 <h2 id="反编译内部类"><a href="#反编译内部类" class="headerlink" title="反编译内部类"></a>反编译内部类</h2><p>但是咱不能光猜啊，咱还得有证据。证据哪来？当然是内部类的字节码。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ javap -c OuterClass<span class="variable">$InnerClass</span>.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass<span class="variable">$InnerClass</span> &#123;</span><br><span class="line">  final com.boris1993.OuterClass this<span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">  public com.boris1993.OuterClass<span class="variable">$InnerClass</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: aload_1</span><br><span class="line">       2: putfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       5: aload_0</span><br><span class="line">       6: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       9: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public void printOuterClassName();</span><br><span class="line">    Code:</span><br><span class="line">       0: getstatic     <span class="comment">#3                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       3: aload_0</span><br><span class="line">       4: getfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       7: invokestatic  <span class="comment">#4                  // Method com/boris1993/OuterClass.access$000:(Lcom/boris1993/OuterClass;)Ljava/lang/String;</span></span><br><span class="line">      10: invokevirtual <span class="comment">#5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">      13: <span class="built_in">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>嗯，果然没错，在第20行这一条指令里，它调用了上面我们看到的那个<code>access$000()</code>方法。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kcm9pZHl1ZS5jb20vYmxvZy8yMDE0LzEwLzAyL3RoZS1wcml2YXRlLW1vZGlmaWVyLWluLWphdmEv">细话Java：&quot;失效&quot;的private修饰符<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ javap -c OuterClass<span class="variable">$InnerClass</span>.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass<span class="variable">$InnerClass</span> {</span><br><span class="line">  final com.boris1993.OuterClass this<span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">  public com.boris1993.OuterClass<span class="variable">$InnerClass</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: aload_1</span><br><span class="line">       2: putfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       5: aload_0</span><br><span class="line">       6: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       9: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public void printOuterClassName();</span><br><span class="line">    Code:</span><br><span class="line">       0: getstatic     <span class="comment">#3                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       3: aload_0</span><br><span class="line">       4: getfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       7: invokestatic  <span class="comment">#4                  // Method com/boris1993/OuterClass.access$000:(Lcom/boris1993/OuterClass;)Ljava/lang/String;</span></span><br><span class="line">      10: invokevirtual <span class="comment">#5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">      13: <span class="built_in">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>嗯，果然没错，在第 20 行这一条指令里，它调用了上面我们看到的那个 <code>access$000()</code> 方法。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kcm9pZHl1ZS5jb20vYmxvZy8yMDE0LzEwLzAyL3RoZS1wcml2YXRlLW1vZGlmaWVyLWluLWphdmEv"> 细话 Java："失效" 的 private 修饰符<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -334,59 +428,52 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/内部类/" rel="tag"># 内部类</a>
+              <a href="/tags/%E5%86%85%E9%83%A8%E7%B1%BB/" rel="tag"># 内部类</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/spring/java-spring-bean-scopes.html" rel="prev" title="Spring bean的作用域">
-      <i class="fa fa-chevron-left"></i> Spring bean的作用域
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/tools/concourse/concourse-quick-start.html" rel="next" title="学习Concourse CI - 快速入门">
-      学习Concourse CI - 快速入门 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/spring/java-spring-bean-scopes.html" rel="prev" title="Spring bean 的作用域">
+                  <i class="fa fa-chevron-left"></i> Spring bean 的作用域
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/tools/concourse/concourse-quick-start.html" rel="next" title="学习 Concourse CI - 快速入门">
+                  学习 Concourse CI - 快速入门 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -395,7 +482,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -404,121 +491,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例代码"><span class="nav-number">1.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反编译外部类"><span class="nav-number">2.</span> <span class="nav-text">反编译外部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反编译内部类"><span class="nav-number">3.</span> <span class="nav-text">反编译内部类</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -526,72 +511,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -600,36 +544,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

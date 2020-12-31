@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,40 +22,41 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
-<meta name="keywords" content="Java,代码技巧">
+<meta name="description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 FlatMap 简化这个操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用FlatMap“展平”一系列数据">
+<meta property="og:title" content="使用 FlatMap “展平” 一系列数据">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 FlatMap 简化这个操作。">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/2-trim.png">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/3-distinct.png">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/4-sort.png">
 <meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/5-collect.png">
-<meta property="og:updated_time" content="2020-08-30T10:52:19.176Z">
+<meta property="article:published_time" content="2019-09-26T08:30:56.000Z">
+<meta property="article:modified_time" content="2020-08-30T10:52:19.176Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="代码技巧">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用FlatMap“展平”一系列数据">
-<meta name="twitter:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
 <meta name="twitter:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -62,9 +64,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>使用FlatMap“展平”一系列数据 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>使用 FlatMap “展平” 一系列数据 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -78,54 +79,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -139,17 +149,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -167,6 +171,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -182,13 +191,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -196,9 +204,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -206,6 +214,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">介绍需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">准备示例数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8%E6%B5%81%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">不使用流的做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">使用流的做法</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -214,19 +320,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -240,65 +349,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用FlatMap“展平”一系列数据
+          使用 FlatMap “展平” 一系列数据
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-09-26 16:30:56" itemprop="dateCreated datePublished" datetime="2019-09-26T16:30:56+08:00">2019-09-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index"><span itemprop="name">代码技巧</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" class="post-meta-item leancloud_visitors" data-flag-title="使用FlatMap“展平”一系列数据" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-26 16:30:56" itemprop="dateCreated datePublished" datetime="2019-09-26T16:30:56+08:00">2019-09-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index"><span itemprop="name">代码技巧</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" class="post-meta-item leancloud_visitors" data-flag-title="使用 FlatMap “展平” 一系列数据" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -307,9 +404,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的<code>FlatMap</code>简化这个操作。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 <code>FlatMap</code> 简化这个操作。</p>
 <a id="more"></a>
 
 <h2 id="介绍需求"><a href="#介绍需求" class="headerlink" title="介绍需求"></a>介绍需求</h2><p>假设现在有这样子的一个排班信息：</p>
@@ -321,7 +416,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>2019-01-02</td>
+<td> 2019-01-02</td>
 <td>Unit-2, Unit-3</td>
 </tr>
 <tr>
@@ -353,33 +448,32 @@
 <td>Unit-2, Unit-3</td>
 </tr>
 </tbody></table>
-<p>而目标是，从中取出这个表中的所有班组，并去重和排序，即最终的结果是<code>Unit-1, Unit-2, Unit-3</code>。</p>
+<p>而目标是，从中取出这个表中的所有班组，并去重和排序，即最终的结果是 <code>Unit-1, Unit-2, Unit-3</code>。</p>
 <h2 id="准备示例数据"><a href="#准备示例数据" class="headerlink" title="准备示例数据"></a>准备示例数据</h2><p>在代码中，我们这样来构造这些数据：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 准备假数据</span></span><br><span class="line">WorkSchedule workSchedule1 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-01"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule2 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-02"</span>, <span class="string">"Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule3 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-03"</span>, <span class="string">"Unit-1, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule4 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-04"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule5 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-05"</span>, <span class="string">"Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule6 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-06"</span>, <span class="string">"Unit-1, Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule7 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-07"</span>, <span class="string">"Unit-1"</span>);</span><br><span class="line">WorkSchedule workSchedule8 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-08"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;WorkSchedule&gt; workSchedules = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">8</span>);</span><br><span class="line">workSchedules.add(workSchedule1);</span><br><span class="line">workSchedules.add(workSchedule2);</span><br><span class="line">workSchedules.add(workSchedule3);</span><br><span class="line">workSchedules.add(workSchedule4);</span><br><span class="line">workSchedules.add(workSchedule5);</span><br><span class="line">workSchedules.add(workSchedule6);</span><br><span class="line">workSchedules.add(workSchedule7);</span><br><span class="line">workSchedules.add(workSchedule8);</span><br></pre></td></tr></table></figure>
-
-<h2 id="不使用流的做法"><a href="#不使用流的做法" class="headerlink" title="不使用流的做法"></a>不使用流的做法</h2><p>如果不使用流，那么我们可以通过<code>for</code>循环取数据，和使用<code>TreeSet</code>实现去重和排序。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;String&gt; unitNames = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (WorkSchedule workSchedule : workSchedules) &#123;</span><br><span class="line">    String[] arrUnitName = workSchedule.getUnits().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String unitName : arrUnitName) &#123;</span><br><span class="line">        unitNames.add(unitName.trim());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 准备假数据</span></span><br><span class="line">WorkSchedule workSchedule1 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-01"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule2 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-02"</span>, <span class="string">"Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule3 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-03"</span>, <span class="string">"Unit-1, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule4 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-04"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule5 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-05"</span>, <span class="string">"Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule6 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-06"</span>, <span class="string">"Unit-1, Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule7 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-07"</span>, <span class="string">"Unit-1"</span>);</span><br><span class="line">WorkSchedule workSchedule8 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-08"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;WorkSchedule&gt; workSchedules = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">8</span>);</span><br><span class="line">workSchedules.add(workSchedule1);</span><br><span class="line">workSchedules.add(workSchedule2);</span><br><span class="line">workSchedules.add(workSchedule3);</span><br><span class="line">workSchedules.add(workSchedule4);</span><br><span class="line">workSchedules.add(workSchedule5);</span><br><span class="line">workSchedules.add(workSchedule6);</span><br><span class="line">workSchedules.add(workSchedule7);</span><br><span class="line">workSchedules.add(workSchedule8);</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="不使用流的做法"><a href="#不使用流的做法" class="headerlink" title="不使用流的做法"></a>不使用流的做法</h2><p>如果不使用流，那么我们可以通过 <code>for</code> 循环取数据，和使用 <code>TreeSet</code> 实现去重和排序。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;String&gt; unitNames = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (WorkSchedule workSchedule : workSchedules) {</span><br><span class="line">    String[] arrUnitName = workSchedule.getUnits().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String unitName : arrUnitName) {</span><br><span class="line">        unitNames.add(unitName.trim());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="使用流的做法"><a href="#使用流的做法" class="headerlink" title="使用流的做法"></a>使用流的做法</h2><p>如果使用流，则可以这样做：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
-
-<p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢<code>Intellij IDEA</code>提供了这个强大的功能)</p>
-<p>首先，在<code>map</code>方法中，<code>List</code>的每个元素都会根据逗号分隔，并生成一个<code>String[]</code>对象。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></tbody></table></figure>
+<p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢 <code>Intellij IDEA</code> 提供了这个强大的功能)</p>
+<p>首先，在 <code>map</code> 方法中，<code>List</code> 的每个元素都会根据逗号分隔，并生成一个 <code>String[]</code>对象。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
-<p><code>flatmap</code>方法会将上面<code>map</code>方法返回的各个流“拼接”成为一个流，即“展平”。</p>
+<p><code>flatmap</code> 方法会将上面 <code>map</code> 方法返回的各个流 “拼接” 成为一个流，即 “展平”。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
-<p>接下来继续使用<code>map</code>方法，对流中的每个元素进行<code>trim</code>操作。</p>
+<p>接下来继续使用 <code>map</code> 方法，对流中的每个元素进行 <code>trim</code> 操作。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
-<p>然后调用<code>distinct</code>和<code>sorted</code>方法实现去重和排序。</p>
+<p>然后调用 <code>distinct</code> 和 <code>sorted</code> 方法实现去重和排序。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img src="/images/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
-<p>最后，使用<code>collect</code>方法，将流中的数据“收集”到一个<code>List</code>中。</p>
+<p>最后，使用 <code>collect</code> 方法，将流中的数据 “收集” 到一个 <code>List</code> 中。</p>
 <p><img src="/images/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
 
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -389,59 +483,52 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/代码技巧/" rel="tag"># 代码技巧</a>
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8A%80%E5%B7%A7/" rel="tag"># 代码技巧</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/java/coding-tips/java-bean-chaining-setters.html" rel="prev" title="在Java bean中实现setter的链式调用">
-      <i class="fa fa-chevron-left"></i> 在Java bean中实现setter的链式调用
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" rel="next" title="IDEA警告Field injection is not recommended">
-      IDEA警告Field injection is not recommended <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/java/coding-tips/java-bean-chaining-setters.html" rel="prev" title="在 Java bean 中实现 setter 的链式调用">
+                  <i class="fa fa-chevron-left"></i> 在 Java bean 中实现 setter 的链式调用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" rel="next" title="IDEA 警告 Field injection is not recommended">
+                  IDEA 警告 Field injection is not recommended <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -450,7 +537,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -459,121 +546,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍需求"><span class="nav-number">1.</span> <span class="nav-text">介绍需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备示例数据"><span class="nav-number">2.</span> <span class="nav-text">准备示例数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用流的做法"><span class="nav-number">3.</span> <span class="nav-text">不使用流的做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用流的做法"><span class="nav-number">4.</span> <span class="nav-text">使用流的做法</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -581,72 +566,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -655,36 +599,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,33 +22,34 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="就像数据库连接可以使用连接池管理一样，Java中的线程也可以使用线程池来管理。本文介绍在Java中如何使用线程池，以及有哪些线程池。">
-<meta name="keywords" content="Java,多线程">
+<meta name="description" content="就像数据库连接可以使用连接池管理一样，Java 中的线程也可以使用线程池来管理。本文介绍在 Java 中如何使用线程池，以及有哪些线程池。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java线程池">
+<meta property="og:title" content="Java 线程池">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="就像数据库连接可以使用连接池管理一样，Java中的线程也可以使用线程池来管理。本文介绍在Java中如何使用线程池，以及有哪些线程池。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T03:51:19.092Z">
+<meta property="og:description" content="就像数据库连接可以使用连接池管理一样，Java 中的线程也可以使用线程池来管理。本文介绍在 Java 中如何使用线程池，以及有哪些线程池。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-04T02:43:02.000Z">
+<meta property="article:modified_time" content="2019-03-22T03:51:19.092Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java线程池">
-<meta name="twitter:description" content="就像数据库连接可以使用连接池管理一样，Java中的线程也可以使用线程池来管理。本文介绍在Java中如何使用线程池，以及有哪些线程池。">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,9 +57,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>Java线程池 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Java 线程池 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -71,54 +72,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -132,17 +142,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -160,6 +164,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -175,13 +184,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -189,9 +197,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -199,6 +207,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">1.</span> <span class="nav-text">为什么需要线程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">2.</span> <span class="nav-text">怎么使用线程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">几种线程池的简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E7%BA%BF%E7%A8%8B%E6%B1%A0-Fixed-thread-pool"><span class="nav-number">3.1.</span> <span class="nav-text">固定线程池 (Fixed thread pool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%AA%83%E5%8F%96%E7%BA%BF%E7%A8%8B%E6%B1%A0-Work-stealing-pool"><span class="nav-number">3.2.</span> <span class="nav-text">工作窃取线程池 (Work stealing pool)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#newWorkStealingPool-int-parallelism"><span class="nav-number">3.2.1.</span> <span class="nav-text">newWorkStealingPool(int parallelism)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors-newWorkStealingPool"><span class="nav-number">3.2.2.</span> <span class="nav-text">Executors.newWorkStealingPool()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E7%BC%93%E5%AD%98%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0-Cached-thread-pool"><span class="nav-number">3.3.</span> <span class="nav-text">有缓存的线程池 (Cached thread pool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%AE%A1%E5%88%92%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0-Scheduled-thread-pool"><span class="nav-number">3.4.</span> <span class="nav-text">可计划的线程池 (Scheduled thread pool)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -207,19 +313,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,65 +342,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java线程池
+          Java 线程池
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-04 10:43:02" itemprop="dateCreated datePublished" datetime="2019-03-04T10:43:02+08:00">2019-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/fundamentals/java-multi-threading-thread-pool.html" class="post-meta-item leancloud_visitors" data-flag-title="Java线程池" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/fundamentals/java-multi-threading-thread-pool.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/fundamentals/java-multi-threading-thread-pool.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-04 10:43:02" itemprop="dateCreated datePublished" datetime="2019-03-04T10:43:02+08:00">2019-03-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-03-22 11:51:19" itemprop="dateModified" datetime="2019-03-22T11:51:19+08:00">2019-03-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/fundamentals/java-multi-threading-thread-pool.html" class="post-meta-item leancloud_visitors" data-flag-title="Java 线程池" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -300,34 +397,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>就像数据库连接可以使用连接池管理一样，Java中的线程也可以使用线程池来管理。本文介绍在Java中如何使用线程池，以及有哪些线程池。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>就像数据库连接可以使用连接池管理一样，Java 中的线程也可以使用线程池来管理。本文介绍在 Java 中如何使用线程池，以及有哪些线程池。</p>
 <a id="more"></a>
 
 <h1 id="为什么需要线程池"><a href="#为什么需要线程池" class="headerlink" title="为什么需要线程池"></a>为什么需要线程池</h1><p>每个线程的创建和销毁，都会消耗一定的系统资源，尤其在高并发的系统中，频繁创建和销毁线程会造成大量的资源浪费。</p>
 <p>那么，为了避免频繁的创建和销毁线程，就可以在系统启动时，预先创建好一定数量的线程，并将其交由线程调度器管理，这就是线程池。</p>
 <h1 id="怎么使用线程池"><a href="#怎么使用线程池" class="headerlink" title="怎么使用线程池"></a>怎么使用线程池</h1><p>依旧是用一个示例来演示。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ticketCount = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" started."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (ticketCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ticketCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" has "</span> + ticketCount-- + <span class="string">" tickets"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" stopped."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个线程池</span></span><br><span class="line">        ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Thread pool created"</span>);</span><br><span class="line"></span><br><span class="line">        MyRunnable myRunnable = <span class="keyword">new</span> MyRunnable();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Assigning jobs to thread pool"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 向线程池提交任务</span></span><br><span class="line">        executorService.execute(myRunnable);</span><br><span class="line">        executorService.execute(myRunnable);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在所有线程都完成工作后，线程池会继续等待新的工作任务</span></span><br><span class="line">        <span class="comment">// 所以如果需要程序在完成后退出，需要显式关闭线程池</span></span><br><span class="line">        executorService.shutdown();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!executorService.isTerminated()) &#123; &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Thread pool is down"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ticketCount = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" started."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (ticketCount &gt; <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                Thread.sleep(<span class="number">500</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">                <span class="keyword">if</span> (ticketCount &gt; <span class="number">0</span>) {</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" has "</span> + ticketCount-- + <span class="string">" tickets"</span>);</span><br><span class="line">                } <span class="keyword">else</span> {</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" stopped."</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="comment">// 创建一个线程池</span></span><br><span class="line">        ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Thread pool created"</span>);</span><br><span class="line"></span><br><span class="line">        MyRunnable myRunnable = <span class="keyword">new</span> MyRunnable();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Assigning jobs to thread pool"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 向线程池提交任务</span></span><br><span class="line">        executorService.execute(myRunnable);</span><br><span class="line">        executorService.execute(myRunnable);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在所有线程都完成工作后，线程池会继续等待新的工作任务</span></span><br><span class="line">        <span class="comment">// 所以如果需要程序在完成后退出，需要显式关闭线程池</span></span><br><span class="line">        executorService.shutdown();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!executorService.isTerminated()) { }</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Thread pool is down"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>运行后得到如下结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Thread pool created</span><br><span class="line">Assigning jobs to thread pool</span><br><span class="line">pool-1-thread-2 started.</span><br><span class="line">pool-1-thread-1 started.</span><br><span class="line">pool-1-thread-1 has 20 tickets</span><br><span class="line">pool-1-thread-2 has 19 tickets</span><br><span class="line">pool-1-thread-1 has 18 tickets</span><br><span class="line">pool-1-thread-2 has 17 tickets</span><br><span class="line">pool-1-thread-1 has 16 tickets</span><br><span class="line">pool-1-thread-2 has 15 tickets</span><br><span class="line">pool-1-thread-1 has 14 tickets</span><br><span class="line">pool-1-thread-2 has 13 tickets</span><br><span class="line">pool-1-thread-2 has 12 tickets</span><br><span class="line">pool-1-thread-1 has 11 tickets</span><br><span class="line">pool-1-thread-1 has 10 tickets</span><br><span class="line">pool-1-thread-2 has 9 tickets</span><br><span class="line">pool-1-thread-1 has 8 tickets</span><br><span class="line">pool-1-thread-2 has 7 tickets</span><br><span class="line">pool-1-thread-2 has 6 tickets</span><br><span class="line">pool-1-thread-1 has 5 tickets</span><br><span class="line">pool-1-thread-2 has 4 tickets</span><br><span class="line">pool-1-thread-1 has 3 tickets</span><br><span class="line">pool-1-thread-2 has 2 tickets</span><br><span class="line">pool-1-thread-1 has 1 tickets</span><br><span class="line">pool-1-thread-1 stopped.</span><br><span class="line">pool-1-thread-2 stopped.</span><br><span class="line">Thread pool is down</span><br></pre></td></tr></table></figure>
-
-<h1 id="几种线程池的简介"><a href="#几种线程池的简介" class="headerlink" title="几种线程池的简介"></a>几种线程池的简介</h1><h2 id="固定线程池-Fixed-thread-pool"><a href="#固定线程池-Fixed-thread-pool" class="headerlink" title="固定线程池(Fixed thread pool)"></a>固定线程池(Fixed thread pool)</h2><p>使用<code>Executors.newFixedThreadPool(int nThreads)</code>创建。</p>
-<p>该线程池维护着固定数量的线程(nThreads个)，在任何时间只允许最多nThreads个线程执行任务，多出来的任务将会在队列中等待，直到有空闲的线程出现。如果其中一个线程在执行过程中因为错误而异常退出，则线程池会立刻创建一个新的线程并执行后续的任务。</p>
-<p>该线程池在显式关闭(<code>ExecutorService#shutdown</code>)前将一直存在。</p>
-<h2 id="工作窃取线程池-Work-stealing-pool"><a href="#工作窃取线程池-Work-stealing-pool" class="headerlink" title="工作窃取线程池(Work stealing pool)"></a>工作窃取线程池(Work stealing pool)</h2><p>使用<code>Executors.newWorkStealingPool(int parallelism)</code>或<code>Executors.newWorkStealingPool()</code>创建。</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Thread pool created</span><br><span class="line">Assigning jobs to thread pool</span><br><span class="line">pool-1-thread-2 started.</span><br><span class="line">pool-1-thread-1 started.</span><br><span class="line">pool-1-thread-1 has 20 tickets</span><br><span class="line">pool-1-thread-2 has 19 tickets</span><br><span class="line">pool-1-thread-1 has 18 tickets</span><br><span class="line">pool-1-thread-2 has 17 tickets</span><br><span class="line">pool-1-thread-1 has 16 tickets</span><br><span class="line">pool-1-thread-2 has 15 tickets</span><br><span class="line">pool-1-thread-1 has 14 tickets</span><br><span class="line">pool-1-thread-2 has 13 tickets</span><br><span class="line">pool-1-thread-2 has 12 tickets</span><br><span class="line">pool-1-thread-1 has 11 tickets</span><br><span class="line">pool-1-thread-1 has 10 tickets</span><br><span class="line">pool-1-thread-2 has 9 tickets</span><br><span class="line">pool-1-thread-1 has 8 tickets</span><br><span class="line">pool-1-thread-2 has 7 tickets</span><br><span class="line">pool-1-thread-2 has 6 tickets</span><br><span class="line">pool-1-thread-1 has 5 tickets</span><br><span class="line">pool-1-thread-2 has 4 tickets</span><br><span class="line">pool-1-thread-1 has 3 tickets</span><br><span class="line">pool-1-thread-2 has 2 tickets</span><br><span class="line">pool-1-thread-1 has 1 tickets</span><br><span class="line">pool-1-thread-1 stopped.</span><br><span class="line">pool-1-thread-2 stopped.</span><br><span class="line">Thread pool is down</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="几种线程池的简介"><a href="#几种线程池的简介" class="headerlink" title="几种线程池的简介"></a>几种线程池的简介</h1><h2 id="固定线程池-Fixed-thread-pool"><a href="#固定线程池-Fixed-thread-pool" class="headerlink" title="固定线程池(Fixed thread pool)"></a>固定线程池 (Fixed thread pool)</h2><p>使用 <code>Executors.newFixedThreadPool(int nThreads)</code> 创建。</p>
+<p>该线程池维护着固定数量的线程 (nThreads 个)，在任何时间只允许最多 nThreads 个线程执行任务，多出来的任务将会在队列中等待，直到有空闲的线程出现。如果其中一个线程在执行过程中因为错误而异常退出，则线程池会立刻创建一个新的线程并执行后续的任务。</p>
+<p>该线程池在显式关闭 (<code>ExecutorService#shutdown</code>) 前将一直存在。</p>
+<h2 id="工作窃取线程池-Work-stealing-pool"><a href="#工作窃取线程池-Work-stealing-pool" class="headerlink" title="工作窃取线程池(Work stealing pool)"></a>工作窃取线程池 (Work stealing pool)</h2><p>使用 <code>Executors.newWorkStealingPool(int parallelism)</code> 或 <code>Executors.newWorkStealingPool()</code> 创建。</p>
 <p>该线程池无法保证各个被提交的任务将会以何种顺序执行。</p>
-<h3 id="newWorkStealingPool-int-parallelism"><a href="#newWorkStealingPool-int-parallelism" class="headerlink" title="newWorkStealingPool(int parallelism)"></a><code>newWorkStealingPool(int parallelism)</code></h3><p>该方法将根据给定的“并行量(parallelism)”，来创建一个包含足够数量线程的线程池，并会<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQxMzQzNTAxLzM4MzM4NTg=">使用多个队列来减少线程与队列的争抢<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>“并行量”的值对应于最多允许参与执行任务的线程数量。但实际存在的线程数可能会动态的增减。</p>
-<h3 id="Executors-newWorkStealingPool"><a href="#Executors-newWorkStealingPool" class="headerlink" title="Executors.newWorkStealingPool()"></a><code>Executors.newWorkStealingPool()</code></h3><p>将所有的“可用的处理器”的数目作为“并行量”来创建线程池。</p>
-<p>可用的处理器数量使用<code>Runtime.getRuntime().availableProcessors()</code>获取，<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzExODc4MDI4LzM4MzM4NTg=">其值等同于CPU中逻辑处理器的数量<i class="fa fa-external-link-alt"></i></span>。</p>
-<h2 id="有缓存的线程池-Cached-thread-pool"><a href="#有缓存的线程池-Cached-thread-pool" class="headerlink" title="有缓存的线程池(Cached thread pool)"></a>有缓存的线程池(Cached thread pool)</h2><p>使用<code>Executors.newCachedThreadPool()</code>创建。</p>
+<h3 id="newWorkStealingPool-int-parallelism"><a href="#newWorkStealingPool-int-parallelism" class="headerlink" title="newWorkStealingPool(int parallelism)"></a><code>newWorkStealingPool(int parallelism)</code></h3><p>该方法将根据给定的 “并行量 (parallelism)”，来创建一个包含足够数量线程的线程池，并会<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQxMzQzNTAxLzM4MzM4NTg=">使用多个队列来减少线程与队列的争抢<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>“并行量” 的值对应于最多允许参与执行任务的线程数量。但实际存在的线程数可能会动态的增减。</p>
+<h3 id="Executors-newWorkStealingPool"><a href="#Executors-newWorkStealingPool" class="headerlink" title="Executors.newWorkStealingPool()"></a><code>Executors.newWorkStealingPool()</code></h3><p>将所有的 “可用的处理器” 的数目作为 “并行量” 来创建线程池。</p>
+<p>可用的处理器数量使用 <code>Runtime.getRuntime().availableProcessors()</code> 获取，<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzExODc4MDI4LzM4MzM4NTg=">其值等同于 CPU 中逻辑处理器的数量<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="有缓存的线程池-Cached-thread-pool"><a href="#有缓存的线程池-Cached-thread-pool" class="headerlink" title="有缓存的线程池(Cached thread pool)"></a>有缓存的线程池 (Cached thread pool)</h2><p>使用 <code>Executors.newCachedThreadPool()</code> 创建。</p>
 <p>当接收到新的任务后，线程池会根据有无可用线程，来决定使用线程池中的空闲线程，或者在线程池中创建新的线程。</p>
-<p>如果线程池中有线程空置超过60秒，则该线程就会被终止并从线程池中移除。</p>
-<h2 id="可计划的线程池-Scheduled-thread-pool"><a href="#可计划的线程池-Scheduled-thread-pool" class="headerlink" title="可计划的线程池(Scheduled thread pool)"></a>可计划的线程池(Scheduled thread pool)</h2><p>使用<code>Executors.newScheduledThreadPool(int corePoolSize)</code>创建。<code>corePoolSize</code>为线程池中保持的线程数。</p>
+<p>如果线程池中有线程空置超过 60 秒，则该线程就会被终止并从线程池中移除。</p>
+<h2 id="可计划的线程池-Scheduled-thread-pool"><a href="#可计划的线程池-Scheduled-thread-pool" class="headerlink" title="可计划的线程池(Scheduled thread pool)"></a>可计划的线程池 (Scheduled thread pool)</h2><p>使用 <code>Executors.newScheduledThreadPool(int corePoolSize)</code> 创建。<code>corePoolSize</code> 为线程池中保持的线程数。</p>
 <p>该线程池可以指定一个延迟，或指定一个周期，并按照这个计划执行任务。</p>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuaWJtLmNvbS9kZXZlbG9wZXJ3b3Jrcy9saWJyYXJ5L2otanRwMDczMC9pbmRleC5odG1s">Thread pools and work queues<i class="fa fa-external-link-alt"></i></span></p>
 
@@ -335,7 +427,9 @@
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -345,59 +439,52 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/多线程/" rel="tag"># 多线程</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/java/fundamentals/java-multi-threading-concepts.html" rel="prev" title="Java多线程概念">
-      <i class="fa fa-chevron-left"></i> Java多线程概念
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="next" title="循序渐进写一个Servlet(2) - 第一个servlet">
-      循序渐进写一个Servlet(2) - 第一个servlet <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/java/fundamentals/java-multi-threading-concepts.html" rel="prev" title="Java 多线程概念">
+                  <i class="fa fa-chevron-left"></i> Java 多线程概念
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/java/Servlet/java-servlet-2-first-servlet.html" rel="next" title="循序渐进写一个 Servlet (2) - 第一个 servlet">
+                  循序渐进写一个 Servlet (2) - 第一个 servlet <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -406,7 +493,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -415,121 +502,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么需要线程池"><span class="nav-number">1.</span> <span class="nav-text">为什么需要线程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么使用线程池"><span class="nav-number">2.</span> <span class="nav-text">怎么使用线程池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几种线程池的简介"><span class="nav-number">3.</span> <span class="nav-text">几种线程池的简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#固定线程池-Fixed-thread-pool"><span class="nav-number">3.1.</span> <span class="nav-text">固定线程池(Fixed thread pool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作窃取线程池-Work-stealing-pool"><span class="nav-number">3.2.</span> <span class="nav-text">工作窃取线程池(Work stealing pool)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#newWorkStealingPool-int-parallelism"><span class="nav-number">3.2.1.</span> <span class="nav-text">newWorkStealingPool(int parallelism)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors-newWorkStealingPool"><span class="nav-number">3.2.2.</span> <span class="nav-text">Executors.newWorkStealingPool()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有缓存的线程池-Cached-thread-pool"><span class="nav-number">3.3.</span> <span class="nav-text">有缓存的线程池(Cached thread pool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可计划的线程池-Scheduled-thread-pool"><span class="nav-number">3.4.</span> <span class="nav-text">可计划的线程池(Scheduled thread pool)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -537,72 +522,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -611,36 +555,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

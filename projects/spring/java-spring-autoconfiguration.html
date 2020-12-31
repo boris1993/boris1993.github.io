@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,33 +22,34 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="在使用Spring Boot时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白Spring Boot自动配置的原理。">
-<meta name="keywords" content="Java,Spring Boot">
+<meta name="description" content="在使用 Spring Boot 时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白 Spring Boot 自动配置的原理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot 自动配置的原理">
 <meta property="og:url" content="https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在使用Spring Boot时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白Spring Boot自动配置的原理。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-20T03:43:20.425Z">
+<meta property="og:description" content="在使用 Spring Boot 时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白 Spring Boot 自动配置的原理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-20T02:00:43.000Z">
+<meta property="article:modified_time" content="2020-02-20T03:43:20.425Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot 自动配置的原理">
-<meta name="twitter:description" content="在使用Spring Boot时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白Spring Boot自动配置的原理。">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -55,9 +57,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>Spring Boot 自动配置的原理 | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Spring Boot 自动配置的原理 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -71,54 +72,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -132,17 +142,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -160,6 +164,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -175,13 +184,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -189,9 +197,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -199,6 +207,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootApplication%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">@SpringBootApplication 注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnableAutoConfiguration%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">@EnableAutoConfiguration 注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoConfigurationImportSelector%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">AutoConfigurationImportSelector 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">举例说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -207,19 +313,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -236,52 +345,40 @@
           Spring Boot 自动配置的原理
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-20 10:00:43 / 修改时间：11:43:20" itemprop="dateCreated datePublished" datetime="2020-02-20T10:00:43+08:00">2020-02-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/spring/java-spring-autoconfiguration.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring Boot 自动配置的原理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/spring/java-spring-autoconfiguration.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/spring/java-spring-autoconfiguration.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-02-20 10:00:43 / 修改时间：11:43:20" itemprop="dateCreated datePublished" datetime="2020-02-20T10:00:43+08:00">2020-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/spring/java-spring-autoconfiguration.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring Boot 自动配置的原理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -290,58 +387,50 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用Spring Boot时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白Spring Boot自动配置的原理。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用 Spring Boot 时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白 Spring Boot 自动配置的原理。</p>
 <a id="more"></a>
 
-<p>我这里就用一个简单的Eureka server的项目来举例。实际上只要是个Spring Boot项目就可以，我只是懒得再创建一个新的项目了。</p>
+<p>我这里就用一个简单的 Eureka server 的项目来举例。实际上只要是个 Spring Boot 项目就可以，我只是懒得再创建一个新的项目了。</p>
 <p>它的启动代码我们都很熟悉，是这样子的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(EurekaServer<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>东西很简单，一共就这么几行。我们看看<code>@SpringBootApplication</code>里面有什么？</p>
-<h2 id="SpringBootApplication注解"><a href="#SpringBootApplication注解" class="headerlink" title="@SpringBootApplication注解"></a>@SpringBootApplication注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123; <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter<span class="class">.<span class="keyword">class</span>),</span></span><br><span class="line"><span class="class">        @<span class="title">Filter</span>(<span class="title">type</span> </span>= FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter<span class="class">.<span class="keyword">class</span>) &#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">SpringBootApplication</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 因为里面的属性与本文关系不大，所以就略掉了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里我们可以看到一个<code>@EnableAutoConfiguration</code>注解，顾名思义，这个注解是用来开启自动配置的。我们继续深入进去看看。</p>
-<h2 id="EnableAutoConfiguration注解"><a href="#EnableAutoConfiguration注解" class="headerlink" title="@EnableAutoConfiguration注解"></a>@EnableAutoConfiguration注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import</span>(AutoConfigurationImportSelector<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">EnableAutoConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY = <span class="string">"spring.boot.enableautoconfiguration"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Exclude specific auto-configuration classes such that they will never be applied.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the classes to exclude</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Class&lt;?&gt;[] exclude() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Exclude specific auto-configuration class names such that they will never be</span></span><br><span class="line"><span class="comment">     * applied.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the class names to exclude</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.3.0</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] excludeName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个注解上面还有一大段的JavaDoc，因为篇幅太长，就不把全文放上来了。翻译过来的大意是这样的：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaServer</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        SpringApplication.run(EurekaServer.class, args);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>东西很简单，一共就这么几行。我们看看 <code>@SpringBootApplication</code> 里面有什么？</p>
+<h2 id="SpringBootApplication注解"><a href="#SpringBootApplication注解" class="headerlink" title="@SpringBootApplication注解"></a>@SpringBootApplication 注解</h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),</span></span><br><span class="line"><span class="meta">        @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication {</span><br><span class="line">    <span class="comment">// 因为里面的属性与本文关系不大，所以就略掉了</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这里我们可以看到一个 <code>@EnableAutoConfiguration</code> 注解，顾名思义，这个注解是用来开启自动配置的。我们继续深入进去看看。</p>
+<h2 id="EnableAutoConfiguration注解"><a href="#EnableAutoConfiguration注解" class="headerlink" title="@EnableAutoConfiguration注解"></a>@EnableAutoConfiguration 注解</h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(AutoConfigurationImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration {</span><br><span class="line"></span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY = <span class="string">"spring.boot.enableautoconfiguration"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Exclude specific auto-configuration classes such that they will never be applied.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the classes to exclude</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Class&lt;?&gt;[] exclude() <span class="keyword">default</span> {};</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Exclude specific auto-configuration class names such that they will never be</span></span><br><span class="line"><span class="comment">     * applied.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the class names to exclude</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.3.0</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] excludeName() <span class="keyword">default</span> {};</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这个注解上面还有一大段的 JavaDoc，因为篇幅太长，就不把全文放上来了。翻译过来的大意是这样的：</p>
 <blockquote>
-<p>这个注解可以启用Spring应用上下文的自动配置。开启这个配置后，Spring将会尝试猜测你需要的类，并进行配置。Spring通常会根据ClassPath和用户定义的bean来完成自动配置的操作。<br>举例来说，如果在你的ClassPath中出现了tomcat-embedded.jar，那么你很可能会需要TomcatServletWebServerFactory这个类，除非你自己定义了ServletWebServerFactory。</p>
+<p>这个注解可以启用 Spring 应用上下文的自动配置。开启这个配置后，Spring 将会尝试猜测你需要的类，并进行配置。Spring 通常会根据 ClassPath 和用户定义的 bean 来完成自动配置的操作。<br>举例来说，如果在你的 ClassPath 中出现了 tomcat-embedded.jar，那么你很可能会需要 TomcatServletWebServerFactory 这个类，除非你自己定义了 ServletWebServerFactory。</p>
 </blockquote>
-<p>看完JavaDoc，我们大概知道了Spring是怎么判断哪些类需要自动配置。那么我们继续深入源码。</p>
-<p>这里有两个注解比较重要：<code>@Import(AutoConfigurationImportSelector.class)</code>和<code>@AutoConfigurationPackage</code>。</p>
-<h2 id="AutoConfigurationImportSelector类"><a href="#AutoConfigurationImportSelector类" class="headerlink" title="AutoConfigurationImportSelector类"></a>AutoConfigurationImportSelector类</h2><p>Spring Boot应用启动过程中使用<code>ConfigurationClassParser</code>分析配置类时，如果发现注解中存在<code>@Import(ImportSelector)</code>的情况，就会创建一个相应的<code>ImportSelector</code>对象， 并调用其方法<code>public String[] selectImports(AnnotationMetadata annotationMetadata)</code>。所以我们就从<code>selectImports</code>方法开始看起。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isEnabled(annotationMetadata)) &#123;</span><br><span class="line">        <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从META-INF/spring-autoconfigure-metadata.properties中加载AutoConfigurationMetaData</span></span><br><span class="line">    AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取自动配置项</span></span><br><span class="line">    AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(autoConfigurationMetadata,annotationMetadata);</span><br><span class="line">    <span class="keyword">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面方法通过<code>getAutoConfigurationEntry</code>获取到了需要自动配置的项，那么它是怎么知道哪些东西需要自动配置的呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the &#123;<span class="doctag">@link</span> AutoConfigurationEntry&#125; based on the &#123;<span class="doctag">@link</span> AnnotationMetadata&#125;</span></span><br><span class="line"><span class="comment"> * of the importing &#123;<span class="doctag">@link</span> Configuration <span class="doctag">@Configuration</span>&#125; class.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> autoConfigurationMetadata the auto-configuration metadata</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> annotationMetadata the annotation metadata of the configuration class</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the auto-configurations that should be imported</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> AutoConfigurationEntry <span class="title">getAutoConfigurationEntry</span><span class="params">(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isEnabled(annotationMetadata)) &#123;</span><br><span class="line">        <span class="keyword">return</span> EMPTY_ENTRY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取到注解里面的属性</span></span><br><span class="line">    AnnotationAttributes attributes = getAttributes(annotationMetadata);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取到需要自动配置的类，并去重</span></span><br><span class="line">    List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">    configurations = removeDuplicates(configurations);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取得要排除在自动配置之外的类的列表，并将其排除</span></span><br><span class="line">    Set&lt;String&gt; exclusions = getExclusions(annotationMetadata, attributes);</span><br><span class="line">    checkExcludedClasses(configurations, exclusions);</span><br><span class="line">    configurations.removeAll(exclusions);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用过滤器AutoConfigurationImportFilter</span></span><br><span class="line">    configurations = filter(configurations, autoConfigurationMetadata);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 广播自动配置事件</span></span><br><span class="line">    fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面我们看到，Spring Boot通过<code>getCandidateConfigurations</code>方法找到了需要自动配置的类，那么它又是怎么工作的呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the auto-configuration class names that should be considered. By default</span></span><br><span class="line"><span class="comment"> * this method will load candidates using &#123;<span class="doctag">@link</span> SpringFactoriesLoader&#125; with</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> #getSpringFactoriesLoaderFactoryClass()&#125;.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> metadata the source metadata</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> attributes the &#123;<span class="doctag">@link</span> #getAttributes(AnnotationMetadata) annotation</span></span><br><span class="line"><span class="comment"> * attributes&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a list of candidate configurations</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;String&gt; <span class="title">getCandidateConfigurations</span><span class="params">(AnnotationMetadata metadata, AnnotationAttributes attributes)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 扫描ClassPath中所有的META-INF/spring.factories，并从中获取所有自动配置的类名</span></span><br><span class="line">    List&lt;String&gt; configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),</span><br><span class="line">            getBeanClassLoader());</span><br><span class="line">    Assert.notEmpty(configurations, <span class="string">"No auto configuration classes found in META-INF/spring.factories. If you "</span></span><br><span class="line">            + <span class="string">"are using a custom packaging, make sure that file is correct."</span>);</span><br><span class="line">    <span class="keyword">return</span> configurations;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the class used by &#123;<span class="doctag">@link</span> SpringFactoriesLoader&#125; to load configuration</span></span><br><span class="line"><span class="comment"> * candidates.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the factory class</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; getSpringFactoriesLoaderFactoryClass() &#123;</span><br><span class="line">    <span class="keyword">return</span> EnableAutoConfiguration<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> ClassLoader <span class="title">getBeanClassLoader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.beanClassLoader;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面<code>getCandidateConfigurations</code>方法又调用了<code>loadFactoryNames</code>方法来获取<code>EnableAutoConfiguration</code>注解相关的工厂类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The location to look for factories.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;Can be present in multiple JAR files.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String FACTORIES_RESOURCE_LOCATION = <span class="string">"META-INF/spring.factories"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Load the fully qualified class names of factory implementations of the</span></span><br><span class="line"><span class="comment"> * given type from &#123;<span class="doctag">@value</span> #FACTORIES_RESOURCE_LOCATION&#125;, using the given</span></span><br><span class="line"><span class="comment"> * class loader.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> factoryClass the interface or abstract class representing the factory</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> classLoader the ClassLoader to use for loading resources; can be</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> null&#125; to use the default</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IllegalArgumentException if an error occurs while loading factory names</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #loadFactories</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">loadFactoryNames</span><span class="params">(Class&lt;?&gt; factoryClass, @Nullable ClassLoader classLoader)</span> </span>&#123;</span><br><span class="line">    String factoryClassName = factoryClass.getName();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据上文我们知道，factoryClass传入的是EnableAutoConfiguration.class</span></span><br><span class="line">    <span class="comment">// 所以这里就是从spring.factories中寻找org.springframework.boot.autoconfigure.EnableAutoConfiguration对应的自动配置类</span></span><br><span class="line">    <span class="keyword">return</span> loadSpringFactories(classLoader).getOrDefault(factoryClassName, Collections.emptyList());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从ClassPath中寻找所有spring.factories文件，并将其包装成一个Properties对象</span></span><br><span class="line"><span class="comment"> * 然后把Properties对象里面的各个条目包装到一个Map&lt;String, List&lt;String&gt;&gt;对象中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, List&lt;String&gt;&gt; loadSpringFactories(<span class="meta">@Nullable</span> ClassLoader classLoader) &#123;</span><br><span class="line">    MultiValueMap&lt;String, String&gt; result = cache.get(classLoader);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Enumeration&lt;URL&gt; urls = (classLoader != <span class="keyword">null</span> ?</span><br><span class="line">                classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :</span><br><span class="line">                ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));</span><br><span class="line">        result = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (urls.hasMoreElements()) &#123;</span><br><span class="line">            URL url = urls.nextElement();</span><br><span class="line">            UrlResource resource = <span class="keyword">new</span> UrlResource(url);</span><br><span class="line">            Properties properties = PropertiesLoaderUtils.loadProperties(resource);</span><br><span class="line">            <span class="keyword">for</span> (Map.Entry&lt;?, ?&gt; entry : properties.entrySet()) &#123;</span><br><span class="line">                String factoryClassName = ((String) entry.getKey()).trim();</span><br><span class="line">                <span class="keyword">for</span> (String factoryName : StringUtils.commaDelimitedListToStringArray((String) entry.getValue())) &#123;</span><br><span class="line">                    result.add(factoryClassName, factoryName.trim());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cache.put(classLoader, result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Unable to load factories from location ["</span> +</span><br><span class="line">                FACTORIES_RESOURCE_LOCATION + <span class="string">"]"</span>, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>这里我们用<code>RedisAutoConfiguration</code>类来说明一个具体的自动配置类是如何工作的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> EnableAutoConfiguration Auto-configuration&#125; for Spring Data's Redis support.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Dave Syer</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Andy Wilkinson</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Christian Dupuis</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Christoph Strobl</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Phillip Webb</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Eddú Meléndez</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Stephane Nicoll</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Marco Aust</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Mark Paluch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">// 说明这是一个配置类</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(RedisOperations<span class="class">.<span class="keyword">class</span>) // 当<span class="title">RedisOperations</span>类存在时这个配置类才会生效</span></span><br><span class="line"><span class="class">@<span class="title">EnableConfigurationProperties</span>(<span class="title">RedisProperties</span>.<span class="title">class</span>) // 将配置文件的字段与<span class="title">RedisProperties</span>类绑定</span></span><br><span class="line"><span class="class">@<span class="title">Import</span>(</span>&#123; LettuceConnectionConfiguration<span class="class">.<span class="keyword">class</span>, <span class="title">JedisConnectionConfiguration</span>.<span class="title">class</span> &#125;) // 导入两个<span class="title">Redis</span>连接池的配置</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">RedisAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这里是初始化redisTemplate和stringRedisTemplate的代码，因为与本文无关，所以略掉了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>看完 JavaDoc，我们大概知道了 Spring 是怎么判断哪些类需要自动配置。那么我们继续深入源码。</p>
+<p>这里有两个注解比较重要：<code>@Import(AutoConfigurationImportSelector.class)</code> 和 <code>@AutoConfigurationPackage</code>。</p>
+<h2 id="AutoConfigurationImportSelector类"><a href="#AutoConfigurationImportSelector类" class="headerlink" title="AutoConfigurationImportSelector类"></a>AutoConfigurationImportSelector 类</h2><p>Spring Boot 应用启动过程中使用 <code>ConfigurationClassParser</code> 分析配置类时，如果发现注解中存在 <code>@Import(ImportSelector)</code> 的情况，就会创建一个相应的 <code>ImportSelector</code> 对象， 并调用其方法 <code>public String[] selectImports(AnnotationMetadata annotationMetadata)</code>。所以我们就从 <code>selectImports</code> 方法开始看起。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) {</span><br><span class="line">    <span class="keyword">if</span> (!isEnabled(annotationMetadata)) {</span><br><span class="line">        <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 从META-INF/spring-autoconfigure-metadata.properties中加载AutoConfigurationMetaData</span></span><br><span class="line">    AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取自动配置项</span></span><br><span class="line">    AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(autoConfigurationMetadata,annotationMetadata);</span><br><span class="line">    <span class="keyword">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面方法通过 <code>getAutoConfigurationEntry</code> 获取到了需要自动配置的项，那么它是怎么知道哪些东西需要自动配置的呢？</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the {<span class="doctag">@link</span> AutoConfigurationEntry} based on the {<span class="doctag">@link</span> AnnotationMetadata}</span></span><br><span class="line"><span class="comment"> * of the importing {<span class="doctag">@link</span> Configuration <span class="doctag">@Configuration</span>} class.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> autoConfigurationMetadata the auto-configuration metadata</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> annotationMetadata the annotation metadata of the configuration class</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the auto-configurations that should be imported</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> AutoConfigurationEntry <span class="title">getAutoConfigurationEntry</span><span class="params">(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (!isEnabled(annotationMetadata)) {</span><br><span class="line">        <span class="keyword">return</span> EMPTY_ENTRY;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取到注解里面的属性</span></span><br><span class="line">    AnnotationAttributes attributes = getAttributes(annotationMetadata);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取到需要自动配置的类，并去重</span></span><br><span class="line">    List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">    configurations = removeDuplicates(configurations);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取得要排除在自动配置之外的类的列表，并将其排除</span></span><br><span class="line">    Set&lt;String&gt; exclusions = getExclusions(annotationMetadata, attributes);</span><br><span class="line">    checkExcludedClasses(configurations, exclusions);</span><br><span class="line">    configurations.removeAll(exclusions);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用过滤器AutoConfigurationImportFilter</span></span><br><span class="line">    configurations = filter(configurations, autoConfigurationMetadata);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 广播自动配置事件</span></span><br><span class="line">    fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面我们看到，Spring Boot 通过 <code>getCandidateConfigurations</code> 方法找到了需要自动配置的类，那么它又是怎么工作的呢？</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the auto-configuration class names that should be considered. By default</span></span><br><span class="line"><span class="comment"> * this method will load candidates using {<span class="doctag">@link</span> SpringFactoriesLoader} with</span></span><br><span class="line"><span class="comment"> * {<span class="doctag">@link</span> #getSpringFactoriesLoaderFactoryClass()}.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> metadata the source metadata</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> attributes the {<span class="doctag">@link</span> #getAttributes(AnnotationMetadata) annotation</span></span><br><span class="line"><span class="comment"> * attributes}</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a list of candidate configurations</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;String&gt; <span class="title">getCandidateConfigurations</span><span class="params">(AnnotationMetadata metadata, AnnotationAttributes attributes)</span> </span>{</span><br><span class="line">    <span class="comment">// 扫描ClassPath中所有的META-INF/spring.factories，并从中获取所有自动配置的类名</span></span><br><span class="line">    List&lt;String&gt; configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),</span><br><span class="line">            getBeanClassLoader());</span><br><span class="line">    Assert.notEmpty(configurations, <span class="string">"No auto configuration classes found in META-INF/spring.factories. If you "</span></span><br><span class="line">            + <span class="string">"are using a custom packaging, make sure that file is correct."</span>);</span><br><span class="line">    <span class="keyword">return</span> configurations;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the class used by {<span class="doctag">@link</span> SpringFactoriesLoader} to load configuration</span></span><br><span class="line"><span class="comment"> * candidates.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the factory class</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; getSpringFactoriesLoaderFactoryClass() {</span><br><span class="line">    <span class="keyword">return</span> EnableAutoConfiguration.class;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> ClassLoader <span class="title">getBeanClassLoader</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.beanClassLoader;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面 <code>getCandidateConfigurations</code> 方法又调用了 <code>loadFactoryNames</code> 方法来获取 <code>EnableAutoConfiguration</code> 注解相关的工厂类。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The location to look for factories.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;Can be present in multiple JAR files.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String FACTORIES_RESOURCE_LOCATION = <span class="string">"META-INF/spring.factories"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Load the fully qualified class names of factory implementations of the</span></span><br><span class="line"><span class="comment"> * given type from {<span class="doctag">@value</span> #FACTORIES_RESOURCE_LOCATION}, using the given</span></span><br><span class="line"><span class="comment"> * class loader.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> factoryClass the interface or abstract class representing the factory</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> classLoader the ClassLoader to use for loading resources; can be</span></span><br><span class="line"><span class="comment"> * {<span class="doctag">@code</span> null} to use the default</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IllegalArgumentException if an error occurs while loading factory names</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #loadFactories</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">loadFactoryNames</span><span class="params">(Class&lt;?&gt; factoryClass, <span class="meta">@Nullable</span> ClassLoader classLoader)</span> </span>{</span><br><span class="line">    String factoryClassName = factoryClass.getName();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据上文我们知道，factoryClass传入的是EnableAutoConfiguration.class</span></span><br><span class="line">    <span class="comment">// 所以这里就是从spring.factories中寻找org.springframework.boot.autoconfigure.EnableAutoConfiguration对应的自动配置类</span></span><br><span class="line">    <span class="keyword">return</span> loadSpringFactories(classLoader).getOrDefault(factoryClassName, Collections.emptyList());</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从ClassPath中寻找所有spring.factories文件，并将其包装成一个Properties对象</span></span><br><span class="line"><span class="comment"> * 然后把Properties对象里面的各个条目包装到一个Map&lt;String, List&lt;String&gt;&gt;对象中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, List&lt;String&gt;&gt; loadSpringFactories(<span class="meta">@Nullable</span> ClassLoader classLoader) {</span><br><span class="line">    MultiValueMap&lt;String, String&gt; result = cache.get(classLoader);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        Enumeration&lt;URL&gt; urls = (classLoader != <span class="keyword">null</span> ?</span><br><span class="line">                classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :</span><br><span class="line">                ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));</span><br><span class="line">        result = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (urls.hasMoreElements()) {</span><br><span class="line">            URL url = urls.nextElement();</span><br><span class="line">            UrlResource resource = <span class="keyword">new</span> UrlResource(url);</span><br><span class="line">            Properties properties = PropertiesLoaderUtils.loadProperties(resource);</span><br><span class="line">            <span class="keyword">for</span> (Map.Entry&lt;?, ?&gt; entry : properties.entrySet()) {</span><br><span class="line">                String factoryClassName = ((String) entry.getKey()).trim();</span><br><span class="line">                <span class="keyword">for</span> (String factoryName : StringUtils.commaDelimitedListToStringArray((String) entry.getValue())) {</span><br><span class="line">                    result.add(factoryClassName, factoryName.trim());</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        cache.put(classLoader, result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">catch</span> (IOException ex) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Unable to load factories from location ["</span> +</span><br><span class="line">                FACTORIES_RESOURCE_LOCATION + <span class="string">"]"</span>, ex);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>这里我们用 <code>RedisAutoConfiguration</code> 类来说明一个具体的自动配置类是如何工作的。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * {<span class="doctag">@link</span> EnableAutoConfiguration Auto-configuration} for Spring Data's Redis support.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Dave Syer</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Andy Wilkinson</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Christian Dupuis</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Christoph Strobl</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Phillip Webb</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Eddú Meléndez</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Stephane Nicoll</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Marco Aust</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Mark Paluch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">// 说明这是一个配置类</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(RedisOperations.class)</span> <span class="comment">// 当RedisOperations类存在时这个配置类才会生效</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(RedisProperties.class)</span> <span class="comment">// 将配置文件的字段与RedisProperties类绑定</span></span><br><span class="line"><span class="meta">@Import({ LettuceConnectionConfiguration.class, JedisConnectionConfiguration.class })</span> <span class="comment">// 导入两个Redis连接池的配置</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisAutoConfiguration</span> </span>{</span><br><span class="line">    <span class="comment">// 这里是初始化redisTemplate和stringRedisTemplate的代码，因为与本文无关，所以略掉了</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>根据上文我们了解到的内容，我们可以推测出它是这样子被初始化的：</p>
 <ul>
-<li>首先Spring在<code>spring.factories</code>中，根据<code>EnableAutoConfiguration</code>发现了<code>org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration</code></li>
-<li>然后Spring会检查<code>RedisOperations</code>类是否存在于ClassPath中</li>
-<li>如果存在，则会从配置文件的<code>spring.redis</code>字段中取值，并初始化<code>RedisProperties</code></li>
-<li>然后根据<code>LettuceConnectionConfiguration</code>和<code>JedisConnectionConfiguration</code>中的条件，选择使用哪个连接池，并将其初始化</li>
+<li>首先 Spring 在 <code>spring.factories</code> 中，根据 <code>EnableAutoConfiguration</code> 发现了 <code>org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration</code></li>
+<li>然后 Spring 会检查 <code>RedisOperations</code> 类是否存在于 ClassPath 中</li>
+<li>如果存在，则会从配置文件的 <code>spring.redis</code> 字段中取值，并初始化 <code>RedisProperties</code></li>
+<li>然后根据 <code>LettuceConnectionConfiguration</code> 和 <code>JedisConnectionConfiguration</code> 中的条件，选择使用哪个连接池，并将其初始化</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上文的分析，我们知道了Spring在启动时，会加载一系列的配置类，并会根据配置类中指定的条件，来决定是否对其实施自动配置。</p>
-<p><code>xxAutoConfigurartion</code>这样的类是自动配置类，用于向容器中添加组件。</p>
-<p><code>xxProperties</code>这样的类是属性类，用于封装配置文件中的属性，并规定了Spring应该从配置文件的哪个字段取值用于初始化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上文的分析，我们知道了 Spring 在启动时，会加载一系列的配置类，并会根据配置类中指定的条件，来决定是否对其实施自动配置。</p>
+<p><code>xxAutoConfigurartion</code> 这样的类是自动配置类，用于向容器中添加组件。</p>
+<p><code>xxProperties</code> 这样的类是属性类，用于封装配置文件中的属性，并规定了 Spring 应该从配置文件的哪个字段取值用于初始化。</p>
 
     </div>
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -351,28 +440,24 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
@@ -380,30 +465,27 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/tools/git/git-commandline-unescape-chinese-characters.html" rel="prev" title="解决命令行中Git显示中文文件名乱码">
-      <i class="fa fa-chevron-left"></i> 解决命令行中Git显示中文文件名乱码
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/projects/spring/java-spring-bean-scopes.html" rel="next" title="Spring bean的作用域">
-      Spring bean的作用域 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/tools/git/git-commandline-unescape-chinese-characters.html" rel="prev" title="解决命令行中 Git 显示中文文件名乱码">
+                  <i class="fa fa-chevron-left"></i> 解决命令行中 Git 显示中文文件名乱码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/projects/spring/java-spring-bean-scopes.html" rel="next" title="Spring bean 的作用域">
+                  Spring bean 的作用域 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -412,7 +494,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -421,121 +503,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBootApplication注解"><span class="nav-number">1.</span> <span class="nav-text">@SpringBootApplication注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnableAutoConfiguration注解"><span class="nav-number">2.</span> <span class="nav-text">@EnableAutoConfiguration注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoConfigurationImportSelector类"><span class="nav-number">3.</span> <span class="nav-text">AutoConfigurationImportSelector类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举例说明"><span class="nav-number">4.</span> <span class="nav-text">举例说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -543,72 +523,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -617,36 +556,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>

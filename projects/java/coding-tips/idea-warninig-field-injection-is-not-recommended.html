@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
@@ -21,36 +22,37 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="前些天在开发过程中，发现IDEA在一个@Autowired注解上打了一个警告，内容是Field injection is not recommended。多年面向Spring开发的经验告诉我，使用@Autowired注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。">
-<meta name="keywords" content="Java,Spring">
+<meta name="description" content="前些天在开发过程中，发现 IDEA 在一个 @Autowired 注解上打了一个警告，内容是 Field injection is not recommended。多年面向 Spring 开发的经验告诉我，使用 @Autowired 注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDEA警告Field injection is not recommended">
+<meta property="og:title" content="IDEA 警告 Field injection is not recommended">
 <meta property="og:url" content="https://www.boris1993.com/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="前些天在开发过程中，发现IDEA在一个@Autowired注解上打了一个警告，内容是Field injection is not recommended。多年面向Spring开发的经验告诉我，使用@Autowired注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="前些天在开发过程中，发现 IDEA 在一个 @Autowired 注解上打了一个警告，内容是 Field injection is not recommended。多年面向 Spring 开发的经验告诉我，使用 @Autowired 注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.boris1993.com/images/idea-warninig-field-injection-is-not-recommended/warning-message.png">
 <meta property="og:image" content="https://www.boris1993.com/images/idea-warninig-field-injection-is-not-recommended/but-i-resist.png">
-<meta property="og:updated_time" content="2020-08-30T10:52:19.180Z">
+<meta property="article:published_time" content="2019-11-29T05:45:13.000Z">
+<meta property="article:modified_time" content="2020-08-30T10:52:19.180Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IDEA警告Field injection is not recommended">
-<meta name="twitter:description" content="前些天在开发过程中，发现IDEA在一个@Autowired注解上打了一个警告，内容是Field injection is not recommended。多年面向Spring开发的经验告诉我，使用@Autowired注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。">
 <meta name="twitter:image" content="https://www.boris1993.com/images/idea-warninig-field-injection-is-not-recommended/warning-message.png">
+
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -58,9 +60,8 @@
     isPost : true,
     lang   : 'zh-CN'
   };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <title>IDEA警告Field injection is not recommended | Code Life</title>
+</script><script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>IDEA 警告 Field injection is not recommended | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
     <script>
@@ -74,54 +75,63 @@
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Code Life</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">码农pilot的个人博客</p>
   </div>
@@ -135,17 +145,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -163,6 +167,11 @@
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-sitemap">
 
     <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
@@ -178,13 +187,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -192,9 +200,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -202,6 +210,104 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">警告信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">修改代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">依赖注入的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Efield%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="nav-number">3.1.</span> <span class="nav-text">基于 field 的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Esetter%E6%96%B9%E6%B3%95%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="nav-number">3.2.</span> <span class="nav-text">基于 setter 方法的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="nav-number">3.3.</span> <span class="nav-text">基于构造方法的注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Efield%E7%9A%84%E6%B3%A8%E5%85%A5%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">基于 field 的注入有什么问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Esetter%E7%9A%84%E6%B3%A8%E5%85%A5%E5%92%8C%E5%9F%BA%E4%BA%8E%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%B3%A8%E5%85%A5%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">基于 setter 的注入和基于构造方法的注入该怎么选择，有什么优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- side ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1056823357231661"
+     data-ad-slot="1718521250"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     //window.addEventListener('load', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     //});
+</script>
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -210,19 +316,22 @@
     <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -236,65 +345,53 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          IDEA警告Field injection is not recommended
+          IDEA 警告 Field injection is not recommended
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-29 13:45:13" itemprop="dateCreated datePublished" datetime="2019-11-29T13:45:13+08:00">2019-11-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index"><span itemprop="name">代码技巧</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" class="post-meta-item leancloud_visitors" data-flag-title="IDEA警告Field injection is not recommended" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
+        <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" itemprop="commentCount"></span>
-    </a>
-  </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-11-29 13:45:13" itemprop="dateCreated datePublished" datetime="2019-11-29T13:45:13+08:00">2019-11-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/coding-tips/" itemprop="url" rel="index"><span itemprop="name">代码技巧</span></a>
+        </span>
+    </span>
+
   
-  
+    <span id="/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html" class="post-meta-item leancloud_visitors" data-flag-title="IDEA 警告 Field injection is not recommended" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -303,66 +400,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前些天在开发过程中，发现IDEA在一个<code>@Autowired</code>注解上打了一个警告，内容是<code>Field injection is not recommended</code>。多年面向Spring开发的经验告诉我，使用<code>@Autowired</code>注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前些天在开发过程中，发现 IDEA 在一个 <code>@Autowired</code> 注解上打了一个警告，内容是 <code>Field injection is not recommended</code>。多年面向 Spring 开发的经验告诉我，使用 <code>@Autowired</code> 注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。</p>
 <a id="more"></a>
 
-<h2 id="警告信息"><a href="#警告信息" class="headerlink" title="警告信息"></a>警告信息</h2><p>这个警告，和警告的处理建议，在IDEA中是这么写的：</p>
+<h2 id="警告信息"><a href="#警告信息" class="headerlink" title="警告信息"></a>警告信息</h2><p>这个警告，和警告的处理建议，在 IDEA 中是这么写的：</p>
 <p><img src="/images/idea-warninig-field-injection-is-not-recommended/warning-message.png" alt="Warning Message"></p>
 <p>翻译过来是这个意思：</p>
 <blockquote>
-<p>不建议直接在字段上进行依赖注入。<br>Spring开发团队建议：在Java Bean中永远使用构造方法进行依赖注入。对于必须的依赖，永远使用断言来确认。</p>
+<p>不建议直接在字段上进行依赖注入。<br>Spring 开发团队建议：在 Java Bean 中永远使用构造方法进行依赖注入。对于必须的依赖，永远使用断言来确认。</p>
 </blockquote>
-<h2 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h2><p>既然IDE给了警告，那就先着手修改。一开始，代码是这样子的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span></span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DependencyClass aDependency;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h2><p>既然 IDE 给了警告，那就先着手修改。一开始，代码是这样子的：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span></span>{</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DependencyClass aDependency;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>根据提示，我将代码修改成了这样子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AClass</span><span class="params">(DependencyClass aDependency)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AClass</span><span class="params">(DependencyClass aDependency)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>然后警告就消失了，同时运行没有问题，说明这个修改是可行的。</p>
-<p>另外，如果你的项目中引入了<code>Lombok</code>，那么代码甚至可以精简成这样子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 该注解指示Lombok为所有没被初始化过的final的变量创建构造方法</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是，光是改好代码还远远不够，我需要知道，为什么Spring团队会提出这一项要求，以及，直接使用<code>@Autowired</code>进行依赖注入有什么问题。</p>
-<h2 id="依赖注入的类型"><a href="#依赖注入的类型" class="headerlink" title="依赖注入的类型"></a>依赖注入的类型</h2><p>经过我的了解，Spring有三种依赖注入的类型。</p>
-<h3 id="基于field的注入"><a href="#基于field的注入" class="headerlink" title="基于field的注入"></a>基于field的注入</h3><p>所谓基于field的注入，就是在变量上使用<code>@Autowired</code>注解进行依赖注入。这是我们最熟悉的一种方式，同时，也正是Spring团队所不推荐的方式。它用起来就像这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DependencyClass aDependency;</span><br></pre></td></tr></table></figure>
-
-<h3 id="基于setter方法的注入"><a href="#基于setter方法的注入" class="headerlink" title="基于setter方法的注入"></a>基于setter方法的注入</h3><p>通过<code>setter()</code>方法，以及在方法上加入<code>@Autowired</code>注解，来完成的依赖注入，就是基于setter方法的注入。它用起来就像这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setADependency</span><span class="params">(DependencyClass aDependency)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注：在<code>Spring 4.3</code>及以后的版本中，setter上面的<code>@Autowired</code>注解是可以不写的。</p>
-<h3 id="基于构造方法的注入"><a href="#基于构造方法的注入" class="headerlink" title="基于构造方法的注入"></a>基于构造方法的注入</h3><p>将各个必需的依赖全部放在带有<code>@Autowired</code>注解构造方法的参数中，并在构造方法中完成对应变量的初始化，这种方式，就是基于构造方法的注入。它用起来就像这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这里 final 修饰符并不是必须的，但是我喜欢这么做</span></span><br><span class="line">    <span class="comment">// 因为这样不仅可以在代码上防止 aDependency 被修改</span></span><br><span class="line">    <span class="comment">// 在语义上也可以表明 aDependency 是不应该被修改的</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AClass</span><span class="params">(DependencyClass aDependency)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注：在<code>Spring 4.3</code>及以后的版本中，如果这个类只有一个构造方法，那么这个构造方法上面也可以不写<code>@Autowired</code>注解。</p>
-<h2 id="基于field的注入有什么问题"><a href="#基于field的注入有什么问题" class="headerlink" title="基于field的注入有什么问题"></a>基于field的注入有什么问题</h2><p>基于field的注入，虽然不是绝对禁止使用，但是它可能会带来一些隐含的问题。比如，在<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3J1YW5nb25nMTIwMy9hcnRpY2xlL2RldGFpbHMvNTA5OTIxNDc=">这篇博客<i class="fa fa-external-link-alt"></i></span>中，作者给出了这样的一个代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> String school;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">UserAccountServiceImpl</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.school = user.getSchool();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初看起来好像没有什么问题，<code>User</code>类会被作为一个依赖被注入到当前类中，同时这个类的<code>school</code>属性将在初始化时通过<code>user.getSchool()</code>方法来获得值。但是，这个代码在运行时，却会抛出如下的异常：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;...&apos; defined in file [....class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [...]: Constructor threw exception; nested exception is java.lang.NullPointerException</span><br></pre></td></tr></table></figure>
-
-<p>即，在执行<code>UserAccountServiceImpl()</code>这个构造方法时出现了NPE。</p>
-<p>出现这个问题的原因是，Java在初始化一个类时，是按照<code>静态变量或静态语句块 –&gt; 实例变量或初始化语句块 –&gt; 构造方法 -&gt; @Autowired</code>的顺序<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Spring Bean: Is autowired attribute initialised before constructor?](https://stackoverflow.com/a/26231555/3833858)
-">[1]</span></a></sup>，那么显而易见，在执行这个类的构造方法时，<code>user</code>对象尚未被注入，它的值还是<code>null</code>，从而产生了NPE。</p>
-<p>此外，在代码质量方面，因为基于field的注入用起来实在是太方便了，增加一个依赖只需要声明一个变量，然后给它加上<code>@Autowired</code>注解，就可以了。而这份便利，有可能会导致这个类的依赖变得越来越多，功能越来越杂，最终违反了单一功能原则。这虽然不会导致功能异常，但是这将增大后续维护的难度。（话虽然这么说，就算我用了基于构造方法的注入，但是用Lombok简化了构造方法，这么一来，增加一个依赖又变得更方便了，只需要加一行变量声明就行，如果在不注重代码质量的时候，这也会加剧类的膨胀。所以最后还是得靠工具和审查流程，以及开发者的自觉，来保证代码质量……）</p>
-<p>还有一点我个人的感受，就是基于field的注解会占据过多的屏幕空间。按照我个人的代码习惯，每个注入之间都要插入一行空行，来把它们分割开来。这意味着，每个注入都将占据3行。如果这个类有过多的依赖，那么很有可能光是依赖注入的部分，就会占据大半个屏幕，这会让我看起来很不舒服。当然，出现这种情况，可能同时也意味着这个类已经过于膨胀，违反单一功能原则了。</p>
-<h2 id="基于setter的注入和基于构造方法的注入该怎么选择，有什么优点"><a href="#基于setter的注入和基于构造方法的注入该怎么选择，有什么优点" class="headerlink" title="基于setter的注入和基于构造方法的注入该怎么选择，有什么优点"></a>基于setter的注入和基于构造方法的注入该怎么选择，有什么优点</h2><p>对于两种注入方式的取舍，Spring开发团队提供了他们的意见<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Setter-based dependency injection](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/beans.html#beans-setter-injection)
+<p>另外，如果你的项目中引入了 <code>Lombok</code>，那么代码甚至可以精简成这样子：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 该注解指示Lombok为所有没被初始化过的final的变量创建构造方法</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>但是，光是改好代码还远远不够，我需要知道，为什么 Spring 团队会提出这一项要求，以及，直接使用 <code>@Autowired</code> 进行依赖注入有什么问题。</p>
+<h2 id="依赖注入的类型"><a href="#依赖注入的类型" class="headerlink" title="依赖注入的类型"></a>依赖注入的类型</h2><p>经过我的了解，Spring 有三种依赖注入的类型。</p>
+<h3 id="基于field的注入"><a href="#基于field的注入" class="headerlink" title="基于field的注入"></a>基于 field 的注入</h3><p>所谓基于 field 的注入，就是在变量上使用 <code>@Autowired</code> 注解进行依赖注入。这是我们最熟悉的一种方式，同时，也正是 Spring 团队所不推荐的方式。它用起来就像这样：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DependencyClass aDependency;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="基于setter方法的注入"><a href="#基于setter方法的注入" class="headerlink" title="基于setter方法的注入"></a>基于 setter 方法的注入</h3><p>通过 <code>setter()</code> 方法，以及在方法上加入 <code>@Autowired</code> 注解，来完成的依赖注入，就是基于 setter 方法的注入。它用起来就像这样：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setADependency</span><span class="params">(DependencyClass aDependency)</span> </span>{</span><br><span class="line">    <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注：在 <code>Spring 4.3</code> 及以后的版本中，setter 上面的 <code>@Autowired</code> 注解是可以不写的。</p>
+<h3 id="基于构造方法的注入"><a href="#基于构造方法的注入" class="headerlink" title="基于构造方法的注入"></a>基于构造方法的注入</h3><p>将各个必需的依赖全部放在带有 <code>@Autowired</code> 注解构造方法的参数中，并在构造方法中完成对应变量的初始化，这种方式，就是基于构造方法的注入。它用起来就像这样：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AClass</span> </span>{</span><br><span class="line">    <span class="comment">// 这里 final 修饰符并不是必须的，但是我喜欢这么做</span></span><br><span class="line">    <span class="comment">// 因为这样不仅可以在代码上防止 aDependency 被修改</span></span><br><span class="line">    <span class="comment">// 在语义上也可以表明 aDependency 是不应该被修改的</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DependencyClass aDependency;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AClass</span><span class="params">(DependencyClass aDependency)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.aDependency = aDependency;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注：在 <code>Spring 4.3</code> 及以后的版本中，如果这个类只有一个构造方法，那么这个构造方法上面也可以不写 <code>@Autowired</code> 注解。</p>
+<h2 id="基于field的注入有什么问题"><a href="#基于field的注入有什么问题" class="headerlink" title="基于field的注入有什么问题"></a>基于 field 的注入有什么问题</h2><p>基于 field 的注入，虽然不是绝对禁止使用，但是它可能会带来一些隐含的问题。比如，在<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3J1YW5nb25nMTIwMy9hcnRpY2xlL2RldGFpbHMvNTA5OTIxNDc=">这篇博客<i class="fa fa-external-link-alt"></i></span>中，作者给出了这样的一个代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> String school;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">UserAccountServiceImpl</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">this</span>.school = user.getSchool();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>初看起来好像没有什么问题，<code>User</code> 类会被作为一个依赖被注入到当前类中，同时这个类的 <code>school</code> 属性将在初始化时通过 <code>user.getSchool()</code> 方法来获得值。但是，这个代码在运行时，却会抛出如下的异常：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread "main" org.springframework.beans.factory.BeanCreationException: Error creating bean with name '...' defined in file [....class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [...]: Constructor threw exception; nested exception is java.lang.NullPointerException</span><br></pre></td></tr></tbody></table></figure>
+<p>即，在执行 <code>UserAccountServiceImpl()</code> 这个构造方法时出现了 NPE。</p>
+<p>出现这个问题的原因是，Java 在初始化一个类时，是按照<code>静态变量或静态语句块 –&gt; 实例变量或初始化语句块 –&gt; 构造方法 -&gt; @Autowired</code> 的顺序 <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Spring Bean: Is autowired attribute initialised before constructor?](https://stackoverflow.com/a/26231555/3833858)
+">[1]</span></a></sup>，那么显而易见，在执行这个类的构造方法时，<code>user</code> 对象尚未被注入，它的值还是 <code>null</code>，从而产生了 NPE。</p>
+<p>此外，在代码质量方面，因为基于 field 的注入用起来实在是太方便了，增加一个依赖只需要声明一个变量，然后给它加上 <code>@Autowired</code> 注解，就可以了。而这份便利，有可能会导致这个类的依赖变得越来越多，功能越来越杂，最终违反了单一功能原则。这虽然不会导致功能异常，但是这将增大后续维护的难度。（话虽然这么说，就算我用了基于构造方法的注入，但是用 Lombok 简化了构造方法，这么一来，增加一个依赖又变得更方便了，只需要加一行变量声明就行，如果在不注重代码质量的时候，这也会加剧类的膨胀。所以最后还是得靠工具和审查流程，以及开发者的自觉，来保证代码质量……）</p>
+<p>还有一点我个人的感受，就是基于 field 的注解会占据过多的屏幕空间。按照我个人的代码习惯，每个注入之间都要插入一行空行，来把它们分割开来。这意味着，每个注入都将占据 3 行。如果这个类有过多的依赖，那么很有可能光是依赖注入的部分，就会占据大半个屏幕，这会让我看起来很不舒服。当然，出现这种情况，可能同时也意味着这个类已经过于膨胀，违反单一功能原则了。</p>
+<h2 id="基于setter的注入和基于构造方法的注入该怎么选择，有什么优点"><a href="#基于setter的注入和基于构造方法的注入该怎么选择，有什么优点" class="headerlink" title="基于setter的注入和基于构造方法的注入该怎么选择，有什么优点"></a>基于 setter 的注入和基于构造方法的注入该怎么选择，有什么优点</h2><p>对于两种注入方式的取舍，Spring 开发团队提供了他们的意见 <sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Setter-based dependency injection](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/beans.html#beans-setter-injection)
 ">[3]</span></a></sup>：</p>
 <blockquote>
 <p>Since you can mix constructor-based and setter-based DI, it is a good rule of thumb to use constructors for mandatory dependencies and setter methods or configuration methods for optional dependencies.</p>
 </blockquote>
 <p>简而言之，<code>对于必需的依赖，使用基于构造方法的注入；对于可选的依赖，使用基于setter的注入</code>。</p>
-<p>同时Spring开发团队也讲明了两种注入方式的优点。对于基于构造方法的注入，Spring团队是这么说的：</p>
+<p>同时 Spring 开发团队也讲明了两种注入方式的优点。对于基于构造方法的注入，Spring 团队是这么说的：</p>
 <blockquote>
-<p>The Spring team generally advocates constructor injection as it enables one to implement application components as immutable objects and to ensure that required dependencies are not null. Furthermore constructor-injected components are always returned to client (calling) code in a fully initialized state. As a side note, a large number of constructor arguments is a bad code smell, implying that the class likely has too many responsibilities and should be refactored to better address proper separation of concerns.<br>Spring团队提倡使用基于构造方法的注入，因为这样一方面可以将依赖注入到一个不可变的变量中(注：<code>final</code>修饰的变量)，另一方面也可以保证这些变量的值不会是null。此外，经过构造方法完成依赖注入的组件(注：比如各个<code>service</code>)，在被调用时可以保证它们都完全准备好了。与此同时，从代码质量的角度来看，一个巨大的构造方法通常代表着出现了代码异味，这个类可能承担了过多的责任。</p>
+<p>The Spring team generally advocates constructor injection as it enables one to implement application components as immutable objects and to ensure that required dependencies are not null. Furthermore constructor-injected components are always returned to client (calling) code in a fully initialized state. As a side note, a large number of constructor arguments is a bad code smell, implying that the class likely has too many responsibilities and should be refactored to better address proper separation of concerns.<br>Spring 团队提倡使用基于构造方法的注入，因为这样一方面可以将依赖注入到一个不可变的变量中 (注：<code>final</code> 修饰的变量)，另一方面也可以保证这些变量的值不会是 null。此外，经过构造方法完成依赖注入的组件 (注：比如各个 <code>service</code>)，在被调用时可以保证它们都完全准备好了。与此同时，从代码质量的角度来看，一个巨大的构造方法通常代表着出现了代码异味，这个类可能承担了过多的责任。</p>
 </blockquote>
-<p>而对于基于setter的注入，他们是这么说的：</p>
+<p>而对于基于 setter 的注入，他们是这么说的：</p>
 <blockquote>
-<p>Setter injection should primarily only be used for optional dependencies that can be assigned reasonable default values within the class. Otherwise, not-null checks must be performed everywhere the code uses the dependency. One benefit of setter injection is that setter methods make objects of that class amenable to reconfiguration or re-injection later.<br>基于setter的注入，则只应该被用于注入非必需的依赖，同时在类中应该对这个依赖提供一个合理的默认值。如果使用setter注入必需的依赖，那么将会有过多的null检查充斥在代码中。使用setter注入的一个优点是，这个依赖可以很方便的被改变或者重新注入。</p>
+<p>Setter injection should primarily only be used for optional dependencies that can be assigned reasonable default values within the class. Otherwise, not-null checks must be performed everywhere the code uses the dependency. One benefit of setter injection is that setter methods make objects of that class amenable to reconfiguration or re-injection later.<br>基于 setter 的注入，则只应该被用于注入非必需的依赖，同时在类中应该对这个依赖提供一个合理的默认值。如果使用 setter 注入必需的依赖，那么将会有过多的 null 检查充斥在代码中。使用 setter 注入的一个优点是，这个依赖可以很方便的被改变或者重新注入。</p>
 </blockquote>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>虽然上面洋洋洒洒写(chao)了那么多，又是分析优劣，又是分析场景的，但是按照我现在仅有的开发经验来看，好像怎么注入区别都不大(除了setter注入，这个我没用过)，要说我为什么一定要用构造方法注入，最大的原因其实就是为了去掉那个警告……</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>虽然上面洋洋洒洒写 (chao) 了那么多，又是分析优劣，又是分析场景的，但是按照我现在仅有的开发经验来看，好像怎么注入区别都不大 (除了 setter 注入，这个我没用过)，要说我为什么一定要用构造方法注入，最大的原因其实就是为了去掉那个警告……</p>
 <p>也有人说，都这么写习惯了，又没出啥问题，你把这个警告关了不就行了吗？我的回答是：</p>
 <p><img src="/images/idea-warninig-field-injection-is-not-recommended/but-i-resist.png" alt="だが断る！"></p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzI2MjMxNTU1LzM4MzM4NTg=">Spring Bean: Is autowired attribute initialised before constructor?<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly93d3cudm9qdGVjaHJ1emlja2EuY29tL2ZpZWxkLWRlcGVuZGVuY3ktaW5qZWN0aW9uLWNvbnNpZGVyZWQtaGFybWZ1bC8=">Field Dependency Injection Considered Harmful<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy80LjIueC9zcHJpbmctZnJhbWV3b3JrLXJlZmVyZW5jZS9odG1sL2JlYW5zLmh0bWwjYmVhbnMtc2V0dGVyLWluamVjdGlvbg==">Setter-based dependency injection<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
@@ -370,7 +457,9 @@
 
     
     
-    <!-- bottom ad -->
+    
+
+    <footer class="post-footer"><!-- bottom ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1056823357231661"
@@ -380,28 +469,24 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        <div class="reward-container">
+          <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
               <a href="/tags/Spring/" rel="tag"># Spring</a>
@@ -409,30 +494,27 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" rel="prev" title="使用FlatMap“展平”一系列数据">
-      <i class="fa fa-chevron-left"></i> 使用FlatMap“展平”一系列数据
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/database/mysql/brief-talk-about-mysql-collations.html" rel="next" title="浅谈MySQL中的校对规则(collation)">
-      浅谈MySQL中的校对规则(collation) <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html" rel="prev" title="使用 FlatMap “展平” 一系列数据">
+                  <i class="fa fa-chevron-left"></i> 使用 FlatMap “展平” 一系列数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/database/mysql/brief-talk-about-mysql-collations.html" rel="next" title="浅谈 MySQL 中的校对规则 (collation)">
+                  浅谈 MySQL 中的校对规则 (collation) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="valine-comments"></div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -441,7 +523,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -450,121 +532,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告信息"><span class="nav-number">1.</span> <span class="nav-text">警告信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改代码"><span class="nav-number">2.</span> <span class="nav-text">修改代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入的类型"><span class="nav-number">3.</span> <span class="nav-text">依赖注入的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于field的注入"><span class="nav-number">3.1.</span> <span class="nav-text">基于field的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于setter方法的注入"><span class="nav-number">3.2.</span> <span class="nav-text">基于setter方法的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于构造方法的注入"><span class="nav-number">3.3.</span> <span class="nav-text">基于构造方法的注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于field的注入有什么问题"><span class="nav-number">4.</span> <span class="nav-text">基于field的注入有什么问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于setter的注入和基于构造方法的注入该怎么选择，有什么优点"><span class="nav-number">5.</span> <span class="nav-text">基于setter的注入和基于构造方法的注入该怎么选择，有什么优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
-      src="/images/favicon/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">Boris Zhao</p>
-  <div class="site-description" itemprop="description">码农pilot的个人博客</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">71</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">72</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https://github.com/boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https://twitter.com/boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https://www.facebook.com/boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https://stackoverflow.com/users/3833858/boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https://www.instagram.com/boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- side ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1056823357231661"
-     data-ad-slot="1718521250"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     window.addEventListener('load', function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     });
-</script>
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
@@ -572,72 +552,31 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -646,36 +585,10 @@
 
   
 
-  
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : true,
-      notify     : true,
-      appId      : 'fbER9eCdhd4heP2Ll43kNkgh-MdYXbMMI',
-      appKey     : 'uabbKAfqSy1axz4g6vYHTCjg',
-      placeholder: "说点什么？",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : 'https://fbER9eCd.api.lncldglobal.com'
-    });
-  }, window.Valine);
-});
-</script>
+
+
 
 </body>
 </html>
