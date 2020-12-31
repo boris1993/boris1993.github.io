@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.boris1993.com/about/index.html</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     
     <lastmod>2020-08-30</lastmod>
@@ -124,13 +145,6 @@
     <loc>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</loc>
     
     <lastmod>2020-08-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/about/index.html</loc>
-    
-    <lastmod>2020-04-11</lastmod>
     
   </url>
   
@@ -345,21 +359,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2019-03-22</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
-    
-    <lastmod>2019-03-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
     
     <lastmod>2019-03-22</lastmod>
     

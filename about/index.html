@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://www.boincstats.com/signature/-1/bam/36477/sig.png">
 <meta property="og:image" content="https://signature.statseb.fr/sig-2504.png">
 <meta property="article:published_time" content="2017-11-18T18:01:51.000Z">
-<meta property="article:modified_time" content="2020-04-11T12:48:44.167Z">
+<meta property="article:modified_time" content="2020-12-31T08:26:04.765Z">
 <meta property="article:author" content="Boris Zhao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://www.boincstats.com/signature/-1/bam/36477/sig.png">
@@ -402,38 +402,6 @@
     
 
 
-      <div class="tabs tabs-comment">
-        <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-waline">waline</a></li>
-            <li class="tab"><a href="#comment-changyan">changyan</a></li>
-            <li class="tab"><a href="#comment-disqus">disqus</a></li>
-            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane waline" id="comment-waline">
-              <div class="comments" id="waline-comments"></div>
-            </div>
-            <div class="tab-pane changyan" id="comment-changyan">
-              
-  <div class="comments">
-    <div id="SOHUCS"></div>
-  </div>
-  
-            </div>
-            <div class="tab-pane disqus" id="comment-disqus">
-              
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-            </div>
-            <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
-            </div>
-        </div>
-      </div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -518,17 +486,6 @@ NexT.utils.loadComments('#waline-comments', () => {
   }, window.Waline);
 });
 </script>
-  <script>
-  NexT.utils.loadComments('#SOHUCS', () => {
-    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
-      window.changyan.api.config({
-        appid: 'cyvevYHUb',
-        conf : 'prod_78d9969cd5bf2f142cf7b8a721b7b1a5'
-      });
-    });
-  });
-  </script>
-  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
 
 <script>
   function loadCount() {
@@ -540,46 +497,7 @@ NexT.utils.loadComments('#waline-comments', () => {
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
 </script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://www.boris1993.com/about/index.html";
-    this.page.identifier = "about/index.html";
-    this.page.title = "About";
-    };
-  NexT.utils.loadComments('#disqus_thread', () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codelife-boris1993.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('#gitalk-container', () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'f443745e7b719bcde51f',
-      clientSecret: '6fe1f942516ec934f4eb004a1de3764457091065',
-      repo        : 'boris1993.github.io',
-      owner       : 'boris1993',
-      admin       : ['boris1993'],
-      id          : '3be7aa98d992907175cbd79c194399f2',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
