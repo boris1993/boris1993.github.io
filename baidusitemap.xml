@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</loc>
+    <lastmod>2021-01-05</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     <lastmod>2020-08-30</lastmod>
   </url>
