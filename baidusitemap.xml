@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</loc>
-    <lastmod>2021-01-05</lastmod>
+    <loc>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html</loc>
+    <lastmod>2021-11-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
+    <lastmod>2021-11-21</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
-    <lastmod>2020-08-30</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</loc>
-    <lastmod>2020-08-30</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
-    <lastmod>2020-08-30</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
-    <lastmod>2020-08-30</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-5-filter.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/database/oracle/install-oracle-12c-on-suse-linux.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/others/i-cried-just-now.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html</loc>
-    <lastmod>2020-08-30</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <lastmod>2021-11-04</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</loc>
-    <lastmod>2020-08-30</lastmod>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    <lastmod>2021-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</loc>
+    <lastmod>2021-03-27</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/coding-tips/gcp-logging-show-class-and-method-name.html</loc>
@@ -161,10 +185,6 @@
     <lastmod>2019-11-11</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/others/i-cried-just-now.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/tools/git/specify-different-git-config-for-different-environments.html</loc>
     <lastmod>2019-09-18</lastmod>
   </url>
@@ -201,19 +221,11 @@
     <lastmod>2019-03-22</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/database/oracle/uninstall-oracle-12c.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>
   <url>
@@ -257,10 +269,6 @@
     <lastmod>2019-03-22</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/tools/elk/install-elk-part-es.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>
@@ -273,19 +281,7 @@
     <lastmod>2019-03-22</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
-    <lastmod>2019-03-22</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2019-03-22</lastmod>
   </url>
 </urlset> 

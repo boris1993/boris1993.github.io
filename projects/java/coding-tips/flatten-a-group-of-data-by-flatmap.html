@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -12,8 +12,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
   <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
   <meta name="yandex-verification" content="4d238d70128aa114">
@@ -23,14 +21,11 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 FlatMap 简化这个操作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 FlatMap “展平” 一系列数据">
@@ -38,85 +33,43 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 FlatMap 简化这个操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/2-trim.png">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/3-distinct.png">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/4-sort.png">
-<meta property="og:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/5-collect.png">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mjnzXMe1Hu9kKDyoZs0-ya9vhkBEDyyQJEGJU7CgruMkLCfF9n2bF6C8TOK3mnocFtfEE-ERhzcraLje7tCW5sX8RMtrhn89r0IhEYIGtdSPxbtjTt9Kx3P-1IlJpn6Yw8Pew9nJii9vsltsOYzpWvquyRfnYjk11-HsVTM_2Yy7WLbJRj4lNABpnXFy964kN?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4m5-CuCOjIWhXmUC0GxcY1XldTIXeaBIugbnQ5LJLQyRdoaDws_wmNbdwRWDi6AejuIqgzD8yymiLDowp2n2njKBAH84HVQlHU7WVvNPzBz5NTIMXnOFt99-pk0e65Kwaf-Zgv9Xhe9lehJ7GMlvhP4LwNbcywk8BKGW8RE6g33rCi6ZbJ1sIlwohxoKewvRp0?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mGO9WRWONjJoWdUvXH-EjuJ26XAQww6Tr34xEwhSnwAYC79zbbyXCsnHsd6rSYLOm-VV9co-U1mNlXuCvY44KPmdyD7C8UHqNC9MShJhxtRIa6eMBeD0D1CsCwdEeKsSj8RPS520WxV21lTs2epW0OtI_YeMML_UBMTi2fbOUkf4TkUdkH7D_Wv7LhDF6Ry3C?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4m9bvFB01BkSl8FTtb7lzJYyO87lZ6MsMk15vL-vvrJZLUngSAyzjrSxNHwY5wBgF1SqeBsCxM23Mf5vGTH97Cm4w4X7EA7lbUOKTcs_FOxNTCSNB9F7Unt2s6hFpiXvuQCznsdK5qF0_6VERdLdTyN__tIT-nG8xyTwwSp4ZTZzlMqt3o1ExO0yWMnw6faxGB?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mVN-jVFTrSBuQNlzzQK5J0f0eby3DRf1fe2VmZ-K0ObR2rVqFLclifQEhLt6QEVA2Sxly-Ywkpu7lnarsZsbG4-czqsos7XTIgXCbMohbfXKSmcDU7ub_XC-v4c3gdKoo7e9Xu7AdGxhGtkdq1psUu7Dg_YEgmoI6CZY8vqe4mKjmB89UatioC2GIs1ETcGVV?width=1664&amp;height=952&amp;cropmode=none">
 <meta property="article:published_time" content="2019-09-26T08:30:56.000Z">
-<meta property="article:modified_time" content="2020-08-30T10:52:19.176Z">
+<meta property="article:modified_time" content="2021-11-04T17:01:13.157Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="代码技巧">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.boris1993.com/images/flatten-a-group-of-data-by-flatmap/0-split.png">
+<meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none">
 
 
 <link rel="canonical" href="https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html","path":"projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html","title":"使用 FlatMap “展平” 一系列数据"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>使用 FlatMap “展平” 一系列数据 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-136879050-1');
-      }
-    </script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false,"localhost_ignored":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com">
+<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -126,7 +79,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -145,7 +98,6 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -154,72 +106,22 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
 
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -239,12 +141,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">介绍需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">准备示例数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8%E6%B5%81%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">不使用流的做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">使用流的做法</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Boris Zhao"
       src="/images/favicon/avatar.jpeg">
@@ -254,22 +156,19 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">72</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">69</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -292,7 +191,7 @@
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
   </div>
 
 
@@ -306,7 +205,7 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -316,7 +215,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="返回顶部">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -368,7 +267,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-08-30 18:52:19" itemprop="dateModified" datetime="2020-08-30T18:52:19+08:00">2020-08-30</time>
+        <time title="修改时间：2021-11-05 01:01:13" itemprop="dateModified" datetime="2021-11-05T01:01:13+08:00">2021-11-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -451,7 +350,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 <code>FlatMap</code> 简化这个操作。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="介绍需求"><a href="#介绍需求" class="headerlink" title="介绍需求"></a>介绍需求</h2><p>假设现在有这样子的一个排班信息：</p>
 <table>
@@ -497,21 +396,24 @@
 <p>而目标是，从中取出这个表中的所有班组，并去重和排序，即最终的结果是 <code>Unit-1, Unit-2, Unit-3</code>。</p>
 <h2 id="准备示例数据"><a href="#准备示例数据" class="headerlink" title="准备示例数据"></a>准备示例数据</h2><p>在代码中，我们这样来构造这些数据：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 准备假数据</span></span><br><span class="line">WorkSchedule workSchedule1 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-01"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule2 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-02"</span>, <span class="string">"Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule3 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-03"</span>, <span class="string">"Unit-1, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule4 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-04"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule5 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-05"</span>, <span class="string">"Unit-3"</span>);</span><br><span class="line">WorkSchedule workSchedule6 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-06"</span>, <span class="string">"Unit-1, Unit-2"</span>);</span><br><span class="line">WorkSchedule workSchedule7 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-07"</span>, <span class="string">"Unit-1"</span>);</span><br><span class="line">WorkSchedule workSchedule8 = <span class="keyword">new</span> WorkSchedule(<span class="string">"2019-01-08"</span>, <span class="string">"Unit-2, Unit-3"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;WorkSchedule&gt; workSchedules = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">8</span>);</span><br><span class="line">workSchedules.add(workSchedule1);</span><br><span class="line">workSchedules.add(workSchedule2);</span><br><span class="line">workSchedules.add(workSchedule3);</span><br><span class="line">workSchedules.add(workSchedule4);</span><br><span class="line">workSchedules.add(workSchedule5);</span><br><span class="line">workSchedules.add(workSchedule6);</span><br><span class="line">workSchedules.add(workSchedule7);</span><br><span class="line">workSchedules.add(workSchedule8);</span><br></pre></td></tr></tbody></table></figure>
+
 <h2 id="不使用流的做法"><a href="#不使用流的做法" class="headerlink" title="不使用流的做法"></a>不使用流的做法</h2><p>如果不使用流，那么我们可以通过 <code>for</code> 循环取数据，和使用 <code>TreeSet</code> 实现去重和排序。</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;String&gt; unitNames = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (WorkSchedule workSchedule : workSchedules) {</span><br><span class="line">    String[] arrUnitName = workSchedule.getUnits().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String unitName : arrUnitName) {</span><br><span class="line">        unitNames.add(unitName.trim());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <h2 id="使用流的做法"><a href="#使用流的做法" class="headerlink" title="使用流的做法"></a>使用流的做法</h2><p>如果使用流，则可以这样做：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></tbody></table></figure>
+
 <p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢 <code>Intellij IDEA</code> 提供了这个强大的功能)</p>
 <p>首先，在 <code>map</code> 方法中，<code>List</code> 的每个元素都会根据逗号分隔，并生成一个 <code>String[]</code>对象。</p>
-<p><img src="/images/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none" alt="Split"></p>
 <p><code>flatmap</code> 方法会将上面 <code>map</code> 方法返回的各个流 “拼接” 成为一个流，即 “展平”。</p>
-<p><img src="/images/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mjnzXMe1Hu9kKDyoZs0-ya9vhkBEDyyQJEGJU7CgruMkLCfF9n2bF6C8TOK3mnocFtfEE-ERhzcraLje7tCW5sX8RMtrhn89r0IhEYIGtdSPxbtjTt9Kx3P-1IlJpn6Yw8Pew9nJii9vsltsOYzpWvquyRfnYjk11-HsVTM_2Yy7WLbJRj4lNABpnXFy964kN?width=1664&amp;height=952&amp;cropmode=none" alt="FlatMap"></p>
 <p>接下来继续使用 <code>map</code> 方法，对流中的每个元素进行 <code>trim</code> 操作。</p>
-<p><img src="/images/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4m5-CuCOjIWhXmUC0GxcY1XldTIXeaBIugbnQ5LJLQyRdoaDws_wmNbdwRWDi6AejuIqgzD8yymiLDowp2n2njKBAH84HVQlHU7WVvNPzBz5NTIMXnOFt99-pk0e65Kwaf-Zgv9Xhe9lehJ7GMlvhP4LwNbcywk8BKGW8RE6g33rCi6ZbJ1sIlwohxoKewvRp0?width=1664&amp;height=952&amp;cropmode=none" alt="Trim"></p>
 <p>然后调用 <code>distinct</code> 和 <code>sorted</code> 方法实现去重和排序。</p>
-<p><img src="/images/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img src="/images/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mGO9WRWONjJoWdUvXH-EjuJ26XAQww6Tr34xEwhSnwAYC79zbbyXCsnHsd6rSYLOm-VV9co-U1mNlXuCvY44KPmdyD7C8UHqNC9MShJhxtRIa6eMBeD0D1CsCwdEeKsSj8RPS520WxV21lTs2epW0OtI_YeMML_UBMTi2fbOUkf4TkUdkH7D_Wv7LhDF6Ry3C?width=1664&amp;height=952&amp;cropmode=none" alt="Distinct"><br><img data-src="https://sat02pap001files.storage.live.com/y4m9bvFB01BkSl8FTtb7lzJYyO87lZ6MsMk15vL-vvrJZLUngSAyzjrSxNHwY5wBgF1SqeBsCxM23Mf5vGTH97Cm4w4X7EA7lbUOKTcs_FOxNTCSNB9F7Unt2s6hFpiXvuQCznsdK5qF0_6VERdLdTyN__tIT-nG8xyTwwSp4ZTZzlMqt3o1ExO0yWMnw6faxGB?width=1664&amp;height=952&amp;cropmode=none" alt="Sort"></p>
 <p>最后，使用 <code>collect</code> 方法，将流中的数据 “收集” 到一个 <code>List</code> 中。</p>
-<p><img src="/images/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mVN-jVFTrSBuQNlzzQK5J0f0eby3DRf1fe2VmZ-K0ObR2rVqFLclifQEhLt6QEVA2Sxly-Ywkpu7lnarsZsbG4-czqsos7XTIgXCbMohbfXKSmcDU7ub_XC-v4c3gdKoo7e9Xu7AdGxhGtkdq1psUu7Dg_YEgmoI6CZY8vqe4mKjmB89UatioC2GIs1ETcGVV?width=1664&amp;height=952&amp;cropmode=none" alt="Collect"></p>
 
     </div>
 
@@ -541,16 +443,16 @@
 
           <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+  <button>
     赞赏
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
 
@@ -597,48 +499,20 @@
               <div class="comments" id="waline-comments"></div>
             </div>
             <div class="tab-pane changyan" id="comment-changyan">
-              
-  <div class="comments">
-    <div id="SOHUCS"></div>
-  </div>
-  
+              <div class="comments" id="SOHUCS"></div>
             </div>
             <div class="tab-pane disqus" id="comment-disqus">
               
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
             </div>
             <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+              <div class="comments gitalk-container"></div>
             </div>
         </div>
       </div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
@@ -654,39 +528,28 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
 
 
 
@@ -694,75 +557,22 @@
 <script>
 NexT.utils.loadComments('#waline-comments', () => {
   NexT.utils.getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js', () => {
-    new Waline(Object.assign({"enable":true,"serverURL":"https://valine-api.boris1993.com","placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":false,"requiredFields":[]}, {
+    new Waline(Object.assign({
+      lang: 'zh-CN'
+    }, {"enable":true,"serverURL":"https://valine-api.boris1993.com","placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":false,"requiredFields":[],"lang":null}, {
       el: '#waline-comments',
-      path: "/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html"
+      path: "/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html",
     }));
   }, window.Waline);
 });
-</script>
-  <script>
-  NexT.utils.loadComments('#SOHUCS', () => {
-    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
-      window.changyan.api.config({
-        appid: 'cyvevYHUb',
-        conf : 'prod_78d9969cd5bf2f142cf7b8a721b7b1a5'
-      });
-    });
-  });
-  </script>
-  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</script><script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvevYHUb","appkey":"prod_78d9969cd5bf2f142cf7b8a721b7b1a5"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"codelife-boris1993","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://codelife-boris1993.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html";
-    this.page.identifier = "projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html";
-    this.page.title = "使用 FlatMap “展平” 一系列数据";
-    };
-  NexT.utils.loadComments('#disqus_thread', () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codelife-boris1993.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('#gitalk-container', () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'f443745e7b719bcde51f',
-      clientSecret: '6fe1f942516ec934f4eb004a1de3764457091065',
-      repo        : 'boris1993.github.io',
-      owner       : 'boris1993',
-      admin       : ['boris1993'],
-      id          : '3b126c33e6ec7f14adef8eed63af3be7',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"boris1993","repo":"boris1993.github.io","client_id":"f443745e7b719bcde51f","client_secret":"6fe1f942516ec934f4eb004a1de3764457091065","admin_user":"boris1993","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"3b126c33e6ec7f14adef8eed63af3be7"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>

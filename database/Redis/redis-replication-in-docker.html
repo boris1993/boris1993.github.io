@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -12,8 +12,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
   <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
   <meta name="yandex-verification" content="4d238d70128aa114">
@@ -23,14 +21,11 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="这篇文章主要介绍如何使用 Docker 在本机搭建一个带有主从复制功能的 Redis 环境，内容包括涉及的目录结构、docker-compose.yml 的编写，以及结果的验证。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Docker 配置 Redis 主从复制">
@@ -48,67 +43,25 @@
 <link rel="canonical" href="https://www.boris1993.com/database/Redis/redis-replication-in-docker.html">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/database/Redis/redis-replication-in-docker.html","path":"database/Redis/redis-replication-in-docker.html","title":"使用 Docker 配置 Redis 主从复制"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>使用 Docker 配置 Redis 主从复制 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-136879050-1');
-      }
-    </script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false,"localhost_ignored":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com">
+<script data-ad-client="ca-pub-1056823357231661" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -118,7 +71,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -137,7 +90,6 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -146,72 +98,22 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
 
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -231,12 +133,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AERedis%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">配置 Redis 节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEmaster%E8%8A%82%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">配置 master 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEslave%E8%8A%82%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">配置 slave 节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">配置及启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99docker-compose-yml"><span class="nav-number">3.1.</span> <span class="nav-text">编写 docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">测试一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E5%88%97%E5%8D%9A%E6%96%87"><span class="nav-number">5.</span> <span class="nav-text">系列博文</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Boris Zhao"
       src="/images/favicon/avatar.jpeg">
@@ -246,22 +148,19 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">72</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">69</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -284,7 +183,7 @@
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-sa.svg" alt="Creative Commons"></span>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
   </div>
 
 
@@ -298,7 +197,7 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -308,7 +207,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="返回顶部">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -439,30 +338,39 @@
     
     <div class="post-body" itemprop="articleBody">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这篇文章主要介绍如何使用 Docker 在本机搭建一个带有主从复制功能的 Redis 环境，内容包括涉及的目录结构、<code>docker-compose.yml</code> 的编写，以及结果的验证。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>本文将采用如下的目录结构，其中 <code>data</code> 目录将用于存放各个容器的数据，<code>server</code> 目录存放 <code>docker-compose.yml</code> 以及针对 <code>master</code> 和 <code>slave</code> 节点的配置文件。</p>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    ├── redis-slave1.conf</span><br><span class="line">    └── redis-slave2.conf</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    ├── redis-slave1.conf</span><br><span class="line">    └── redis-slave2.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <h2 id="配置Redis节点"><a href="#配置Redis节点" class="headerlink" title="配置Redis节点"></a>配置 Redis 节点</h2><h3 id="配置master节点"><a href="#配置master节点" class="headerlink" title="配置master节点"></a>配置 <code>master</code> 节点</h3><p>编辑 <code>redis-master.conf</code>，修改下列配置：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6379</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS ""</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6379</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS ""</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br></pre></td></tr></tbody></table></figure>
+
 <h3 id="配置slave节点"><a href="#配置slave节点" class="headerlink" title="配置slave节点"></a>配置 <code>slave</code> 节点</h3><p>创建 <code>redis-slave1.conf</code>，修改下列配置：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6380</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS ""</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br><span class="line"></span><br><span class="line"># 配置master节点信息</span><br><span class="line"># 格式：</span><br><span class="line">#slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"># 此处masterip所指定的redis-server-master是运行master节点的容器名</span><br><span class="line"># Docker容器间可以使用容器名代替实际的IP地址来通信</span><br><span class="line">slaveof 127.0.0.1 6379</span><br><span class="line"></span><br><span class="line"># 设定连接主节点所使用的密码</span><br><span class="line">masterauth "redis"</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># 启用保护模式</span><br><span class="line"># 即在没有使用bind指令绑定具体地址时</span><br><span class="line"># 或在没有设定密码时</span><br><span class="line"># Redis将拒绝来自外部的连接</span><br><span class="line">protected-mode yes</span><br><span class="line"></span><br><span class="line"># 监听端口</span><br><span class="line">port 6380</span><br><span class="line"></span><br><span class="line"># 启动时不打印logo</span><br><span class="line"># 这个不重要，想看logo就打开它</span><br><span class="line">always-show-logo no</span><br><span class="line"></span><br><span class="line"># 设定密码认证</span><br><span class="line">requirepass redis</span><br><span class="line"></span><br><span class="line"># 禁用KEYS命令</span><br><span class="line"># 一方面 KEYS * 命令可以列出所有的键，会影响数据安全</span><br><span class="line"># 另一方面 KEYS 命令会阻塞数据库，在数据库中存储了大量数据时，该命令会消耗很长时间</span><br><span class="line"># 期间对Redis的访问也会被阻塞，而当锁释放的一瞬间，大量请求涌入Redis，会造成Redis直接崩溃</span><br><span class="line">rename-command KEYS ""</span><br><span class="line"></span><br><span class="line"># 此外还应禁止 FLUSHALL 和 FLUSHDB 命令</span><br><span class="line"># 这两个命令会清空数据，并且不会失败</span><br><span class="line"></span><br><span class="line"># 配置master节点信息</span><br><span class="line"># 格式：</span><br><span class="line">#slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line"># 此处masterip所指定的redis-server-master是运行master节点的容器名</span><br><span class="line"># Docker容器间可以使用容器名代替实际的IP地址来通信</span><br><span class="line">slaveof 127.0.0.1 6379</span><br><span class="line"></span><br><span class="line"># 设定连接主节点所使用的密码</span><br><span class="line">masterauth "redis"</span><br></pre></td></tr></tbody></table></figure>
+
 <p>创建 <code>redis-slave2.conf</code>，修改监听端口号为 <code>6381</code>，其余配置与 <code>redis-slave1.conf</code> 相同。</p>
 <h2 id="配置及启动容器"><a href="#配置及启动容器" class="headerlink" title="配置及启动容器"></a>配置及启动容器</h2><h3 id="编写docker-compose-yml"><a href="#编写docker-compose-yml" class="headerlink" title="编写docker-compose.yml"></a>编写 <code>docker-compose.yml</code></h3><p>本例中使用 <code>docker-compose</code> 编排相关容器。要说为什么不用 <code>Kubernetes</code>，那是因为对于一个示例来说这玩意太重了。<del>说的一套一套的还不是因为不会用</del></p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 主节点的容器</span></span><br><span class="line">  <span class="attr">redis-server-master:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="comment"># 为了规避Docker中端口映射可能带来的问题</span></span><br><span class="line">    <span class="comment"># 这里选择使用host网络</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># 指定时区，保证容器内时间正确</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># 映射配置文件和数据目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-master.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-master:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="comment"># 必要的内核参数</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br><span class="line">  <span class="comment"># 从节点1的容器</span></span><br><span class="line">  <span class="attr">redis-server-slave-1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-slave-1</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-slave1.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-slave-1:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br><span class="line">  <span class="comment"># 从节点2的容器</span></span><br><span class="line">  <span class="attr">redis-server-slave-2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-slave-2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-slave2.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-slave-2:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 主节点的容器</span></span><br><span class="line">  <span class="attr">redis-server-master:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="comment"># 为了规避Docker中端口映射可能带来的问题</span></span><br><span class="line">    <span class="comment"># 这里选择使用host网络</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># 指定时区，保证容器内时间正确</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># 映射配置文件和数据目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-master.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-master:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="comment"># 必要的内核参数</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br><span class="line">  <span class="comment"># 从节点1的容器</span></span><br><span class="line">  <span class="attr">redis-server-slave-1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-slave-1</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-slave1.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-slave-1:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br><span class="line">  <span class="comment"># 从节点2的容器</span></span><br><span class="line">  <span class="attr">redis-server-slave-2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis-server-slave-2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis-server-master</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">"Asia/Shanghai"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis-slave2.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">../data/redis-slave-2:/data</span></span><br><span class="line">    <span class="attr">sysctls:</span></span><br><span class="line">      <span class="attr">net.core.somaxconn:</span> <span class="string">'511'</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"redis-server"</span>, <span class="string">"/usr/local/etc/redis/redis.conf"</span>]</span><br></pre></td></tr></tbody></table></figure>
+
 <h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>在 <code>docker-compose.yml</code> 所在位置执行 <code>docker-compose up</code> 即可启动上述三个容器，<code>docker-compose</code> 会将容器日志打印到终端，在日志中可以看到三个 <code>Redis</code> 服务器在启动过程中的动作，以及从节点加入主节点的信息。</p>
 <p>启动成功后，可以在本机使用 <code>redis-cli</code> 连接至主节点。连接成功后，可以使用 <code>info replication</code> 命令检查主从复制的信息。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; info replication</span><br><span class="line"># Replication</span><br><span class="line">role:master</span><br><span class="line">connected_slaves:2</span><br><span class="line">slave0:ip=127.0.0.1,port=6381,state=online,offset=14,lag=1</span><br><span class="line">slave1:ip=127.0.0.1,port=6380,state=online,offset=14,lag=1</span><br><span class="line">master_replid:156ad6d206def2c9d423ef95f5311365d454f57d</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:14</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:1</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:1</span><br><span class="line">repl_backlog_histlen:14</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; info replication</span><br><span class="line"># Replication</span><br><span class="line">role:master</span><br><span class="line">connected_slaves:2</span><br><span class="line">slave0:ip=127.0.0.1,port=6381,state=online,offset=14,lag=1</span><br><span class="line">slave1:ip=127.0.0.1,port=6380,state=online,offset=14,lag=1</span><br><span class="line">master_replid:156ad6d206def2c9d423ef95f5311365d454f57d</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:14</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:1</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:1</span><br><span class="line">repl_backlog_histlen:14</span><br></pre></td></tr></tbody></table></figure>
+
 <p>其中第 5 行的 <code>role:master</code> 指示该节点为主节点，第 6 行的 <code>connected_slaves:2</code> 说明当前有 2 个从节点，第 7、8 行则是两个从节点的信息，包括它们的地址、端口号，和状态。</p>
 <p>如果此时查看该项目的目录结构，则可以发现在 <code>data</code> 目录中增加了三个 Redis 服务器的数据目录。</p>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│&nbsp;&nbsp; ├── redis-master</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── dump.rdb</span><br><span class="line">│&nbsp;&nbsp; ├── redis-slave-1</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── dump.rdb</span><br><span class="line">│&nbsp;&nbsp; └── redis-slave-2</span><br><span class="line">│&nbsp;&nbsp;     └── dump.rdb</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    └── redis-slave.conf</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│&nbsp;&nbsp; ├── redis-master</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── dump.rdb</span><br><span class="line">│&nbsp;&nbsp; ├── redis-slave-1</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── dump.rdb</span><br><span class="line">│&nbsp;&nbsp; └── redis-slave-2</span><br><span class="line">│&nbsp;&nbsp;     └── dump.rdb</span><br><span class="line">└── server</span><br><span class="line">    ├── docker-compose.yml</span><br><span class="line">    ├── redis-master.conf</span><br><span class="line">    └── redis-slave.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p>光是启动成功还不够，还需要测试一下从节点是否能同步主节点的数据。</p>
 <p>首先连接到主节点，新增一个 set：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set foo bar</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get foo</span><br><span class="line">"bar"</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set foo bar</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get foo</span><br><span class="line">"bar"</span><br></pre></td></tr></tbody></table></figure>
+
 <p>好的，在主节点里面成功添加了一条数据。那么接下来连接到 <code>slave-1</code>，看一下数据有没有同步过去：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get foo</span><br><span class="line">"bar"</span><br><span class="line">127.0.0.1:6380&gt; set foo baz</span><br><span class="line">(error) READONLY You can't write against a read only replica.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get foo</span><br><span class="line">"bar"</span><br><span class="line">127.0.0.1:6380&gt; set foo baz</span><br><span class="line">(error) READONLY You can't write against a read only replica.</span><br></pre></td></tr></tbody></table></figure>
+
 <p>看来 <code>slave-1</code> 成功的从主节点同步了数据，并且这个节点也按照设定，是一个只读的节点。那么 <code>slave-2</code> 呢？</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6381&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; get foo</span><br><span class="line">"bar"</span><br><span class="line">127.0.0.1:6381&gt; set foo baz</span><br><span class="line">(error) READONLY You can't write against a read only replica.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6381&gt; auth redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; get foo</span><br><span class="line">"bar"</span><br><span class="line">127.0.0.1:6381&gt; set foo baz</span><br><span class="line">(error) READONLY You can't write against a read only replica.</span><br></pre></td></tr></tbody></table></figure>
+
 <p>OK，<code>slave-2</code> 也成功的同步了数据，并且正在作为一个只读节点运行着。</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby90b3BpY3MvcmVwbGljYXRpb24jY29uZmlndXJpbmctcmVwbGljYXRpb24taW4tZG9ja2VyLWFuZC1uYXQ=">Configuring replication in Docker and NAT - Redis Replication Document<i class="fa fa-external-link-alt"></i></span></li>
@@ -500,16 +408,16 @@
 
           <div class="reward-container">
   <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
-  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+  <button>
     赞赏
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="/images/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
 
@@ -555,48 +463,20 @@
               <div class="comments" id="waline-comments"></div>
             </div>
             <div class="tab-pane changyan" id="comment-changyan">
-              
-  <div class="comments">
-    <div id="SOHUCS"></div>
-  </div>
-  
+              <div class="comments" id="SOHUCS"></div>
             </div>
             <div class="tab-pane disqus" id="comment-disqus">
               
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
             </div>
             <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+              <div class="comments gitalk-container"></div>
             </div>
         </div>
       </div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
@@ -612,39 +492,28 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
 
 
 
@@ -652,75 +521,22 @@
 <script>
 NexT.utils.loadComments('#waline-comments', () => {
   NexT.utils.getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js', () => {
-    new Waline(Object.assign({"enable":true,"serverURL":"https://valine-api.boris1993.com","placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":true,"comment_count":false,"requiredFields":[]}, {
+    new Waline(Object.assign({
+      lang: 'zh-CN'
+    }, {"enable":true,"serverURL":"https://valine-api.boris1993.com","placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":false,"requiredFields":[],"lang":null}, {
       el: '#waline-comments',
-      path: "/database/Redis/redis-replication-in-docker.html"
+      path: "/database/Redis/redis-replication-in-docker.html",
     }));
   }, window.Waline);
 });
-</script>
-  <script>
-  NexT.utils.loadComments('#SOHUCS', () => {
-    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
-      window.changyan.api.config({
-        appid: 'cyvevYHUb',
-        conf : 'prod_78d9969cd5bf2f142cf7b8a721b7b1a5'
-      });
-    });
-  });
-  </script>
-  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</script><script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvevYHUb","appkey":"prod_78d9969cd5bf2f142cf7b8a721b7b1a5"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"codelife-boris1993","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://codelife-boris1993.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://www.boris1993.com/database/Redis/redis-replication-in-docker.html";
-    this.page.identifier = "database/Redis/redis-replication-in-docker.html";
-    this.page.title = "使用 Docker 配置 Redis 主从复制";
-    };
-  NexT.utils.loadComments('#disqus_thread', () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codelife-boris1993.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('#gitalk-container', () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'f443745e7b719bcde51f',
-      clientSecret: '6fe1f942516ec934f4eb004a1de3764457091065',
-      repo        : 'boris1993.github.io',
-      owner       : 'boris1993',
-      admin       : ['boris1993'],
-      id          : 'b4fb7fe392a78d23f50e386a893de002',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"boris1993","repo":"boris1993.github.io","client_id":"f443745e7b719bcde51f","client_secret":"6fe1f942516ec934f4eb004a1de3764457091065","admin_user":"boris1993","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b4fb7fe392a78d23f50e386a893de002"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>
