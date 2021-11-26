@@ -1,86 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux/suppress-appending-to-nohup-out-message.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
-    <lastmod>2021-11-26</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-2-first-servlet.html</loc>
     <lastmod>2021-11-26</lastmod>
   </url>
@@ -185,15 +105,35 @@
     <lastmod>2021-11-26</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</loc>
     <lastmod>2021-11-26</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-linkedlist.html</loc>
+    <loc>https://www.boris1993.com/tools/ssh/ssh-config-file.html</loc>
     <lastmod>2021-11-26</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
+    <loc>https://www.boris1993.com/linux/suppress-appending-to-nohup-out-message.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-deploy-to-root.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/tomcat-servlet-context-listener.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/others/zos-xmit.html</loc>
     <lastmod>2021-11-26</lastmod>
   </url>
   <url>
@@ -286,6 +226,66 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-customized-annotations.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-gc-algorithms.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashcode-and-equals.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-linkedlist.html</loc>
+    <lastmod>2021-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
     <lastmod>2021-11-26</lastmod>
   </url>
 </urlset> 
