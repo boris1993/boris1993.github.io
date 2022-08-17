@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/programatically-call-jsr-303.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
-    <lastmod>2022-08-17</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/linux/shell-set-ex.html</loc>
     <lastmod>2022-08-17</lastmod>
   </url>
@@ -278,6 +246,38 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/programatically-call-jsr-303.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/database/Redis/redis-sentinel-in-docker.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/wxapp/scroll-view-auto-fit-height.html</loc>
+    <lastmod>2022-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/set-up-caddy-server.html</loc>
     <lastmod>2022-08-17</lastmod>
   </url>
   <url>
