@@ -3707,6 +3707,78 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>简单理解 NTP v3 协议</title>
+    <url>/others/understanding-ntp-protocol.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间瞎折腾，给自己的黑莓 Bold 9900 写了个通过 NTP 同步时间的小工具，顺便在这里记录一下我在实现一个 NTP 客户端时对这个协议的理解。</p>
+<span id="more"></span>
+
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>NTP 协议使用 UDP 作为传输层协议，服务器监听 UDP 端口 123，在收到有效的报文后，服务器会发送响应报文，否则服务器将直接忽略不做响应。</p>
+<h2 id="时间格式"><a href="#时间格式" class="headerlink" title="时间格式"></a>时间格式</h2><p>NTP 协议使用三种时间格式。</p>
+<h3 id="NTP短时间格式"><a href="#NTP短时间格式" class="headerlink" title="NTP短时间格式"></a>NTP 短时间格式</h3><p>短时间格式长度为 32 位，其中高 16 位代表从 NTP 时间戳 0 秒至现在的秒数，低 16 位代表 1 秒以内的分数部分。<br>这个格式只会在 NTP 报文的 delay 和 dispersion 字段中用到。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|          Seconds              |           Fraction            |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="NTP时间戳"><a href="#NTP时间戳" class="headerlink" title="NTP时间戳"></a>NTP 时间戳</h3><p>NTP 时间戳格式长度为 64 位，其中高 32 位代表从 NTP 时间戳 0 秒至现在的秒数，低 32 位代表 1 秒以内的分数部分。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                            Seconds                            |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                            Fraction                           |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="NTP日期格式"><a href="#NTP日期格式" class="headerlink" title="NTP日期格式"></a>NTP 日期格式</h3><p>NTP 日期格式长度为 128 位，其中高 32 位用来表示 NTP 时间纪元，然后用 32 位表示从当前纪元开始经过的秒数，最后用 64 位表示 1 秒以内的分数部分。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                           Era Number                          |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                           Era Offset                          |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                                                               |</span><br><span class="line">|                           Fraction                            |</span><br><span class="line">|                                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><p>一个 NTP v3 的报文必须包含如下字段：</p>
+<ul>
+<li><code>LI</code> - Leap Indicator，2 bit 整型数，指示当月最后一分钟是否包含闰秒</li>
+<li><code>VN</code> - Version Number，3 bit 整型数，指示 NTP 协议的版本号。如 NTP v3 就是 3。</li>
+<li><code>MODE</code> - 3 bit 整型数，指示发包方的工作模式。通常来说客户端使用 3 (client) 请求时间，服务端使用 4 (server) 返回时间。</li>
+<li><code>STRATUM</code> - 8 bit 整型数，代表 NTP 层数。0 代表时钟源，如装备有 GPS 接收机的主服务器；1-15 逐层作为下游服务器，16 被定义为 “无法同步”。</li>
+<li><code>POLL</code> - 8 bit 有符号整型数，代表在间隔多少秒后再进行下一次同步。值由 <code>log2(second)</code> 计算得出。</li>
+<li><code>PRECISION</code> - 8 bit 有符号整型数，代表系统时钟的精确度。</li>
+<li><code>ROOT DELAY</code> - NTP 短时间格式，指示从客户端到根服务器 (stratum 1 的服务器) 的延迟。</li>
+<li><code>ROOT DISPERSION</code> - NTP 短时间格式，指示数据从根服务器到客户端之间可能引入的误差。</li>
+<li><code>REFERENCE ID</code> - 32 bit 代码，用于标识一个特定的服务器，或一个参考时钟。<ul>
+<li>对于 stratum 0 的数据包，该字段为 4 个 ASCII 字符，称作 “kiss code”，用于调试和监控。</li>
+<li>对于 stratum 1 的数据包，该字段为参考时钟的标识符。标识符由 IANA 维护，此外以 “X” 开头的标识符都被预留给未注册的试验和开发用途。</li>
+<li>对于 stratum 2~15 的数据包，该字段为服务器的标识符。当服务器使用 IPv4 时，该字段为服务器的 IP 地址；当服务器使用 IPv6 时，该字段为 IPv6 地址的前四段。</li>
+</ul>
+</li>
+<li><code>REFERENCE TIMESTAMP</code> - NTP 时间戳格式，内容为客户端最后同步的时间。</li>
+<li><code>ORIGIN TIMESTAMP</code> - NTP 时间格式，内容为数据包离开客户端的时间。</li>
+<li><code>RECEIVE TIMESTAMP</code> - NTP 时间格式，内容为数据包抵达服务器的时间。</li>
+<li><code>TRANSMIT TIMESTAMP</code> - NTP 时间格式，内容为数据包离开服务器的时间。</li>
+<li><code>DESTINATION TIMESTAMP</code> - NTP 时间格式，内容为数据包抵达客户端的时间。<ul>
+<li>注：DESTINATION TIMESTAMP 并不会包含在数据包中，而是在客户端收到数据包之后，它的数值才会被确定。</li>
+</ul>
+</li>
+</ul>
+<p>那么全部组合起来，就是这个样子的：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|LI | VN  |Mode |    Stratum     |     Poll      |  Precision   |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                         Root Delay                            |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                         Root Dispersion                       |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                          Reference ID                         |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                                                               |</span><br><span class="line">+                     Reference Timestamp (64)                  +</span><br><span class="line">|                                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                                                               |</span><br><span class="line">+                      Origin Timestamp (64)                    +</span><br><span class="line">|                                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                                                               |</span><br><span class="line">+                      Receive Timestamp (64)                   +</span><br><span class="line">|                                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                                                               |</span><br><span class="line">+                      Transmit Timestamp (64)                  +</span><br><span class="line">|                                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然而上述字段并不需要全部填写数据，实际上除了 LI、VN、MODE、STRATUM 之外，剩下的所有字段都可以填零。如下就是一个我用来测试的数据包：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">HEX:</span><br><span class="line">DB 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></tbody></table></figure>
+
+<p>拆开来看的话：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">BIN:</span><br><span class="line">LI = 0b11 = 3 unknown (clock unsyncronized)</span><br><span class="line">VN = 0b011 = 3</span><br><span class="line">MODE = 0b011 = 3 client</span><br><span class="line">STRATUM = 0b00010000 = 16</span><br><span class="line">POLL = 0b00000000 = 0</span><br><span class="line">PRECISION = 0b00000000 = 0</span><br><span class="line">ROOT DELAY = 0b00000000000000000000000000000000</span><br><span class="line">ROOT DISPERSION = 0b00000000000000000000000000000000</span><br><span class="line">REFERENCE ID = 00000000000000000000000000000000</span><br><span class="line">REFERENCE TIMESTAMP = 00000000000000000000000000000000 00000000000000000000000000000000</span><br><span class="line">ORIGIN TIMESTAMP = 00000000000000000000000000000000 00000000000000000000000000000000</span><br><span class="line">RECEIVE TIMESTAMP = 00000000000000000000000000000000 00000000000000000000000000000000</span><br><span class="line">TRANSMIT TIMESTAMP = 00000000000000000000000000000000 00000000000000000000000000000000</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="计算second和fraction"><a href="#计算second和fraction" class="headerlink" title="计算second和fraction"></a>计算 second 和 fraction</h2><p>计算 second 很简单，取出 timestamp 的高 32 位就可以了；但是从 fraction 计算毫秒数比较麻烦，需要通过 <code>fraction * 10^6 / 2^32</code> 计算得到毫秒数。</p>
+<p>这里我给出一个 Java 的代码片段：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> seconds = (ntpTimestamp &gt;&gt;&gt; <span class="number">32</span>) &amp; <span class="number">0xFFFFFFFFL</span>;</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> secondsInMilliseconds = seconds * <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> fractionInTimestamp = (ntpTimestamp &amp; <span class="number">0xFFFFFFFFL</span>);</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> milliseconds = fractionInTimestamp * Math.pow(<span class="number">10</span>, <span class="number">6</span>) / Math.pow(<span class="number">2</span>, <span class="number">32</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后计算 1900 年 1 月 1 日 00:00:00 的 UNIX 时间戳作为基准 UNIX 时间戳，再加上 <code>secondsInMilliseconds</code> 和 <code>milliseconds</code>，就可以得到 NTP 返回的当前时间了。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmZjLWVkaXRvci5vcmcvcmZjL3JmYzU5MDU=">Network Time Protocol Version 4: Protocol and Algorithms Specification - RFC<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuamFubmV0LmhrL25ldHdvcmstdGltZS1wcm90b2NvbC1udHAtemgtaGFucy8=">Network Time Protocol (NTP) 网络时间协定 - Jan Ho 的网络世界<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1laW5iZXJnZ2xvYmFsLmNvbS8yMDIxLzAyLzI1L3RoZS1yb290LW9mLWFsbC10aW1pbmctdW5kZXJzdGFuZGluZy1yb290LWRlbGF5LWFuZC1yb290LWRpc3BlcnNpb24taW4tbnRwLw==">The Root of All Timing: Understanding root delay and root dispersion in NTP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3Rob21wc29ubmcuYmxvZ3Nwb3QuY29tLzIwMTAvMDQvbnRwLXRpbWVzdGFtcF8yMS5odG1s">NTP Timestamp - Thompson’s Technological Insight<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly90aWNrZWx0b24uZ2l0bGFiLmlvL2FydGljbGVzL250cC10aW1lc3RhbXBzLw==">A Very Short Introduction to NTP Timestamps<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My9ibGFja2JlcnJ5X3RpbWVfc3luY19udHAvYmxvYi9lYmMyMTE2YmM4ZGEzMDkwZTlhZGI2OGZlOTEzMmRjNDdmMzc1ODkzL3NyYy9jb20vYm9yaXMxOTkzL3RpbWVzeW5jbnRwL3V0aWxzL050cFBhY2tldFV0aWxzLmphdmEjTDMyLUw1Ng==">NtpPacketUtils#getNtpTimestampMilliseconds - blackberry_time_sync_ntp - GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>NTP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>常用 lsof 命令备忘</title>
     <url>/linux/useful-lsof-commands.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录 lsof 命令常见用法备忘</p>
