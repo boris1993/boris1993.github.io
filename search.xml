@@ -2852,6 +2852,38 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>使用 VisualVM 监控应用 GC</title>
+    <url>/projects/java/coding-tips/monitor-gc-with-visual-vm.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 <code>Visual GC</code> 来监控 Java 应用的垃圾回收情况。</p>
+<span id="more"></span>
+
+<h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装 <code>Visual GC</code> 插件</h2><p>因为 <code>Visual GC</code> 插件并不是随 VisualVM 附带的，需要到插件商店下载。</p>
+<p>点击 <code>Tools</code>–&gt;<code>Plugins</code> 打开插件管理窗口，进入 <code>Available Plugins</code>，在左侧窗格中勾选 <code>Visual GC</code>，点击 <code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启 VisualVM。</p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mB0xUlwCwxRs1OYG5s7tct4fE9O8mEfB9d0TDUtr3n-dLtE-kCUaRDqQ0oiM-gl9yeFJFfj7p8AW6-mbEIWUPzYqJzYHMVkuxJudzUxbdUIfvP1GM2H1hOpngIdNk8RLyEna53-JFT96lhfYwTcdP15fXhdg1ojlCh9VPH7IY5s1US0SW31s6_daVwATD9ZrS?width=1782&amp;height=1080&amp;cropmode=none" alt="Install Visual GC"></p>
+<h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在 VisualVM 的 <code>Applications</code> 窗格中双击要监控的应用，然后在右侧窗格中进入 <code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4m3cQpYqJKAIsE9_gLv8JNhyqspQZRDmVo1Pwduk0crZlHkwXcRf8koN4u-Gput6JysCToZgM_uj8BAEJmWuYMpUaZJpheamTxNJ7Fq169nZsDuwNJTTl23jm_4PwsNlA4lneLgFjN7NSDNE4JeObrFPhmQRrAWfVd4AF_R6xPlwtKC3ZuqbYA7uRAR1VLTz19?width=2880&amp;height=1644&amp;cropmode=none" alt="Monitor GC"></p>
+<p>窗格中的 <code>Spaces</code> 部分展示的是当前各个区域的占用情况；<code>Graphs</code> 部分则包括：</p>
+<ul>
+<li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li>
+<li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类 (<code>loaded</code>)，卸载了多少个类 (<code>unloaded</code>)，和累计用于类加载的时间</li>
+<li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li>
+<li><code>Eden Space</code>：Eden 区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li>
+<li><code>Survivor 0</code> 和 <code>Survivor 1</code>：两个 <code>Survivor</code> 区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li>
+<li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li>
+<li><code>Metaspace</code>：Metaspace 的空间 (如果使用的是 Java 1.7 及之前版本，这里则是 <code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+        <category>Java</category>
+        <category>代码技巧</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>VisualVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>让 MyBatis 把查询结果以 Map 形式返回</title>
     <url>/projects/mybatis/mybatis-return-query-results-in-a-map.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用 MyBatis 查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
@@ -3464,38 +3496,6 @@ reject_the_task --&gt; 结束
       <tags>
         <tag>Java</tag>
         <tag>Spring Boot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 VisualVM 监控应用 GC</title>
-    <url>/projects/java/coding-tips/monitor-gc-with-visual-vm.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 <code>Visual GC</code> 来监控 Java 应用的垃圾回收情况。</p>
-<span id="more"></span>
-
-<h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装 <code>Visual GC</code> 插件</h2><p>因为 <code>Visual GC</code> 插件并不是随 VisualVM 附带的，需要到插件商店下载。</p>
-<p>点击 <code>Tools</code>–&gt;<code>Plugins</code> 打开插件管理窗口，进入 <code>Available Plugins</code>，在左侧窗格中勾选 <code>Visual GC</code>，点击 <code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启 VisualVM。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mB0xUlwCwxRs1OYG5s7tct4fE9O8mEfB9d0TDUtr3n-dLtE-kCUaRDqQ0oiM-gl9yeFJFfj7p8AW6-mbEIWUPzYqJzYHMVkuxJudzUxbdUIfvP1GM2H1hOpngIdNk8RLyEna53-JFT96lhfYwTcdP15fXhdg1ojlCh9VPH7IY5s1US0SW31s6_daVwATD9ZrS?width=1782&amp;height=1080&amp;cropmode=none" alt="Install Visual GC"></p>
-<h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在 VisualVM 的 <code>Applications</code> 窗格中双击要监控的应用，然后在右侧窗格中进入 <code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4m3cQpYqJKAIsE9_gLv8JNhyqspQZRDmVo1Pwduk0crZlHkwXcRf8koN4u-Gput6JysCToZgM_uj8BAEJmWuYMpUaZJpheamTxNJ7Fq169nZsDuwNJTTl23jm_4PwsNlA4lneLgFjN7NSDNE4JeObrFPhmQRrAWfVd4AF_R6xPlwtKC3ZuqbYA7uRAR1VLTz19?width=2880&amp;height=1644&amp;cropmode=none" alt="Monitor GC"></p>
-<p>窗格中的 <code>Spaces</code> 部分展示的是当前各个区域的占用情况；<code>Graphs</code> 部分则包括：</p>
-<ul>
-<li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li>
-<li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类 (<code>loaded</code>)，卸载了多少个类 (<code>unloaded</code>)，和累计用于类加载的时间</li>
-<li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li>
-<li><code>Eden Space</code>：Eden 区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li>
-<li><code>Survivor 0</code> 和 <code>Survivor 1</code>：两个 <code>Survivor</code> 区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li>
-<li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li>
-<li><code>Metaspace</code>：Metaspace 的空间 (如果使用的是 Java 1.7 及之前版本，这里则是 <code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li>
-</ul>
-]]></content>
-      <categories>
-        <category>学习记录</category>
-        <category>Java</category>
-        <category>代码技巧</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>VisualVM</tag>
       </tags>
   </entry>
   <entry>
