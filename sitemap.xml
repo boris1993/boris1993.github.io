@@ -2,21 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
+    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
+    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
+    <loc>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/programatically-call-jsr-303.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -149,6 +184,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/manifest.json</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/about/index.html</loc>
     
     <lastmod>2022-09-19</lastmod>
@@ -157,6 +199,97 @@
   
   <url>
     <loc>https://www.boris1993.com/categories/index.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/database/mysql/column-flags-in-mysql-workbench.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -416,139 +549,6 @@
   
   <url>
     <loc>https://www.boris1993.com/linux/linux-server-security-measures.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/ssh/macos-install-x11-client.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/maven/maven-configure-mirrors.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/mybatis/mybatis-return-query-results-in-a-map.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/mysql/mysql-convert-tables-and-columns-collation.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/programatically-call-jsr-303.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/dnsmasq/build-dns-server-on-macos.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/caddy/caddy-and-github-custom-domain.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/others/change-google-play-market-location.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/database/mysql/column-flags-in-mysql-workbench.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tools/tomcat/customize-context-xml-for-individual-webapp.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
