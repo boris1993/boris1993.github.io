@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
-    <lastmod>2022-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    <lastmod>2022-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    <lastmod>2022-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    <lastmod>2022-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
-    <lastmod>2022-09-19</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
@@ -109,11 +89,11 @@
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
@@ -173,11 +153,11 @@
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/others/understanding-ntp-protocol.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/others/understanding-ntp-protocol.html</loc>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
@@ -285,6 +265,10 @@
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
+    <lastmod>2022-09-19</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
@@ -293,7 +277,23 @@
     <lastmod>2022-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
+    <lastmod>2022-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <lastmod>2022-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <lastmod>2022-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <lastmod>2022-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     <lastmod>2022-09-19</lastmod>
   </url>
 </urlset> 

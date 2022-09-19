@@ -23,41 +23,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
     
     <lastmod>2022-09-19</lastmod>
@@ -212,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
+    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tools/git/push-to-multi-git-repo.html</loc>
+    <loc>https://www.boris1993.com/database/Redis/redis-replication-in-docker.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -324,14 +289,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
+    <loc>https://www.boris1993.com/others/understanding-ntp-protocol.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/others/understanding-ntp-protocol.html</loc>
+    <loc>https://www.boris1993.com/linux/useful-lsof-commands.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -534,6 +499,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
     
     <lastmod>2022-09-19</lastmod>
@@ -548,7 +520,35 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</loc>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -578,13 +578,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/MySQL/</loc>
-    <lastmod>2022-09-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tags/Java/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
@@ -593,6 +586,13 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/JVM/</loc>
+    <lastmod>2022-09-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/MySQL/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -851,14 +851,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
+    <loc>https://www.boris1993.com/tags/%E5%86%85%E9%83%A8%E7%B1%BB/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/%E5%86%85%E9%83%A8%E7%B1%BB/</loc>
+    <loc>https://www.boris1993.com/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1068,14 +1068,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/lsof/</loc>
+    <loc>https://www.boris1993.com/tags/NTP/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/NTP/</loc>
+    <loc>https://www.boris1993.com/tags/lsof/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1126,14 +1126,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/database/</loc>
+    <loc>https://www.boris1993.com/categories/projects/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/projects/</loc>
+    <loc>https://www.boris1993.com/categories/database/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1154,7 +1154,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/database/mysql/</loc>
+    <loc>https://www.boris1993.com/categories/projects/java/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1162,6 +1162,13 @@
   
   <url>
     <loc>https://www.boris1993.com/categories/tools/dnsmasq/</loc>
+    <lastmod>2022-09-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/categories/database/mysql/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1182,13 +1189,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/projects/java/</loc>
-    <lastmod>2022-09-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/categories/tools/tomcat/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
@@ -1203,13 +1203,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/tools/elk/</loc>
-    <lastmod>2022-09-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/categories/projects/java/fundamentals/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
@@ -1217,14 +1210,28 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
+    <loc>https://www.boris1993.com/categories/projects/java/coding-tips/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/projects/java/coding-tips/</loc>
+    <loc>https://www.boris1993.com/categories/projects/java/jdbc/</loc>
+    <lastmod>2022-09-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/categories/tools/elk/</loc>
+    <lastmod>2022-09-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/categories/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1253,13 +1260,6 @@
   
   <url>
     <loc>https://www.boris1993.com/categories/tools/maven/</loc>
-    <lastmod>2022-09-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/categories/projects/java/jdbc/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
