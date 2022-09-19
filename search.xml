@@ -1131,37 +1131,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java 的内部类和 private 修饰符</title>
-    <url>/projects/java/fundamentals/java-inner-class-and-private-identifier.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
-<p>本文将通过一个小例子，来演示怎么让 <code>private</code> 修饰符 “失效”，以及它为什么会 “失效”。</p>
-<span id="more"></span>
-
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>废话不多说，先写一段代码：</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String outerClassName = <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>{</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printOuterClassName</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line">        OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>上面的代码是不是感觉有一丝异样？为什么在内部类里，能直接访问到外部类的 <code>private</code> 属性？难道 <code>private</code> 修饰符真的 “失效” 了？</p>
-<p>别急，待我们把这个 class 反编译了，从字节码层面来看看它到底有什么猫腻。毕竟，字节码可不会骗人。</p>
-<h2 id="反编译外部类"><a href="#反编译外部类" class="headerlink" title="反编译外部类"></a>反编译外部类</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ javap -c OuterClass.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass {</span><br><span class="line">  public com.boris1993.OuterClass();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       4: aload_0</span><br><span class="line">       5: ldc           <span class="comment">#3                  // String outerClass</span></span><br><span class="line">       7: putfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">      10: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           <span class="comment">#4                  // class com/boris1993/OuterClass</span></span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial <span class="comment">#5                  // Method "&lt;init&gt;":()V</span></span><br><span class="line">       7: astore_1</span><br><span class="line">       8: new           <span class="comment">#6                  // class com/boris1993/OuterClass$InnerClass</span></span><br><span class="line">      11: dup</span><br><span class="line">      12: aload_1</span><br><span class="line">      13: dup</span><br><span class="line">      14: invokevirtual <span class="comment">#7                  // Method java/lang/Object.getClass:()Ljava/lang/Class;</span></span><br><span class="line">      17: pop</span><br><span class="line">      18: invokespecial <span class="comment">#8                  // Method com/boris1993/OuterClass$InnerClass."&lt;init&gt;":(Lcom/boris1993/OuterClass;)V</span></span><br><span class="line">      21: astore_2</span><br><span class="line">      22: aload_2</span><br><span class="line">      23: invokevirtual <span class="comment">#9                  // Method com/boris1993/OuterClass$InnerClass.printOuterClassName:()V</span></span><br><span class="line">      26: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  static java.lang.String access<span class="variable">$000</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: getfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">       4: areturn</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>有没有发现，78 行出现了一个我们没有写过的方法 <code>access$000</code>？而且从注释来看，它接受一个 <code>OuterClass</code> 类型的参数，而且返回的正是外部类的 <code>outerClassName</code> 的值。</p>
-<p>既然我们没定义这个方法，那就是编译器偷偷的给咱整了点活。至于为啥编译器要这么干，结合上面这个例子，也不难猜出来：这就是给内部类访问它的 <code>private</code> 属性用的。</p>
-<h2 id="反编译内部类"><a href="#反编译内部类" class="headerlink" title="反编译内部类"></a>反编译内部类</h2><p>但是咱不能光猜啊，咱还得有证据。证据哪来？当然是内部类的字节码。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ javap -c OuterClass<span class="variable">$InnerClass</span>.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass<span class="variable">$InnerClass</span> {</span><br><span class="line">  final com.boris1993.OuterClass this<span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">  public com.boris1993.OuterClass<span class="variable">$InnerClass</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: aload_1</span><br><span class="line">       2: putfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       5: aload_0</span><br><span class="line">       6: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       9: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public void printOuterClassName();</span><br><span class="line">    Code:</span><br><span class="line">       0: getstatic     <span class="comment">#3                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       3: aload_0</span><br><span class="line">       4: getfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       7: invokestatic  <span class="comment">#4                  // Method com/boris1993/OuterClass.access$000:(Lcom/boris1993/OuterClass;)Ljava/lang/String;</span></span><br><span class="line">      10: invokevirtual <span class="comment">#5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">      13: <span class="built_in">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>嗯，果然没错，在第 20 行这一条指令里，它调用了上面我们看到的那个 <code>access$000()</code> 方法。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kcm9pZHl1ZS5jb20vYmxvZy8yMDE0LzEwLzAyL3RoZS1wcml2YXRlLW1vZGlmaWVyLWluLWphdmEv"> 细话 Java："失效" 的 private 修饰符<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
-      <categories>
-        <category>学习记录</category>
-        <category>Java</category>
-        <category>基础知识</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>内部类</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>简谈 JVM 中的几种引用</title>
     <url>/projects/java/fundamentals/java-jvm-reference.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <a href="/projects/java/fundamentals/java-gc-algorithms.html">Java 的垃圾回收算法</a>一文中，我们知道 JVM 是根据一个对象有没有被引用来判断要不要对其进行垃圾回收的。但是，如果我们为了提升垃圾回收的效率，想要再把垃圾回收的条件更细化一些，比如只在内存非常紧张的时候才回收某些对象，那么光靠一个粗略的 “引用”，就显得心有余而力不足了。所以，在 <code>JDK 1.2</code> 版本之后，Java 扩充了引用的概念，将其扩充成了<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code>四个更细化的概念。</p>
@@ -1246,6 +1215,37 @@
         <tag>Java</tag>
         <tag>JVM</tag>
         <tag>内存模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 的内部类和 private 修饰符</title>
+    <url>/projects/java/fundamentals/java-inner-class-and-private-identifier.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
+<p>本文将通过一个小例子，来演示怎么让 <code>private</code> 修饰符 “失效”，以及它为什么会 “失效”。</p>
+<span id="more"></span>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>废话不多说，先写一段代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String outerClassName = <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>{</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printOuterClassName</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line">        OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面的代码是不是感觉有一丝异样？为什么在内部类里，能直接访问到外部类的 <code>private</code> 属性？难道 <code>private</code> 修饰符真的 “失效” 了？</p>
+<p>别急，待我们把这个 class 反编译了，从字节码层面来看看它到底有什么猫腻。毕竟，字节码可不会骗人。</p>
+<h2 id="反编译外部类"><a href="#反编译外部类" class="headerlink" title="反编译外部类"></a>反编译外部类</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ javap -c OuterClass.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass {</span><br><span class="line">  public com.boris1993.OuterClass();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       4: aload_0</span><br><span class="line">       5: ldc           <span class="comment">#3                  // String outerClass</span></span><br><span class="line">       7: putfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">      10: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           <span class="comment">#4                  // class com/boris1993/OuterClass</span></span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial <span class="comment">#5                  // Method "&lt;init&gt;":()V</span></span><br><span class="line">       7: astore_1</span><br><span class="line">       8: new           <span class="comment">#6                  // class com/boris1993/OuterClass$InnerClass</span></span><br><span class="line">      11: dup</span><br><span class="line">      12: aload_1</span><br><span class="line">      13: dup</span><br><span class="line">      14: invokevirtual <span class="comment">#7                  // Method java/lang/Object.getClass:()Ljava/lang/Class;</span></span><br><span class="line">      17: pop</span><br><span class="line">      18: invokespecial <span class="comment">#8                  // Method com/boris1993/OuterClass$InnerClass."&lt;init&gt;":(Lcom/boris1993/OuterClass;)V</span></span><br><span class="line">      21: astore_2</span><br><span class="line">      22: aload_2</span><br><span class="line">      23: invokevirtual <span class="comment">#9                  // Method com/boris1993/OuterClass$InnerClass.printOuterClassName:()V</span></span><br><span class="line">      26: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  static java.lang.String access<span class="variable">$000</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: getfield      <span class="comment">#1                  // Field outerClassName:Ljava/lang/String;</span></span><br><span class="line">       4: areturn</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>有没有发现，78 行出现了一个我们没有写过的方法 <code>access$000</code>？而且从注释来看，它接受一个 <code>OuterClass</code> 类型的参数，而且返回的正是外部类的 <code>outerClassName</code> 的值。</p>
+<p>既然我们没定义这个方法，那就是编译器偷偷的给咱整了点活。至于为啥编译器要这么干，结合上面这个例子，也不难猜出来：这就是给内部类访问它的 <code>private</code> 属性用的。</p>
+<h2 id="反编译内部类"><a href="#反编译内部类" class="headerlink" title="反编译内部类"></a>反编译内部类</h2><p>但是咱不能光猜啊，咱还得有证据。证据哪来？当然是内部类的字节码。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ javap -c OuterClass<span class="variable">$InnerClass</span>.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass<span class="variable">$InnerClass</span> {</span><br><span class="line">  final com.boris1993.OuterClass this<span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">  public com.boris1993.OuterClass<span class="variable">$InnerClass</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: aload_1</span><br><span class="line">       2: putfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       5: aload_0</span><br><span class="line">       6: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       9: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public void printOuterClassName();</span><br><span class="line">    Code:</span><br><span class="line">       0: getstatic     <span class="comment">#3                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       3: aload_0</span><br><span class="line">       4: getfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       7: invokestatic  <span class="comment">#4                  // Method com/boris1993/OuterClass.access$000:(Lcom/boris1993/OuterClass;)Ljava/lang/String;</span></span><br><span class="line">      10: invokevirtual <span class="comment">#5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">      13: <span class="built_in">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>嗯，果然没错，在第 20 行这一条指令里，它调用了上面我们看到的那个 <code>access$000()</code> 方法。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kcm9pZHl1ZS5jb20vYmxvZy8yMDE0LzEwLzAyL3RoZS1wcml2YXRlLW1vZGlmaWVyLWluLWphdmEv"> 细话 Java："失效" 的 private 修饰符<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+      <categories>
+        <category>学习记录</category>
+        <category>Java</category>
+        <category>基础知识</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>内部类</tag>
       </tags>
   </entry>
   <entry>
@@ -3020,34 +3020,6 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
-    <title>Git 连接多个远程仓库</title>
-    <url>/tools/git/push-to-multi-git-repo.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有时候我们可能会需要 push 到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。</p>
-<p>保险起见在操作之前请先做好备份工作，毕竟数据无价。</p>
-<span id="more"></span>
-
-<h1 id="方法1-添加多个远程仓库"><a href="#方法1-添加多个远程仓库" class="headerlink" title="方法1 - 添加多个远程仓库"></a>方法 1 - 添加多个远程仓库</h1><p>比如要链接两个 Github 仓库，分别是 github1 和 github2，那么：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 添加 github1</span></span><br><span class="line">git remote add github1 https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 github2</span></span><br><span class="line">git remote add github2 https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github1</span></span><br><span class="line">git push github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github2</span></span><br><span class="line">git push github2 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github1 更新</span></span><br><span class="line">git pull github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github2 更新</span></span><br><span class="line">git pull github2 master</span><br></pre></td></tr></tbody></table></figure>
-
-<h1 id="方法2-添加同名多个远程仓库"><a href="#方法2-添加同名多个远程仓库" class="headerlink" title="方法2 - 添加同名多个远程仓库"></a>方法 2 - 添加同名多个远程仓库</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 添加一个远程仓库</span></span><br><span class="line">git remote add origin https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后分别设定push URL</span></span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github1.git</span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查远程仓库配置</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若配置正确，则结果应当包含一个fetch路径和两个push路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 向所有远程仓库推送</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
-
-<h1 id="方法3-直接修改-git-config文件"><a href="#方法3-直接修改-git-config文件" class="headerlink" title="方法3 - 直接修改.git/config文件"></a>方法 3 - 直接修改.git/config 文件</h1><p>用文本编辑器打开本地仓库的 .git/config 文件，然后修改其中的远程仓库配置</p>
-<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 假设当前的远程仓库名为 origin</span></span><br><span class="line"><span class="section">[remote "origin"]</span></span><br><span class="line">    <span class="attr">url</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">fetch</span> = +refs/heads/*:refs/remotes/github/*</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github2.git</span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后直接使用</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
-
-<p>即可提交至所有版本库</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 Docker 配置 Redis 主从复制</title>
     <url>/database/Redis/redis-replication-in-docker.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这篇文章主要介绍如何使用 Docker 在本机搭建一个带有主从复制功能的 Redis 环境，内容包括涉及的目录结构、<code>docker-compose.yml</code> 的编写，以及结果的验证。</p>
@@ -3099,6 +3071,34 @@ reject_the_task --&gt; 结束
       </categories>
       <tags>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 连接多个远程仓库</title>
+    <url>/tools/git/push-to-multi-git-repo.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有时候我们可能会需要 push 到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。</p>
+<p>保险起见在操作之前请先做好备份工作，毕竟数据无价。</p>
+<span id="more"></span>
+
+<h1 id="方法1-添加多个远程仓库"><a href="#方法1-添加多个远程仓库" class="headerlink" title="方法1 - 添加多个远程仓库"></a>方法 1 - 添加多个远程仓库</h1><p>比如要链接两个 Github 仓库，分别是 github1 和 github2，那么：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 添加 github1</span></span><br><span class="line">git remote add github1 https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 github2</span></span><br><span class="line">git remote add github2 https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github1</span></span><br><span class="line">git push github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到 github2</span></span><br><span class="line">git push github2 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github1 更新</span></span><br><span class="line">git pull github1 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从 github2 更新</span></span><br><span class="line">git pull github2 master</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="方法2-添加同名多个远程仓库"><a href="#方法2-添加同名多个远程仓库" class="headerlink" title="方法2 - 添加同名多个远程仓库"></a>方法 2 - 添加同名多个远程仓库</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 添加一个远程仓库</span></span><br><span class="line">git remote add origin https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后分别设定push URL</span></span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github1.git</span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查远程仓库配置</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若配置正确，则结果应当包含一个fetch路径和两个push路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 向所有远程仓库推送</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="方法3-直接修改-git-config文件"><a href="#方法3-直接修改-git-config文件" class="headerlink" title="方法3 - 直接修改.git/config文件"></a>方法 3 - 直接修改.git/config 文件</h1><p>用文本编辑器打开本地仓库的 .git/config 文件，然后修改其中的远程仓库配置</p>
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 假设当前的远程仓库名为 origin</span></span><br><span class="line"><span class="section">[remote "origin"]</span></span><br><span class="line">    <span class="attr">url</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">fetch</span> = +refs/heads/*:refs/remotes/github/*</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github2.git</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后直接使用</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
+
+<p>即可提交至所有版本库</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -3707,6 +3707,34 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>常用 lsof 命令备忘</title>
+    <url>/linux/useful-lsof-commands.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录 lsof 命令常见用法备忘</p>
+<span id="more"></span>
+
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 显示所有网络连接</span></span><br><span class="line">lsof -i</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="根据协议类型筛选"><a href="#根据协议类型筛选" class="headerlink" title="根据协议类型筛选"></a>根据协议类型筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 仅显示IPv4网络连接</span></span><br><span class="line">lsof -i 4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示IPv6网络连接</span></span><br><span class="line">lsof -i 6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示TCP连接</span></span><br><span class="line">lsof -iTCP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示UDP连接</span></span><br><span class="line">lsof -iUDP</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="根据目标地址和端口号筛选"><a href="#根据目标地址和端口号筛选" class="headerlink" title="根据目标地址和端口号筛选"></a>根据目标地址和端口号筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 根据目标地址筛选</span></span><br><span class="line">lsof -i@<span class="variable">${HOSTNAME_OR_IP_ADDRESS}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据端口号筛选</span></span><br><span class="line">lsof -i :<span class="variable">${PORT_NUMBER}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合</span></span><br><span class="line">lsof -i@<span class="variable">${HOSTNAME_OR_IP_ADDRESS}</span>:<span class="variable">${PORT_NUMBER}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="根据端口状态筛选"><a href="#根据端口状态筛选" class="headerlink" title="根据端口状态筛选"></a>根据端口状态筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">lsof -i -sTCP:<span class="variable">${STATE}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">lsof -i -sTCP:LISTEN</span><br><span class="line">lsof -i -sTCP:ESTABLISHED</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="查看某进程端口占用"><a href="#查看某进程端口占用" class="headerlink" title="查看某进程端口占用"></a>查看某进程端口占用</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">lsof -p <span class="variable">${PID}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前用户打开的文件</span></span><br><span class="line">lsof -u <span class="variable">${USER}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示除当前用户以外的用户打开的文件</span></span><br><span class="line">lsof -u ^<span class="variable">${USER}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 仅显示PID而不是所有输出信息</span></span><br><span class="line">lsof -t</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据程序名筛选</span></span><br><span class="line">lsof -c <span class="variable">${COMMAND}</span></span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+        <tag>lsof</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>简单理解 NTP v3 协议</title>
     <url>/others/understanding-ntp-protocol.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间瞎折腾，给自己的黑莓 Bold 9900 写了个通过 NTP 同步时间的小工具，顺便在这里记录一下我在实现一个 NTP 客户端时对这个协议的理解。</p>
@@ -3776,34 +3804,6 @@ reject_the_task --&gt; 结束
       </categories>
       <tags>
         <tag>NTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用 lsof 命令备忘</title>
-    <url>/linux/useful-lsof-commands.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录 lsof 命令常见用法备忘</p>
-<span id="more"></span>
-
-<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 显示所有网络连接</span></span><br><span class="line">lsof -i</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="根据协议类型筛选"><a href="#根据协议类型筛选" class="headerlink" title="根据协议类型筛选"></a>根据协议类型筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 仅显示IPv4网络连接</span></span><br><span class="line">lsof -i 4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示IPv6网络连接</span></span><br><span class="line">lsof -i 6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示TCP连接</span></span><br><span class="line">lsof -iTCP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示UDP连接</span></span><br><span class="line">lsof -iUDP</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="根据目标地址和端口号筛选"><a href="#根据目标地址和端口号筛选" class="headerlink" title="根据目标地址和端口号筛选"></a>根据目标地址和端口号筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 根据目标地址筛选</span></span><br><span class="line">lsof -i@<span class="variable">${HOSTNAME_OR_IP_ADDRESS}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据端口号筛选</span></span><br><span class="line">lsof -i :<span class="variable">${PORT_NUMBER}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合</span></span><br><span class="line">lsof -i@<span class="variable">${HOSTNAME_OR_IP_ADDRESS}</span>:<span class="variable">${PORT_NUMBER}</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="根据端口状态筛选"><a href="#根据端口状态筛选" class="headerlink" title="根据端口状态筛选"></a>根据端口状态筛选</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">lsof -i -sTCP:<span class="variable">${STATE}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">lsof -i -sTCP:LISTEN</span><br><span class="line">lsof -i -sTCP:ESTABLISHED</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="查看某进程端口占用"><a href="#查看某进程端口占用" class="headerlink" title="查看某进程端口占用"></a>查看某进程端口占用</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">lsof -p <span class="variable">${PID}</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h1 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前用户打开的文件</span></span><br><span class="line">lsof -u <span class="variable">${USER}</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示除当前用户以外的用户打开的文件</span></span><br><span class="line">lsof -u ^<span class="variable">${USER}</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 仅显示PID而不是所有输出信息</span></span><br><span class="line">lsof -t</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据程序名筛选</span></span><br><span class="line">lsof -c <span class="variable">${COMMAND}</span></span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Shell</tag>
-        <tag>lsof</tag>
       </tags>
   </entry>
   <entry>
