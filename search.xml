@@ -1197,15 +1197,15 @@
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
 <ul>
 <li>线程专有 <ul>
-<li><a href="#pc-program-counter-寄存器">pc (program counter) 寄存器</a></li>
-<li><a href="#JVM栈">JVM 栈</a></li>
-<li><a href="#本地方法栈">本地方法栈</a></li>
+<li><a href="#pc-program-counter-%E5%AF%84%E5%AD%98%E5%99%A8">pc (program counter) 寄存器</a></li>
+<li><a href="#JVM%E6%A0%88">JVM 栈</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88">本地方法栈</a></li>
 </ul>
 </li>
 <li>线程间共享<ul>
-<li><a href="#堆">堆</a></li>
-<li><a href="#方法区">方法区</a><ul>
-<li><a href="#运行时常量池">运行时常量池</a></li>
+<li><a href="#%E5%A0%86">堆</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95%E5%8C%BA">方法区</a><ul>
+<li><a href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0">运行时常量池</a></li>
 </ul>
 </li>
 </ul>
@@ -1438,7 +1438,7 @@
 <p>同样，在 <code>t1.start()</code> 上打断点，得到结果如下：</p>
 <p><img data-src="https://sat02pap001files.storage.live.com/y4mjg83nChRabclD8lcomm6zZeNLIWCeWi7ExOA-iDcqAdXtPnrPszn3S3YM4fh4cA5EkNIe41IyTKplFKFJADybZeUKkQMw_cy0YDTqskw5UoiLbhltyuQP8sJMrkl-7MNF8uT3zcfLs0xnSaCC9A4xezt4kQJJB6TACifKhSYTNnLUh-ofOhNDTOIg2h9X6el?width=726&amp;height=498&amp;cropmode=none" alt="Threads running separately"></p>
 <p>可以发现，这三个 <code>Thread</code> 不止没有 <code>target</code>，甚至它们的成员变量都是各自有一份，何谈线程之间共享。</p>
-<h1 id="多线程的同步问题"><a href="#多线程的同步问题" class="headerlink" title="多线程的同步问题"></a>多线程的同步问题</h1><p>将<a href="#多线程共享资源">多线程共享资源</a>这一节的代码执行，得到了这样的输出：</p>
+<h1 id="多线程的同步问题"><a href="#多线程的同步问题" class="headerlink" title="多线程的同步问题"></a>多线程的同步问题</h1><p>将<a href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E8%B5%84%E6%BA%90">多线程共享资源</a>这一节的代码执行，得到了这样的输出：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Thread-0 has 20 tickets</span><br><span class="line">Thread-2 has 19 tickets</span><br><span class="line">Thread-1 has 19 tickets</span><br><span class="line">Thread-2 has 17 tickets</span><br><span class="line">Thread-0 has 18 tickets</span><br><span class="line">Thread-2 has 15 tickets</span><br><span class="line">Thread-1 has 16 tickets</span><br><span class="line">Thread-2 has 13 tickets</span><br><span class="line">Thread-0 has 14 tickets</span><br><span class="line">Thread-2 has 11 tickets</span><br><span class="line">Thread-1 has 12 tickets</span><br><span class="line">Thread-0 has 10 tickets</span><br><span class="line">Thread-2 has 9 tickets</span><br><span class="line">Thread-0 has 7 tickets</span><br><span class="line">Thread-1 has 8 tickets</span><br><span class="line">Thread-0 has 5 tickets</span><br><span class="line">Thread-2 has 6 tickets</span><br><span class="line">Thread-0 has 3 tickets</span><br><span class="line">Thread-1 has 4 tickets</span><br><span class="line">Thread-0 has 1 tickets</span><br><span class="line">Thread-2 has 2 tickets</span><br></pre></td></tr></tbody></table></figure>
 
 <p>鞥？第二行和第三行好像不太对劲？线程 1 和线程 2 把同一张票重复卖了两次？果然出现了线程的同步问题了。</p>
@@ -3031,7 +3031,7 @@ reject_the_task --&gt; 结束
 
 <h1 id="方法2-添加同名多个远程仓库"><a href="#方法2-添加同名多个远程仓库" class="headerlink" title="方法2 - 添加同名多个远程仓库"></a>方法 2 - 添加同名多个远程仓库</h1><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 添加一个远程仓库</span></span><br><span class="line">git remote add origin https://github.com/username/github1.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后分别设定push URL</span></span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github1.git</span><br><span class="line">git remote set-url --add --push origin https://github.com/username/github2.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查远程仓库配置</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若配置正确，则结果应当包含一个fetch路径和两个push路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 向所有远程仓库推送</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
 
-<h1 id="方法3-直接修改-git-config文件"><a href="#方法3-直接修改-git-config文件" class="headerlink" title="方法3 - 直接修改.git/config文件"></a>方法 3 - 直接修改.git/config 文件</h1><p>用文本编辑器打开本地仓库的 .git/config 文件，然后修改其中的远程仓库配置</p>
+<h1 id="方法3-直接修改-git-x2F-config文件"><a href="#方法3-直接修改-git-x2F-config文件" class="headerlink" title="方法3 - 直接修改.git/config文件"></a>方法 3 - 直接修改.git/config 文件</h1><p>用文本编辑器打开本地仓库的 .git/config 文件，然后修改其中的远程仓库配置</p>
 <figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 假设当前的远程仓库名为 origin</span></span><br><span class="line"><span class="section">[remote "origin"]</span></span><br><span class="line">    <span class="attr">url</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">fetch</span> = +refs/heads/*:refs/remotes/github/*</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github1.git</span><br><span class="line">    <span class="attr">pushurl</span> = https://github.com/username/github2.git</span><br></pre></td></tr></tbody></table></figure>
 
 <p>然后直接使用</p>
@@ -3255,7 +3255,7 @@ reject_the_task --&gt; 结束
 <p>在这之后，就没什么我们能做的了。我们就慢慢等着甜糖星愿给你分配任务吧。我是等了大概有两三天才开始跑流量的。如果在配置好 UPnP 后，手机端仍提示 “未配置网络”，那有可能是在配置 UPnP 的脚本启动时，甜糖星愿尚未打开所有端口，导致 UPnP 规则不完整。你可以前往路由器的 UPnP 页面，将页面显示结果与 <code>netstat -nlp | grep qemu</code> 命令的输出做对比，如果不一致的话，重新手动运行 <code>set-port-forwarding.sh</code> 脚本即可。</p>
 <h2 id="深入了解"><a href="#深入了解" class="headerlink" title="深入了解"></a>深入了解</h2><p>如果你不止满足于把它跑起来，还想要了解这个镜像背后的运作方式，那么你可以前往这个镜像的 GitHub 仓库 <sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[tiantang-x86-docker - GitHub](https://github.com/boris1993/tiantang-x86-docker)
 ">[3]</span></a></sup> 阅读该镜像相关的源码。在源码中我也写了注释，可以方便你理解我的想法。</p>
-<h2 id="我的邀请码"><a href="#我的邀请码" class="headerlink" title="我的邀请码"></a>我的邀请码</h2><p>如果我的镜像帮到了你，或者我的这篇文章帮到了你，那么如果你愿意的话，你可以在手机客户端的<code>填写邀请码</code>处，填上我的邀请码<strong><code>804744</code></strong>，这样你可以获得 15 张加成卡，当然我也会得到一些加成。反正互利互惠，我的加成不会从你的身上扣掉，何乐而不为呢？</p>
+<h2 id="我的邀请码"><a href="#我的邀请码" class="headerlink" title="我的邀请码"></a>我的邀请码</h2><p>如果我的镜像帮到了你，或者我的这篇文章帮到了你，那么如果你愿意的话，你可以在手机客户端的<code>填写邀请码</code>处，填上我的邀请码 **<code>804744</code>**，这样你可以获得 15 张加成卡，当然我也会得到一些加成。反正互利互惠，我的加成不会从你的身上扣掉，何乐而不为呢？</p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cDovL20udGlhbnRhbmcubW9nZW5jbG91ZC5jb20v"> 甜糖星愿官方网站<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yZXBvc2l0b3J5L2RvY2tlci9ib3JpczE5OTMvdGlhbnRhbmcteDg2LWRvY2tlcg==">tiantang-x86-docker - Docker Hub<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2Vy">tiantang-x86-docker - GitHub<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
       <categories>
         <category>其他</category>
