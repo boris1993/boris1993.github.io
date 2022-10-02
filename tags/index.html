@@ -32,7 +32,7 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-11-19T13:05:10.000Z">
-<meta property="article:modified_time" content="2022-10-02T14:02:39.813Z">
+<meta property="article:modified_time" content="2022-10-02T14:14:08.082Z">
 <meta property="article:author" content="Boris Zhao">
 <meta name="twitter:card" content="summary">
 
@@ -304,17 +304,17 @@
 
 
 
+<script class="next-config" data-name="waline" type="application/json">{"lang":null,"enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":false,"requiredFields":[],"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/tags/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
-NexT.utils.loadComments('#waline-comments', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js', () => {
-    new Waline(Object.assign({
-      lang: 'zh-CN'
-    }, {"enable":true,"serverURL":"https://valine-api.boris1993.com","placeholder":"说点什么","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":false,"requiredFields":[],"lang":null}, {
-      el: '#waline-comments',
-      path: "/tags/",
-    }));
-  }, window.Waline);
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
 });
 </script>
+
 </body>
 </html>
