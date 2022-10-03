@@ -32,7 +32,7 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-11-19T13:05:10.000Z">
-<meta property="article:modified_time" content="2022-10-02T14:44:19.847Z">
+<meta property="article:modified_time" content="2022-10-03T02:55:52.650Z">
 <meta property="article:author" content="Boris Zhao">
 <meta name="twitter:card" content="summary">
 
@@ -60,7 +60,7 @@
 
     // Redirect to the main site from other sites like GitHub pages or GitEE pages
     if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
-        location.href = mainSiteUrl;
+        location.href = mainSiteUrl + location.pathname;
     }
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>

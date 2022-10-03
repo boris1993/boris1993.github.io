@@ -59,7 +59,7 @@
 
     // Redirect to the main site from other sites like GitHub pages or GitEE pages
     if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
-        location.href = mainSiteUrl;
+        location.href = mainSiteUrl + location.pathname;
     }
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
