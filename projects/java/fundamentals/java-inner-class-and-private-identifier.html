@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -34,7 +34,7 @@
 <meta property="og:description" content="一个 private 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让 private 修饰符 “失效”，以及它为什么会 “失效”。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-24T13:38:32.000Z">
-<meta property="article:modified_time" content="2022-10-03T14:16:58.656Z">
+<meta property="article:modified_time" content="2022-10-03T14:19:19.139Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="内部类">
@@ -276,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-03 22:16:58" itemprop="dateModified" datetime="2022-10-03T22:16:58+08:00">2022-10-03</time>
+      <time title="修改时间：2022-10-03 22:19:19" itemprop="dateModified" datetime="2022-10-03T22:19:19+08:00">2022-10-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -333,7 +333,7 @@
 <span id="more"></span>
 
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>废话不多说，先写一段代码：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String outerClassName = <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>{</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printOuterClassName</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line">        OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OuterClass</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">outerClassName</span> <span class="operator">=</span> <span class="string">"outerClass"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InnerClass</span> {</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printOuterClassName</span><span class="params">()</span> {</span><br><span class="line">            System.out.println(outerClassName);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        <span class="type">OuterClass</span> <span class="variable">outerClass</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OuterClass</span>();</span><br><span class="line">        OuterClass.<span class="type">InnerClass</span> <span class="variable">innerClass</span> <span class="operator">=</span> outerClass.<span class="keyword">new</span> <span class="title class_">InnerClass</span>();</span><br><span class="line"></span><br><span class="line">        innerClass.printOuterClassName();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上面的代码是不是感觉有一丝异样？为什么在内部类里，能直接访问到外部类的 <code>private</code> 属性？难道 <code>private</code> 修饰符真的 “失效” 了？</p>
 <p>别急，待我们把这个 class 反编译了，从字节码层面来看看它到底有什么猫腻。毕竟，字节码可不会骗人。</p>

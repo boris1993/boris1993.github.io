@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -34,7 +34,7 @@
 <meta property="og:description" content="在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-22T03:00:12.000Z">
-<meta property="article:modified_time" content="2022-10-03T14:16:58.656Z">
+<meta property="article:modified_time" content="2022-10-03T14:19:19.139Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
@@ -276,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-03 22:16:58" itemprop="dateModified" datetime="2022-10-03T22:16:58+08:00">2022-10-03</time>
+      <time title="修改时间：2022-10-03 22:19:19" itemprop="dateModified" datetime="2022-10-03T22:19:19+08:00">2022-10-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,10 +369,10 @@
 <figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someBean"</span> <span class="attr">class</span>=<span class="string">"com.demo.SomeClass"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>/&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>使用注解方式配置 bean 时，可以通过 <code>@Scope</code> 注解来指定作用域：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>{</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeClass</span> {</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>此外，如果使用注解方式配置作用域，Spring 也提供了一系列常量值来方便我们配置：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line">String SCOPE_SINGLETON = <span class="string">"singleton"</span>;</span><br><span class="line">String SCOPE_PROTOTYPE = <span class="string">"prototype"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line">String SCOPE_REQUEST = <span class="string">"request"</span>;</span><br><span class="line">String SCOPE_SESSION = <span class="string">"session"</span>;</span><br><span class="line">String SCOPE_APPLICATION = <span class="string">"application"</span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SINGLETON</span> <span class="operator">=</span> <span class="string">"singleton"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_PROTOTYPE</span> <span class="operator">=</span> <span class="string">"prototype"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_REQUEST</span> <span class="operator">=</span> <span class="string">"request"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SESSION</span> <span class="operator">=</span> <span class="string">"session"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_APPLICATION</span> <span class="operator">=</span> <span class="string">"application"</span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="singleton作用域"><a href="#singleton作用域" class="headerlink" title="singleton作用域"></a>singleton 作用域</h2><p><code>singleton</code> 是 Spring 容器中的默认作用域。这个作用域下，容器中只创建各管理一个 bean 实例，实例存在于缓存中，并在后续对该 bean 的请求中都返回这个实例。</p>
 <h2 id="prototype作用域"><a href="#prototype作用域" class="headerlink" title="prototype作用域"></a>prototype 作用域</h2><p>与 <code>singleton</code> 正相反，每次对 <code>prototype</code> 作用域的 bean 的请求，Spring 都会生成一个新的实例，即类似我们手动使用 <code>new XxxBean()</code> 方式创建实例。</p>
