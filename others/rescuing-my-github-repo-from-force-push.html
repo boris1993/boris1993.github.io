@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.3","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="就在刚刚，我一个误操作，在没有本地备份的前提下，force push 了一个 GitHub 上的仓库。万幸最后恢复成功，数据拿回来了。惊魂未定之余，在此记录我的抢救过程以供参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次抢救被 force push 的 GitHub 仓库">
+<meta property="og:url" content="https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="就在刚刚，我一个误操作，在没有本地备份的前提下，force push 了一个 GitHub 上的仓库。万幸最后恢复成功，数据拿回来了。惊魂未定之余，在此记录我的抢救过程以供参考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mUHGqsZS-DOY7n369khEGH2agbXnq0bx3w6Oz2YoZHweZ9ptM3bMWltDg7MfPv3Vrip1E2M2YfZjdRhuhO5ESrz7pr94z2QXUrFwC7utxDki_4axu4pdUSv-RxroJJ_pUxjZ3nfa4yTFw5g0jHoJTX87TiqAp6eceM7qOLZ6O2UIJ89mEWLFs7lkcQHaykotn?width=1704&amp;height=412&amp;cropmode=none">
+<meta property="article:published_time" content="2022-10-17T06:06:33.000Z">
+<meta property="article:modified_time" content="2022-10-17T06:46:06.728Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="force push">
+<meta property="article:tag" content="恢复GitHub仓库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4mUHGqsZS-DOY7n369khEGH2agbXnq0bx3w6Oz2YoZHweZ9ptM3bMWltDg7MfPv3Vrip1E2M2YfZjdRhuhO5ESrz7pr94z2QXUrFwC7utxDki_4axu4pdUSv-RxroJJ_pUxjZ3nfa4yTFw5g0jHoJTX87TiqAp6eceM7qOLZ6O2UIJ89mEWLFs7lkcQHaykotn?width=1704&amp;height=412&amp;cropmode=none">
+
+
+<link rel="canonical" href="https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html","path":"others/rescuing-my-github-repo-from-force-push.html","title":"记一次抢救被 force push 的 GitHub 仓库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一次抢救被 force push 的 GitHub 仓库 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false,"localhost_ignored":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script async defer 
+    data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" 
+    data-do-not-track="true"
+    src="https://umami.boris1993.com/umami.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%99%AF%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前景提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">恢复过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E4%B8%8A%E4%B8%80%E6%AC%A1commit%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">找到上一次 commit 的记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E4%B8%8A%E4%B8%80%E6%AC%A1%E7%9A%84push%E8%AE%B0%E5%BD%95%E4%B8%AD%E6%89%BE%E5%9B%9E%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">从上一次的 push 记录中找回数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- sidebar ad -->
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一次抢救被 force push 的 GitHub 仓库 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次抢救被 force push 的 GitHub 仓库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-17 14:06:33 / 修改时间：14:46:06" itemprop="dateCreated datePublished" datetime="2022-10-17T14:06:33+08:00">2022-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/others/rescuing-my-github-repo-from-force-push.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/others/rescuing-my-github-repo-from-force-push.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/others/rescuing-my-github-repo-from-force-push.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>就在刚刚，我一个误操作，在没有本地备份的前提下，force push 了一个 GitHub 上的仓库。万幸最后恢复成功，数据拿回来了。惊魂未定之余，在此记录我的抢救过程以供参考。</p>
+<span id="more"></span>
+
+<h2 id="前景提要"><a href="#前景提要" class="headerlink" title="前景提要"></a>前景提要</h2><p>在闲逛 GitHub 的时候，发现了一个叫<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BsYXRhbmUvc25r"> snk<i class="fa fa-external-link-alt"></i></span>的项目，可以在我的 profile readme 里面放个贪吃蛇，遂照着它的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BsYXRhbmUvUGxhdGFuZS9ibG9iL21hc3Rlci8uZ2l0aHViL3dvcmtmbG93cy9tYWluLnltbA=="> example with cron job<i class="fa fa-external-link-alt"></i></span>抄了一个 workflow 过来。但是这里我自作聪明地想着把东西全放在 <code>master</code> 上，就把 38 行的 <code>target_branch</code> 改成了 <code>master</code>。结果一运行吓一跳，我的 <code>README.md</code> 没了，仓库只剩下 <code>snk</code> 生成的 svg 文件。这不行啊，我花了好久的时间才整出来的东西，不能说没就没啊！于是赶紧开始网上冲浪，看怎么抢救被 force push 的 repo。</p>
+<h2 id="恢复过程"><a href="#恢复过程" class="headerlink" title="恢复过程"></a>恢复过程</h2><p>首先我要大力感谢<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vYWdhcndhbHBhcmFzL2QzNTVhOTUwMTQ4NzAyY2M3YmE4MmFiYzRkMTk0M2Jm">这个 Gist<i class="fa fa-external-link-alt"></i></span>，我就是参考这里的做法成功恢复了这个 repo 的。</p>
+<h3 id="找到上一次commit的记录"><a href="#找到上一次commit的记录" class="headerlink" title="找到上一次commit的记录"></a>找到上一次 commit 的记录</h3><p>首先，要通过 <code>https://api.github.com/repos/:owner/:repo/events</code> 这个 API 找到上次提交的 sha。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">-&gt; % curl -u boris1993 https://api.github.com/repos/boris1993/boris1993/events</span><br><span class="line">Enter host password <span class="keyword">for</span> user <span class="string">'boris1993'</span>:</span><br><span class="line">[</span><br><span class="line">  {</span><br><span class="line">    <span class="string">"id"</span>: <span class="string">"24633558565"</span>,</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">"PushEvent"</span>,</span><br><span class="line">    <span class="string">"actor"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 4367313,</span><br><span class="line">      <span class="string">"login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"display_login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"gravatar_id"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/users/boris1993"</span>,</span><br><span class="line">      <span class="string">"avatar_url"</span>: <span class="string">"https://avatars.githubusercontent.com/u/4367313?"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"repo"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 297097347,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"boris1993/boris1993"</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"payload"</span>: {</span><br><span class="line">      <span class="string">"push_id"</span>: 11349267173,</span><br><span class="line">      <span class="string">"size"</span>: 1,</span><br><span class="line">      <span class="string">"distinct_size"</span>: 1,</span><br><span class="line">      <span class="string">"ref"</span>: <span class="string">"refs/heads/master"</span>,</span><br><span class="line">      <span class="string">"head"</span>: <span class="string">"98364ce80ec5bbcdb6dc6f8d2239de2256ede487"</span>,</span><br><span class="line">      <span class="string">"before"</span>: <span class="string">"32276fc643c6b34fee48f46363cfb6a44327cbe4"</span>,</span><br><span class="line">      <span class="string">"commits"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"sha"</span>: <span class="string">"98364ce80ec5bbcdb6dc6f8d2239de2256ede487"</span>,</span><br><span class="line">          <span class="string">"author"</span>: {</span><br><span class="line">            <span class="string">"email"</span>: <span class="string">"41898282+github-actions[bot]@users.noreply.github.com"</span>,</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"github-actions[bot]"</span></span><br><span class="line">          },</span><br><span class="line">          <span class="string">"message"</span>: <span class="string">"Deploy to GitHub pages"</span>,</span><br><span class="line">          <span class="string">"distinct"</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993/commits/98364ce80ec5bbcdb6dc6f8d2239de2256ede487"</span></span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"public"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2022-10-17T05:44:11Z"</span></span><br><span class="line">  },</span><br><span class="line">  {</span><br><span class="line">    <span class="string">"id"</span>: <span class="string">"24633554175"</span>,</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">"PushEvent"</span>,</span><br><span class="line">    <span class="string">"actor"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 4367313,</span><br><span class="line">      <span class="string">"login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"display_login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"gravatar_id"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/users/boris1993"</span>,</span><br><span class="line">      <span class="string">"avatar_url"</span>: <span class="string">"https://avatars.githubusercontent.com/u/4367313?"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"repo"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 297097347,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"boris1993/boris1993"</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"payload"</span>: {</span><br><span class="line">      <span class="string">"push_id"</span>: 11349264873,</span><br><span class="line">      <span class="string">"size"</span>: 1,</span><br><span class="line">      <span class="string">"distinct_size"</span>: 1,</span><br><span class="line">      <span class="string">"ref"</span>: <span class="string">"refs/heads/master"</span>,</span><br><span class="line">      <span class="string">"head"</span>: <span class="string">"32276fc643c6b34fee48f46363cfb6a44327cbe4"</span>,</span><br><span class="line">      <span class="string">"before"</span>: <span class="string">"b0ab0263c0693122ae8069c95526e13b7336483f"</span>,</span><br><span class="line">      <span class="string">"commits"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"sha"</span>: <span class="string">"32276fc643c6b34fee48f46363cfb6a44327cbe4"</span>,</span><br><span class="line">          <span class="string">"author"</span>: {</span><br><span class="line">            <span class="string">"email"</span>: <span class="string">"boris1993@live.cn"</span>,</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"Boris Zhao"</span></span><br><span class="line">          },</span><br><span class="line">          <span class="string">"message"</span>: <span class="string">"Create generate_snake_animation.yml"</span>,</span><br><span class="line">          <span class="string">"distinct"</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993/commits/32276fc643c6b34fee48f46363cfb6a44327cbe4"</span></span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"public"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2022-10-17T05:43:50Z"</span></span><br><span class="line">  },</span><br><span class="line">  {</span><br><span class="line">    <span class="string">"id"</span>: <span class="string">"23024411036"</span>,</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">"PushEvent"</span>,</span><br><span class="line">    <span class="string">"actor"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 4367313,</span><br><span class="line">      <span class="string">"login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"display_login"</span>: <span class="string">"boris1993"</span>,</span><br><span class="line">      <span class="string">"gravatar_id"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/users/boris1993"</span>,</span><br><span class="line">      <span class="string">"avatar_url"</span>: <span class="string">"https://avatars.githubusercontent.com/u/4367313?"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"repo"</span>: {</span><br><span class="line">      <span class="string">"id"</span>: 297097347,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"boris1993/boris1993"</span>,</span><br><span class="line">      <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993"</span></span><br><span class="line">    },</span><br><span class="line">    <span class="string">"payload"</span>: {</span><br><span class="line">      <span class="string">"push_id"</span>: 10514884570,</span><br><span class="line">      <span class="string">"size"</span>: 1,</span><br><span class="line">      <span class="string">"distinct_size"</span>: 1,</span><br><span class="line">      <span class="string">"ref"</span>: <span class="string">"refs/heads/master"</span>,</span><br><span class="line">      <span class="string">"head"</span>: <span class="string">"b0ab0263c0693122ae8069c95526e13b7336483f"</span>,</span><br><span class="line">      <span class="string">"before"</span>: <span class="string">"660e4d3896eb523d703464f89112a2eea07ee309"</span>,</span><br><span class="line">      <span class="string">"commits"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"sha"</span>: <span class="string">"b0ab0263c0693122ae8069c95526e13b7336483f"</span>,</span><br><span class="line">          <span class="string">"author"</span>: {</span><br><span class="line">            <span class="string">"email"</span>: <span class="string">"boris1993@live.cn"</span>,</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"Boris Zhao"</span></span><br><span class="line">          },</span><br><span class="line">          <span class="string">"message"</span>: <span class="string">"Update README.md"</span>,</span><br><span class="line">          <span class="string">"distinct"</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="string">"url"</span>: <span class="string">"https://api.github.com/repos/boris1993/boris1993/commits/b0ab0263c0693122ae8069c95526e13b7336483f"</span></span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"public"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"created_at"</span>: <span class="string">"2022-07-22T08:05:06Z"</span></span><br><span class="line">  }</span><br><span class="line">]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从接口的返回可以看到，截至现在一共有三次 push，仓库被覆盖就是发生在最上面的一次 push 中，而接下来的一个就是我添加 workflow 的那一次 push。</p>
+<h3 id="从上一次的push记录中找回数据"><a href="#从上一次的push记录中找回数据" class="headerlink" title="从上一次的push记录中找回数据"></a>从上一次的 push 记录中找回数据</h3><p>找到 push 记录，那么就好办了。点击添加 workflow 那次 push 中的 <code>url</code>，在浏览器中会打开一个新页面，返回的 JSON 中是这次 push 的详细信息。这里我们要找的是 <code>html_url</code> 这个字段。点开这个字段里面的链接，会进入 GitHub 里面，看到这次 commit 的 diff。然后点击 <code>Browse files</code> 按钮，就能看到当时的文件了。这时候还等什么？赶紧下载啊！文件少的话复制内容回来就行，文件多的话，点开 <code>Code</code> 按钮，<code>Download ZIP</code> 就好啦。</p>
+<p><img data-src="https://sat02pap001files.storage.live.com/y4mUHGqsZS-DOY7n369khEGH2agbXnq0bx3w6Oz2YoZHweZ9ptM3bMWltDg7MfPv3Vrip1E2M2YfZjdRhuhO5ESrz7pr94z2QXUrFwC7utxDki_4axu4pdUSv-RxroJJ_pUxjZ3nfa4yTFw5g0jHoJTX87TiqAp6eceM7qOLZ6O2UIJ89mEWLFs7lkcQHaykotn?width=1704&amp;height=412&amp;cropmode=none" alt="Files at that commit"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>一定要做备份啊！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div>
+    <script type="text/javascript">
+      document.write(
+        "<iframe scrolling='no' frameborder='0' " + 
+        "sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' " + 
+        "src='https://button.like.co/in/embed/boris1993/button?referrer=" +
+        encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+    </script>
+</div>
+
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/force-push/" rel="tag"># force push</a>
+              <a href="/tags/%E6%81%A2%E5%A4%8DGitHub%E4%BB%93%E5%BA%93/" rel="tag"># 恢复GitHub仓库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/others/understanding-ntp-protocol.html" rel="prev" title="简单理解 NTP v3 协议">
+                  <i class="fa fa-chevron-left"></i> 简单理解 NTP v3 协议
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/others/rescuing-my-github-repo-from-force-push.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
