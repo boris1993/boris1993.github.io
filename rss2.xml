@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Tue, 01 Nov 2022 10:16:11 GMT</pubDate>
+    <pubDate>Tue, 01 Nov 2022 13:51:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -96,7 +96,7 @@
     </item>
     
     <item>
-      <title>解决微软模拟飞行更新下载过慢的问题</title>
+      <title>关闭 IPv6 或调整 IPv6 优先级以解决微软模拟飞行更新下载过慢的问题</title>
       <link>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</link>
       <guid>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</guid>
       <pubDate>Sun, 05 Dec 2021 13:26:12 GMT</pubDate>
