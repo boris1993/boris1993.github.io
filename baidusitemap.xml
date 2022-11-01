@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2022-11-01</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
@@ -197,11 +165,11 @@
     <lastmod>2022-11-01</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html</loc>
+    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/linux/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <loc>https://www.boris1993.com/database/mysql/brief-talk-about-mysql-collations.html</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
   <url>
@@ -302,6 +270,38 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-runtime-data-areas.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-jvm-stack-frame.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-concepts.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-how-to.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/fundamentals/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashcode-and-equals.html</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
 </urlset> 
