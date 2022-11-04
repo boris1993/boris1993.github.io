@@ -2590,9 +2590,9 @@ reject_the_task --&gt; 结束
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>垃圾回收</tag>
         <tag>GC</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>

@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Thu, 03 Nov 2022 16:36:29 GMT</pubDate>
+    <pubDate>Fri, 04 Nov 2022 15:13:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -580,11 +580,11 @@
       
       <category domain="https://www.boris1993.com/tags/Java/">Java</category>
       
-      <category domain="https://www.boris1993.com/tags/JVM/">JVM</category>
-      
       <category domain="https://www.boris1993.com/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">垃圾回收</category>
       
       <category domain="https://www.boris1993.com/tags/GC/">GC</category>
+      
+      <category domain="https://www.boris1993.com/tags/JVM/">JVM</category>
       
       
       <comments>https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html#disqus_thread</comments>
