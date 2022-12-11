@@ -1,78 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/ssh-config-file.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/suppress-appending-to-nohup-out-message.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tomcat-deploy-to-root.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tomcat-monitor-classes-and-auto-reload.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/understanding-ntp-protocol.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/useful-lsof-commands.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/zos-xmit.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
-    <lastmod>2022-12-11</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/hexo-next-enable-google-adsense.html</loc>
     <lastmod>2022-12-11</lastmod>
   </url>
@@ -173,11 +101,11 @@
     <lastmod>2022-12-11</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
     <lastmod>2022-12-11</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
     <lastmod>2022-12-11</lastmod>
   </url>
   <url>
@@ -285,6 +213,42 @@
     <lastmod>2022-12-11</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/ssh-config-file.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/suppress-appending-to-nohup-out-message.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tomcat-deploy-to-root.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tomcat-monitor-classes-and-auto-reload.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/understanding-ntp-protocol.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/useful-lsof-commands.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/zos-xmit.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2022-12-11</lastmod>
   </url>
@@ -302,6 +266,42 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
+    <lastmod>2022-12-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
     <lastmod>2022-12-11</lastmod>
   </url>
 </urlset> 
