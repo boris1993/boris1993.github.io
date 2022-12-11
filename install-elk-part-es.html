@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近搭建了一次 ELK 日志平台，在此记录一下安装步骤。由于本次模拟的是服务器不能连接互联网的情况，所以全部安装步骤皆使用 RPM 或 tar 包的方式安装。本文主要记录安装 Elastic Search 的过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建 ELK 日志平台 - 安装 Elastic Search">
+<meta property="og:url" content="https://www.boris1993.com/install-elk-part-es.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="最近搭建了一次 ELK 日志平台，在此记录一下安装步骤。由于本次模拟的是服务器不能连接互联网的情况，所以全部安装步骤皆使用 RPM 或 tar 包的方式安装。本文主要记录安装 Elastic Search 的过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-04T08:50:31.000Z">
+<meta property="article:modified_time" content="2022-12-11T06:26:53.459Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="ELK">
+<meta property="article:tag" content="Elastic Search">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/install-elk-part-es.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/install-elk-part-es.html","path":"install-elk-part-es.html","title":"搭建 ELK 日志平台 - 安装 Elastic Search"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搭建 ELK 日志平台 - 安装 Elastic Search | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script async defer 
+    data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" 
+    data-do-not-track="true"
+    src="https://umami.boris1993.com/umami.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85JRE"><span class="nav-number">1.</span> <span class="nav-text">安装 JRE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Elastic-Search"><span class="nav-number">2.</span> <span class="nav-text">安装 Elastic Search</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8RPM%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用 RPM 包安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tar-gz%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.2.</span> <span class="nav-text">使用 tar.gz 包安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">安装后的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">2.2.1.</span> <span class="nav-text">系统配置文件修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Elastic-Search%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">2.2.2.</span> <span class="nav-text">Elastic Search 配置文件修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">配置自动启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- sidebar ad -->
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/install-elk-part-es.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搭建 ELK 日志平台 - 安装 Elastic Search | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建 ELK 日志平台 - 安装 Elastic Search
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-04 16:50:31" itemprop="dateCreated datePublished" datetime="2018-02-04T16:50:31+08:00">2018-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-11 14:26:53" itemprop="dateModified" datetime="2022-12-11T14:26:53+08:00">2022-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/elk/" itemprop="url" rel="index"><span itemprop="name">ELK</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/install-elk-part-es.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/install-elk-part-es.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/install-elk-part-es.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近搭建了一次 ELK 日志平台，在此记录一下安装步骤。由于本次模拟的是服务器不能连接互联网的情况，所以全部安装步骤皆使用 RPM 或 tar 包的方式安装。本文主要记录安装 Elastic Search 的过程。</p>
+<span id="more"></span>
+
+<h1 id="安装JRE"><a href="#安装JRE" class="headerlink" title="安装JRE"></a>安装 JRE</h1><p>首先这套平台是基于 Java 的，所以 Java 运行环境当然是不能少。但因为这上面不涉及 Java 的开发，所以不需要装 JDK，装 JRE 就够了，还能省下一些磁盘空间。我这里选择 <code>JRE8u161</code>。</p>
+<p>我这次选择使用 RPM 包安装。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh jre-8u161-linux-x64.rpm</span><br></pre></td></tr></tbody></table></figure>
+
+<p>安装完毕后，验证安装是否成功：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检验当前用户下是否安装成功</span></span><br><span class="line">java -version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检验sudo环境下是否安装成功</span></span><br><span class="line">sudo java -version</span><br></pre></td></tr></tbody></table></figure>
+
+<p>若都输出如下内容则说明安装成功：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version "1.8.0_161"</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_161-b12)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>至此 Java 环境配置完成</p>
+<h1 id="安装Elastic-Search"><a href="#安装Elastic-Search" class="headerlink" title="安装Elastic Search"></a>安装 Elastic Search</h1><h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="使用RPM包安装"><a href="#使用RPM包安装" class="headerlink" title="使用RPM包安装"></a>使用 RPM 包安装</h3><p>直接使用 rpm 命令安装该 RPM 包</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --install elasticsearch-6.2.2.rpm</span><br></pre></td></tr></tbody></table></figure>
+
+<p>CentOS 7 使用 systemd 管理开机自启动项，而且安装过程已经配置好针对 systemd 的启动脚本，使用如下命令激活</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> elasticsearch.service</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="使用tar-gz包安装"><a href="#使用tar-gz包安装" class="headerlink" title="使用tar.gz包安装"></a>使用 tar.gz 包安装</h3><p>首先新建一个名为 elk 的用户，用于运行 ELK 平台</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m elk</span><br></pre></td></tr></tbody></table></figure>
+
+<p>下载好 Elastic Search 的安装包，将其复制到 /opt 并解压，然后试运行</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> elasticsearch-6.1.3.tar.gz /opt</span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">sudo tar xvzf elasticsearch-6.1.3.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要将Elastic Search目录的所有权设为将要运行该软件的用户</span></span><br><span class="line"><span class="comment"># Elastic Search不允许以root用户运行，安全方面亦不建议以root权限运行程序</span></span><br><span class="line">sudo <span class="built_in">chown</span> -R elk:elk elasticsearch-6.1.3</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> elasticsearch-6.1.3/bin</span><br><span class="line">./elelasticsearch</span><br></pre></td></tr></tbody></table></figure>
+
+<p>启动成功后，在另一终端使用 curl 尝试连接 Elastic Search</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://127.0.0.1:9200</span><br></pre></td></tr></tbody></table></figure>
+
+<p>若有如下返回，则说明 Elastic Search 启动成功</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"name"</span> <span class="punctuation">:</span> <span class="string">"LWmSd17"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"cluster_name"</span> <span class="punctuation">:</span> <span class="string">"elasticsearch"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"cluster_uuid"</span> <span class="punctuation">:</span> <span class="string">"lkbXufQpQuiLaE5kzVKAeA"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"version"</span> <span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"number"</span> <span class="punctuation">:</span> <span class="string">"6.1.3"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"build_hash"</span> <span class="punctuation">:</span> <span class="string">"af51318"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"build_date"</span> <span class="punctuation">:</span> <span class="string">"2018-01-26T18:22:55.523Z"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"build_snapshot"</span> <span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"lucene_version"</span> <span class="punctuation">:</span> <span class="string">"7.1.0"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"minimum_wire_compatibility_version"</span> <span class="punctuation">:</span> <span class="string">"5.6.0"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"minimum_index_compatibility_version"</span> <span class="punctuation">:</span> <span class="string">"5.0.0"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"tagline"</span> <span class="punctuation">:</span> <span class="string">"You Know, for Search"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="安装后的配置"><a href="#安装后的配置" class="headerlink" title="安装后的配置"></a>安装后的配置</h2><h3 id="系统配置文件修改"><a href="#系统配置文件修改" class="headerlink" title="系统配置文件修改"></a>系统配置文件修改</h3><p>Elastic Search 需要调整文件描述符大于 65535、最大线程数大于 4096、以及 <code>vm.max_map_count</code> 大于 262144。所以修改操作系统配置文件以满足此要求。</p>
+<p>在 <code>/etc/security/limits.conf</code> 插入如下内容</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* hard nofile 65536</span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nproc  4096</span><br><span class="line">* soft nproc  4096</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在 <code>/etc/sysctl.conf</code> 中插入如下内容</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后执行 <code>sysctl -p</code>，并重新登录，使配置生效。若配置成功，则可见 Elastic Search 启动过程中相关的警告信息将不再出现。</p>
+<h3 id="Elastic-Search配置文件修改"><a href="#Elastic-Search配置文件修改" class="headerlink" title="Elastic Search配置文件修改"></a>Elastic Search 配置文件修改</h3><p><strong>以下文件位置根据安装方法不同而不同</strong><br><strong>若使用 RPM 包方式安装，则文件位于 /etc/elasticsearch</strong><br><strong>若使用 tar 包方式安装，则文件位于解压出来的目录的 conf 文件夹中</strong></p>
+<ul>
+<li><p>修改 <code>cluster.name</code><br>我们应当将集群名设置成一个能清晰地表明该集群的作用的名字，如 <code>logging-prod</code>。</p>
+</li>
+<li><p>修改 <code>node.name</code><br>为每个 Elastic Search 节点起一个清晰易懂的名字绝不会是一件坏事。<br>节点名字可以是一个自定义的名字，如 <code>prod-data-2</code>，也可以使用 <code>${HOSTNAME}</code> 来把本机的主机名作为该节点的节点名。</p>
+</li>
+<li><p>其他详细配置<br>要想了解更多配置，可以参考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxhc3RpYy5jby9ndWlkZS9lbi9lbGFzdGljc2VhcmNoL3JlZmVyZW5jZS9jdXJyZW50L2luZGV4Lmh0bWw="> Elasticsearch Reference
+<i class="fa fa-external-link-alt"></i></span>的 <strong>Set up Elasticsearch</strong> 部分。</p>
+</li>
+</ul>
+<h3 id="配置自动启动"><a href="#配置自动启动" class="headerlink" title="配置自动启动"></a>配置自动启动</h3><p>如果使用 RPM 包方式安装，则此步可忽略。</p>
+<p>若使用 tar 包方式安装，则进入 Elastic Search 的 bin 目录后运行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./elasticsearch -d -p ../logs/elasticsearch.pid</span><br></pre></td></tr></tbody></table></figure>
+
+<p>使 Elastic Search 以 daemon 模式启动并监控启动过程。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxhc3RpYy5jby9ndWlkZS9lbi9lbGFzdGljc2VhcmNoL3JlZmVyZW5jZS9jdXJyZW50L19pbnN0YWxsYXRpb24uaHRtbA==">Elastic Search Installation Guide<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ELK/" rel="tag"># ELK</a>
+              <a href="/tags/Elastic-Search/" rel="tag"># Elastic Search</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/tomcat-deploy-to-root.html" rel="prev" title="如何将项目部署至 Tomcat 的根下">
+                  <i class="fa fa-chevron-left"></i> 如何将项目部署至 Tomcat 的根下
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/install-elk-part-logstash.html" rel="next" title="搭建 ELK 日志平台 - 安装 Logstash">
+                  搭建 ELK 日志平台 - 安装 Logstash <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/install-elk-part-es.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

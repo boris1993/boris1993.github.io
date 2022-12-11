@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+ 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在群晖的 Docker 环境中运行甜糖星愿服务">
+<meta property="og:url" content="https://www.boris1993.com/run-tiantang-on-synology-docker.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+ 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-04T14:14:48.000Z">
+<meta property="article:modified_time" content="2022-12-11T06:26:53.463Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="甜糖星愿">
+<meta property="article:tag" content="甜糖">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/run-tiantang-on-synology-docker.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/run-tiantang-on-synology-docker.html","path":"run-tiantang-on-synology-docker.html","title":"在群晖的 Docker 环境中运行甜糖星愿服务"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在群晖的 Docker 环境中运行甜糖星愿服务 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script async defer 
+    data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" 
+    data-do-not-track="true"
+    src="https://umami.boris1993.com/umami.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">我的网络环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text">安装 Docker 及配置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">准备二进制翻译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">运行镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">深入了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%82%80%E8%AF%B7%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">我的邀请码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- sidebar ad -->
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/run-tiantang-on-synology-docker.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在群晖的 Docker 环境中运行甜糖星愿服务 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在群晖的 Docker 环境中运行甜糖星愿服务
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-04 22:14:48" itemprop="dateCreated datePublished" datetime="2021-01-04T22:14:48+08:00">2021-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-11 14:26:53" itemprop="dateModified" datetime="2022-12-11T14:26:53+08:00">2022-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/run-tiantang-on-synology-docker.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/run-tiantang-on-synology-docker.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/run-tiantang-on-synology-docker.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
+<p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code> 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
+<p>本文提到的操作全部基于 Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用 <code>Docker</code> 和 <code>docker-compose</code>。</p>
+<span id="more"></span>
+
+<h2 id="我的网络环境"><a href="#我的网络环境" class="headerlink" title="我的网络环境"></a>我的网络环境</h2><p>因为这个镜像相关的一些配置是以我的网络结构为基础的，所以我觉得有必要简单说一下我的网络结构是什么样的。</p>
+<p>简单来说，我的网络就是这样子的。虽然网络里还有别的设备，但是因为与本文无关，我就略掉了。</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[公网] -- [光猫] -- [群晖]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>其中光猫负责拨号，所以它也是最外层的一个路由器，光猫的 IP 地址是 <code>192.168.1.1</code>，它下面有一个 <code>192.168.1.0/24</code> 的子网，群晖与光猫直连，有一个 <code>192.168.1.0/24</code> 子网下的 IP 地址。在群晖的 Docker 中，会有一个 <code>macvlan</code> 驱动的网络，与物理网卡共享同一个子网。甜糖星愿的容器将会接入到这个 <code>macvlan</code> 网络，在接入时我会手动为其分配一个 IP 地址。</p>
+<h2 id="安装Docker及配置网络"><a href="#安装Docker及配置网络" class="headerlink" title="安装Docker及配置网络"></a>安装 Docker 及配置网络</h2><p>因为本文是通过 Docker 来实现的，所以第一步当然是安装 Docker。群晖嘛就从套件商店安装，其他平台就用自己平台的方法安装，总之装上 Docker 就行。安装好 Docker 之后，进入<code>控制面板 -- 网络 -- 网络界面</code>，选择连接公网的接口，如<code>局域网1</code>，点击<code>管理 -- Open vSwitch设置</code>，勾选<code>启用 Open vSwitch</code>。</p>
+<p>然后我们需要在 Docker 里面创建一个 <code>macvlan</code> 驱动的网络，命令如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network create \</span><br><span class="line">    -d macvlan \</span><br><span class="line">    --subnet=192.168.1.0/24 \</span><br><span class="line">    --gateway=192.168.1.1 \</span><br><span class="line">    -o parent=ovs_eth0 \</span><br><span class="line">    macvlan</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面命令中 <code>subnet</code> 的值替换成群晖所在网络的子网，<code>gateway</code> 指向该子网的网关，<code>parent</code> 指向要绑定的物理网卡，最后面的 <code>macvlan</code> 是网络名，可以按需修改。</p>
+<h2 id="准备二进制翻译器"><a href="#准备二进制翻译器" class="headerlink" title="准备二进制翻译器"></a>准备二进制翻译器</h2><p>接下来，我们要借助 QEMU 的力量，放一个幻术。毕竟，甜糖星愿只给了 ARM 平台的可执行程序，直接在 x86 平台跑肯定是跑不起来的，所以我们要向内核注册一个翻译器，这样 Docker 在执行其他平台的机器码时就可以通过这个翻译器将其翻译成 x86 指令来执行了。是的，我知道这玩意效率不高，我已经体验过了。</p>
+<p>首先，克隆这个镜像的源码仓库 <sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[tiantang-x86-docker - Docker Hub](https://hub.docker.com/repository/docker/boris1993/tiantang-x86-docker)
+">[2]</span></a></sup>，找到 <code>resources/qemu-aarch64-static</code>，或者你直接<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211bHRpYXJjaC9xZW11LXVzZXItc3RhdGljL3JlbGVhc2VzL2Rvd25sb2FkL3Y1LjIuMC0yL3FlbXUtYWFyY2g2NC1zdGF0aWM=">从 GitHub 下载 qemu-aarch64-static<i class="fa fa-external-link-alt"></i></span>也行，把这个文件放到 <code>$PATH</code> 指定的目录，赋予执行权限。</p>
+<p>然后施法吟唱，很简单，就一句话：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --<span class="built_in">rm</span> --privileged multiarch/qemu-user-static:register</span><br></pre></td></tr></tbody></table></figure>
+
+<p>但是，这个幻术在群晖重启之后就会消失，幻术没了，甜糖星愿就起不来。所以我们还得配一个开机后的自启动任务，让群晖帮我们自动吟唱。操作也很简单，首先将本仓库的 <code>set_qemu_user_static.sh</code> 放到一个合适的位置，比如我放到了 <code>/var/services/homes/boris1993/scripts</code>，然后前往<code>控制面板 -- 任务计划</code>，然后按照如下说明新增一个任务计划：</p>
+<ul>
+<li>任务名称：可自选</li>
+<li>用户账号：root</li>
+<li> 事件：开机</li>
+<li>任务设置页面的运行命令：<br><code>/var/services/homes/boris1993/scripts/set_qemu_user_static.sh</code></li>
+</ul>
+<p>如果要看这个脚本的日志的话，在<code>运行命令</code>里面把脚本输出重定向到一个文件就可以了。</p>
+<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>进入本仓库所在目录，或者下载<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2VyL21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw="> docker-compose.yml<i class="fa fa-external-link-alt"></i></span>到一个合适的目录下，然后稍微编辑一下，以符合你的网络状况。主要要检查的就是 <code>networks.macvlan.ipv4_address</code> 的值，要确保它处在上面创建的那个 <code>macvlan</code> 网络的子网中。</p>
+<p>确认无误后，执行 <code>sudo docker-compose up -d</code>，Docker 就会自动拉取镜像，并启动一个名为 <code>tiantang</code> 的容器。</p>
+<p>容器内的甜糖星愿在首次启动时会自动退出，这是因为它在自我更新（我就不说这个操作一开始给了我多大的困扰了）。不要怕，容器里面有一个每分钟执行一次的定时任务，在没有发现甜糖星愿的进程时会自动将它启动。</p>
+<p>除此之外，我会在容器启动两分钟后，检测甜糖星愿监听了哪些端口，然后通过脚本自动设置路由器上的 UPnP 规则，这样你就不需要将甜糖星愿容器的 IP 放到 DMZ 里，也不需要手动配置端口转发了。当然这个操作的前提是，你的路由器支持 UPnP，并且你启用了 UPnP，如果没有的话，那你只能手动操作了。或者，如果你不想让脚本自动配置 UPnP，或者客观条件下不允许你这么做，那么你可以把 <code>docker-compose.yml</code> 中 <code>SKIP_UPNP_AUTOCONFIG</code> 这一环境变量置为 <code>true</code>，这样脚本就不会执行了。</p>
+<p>在甜糖星愿稳定运行，且端口转发规则也配置成功后，就可以通过手机客户端绑定这个节点了。但是这里有个问题，就是手机与甜糖星愿必须处在同一个子网里才能自动发现，如果因为各种原因没能自动发现，那么你可以在 <code>tiantang</code> 这个容器中打开一个 <code>bash</code> 终端，执行 <code>ttnode_168 -p /data</code>，在输出中会打印出这个节点的 UID，将其复制到任意二维码生成工具中生成一个二维码，然后用手机端扫描这个二维码，即可完成绑定。</p>
+<p>在这之后，就没什么我们能做的了。我们就慢慢等着甜糖星愿给你分配任务吧。我是等了大概有两三天才开始跑流量的。如果在配置好 UPnP 后，手机端仍提示 “未配置网络”，那有可能是在配置 UPnP 的脚本启动时，甜糖星愿尚未打开所有端口，导致 UPnP 规则不完整。你可以前往路由器的 UPnP 页面，将页面显示结果与 <code>netstat -nlp | grep qemu</code> 命令的输出做对比，如果不一致的话，重新手动运行 <code>set-port-forwarding.sh</code> 脚本即可。</p>
+<h2 id="深入了解"><a href="#深入了解" class="headerlink" title="深入了解"></a>深入了解</h2><p>如果你不止满足于把它跑起来，还想要了解这个镜像背后的运作方式，那么你可以前往这个镜像的 GitHub 仓库 <sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[tiantang-x86-docker - GitHub](https://github.com/boris1993/tiantang-x86-docker)
+">[3]</span></a></sup> 阅读该镜像相关的源码。在源码中我也写了注释，可以方便你理解我的想法。</p>
+<h2 id="我的邀请码"><a href="#我的邀请码" class="headerlink" title="我的邀请码"></a>我的邀请码</h2><p>如果我的镜像帮到了你，或者我的这篇文章帮到了你，那么如果你愿意的话，你可以在手机客户端的<code>填写邀请码</code>处，填上我的邀请码 **<code>804744</code>**，这样你可以获得 15 张加成卡，当然我也会得到一些加成。反正互利互惠，我的加成不会从你的身上扣掉，何乐而不为呢？</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cDovL20udGlhbnRhbmcubW9nZW5jbG91ZC5jb20v"> 甜糖星愿官方网站<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yZXBvc2l0b3J5L2RvY2tlci9ib3JpczE5OTMvdGlhbnRhbmcteDg2LWRvY2tlcg==">tiantang-x86-docker - Docker Hub<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2Vy">tiantang-x86-docker - GitHub<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%94%9C%E7%B3%96%E6%98%9F%E6%84%BF/" rel="tag"># 甜糖星愿</a>
+              <a href="/tags/%E7%94%9C%E7%B3%96/" rel="tag"># 甜糖</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/gcp-logging-show-class-and-method-name.html" rel="prev" title="在 Google Cloud Logging 的日志输出中增加类名、方法名和行数">
+                  <i class="fa fa-chevron-left"></i> 在 Google Cloud Logging 的日志输出中增加类名、方法名和行数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/resolving-nginx-sni-issue.html" rel="next" title="记一次修复生产环境中 nginx 出现的 SNI 相关的问题">
+                  记一次修复生产环境中 nginx 出现的 SNI 相关的问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/run-tiantang-on-synology-docker.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

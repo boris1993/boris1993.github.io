@@ -9,13 +9,13 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Fri, 04 Nov 2022 15:25:31 GMT</pubDate>
+    <pubDate>Sun, 11 Dec 2022 06:26:53 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>使用 Tailscale 部署虚拟局域网</title>
-      <link>https://www.boris1993.com/tools/setting-up-tailscale.html</link>
-      <guid>https://www.boris1993.com/tools/setting-up-tailscale.html</guid>
+      <link>https://www.boris1993.com/setting-up-tailscale.html</link>
+      <guid>https://www.boris1993.com/setting-up-tailscale.html</guid>
       <pubDate>Mon, 24 Oct 2022 02:16:39 GMT</pubDate>
       
       <description>&lt;p&gt;最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。&lt;/p&gt;</description>
@@ -39,14 +39,14 @@
       <category domain="https://www.boris1993.com/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</category>
       
       
-      <comments>https://www.boris1993.com/tools/setting-up-tailscale.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/setting-up-tailscale.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>记一次抢救被 force push 的 GitHub 仓库</title>
-      <link>https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html</link>
-      <guid>https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html</guid>
+      <link>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html</link>
+      <guid>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html</guid>
       <pubDate>Mon, 17 Oct 2022 06:06:33 GMT</pubDate>
       
       <description>&lt;p&gt;就在刚刚，我一个误操作，在没有本地备份的前提下，force push 了一个 GitHub 上的仓库。万幸最后恢复成功，数据拿回来了。惊魂未定之余，在此记录我的抢救过程以供参考。&lt;/p&gt;</description>
@@ -68,14 +68,14 @@
       <category domain="https://www.boris1993.com/tags/%E6%81%A2%E5%A4%8DGitHub%E4%BB%93%E5%BA%93/">恢复GitHub仓库</category>
       
       
-      <comments>https://www.boris1993.com/others/rescuing-my-github-repo-from-force-push.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>简单理解 NTP v3 协议</title>
-      <link>https://www.boris1993.com/others/understanding-ntp-protocol.html</link>
-      <guid>https://www.boris1993.com/others/understanding-ntp-protocol.html</guid>
+      <link>https://www.boris1993.com/understanding-ntp-protocol.html</link>
+      <guid>https://www.boris1993.com/understanding-ntp-protocol.html</guid>
       <pubDate>Wed, 07 Sep 2022 07:40:00 GMT</pubDate>
       
       <description>&lt;p&gt;前段时间瞎折腾，给自己的黑莓 Bold 9900 写了个通过 NTP 同步时间的小工具，顺便在这里记录一下我在实现一个 NTP 客户端时对这个协议的理解。&lt;/p&gt;</description>
@@ -91,14 +91,14 @@
       <category domain="https://www.boris1993.com/tags/NTP/">NTP</category>
       
       
-      <comments>https://www.boris1993.com/others/understanding-ntp-protocol.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/understanding-ntp-protocol.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>关闭 IPv6 或调整 IPv6 优先级以解决微软模拟飞行更新下载过慢的问题</title>
-      <link>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</link>
-      <guid>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html</guid>
+      <link>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</link>
+      <guid>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</guid>
       <pubDate>Sun, 05 Dec 2021 13:26:12 GMT</pubDate>
       
       <description>&lt;blockquote&gt;
@@ -123,14 +123,14 @@
       <category domain="https://www.boris1993.com/tags/%E5%BE%AE%E8%BD%AF%E6%A8%A1%E6%8B%9F%E9%A3%9E%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%85%A2/">微软模拟飞行下载慢</category>
       
       
-      <comments>https://www.boris1993.com/others/fixing-downloading-too-slow-msfs-2020.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Java 8 的一个 SNI 的 bug</title>
-      <link>https://www.boris1993.com/others/java-8-sni-bug.html</link>
-      <guid>https://www.boris1993.com/others/java-8-sni-bug.html</guid>
+      <link>https://www.boris1993.com/java-8-sni-bug.html</link>
+      <guid>https://www.boris1993.com/java-8-sni-bug.html</guid>
       <pubDate>Wed, 24 Nov 2021 09:17:22 GMT</pubDate>
       
         
@@ -153,14 +153,14 @@
       <category domain="https://www.boris1993.com/tags/SNI/">SNI</category>
       
       
-      <comments>https://www.boris1993.com/others/java-8-sni-bug.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-8-sni-bug.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>记一次修复生产环境中 nginx 出现的 SNI 相关的问题</title>
-      <link>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html</link>
-      <guid>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html</guid>
+      <link>https://www.boris1993.com/resolving-nginx-sni-issue.html</link>
+      <guid>https://www.boris1993.com/resolving-nginx-sni-issue.html</guid>
       <pubDate>Sun, 21 Nov 2021 15:41:56 GMT</pubDate>
       
       <description>&lt;p&gt;前段时间，我司出现了一次生产事故，调查后发现是当时的 OpenResty 配置不兼容 SNI 导致的。在这里我也记录一下整件事的排查过程，以及解决方法，供遇到类似问题的同志们参考。&lt;/p&gt;</description>
@@ -182,14 +182,14 @@
       <category domain="https://www.boris1993.com/tags/OpenResty/">OpenResty</category>
       
       
-      <comments>https://www.boris1993.com/tools/nginx/resolving-nginx-sni-issue.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/resolving-nginx-sni-issue.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>在群晖的 Docker 环境中运行甜糖星愿服务</title>
-      <link>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</link>
-      <guid>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html</guid>
+      <link>https://www.boris1993.com/run-tiantang-on-synology-docker.html</link>
+      <guid>https://www.boris1993.com/run-tiantang-on-synology-docker.html</guid>
       <pubDate>Mon, 04 Jan 2021 14:14:48 GMT</pubDate>
       
       <description>&lt;p&gt;前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。&lt;/p&gt;
@@ -209,14 +209,14 @@
       <category domain="https://www.boris1993.com/tags/%E7%94%9C%E7%B3%96/">甜糖</category>
       
       
-      <comments>https://www.boris1993.com/others/run-tiantang-on-synology-docker.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/run-tiantang-on-synology-docker.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>在 Google Cloud Logging 的日志输出中增加类名、方法名和行数</title>
-      <link>https://www.boris1993.com/projects/java/coding-tips/gcp-logging-show-class-and-method-name.html</link>
-      <guid>https://www.boris1993.com/projects/java/coding-tips/gcp-logging-show-class-and-method-name.html</guid>
+      <link>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</link>
+      <guid>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</guid>
       <pubDate>Sun, 30 Aug 2020 06:09:23 GMT</pubDate>
       
       <description>&lt;p&gt;由于我司目前的项目都运行在 Google Cloud Platform (以下简称 GCP) 上，那么自然而然的，我们选择了使用 GCP 的 Logging 来查看日志。在使用过程中，我们发现了一个问题，那就是我们无法直观的看到日志是从什么地方打印出来的，经常需要通过日志内容，在代码里面通过全文搜索来定位。这样就产生了一个需求：可不可以把这条日志所在的类、方法，和行数一起打印在日志中？&lt;/p&gt;</description>
@@ -242,14 +242,14 @@
       <category domain="https://www.boris1993.com/tags/Stackdriver/">Stackdriver</category>
       
       
-      <comments>https://www.boris1993.com/projects/java/coding-tips/gcp-logging-show-class-and-method-name.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>在 Spring 中通过配置类注入配置文件的值</title>
-      <link>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</link>
-      <guid>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</guid>
+      <link>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</link>
+      <guid>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</guid>
       <pubDate>Sun, 03 May 2020 10:44:14 GMT</pubDate>
       
       <description>&lt;p&gt;我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用 &lt;code&gt;@Value()&lt;/code&gt; 注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。&lt;/p&gt;</description>
@@ -273,14 +273,14 @@
       <category domain="https://www.boris1993.com/tags/ConfigurationProperties/">ConfigurationProperties</category>
       
       
-      <comments>https://www.boris1993.com/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>在 NexT 主题中接入 Google AdSense</title>
-      <link>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</link>
-      <guid>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html</guid>
+      <link>https://www.boris1993.com/hexo-next-enable-google-adsense.html</link>
+      <guid>https://www.boris1993.com/hexo-next-enable-google-adsense.html</guid>
       <pubDate>Sun, 05 Apr 2020 06:58:01 GMT</pubDate>
       
       <description>&lt;p&gt;这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。&lt;/p&gt;
@@ -301,14 +301,14 @@
       <category domain="https://www.boris1993.com/tags/adsense/">adsense</category>
       
       
-      <comments>https://www.boris1993.com/others/hexo-next-enable-google-adsense.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/hexo-next-enable-google-adsense.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>解决 Maven 的 unable to find valid certification path to requested target 错误</title>
-      <link>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</link>
-      <guid>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</guid>
+      <link>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</link>
+      <guid>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</guid>
       <pubDate>Mon, 30 Mar 2020 03:13:30 GMT</pubDate>
       
       <description>&lt;p&gt;今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了 &lt;code&gt;unable to find valid certification path to requested target&lt;/code&gt; 的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。&lt;/p&gt;</description>
@@ -326,14 +326,14 @@
       <category domain="https://www.boris1993.com/tags/Maven/">Maven</category>
       
       
-      <comments>https://www.boris1993.com/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>学习 Concourse CI - 使用变量</title>
-      <link>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</link>
-      <guid>https://www.boris1993.com/tools/concourse/concourse-using-vars.html</guid>
+      <link>https://www.boris1993.com/concourse-using-vars.html</link>
+      <guid>https://www.boris1993.com/concourse-using-vars.html</guid>
       <pubDate>Fri, 20 Mar 2020 06:48:47 GMT</pubDate>
       
       <description>&lt;p&gt;在实际编写配置文件时，我们不可能保证所有相关的值都是一成不变的。有的值可能会根据运行时的状态来指定，也有可能它是类似 token 一样的机密信息，必须从一个可信渠道获取。为了应对这种情况，我们就需要在配置文件中引入变量。&lt;/p&gt;</description>
@@ -355,14 +355,14 @@
       <category domain="https://www.boris1993.com/tags/vault/">vault</category>
       
       
-      <comments>https://www.boris1993.com/tools/concourse/concourse-using-vars.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/concourse-using-vars.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>学习 Concourse CI - 快速入门</title>
-      <link>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</link>
-      <guid>https://www.boris1993.com/tools/concourse/concourse-quick-start.html</guid>
+      <link>https://www.boris1993.com/concourse-quick-start.html</link>
+      <guid>https://www.boris1993.com/concourse-quick-start.html</guid>
       <pubDate>Tue, 10 Mar 2020 06:38:54 GMT</pubDate>
       
       <description>&lt;p&gt;最近公司需要用到一个名叫 &lt;code&gt;Concourse CI&lt;/code&gt; 的 &lt;code&gt;CI/CD&lt;/code&gt; 工具，那么我当然就要学习一下啦。顺便还能水一篇，啊不，写一篇博客，当作学习过程中的笔记。&lt;/p&gt;</description>
@@ -382,14 +382,14 @@
       <category domain="https://www.boris1993.com/tags/concourse-ci/">concourse-ci</category>
       
       
-      <comments>https://www.boris1993.com/tools/concourse/concourse-quick-start.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/concourse-quick-start.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Java 的内部类和 private 修饰符</title>
-      <link>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</link>
-      <guid>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html</guid>
+      <link>https://www.boris1993.com/java-inner-class-and-private-identifier.html</link>
+      <guid>https://www.boris1993.com/java-inner-class-and-private-identifier.html</guid>
       <pubDate>Mon, 24 Feb 2020 13:38:32 GMT</pubDate>
       
       <description>&lt;p&gt;一个 &lt;code&gt;private&lt;/code&gt; 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？&lt;/p&gt;
@@ -412,14 +412,14 @@
       <category domain="https://www.boris1993.com/tags/%E5%86%85%E9%83%A8%E7%B1%BB/">内部类</category>
       
       
-      <comments>https://www.boris1993.com/projects/java/fundamentals/java-inner-class-and-private-identifier.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-inner-class-and-private-identifier.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Spring bean 的作用域</title>
-      <link>https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html</link>
-      <guid>https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html</guid>
+      <link>https://www.boris1993.com/java-spring-bean-scopes.html</link>
+      <guid>https://www.boris1993.com/java-spring-bean-scopes.html</guid>
       <pubDate>Sat, 22 Feb 2020 03:00:12 GMT</pubDate>
       
       <description>&lt;p&gt;在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。&lt;/p&gt;</description>
@@ -439,14 +439,14 @@
       <category domain="https://www.boris1993.com/tags/Spring-Boot/">Spring Boot</category>
       
       
-      <comments>https://www.boris1993.com/projects/spring/java-spring-bean-scopes.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-spring-bean-scopes.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Spring Boot 自动配置的原理</title>
-      <link>https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html</link>
-      <guid>https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html</guid>
+      <link>https://www.boris1993.com/java-spring-autoconfiguration.html</link>
+      <guid>https://www.boris1993.com/java-spring-autoconfiguration.html</guid>
       <pubDate>Thu, 20 Feb 2020 02:00:43 GMT</pubDate>
       
       <description>&lt;p&gt;在使用 Spring Boot 时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白 Spring Boot 自动配置的原理。&lt;/p&gt;</description>
@@ -466,14 +466,14 @@
       <category domain="https://www.boris1993.com/tags/Spring-Boot/">Spring Boot</category>
       
       
-      <comments>https://www.boris1993.com/projects/spring/java-spring-autoconfiguration.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-spring-autoconfiguration.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>解决命令行中 Git 显示中文文件名乱码</title>
-      <link>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html</link>
-      <guid>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html</guid>
+      <link>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</link>
+      <guid>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</guid>
       <pubDate>Mon, 10 Feb 2020 02:15:34 GMT</pubDate>
       
         
@@ -495,14 +495,14 @@
       <category domain="https://www.boris1993.com/tags/Git/">Git</category>
       
       
-      <comments>https://www.boris1993.com/tools/git/git-commandline-unescape-chinese-characters.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>使用 VisualVM 监控应用 GC</title>
-      <link>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</link>
-      <guid>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html</guid>
+      <link>https://www.boris1993.com/monitor-gc-with-visual-vm.html</link>
+      <guid>https://www.boris1993.com/monitor-gc-with-visual-vm.html</guid>
       <pubDate>Sun, 09 Feb 2020 09:38:42 GMT</pubDate>
       
       <description>&lt;p&gt;我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 &lt;code&gt;Visual GC&lt;/code&gt; 来监控 Java 应用的垃圾回收情况。&lt;/p&gt;</description>
@@ -524,14 +524,14 @@
       <category domain="https://www.boris1993.com/tags/VisualVM/">VisualVM</category>
       
       
-      <comments>https://www.boris1993.com/projects/java/coding-tips/monitor-gc-with-visual-vm.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/monitor-gc-with-visual-vm.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>简谈 JVM 中的几种引用</title>
-      <link>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</link>
-      <guid>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html</guid>
+      <link>https://www.boris1993.com/java-jvm-reference.html</link>
+      <guid>https://www.boris1993.com/java-jvm-reference.html</guid>
       <pubDate>Fri, 07 Feb 2020 03:36:26 GMT</pubDate>
       
       <description>&lt;p&gt;在 &lt;a href=&quot;/projects/java/fundamentals/java-gc-algorithms.html&quot;&gt;Java 的垃圾回收算法&lt;/a&gt;一文中，我们知道 JVM 是根据一个对象有没有被引用来判断要不要对其进行垃圾回收的。但是，如果我们为了提升垃圾回收的效率，想要再把垃圾回收的条件更细化一些，比如只在内存非常紧张的时候才回收某些对象，那么光靠一个粗略的 “引用”，就显得心有余而力不足了。所以，在 &lt;code&gt;JDK 1.2&lt;/code&gt; 版本之后，Java 扩充了引用的概念，将其扩充成了&lt;code&gt;强引用&lt;/code&gt;，&lt;code&gt;软引用&lt;/code&gt;，&lt;code&gt;弱引用&lt;/code&gt;，&lt;code&gt;虚引用&lt;/code&gt;四个更细化的概念。&lt;/p&gt;
@@ -554,14 +554,14 @@
       <category domain="https://www.boris1993.com/tags/JVM/">JVM</category>
       
       
-      <comments>https://www.boris1993.com/projects/java/fundamentals/java-jvm-reference.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-jvm-reference.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>看懂 ParallelGC 的日志</title>
-      <link>https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html</link>
-      <guid>https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html</guid>
+      <link>https://www.boris1993.com/java-understand-parallel-gc-logs.html</link>
+      <guid>https://www.boris1993.com/java-understand-parallel-gc-logs.html</guid>
       <pubDate>Wed, 05 Feb 2020 06:45:25 GMT</pubDate>
       
       <description>&lt;p&gt;在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂 Java 的垃圾回收日志。本文将介绍打印 GC 日志相关的 JVM 参数，以及使用不同参数时 JVM 将会打印出的日志内容。&lt;/p&gt;</description>
@@ -580,14 +580,14 @@
       
       <category domain="https://www.boris1993.com/tags/Java/">Java</category>
       
+      <category domain="https://www.boris1993.com/tags/JVM/">JVM</category>
+      
       <category domain="https://www.boris1993.com/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">垃圾回收</category>
       
       <category domain="https://www.boris1993.com/tags/GC/">GC</category>
       
-      <category domain="https://www.boris1993.com/tags/JVM/">JVM</category>
       
-      
-      <comments>https://www.boris1993.com/projects/java/fundamentals/java-understand-parallel-gc-logs.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/java-understand-parallel-gc-logs.html#disqus_thread</comments>
       
     </item>
     

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近心血来潮，想给这个博客在 GitHub 上面的页面绑个自定义域名，结果无意中发现了一个坑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一个 Caddy 和 GitHub 自定义域名的坑">
+<meta property="og:url" content="https://www.boris1993.com/caddy-and-github-custom-domain.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="最近心血来潮，想给这个博客在 GitHub 上面的页面绑个自定义域名，结果无意中发现了一个坑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-10T08:54:33.000Z">
+<meta property="article:modified_time" content="2022-12-11T06:26:53.459Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Caddy">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="Custom domain">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/caddy-and-github-custom-domain.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/caddy-and-github-custom-domain.html","path":"caddy-and-github-custom-domain.html","title":"记一个 Caddy 和 GitHub 自定义域名的坑"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一个 Caddy 和 GitHub 自定义域名的坑 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script async defer 
+    data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" 
+    data-do-not-track="true"
+    src="https://umami.boris1993.com/umami.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%BD%E8%B8%AA%E7%BA%BF%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">追踪线索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">结案</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- sidebar ad -->
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/caddy-and-github-custom-domain.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一个 Caddy 和 GitHub 自定义域名的坑 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一个 Caddy 和 GitHub 自定义域名的坑
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-10 16:54:33" itemprop="dateCreated datePublished" datetime="2018-08-10T16:54:33+08:00">2018-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-11 14:26:53" itemprop="dateModified" datetime="2022-12-11T14:26:53+08:00">2022-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/caddy/" itemprop="url" rel="index"><span itemprop="name">Caddy</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/caddy-and-github-custom-domain.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/caddy-and-github-custom-domain.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/caddy-and-github-custom-domain.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近心血来潮，想给这个博客在 GitHub 上面的页面绑个自定义域名，结果无意中发现了一个坑。</p>
+<span id="more"></span>
+
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>如关于页面所见，这个博客是同时放在 GitHub Pages 和我的服务器上面的。我的服务器上面呢，是用 Caddy 的 <code>git</code> 插件监听了一个 <code>WebHook</code> 来实现同步更新的。</p>
+<p>在我绑定 Custom domain 之前，<code>Caddy</code> 的自动更新一直在默默正常工作着。但就在我绑了 Custom domain 之后，我发现，Caddy 没能成功拉取最新版本的仓库。</p>
+<h1 id="追踪线索"><a href="#追踪线索" class="headerlink" title="追踪线索"></a>追踪线索</h1><p>首先使用排除法，肯定不是 GitHub 的问题。那就看一下 Caddy 的日志里面有没有什么线索吧。</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Aug 09 14:44:42 vps caddy[4516]: 2018/08/09 14:44:42 Received pull notification for the tracking branch, updating...</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: From https://github.com/boris1993/boris1993.github.io</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]:  * branch            master     -&gt; FETCH_HEAD</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]:  + 3d5ecea...204143b master     -&gt; origin/master  (forced update)</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: *** Please tell me who you are.</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: Run</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]:   git config --global user.email "you@example.com"</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]:   git config --global user.name "Your Name"</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: to set your account's default identity.</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: Omit --global to set the identity only in this repository.</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: fatal: unable to auto-detect email address (got 'www-data@vps.(none)')</span><br><span class="line">Aug 09 14:44:43 vps caddy[4516]: 2018/08/09 14:44:43 exit status 128</span><br></pre></td></tr></tbody></table></figure>
+
+<p>鞥？啥时候 <code>git pull</code> 也要提供用户名和邮箱了？</p>
+<p>随手往上面翻了翻，看见了点更有意思的东西：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Aug 10 16:45:46 vps caddy[11022]: 2018/08/10 16:45:46 Received pull notification for the tracking branch, updating...</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]: From https://github.com/boris1993/boris1993.github.io</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]:  * branch            master     -&gt; FETCH_HEAD</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]:    3a305c6..b57b257  master     -&gt; origin/master</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]: Updating 3a305c6..b57b257</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]: Fast-forward</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]:  CNAME | 1 +</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]:  1 file changed, 1 insertion(+)</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]:  create mode 100644 CNAME</span><br><span class="line">Aug 10 16:45:47 vps caddy[11022]: 2018/08/10 16:45:47 https://github.com/boris1993/boris1993.github.io.git pulled.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>新增了个叫 <code>CNAME</code> 的文件？这是啥玩意？得，看看里面写了啥。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> CNAME</span><br><span class="line">blog2.boris1993.tk</span><br><span class="line">$</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这…… 不是我刚绑的那个自定义域名么…… 原来是这么实现的……</p>
+<p>好吧，这样一来，问题就清楚了。</p>
+<h1 id="结案"><a href="#结案" class="headerlink" title="结案"></a>结案</h1><p>其实这个问题，是这么回事：</p>
+<p>在配置了自定义域名之后，GitHub 会往仓库里放一个名为 <code>CNAME</code> 的文件，而我在用 hexo 提交的时候，我本地完全没有关于这个文件的任何记录，导致远端仓库的 CNAME 文件又丢了，而在 Caddy 更新的时候，怀疑 Caddy 在进行 merge 操作，merge 操作需要用户提供用户名和邮箱，但是运行 Caddy 的 <code>www-data</code> 用户下没有这两个配置，于是就导致了上面的错误。</p>
+<p>至于解决方案嘛，要么就往博客的源码里面放一个名为 <code>CNAME</code> 文件并且保证内容正确，要么就干脆不配置自定义域名了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Caddy/" rel="tag"># Caddy</a>
+              <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+              <a href="/tags/Custom-domain/" rel="tag"># Custom domain</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/scroll-view-auto-fit-height.html" rel="prev" title="微信小程序 scroll-view 填满剩余可用高度">
+                  <i class="fa fa-chevron-left"></i> 微信小程序 scroll-view 填满剩余可用高度
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/tomcat-servlet-context-listener.html" rel="next" title="监听 Tomcat 的启动、停止事件">
+                  监听 Tomcat 的启动、停止事件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/caddy-and-github-custom-domain.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>如何允许非 root 进程绑定低位端口</title>
-    <url>/linux/allow-non-root-process-to-bind-low-numbered-ports.html</url>
+    <url>/allow-non-root-process-to-bind-low-numbered-ports.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>众所周知，在 Linux 中，要想绑定端口号在 1024 以下的低位端口，是需要 root 权限的。但是，如果我又想绑定低位端口，又不想以 root 身份运行程序，该怎么办？答案是，<code>setcap</code> 命令。</p>
 <span id="more"></span>
 
@@ -48,7 +48,7 @@
   </entry>
   <entry>
     <title>浅谈 MySQL 中的校对规则 (collation)</title>
-    <url>/database/mysql/brief-talk-about-mysql-collations.html</url>
+    <url>/brief-talk-about-mysql-collations.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在我们开发过程中，最常见到的三种校对规则 (collation) 就是 <code>utf8mb4_general_ci</code>、<code>utf8mb4_unicode_ci</code>，和 <code>utf8mb4_bin</code>。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。</p>
 <span id="more"></span>
 
@@ -80,7 +80,7 @@
   </entry>
   <entry>
     <title>在 macOS 中搭建自己的 DNS 服务器</title>
-    <url>/tools/dnsmasq/build-dns-server-on-macos.html</url>
+    <url>/build-dns-server-on-macos.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近实验了一下配置 nginx 多站点，顺便也给自己跑在本机上的几个服务上了个域名 (当然是直接用 Hosts 强行解析到 127.0.0.1 的……)。但是吧，用 Hosts 强行解析，总觉得有点别扭，所以试着在本机搭一个 DNS 服务器。</p>
 <span id="more"></span>
 
@@ -111,7 +111,7 @@
   </entry>
   <entry>
     <title>记一个 Caddy 和 GitHub 自定义域名的坑</title>
-    <url>/tools/caddy/caddy-and-github-custom-domain.html</url>
+    <url>/caddy-and-github-custom-domain.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近心血来潮，想给这个博客在 GitHub 上面的页面绑个自定义域名，结果无意中发现了一个坑。</p>
 <span id="more"></span>
 
@@ -145,7 +145,7 @@
   </entry>
   <entry>
     <title>更改 Google Play 市场使用的区域</title>
-    <url>/others/change-google-play-market-location.html</url>
+    <url>/change-google-play-market-location.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>首先需要注意的一点是，目前所谓 Market Unlocker 等伪装工具已经失效了，Google 判定你商店区域的依据之一，是你登记在 Google Payments 中的当前住址。你登记的住址在哪，你的商店就在哪。</p>
 <p>那么事情就简单了，如果要转区的话，在保证你目前该账户 <strong>余额小于 $10 (或等额货币)</strong> 时，更改 Google Payments 中该账户当前住址为你想要的地区的住址即可，然后在手持设备上 <strong>删除这个账户</strong> 并 <strong>重新登录</strong> ，然后就可以看到转区成功了。</p>
 <p>不过转区前区域的余额是无法在转区后的区域中使用的，比如你从美区转到日区，那么你账户里的美刀就冻在里面花不出去了，除非你再转回美区。</p>
@@ -165,7 +165,7 @@
   </entry>
   <entry>
     <title>MySQL Workbench 中各个列属性的含义</title>
-    <url>/database/mysql/column-flags-in-mysql-workbench.html</url>
+    <url>/column-flags-in-mysql-workbench.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
 <li><code>PK</code>: 主键 (Primary Key)</li>
 <li><code>NN</code>: 非空 (Not Null)</li>
@@ -190,7 +190,7 @@
   </entry>
   <entry>
     <title>学习 Concourse CI - 快速入门</title>
-    <url>/tools/concourse/concourse-quick-start.html</url>
+    <url>/concourse-quick-start.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近公司需要用到一个名叫 <code>Concourse CI</code> 的 <code>CI/CD</code> 工具，那么我当然就要学习一下啦。顺便还能水一篇，啊不，写一篇博客，当作学习过程中的笔记。</p>
 <span id="more"></span>
 
@@ -275,7 +275,7 @@
   </entry>
   <entry>
     <title>学习 Concourse CI - 使用变量</title>
-    <url>/tools/concourse/concourse-using-vars.html</url>
+    <url>/concourse-using-vars.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在实际编写配置文件时，我们不可能保证所有相关的值都是一成不变的。有的值可能会根据运行时的状态来指定，也有可能它是类似 token 一样的机密信息，必须从一个可信渠道获取。为了应对这种情况，我们就需要在配置文件中引入变量。</p>
 <span id="more"></span>
 
@@ -334,7 +334,7 @@
   </entry>
   <entry>
     <title>为 webapp 设定单独的 context.xml</title>
-    <url>/tools/tomcat/customize-context-xml-for-individual-webapp.html</url>
+    <url>/customize-context-xml-for-individual-webapp.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>要给某个 webapp 设定单独的 <code>context.xml</code>，只需要在 <code>${WEBAPP_ROOT}/webapp</code> 目录下新建一个 <code>META-INF</code> 目录，并将 <code>context.xml</code> 放进去，就可以了。</p>
 ]]></content>
       <categories>
@@ -347,7 +347,7 @@
   </entry>
   <entry>
     <title>关闭 IPv6 或调整 IPv6 优先级以解决微软模拟飞行更新下载过慢的问题</title>
-    <url>/others/fixing-downloading-too-slow-msfs-2020.html</url>
+    <url>/fixing-downloading-too-slow-msfs-2020.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>太长不看：关闭 IPv6 或许可以解决。如果你平时要用到 IPv6，那就在更新之前先禁用 IPv6，更新完了再打开；如果开不开 IPv6 对你来说没区别的话，那永久关闭也不是不可以。当然如果你愿意，下文提到的改注册表的方案也是可用的。</p>
 </blockquote>
@@ -373,7 +373,7 @@
   </entry>
   <entry>
     <title>使用 FlatMap “展平” 一系列数据</title>
-    <url>/projects/java/coding-tips/flatten-a-group-of-data-by-flatmap.html</url>
+    <url>/flatten-a-group-of-data-by-flatmap.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 <code>FlatMap</code> 简化这个操作。</p>
 <span id="more"></span>
 
@@ -452,7 +452,7 @@
   </entry>
   <entry>
     <title>在 Google Cloud Logging 的日志输出中增加类名、方法名和行数</title>
-    <url>/projects/java/coding-tips/gcp-logging-show-class-and-method-name.html</url>
+    <url>/gcp-logging-show-class-and-method-name.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>由于我司目前的项目都运行在 Google Cloud Platform (以下简称 GCP) 上，那么自然而然的，我们选择了使用 GCP 的 Logging 来查看日志。在使用过程中，我们发现了一个问题，那就是我们无法直观的看到日志是从什么地方打印出来的，经常需要通过日志内容，在代码里面通过全文搜索来定位。这样就产生了一个需求：可不可以把这条日志所在的类、方法，和行数一起打印在日志中？</p>
 <span id="more"></span>
 
@@ -494,7 +494,7 @@
   </entry>
   <entry>
     <title>在 Spring Boot 应用中配置统一的请求响应</title>
-    <url>/projects/java/coding-tips/generify-response-format-in-spring-boot-applications.html</url>
+    <url>/generify-response-format-in-spring-boot-applications.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在前后端分离的架构下，后端通常是一个 RESTFul 的接口，而因为 HTTP 的响应码数量有限，无法灵活的反映出接口执行的各种结果，在这种情况下，就需要通过自定义的结构来表达接口最终的状态和返回的信息。而我正好最近在一个项目中实现了一个基于 <code>ControllerAdvice</code> 的统一请求响应的功能，在这里记录一下实现的方式。</p>
 <span id="more"></span>
 
@@ -541,7 +541,7 @@
   </entry>
   <entry>
     <title>解决命令行中 Git 显示中文文件名乱码</title>
-    <url>/tools/git/git-commandline-unescape-chinese-characters.html</url>
+    <url>/git-commandline-unescape-chinese-characters.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在用 Git 管理包含中文的文件时，会出现类似这样的 “乱码”：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to <span class="built_in">date</span> with <span class="string">'origin/master'</span>.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">    <span class="string">"\345\271\277\345\221\212\345\220\214\346\255\245\345\271\263\345\217\260\346\216\245\345\217\243\346\226\207\346\241\2432.0.docx.new"</span></span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></tbody></table></figure>
 
@@ -558,7 +558,7 @@
   </entry>
   <entry>
     <title>在 NexT 主题中接入 Google AdSense</title>
-    <url>/others/hexo-next-enable-google-adsense.html</url>
+    <url>/hexo-next-enable-google-adsense.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。</p>
 <p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 <code>v6.0.2</code> 或后续版本，因为本文涉及的功能是在 <code>v6.0.2</code> 引入的。</p>
 <span id="more"></span>
@@ -612,7 +612,7 @@
   </entry>
   <entry>
     <title>突然情绪爆发，暴哭了一场</title>
-    <url>/others/i-cried-just-now.html</url>
+    <url>/i-cried-just-now.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>刚才久违的暴哭了一场。</p>
 <p>嘛，其实也没暴走多久，满打满算，也就暴走了一个刘强东那么久。</p>
 <p>无奈，最近一段时间里，发生了太多闹心的事。</p>
@@ -702,7 +702,7 @@
   </entry>
   <entry>
     <title>IDEA 警告 Field injection is not recommended</title>
-    <url>/projects/java/coding-tips/idea-warninig-field-injection-is-not-recommended.html</url>
+    <url>/idea-warninig-field-injection-is-not-recommended.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前些天在开发过程中，发现 IDEA 在一个 <code>@Autowired</code> 注解上打了一个警告，内容是 <code>Field injection is not recommended</code>。多年面向 Spring 开发的经验告诉我，使用 <code>@Autowired</code> 注解进行依赖注入，肯定是没有问题的。但是我的代码洁癖不允许我这么不明不白的留一个警告在这里。所以，带着我的洁癖，和我的好奇心，我开始研究起了这个警告。</p>
 <span id="more"></span>
 
@@ -776,7 +776,7 @@
   </entry>
   <entry>
     <title>JDBC 错误 Illegal mix of collations 解决方法</title>
-    <url>/projects/java/jdbc/illegal-mix-of-collations.html</url>
+    <url>/illegal-mix-of-collations.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近项目开发时遇到了一个错误，内容是<br><code>Illegal mix of collations (utf8_unicode_ci,IMPLICIT) and (utf8_general_ci,IMPLICIT) for operation '='</code><br>经查是关联查询时两个表的排序规则 (collation) 不同导致的。</p>
 <span id="more"></span>
 
@@ -799,7 +799,7 @@
   </entry>
   <entry>
     <title>搭建 ELK 日志平台 - 安装 Elastic Search</title>
-    <url>/tools/elk/install-elk-part-es.html</url>
+    <url>/install-elk-part-es.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近搭建了一次 ELK 日志平台，在此记录一下安装步骤。由于本次模拟的是服务器不能连接互联网的情况，所以全部安装步骤皆使用 RPM 或 tar 包的方式安装。本文主要记录安装 Elastic Search 的过程。</p>
 <span id="more"></span>
 
@@ -870,7 +870,7 @@
   </entry>
   <entry>
     <title>搭建 ELK 日志平台 - 安装 Kibana</title>
-    <url>/tools/elk/install-elk-part-kibana.html</url>
+    <url>/install-elk-part-kibana.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>上一次我们安装好了 Elastic Search 和 Logstash，本次我们继续安装 Kibana。</p>
 <span id="more"></span>
 
@@ -905,7 +905,7 @@
   </entry>
   <entry>
     <title>搭建 ELK 日志平台 - 安装 Logstash</title>
-    <url>/tools/elk/install-elk-part-logstash.html</url>
+    <url>/install-elk-part-logstash.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>上回书说道，我们已经安装好了 Elastic Search。那么这次，我们继续安装 Logstash。</p>
 <span id="more"></span>
 
@@ -949,7 +949,7 @@
   </entry>
   <entry>
     <title>Java 8 的一个 SNI 的 bug</title>
-    <url>/others/java-8-sni-bug.html</url>
+    <url>/java-8-sni-bug.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p>
 <p>简单来说，就是在 <code>Java 1.8u141</code> 之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code> 方法会破坏 SNI，而正好我们的代码里有这么一行：</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></tbody></table></figure>
@@ -970,7 +970,7 @@
   </entry>
   <entry>
     <title>在 Java bean 中实现 setter 的链式调用</title>
-    <url>/projects/java/coding-tips/java-bean-chaining-setters.html</url>
+    <url>/java-bean-chaining-setters.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code> 方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
 <span id="more"></span>
 
@@ -1015,7 +1015,7 @@
   </entry>
   <entry>
     <title>Java 自定义注解</title>
-    <url>/projects/java/fundamentals/java-customized-annotations.html</url>
+    <url>/java-customized-annotations.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>注解是 Java 5 引入的一个新特性，它提供了一个用来将信息和元数据与程序元素相关联的能力，其作用如同一个修饰符，本身并不包含任何程序逻辑。</p>
 <p>本文将介绍如何创建和使用自定义的注解。</p>
 <span id="more"></span>
@@ -1080,7 +1080,7 @@
   </entry>
   <entry>
     <title>Java 的垃圾回收算法</title>
-    <url>/projects/java/fundamentals/java-gc-algorithms.html</url>
+    <url>/java-gc-algorithms.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>中了解到了 JVM 的内存模型，那么既然使用了内存，就要考虑如何回收内存。与 C 语言不同，Java 不需要开发人员人工回收内存，而是交给 Java 的垃圾回收机制来完成。</p>
 <span id="more"></span>
 
@@ -1135,7 +1135,7 @@
   </entry>
   <entry>
     <title>Java 的内部类和 private 修饰符</title>
-    <url>/projects/java/fundamentals/java-inner-class-and-private-identifier.html</url>
+    <url>/java-inner-class-and-private-identifier.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
 <p>本文将通过一个小例子，来演示怎么让 <code>private</code> 修饰符 “失效”，以及它为什么会 “失效”。</p>
 <span id="more"></span>
@@ -1166,7 +1166,7 @@
   </entry>
   <entry>
     <title>简谈 JVM 中的几种引用</title>
-    <url>/projects/java/fundamentals/java-jvm-reference.html</url>
+    <url>/java-jvm-reference.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <a href="/projects/java/fundamentals/java-gc-algorithms.html">Java 的垃圾回收算法</a>一文中，我们知道 JVM 是根据一个对象有没有被引用来判断要不要对其进行垃圾回收的。但是，如果我们为了提升垃圾回收的效率，想要再把垃圾回收的条件更细化一些，比如只在内存非常紧张的时候才回收某些对象，那么光靠一个粗略的 “引用”，就显得心有余而力不足了。所以，在 <code>JDK 1.2</code> 版本之后，Java 扩充了引用的概念，将其扩充成了<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code>四个更细化的概念。</p>
 <p>本文将参考《深入理解 Java 虚拟机 (第 3 版)》中<code>再谈引用</code>一节，简述一下这四种引用的概念，以及被引用的对象何时会被垃圾回收器回收。</p>
 <span id="more"></span>
@@ -1196,7 +1196,7 @@
   </entry>
   <entry>
     <title>JVM 运行时的数据区域</title>
-    <url>/projects/java/fundamentals/java-jvm-runtime-data-areas.html</url>
+    <url>/java-jvm-runtime-data-areas.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
 <ul>
 <li>线程专有 <ul>
@@ -1253,7 +1253,7 @@
   </entry>
   <entry>
     <title>JVM 的栈帧</title>
-    <url>/projects/java/fundamentals/java-jvm-stack-frame.html</url>
+    <url>/java-jvm-stack-frame.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>栈帧是支持 JVM 进行方法调用和执行的数据结构，它是 <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。</p>
 <span id="more"></span>
 
@@ -1283,7 +1283,7 @@
   </entry>
   <entry>
     <title>Java 多线程概念</title>
-    <url>/projects/java/fundamentals/java-multi-threading-concepts.html</url>
+    <url>/java-multi-threading-concepts.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文记录一些 Java 多线程相关的概念性的知识。</p>
 <span id="more"></span>
 
@@ -1375,7 +1375,7 @@
   </entry>
   <entry>
     <title>Java 如何创建和运行多线程</title>
-    <url>/projects/java/fundamentals/java-multi-threading-how-to.html</url>
+    <url>/java-multi-threading-how-to.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文通过一个简单的示例，介绍一下在 Java 中如何创建和运行多线程，以及我在学习过程中遇到的问题。包括：</p>
 <ul>
 <li>如何实现多线程</li>
@@ -1486,7 +1486,7 @@
   </entry>
   <entry>
     <title>生产者与消费者问题在 Java 中的实现</title>
-    <url>/projects/java/fundamentals/java-multi-threading-producer-consumer-problem.html</url>
+    <url>/java-multi-threading-producer-consumer-problem.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>生产者与消费者问题 (Producer-consumer problem)，也叫有限缓冲问题 (Bounded-buffer problem)，是一个经典的多线程同步问题案例。</p>
 <p>该问题中有两个线程共享一个固定大小的缓冲区，一个线程作为生产者，负责向缓冲区中放入数据；另一个线程作为消费者，负责从缓冲区中取出数据。该问题的重点在于，要保证当缓冲区满时，生产者不能继续向其中放入数据，而当缓冲区空时，消费者也不能从缓冲区中取出数据。</p>
 <p>那么要保证以上两点，需要在缓冲区空时休眠消费者线程，并当缓冲区有数据之后唤醒消费者线程；以及当缓冲区满时休眠生产者线程，在缓冲区有空闲空间后唤醒生产者线程，或者直接在缓冲区满时放弃未存入缓冲区的数据。</p>
@@ -1527,7 +1527,7 @@
   </entry>
   <entry>
     <title>Java 线程池</title>
-    <url>/projects/java/fundamentals/java-multi-threading-thread-pool.html</url>
+    <url>/java-multi-threading-thread-pool.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>就像数据库连接可以使用连接池管理一样，Java 中的线程也可以使用线程池来管理。本文介绍在 Java 中如何使用线程池，以及有哪些线程池。</p>
 <span id="more"></span>
 
@@ -1600,7 +1600,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Java 源码阅读 - ArrayList</title>
-    <url>/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-arraylist.html</url>
+    <url>/java-read-src-arraylist.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p>
 <p>这次就来阅读一下 <code>ArrayList</code> 的源码。</p>
 <span id="more"></span>
@@ -1714,7 +1714,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Java 源码阅读 - equals 和 hashCode 方法</title>
-    <url>/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashcode-and-equals.html</url>
+    <url>/java-read-src-hashcode-and-equals.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p>
 <p>这次就来阅读一下 <code>Object</code> 类里面 <code>hashCode</code> 方法和 <code>equals</code> 方法的源码。</p>
 <span id="more"></span>
@@ -1790,7 +1790,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Java 源码阅读 - HashMap</title>
-    <url>/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-hashmap.html</url>
+    <url>/java-read-src-hashmap.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p>
 <p>这次就来阅读一下 <code>HashMap</code> 的源码。</p>
 <span id="more"></span>
@@ -1900,7 +1900,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Java 源码阅读 - LinkedList</title>
-    <url>/projects/java/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/java-read-src-linkedlist.html</url>
+    <url>/java-read-src-linkedlist.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>做技术，不能只知其然而不知其所以然。在知道了工具的原理之后，才能更高效的使用这个工具。在程序的世界里，源码里面没有秘密，看懂了源码，也就看懂了原理。</p>
 <p>这次就来阅读一下 <code>LinkedList</code> 的源码。</p>
 <span id="more"></span>
@@ -2022,7 +2022,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>去掉自定义异常中的堆栈跟踪信息</title>
-    <url>/projects/java/coding-tips/java-remove-stack-trace-in-customized-exceptions.html</url>
+    <url>/java-remove-stack-trace-in-customized-exceptions.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 业务异常基类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">BaseBizException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseBizException</span><span class="params">(String message)</span> {</span><br><span class="line">        <span class="built_in">super</span>(message);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 覆盖fillInStackTrace()方法，抹掉异常中的堆栈跟踪信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> Throwable <span class="title function_">fillInStackTrace</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
@@ -2037,7 +2037,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>循序渐进写一个 Servlet (1) - 介绍相关的接口和类</title>
-    <url>/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html</url>
+    <url>/java-servlet-1-introducing-classes-and-interfaces.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
 <p>这篇博文将介绍一些后面会用到的接口和类。</p>
 <span id="more"></span>
@@ -2093,7 +2093,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>循序渐进写一个 Servlet (2) - 第一个 servlet</title>
-    <url>/projects/java/Servlet/java-servlet-2-first-servlet.html</url>
+    <url>/java-servlet-2-first-servlet.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
 <p>这篇博文将演示如何创建一个 servlet。</p>
 <span id="more"></span>
@@ -2138,7 +2138,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>循序渐进写一个 Servlet (3) - 分别处理 GET 和 POST</title>
-    <url>/projects/java/Servlet/java-servlet-3-handle-get-and-post.html</url>
+    <url>/java-servlet-3-handle-get-and-post.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
 <p>这篇博文将演示如何分别处理 <code>GET</code> 和 <code>POST</code> 请求，以及处理请求中的参数。</p>
 <span id="more"></span>
@@ -2193,7 +2193,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>循序渐进写一个 Servlet (4) - 会话追踪</title>
-    <url>/projects/java/Servlet/java-servlet-4-session-tracking.html</url>
+    <url>/java-servlet-4-session-tracking.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
 <p>这篇博文将演示如何使用 <code>cookie</code> 和 <code>session</code> 进行会话追踪。</p>
 <span id="more"></span>
@@ -2264,7 +2264,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>循序渐进写一个 Servlet (5) - Filter</title>
-    <url>/projects/java/Servlet/java-servlet-5-filter.html</url>
+    <url>/java-servlet-5-filter.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
 <p>这篇博文将演示如何创建和使用 filter。</p>
 <span id="more"></span>
@@ -2350,7 +2350,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Spring Boot 自动配置的原理</title>
-    <url>/projects/spring/java-spring-autoconfiguration.html</url>
+    <url>/java-spring-autoconfiguration.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用 Spring Boot 时，最使我们收益的一个功能就是它的自动配置。但是，用了这么久的自动配置功能，有没有想过它是怎么实现的？本文将从源码入手，一步一步搞明白 Spring Boot 自动配置的原理。</p>
 <span id="more"></span>
 
@@ -2407,7 +2407,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Spring bean 的作用域</title>
-    <url>/projects/spring/java-spring-bean-scopes.html</url>
+    <url>/java-spring-bean-scopes.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。</p>
 <span id="more"></span>
 
@@ -2488,7 +2488,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>看懂 ParallelGC 的日志</title>
-    <url>/projects/java/fundamentals/java-understand-parallel-gc-logs.html</url>
+    <url>/java-understand-parallel-gc-logs.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂 Java 的垃圾回收日志。本文将介绍打印 GC 日志相关的 JVM 参数，以及使用不同参数时 JVM 将会打印出的日志内容。</p>
 <span id="more"></span>
 
@@ -2590,14 +2590,14 @@ reject_the_task --&gt; 结束
       </categories>
       <tags>
         <tag>Java</tag>
+        <tag>JVM</tag>
         <tag>垃圾回收</tag>
         <tag>GC</tag>
-        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
     <title>JDBC 的事务和隔离级别</title>
-    <url>/database/jdbc-transaction-and-isolation-level.html</url>
+    <url>/jdbc-transaction-and-isolation-level.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这里简单写一下我对 <code>JDBC</code> 的事务和隔离级别的理解。</p>
 <span id="more"></span>
 
@@ -2726,7 +2726,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>购买新的 Linux 服务器后需要做的安全措施</title>
-    <url>/linux/linux-server-security-measures.html</url>
+    <url>/linux-server-security-measures.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在购买了一台安装 Linux 系统的 VPS 之后，首先要做好一定的安全防护措施，来尽可能地保证你的 VPS 不会沦为某些人的肉鸡。</p>
 <span id="more"></span>
 
@@ -2775,7 +2775,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>在 macOS 中通过 SSH 进行 X11 转发</title>
-    <url>/tools/ssh/macos-install-x11-client.html</url>
+    <url>/macos-install-x11-client.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文记录如何在 macOS 中安装 X11 客户端，并通过 SSH 进行 X11 转发。</p>
 <span id="more"></span>
 
@@ -2803,7 +2803,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>为 Maven 配置阿里云镜像和代理服务器</title>
-    <url>/tools/maven/maven-configure-mirrors.html</url>
+    <url>/maven-configure-mirrors.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Maven 中央仓库在国内的速度简直是感人，好在阿里云提供了 Maven 中央仓库的镜像，配置方法在此记录备用。</p>
 <span id="more"></span>
 
@@ -2822,7 +2822,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>解决 Maven 的 unable to find valid certification path to requested target 错误</title>
-    <url>/tools/maven/maven-unable-to-find-valid-certification-path-to-requested-target.html</url>
+    <url>/maven-unable-to-find-valid-certification-path-to-requested-target.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了 <code>unable to find valid certification path to requested target</code> 的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。</p>
 <span id="more"></span>
 
@@ -2856,7 +2856,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 VisualVM 监控应用 GC</title>
-    <url>/projects/java/coding-tips/monitor-gc-with-visual-vm.html</url>
+    <url>/monitor-gc-with-visual-vm.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 <code>Visual GC</code> 来监控 Java 应用的垃圾回收情况。</p>
 <span id="more"></span>
 
@@ -2888,7 +2888,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>让 MyBatis 把查询结果以 Map 形式返回</title>
-    <url>/projects/mybatis/mybatis-return-query-results-in-a-map.html</url>
+    <url>/mybatis-return-query-results-in-a-map.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用 MyBatis 查询数据库时，偶尔会出现短时间高频查询的情况。或者，会被短时间高频率查询的数据需要通过另一个微服务的接口来获取。显而易见，高频率的查询数据库，或者高频率的调用微服务的接口，是会对性能产生一定影响的。</p>
 <p>在这种情况下，或许可以考虑将相关的数据一次性全部查询出来，然后根据某一列作为 key，将其存放在一个 Map 中，把这个 Map 当成一个临时的缓存。</p>
 <span id="more"></span>
@@ -2965,7 +2965,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>在 MySQL 中修改表和列的排序规则</title>
-    <url>/database/mysql/mysql-convert-tables-and-columns-collation.html</url>
+    <url>/mysql-convert-tables-and-columns-collation.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>使用如下 SQL 语句即可更新一张表的字符集 (character set) 和排序规则 (collation)：</p>
 <figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">-- 此处假设使用utf8字符集，以及使用utf8_unicode_ci排序规则</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `table_name` <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci;</span><br></pre></td></tr></tbody></table></figure>
 
@@ -2983,7 +2983,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>手动编写代码调用 JSR-303 Bean Validation</title>
-    <url>/projects/java/coding-tips/programatically-call-jsr-303.html</url>
+    <url>/programatically-call-jsr-303.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近做了一个有点不一样的项目，它是将传入接口的业务参数以 JSON 的形式放在了一个统一的请求体里面，我要将它取出来，再反序列化到一个 Bean 里面。这样会带来一个问题，就是我不能直接使用 <code>@Valid</code> 注解来让框架自行校验参数的合法性，而需要手动调用 <code>Validator</code> 实现对 bean 的校验。</p>
 <span id="more"></span>
 
@@ -3024,7 +3024,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Git 连接多个远程仓库</title>
-    <url>/tools/git/push-to-multi-git-repo.html</url>
+    <url>/push-to-multi-git-repo.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有时候我们可能会需要 push 到多个远程仓库，比如同时链接多个代码托管平台的账号，那么可以参考本文所述的方法配置。</p>
 <p>保险起见在操作之前请先做好备份工作，毕竟数据无价。</p>
 <span id="more"></span>
@@ -3052,7 +3052,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 Docker 配置 Redis 主从复制</title>
-    <url>/database/Redis/redis-replication-in-docker.html</url>
+    <url>/redis-replication-in-docker.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这篇文章主要介绍如何使用 Docker 在本机搭建一个带有主从复制功能的 Redis 环境，内容包括涉及的目录结构、<code>docker-compose.yml</code> 的编写，以及结果的验证。</p>
 <span id="more"></span>
 
@@ -3106,7 +3106,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 Docker 配置 Redis 哨兵</title>
-    <url>/database/Redis/redis-sentinel-in-docker.html</url>
+    <url>/redis-sentinel-in-docker.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>接上文<a href="/database/Redis/redis-replication-in-docker.html">使用 Docker 配置 Redis 主从复制</a>完成之后，这篇文章主要介绍如何使用 Docker 在本机搭建 Redis 的哨兵，内容包括涉及的目录结构、<code>docker-compose.yml</code> 的编写。</p>
 <span id="more"></span>
 
@@ -3170,7 +3170,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>记一次抢救被 force push 的 GitHub 仓库</title>
-    <url>/others/rescuing-my-github-repo-from-force-push.html</url>
+    <url>/rescuing-my-github-repo-from-force-push.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>就在刚刚，我一个误操作，在没有本地备份的前提下，force push 了一个 GitHub 上的仓库。万幸最后恢复成功，数据拿回来了。惊魂未定之余，在此记录我的抢救过程以供参考。</p>
 <span id="more"></span>
 
@@ -3196,7 +3196,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>记一次修复生产环境中 nginx 出现的 SNI 相关的问题</title>
-    <url>/tools/nginx/resolving-nginx-sni-issue.html</url>
+    <url>/resolving-nginx-sni-issue.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间，我司出现了一次生产事故，调查后发现是当时的 OpenResty 配置不兼容 SNI 导致的。在这里我也记录一下整件事的排查过程，以及解决方法，供遇到类似问题的同志们参考。</p>
 <span id="more"></span>
 
@@ -3246,7 +3246,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>在群晖的 Docker 环境中运行甜糖星愿服务</title>
-    <url>/others/run-tiantang-on-synology-docker.html</url>
+    <url>/run-tiantang-on-synology-docker.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
 <p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code> 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
 <p>本文提到的操作全部基于 Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用 <code>Docker</code> 和 <code>docker-compose</code>。</p>
@@ -3296,7 +3296,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>微信小程序 scroll-view 填满剩余可用高度</title>
-    <url>/projects/wxapp/scroll-view-auto-fit-height.html</url>
+    <url>/scroll-view-auto-fit-height.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>根据<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2NvbXBvbmVudC9zY3JvbGwtdmlldy5odG1s">微信小程序 scroll-view 文档<i class="fa fa-external-link-alt"></i></span>所述，<code>scroll-view</code> 必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？</p>
 <span id="more"></span>
 
@@ -3327,7 +3327,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>配置 Caddy 作为静态网站服务器和前置代理</title>
-    <url>/tools/caddy/set-up-caddy-server.html</url>
+    <url>/set-up-caddy-server.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前听闻有个新的 Web Server，名曰 Caddy，其配置简单，还默认启用 HTTP/2，并且可以自动申请 Let’s Encrypt 的 HTTPS 证书。试用了一番，觉得不错，便把这个博客的服务程序换成了 Caddy。在这里呢，记录一下安装和配置的过程。</p>
 <span id="more"></span>
 
@@ -3420,7 +3420,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 Tailscale 部署虚拟局域网</title>
-    <url>/tools/setting-up-tailscale.html</url>
+    <url>/setting-up-tailscale.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。</p>
 <span id="more"></span>
 
@@ -3470,7 +3470,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>Shell 脚本中 set -ex 命令的作用</title>
-    <url>/linux/shell-set-ex.html</url>
+    <url>/shell-set-ex.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>刚刚学会了一个很实用的 shell 命令 <code>set -ex</code>，在这里分享一下。</p>
 <span id="more"></span>
 
@@ -3510,7 +3510,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>分环境为 Git 指定单独的配置</title>
-    <url>/tools/git/specify-different-git-config-for-different-environments.html</url>
+    <url>/specify-different-git-config-for-different-environments.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有的小伙伴，在公司需要使用公司的 Git 来干活，同时自己也有些托管在 GitHub 等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的 GPG 签名。</p>
 <p>在 <code>2.13</code> 版本之前，大概你就只能单独为每一个仓库单独设定这些信息了，但是，在 <code>2.13</code> 这个版本中，Git 引入了一个名为 “按条件引入”(Conditional includes) 的功能。这个功能允许用户通过指定一定的条件，来使 Git 从不同的配置文件中取得配置项。</p>
 <span id="more"></span>
@@ -3557,7 +3557,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>在 Spring Boot 应用中启用 HTTPS</title>
-    <url>/projects/java/coding-tips/spring-boot-enable-https.html</url>
+    <url>/spring-boot-enable-https.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <code>application.yml</code> 中添加如下配置，即可在 Spring Boot 项目中开启 HTTPS。</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 如果有需要的话，配置应用监听HTTPS的默认端口</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">  <span class="attr">ssl:</span></span><br><span class="line">    <span class="comment"># 我把证书放在了 resources/cert/certificate.pfx下</span></span><br><span class="line">    <span class="comment"># 使用时需要按照实际情况修改下面的路径</span></span><br><span class="line">    <span class="attr">key-store:</span> <span class="string">classpath:cert/certificate.pfx</span></span><br><span class="line">    <span class="attr">key-store-password:</span> <span class="string">pA55w0Rd</span></span><br><span class="line">    <span class="comment"># 证书类型需要按照实际类型填写</span></span><br><span class="line">    <span class="comment"># 本例使用PKCS12格式，所以写PKCS12。如果是JKS格式，那么需要填写JKS</span></span><br><span class="line">    <span class="comment"># 因为PKCS12比JKS有更好的通用型，所以个人建议使用PKCS12格式</span></span><br><span class="line">    <span class="attr">key-store-type:</span> <span class="string">PKCS12</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
 
@@ -3579,7 +3579,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>在 Spring 中通过配置类注入配置文件的值</title>
-    <url>/projects/java/coding-tips/spring-injecting-property-value-with-configuration-bean.html</url>
+    <url>/spring-injecting-property-value-with-configuration-bean.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用 <code>@Value()</code> 注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。</p>
 <span id="more"></span>
 
@@ -3640,7 +3640,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 SSH config 简化 SSH 连接</title>
-    <url>/tools/ssh/ssh-config-file.html</url>
+    <url>/ssh-config-file.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>如果你有很多的服务器要连接，如果对你来说记住那些服务器的地址、端口实在是一种痛苦，如果你一直在寻找一种能够简化在命令行下连接 SSH 服务器的办法，那么，本文将给你提供一种解决问题的思路，那就是，使用 SSH 的 config 文件。</p>
 <span id="more"></span>
 
@@ -3704,7 +3704,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>让 nohup 不输出 appending output to &#39;nohup.out&#39;</title>
-    <url>/linux/suppress-appending-to-nohup-out-message.html</url>
+    <url>/suppress-appending-to-nohup-out-message.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在使用 <code>nohup</code> 的时候，它总会打印一条 <code>nohup: appending output to 'nohup.out'</code> 这样的信息，并且必须敲一下回车。</p>
 <p>因为 <code>nohup: appending output to 'nohup.out'</code> 这条信息是打印到 <code>STDERR</code> 的，所以解决的方法很简单，把 <code>STDERR</code> 重定向至 <code>STDOUT</code> 就可以了，比如这样：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> doSomething &gt; nohup.out 2&gt;&amp;1 &amp;</span><br></pre></td></tr></tbody></table></figure>
@@ -3719,7 +3719,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>如何将项目部署至 Tomcat 的根下</title>
-    <url>/tools/tomcat/tomcat-deploy-to-root.html</url>
+    <url>/tomcat-deploy-to-root.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有两种方法可以实现将项目部署到 Tomcat 的根下。</p>
 <ol>
 <li><p>删掉自带的 ROOT / 目录，然后将项目的 war 包重命名为 ROOT.war</p>
@@ -3741,7 +3741,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>配置 Tomcat 监控 class 和 lib 变更并自动重新加载</title>
-    <url>/tools/tomcat/tomcat-monitor-classes-and-auto-reload.html</url>
+    <url>/tomcat-monitor-classes-and-auto-reload.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 <code>context.xml</code> 的 <code>Context</code> 标签中，设定 <code>reloadable="true"</code> 即可。</p>
 <figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Other configurations --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
@@ -3758,7 +3758,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>监听 Tomcat 的启动、停止事件</title>
-    <url>/tools/tomcat/tomcat-servlet-context-listener.html</url>
+    <url>/tomcat-servlet-context-listener.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>当 <code>Servlet</code> 容器启动或终止 Web 应用时，会触发 <code>ServletContextEvent</code> 事件，该事件由 <code>ServletContextListener</code> 来处理。在 <code>Servlet API</code> 中有一个 <code>ServletContextListener</code> 接口，接口中定义了处理 <code>ServletContextEvent</code> 事件的两个方法，它能够监听 <code>ServletContext</code> 对象的生命周期，实际上就是监听 Web 应用的生命周期。我们可以通过实现这两个方法，来实现在 <code>Tomcat</code> 启动和停止时执行一定的操作。</p>
 <span id="more"></span>
 
@@ -3787,7 +3787,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>简单理解 NTP v3 协议</title>
-    <url>/others/understanding-ntp-protocol.html</url>
+    <url>/understanding-ntp-protocol.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>前段时间瞎折腾，给自己的黑莓 Bold 9900 写了个通过 NTP 同步时间的小工具，顺便在这里记录一下我在实现一个 NTP 客户端时对这个协议的理解。</p>
 <span id="more"></span>
 
@@ -3859,7 +3859,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>常用 lsof 命令备忘</title>
-    <url>/linux/useful-lsof-commands.html</url>
+    <url>/useful-lsof-commands.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>记录 lsof 命令常见用法备忘</p>
 <span id="more"></span>
 
@@ -3887,7 +3887,7 @@ reject_the_task --&gt; 结束
   </entry>
   <entry>
     <title>使用 TRANSMIT 和 RECEIVE 命令打包、解包文件</title>
-    <url>/others/zos-xmit.html</url>
+    <url>/zos-xmit.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>当需要从 z/OS 中下载一个 PS 文件，或者下载一个 Member 时，我们可以简单地使用 FTP 或者 IND$FILE 将文件下载回来，但是如果想要下载一整个 PDS 呢？总不能一个个地去下载吧，此时，XMIT 命令就派上用场了。</p>
 <span id="more"></span>
 

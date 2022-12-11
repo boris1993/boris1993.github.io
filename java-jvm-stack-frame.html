@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="栈帧是支持 JVM 进行方法调用和执行的数据结构，它是 JVM 运行时的数据区域的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM 的栈帧">
+<meta property="og:url" content="https://www.boris1993.com/java-jvm-stack-frame.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="栈帧是支持 JVM 进行方法调用和执行的数据结构，它是 JVM 运行时的数据区域的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-04-02T02:08:33.000Z">
+<meta property="article:modified_time" content="2022-12-11T06:26:53.463Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/java-jvm-stack-frame.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-jvm-stack-frame.html","path":"java-jvm-stack-frame.html","title":"JVM 的栈帧"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JVM 的栈帧 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136879050-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-136879050-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script async defer 
+    data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" 
+    data-do-not-track="true"
+    src="https://umami.boris1993.com/umami.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">局部变量表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">操作数栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%9D%80"><span class="nav-number">4.</span> <span class="nav-text">返回地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">附加信息</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+<!-- sidebar ad -->
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-jvm-stack-frame.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JVM 的栈帧 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM 的栈帧
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-02 10:08:33" itemprop="dateCreated datePublished" datetime="2019-04-02T10:08:33+08:00">2019-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-11 14:26:53" itemprop="dateModified" datetime="2022-12-11T14:26:53+08:00">2022-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/projects/java/fundamentals/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/java-jvm-stack-frame.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/java-jvm-stack-frame.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/java-jvm-stack-frame.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>栈帧是支持 JVM 进行方法调用和执行的数据结构，它是 <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html">JVM 运行时的数据区域</a>的栈元素，其中包含了方法的局部变量表、操作数栈、动态链接方法，和返回地址等信息。</p>
+<span id="more"></span>
+
+<p>局部变量表和操作数栈的空间，在编译期就已经可以确定下来，并会随着方法表的 code 属性一并提供给 JVM，所以每个栈帧的空间不会受运行时数据的影响，而仅取决于 JVM 的实现。</p>
+<p>每当一个方法被调用都会生成一个栈帧，并在方法执行完毕后被销毁，并且对于每个活动的线程，只有栈顶的栈帧是活动的，这个栈帧被称为 “活动栈帧”，与其相关联的方法被称为 “活动方法”，以及与其相关联的类被称为 “活动类”。</p>
+<h1 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h1><p>每个栈帧中都会有一个被称为 “局部变量表” 的数组，其中保存着方法的局部变量。局部变量表的大小在编译期就已经确定下来，并保存在 class 文件的 code 区。各个变量可通过数组下标的方式被定位到，对于需要占用两个元素的数据类型，比如 <code>long</code> 和 <code>double</code>，其对应的下标使用较小的那个值。</p>
+<p>在方法执行时，JVM 使用局部变量表完成参数值到参数列表的传递过程的。如果调用的是类方法，那么参数会从局部变量表第 0 位开始向后排列。如果调用的是实例方法 (非 static 方法)，则局部变量表第 0 位默认用于传递方法所属对象的实例的引用，在方法中使用 <code>this</code> 关键字可以访问到这个隐含的参数，其余的参数则从第 1 位开始向后排列；在参数表分配完毕后，方法体内部定义的变量会按照其顺序和作用域分配剩余的位置。</p>
+<h1 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h1><p>每个栈帧中都有一个被称为 “操作数栈” 的栈。操作数栈的最大深度也是在编译期就可以确定下来，并保存在 class 文件的 code 区。</p>
+<p>在栈帧创建初期，其中的操作数栈是空的。JVM 提供了一系列的指令，用于将值压入操作数栈，同时也有指令来从操作数栈中取出值并进行计算，并将计算结果压入操作数栈。比如 <code>iadd</code> 指令会从操作数栈中取出最顶部的两个 <code>int</code> 数值，将其相加，然后将结果压入操作数栈。</p>
+<p>压入操作数栈的元素的类型必须与指令的要求严格匹配，比如使用 <code>iadd</code> 指令将一个 <code>float</code> 和一个 <code>double</code> 相加是不允许的，这一点不仅在编译期会被严格确定，在类校验阶段也会进行检查。</p>
+<h1 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h1><p>每个栈帧都包含一个指向运行时常量池的引用，用来支持方法调用过程中的动态链接。</p>
+<p>字节码中的方法调用指令会以常量池中指向方法的符号引用作为参数。这些符号引用一部分会在类加载阶段或者第一次使用时转化成直接引用，这种称为静态解析；另一部分将在每一次运行期间转化为直接引用，这种称为动态链接。</p>
+<h1 id="返回地址"><a href="#返回地址" class="headerlink" title="返回地址"></a>返回地址</h1><p>当一个方法开始执行后，只有两种方式可以退出这个方法：执行方法返回的指令，和遇到未处理的异常。</p>
+<p>执行方法返回的指令称为 “正常方法调用出口 (Normal Method Invocation Completion)”，在这种情况下，如果方法有返回值，那么返回值将会被传递到上方的调用者。此时，当前栈帧将被用来恢复调用者的状态，包括调用者的本地变量表和操作数栈，并会修改 pc 寄存器的值来跳过方法调用指令。</p>
+<p>当方法执行期间遇到了异常，并没有找到对应的异常处理器时，导致的方法返回称为 “异常方法调用出口 (Abrupt Method Invocation Completion)”，在这种情况下将不会有值被传回上方调用者。</p>
+<h1 id="附加信息"><a href="#附加信息" class="headerlink" title="附加信息"></a>附加信息</h1><p>虚拟机规范允许具体的 JVM 实现增加一些规范中没有的信息到栈帧中，比如调试信息等，这些信息的内容将取决于 JVM 的具体实现。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>如果我的博客帮到了你，那么可不可以请我喝一杯咖啡？</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/java-gc-algorithms.html" rel="prev" title="Java 的垃圾回收算法">
+                  <i class="fa fa-chevron-left"></i> Java 的垃圾回收算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/redis-replication-in-docker.html" rel="next" title="使用 Docker 配置 Redis 主从复制">
+                  使用 Docker 配置 Redis 主从复制 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/mermaid.min.js","integrity":"sha256-G58AID1YoX5YaEtWfXSI0VLrZ6N4kvNvwg0BI8zUFxE="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/java-jvm-stack-frame.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
