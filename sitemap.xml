@@ -2,249 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/mybatis-return-query-results-in-a-map.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/mysql-convert-tables-and-columns-collation.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/programatically-call-jsr-303.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/push-to-multi-git-repo.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/redis-replication-in-docker.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</loc>
     
     <lastmod>2022-12-11</lastmod>
@@ -326,6 +83,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/manifest.json</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/about/index.html</loc>
     
     <lastmod>2022-12-11</lastmod>
@@ -344,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
     
     <lastmod>2022-12-11</lastmod>
     
@@ -353,34 +119,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
-    
-    <lastmod>2022-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
     
     <lastmod>2022-12-11</lastmod>
     
@@ -723,6 +462,267 @@
   
   <url>
     <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/mybatis-return-query-results-in-a-map.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/mysql-convert-tables-and-columns-collation.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/programatically-call-jsr-303.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/push-to-multi-git-repo.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/redis-replication-in-docker.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
+    
+    <lastmod>2022-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
     
     <lastmod>2022-12-11</lastmod>
     
