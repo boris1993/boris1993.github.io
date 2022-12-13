@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Tue, 13 Dec 2022 08:57:16 GMT</pubDate>
+    <pubDate>Tue, 13 Dec 2022 09:02:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,14 +18,35 @@
       <guid>https://www.boris1993.com/filter-vs-interceptor.html</guid>
       <pubDate>Tue, 13 Dec 2022 07:36:21 GMT</pubDate>
       
-        
-        
-      <description>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;Filter&quot;&gt;&lt;a href=&quot;#Filter&quot; class=&quot;</description>
-        
+      <description>&lt;h2 id=&quot;Filter&quot;&gt;&lt;a href=&quot;#Filter&quot; class=&quot;headerlink&quot; title=&quot;Filter&quot;&gt;&lt;/a&gt;Filter&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 是 &lt;code&gt;Servlet&lt;/code&gt; 规范制定的，受 &lt;code&gt;Servlet&lt;/code&gt; 容器支持，接口定义在 &lt;code&gt;javax.servlet&lt;/code&gt; 包中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 是被 Web Server（如 &lt;code&gt;Tomcat&lt;/code&gt;）调用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 需要在 &lt;code&gt;web.xml&lt;/code&gt; 中定义之后才会起作用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 只在请求的前后起作用，&lt;code&gt;Servlet&lt;/code&gt; 对于 &lt;code&gt;Filter&lt;/code&gt; 来说是一个黑盒。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 的执行顺序是：&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;void init(FilterConfig)&lt;/code&gt; - 容器在初始化 &lt;code&gt;Filter&lt;/code&gt; 时调用，在 &lt;code&gt;Filter&lt;/code&gt; 生命周期内仅会被调用一次。方法可以抛出 &lt;code&gt;ServletException&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doFilter(ServletRequest, ServletResponse, FilterChain)&lt;/code&gt; - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， &lt;code&gt;FilterChain&lt;/code&gt; 用来调用下一个 &lt;code&gt;Filter&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void destroy()&lt;/code&gt; - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Interceptor&quot;&gt;&lt;a href=&quot;#Interceptor&quot; class=&quot;headerlink&quot; title=&quot;Interceptor&quot;&gt;&lt;/a&gt;Interceptor&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 是 &lt;code&gt;Spring&lt;/code&gt; 容器内的，由 &lt;code&gt;Spring&lt;/code&gt; 框架提供支持。接口 &lt;code&gt;HandlerInterceptor&lt;/code&gt; 定义在 &lt;code&gt;org.springframework.web.servlet&lt;/code&gt; 包中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 是被 &lt;code&gt;Spring&lt;/code&gt; 调用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 可以深入到方法前后、异常抛出前后等，比起 &lt;code&gt;Filter&lt;/code&gt; 有更大的弹性。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 的执行顺序是：&lt;ul&gt;
+&lt;li&gt;请求到达 &lt;code&gt;DispatcherServlet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DispatcherServlet&lt;/code&gt; 将请求发送至 &lt;code&gt;Interceptor&lt;/code&gt;，&lt;code&gt;Interceptor&lt;/code&gt; 执行 &lt;code&gt;preHandle()&lt;/code&gt; 方法&lt;/li&gt;
+&lt;li&gt;请求到达 &lt;code&gt;Controller&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;请求结束后，&lt;code&gt;Interceptor&lt;/code&gt; 执行 &lt;code&gt;postHandle()&lt;/code&gt; 方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
       
       
       
-      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul><li><code>Filter</code> 是 <code>Servlet</code> 规范制定的，受 <code>Servlet</code> 容器支持，接口定义在 <code>javax.servlet</code> 包中。</li><li><code>Filter</code> 是被 Web Server（如 <code>Tomcat</code>）调用。</li><li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li><li><code>Filter</code> 只在请求的前后起作用，<code>Servlet</code> 对于 <code>Filter</code> 来说是一个黑盒。</li><li><code>Filter</code> 的执行顺序是：<ul><li><code>void init(FilterConfig)</code> - 容器在初始化 <code>Filter</code> 时调用，在 <code>Filter</code> 生命周期内仅会被调用一次。方法可以抛出 <code>ServletException</code>。</li><li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code> 用来调用下一个 <code>Filter</code>。</li><li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li></ul></li></ul><h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul><li><code>Interceptor</code> 是 <code>Spring</code> 容器内的，由 <code>Spring</code> 框架提供支持。接口 <code>HandlerInterceptor</code> 定义在 <code>org.springframework.web.servlet</code> 包中。</li><li><code>Interceptor</code> 是被 <code>Spring</code> 调用。</li><li><code>Interceptor</code> 可以深入到方法前后、异常抛出前后等，比起 <code>Filter</code> 有更大的弹性。</li><li><code>Interceptor</code> 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li><li><code>Interceptor</code> 的执行顺序是：<ul><li>请求到达 <code>DispatcherServlet</code></li><li><code>DispatcherServlet</code> 将请求发送至 <code>Interceptor</code>，<code>Interceptor</code> 执行 <code>preHandle()</code> 方法</li><li>请求到达 <code>Controller</code></li><li>请求结束后，<code>Interceptor</code> 执行 <code>postHandle()</code> 方法</li></ul></li></ul><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9laW52ZXJuZS5naXRodWIuaW8vcG9zdC8yMDE3LzA4L3NwcmluZy1pbnRlcmNlcHRvci12cy1maWx0ZXIuaHRtbA==">Spring Interceptor vs Filter 拦截器和过滤器区别<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODQ0OTAzODI4OTcwNTUzMzU4">Spring Interceptor vs Filter - 掘金<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lY2xpcHNlLWVlNGouZ2l0aHViLmlvL2plcnNleS5naXRodWIuaW8vZG9jdW1lbnRhdGlvbi9sYXRlc3QvZmlsdGVycy1hbmQtaW50ZXJjZXB0b3JzLmh0bWw=">Chapter 10. Filters and Interceptors - Jersey 2.37 User Guide<i class="fa fa-external-link-alt"></i></span></li></ul>]]></content:encoded>
+      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul><li><code>Filter</code> 是 <code>Servlet</code> 规范制定的，受 <code>Servlet</code> 容器支持，接口定义在 <code>javax.servlet</code> 包中。</li><li><code>Filter</code> 是被 Web Server（如 <code>Tomcat</code>）调用。</li><li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li><li><code>Filter</code> 只在请求的前后起作用，<code>Servlet</code> 对于 <code>Filter</code> 来说是一个黑盒。</li><li><code>Filter</code> 的执行顺序是：<ul><li><code>void init(FilterConfig)</code> - 容器在初始化 <code>Filter</code> 时调用，在 <code>Filter</code> 生命周期内仅会被调用一次。方法可以抛出 <code>ServletException</code>。</li><li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code> 用来调用下一个 <code>Filter</code>。</li><li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li></ul></li></ul><h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul><li><code>Interceptor</code> 是 <code>Spring</code> 容器内的，由 <code>Spring</code> 框架提供支持。接口 <code>HandlerInterceptor</code> 定义在 <code>org.springframework.web.servlet</code> 包中。</li><li><code>Interceptor</code> 是被 <code>Spring</code> 调用。</li><li><code>Interceptor</code> 可以深入到方法前后、异常抛出前后等，比起 <code>Filter</code> 有更大的弹性。</li><li><code>Interceptor</code> 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li><li><code>Interceptor</code> 的执行顺序是：<ul><li>请求到达 <code>DispatcherServlet</code></li><li><code>DispatcherServlet</code> 将请求发送至 <code>Interceptor</code>，<code>Interceptor</code> 执行 <code>preHandle()</code> 方法</li><li>请求到达 <code>Controller</code></li><li>请求结束后，<code>Interceptor</code> 执行 <code>postHandle()</code> 方法</li></ul></li></ul><span id="more"></span><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9laW52ZXJuZS5naXRodWIuaW8vcG9zdC8yMDE3LzA4L3NwcmluZy1pbnRlcmNlcHRvci12cy1maWx0ZXIuaHRtbA==">Spring Interceptor vs Filter 拦截器和过滤器区别<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODQ0OTAzODI4OTcwNTUzMzU4">Spring Interceptor vs Filter - 掘金<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lY2xpcHNlLWVlNGouZ2l0aHViLmlvL2plcnNleS5naXRodWIuaW8vZG9jdW1lbnRhdGlvbi9sYXRlc3QvZmlsdGVycy1hbmQtaW50ZXJjZXB0b3JzLmh0bWw=">Chapter 10. Filters and Interceptors - Jersey 2.37 User Guide<i class="fa fa-external-link-alt"></i></span></li></ul>]]></content:encoded>
       
       
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>

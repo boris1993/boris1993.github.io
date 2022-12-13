@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
-    <lastmod>2022-12-13</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2022-12-13</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
     <lastmod>2022-12-13</lastmod>
   </url>
@@ -33,11 +25,11 @@
     <lastmod>2022-12-13</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
     <lastmod>2022-12-13</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
     <lastmod>2022-12-13</lastmod>
   </url>
   <url>
@@ -306,6 +298,14 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2022-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
+    <lastmod>2022-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
     <lastmod>2022-12-13</lastmod>
   </url>
 </urlset> 
