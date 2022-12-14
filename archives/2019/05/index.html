@@ -58,9 +58,15 @@
 
 <link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
     const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
 
     // Redirect to the main site from other sites like GitHub pages or GitEE pages
-    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)")) { 
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
         location.href = mainSiteUrl + location.pathname;
     }
 </script>
