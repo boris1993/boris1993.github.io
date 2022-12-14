@@ -47,6 +47,44 @@
       </tags>
   </entry>
   <entry>
+    <title>Servlet 和 Spring MVC 是不是线程安全的</title>
+    <url>/are-servlet-and-spring-mvc-thread-safe.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>太长不看：默认情况下 <code>servlet</code> 不是线程安全的；<code>Spring bean</code> 是否线程安全取决于这个 bean 的 scope。</p>
+<span id="more"></span>
+
+<h2 id="Servlet为什么不是线程安全的"><a href="#Servlet为什么不是线程安全的" class="headerlink" title="Servlet为什么不是线程安全的"></a>Servlet 为什么不是线程安全的</h2><p>单个 servlet 实例中的方法会被多个线程同时调用很多次，而 servlet 类中的变量是引用传递，多个线程同时存取某个变量时，就会产生线程安全问题。</p>
+<p>以下方法可以让 servlet 或其中的一部分代码块变成线程安全的：</p>
+<ul>
+<li>使用 <code>syncronized</code> 关键字。</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doGet</span> <span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException {</span><br><span class="line">        <span class="comment">//pre-processing</span></span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="built_in">this</span>) {</span><br><span class="line">            <span class="comment">//code in this block is thread-safe</span></span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//other processing;</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>使用 <code>SingleThreadModel</code> 类</li>
+</ul>
+<p>如果在 <code>Sun Java System Web Server 7.0</code> 中部署单线程 servlet 时，servlet 引擎会创建一个 servlet 实例池，并保持内存中有多个 servlet 实例的副本。要想调整实例池中的实例数量，可以调整 Web Server 中的 <code>singleThreadedServletPoolSize</code> 属性。这种情况下，服务器的性能可能会降低，如果池中的所有实例全部被占用，那么新到来的请求就必须要在队列中等待某个实例被释放。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">myServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> <span class="keyword">implements</span> <span class="title class_">SingleThreadModel</span> {</span><br><span class="line">    <span class="comment">//servlet methods...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Spring-Bean什么时候是线程安全的，什么时候不是"><a href="#Spring-Bean什么时候是线程安全的，什么时候不是" class="headerlink" title="Spring Bean什么时候是线程安全的，什么时候不是"></a>Spring Bean 什么时候是线程安全的，什么时候不是</h2><p>首先，<code>singleton</code> 的 bean 不是线程安全的。在不使用 <code>@Lazy</code> 注解时，框架会在启动时就初始化好 singleton bean。但是框架不会管理开发人员怎么用这些 singleton bean，换言之，开发人员要自己处理线程安全问题。</p>
+<p>而被 <code>@RequestScope</code> 注解标记的 bean 是线程安全的，因为这些 bean 不会在线程之间共享，而是在每次请求到来时都会创建新的实例。</p>
+<p>Session scope 的 bean 也不是线程安全的，因为这些 bean 会与用户的会话绑定，每有一个新用户发来请求，就会创建一个新的 bean。但是，用户发来的请求可能是并行的，所以也有可能产生线程安全问题。</p>
+<p>Prototype bean 是不是线程安全取决于它与哪种 bean 绑定。如果它是被一个 singleton bean 所依赖，因为 singleton bean 不是线程安全的，这个 prototype bean 也将被多个线程访问，所以此时 prototype bean 不是线程安全的；如果它被一个 request scope 的 bean 所依赖，那么这个 prototype bean 就是线程安全的，因为它会随着 request scoped bean 消亡而消亡，同时不会被多个线程共享。</p>
+<p>除此之外，如果一个 bean 是无状态的，那么无论是什么 scope，它都是线程安全的。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5MTQ2LTAxLzgxOS0yNjM0L2FieGJoL2luZGV4Lmh0bWw=">Handling Threading Issues<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2RvbHN6ZXdza2kuY29tL3NwcmluZy9zcHJpbmctYmVhbi10aHJlYWQtc2FmZXR5LWd1aWRlLw==">Spring bean thread safety guide<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>学知识</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>多线程</tag>
+        <tag>线程安全</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈 MySQL 中的校对规则 (collation)</title>
     <url>/brief-talk-about-mysql-collations.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在我们开发过程中，最常见到的三种校对规则 (collation) 就是 <code>utf8mb4_general_ci</code>、<code>utf8mb4_unicode_ci</code>，和 <code>utf8mb4_bin</code>。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。</p>

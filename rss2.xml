@@ -9,8 +9,35 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Wed, 14 Dec 2022 05:59:58 GMT</pubDate>
+    <pubDate>Wed, 14 Dec 2022 06:41:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Servlet 和 Spring MVC 是不是线程安全的</title>
+      <link>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</link>
+      <guid>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</guid>
+      <pubDate>Wed, 14 Dec 2022 06:01:16 GMT</pubDate>
+      
+      <description>&lt;p&gt;太长不看：默认情况下 &lt;code&gt;servlet&lt;/code&gt; 不是线程安全的；&lt;code&gt;Spring bean&lt;/code&gt; 是否线程安全取决于这个 bean 的 scope。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>太长不看：默认情况下 <code>servlet</code> 不是线程安全的；<code>Spring bean</code> 是否线程安全取决于这个 bean 的 scope。</p><span id="more"></span><h2 id="Servlet为什么不是线程安全的"><a href="#Servlet为什么不是线程安全的" class="headerlink" title="Servlet为什么不是线程安全的"></a>Servlet 为什么不是线程安全的</h2><p>单个 servlet 实例中的方法会被多个线程同时调用很多次，而 servlet 类中的变量是引用传递，多个线程同时存取某个变量时，就会产生线程安全问题。</p><p>以下方法可以让 servlet 或其中的一部分代码块变成线程安全的：</p><ul><li>使用 <code>syncronized</code> 关键字。</li></ul><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doGet</span> <span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException {</span><br><span class="line">        <span class="comment">//pre-processing</span></span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="built_in">this</span>) {</span><br><span class="line">            <span class="comment">//code in this block is thread-safe</span></span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//other processing;</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><ul><li>使用 <code>SingleThreadModel</code> 类</li></ul><p>如果在 <code>Sun Java System Web Server 7.0</code> 中部署单线程 servlet 时，servlet 引擎会创建一个 servlet 实例池，并保持内存中有多个 servlet 实例的副本。要想调整实例池中的实例数量，可以调整 Web Server 中的 <code>singleThreadedServletPoolSize</code> 属性。这种情况下，服务器的性能可能会降低，如果池中的所有实例全部被占用，那么新到来的请求就必须要在队列中等待某个实例被释放。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">myServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> <span class="keyword">implements</span> <span class="title class_">SingleThreadModel</span> {</span><br><span class="line">    <span class="comment">//servlet methods...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><h2 id="Spring-Bean什么时候是线程安全的，什么时候不是"><a href="#Spring-Bean什么时候是线程安全的，什么时候不是" class="headerlink" title="Spring Bean什么时候是线程安全的，什么时候不是"></a>Spring Bean 什么时候是线程安全的，什么时候不是</h2><p>首先，<code>singleton</code> 的 bean 不是线程安全的。在不使用 <code>@Lazy</code> 注解时，框架会在启动时就初始化好 singleton bean。但是框架不会管理开发人员怎么用这些 singleton bean，换言之，开发人员要自己处理线程安全问题。</p><p>而被 <code>@RequestScope</code> 注解标记的 bean 是线程安全的，因为这些 bean 不会在线程之间共享，而是在每次请求到来时都会创建新的实例。</p><p>Session scope 的 bean 也不是线程安全的，因为这些 bean 会与用户的会话绑定，每有一个新用户发来请求，就会创建一个新的 bean。但是，用户发来的请求可能是并行的，所以也有可能产生线程安全问题。</p><p>Prototype bean 是不是线程安全取决于它与哪种 bean 绑定。如果它是被一个 singleton bean 所依赖，因为 singleton bean 不是线程安全的，这个 prototype bean 也将被多个线程访问，所以此时 prototype bean 不是线程安全的；如果它被一个 request scope 的 bean 所依赖，那么这个 prototype bean 就是线程安全的，因为它会随着 request scoped bean 消亡而消亡，同时不会被多个线程共享。</p><p>除此之外，如果一个 bean 是无状态的，那么无论是什么 scope，它都是线程安全的。</p><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5MTQ2LTAxLzgxOS0yNjM0L2FieGJoL2luZGV4Lmh0bWw=">Handling Threading Issues<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cDovL2RvbHN6ZXdza2kuY29tL3NwcmluZy9zcHJpbmctYmVhbi10aHJlYWQtc2FmZXR5LWd1aWRlLw==">Spring bean thread safety guide<i class="fa fa-external-link-alt"></i></span></li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/Java/">Java</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">线程安全</category>
+      
+      
+      <comments>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Java 的线程安全，以及死锁</title>
@@ -554,31 +581,6 @@
       
       
       <comments>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>使用 VisualVM 监控应用 GC</title>
-      <link>https://www.boris1993.com/monitor-gc-with-visual-vm.html</link>
-      <guid>https://www.boris1993.com/monitor-gc-with-visual-vm.html</guid>
-      <pubDate>Sun, 09 Feb 2020 09:38:42 GMT</pubDate>
-      
-      <description>&lt;p&gt;我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 &lt;code&gt;Visual GC&lt;/code&gt; 来监控 Java 应用的垃圾回收情况。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 <code>Visual GC</code> 来监控 Java 应用的垃圾回收情况。</p><span id="more"></span><h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装 <code>Visual GC</code> 插件</h2><p>因为 <code>Visual GC</code> 插件并不是随 VisualVM 附带的，需要到插件商店下载。</p><p>点击 <code>Tools</code>–&gt;<code>Plugins</code> 打开插件管理窗口，进入 <code>Available Plugins</code>，在左侧窗格中勾选 <code>Visual GC</code>，点击 <code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启 VisualVM。</p><p><img data-src="https://sat02pap001files.storage.live.com/y4mB0xUlwCwxRs1OYG5s7tct4fE9O8mEfB9d0TDUtr3n-dLtE-kCUaRDqQ0oiM-gl9yeFJFfj7p8AW6-mbEIWUPzYqJzYHMVkuxJudzUxbdUIfvP1GM2H1hOpngIdNk8RLyEna53-JFT96lhfYwTcdP15fXhdg1ojlCh9VPH7IY5s1US0SW31s6_daVwATD9ZrS?width=1782&amp;height=1080&amp;cropmode=none" alt="Install Visual GC"></p><h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在 VisualVM 的 <code>Applications</code> 窗格中双击要监控的应用，然后在右侧窗格中进入 <code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p><p><img data-src="https://sat02pap001files.storage.live.com/y4m3cQpYqJKAIsE9_gLv8JNhyqspQZRDmVo1Pwduk0crZlHkwXcRf8koN4u-Gput6JysCToZgM_uj8BAEJmWuYMpUaZJpheamTxNJ7Fq169nZsDuwNJTTl23jm_4PwsNlA4lneLgFjN7NSDNE4JeObrFPhmQRrAWfVd4AF_R6xPlwtKC3ZuqbYA7uRAR1VLTz19?width=2880&amp;height=1644&amp;cropmode=none" alt="Monitor GC"></p><p>窗格中的 <code>Spaces</code> 部分展示的是当前各个区域的占用情况；<code>Graphs</code> 部分则包括：</p><ul><li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li><li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类 (<code>loaded</code>)，卸载了多少个类 (<code>unloaded</code>)，和累计用于类加载的时间</li><li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li><li><code>Eden Space</code>：Eden 区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Survivor 0</code> 和 <code>Survivor 1</code>：两个 <code>Survivor</code> 区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li><li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li><li><code>Metaspace</code>：Metaspace 的空间 (如果使用的是 Java 1.7 及之前版本，这里则是 <code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li></ul>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/Java/">Java</category>
-      
-      <category domain="https://www.boris1993.com/tags/VisualVM/">VisualVM</category>
-      
-      
-      <comments>https://www.boris1993.com/monitor-gc-with-visual-vm.html#disqus_thread</comments>
       
     </item>
     
