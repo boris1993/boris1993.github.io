@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
     <lastmod>2023-01-03</lastmod>
   </url>
@@ -118,6 +138,38 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/zos-xmit.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
     <lastmod>2023-01-03</lastmod>
   </url>
   <url>
@@ -270,58 +322,6 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
-    <lastmod>2023-01-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
     <lastmod>2023-01-03</lastmod>
   </url>
 </urlset> 
