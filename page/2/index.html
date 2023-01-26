@@ -177,18 +177,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -249,6 +249,120 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-8-sni-bug.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-8-sni-bug.html" class="post-title-link" itemprop="url">Java 8 的一个 SNI 的 bug</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-24 17:17:22" itemprop="dateCreated datePublished" datetime="2021-11-24T17:17:22+08:00">2021-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/java-8-sni-bug.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/java-8-sni-bug.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/java-8-sni-bug.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p>
+<p>简单来说，就是在 <code>Java 1.8u141</code> 之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code> 方法会破坏 SNI，而正好我们的代码里有这么一行：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>翻了下框架的代码，发现如果我不设定这个值，框架也调用这个方法来指定它默认的 hostname verifier；而如果我传个 null，那么它会抛个异常给我。所以，代码层面没有很方便的解决方案。</p>
+<p>无奈，最后决定，先临时换了个没开启 SNI 的域名，暂时解决掉问题，然后升级 Java 到 <code>1.8u181</code>，一劳永逸。</p>
+<hr>
+<p>终于，我也有机会理直气壮地喊出 “这是 Java 的 bug” 了！（笑</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzA4MTc5MzQvZXh0ZW5kZWQtc2VydmVyLW5hbWUtc25pLWV4dGVuc2lvbi1ub3Qtc2VudC13aXRoLWpkazEtOC0wLWJ1dC1zZW5kLXdpdGgtamRrMS03">Extended server_name (SNI Extension) not sent with jdk1.8.0 but send with jdk1.7.0<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3NlL0pESy04MDcyNDY0">Custom HostnameVerifier disables SNI support on client in Java 8<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/resolving-nginx-sni-issue.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -285,7 +399,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -399,7 +513,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +629,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -629,7 +743,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -743,7 +857,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -858,7 +972,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -972,7 +1086,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1086,7 +1200,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1200,7 +1314,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
+      <time title="修改时间：2023-01-26 17:14:58" itemprop="dateModified" datetime="2023-01-26T17:14:58+08:00">2023-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1249,120 +1363,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/java-inner-class-and-private-identifier.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-spring-bean-scopes.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/java-spring-bean-scopes.html" class="post-title-link" itemprop="url">Spring bean 的作用域</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-02-22 11:00:12" itemprop="dateCreated datePublished" datetime="2020-02-22T11:00:12+08:00">2020-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-26 02:36:17" itemprop="dateModified" datetime="2023-01-26T02:36:17+08:00">2023-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/java-spring-bean-scopes.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/java-spring-bean-scopes.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/java-spring-bean-scopes.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/java-spring-bean-scopes.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
