@@ -2,51 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.boris1993.com/ssh-config-file.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/suppress-appending-to-nohup-out-message.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tomcat-deploy-to-root.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tomcat-monitor-classes-and-auto-reload.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/understanding-ntp-protocol.html</loc>
     
     <lastmod>2023-01-27</lastmod>
@@ -111,141 +66,6 @@
   
   <url>
     <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/install-elk-part-kibana.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/install-elk-part-logstash.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-8-sni-bug.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-bean-chaining-setters.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-customized-annotations.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-gc-algorithms.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-inner-class-and-private-identifier.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-jvm-reference.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-jvm-runtime-data-areas.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-jvm-stack-frame.html</loc>
-    
-    <lastmod>2023-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-concepts.html</loc>
     
     <lastmod>2023-01-27</lastmod>
     
@@ -632,6 +452,51 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/ssh-config-file.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/suppress-appending-to-nohup-out-message.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tomcat-deploy-to-root.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tomcat-monitor-classes-and-auto-reload.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     
     <lastmod>2023-01-27</lastmod>
@@ -777,6 +642,141 @@
   
   <url>
     <loc>https://www.boris1993.com/hexo-next-enable-google-adsense.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/install-elk-part-kibana.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/install-elk-part-logstash.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-8-sni-bug.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-bean-chaining-setters.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-customized-annotations.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-gc-algorithms.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-inner-class-and-private-identifier.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-jvm-reference.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-jvm-runtime-data-areas.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-jvm-stack-frame.html</loc>
+    
+    <lastmod>2023-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-concepts.html</loc>
     
     <lastmod>2023-01-27</lastmod>
     
