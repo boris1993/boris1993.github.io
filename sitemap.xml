@@ -29,24 +29,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/java-jvm-stack-frame.html</loc>
-    
-    <lastmod>2023-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-concepts.html</loc>
-    
-    <lastmod>2023-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/java-multi-threading-how-to.html</loc>
     
     <lastmod>2023-01-30</lastmod>
@@ -786,6 +768,24 @@
   
   <url>
     <loc>https://www.boris1993.com/java-jvm-runtime-data-areas.html</loc>
+    
+    <lastmod>2023-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-jvm-stack-frame.html</loc>
+    
+    <lastmod>2023-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-concepts.html</loc>
     
     <lastmod>2023-01-30</lastmod>
     
