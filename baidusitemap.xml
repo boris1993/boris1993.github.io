@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/java-multi-threading-how-to.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-producer-consumer-problem.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    <lastmod>2023-01-31</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
     <lastmod>2023-01-31</lastmod>
   </url>
@@ -306,30 +330,6 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-multi-threading-concepts.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-how-to.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-producer-consumer-problem.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2023-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
     <lastmod>2023-01-31</lastmod>
   </url>
 </urlset> 
