@@ -33,7 +33,7 @@
 <meta property="og:description" content="一个 private 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？ 本文将通过一个小例子，来演示怎么让 private 修饰符 “失效”，以及它为什么会 “失效”。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-24T13:38:32.000Z">
-<meta property="article:modified_time" content="2023-02-02T16:12:21.453Z">
+<meta property="article:modified_time" content="2023-02-02T16:25:47.785Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="内部类">
@@ -294,7 +294,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -338,7 +338,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
+        <p>一个 <code>private</code> 属性只能被它所在的类访问，这件事地球人都知道。但是，你有没有想过，这条规则有没有可能在某种情况下，会变得不成立？</p>
 <p>本文将通过一个小例子，来演示怎么让 <code>private</code> 修饰符 “失效”，以及它为什么会 “失效”。</p>
 <span id="more"></span>
 
@@ -355,7 +355,7 @@
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ javap -c OuterClass<span class="variable">$InnerClass</span>.class</span><br><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line">public class com.boris1993.OuterClass<span class="variable">$InnerClass</span> {</span><br><span class="line">  final com.boris1993.OuterClass this<span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">  public com.boris1993.OuterClass<span class="variable">$InnerClass</span>(com.boris1993.OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: aload_1</span><br><span class="line">       2: putfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       5: aload_0</span><br><span class="line">       6: invokespecial <span class="comment">#2                  // Method java/lang/Object."&lt;init&gt;":()V</span></span><br><span class="line">       9: <span class="built_in">return</span></span><br><span class="line"></span><br><span class="line">  public void printOuterClassName();</span><br><span class="line">    Code:</span><br><span class="line">       0: getstatic     <span class="comment">#3                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       3: aload_0</span><br><span class="line">       4: getfield      <span class="comment">#1                  // Field this$0:Lcom/boris1993/OuterClass;</span></span><br><span class="line">       7: invokestatic  <span class="comment">#4                  // Method com/boris1993/OuterClass.access$000:(Lcom/boris1993/OuterClass;)Ljava/lang/String;</span></span><br><span class="line">      10: invokevirtual <span class="comment">#5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">      13: <span class="built_in">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>嗯，果然没错，在第 20 行这一条指令里，它调用了上面我们看到的那个 <code>access$000()</code> 方法。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9kcm9pZHl1ZS5jb20vYmxvZy8yMDE0LzEwLzAyL3RoZS1wcml2YXRlLW1vZGlmaWVyLWluLWphdmEv"> 细话 Java："失效" 的 private 修饰符<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+
     </div>
 
     

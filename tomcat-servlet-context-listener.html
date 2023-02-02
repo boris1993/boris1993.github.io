@@ -33,7 +33,7 @@
 <meta property="og:description" content="当 Servlet 容器启动或终止 Web 应用时，会触发 ServletContextEvent 事件，该事件由 ServletContextListener 来处理。在 Servlet API 中有一个 ServletContextListener 接口，接口中定义了处理 ServletContextEvent 事件的两个方法，它能够监听 ServletContext 对象的生命周期，实际上就">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-08-15T01:53:47.000Z">
-<meta property="article:modified_time" content="2023-02-02T16:12:21.457Z">
+<meta property="article:modified_time" content="2023-02-02T16:25:47.789Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Tomcat">
 <meta name="twitter:card" content="summary">
@@ -293,7 +293,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -337,7 +337,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>当 <code>Servlet</code> 容器启动或终止 Web 应用时，会触发 <code>ServletContextEvent</code> 事件，该事件由 <code>ServletContextListener</code> 来处理。在 <code>Servlet API</code> 中有一个 <code>ServletContextListener</code> 接口，接口中定义了处理 <code>ServletContextEvent</code> 事件的两个方法，它能够监听 <code>ServletContext</code> 对象的生命周期，实际上就是监听 Web 应用的生命周期。我们可以通过实现这两个方法，来实现在 <code>Tomcat</code> 启动和停止时执行一定的操作。</p>
+        <p>当 <code>Servlet</code> 容器启动或终止 Web 应用时，会触发 <code>ServletContextEvent</code> 事件，该事件由 <code>ServletContextListener</code> 来处理。在 <code>Servlet API</code> 中有一个 <code>ServletContextListener</code> 接口，接口中定义了处理 <code>ServletContextEvent</code> 事件的两个方法，它能够监听 <code>ServletContext</code> 对象的生命周期，实际上就是监听 Web 应用的生命周期。我们可以通过实现这两个方法，来实现在 <code>Tomcat</code> 启动和停止时执行一定的操作。</p>
 <span id="more"></span>
 
 <h1 id="监听器类编写"><a href="#监听器类编写" class="headerlink" title="监听器类编写"></a>监听器类编写</h1><p>新建一个监听器类 <code>TomcatListener</code> 并实现 <code>ServletContextListener</code> 接口</p>

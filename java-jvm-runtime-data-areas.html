@@ -33,7 +33,7 @@
 <meta property="og:description" content="JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有  pc (program counter) 寄存器 JVM 栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-27T02:19:51.000Z">
-<meta property="article:modified_time" content="2023-02-02T16:12:21.453Z">
+<meta property="article:modified_time" content="2023-02-02T16:25:47.785Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -295,7 +295,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,7 +339,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
+        <p>JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
 <ul>
 <li>线程专有 <ul>
 <li><a href="#pc-program-counter-%E5%AF%84%E5%AD%98%E5%99%A8">pc (program counter) 寄存器</a></li>
@@ -381,7 +381,8 @@
 <p>从 Java 8 开始，永久代被 Metaspace 取而代之。Metaspace 的内存空间不再与堆连续，而是存在于本地内存中。</p>
 <h2 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h2><p>运行时常量池对应 class 文件中的 <a href="/projects/java/fundamentals/java-jvm-constant-pool.html"><code>constant_pool</code> 表</a>。</p>
 <p>运行时常量池中包含了数值常量和属性的引用。每个运行时常量池的空间都会在类或接口被创建时生成，并且从方法区中分配空间。在创建运行时方法区时，如果申请的空间大于方法区可提供的空间，那么 JVM 会抛出 <code>OutOfMemoryError</code> 异常。</p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">《The Java Virtual Machine Specification (Java SE 8 Edition)》 - 2.5 Run-Time Data Areas<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFlN2U1ZGU1MWQ0NTI0OTg1MGNmOWY="> 面试官，Java8 JVM 内存结构变了，永久代到元空间<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3. </span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html#jvm-method-area">方法区 - JVM 运行时的数据区域</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN0ZXIvcC85NzY4Mjk4Lmh0bWwjJUU2JTk2JUI5JUU2JUIzJTk1JUU1JThDJUJBJUU2JUIwJUI4JUU0JUI5JTg1JUU1JThDJUJBJUU1JTg1JTgzJUU3JUE5JUJBJUU5JTk3JUI0"> 方法区（永久区、元空间） - 深入理解 JAVA 虚拟机（内存模型 + GC 算法 + JVM 调优）<i class="fa fa-external-link-alt"></i></span><a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGFkZGl4L3AvNTMwOTU1MC5odG1s">Java8 内存模型 — 永久代 (PermGen) 和元空间 (Metaspace)<i class="fa fa-external-link-alt"></i></span><a href="#fnref:5" rev="footnote"> ↩</a></span></li></ol></div></div>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>[^1]: 《The Java Virtual Machine Specification (Java SE 8 Edition)》 - 2.5 Run-Time Data Areas<br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFlN2U1ZGU1MWQ0NTI0OTg1MGNmOWY=">面试官，Java8 JVM 内存结构变了，永久代到元空间<i class="fa fa-external-link-alt"></i></span><br>[^3]: <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html#jvm-method-area">方法区 - JVM 运行时的数据区域</a><br>[^4]: <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN0ZXIvcC85NzY4Mjk4Lmh0bWwjJUU2JTk2JUI5JUU2JUIzJTk1JUU1JThDJUJBJUU2JUIwJUI4JUU0JUI5JTg1JUU1JThDJUJBJUU1JTg1JTgzJUU3JUE5JUJBJUU5JTk3JUI0">方法区（永久区、元空间） - 深入理解 JAVA 虚拟机（内存模型 + GC 算法 + JVM 调优）<i class="fa fa-external-link-alt"></i></span><br>[^5]: <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGFkZGl4L3AvNTMwOTU1MC5odG1s">Java8 内存模型 — 永久代 (PermGen) 和元空间 (Metaspace)<i class="fa fa-external-link-alt"></i></span></p>
+
     </div>
 
     

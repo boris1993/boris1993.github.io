@@ -288,7 +288,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -402,7 +402,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -521,7 +521,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -565,7 +565,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p>
+          <p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p>
 <p>简单来说，就是在 <code>Java 1.8u141</code> 之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code> 方法会破坏 SNI，而正好我们的代码里有这么一行：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></tbody></table></figure>
 
@@ -573,7 +573,8 @@
 <p>无奈，最后决定，先临时换了个没开启 SNI 的域名，暂时解决掉问题，然后升级 Java 到 <code>1.8u181</code>，一劳永逸。</p>
 <hr>
 <p>终于，我也有机会理直气壮地喊出 “这是 Java 的 bug” 了！（笑</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzA4MTc5MzQvZXh0ZW5kZWQtc2VydmVyLW5hbWUtc25pLWV4dGVuc2lvbi1ub3Qtc2VudC13aXRoLWpkazEtOC0wLWJ1dC1zZW5kLXdpdGgtamRrMS03">Extended server_name (SNI Extension) not sent with jdk1.8.0 but send with jdk1.7.0<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3NlL0pESy04MDcyNDY0">Custom HostnameVerifier disables SNI support on client in Java 8<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzA4MTc5MzQvZXh0ZW5kZWQtc2VydmVyLW5hbWUtc25pLWV4dGVuc2lvbi1ub3Qtc2VudC13aXRoLWpkazEtOC0wLWJ1dC1zZW5kLXdpdGgtamRrMS03">Extended server_name (SNI Extension) not sent with jdk1.8.0 but send with jdk1.7.0<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3NlL0pESy04MDcyNDY0">Custom HostnameVerifier disables SNI support on client in Java 8<i class="fa fa-external-link-alt"></i></span></p>
+
       
     </div>
 
@@ -635,7 +636,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -749,7 +750,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -865,7 +866,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -979,7 +980,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1093,7 +1094,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1208,7 +1209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1322,7 +1323,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

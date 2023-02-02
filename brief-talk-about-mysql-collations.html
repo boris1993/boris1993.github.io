@@ -33,7 +33,7 @@
 <meta property="og:description" content="在我们开发过程中，最常见到的三种校对规则 (collation) 就是 utf8mb4_general_ci、utf8mb4_unicode_ci，和 utf8mb4_bin。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-14T02:07:11.000Z">
-<meta property="article:modified_time" content="2023-02-02T16:12:21.453Z">
+<meta property="article:modified_time" content="2023-02-02T16:25:47.785Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="collation">
@@ -294,7 +294,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-03 00:12:21" itemprop="dateModified" datetime="2023-02-03T00:12:21+08:00">2023-02-03</time>
+      <time title="修改时间：2023-02-03 00:25:47" itemprop="dateModified" datetime="2023-02-03T00:25:47+08:00">2023-02-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -338,7 +338,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在我们开发过程中，最常见到的三种校对规则 (collation) 就是 <code>utf8mb4_general_ci</code>、<code>utf8mb4_unicode_ci</code>，和 <code>utf8mb4_bin</code>。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。</p>
+        <p>在我们开发过程中，最常见到的三种校对规则 (collation) 就是 <code>utf8mb4_general_ci</code>、<code>utf8mb4_unicode_ci</code>，和 <code>utf8mb4_bin</code>。那么这三种排序规则之间有什么区别，在开发过程中又该怎么选择？这里就简单说一下我所了解到的知识，和我的理解。</p>
 <span id="more"></span>
 
 <h2 id="校对规则不会导致乱码"><a href="#校对规则不会导致乱码" class="headerlink" title="校对规则不会导致乱码"></a>校对规则不会导致乱码</h2><p>之前听到一名同事说，“这个东西 (collation) 你再研究下，搞不好中文会乱码的”。显然这位同事没搞清楚字符编码 (encoding) 和校对规则 (collation) 的区别。</p>
@@ -352,12 +352,12 @@
 <p><code>utf8mb4_bin</code> 则是直接比较每个字符的 Unicode 码点 (code point)。</p>
 <p>从效率上来讲，<code>utf8mb4_bin</code> &gt; <code>utf8mb4_general_ci</code> &gt; <code>utf8mb4_unicode_ci</code>。</p>
 <h2 id="校对规则会产生什么影响"><a href="#校对规则会产生什么影响" class="headerlink" title="校对规则会产生什么影响"></a>校对规则会产生什么影响</h2><p>不同的排序规则，不仅对大小写和重音字符的处理不同，对于一些语言中特有的字符的处理也是不同的。</p>
-<p>比如一个斯洛伐克人，他向数据库中插入了两条数据，其主键分别是 <code>poistný</code> 和 <code>poistny</code>。但是因为他用了重音不敏感的 <code>utf8mb4_general_ci</code>，导致数据库判定这两个字符串是一样的，而抛出了重复主键的错误。<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[斯洛伐克人的例子](https://stackoverflow.com/a/35482707/3833858)
-">[3]</span></a></sup></p>
+<p>比如一个斯洛伐克人，他向数据库中插入了两条数据，其主键分别是 <code>poistný</code> 和 <code>poistny</code>。但是因为他用了重音不敏感的 <code>utf8mb4_general_ci</code>，导致数据库判定这两个字符串是一样的，而抛出了重复主键的错误。[^3]</p>
 <p>另一个例子是，对于德语中的 <code>ß</code>，如果使用 <code>utf8mb4_general_ci</code>，那么它等同于 <code>s</code>，而如果使用 <code>utf8mb4_unicode_ci</code>，它则等同于 <code>ss</code>。</p>
 <p>所以，如果数据涉及的语言中包含有特殊的字符或者重音符号，而其比对结果的正确性又很重要时，那么就应当选择 <code>unicode_ci</code> 系列的校对规则，否则，<code>general_ci</code> 就够用了。当然，在必要的情况下，也可以选择这个语言对应的规则，比如 <code>utf8_swedish_ci</code>。</p>
 <p>对于中文来说，我在网上并没有找到相关的文章，同时根据自己的开发经验，<code>general_ci</code> 和 <code>unicode_ci</code> 对于中文都没有什么明显的问题，所以两个都可以用。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9mb3J1bXMubXlzcWwuY29tL3JlYWQucGhwPzEwMywxODcwNDgsMTg4NzQ4">Re: utf8_unicode_ci vs utf8_general_ci - MySQL Forums<i class="fa fa-external-link-alt"></i></span><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cDovL2NvbGxhdGlvbi1jaGFydHMub3JnL215c3FsNjAv">MySQL collation charts<i class="fa fa-external-link-alt"></i></span><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzM1NDgyNzA3LzM4MzM4NTg="> 斯洛伐克人的例子<i class="fa fa-external-link-alt"></i></span><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9mb3J1bXMubXlzcWwuY29tL3JlYWQucGhwPzEwMywxODcwNDgsMTg4NzQ4">Re: utf8_unicode_ci vs utf8_general_ci - MySQL Forums<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cDovL2NvbGxhdGlvbi1jaGFydHMub3JnL215c3FsNjAv">MySQL collation charts<i class="fa fa-external-link-alt"></i></span><br>[^3]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzM1NDgyNzA3LzM4MzM4NTg=">斯洛伐克人的例子<i class="fa fa-external-link-alt"></i></span></p>
+
     </div>
 
     
