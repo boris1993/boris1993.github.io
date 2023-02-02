@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
-    <lastmod>2023-02-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
-    <lastmod>2023-02-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
-    <lastmod>2023-02-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
-    <lastmod>2023-02-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
-    <lastmod>2023-02-02</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
     <lastmod>2023-02-02</lastmod>
   </url>
@@ -334,6 +314,26 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <lastmod>2023-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <lastmod>2023-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <lastmod>2023-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2023-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <lastmod>2023-02-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
     <lastmod>2023-02-02</lastmod>
   </url>
 </urlset> 
