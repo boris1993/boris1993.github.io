@@ -437,6 +437,29 @@
       </tags>
   </entry>
   <entry>
+    <title>关闭 Vercel 的部署结果通知</title>
+    <url>/disable-vercel-deployment-notification.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>每次 Vercel 部署之后，它都会在部署的 commit 下面发个类似这样的留言：</p>
+<blockquote>
+<p>Successfully deployed to the following URLs:</p>
+<h2 id="blog-–-x2F"><a href="#blog-–-x2F" class="headerlink" title="blog – ./"></a>blog – ./</h2><hr>
+<p>blog-boris1993.vercel.app</p>
+<p>boris1993.com</p>
+<p><a href="http://www.boris1993.com/">www.boris1993.com</a></p>
+</blockquote>
+<p>而且 GitHub 还会给我发邮件通知这个留言的内容，但是这个消息说实话没啥用，白白麻烦人而已，后来发现，在项目根目录创建一个名为 <code>vercel.json</code> 的文件，里面写上这样的配置就行：</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"github"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"silent"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个配置的作用就是让 Vercel 不再往这个 repo 的 commit 下面评论部署状态。提交之后，Vercel 就会在这次部署开始遵循 <code>vercel.json</code> 的设定，不会再发送评论，自然也就不会有那封 “骚扰邮件” 了。</p>
+]]></content>
+      <categories>
+        <category>小技巧</category>
+      </categories>
+      <tags>
+        <tag>Vercel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Filter 与 interceptor 的区别</title>
     <url>/filter-vs-interceptor.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul>
