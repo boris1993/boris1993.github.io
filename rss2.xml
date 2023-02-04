@@ -9,8 +9,35 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Sat, 04 Feb 2023 16:55:39 GMT</pubDate>
+    <pubDate>Sat, 04 Feb 2023 17:40:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>通过 Hexo 博客完成 NIP-05 验证</title>
+      <link>https://www.boris1993.com/nostr-nip-05-with-hexo.html</link>
+      <guid>https://www.boris1993.com/nostr-nip-05-with-hexo.html</guid>
+      <pubDate>Sat, 04 Feb 2023 17:26:02 GMT</pubDate>
+      
+      <description>&lt;p&gt;简单几步，轻松用自己的博客站完成 &lt;code&gt;NIP-05&lt;/code&gt; 认证。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>简单几步，轻松用自己的博客站完成 <code>NIP-05</code> 认证。</p><span id="more"></span><h2 id="让Hexo在生成时包含-well-known目录"><a href="#让Hexo在生成时包含-well-known目录" class="headerlink" title="让Hexo在生成时包含.well-known目录"></a>让 Hexo 在生成时包含<code>.well-known</code> 目录</h2><p>编辑 <code>config.yml</code>，添加如下配置：</p><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">include:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">".well-known/**"</span></span><br></pre></td></tr></tbody></table></figure><h2 id="转换公钥格式"><a href="#转换公钥格式" class="headerlink" title="转换公钥格式"></a>转换公钥格式</h2><p>Damus 生成的 <code>npub</code> 开头的公钥不能直接用，要先转换成十六进制格式的公钥。可以用<span class="exturl" data-url="aHR0cHM6Ly9kYW11cy5pby9rZXkv">这个网站<i class="fa fa-external-link-alt"></i></span>来转换。</p><p>把 <code>npub</code> 开头的公钥粘贴进 <code>damus key</code> 一栏，<code>hex key</code> 会自动计算出来，复制 <code>hex key</code> 的内容备用。</p><h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>在 <code>source</code> 目录下新建一个名为<code>.well-known</code> 的目录，然后在<code>.well-known</code> 目录中创建 <code>nostr.json</code>，填写如下信息：</p><figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"names"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"你的用户名"</span><span class="punctuation">:</span> <span class="string">"刚刚转换得到的hex key"</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure><p>在本地运行 <code>hexo clean &amp;&amp; hexo g</code>，生成成功后检查 <code>public</code> 目录中是否存在<code>.well-known/nostr.json</code> 文件，如存在则说明配置正确。</p><h2 id="配置Nostr"><a href="#配置Nostr" class="headerlink" title="配置Nostr"></a>配置 Nostr</h2><p>提交代码并部署成功后，即可在 <code>nostr</code> 客户端配置 <code>NIP-05</code> 认证，本文以 <code>Damus</code> 为例。</p><p>点击左上角头像，进入 <code>Profile</code>，点击 <code>Edit</code>，在 <code>NIP-05 VERIFICATION</code> 一栏中填写<code>你的username@你的博客网站</code>，比如我填写的是 <code>boris1993@www.boris1993.com</code>，最后点击 <code>Save</code>。</p><p>如果一切正常的话，在你的 Profile 页面就能看到一个对勾图标，代表验证成功。</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/nostr/">nostr</category>
+      
+      <category domain="https://www.boris1993.com/tags/NIP-05/">NIP-05</category>
+      
+      <category domain="https://www.boris1993.com/tags/Damus/">Damus</category>
+      
+      
+      <comments>https://www.boris1993.com/nostr-nip-05-with-hexo.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>设计并实现一个简易的短 URL 服务</title>
@@ -558,29 +585,6 @@
       
       
       <comments>https://www.boris1993.com/hexo-next-enable-google-adsense.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>解决 Maven 的 unable to find valid certification path to requested target 错误</title>
-      <link>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</link>
-      <guid>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</guid>
-      <pubDate>Mon, 30 Mar 2020 03:13:30 GMT</pubDate>
-      
-      <description>&lt;p&gt;今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了 &lt;code&gt;unable to find valid certification path to requested target&lt;/code&gt; 的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了 <code>unable to find valid certification path to requested target</code> 的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。</p><span id="more"></span><h2 id="让Maven忽略证书错误"><a href="#让Maven忽略证书错误" class="headerlink" title="让Maven忽略证书错误"></a>让 Maven 忽略证书错误</h2><p>因为在默认情况下，自签名证书是不受信任的，那么我们只要让 Maven 忽略证书错误，就可以解决这个问题了。</p><p>我们可以在<code>.bashrc</code> 或<code>.zshrc</code>（或者其他位置，看你用哪个 shell 了）里面加入如下语句：</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> MAVEN_OPTS=<span class="string">'-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Djsse.enableSNIExtension=false'</span></span><br></pre></td></tr></tbody></table></figure><p>或者，也可以在 <code>~/.mavenrc</code> 中配置这个参数：</p><figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">MAVEN_OPTS</span>=<span class="string">"-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Djsse.enableSNIExtension=false"</span></span><br></pre></td></tr></tbody></table></figure><h2 id="导入证书到keystore"><a href="#导入证书到keystore" class="headerlink" title="导入证书到keystore"></a>导入证书到 keystore</h2><p>首先使用这个命令得到网站上面的证书：</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意将mavenrepository.mycompany.com替换成实际的地址</span></span><br><span class="line">openssl s_client -showcerts -connect mavenrepository.mycompany.com:443</span><br></pre></td></tr></tbody></table></figure><p>在输出中可以看到类似这样的证书信息：</p><figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s:/C=US/ST=North Carolina/L=Raleigh/O=Red Hat, Inc./OU=Red Hat Network/CN=Entitlement Master CA/emailAddress=ca-support@redhat.com</span><br><span class="line"></span><br><span class="line">i:/C=US/ST=North Carolina/L=Raleigh/O=Red Hat, Inc./OU=Red Hat Network/CN=Entitlement Master CA/emailAddress=ca-support@redhat.com</span><br></pre></td></tr></tbody></table></figure><p>我们要在这里面寻找 <code>issuer(i:)</code> 和 <code>subject(s:)</code> 相同的证书，这个就是我们要导出的根证书。找到之后，保存证书的哈希（即以 <code>—–BEGIN CERTIFICATE—–</code>开始，以 <code>—–END CERTIFICATE—–</code>结束的这部分内容）到一个文件中，比如 <code>root.crt</code>。</p><p>接下来，我们需要使用 <code>keytool</code> 把这个证书导入到 Java 的 keystore 中，命令如下：</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo keytool \</span><br><span class="line">    -importcert \</span><br><span class="line">    <span class="comment"># keystore文件位置需要修改成实际的位置</span></span><br><span class="line">    -keystore /usr/local/java/jdk1.8.0_60/jre/lib/security/cacerts \</span><br><span class="line">    <span class="comment"># keystore密码需要修改成实际的密码，默认密码是changeit</span></span><br><span class="line">    -storepass changeit \</span><br><span class="line">    <span class="comment"># 要导入的证书，就是刚才保存的那个，注意使用实际的位置</span></span><br><span class="line">    -file ~/Downloads/root.crt \</span><br><span class="line">    <span class="comment"># 给证书起个名字</span></span><br><span class="line">    -<span class="built_in">alias</span> <span class="string">"mavenrepository-mycompany"</span></span><br></pre></td></tr></tbody></table></figure><p>执行后 keytool 会询问是否信任这个证书，输入 <code>yes</code> 来信任。</p><p>导入完成后，Maven 就可以从这个私库下载依赖了。如果你使用 IDEA 的话，那么可能需要重新启动一下 IDEA 才会使新的 keystore 生效。</p><p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9qZnJvZy5jb20va25vd2xlZGdlLWJhc2UvaG93LXRvLXJlc29sdmUtdW5hYmxlLXRvLWZpbmQtdmFsaWQtY2VydGlmaWNhdGlvbi1wYXRoLXRvLXJlcXVlc3RlZC10YXJnZXQtZXJyb3Iv">How to resolve “unable to find valid certification path to requested target” error? - JFrog<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjEyNTI4MDAvaG93LXRvLXRlbGwtbWF2ZW4tdG8tZGlzcmVnYXJkLXNzbC1lcnJvcnMtYW5kLXRydXN0aW5nLWFsbC1jZXJ0cw==">How to tell Maven to disregard SSL errors (and trusting all certs)?<i class="fa fa-external-link-alt"></i></span></p>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/tips/">小技巧</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/Maven/">Maven</category>
-      
-      
-      <comments>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html#disqus_thread</comments>
       
     </item>
     
