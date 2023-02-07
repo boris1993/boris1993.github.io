@@ -121,10 +121,6 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/shell-set-ex.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
@@ -177,51 +173,7 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
+    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
@@ -346,6 +298,54 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
 </urlset> 
