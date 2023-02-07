@@ -1,102 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/mybatis-return-query-results-in-a-map.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/mysql-convert-tables-and-columns-collation.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/nostr-nip-05-with-hexo.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/programatically-call-jsr-303.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/push-to-multi-git-repo.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/recording-my-infection-of-corona.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/redis-replication-in-docker.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
@@ -121,11 +25,15 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
@@ -173,7 +81,19 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
+    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
@@ -301,6 +221,102 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/mybatis-return-query-results-in-a-map.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/mysql-convert-tables-and-columns-collation.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/nostr-nip-05-with-hexo.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/programatically-call-jsr-303.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/push-to-multi-git-repo.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/recording-my-infection-of-corona.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/redis-replication-in-docker.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
@@ -330,22 +346,6 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
 </urlset> 
