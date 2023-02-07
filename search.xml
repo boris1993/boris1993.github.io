@@ -4051,6 +4051,46 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>Shell 脚本中 set -ex 命令的作用</title>
+    <url>/shell-set-ex.html</url>
+    <content><![CDATA[<p>刚刚学会了一个很实用的 shell 命令 <code>set -ex</code>，在这里分享一下。</p>
+<span id="more"></span>
+
+<p>稍有常识的人都能看出，这是 <code>set</code> 命令加上了 <code>-e</code> 和 <code>-x</code> 两个参数 (废话么这不是)。那么，我就把这两个参数拆开，分别说一下它在脚本中的用处。</p>
+<h1 id="set-e"><a href="#set-e" class="headerlink" title="set -e"></a><code>set -e</code></h1><p>先说说 <code>set -e</code>，这个参数的含义是，当命令发生错误的时候，停止脚本的执行。</p>
+<p>通常来说，我们会习惯于使用 <code>&amp;&amp;</code> 来实现这样的功能，比如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 1 &amp;&amp; <span class="built_in">rm</span> non-existent-file &amp;&amp; <span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
+
+<p>但是，写成一行呢，可读性有点差，分成多行的话，也得注意换行符 <code>\</code> 和 <code>&amp;&amp;</code> 号，我就有过好几次忘了加这俩东西，还是挺麻烦的是吧。</p>
+<p>更麻烦的是，<code>&amp;&amp;</code> 连接的命令之间不能写注释，也就是说，下面这个示例是不能用的：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 1 \</span><br><span class="line">  &amp;&amp; <span class="built_in">rm</span> non-existent-file \ <span class="comment"># which will fail</span></span><br><span class="line">  &amp;&amp; <span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行之后会是这个德行：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">1</span><br><span class="line">rm: non-existent-file: No such file or directory</span><br><span class="line">rm:  #: No such file or directory</span><br><span class="line">rm: which: No such file or directory</span><br><span class="line">rm: will: No such file or directory</span><br><span class="line">rm: fail: No such file or directory</span><br><span class="line">./test1.sh: line 5: syntax error near unexpected token `&amp;&amp;'</span><br><span class="line">./test1.sh: line 5: `  &amp;&amp; echo 2'</span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在，就可以写成下面这样了：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">echo</span> 1</span><br><span class="line"><span class="built_in">rm</span> non-existent-file <span class="comment"># which will fail</span></span><br><span class="line"><span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
+
+<p>猜猜最后输出里面会不会把 <code>2</code> 打印出来？</p>
+<h1 id="set-x"><a href="#set-x" class="headerlink" title="set -x"></a><code>set -x</code></h1><p>说完了 <code>-e</code>，继续说说 <code>-x</code>。<code>-x</code> 参数的作用，是把将要运行的命令用一个 <code>+</code> 标记之后显示出来。</p>
+<p>还是拿上面这个脚本举个例子，这次加上 <code>-x</code>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -ex</span><br><span class="line"><span class="built_in">echo</span> 1</span><br><span class="line"><span class="built_in">rm</span> non-existent-file <span class="comment"># which will fail</span></span><br><span class="line"><span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后它的输出就变成了：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">+ echo 1</span><br><span class="line">1</span><br><span class="line">+ rm non-existent-file</span><br><span class="line">rm: non-existent-file: No such file or directory</span><br></pre></td></tr></tbody></table></figure>
+
+<p>注意第一行和第三行前面那个 <code>+</code>，这就是 <code>-x</code> 参数的作用。</p>
+<h1 id="One-more-thing……"><a href="#One-more-thing……" class="headerlink" title="One more thing……"></a>One more thing……</h1><p>需要注意，这条命令需要放到整个 shell 脚本的开头，才会起作用。毕竟用脑子想想就知道，这是俩开关，不论放在中间还是结尾，都不会起到预期的作用。</p>
+<h1 id="Credit"><a href="#Credit" class="headerlink" title="Credit"></a>Credit</h1><p>感谢这篇文章<span class="exturl" data-url="aHR0cHM6Ly93d3cucGV0ZXJiZS5jb20vcGxvZy9zZXQtZXg="> set -ex - The most useful bash trick of the year<i class="fa fa-external-link-alt"></i></span>为我提供了这条命令的解释，和写作的思路。</p>
+]]></content>
+      <categories>
+        <category>学知识</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分环境为 Git 指定单独的配置</title>
     <url>/specify-different-git-config-for-different-environments.html</url>
     <content><![CDATA[<p>有的小伙伴，在公司需要使用公司的 Git 来干活，同时自己也有些托管在 GitHub 等其他仓库的代码，在这种情况下会有一个烦恼，就是怎么样在多个仓库之间使用不同的配置。比如在公司仓库和个人仓库之间使用不同的身份信息，或者在公司仓库和个人仓库之间，使用不同的 GPG 签名。</p>
@@ -4094,46 +4134,6 @@ reject_the_task --&gt; 结束
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Shell 脚本中 set -ex 命令的作用</title>
-    <url>/shell-set-ex.html</url>
-    <content><![CDATA[<p>刚刚学会了一个很实用的 shell 命令 <code>set -ex</code>，在这里分享一下。</p>
-<span id="more"></span>
-
-<p>稍有常识的人都能看出，这是 <code>set</code> 命令加上了 <code>-e</code> 和 <code>-x</code> 两个参数 (废话么这不是)。那么，我就把这两个参数拆开，分别说一下它在脚本中的用处。</p>
-<h1 id="set-e"><a href="#set-e" class="headerlink" title="set -e"></a><code>set -e</code></h1><p>先说说 <code>set -e</code>，这个参数的含义是，当命令发生错误的时候，停止脚本的执行。</p>
-<p>通常来说，我们会习惯于使用 <code>&amp;&amp;</code> 来实现这样的功能，比如：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 1 &amp;&amp; <span class="built_in">rm</span> non-existent-file &amp;&amp; <span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
-
-<p>但是，写成一行呢，可读性有点差，分成多行的话，也得注意换行符 <code>\</code> 和 <code>&amp;&amp;</code> 号，我就有过好几次忘了加这俩东西，还是挺麻烦的是吧。</p>
-<p>更麻烦的是，<code>&amp;&amp;</code> 连接的命令之间不能写注释，也就是说，下面这个示例是不能用的：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 1 \</span><br><span class="line">  &amp;&amp; <span class="built_in">rm</span> non-existent-file \ <span class="comment"># which will fail</span></span><br><span class="line">  &amp;&amp; <span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
-
-<p>运行之后会是这个德行：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">1</span><br><span class="line">rm: non-existent-file: No such file or directory</span><br><span class="line">rm:  #: No such file or directory</span><br><span class="line">rm: which: No such file or directory</span><br><span class="line">rm: will: No such file or directory</span><br><span class="line">rm: fail: No such file or directory</span><br><span class="line">./test1.sh: line 5: syntax error near unexpected token `&amp;&amp;'</span><br><span class="line">./test1.sh: line 5: `  &amp;&amp; echo 2'</span><br></pre></td></tr></tbody></table></figure>
-
-<p>现在，就可以写成下面这样了：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">echo</span> 1</span><br><span class="line"><span class="built_in">rm</span> non-existent-file <span class="comment"># which will fail</span></span><br><span class="line"><span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
-
-<p>猜猜最后输出里面会不会把 <code>2</code> 打印出来？</p>
-<h1 id="set-x"><a href="#set-x" class="headerlink" title="set -x"></a><code>set -x</code></h1><p>说完了 <code>-e</code>，继续说说 <code>-x</code>。<code>-x</code> 参数的作用，是把将要运行的命令用一个 <code>+</code> 标记之后显示出来。</p>
-<p>还是拿上面这个脚本举个例子，这次加上 <code>-x</code>：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -ex</span><br><span class="line"><span class="built_in">echo</span> 1</span><br><span class="line"><span class="built_in">rm</span> non-existent-file <span class="comment"># which will fail</span></span><br><span class="line"><span class="built_in">echo</span> 2</span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后它的输出就变成了：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">+ echo 1</span><br><span class="line">1</span><br><span class="line">+ rm non-existent-file</span><br><span class="line">rm: non-existent-file: No such file or directory</span><br></pre></td></tr></tbody></table></figure>
-
-<p>注意第一行和第三行前面那个 <code>+</code>，这就是 <code>-x</code> 参数的作用。</p>
-<h1 id="One-more-thing……"><a href="#One-more-thing……" class="headerlink" title="One more thing……"></a>One more thing……</h1><p>需要注意，这条命令需要放到整个 shell 脚本的开头，才会起作用。毕竟用脑子想想就知道，这是俩开关，不论放在中间还是结尾，都不会起到预期的作用。</p>
-<h1 id="Credit"><a href="#Credit" class="headerlink" title="Credit"></a>Credit</h1><p>感谢这篇文章<span class="exturl" data-url="aHR0cHM6Ly93d3cucGV0ZXJiZS5jb20vcGxvZy9zZXQtZXg="> set -ex - The most useful bash trick of the year<i class="fa fa-external-link-alt"></i></span>为我提供了这条命令的解释，和写作的思路。</p>
-]]></content>
-      <categories>
-        <category>学知识</category>
-      </categories>
-      <tags>
-        <tag>Shell</tag>
       </tags>
   </entry>
   <entry>
