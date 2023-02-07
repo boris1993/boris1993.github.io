@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
-    <lastmod>2023-02-07</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
@@ -205,11 +185,11 @@
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
+    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
+    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
   <url>
@@ -346,6 +326,26 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
+    <lastmod>2023-02-07</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
     <lastmod>2023-02-07</lastmod>
   </url>
 </urlset> 
