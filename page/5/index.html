@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,7 +190,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">109</span>
+        <span class="site-state-item-count">110</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,6 +251,129 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/column-flags-in-mysql-workbench.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/column-flags-in-mysql-workbench.html" class="post-title-link" itemprop="url">MySQL Workbench 中各个列属性的含义</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-14 11:22:29" itemprop="dateCreated datePublished" datetime="2019-12-14T11:22:29+08:00">2019-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/column-flags-in-mysql-workbench.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/column-flags-in-mysql-workbench.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/column-flags-in-mysql-workbench.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li><code>PK</code>: 主键 (Primary Key)</li>
+<li><code>NN</code>: 非空 (Not Null)</li>
+<li><code>UQ</code>: 唯一索引 (Unique Index)</li>
+<li><code>BIN</code>: 二进制 (Binary) 将数据储存为二进制字符串</li>
+<li><code>UN</code>: 无符号的 (Unsigned)</li>
+<li><code>ZF</code>: 零填充的 (Zero Fill) 如：INT (5) 的列中，<code>12</code> 会被填充为 <code>00012</code></li>
+<li><code>AI</code>: 自增长的 (Auto Increment)</li>
+<li><code>G</code>: 生成出来的 (Generated) 如：根据公式从其它列中生成的数据</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/column-flags-in-mysql-workbench.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/brief-talk-about-mysql-collations.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,7 +410,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -401,7 +524,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +638,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -629,7 +752,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -743,7 +866,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -858,7 +981,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -973,7 +1096,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1087,7 +1210,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1198,7 +1321,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
+      <time title="修改时间：2023-02-08 15:39:36" itemprop="dateModified" datetime="2023-02-08T15:39:36+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1253,120 +1376,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/i-cried-just-now.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/redis-sentinel-in-docker.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/redis-sentinel-in-docker.html" class="post-title-link" itemprop="url">使用 Docker 配置 Redis 哨兵</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-06-05 10:08:10" itemprop="dateCreated datePublished" datetime="2019-06-05T10:08:10+08:00">2019-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-07 17:01:15" itemprop="dateModified" datetime="2023-02-07T17:01:15+08:00">2023-02-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/redis-sentinel-in-docker.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/redis-sentinel-in-docker.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/redis-sentinel-in-docker.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>接上文<a href="/database/Redis/redis-replication-in-docker.html">使用 Docker 配置 Redis 主从复制</a>完成之后，这篇文章主要介绍如何使用 Docker 在本机搭建 Redis 的哨兵，内容包括涉及的目录结构、<code>docker-compose.yml</code> 的编写。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/redis-sentinel-in-docker.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
