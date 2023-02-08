@@ -3874,6 +3874,9 @@ reject_the_task --&gt; 结束
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/go/bin:~/go/bin</span><br></pre></td></tr></tbody></table></figure>
 
 <p>重新载入<code>.bashrc</code> 后，执行 <code>go install tailscale.com/cmd/derper@main</code>，安装 <code>derper</code>。</p>
+<p>此外，因为 derper 不能自动更新，所以需要设定一个定时任务来定期重新运行 <code>go install</code> 命令，如：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">0 0 * * * go install tailscale.com/cmd/derper@main</span><br></pre></td></tr></tbody></table></figure>
+
 <h2 id="测试derper"><a href="#测试derper" class="headerlink" title="测试derper"></a>测试 derper</h2><p>在运行 derper 之前，你需要给这个服务器绑定一个域名，derper 会用这个域名来申请 Let’s Encrypt 的 SSL 证书。申请和购买域名我就不在这废话了，网上有很多相关文章。</p>
 <p>此外，因为 derper 需要监听 443 端口，而我又不想以 root 身份运行它，所以我选择给它分配 <code>CAP_NET_BIND_SERVICE</code> 这个 capability，来让它有监听低位端口的权限。</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo <span class="built_in">setcap</span> CAP_NET_BIND_SERVICE=+eip ~/go/bin/derper</span><br></pre></td></tr></tbody></table></figure>
