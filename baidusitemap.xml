@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
     <lastmod>2023-02-11</lastmod>
   </url>
@@ -78,66 +62,6 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/zos-xmit.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/filter-vs-interceptor.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/hexo-next-enable-google-adsense.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
-    <lastmod>2023-02-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
     <lastmod>2023-02-11</lastmod>
   </url>
   <url>
@@ -317,6 +241,22 @@
     <lastmod>2023-02-11</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2023-02-11</lastmod>
   </url>
@@ -350,6 +290,66 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/filter-vs-interceptor.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/gcp-logging-show-class-and-method-name.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/hexo-next-enable-google-adsense.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
+    <lastmod>2023-02-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
     <lastmod>2023-02-11</lastmod>
   </url>
 </urlset> 
