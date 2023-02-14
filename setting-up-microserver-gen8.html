@@ -25,12 +25,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。">
+    <meta name="description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手 MicroServer Gen8 折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二手 MicroServer Gen8 折腾记">
+<meta property="og:title" content="二手 MicroServer Gen8 折腾记 (1&#x2F;n) - 初始化服务器">
 <meta property="og:url" content="https://www.boris1993.com/setting-up-microserver-gen8.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。">
+<meta property="og:description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手 MicroServer Gen8 折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mqoh9KX_EvO-_zK6RXa5mBvTr2Y4o_qEol3rVfXy6yPZ0FD0_UYVzbEbSiLSngI4dqdPIDpfaZR-n0GDa-Wxnw64D-CPNF5bwi7aIRw8RA5sbnJRLjW3u7fTv3LLp5iILHCw1mM7Y0_CZq77fkpKdVMClUPJqB2nSWL2Uanp3V06q-wSJz57jWtefq0RDRGZj?width=242&amp;height=167&amp;cropmode=none">
 <meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mEPrwJVtS4chVC9o-Nby06DcHRydHTg18hCaMz9uOQCBbe9WbBRW93RtHOxuhk4SdkIW4QtRZ_ep2rZ_kGrOvdCBm1UrD38ds4JjCu0q1JjZfMnBmfpeobgFiOQyISblL3Lzhv1M5JTF0Rv91wpaUQHUDqZmWaMlIwWWHUaHyBUn1KYVMxOMI1RQJvcFliqWD?width=1038&amp;height=733&amp;cropmode=none">
@@ -45,8 +45,9 @@
 <meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mV0dd-Yv2SXaLKTzpYUxK2WeQ6Cdy_mcTg4C5zVYERBvswb5OznCxwIaD9km-BiCTCuJokyx9BWW7diupFhx-vNL8_gLogdeMkgEfoaDLNSFqW4hINYzSAfoTbgvIKyhKeEsmasMfjrjCPzx6ez6ZkKcJZ86Hm7Pv89MvR60PciKY0N98orG452TLF2ZquafU?width=3584&amp;height=1800&amp;cropmode=none">
 <meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mtOCRNkLk0OewU_7ZO4p0C14cqVkSYyeKx0aBZc83ylumDBA89xk5xF1rOLl-jpgnhS26yPiqJnA3lezTYEs84Pen-Bc5CPGQayAATLpKUVhFG0-A33Ao36Q_TASLxqG76OyePlD5bx97-1ae6fqvUU3nrYkrZxzGurls69q-Regvp_wcesIKJmJZ4aYqslaf?width=600&amp;height=338&amp;cropmode=none">
 <meta property="article:published_time" content="2022-12-18T19:01:45.000Z">
-<meta property="article:modified_time" content="2023-02-11T17:01:00.201Z">
+<meta property="article:modified_time" content="2023-02-14T15:07:10.612Z">
 <meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="二手MicroServer Gen8折腾记">
 <meta property="article:tag" content="Gen8">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4mqoh9KX_EvO-_zK6RXa5mBvTr2Y4o_qEol3rVfXy6yPZ0FD0_UYVzbEbSiLSngI4dqdPIDpfaZR-n0GDa-Wxnw64D-CPNF5bwi7aIRw8RA5sbnJRLjW3u7fTv3LLp5iILHCw1mM7Y0_CZq77fkpKdVMClUPJqB2nSWL2Uanp3V06q-wSJz57jWtefq0RDRGZj?width=242&amp;height=167&amp;cropmode=none">
@@ -56,10 +57,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8.html","path":"setting-up-microserver-gen8.html","title":"二手 MicroServer Gen8 折腾记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8.html","path":"setting-up-microserver-gen8.html","title":"二手 MicroServer Gen8 折腾记 (1/n) - 初始化服务器"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>二手 MicroServer Gen8 折腾记 | Code Life</title>
+<title>二手 MicroServer Gen8 折腾记 (1/n) - 初始化服务器 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false}</script>
@@ -196,7 +197,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -207,7 +208,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -282,12 +283,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="二手 MicroServer Gen8 折腾记 | Code Life">
+      <meta itemprop="name" content="二手 MicroServer Gen8 折腾记 (1/n) - 初始化服务器 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          二手 MicroServer Gen8 折腾记
+          二手 MicroServer Gen8 折腾记 (1/n) - 初始化服务器
         </h1>
 
         <div class="post-meta-container">
@@ -305,7 +306,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -350,6 +351,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。</p>
+<p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手 MicroServer Gen8 折腾记</a>的第一篇，记录拿到服务器之后做的一些初始化的工作。</p>
 <span id="more"></span>
 
 <h2 id="重置iLO"><a href="#重置iLO" class="headerlink" title="重置iLO"></a>重置 iLO</h2><p>到手之后，我发现我把事想简单了，服务器一般只给一个 VGA 口，而这台也不例外，然而，我这里没有一个能接 VGA 口的设备。是的，你没看错。不止显示器没有 VGA 口，连电视也没有。遂果断下单了一个 VGA 到 HDMI 转接器。第二天收到快递，兴冲冲的接上，却发现只能显示 POST 画面，之后无论是正常继续启动，还是进 RBSU（ROM based setup utility），电视上都是无信号。事到如此，接显示器这条路算是堵死了。别问我为什么不买个支持 VGA 的显示器，你自己想想这成本划得来么？</p>
@@ -469,6 +471,7 @@
 </div>
 
           <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/" rel="tag"># 二手MicroServer Gen8折腾记</a>
               <a href="/tags/Gen8/" rel="tag"># Gen8</a>
           </div>
 

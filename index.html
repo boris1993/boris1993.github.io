@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,7 +190,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,6 +251,116 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/setting-up-microserver-gen8-routeros.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/setting-up-microserver-gen8-routeros.html" class="post-title-link" itemprop="url">二手 MicroServer Gen8 折腾记 (2/n) - 配置 RouterOS 软路由</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-14 17:51:37 / 修改时间：23:07:10" itemprop="dateCreated datePublished" datetime="2023-02-14T17:51:37+08:00">2023-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/setting-up-microserver-gen8-routeros.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/setting-up-microserver-gen8-routeros.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/setting-up-microserver-gen8-routeros.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我之前宽带一直都是光猫拨号，电脑和 NAS 直连光猫，光猫下挂个二级无线路由器来给其他设备联网，但我早就对这个拓扑不爽了，主要原因是自己花大钱买的 AC86U 派不上用场，只能干点边缘的杂活，而且搞两套局域网怎么看都挺恶心的。之前也试过把路由器改成 AP 模式，让所有设备都直连光猫，但是万恶的电信光猫限制了设备数，只有前 5 台机器能上网，其它的机器虽然能拿到地址，但是上网必定超时。那现在既然有了台服务器，那干脆装个软路由。</p>
+<p>软路由系统我打算玩玩 <code>RouterOS</code>，毕竟 <code>iKuai</code> 听说过没用过，据说还出过劫持流量这种问题，不敢用也不想用；<code>OpenWRT</code> 以前玩过，没啥新鲜感，而 <code>RouterOS</code>，之前装着玩的时候就觉得倍有逼格，早就想搞搞它玩玩了。</p>
+<p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手 MicroServer Gen8 折腾记</a>的第二篇，记录配置猫棒和搭建 RouterOS 软路由的过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/setting-up-microserver-gen8-routeros.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/self-hosting-tailscale-derp.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,7 +397,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -401,7 +511,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +625,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -629,7 +739,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -743,7 +853,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -861,7 +971,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -975,7 +1085,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1090,7 +1200,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1186,7 +1296,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/setting-up-microserver-gen8.html" class="post-title-link" itemprop="url">二手 MicroServer Gen8 折腾记</a>
+          <a href="/setting-up-microserver-gen8.html" class="post-title-link" itemprop="url">二手 MicroServer Gen8 折腾记 (1/n) - 初始化服务器</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1204,7 +1314,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-14 23:07:10" itemprop="dateModified" datetime="2023-02-14T23:07:10+08:00">2023-02-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1249,123 +1359,10 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。</p>
+<p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手 MicroServer Gen8 折腾记</a>的第一篇，记录拿到服务器之后做的一些初始化的工作。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/setting-up-microserver-gen8.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/are-servlet-and-spring-mvc-thread-safe.html" class="post-title-link" itemprop="url">Servlet 和 Spring MVC 是不是线程安全的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-12-14 14:01:16" itemprop="dateCreated datePublished" datetime="2022-12-14T14:01:16+08:00">2022-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 01:01:00" itemprop="dateModified" datetime="2023-02-12T01:01:00+08:00">2023-02-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/are-servlet-and-spring-mvc-thread-safe.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/are-servlet-and-spring-mvc-thread-safe.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/are-servlet-and-spring-mvc-thread-safe.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>太长不看：默认情况下 <code>servlet</code> 不是线程安全的；<code>Spring bean</code> 是否线程安全取决于这个 bean 的 scope。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/are-servlet-and-spring-mvc-thread-safe.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
