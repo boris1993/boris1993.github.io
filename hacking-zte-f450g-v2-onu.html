@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="还记得我之前买了个猫棒来替换光猫么？用了一个来月，发现这玩意真的不稳定，短则几分钟长则一两天它必定自己重启一次，导致我的网络时不时就会断线。这玩意不好使，我也没有别的光猫，只好找电信装维师傅给我改桥接。可哪成想一个师傅踢皮球让我找另一个师傅，另一个一听我说是悦me 直接就说不能改，只有 SDN 光猫能改。那你们逼我的，我自己改。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="破解中兴 F450G V2 光猫">
+<meta property="og:url" content="https://www.boris1993.com/hacking-zte-f450g-v2-onu.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="还记得我之前买了个猫棒来替换光猫么？用了一个来月，发现这玩意真的不稳定，短则几分钟长则一两天它必定自己重启一次，导致我的网络时不时就会断线。这玩意不好使，我也没有别的光猫，只好找电信装维师傅给我改桥接。可哪成想一个师傅踢皮球让我找另一个师傅，另一个一听我说是悦me 直接就说不能改，只有 SDN 光猫能改。那你们逼我的，我自己改。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mNgsMfWdJKmlhsgSrqeZWK0mKH_TgCGVDEdK8kX_MIE8gqzY4ot_iHpIQAQiySaKP29vol9gDbsgmqtMLEmNaFyabdBXWNjZqLg1QzLmxelO84UOaTHihLHlxSL3qSP55BF_5XnKNmGhYd7kkKPkXNc9GEm7gN9kIzmXhLEdObnvTGRVvFqeOh48xdcRu7CND?width=820&amp;height=534&amp;cropmode=none">
+<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mVnQlHFkLSM7uJBFTkALON8nMwnAxhwDkgo4GE4jb1TFbnUrA9B4y0ZASfZLD0e3UIMXZuz68IKN0dnFibZwRX3Pyama625xaQ__T4b6ldYeCUeRuxsUKN5yUlrb1k5Hm5YIMrf741-i9rKPeFS71mwcoFFs8b1EmG17iDvxHReZsg1cc9WoA_bhG3p7yhXO3?width=1088&amp;height=690&amp;cropmode=none">
+<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mXE2I0zdJz-5avLM5uYDkkKSXx1VzZaanNNhj5WCoe1UT6WfUXtKS0NxRvUKpUYaj6TNxjPNVFh0cXUjBi7WXGrUdE35vqEpxpr5JUJbuJa1x190vEU0fcJi5ODJgsnm3Koc3c58zhl-V0HUK76Kd1C56FpWX2o7UAByZCnl-PybyUUtGHBiFlDaF4nCgOzLb?width=808&amp;height=264&amp;cropmode=none">
+<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4m-Iqy5cSnmCKZzuIbUaXA2Ar41HxY6j4kL4o2Mlj2CAbTuOz6ybMGkFGAepmWJEGc5GZpPUDCqTkT0ZapY8c_IGkN1gh8wL2YsskFVRTRDv3QEQHToM2RzBlXjuDgGI4a6_7ylntiQkYOhdtLbZ2PmIh4OikvDY5VaWzOAK0_FnNbebPHeuedXDUVkZHfaIyh?width=954&amp;height=540&amp;cropmode=none">
+<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mTLQf6UNyRnLV9DHNP2PxhSjQYcs4UP_UqlMErnvS9gIBK0oNXSYV0fNEQlipq96QJvfZVVmp4relM5_UmmzE1PE5Fu62rYkIlAZWYe_7i4CSKQ1sbERcrdFtVi6EVwMqAXfcCGKD5LcFk16ObaNrbvEwvH5CnNC_-4E5LShkIUrPBoTotT7XElzQEB_KpoDb?width=1058&amp;height=586&amp;cropmode=none">
+<meta property="article:published_time" content="2023-03-16T05:13:37.000Z">
+<meta property="article:modified_time" content="2023-03-16T11:54:58.307Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="光猫">
+<meta property="article:tag" content="桥接">
+<meta property="article:tag" content="F450G">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bn02pap001files.storage.live.com/y4mNgsMfWdJKmlhsgSrqeZWK0mKH_TgCGVDEdK8kX_MIE8gqzY4ot_iHpIQAQiySaKP29vol9gDbsgmqtMLEmNaFyabdBXWNjZqLg1QzLmxelO84UOaTHihLHlxSL3qSP55BF_5XnKNmGhYd7kkKPkXNc9GEm7gN9kIzmXhLEdObnvTGRVvFqeOh48xdcRu7CND?width=820&amp;height=534&amp;cropmode=none">
+
+
+<link rel="canonical" href="https://www.boris1993.com/hacking-zte-f450g-v2-onu.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/hacking-zte-f450g-v2-onu.html","path":"hacking-zte-f450g-v2-onu.html","title":"破解中兴 F450G V2 光猫"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>破解中兴 F450G V2 光猫 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+
+  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/umami.js"></script>
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-探针"><span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw=="><i class="fa fa-link fa-fw"></i>探针</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E7%8C%AB%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">光猫信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%8A%A8%E6%89%8B"><span class="nav-number">3.</span> <span class="nav-text">开始动手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E4%BD%8D%E5%85%89%E7%8C%AB%EF%BC%8C%E5%BC%80%E5%90%AFtelnet"><span class="nav-number">3.1.</span> <span class="nav-text">复位光猫，开启 telnet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87telnet%E5%81%9A%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">需要通过 telnet 做的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E8%BF%9B%E5%90%8E%E5%8F%B0%E9%85%8D%E6%A1%A5%E6%8E%A5"><span class="nav-number">3.3.</span> <span class="nav-text">登进后台配桥接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BD%90%E6%B4%BB"><span class="nav-number">4.</span> <span class="nav-text">齐活</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!-- sidebar ad 
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/hacking-zte-f450g-v2-onu.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="破解中兴 F450G V2 光猫 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          破解中兴 F450G V2 光猫
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-16 13:13:37 / 修改时间：19:54:58" itemprop="dateCreated datePublished" datetime="2023-03-16T13:13:37+08:00">2023-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/hacking-zte-f450g-v2-onu.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/hacking-zte-f450g-v2-onu.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/hacking-zte-f450g-v2-onu.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>还记得我<a href="/setting-up-microserver-gen8-routeros.html">之前买了个猫棒来替换光猫</a>么？用了一个来月，发现这玩意真的不稳定，短则几分钟长则一两天它必定自己重启一次，导致我的网络时不时就会断线。这玩意不好使，我也没有别的光猫，只好找电信装维师傅给我改桥接。可哪成想一个师傅踢皮球让我找另一个师傅，另一个一听我说是<code>悦me</code> 直接就说不能改，只有 SDN 光猫能改。那你们逼我的，我自己改。</p>
+<span id="more"></span>
+
+<h2 id="光猫信息"><a href="#光猫信息" class="headerlink" title="光猫信息"></a>光猫信息</h2><p>我的这款光猫是 <code>EPON上行悦me网关</code>，型号是<code>中兴 ZXHN F450G</code>，区域是上海，硬件版本 <code>V2.0</code>。</p>
+<p><img data-src="https://bn02pap001files.storage.live.com/y4mNgsMfWdJKmlhsgSrqeZWK0mKH_TgCGVDEdK8kX_MIE8gqzY4ot_iHpIQAQiySaKP29vol9gDbsgmqtMLEmNaFyabdBXWNjZqLg1QzLmxelO84UOaTHihLHlxSL3qSP55BF_5XnKNmGhYd7kkKPkXNc9GEm7gN9kIzmXhLEdObnvTGRVvFqeOh48xdcRu7CND?width=820&amp;height=534&amp;cropmode=none"></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>开始折腾光猫之前，一定要把当前光猫里存的配置备份好，尤其是 <code>LOID</code>，万一折腾砸了，还可以改回去，或者重新注册，让局端重新下发正确的配置。我已经有了 <code>telecomadmin</code> 的密码，就直接登进后台，把配置抄了下来。</p>
+<p><img data-src="https://bn02pap001files.storage.live.com/y4mVnQlHFkLSM7uJBFTkALON8nMwnAxhwDkgo4GE4jb1TFbnUrA9B4y0ZASfZLD0e3UIMXZuz68IKN0dnFibZwRX3Pyama625xaQ__T4b6ldYeCUeRuxsUKN5yUlrb1k5Hm5YIMrf741-i9rKPeFS71mwcoFFs8b1EmG17iDvxHReZsg1cc9WoA_bhG3p7yhXO3?width=1088&amp;height=690&amp;cropmode=none"></p>
+<h2 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h2><blockquote>
+<p>首先我要大力感谢这篇帖子，那天我就是照着这里面的内容操作的。<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmFkc2wubmV0L3RocmVhZC0xMjc2NjYtMS0xLmh0bWw=">https://www.chinadsl.net/thread-127666-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h3 id="复位光猫，开启telnet"><a href="#复位光猫，开启telnet" class="headerlink" title="复位光猫，开启telnet"></a>复位光猫，开启 telnet</h3><p>首先，拔掉光纤，用细针捅住光猫后面的复位孔，直到光猫前面板下方的两个灯都熄灭，只剩下上面的电信 logo 亮着，以彻底复位光猫。这一步是为了重新打开 telnet，因为这个光猫在插上光纤之后 telnet 就会被禁用，只有拔掉光纤并彻底复位才能再把 telnet 打开。</p>
+<p>复位后光猫会自动重启，拿根网线，把电脑接上光猫的 LAN 口（别接 LAN 2，那是给 IPTV 用的），电脑设定静态 IP 地址 <code>192.168.1.100</code>（其实除了 <code>192.168.1.1</code> 之外，整个 <code>192.168.1.0/24</code> 网段随便你选），子网掩码 <code>255.255.255.0</code>。</p>
+<p>接下来持续 <code>ping 192.168.1.1</code>，光猫启动好之后会有响应，接下来用 telnet 连接 192.168.1.1，使用用户名 <code>root</code> 和密码 <code>Zte521</code> 登进光猫 shell。</p>
+<h3 id="需要通过telnet做的配置"><a href="#需要通过telnet做的配置" class="headerlink" title="需要通过telnet做的配置"></a>需要通过 telnet 做的配置</h3><p>首先用以下命令实现在光纤插入后 telnet 仍然可用。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开telnet</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> TelnetCfg 0 TS_Enable 1</span><br><span class="line"><span class="comment"># 允许局域网登陆</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> TelnetCfg 0 Lan_Enable 1</span><br><span class="line"><span class="comment"># 插上光纤后不关闭telnet</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> TelnetCfg 0 Lan_EnableAfterOlt 1</span><br><span class="line"><span class="comment"># 最多允许5个用户同时登陆telnet，避免自己被锁在外面</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> TelnetCfg 0 Max_Con_Num 5</span><br><span class="line"><span class="comment"># 打开23端口</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> PortControl 3 PortEnable 1</span><br><span class="line"><span class="comment"># 保存配置</span></span><br><span class="line">sendcmd 1 DB save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后可以用 <code>sendcmd 1 DB p TelnetCfg</code> 确认下配置。后面的操作也可以用 <code>sendcmd 1 DB p 表名</code>这条命令确认配置，就不再重复了。</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Tbl</span> <span class="attr">name</span>=<span class="string">"TelnetCfg"</span> <span class="attr">RowCount</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Row</span> <span class="attr">No</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TS_Enable"</span> <span class="attr">val</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"Wan_Enable"</span> <span class="attr">val</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"Lan_Enable"</span> <span class="attr">val</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TS_Port"</span> <span class="attr">val</span>=<span class="string">"23"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TSLan_Port"</span> <span class="attr">val</span>=<span class="string">"23"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TS_UName"</span> <span class="attr">val</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TS_UPwd"</span> <span class="attr">val</span>=<span class="string">"Zte521"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TSLan_UName"</span> <span class="attr">val</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TSLan_UPwd"</span> <span class="attr">val</span>=<span class="string">"Zte521"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"Max_Con_Num"</span> <span class="attr">val</span>=<span class="string">"5"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"ProcType"</span> <span class="attr">val</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"Lan_EnableAfterOlt"</span> <span class="attr">val</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"TS_Sprtwl_Mode"</span> <span class="attr">val</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">DM</span> <span class="attr">name</span>=<span class="string">"WanWebLinkToTS"</span> <span class="attr">val</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Row</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Tbl</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后禁用掉 TR069。电信局端通过 TR069 协议下发配置，而我们自己改的桥接肯定跟局端的配置不一样，不关掉这玩意相当于白忙活。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁用TR069的58000端口</span></span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> PortControl 6 PortEnable 0</span><br><span class="line">sendcmd 1 DB save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>虽然原帖中说还要把远程管理配置乱改以斩草除根，我是懒得改，应该关了端口就行，因为一来直到现在一个星期了我的配置都还在，二来重新设备注册的时候也会卡在<code>等待ITMS下发配置</code>，所以 TR069 应该是已经被掐了。</p>
+<p>然后需要骗过光猫，让它认为 ITMS 下发配置已经成功。一开始搞的时候没做这一步，就发现过几分钟网页就打不开，nslookup 一下发现解析全去了 192.168.1.1，又打开个网站说试试，结果直接被光猫劫持到了设备注册页面。直接在光猫的表里面改掉 ITMS 状态，再清理 DNS 缓存之后就正常了。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sendcmd 1 DB <span class="built_in">set</span> PDTCTUSERINFO 0 Status 0</span><br><span class="line">sendcmd 1 DB <span class="built_in">set</span> PDTCTUSERINFO 0 Result 1</span><br><span class="line">sendcmd 1 DB save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>接下来改掉光猫的最大用户数。其实要改桥接的话，这个改不改都没关系，反正我也不用光猫上网。但还是顺手改了。也不需要改什么最大用户数，直接关掉限制完事。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sendcmd 1 DB <span class="built_in">set</span> CltLmt 8 Enable 0</span><br><span class="line">sendcmd 1 DB save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>至此 telnet 里面要搞的东西就都搞完了。虽然原帖里面还提到改掉 <code>telecomadmin</code> 的密码，但是既然 TR069 都废了，密码自然也不会再变。正好之前从装维师傅那要到的密码还能用，我也懒得再改。</p>
+<h3 id="登进后台配桥接"><a href="#登进后台配桥接" class="headerlink" title="登进后台配桥接"></a>登进后台配桥接</h3><p>插上光纤，用 telecomadmin 登进光猫后台。先看一眼<code>网关注册信息</code>，因为光猫复位不会丢 LOID，所以插上光纤之后，<code>光路（OLT）认证</code>应该就是认证成功的状态；而上面在 telnet 里面也改掉了 ITMS 认证状态，所以<code>管理（ITMS）注册</code>也应该是注册成功的状态。</p>
+<p><img data-src="https://bn02pap001files.storage.live.com/y4mXE2I0zdJz-5avLM5uYDkkKSXx1VzZaanNNhj5WCoe1UT6WfUXtKS0NxRvUKpUYaj6TNxjPNVFh0cXUjBi7WXGrUdE35vqEpxpr5JUJbuJa1x190vEU0fcJi5ODJgsnm3Koc3c58zhl-V0HUK76Kd1C56FpWX2o7UAByZCnl-PybyUUtGHBiFlDaF4nCgOzLb?width=808&amp;height=264&amp;cropmode=none"></p>
+<p>进入<code>网络</code>的<code>网络设置</code>，点开<code>连接名称</code>下拉菜单，看有没有 <code>INTERNET_B_VID</code>，如果有，而且连接模式是<code>路由</code>，那就删了它。然后下拉菜单选<code>新建WAN连接</code>，连接模式选<code>桥接</code>，业务类型选<code>上网</code>，IP 模式选 <code>IPv4&amp;IPv6</code>，点保存，光猫端就配置完成了。</p>
+<p><img data-src="https://bn02pap001files.storage.live.com/y4m-Iqy5cSnmCKZzuIbUaXA2Ar41HxY6j4kL4o2Mlj2CAbTuOz6ybMGkFGAepmWJEGc5GZpPUDCqTkT0ZapY8c_IGkN1gh8wL2YsskFVRTRDv3QEQHToM2RzBlXjuDgGI4a6_7ylntiQkYOhdtLbZ2PmIh4OikvDY5VaWzOAK0_FnNbebPHeuedXDUVkZHfaIyh?width=954&amp;height=540&amp;cropmode=none"></p>
+<h2 id="齐活"><a href="#齐活" class="headerlink" title="齐活"></a>齐活</h2><p>到这光猫就改好桥接了，从光猫上扯根网线连上自己的路由器拨号，就可以上网了。正好改完桥接那天，RouterOS 有更新，看 PPPoE 接口的 uptime 可以看出来，从 RouterOS 重启之后到现在，链接就没断过。之前用猫棒的时候，uptime 就没多于过 2 天。</p>
+<p><img data-src="https://bn02pap001files.storage.live.com/y4mTLQf6UNyRnLV9DHNP2PxhSjQYcs4UP_UqlMErnvS9gIBK0oNXSYV0fNEQlipq96QJvfZVVmp4relM5_UmmzE1PE5Fu62rYkIlAZWYe_7i4CSKQ1sbERcrdFtVi6EVwMqAXfcCGKD5LcFk16ObaNrbvEwvH5CnNC_-4E5LShkIUrPBoTotT7XElzQEB_KpoDb?width=1058&amp;height=586&amp;cropmode=none"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%85%89%E7%8C%AB/" rel="tag"># 光猫</a>
+              <a href="/tags/%E6%A1%A5%E6%8E%A5/" rel="tag"># 桥接</a>
+              <a href="/tags/F450G/" rel="tag"># F450G</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/floyd-and-brent-cycle-detection-algorithm.html" rel="prev" title="Floyd 和 Brent 判圈算法">
+                  <i class="fa fa-chevron-left"></i> Floyd 和 Brent 判圈算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.3/algoliasearch-lite.umd.js" integrity="sha256-dyJcbGuYfdzNfifkHxYVd/rzeR6SLLcDFYEidcybldM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.50.1/instantsearch.production.min.js" integrity="sha256-xtz5Q60cdtw/7BDkzWiTgCXLvwLrUqlKqegFqvNHiNM=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/hacking-zte-f450g-v2-onu.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
