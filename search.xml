@@ -823,7 +823,7 @@
       </tags>
   </entry>
   <entry>
-    <title>破解中兴 F450G V2 光猫</title>
+    <title>为了改桥接，我决定破解中兴 F450G V2 光猫</title>
     <url>/hacking-zte-f450g-v2-onu.html</url>
     <content><![CDATA[<p>还记得我<a href="/setting-up-microserver-gen8-routeros.html">之前买了个猫棒来替换光猫</a>么？用了一个来月，发现这玩意真的不稳定，短则几分钟长则一两天它必定自己重启一次，导致我的网络时不时就会断线。这玩意不好使，我也没有别的光猫，只好找电信装维师傅给我改桥接。可哪成想一个师傅踢皮球让我找另一个师傅，另一个一听我说是<code>悦me</code> 直接就说不能改，只有 SDN 光猫能改。那你们逼我的，我自己改。</p>
 <span id="more"></span>

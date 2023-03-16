@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
-    <lastmod>2023-03-16</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
-    <lastmod>2023-03-16</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
     <lastmod>2023-03-16</lastmod>
   </url>
@@ -202,6 +194,14 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
+    <lastmod>2023-03-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
+    <lastmod>2023-03-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
     <lastmod>2023-03-16</lastmod>
   </url>
   <url>
