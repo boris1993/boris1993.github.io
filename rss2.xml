@@ -9,8 +9,39 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Thu, 16 Mar 2023 12:15:51 GMT</pubDate>
+    <pubDate>Tue, 21 Mar 2023 09:44:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>100 块自制短信转发器</title>
+      <link>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</link>
+      <guid>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</guid>
+      <pubDate>Tue, 21 Mar 2023 08:42:17 GMT</pubDate>
+      
+      <description>&lt;p&gt;迫于手上有张 KnowRoaming 的卡用来收短信，但是为了这玩意再照顾个手机又很烦，正好看到合宙有卖 4G 模块，还有人已经实现了短信转发功能。本着生命在于折腾的精神，果断下单了一张开始搞。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>迫于手上有张 KnowRoaming 的卡用来收短信，但是为了这玩意再照顾个手机又很烦，正好看到合宙有卖 4G 模块，还有人已经实现了短信转发功能。本着生命在于折腾的精神，果断下单了一张开始搞。</p><span id="more"></span><h2 id="成本"><a href="#成本" class="headerlink" title="成本"></a>成本</h2><ul><li>Air780E + ESP32S3 套餐 - ￥66.80</li></ul><p>因为 KnowRoaming 手机卡只能收短信，不能发短信，也没有数据流量，而 Air780e 正好不支持连接 Wi-Fi，所以需要搭配 ESP32S3。ESP32S3 用来连接 Wi-Fi，并作为主控板，通过 UART 来连接和驱动 Air780e。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4m3ffW5qZTQ2rAw_So1MVEVk2D346B4j5ceXJEslimdEqc0jUTKktdi-WQk8I2wt2Uw4GtMouYxH6Acm0ZF_Es8L55UUKaI5ii5m-JpQyurj44itfnUmj5OHdFA4sHkpDPJRKvCrH0jKVd-CPdH6DWNrH_hDAooSC0PSubkoCgneYBBEG9LXhRCR_lramsKMNR?width=1170&amp;height=582&amp;cropmode=none"></p><ul><li>16pin 排母 - ￥15</li></ul><p>合宙只给送了排针，没有排母（甚至不卖这玩意），但是直接把 ESP32S3 和 Air780e 焊死显然不合适，所以只能自己再买排母。￥15 一盒里面有 5 对，所以实际分摊下来只有￥3。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4mmrRat9tl7GSoPdysg_xRPtcUDip1EVZyGW4eI1_mTm9tc1eadnie1mrbyavrgCr6ovUaqhyyTMMftxzKNbNF25JfjF9FQZZpq8RkG4ixqhJqPjmj3vddAqdfvgND3TMI81lIyp2DI5rn5Pd0AGtBVlg6BeBAOr5v-zgP1MBPE8d4NPDw5WlgVokpDF0vRBQT?width=1170&amp;height=552&amp;cropmode=none"></p><ul><li>USB Type-C 转 Type-B 双公头转接头 - ￥9.9</li></ul><p>开发过程中可以用线凑合，但是我最后打算直插在 UPS 的 USB 口上，所以转换头必不可少。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4m3waUyNRufhUN4GQRjFhPgIa81ZFfL8CtWZPgc-bjl7eTyDGH06hKKtXyhuUnViaN3qGk-_sCZaH5m5S8e4XXfoy6BGu10ax8HvGY3o0BZwmxyz2T0Pqm7tpLE4KiIpant2cCHfoHPC9shzB1iwJf1H33gtUq-2LXHL79a0xkryIGBVnUd3oVVAtpU9vsZxxW?width=1170&amp;height=556&amp;cropmode=none"></p><ul><li>找师傅焊接的手工费 - ￥50</li></ul><p>这没啥说的，自己又没有电烙铁又没这技术，就找了个修手机的铺子，让老板帮忙焊的。老板一边焊，一边说他这含银焊锡用在这上面都浪费……</p><h2 id="焊接和组装"><a href="#焊接和组装" class="headerlink" title="焊接和组装"></a>焊接和组装</h2><p>先上个全家福～</p><p><img data-src="https://bn02pap001files.storage.live.com/y4mJTU5hH8wXN7V7EMiogIs0pIOvZLnpyfvxmVuXeFIhaz8FT-t83j4mgtEd6rdYTV2f45MluyKOHTxGMClHFjqS1RrM4M6RHIWliw8OLMStRdEABl_GJALBzHqHUZymCt5_52Q_aNbHENmOJL4gCT-myTmOHECwozUZRh9Gi_1dvJ66yvdQ_BF74MNmAC-3Wt3?width=4032&amp;height=2268&amp;cropmode=none"></p><p>焊排针和排座没啥好说的，就照着下图的样子焊就行。</p><table><thead><tr><th>ESP32S3</th><th>Air780e</th></tr></thead><tbody><tr><td><img data-src="https://bn02pap001files.storage.live.com/y4mYXZUT5Glc_-VMyJatUu4x0cC0RPhTQhVQiqn3sNu4zHQamUPVbOFsXl-9Le0Bk4lwOgtb5NVrM_9gFPDOx-YSlHXnfnwmurDNKsL2iIqrHxRjbwOyhOwtc0M8F3Q5ygpAKiXiAICLb71AAIdqS7Hm5sZjaFrNtAOqSB393fiK0UKrP2sAeBgz0PahSBQGfaC?width=4032&amp;height=2268&amp;cropmode=none"></td><td><img data-src="https://bn02pap001files.storage.live.com/y4msiuXyUXcrmuzX874xutVun7exA7KyxIQQ147xcdWw6ks26HQTI0-swoFKsFv2tkccIa7Xx6_w0GEromGRySofIboR1R299prrb2ILX9Oyoyu9fJEUdVbNVfkh0qrMkEY3Xz92133AzgX376Fyf53927O4yoDHdaM8lXV3S5QstwNVbsg0s3pMj48TxH_II_q?width=4032&amp;height=2268&amp;cropmode=none"></td></tr></tbody></table><p>另外因为 Air780e 默认不会上电自动开机，所以还要把 PWR 键上方的焊盘短接来让它通电就自动开机。（暂且借<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hlbnh1YmxvZy5jb20vMjAyMi8xMC8yOC8xOS05LXNtcy1mb3J3YXJkaW5nLWFpcjc4MGUtZXNwMzJjMy5odG1s">晨旭的博客<i class="fa fa-external-link-alt"></i></span>中的图片，因为我焊的时候忘了这茬了……）</p><p><img data-src="https://bn02pap001files.storage.live.com/y4mYJtjimcJs4eh7uL09yyrSm6GR8Flo1LNgGqttmcVejkAwzGF5EbV0UI3MWYZdEeRJNLXFhOLY4WjsedlvbDmuSunwROOIM131CqQZsi2GZ9ruuwNa3wMGCD01XIXL13MOJciWISPcILsPrVBwyjwpItHFBW8YiLzlyeaX6eSd84T1ssPtuqD9DdjOrkZLcJu?width=800&amp;height=600&amp;cropmode=none"></p><p>然后 SIM 卡芯片朝板子，缺口朝内，插进 Air780e 的 SIM 卡槽。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4m_uQGI0zNI14XFmfuxOn-Z_m9Ls69Zfg8y-sbI5LwCbde16Jlhq3nR_MZgEvFeFIYwb9N2_4HAEMMw56QF191GivhED8khOdg5VS7cDE-Wx4YTn8wanoMqgkIVKFRmHW2s3EbDOP1-1Aqu3kP5wonT3ozgitJ4fKvet1rfjBFQo_fDakXJy3UjIiNPmsdfsOw?width=4032&amp;height=2268&amp;cropmode=none"></p><p>最后按照如图的方向把排针对其插上就组装好了。一定要注意方向，毕竟有 5V 供电的针脚，插反了把 5V 怼到 GND 上会发生什么就不好说了，或许可以参考伊朗电工 Mehdi Sadaghdar 的各种作死实战。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4mbH1M2d5MBD9PhNItSZikKyo_iDZUFpj_y-Jt3r3a1aBu3Z6ASm_bfBMKbQ7runkwgIaBWjaS4j_6IKPOFn8JApd7zvmTgHA0okV3zfNQniAWe2Jwub8ZTVQaw_uJKC9Lbs57Ut4m9RdbQN7p_2Y-TZ8OA2EkogZ34BwbkxbPqQQ_DUW-VQMnntJuW1fbpvlM?width=4032&amp;height=2268&amp;cropmode=none"></p><h2 id="刷机和测试"><a href="#刷机和测试" class="headerlink" title="刷机和测试"></a>刷机和测试</h2><p>ESP32S3 接上 USB 转换头，再插到电脑上，就可以愉快的刷机了。<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My9zbXNfZm9yd2FyZGVyX2Fpcjc4MF9lc3AzMg==">代码我已经写好并发布在 GitHub 上面了<i class="fa fa-external-link-alt"></i></span>，下载下来，照着<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My9zbXNfZm9yd2FyZGVyX2Fpcjc4MF9lc3AzMi9ibG9iL21hc3Rlci9SRUFETUUubWQjJUU0JUJGJUFFJUU2JTk0JUI5JUU4JTg0JTlBJUU2JTlDJUFDJUU1JTg4JUI3JUU1JTg1JUE1ZXNwMzI="> README 里面刷机的部分<i class="fa fa-external-link-alt"></i></span>改好代码，用合宙的 <code>LuaTools</code> 刷进去，就可以了。注意板子的固件要用我的 repo 里面的，<code>LuaTools</code> 提供的固件刷进去之后可用内存不够，会发不出去 HTTP 请求。如果不会刷机，可以看看<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMU1xNHkxZTdFYi8/cD0zJnZkX3NvdXJjZT1lOTE3ZGMyYmIyZTI2MDZjYzQ5MTdkNTM1MTNhNmJlNg=="> ESP32C3 烧录教程<i class="fa fa-external-link-alt"></i></span>。</p><p>刷完机板子会自动重启，这时候可以观察板子上面指示灯的状态，或者直接在 <code>LuaTools</code> 里面看日志，来看板子的初始化状态。LED 灯各种状态的含义也可以看<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My9zbXNfZm9yd2FyZGVyX2Fpcjc4MF9lc3AzMi9ibG9iL21hc3Rlci9SRUFETUUubWQjbGVkJUU3JTgxJUFGJUU3JThBJUI2JUU2JTgwJTgxJUU1JTkwJUFCJUU0JUI5JTg5"> README 里面的解释<i class="fa fa-external-link-alt"></i></span>。</p><p>等板子初始化完成之后，就可以给这个手机号发短信了，板子收到短信后就会把发信号码和短信内容发送到配置的通知通道。开发的时候我已经测试过普通短信、长短信、中文、英文、日语，都可以正常接收。</p><p><img data-src="https://bn02pap001files.storage.live.com/y4m1pqzHDqg0DGRJxRh0OrskxVfIwscr8sx9sGA2s7zMaqpoLzhx9xpzQ6P64l7i8aQGU7SAQbm1ZyP8rskIkSqIiyCzQ8tBDlhV9uL7O4elH7UnqibJjcysWZkrs8BpSxxm9ZqZX9V9hLM2XTOz-jCflj3ACW0-lnOKx0IULv8BA32U_tuBnF7QzKvMYLsxSLm?width=1170&amp;height=2429&amp;cropmode=none"></p>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/LuatOS/">LuatOS</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E5%90%88%E5%AE%99/">合宙</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E7%9F%AD%E4%BF%A1%E8%BD%AC%E5%8F%91/">短信转发</category>
+      
+      <category domain="https://www.boris1993.com/tags/Air780E/">Air780E</category>
+      
+      <category domain="https://www.boris1993.com/tags/ESP32S3/">ESP32S3</category>
+      
+      
+      <comments>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>为了改桥接，我决定破解中兴 F450G V2 光猫</title>
@@ -570,36 +601,6 @@
       
       
       <comments>https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Java 8 的一个 SNI 的 bug</title>
-      <link>https://www.boris1993.com/java-8-sni-bug.html</link>
-      <guid>https://www.boris1993.com/java-8-sni-bug.html</guid>
-      <pubDate>Wed, 24 Nov 2021 09:17:22 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;联动&lt;a href=&quot;/tools/nginx/resolving-nginx-sni-issue.html&quot;&gt;上一篇博文&lt;/a&gt;，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 J</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p><p>简单来说，就是在 <code>Java 1.8u141</code> 之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code> 方法会破坏 SNI，而正好我们的代码里有这么一行：</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></tbody></table></figure><p>翻了下框架的代码，发现如果我不设定这个值，框架也调用这个方法来指定它默认的 hostname verifier；而如果我传个 null，那么它会抛个异常给我。所以，代码层面没有很方便的解决方案。</p><p>无奈，最后决定，先临时换了个没开启 SNI 的域名，暂时解决掉问题，然后升级 Java 到 <code>1.8u181</code>，一劳永逸。</p><hr><p>终于，我也有机会理直气壮地喊出 “这是 Java 的 bug” 了！（笑</p><p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzA4MTc5MzQvZXh0ZW5kZWQtc2VydmVyLW5hbWUtc25pLWV4dGVuc2lvbi1ub3Qtc2VudC13aXRoLWpkazEtOC0wLWJ1dC1zZW5kLXdpdGgtamRrMS03">Extended server_name (SNI Extension) not sent with jdk1.8.0 but send with jdk1.7.0<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3NlL0pESy04MDcyNDY0">Custom HostnameVerifier disables SNI support on client in Java 8<i class="fa fa-external-link-alt"></i></span></p>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/Java-8/">Java 8</category>
-      
-      <category domain="https://www.boris1993.com/tags/bug/">bug</category>
-      
-      <category domain="https://www.boris1993.com/tags/SNI/">SNI</category>
-      
-      
-      <comments>https://www.boris1993.com/java-8-sni-bug.html#disqus_thread</comments>
       
     </item>
     
