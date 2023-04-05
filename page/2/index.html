@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,7 +190,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">130</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,6 +251,124 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/disable-vercel-deployment-notification.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/disable-vercel-deployment-notification.html" class="post-title-link" itemprop="url">关闭 Vercel 的部署结果通知</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-02 23:57:51" itemprop="dateCreated datePublished" datetime="2023-02-02T23:57:51+08:00">2023-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tips/" itemprop="url" rel="index"><span itemprop="name">小技巧</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/disable-vercel-deployment-notification.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/disable-vercel-deployment-notification.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/disable-vercel-deployment-notification.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>每次 Vercel 部署之后，它都会在部署的 commit 下面发个类似这样的留言：</p>
+<blockquote>
+<p>Successfully deployed to the following URLs:</p>
+<h2 id="blog-–-x2F"><a href="#blog-–-x2F" class="headerlink" title="blog – ./"></a>blog – ./</h2><hr>
+<p>blog-boris1993.vercel.app</p>
+<p>boris1993.com</p>
+<p><a href="http://www.boris1993.com/">www.boris1993.com</a></p>
+</blockquote>
+<p>而且 GitHub 还会给我发邮件通知这个留言的内容，但是这个消息说实话没啥用，白白麻烦人而已，后来发现，在项目根目录创建一个名为 <code>vercel.json</code> 的文件，里面写上这样的配置就行：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"github"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"silent"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个配置的作用就是让 Vercel 不再往这个 repo 的 commit 下面评论部署状态。提交之后，Vercel 就会在这次部署开始遵循 <code>vercel.json</code> 的设定，不会再发送评论，自然也就不会有那封 “骚扰邮件” 了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,7 +405,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -401,7 +519,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,7 +634,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -630,7 +748,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -745,7 +863,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -859,7 +977,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -973,7 +1091,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1111,7 +1229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1225,7 +1343,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
+      <time title="修改时间：2023-04-05 22:11:43" itemprop="dateModified" datetime="2023-04-05T22:11:43+08:00">2023-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1273,120 +1391,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/rescuing-my-github-repo-from-force-push.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/understanding-ntp-protocol.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/understanding-ntp-protocol.html" class="post-title-link" itemprop="url">简单理解 NTP v3 协议</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-07 15:40:00" itemprop="dateCreated datePublished" datetime="2022-09-07T15:40:00+08:00">2022-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-05 17:20:55" itemprop="dateModified" datetime="2023-04-05T17:20:55+08:00">2023-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/understanding-ntp-protocol.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/understanding-ntp-protocol.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/understanding-ntp-protocol.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前段时间瞎折腾，给自己的黑莓 Bold 9900 写了个通过 NTP 同步时间的小工具，顺便在这里记录一下我在实现一个 NTP 客户端时对这个协议的理解。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/understanding-ntp-protocol.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

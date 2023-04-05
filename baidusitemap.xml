@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
     <lastmod>2023-04-05</lastmod>
   </url>
@@ -157,62 +125,6 @@
     <lastmod>2023-04-05</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/filter-vs-interceptor.html</loc>
     <lastmod>2023-04-05</lastmod>
   </url>
@@ -293,6 +205,10 @@
     <lastmod>2023-04-05</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/java-how-to-wait-for-threads-before-continuing.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/java-inner-class-and-private-identifier.html</loc>
     <lastmod>2023-04-05</lastmod>
   </url>
@@ -370,6 +286,94 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/brief-talk-about-mysql-collations.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/column-flags-in-mysql-workbench.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-quick-start.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
+    <lastmod>2023-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
     <lastmod>2023-04-05</lastmod>
   </url>
 </urlset> 
