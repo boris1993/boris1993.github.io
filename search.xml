@@ -4815,7 +4815,7 @@ reject_the_task --&gt; 结束
   <entry>
     <title>SwiftUI 学习记录 - 切换 TabView 的 tab 时触发震动反馈</title>
     <url>/swiftui-trigger-haptic-feedback-when-changing-tabs.html</url>
-    <content><![CDATA[<p>最近在折腾 iOS 开发的时候，想实现在切换 <code>TabView</code> 的 tab 时触发震动反馈，因为一边写一边学嘛，基础不牢，只能在网上瞎搜，试了各种方法都不奏效。直到前两天看到<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RpbWlsbGlhbi9JY2VDdWJlc0FwcC9ibG9iL21haW4vSWNlQ3ViZXNBcHAvQXBwL0ljZUN1YmVzQXBwLnN3aWZ0I0wxMzItTDE0NQ=="> Ice Cubes: for Mastodon 的这段代码<i class="fa fa-external-link-alt"></i></span>，豁然开朗。</p>
+    <content><![CDATA[<p>最近在折腾 iOS 开发的时候，想实现在切换 <code>TabView</code> 的 tab 时触发震动反馈，因为一边写一边学嘛，基础不牢，只能在网上瞎搜，试了各种方法都不奏效。直到前两天看到<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RpbWlsbGlhbi9JY2VDdWJlc0FwcC9ibG9iLzczMGU0NzE3MTgzODliNTRmMWM5MjgwNWM1NmY1YTQ3MjI1NjUwYTIvSWNlQ3ViZXNBcHAvQXBwL0ljZUN1YmVzQXBwLnN3aWZ0I0wxMzItTDE0NQ=="> Ice Cubes: for Mastodon 的这段代码<i class="fa fa-external-link-alt"></i></span>，豁然开朗。</p>
 <span id="more"></span>
 
 <p>之前写的时候，只知道给 <code>selection</code> 传一个绑定的对象，但是看完 <code>IceCubes</code> 的代码，再一看 <code>selection</code> 参数的文档，恍然大悟，这个参数要的其实是一个 <code>SelectionValue</code> 的绑定对象，所以我其实可以在这个对象的 <code>set</code> 方法上面做文章。</p>
