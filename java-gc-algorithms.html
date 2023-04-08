@@ -32,17 +32,17 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="在 JVM 运行时的数据区域中了解到了 JVM 的内存模型，那么既然使用了内存，就要考虑如何回收内存。与 C 语言不同，Java 不需要开发人员人工回收内存，而是交给 Java 的垃圾回收机制来完成。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4my7jCNvcA4gAr_kiFFyZA-0d6Qn9HWs5ah5gHJT-wQ5wR1jnKdW5isqVOZzao7QEoLJ6Yq4nIsHM2Fp-P2c9r2elecvacG7n9t1J81jFGgwNgGd9oA8heeXQgEOpzcf_w0y66drID6kwi4bC8GWcPN2iBDhT61Z9uHgueWg5ih3UwIYhgl9S4SsYMugy76GEE?width=980&amp;height=640&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mjWBvU5wXW6RBkxkJnYFq79w9oPbNxegoakCVt2EZctkaaak2yY1GfI5Ldp5fYwwsKagzlTmb38pQK0r0Wc9WyzHBVnonHUZUjqaW7SB0wAyG_M-iG-XAJDThmShbCzFZbOGyiI54VnSLBSUxpyXgntN7oBiqgwEJnws6NdhVejUj3CdO1GIAnv9dXOXcPI9h?width=1068&amp;height=694&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mjWBvU5wXW6RBkxkJnYFq79w9oPbNxegoakCVt2EZctkaaak2yY1GfI5Ldp5fYwwsKagzlTmb38pQK0r0Wc9WyzHBVnonHUZUjqaW7SB0wAyG_M-iG-XAJDThmShbCzFZbOGyiI54VnSLBSUxpyXgntN7oBiqgwEJnws6NdhVejUj3CdO1GIAnv9dXOXcPI9h?width=1068&amp;height=694&amp;cropmode=none">
+<meta property="og:image" content="https://blog-static.boris1993.com/java-gc-algorithms/reference-counter.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/java-gc-algorithms/circular-reference.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/java-gc-algorithms/circular-reference.png">
 <meta property="article:published_time" content="2019-03-28T06:29:41.000Z">
-<meta property="article:modified_time" content="2023-04-07T14:57:01.715Z">
+<meta property="article:modified_time" content="2023-04-08T12:00:14.194Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="垃圾回收">
 <meta property="article:tag" content="GC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4my7jCNvcA4gAr_kiFFyZA-0d6Qn9HWs5ah5gHJT-wQ5wR1jnKdW5isqVOZzao7QEoLJ6Yq4nIsHM2Fp-P2c9r2elecvacG7n9t1J81jFGgwNgGd9oA8heeXQgEOpzcf_w0y66drID6kwi4bC8GWcPN2iBDhT61Z9uHgueWg5ih3UwIYhgl9S4SsYMugy76GEE?width=980&amp;height=640&amp;cropmode=none">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/java-gc-algorithms/reference-counter.png">
 
 
 <link rel="canonical" href="https://www.boris1993.com/java-gc-algorithms.html">
@@ -298,7 +298,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-07 22:57:01" itemprop="dateModified" datetime="2023-04-07T22:57:01+08:00">2023-04-07</time>
+      <time title="修改时间：2023-04-08 20:00:14" itemprop="dateModified" datetime="2023-04-08T20:00:14+08:00">2023-04-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -348,9 +348,9 @@
 <h2 id="哪些内存需要回收"><a href="#哪些内存需要回收" class="headerlink" title="哪些内存需要回收"></a>哪些内存需要回收</h2><p>在 Java 中，GC 的对象是堆和方法区。栈中的栈帧随着方法的调用和退出，会自行完成压栈和出栈操作，每个栈帧所需的内存空间也是在类结构确定下来时就已知的，所以不怎么需要考虑内存的回收问题。但是堆和方法区则不一样，这部分的空间是动态分配和回收的，同时也只有在运行时才可得知要生成哪些对象以及需要多少空间。</p>
 <p>判断对象是否可以被回收通常有两种算法：<code>引用计数法</code>和<code>可达性分析法</code>。</p>
 <h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法会给每个对象添加一个引用计数器，每当有一个地方引用它时，计数器就会加一；反之，每当一个引用失效时，计数器就会减一。任何时候，如果引用计数为 0，则说明这个对象可以被回收。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4my7jCNvcA4gAr_kiFFyZA-0d6Qn9HWs5ah5gHJT-wQ5wR1jnKdW5isqVOZzao7QEoLJ6Yq4nIsHM2Fp-P2c9r2elecvacG7n9t1J81jFGgwNgGd9oA8heeXQgEOpzcf_w0y66drID6kwi4bC8GWcPN2iBDhT61Z9uHgueWg5ih3UwIYhgl9S4SsYMugy76GEE?width=980&amp;height=640&amp;cropmode=none" alt="Reference counter"></p>
+<p><img data-src="https://blog-static.boris1993.com/java-gc-algorithms/reference-counter.png" alt="Reference counter"></p>
 <p>但是，这个算法有一个问题，那就是无法处理循环引用，即这样：</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mjWBvU5wXW6RBkxkJnYFq79w9oPbNxegoakCVt2EZctkaaak2yY1GfI5Ldp5fYwwsKagzlTmb38pQK0r0Wc9WyzHBVnonHUZUjqaW7SB0wAyG_M-iG-XAJDThmShbCzFZbOGyiI54VnSLBSUxpyXgntN7oBiqgwEJnws6NdhVejUj3CdO1GIAnv9dXOXcPI9h?width=1068&amp;height=694&amp;cropmode=none" alt="Circular reference"></p>
+<p><img data-src="https://blog-static.boris1993.com/java-gc-algorithms/circular-reference.png" alt="Circular reference"></p>
 <p>此时，<code>对象1</code>，<code>对象2</code>，<code>对象3</code> 都是不可达状态，理论上这三个对象都应该被回收，但是因为它们三个形成循环引用，引用计数器不为零，导致 GC 不会回收它们的空间。所以实际上，JVM 并没有采用这种判断方法。</p>
 <h3 id="可达性分析法-根搜索算法"><a href="#可达性分析法-根搜索算法" class="headerlink" title="可达性分析法(根搜索算法)"></a>可达性分析法 (根搜索算法)</h3><p>可达性分析法的原理是，从根对象 (GC Root) 开始向下搜索，搜索走过的路径称为 “引用链”，对象与引用链可以形成一个图，当任一个对象没有到根对象的引用链，即在这个图中该对象是不可达的，那么就判定这个对象是可以被回收的。</p>
 <p>Java 语言使用如下几种 GC Root 对象：</p>
@@ -363,7 +363,7 @@
 </ol>
 </blockquote>
 <p>还是用上面这个循环引用作为示例：</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mjWBvU5wXW6RBkxkJnYFq79w9oPbNxegoakCVt2EZctkaaak2yY1GfI5Ldp5fYwwsKagzlTmb38pQK0r0Wc9WyzHBVnonHUZUjqaW7SB0wAyG_M-iG-XAJDThmShbCzFZbOGyiI54VnSLBSUxpyXgntN7oBiqgwEJnws6NdhVejUj3CdO1GIAnv9dXOXcPI9h?width=1068&amp;height=694&amp;cropmode=none" alt="Circular reference"></p>
+<p><img data-src="https://blog-static.boris1993.com/java-gc-algorithms/circular-reference.png" alt="Circular reference"></p>
 <p>此时虽然<code>对象1</code>、<code>对象2</code>、<code>对象3</code> 互相之间存在引用，但是从根对象开始无法找到到达它们的路径，即它们三个都是<code>不可达</code>的，也就是可以被回收的。</p>
 <h2 id="如何进行回收"><a href="#如何进行回收" class="headerlink" title="如何进行回收"></a>如何进行回收</h2><p>在根搜索算法的基础上，现代虚拟机中实现了三种算法：<code>标记-清除算法</code>，<code>复制算法</code>，<code>标记-整理算法</code>。</p>
 <h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记 - 清除算法</h3><p>标记 - 清除算法把垃圾回收过程分成标记和清除两个阶段。在标记阶段，通过根节点标记所有可达的对象，也就是说，未被标记的对象都是不可达的对象。然后在清除阶段回收所有未被标记的对象。详细来说的话，就是当堆中的有效内存空间被耗尽时，就会停止整个程序 (stop the world)，然后逐步开始标记和清除工作。</p>
@@ -389,7 +389,7 @@
     
     
 
-    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
 <br>
 <!-- bottom ad -->
 <div class="post-body-adsense" style="text-align: center;">
@@ -411,15 +411,15 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
         <span>比特币</span>
       </div>
 

@@ -32,17 +32,17 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="迫于找工作，不得不一边鄙视自己的智商，一边硬着头皮刷 LeetCode。既然开始刷题，那顺便做个笔记，以便日后温习。 因为顺序是乱的，所以请善用 CTRL-F。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bn02pap001files.storage.live.com/y4mo-0mHl8WwWsSHDX4V-7bYAUGZodjRGawnyJS2NygvakiR5dihCV8UzWHK5fCWseo_znk-QV23IbwhHmbYzDUV1L2RylbjtAdsI8Yc3Ab80dTy8IqmzAYV-nXAjsUHcVwD3Bk206U9ziDJ_ZJV05k9oT0rlAY4Ec3wFw2twnnfQCN3iCrbEgvjG9ENijPx7y_?width=1024&amp;height=227&amp;cropmode=none">
+<meta property="og:image" content="https://blog-static.boris1993.com/leetcode-notes/longest-common-prefix.png">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif">
 <meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/btree1.jpg">
 <meta property="article:published_time" content="2023-01-26T07:23:57.000Z">
-<meta property="article:modified_time" content="2023-04-07T14:57:01.715Z">
+<meta property="article:modified_time" content="2023-04-08T12:00:14.194Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="乐扣">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bn02pap001files.storage.live.com/y4mo-0mHl8WwWsSHDX4V-7bYAUGZodjRGawnyJS2NygvakiR5dihCV8UzWHK5fCWseo_znk-QV23IbwhHmbYzDUV1L2RylbjtAdsI8Yc3Ab80dTy8IqmzAYV-nXAjsUHcVwD3Bk206U9ziDJ_ZJV05k9oT0rlAY4Ec3wFw2twnnfQCN3iCrbEgvjG9ENijPx7y_?width=1024&amp;height=227&amp;cropmode=none">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/leetcode-notes/longest-common-prefix.png">
 
 
 <link rel="canonical" href="https://www.boris1993.com/leetcode-notes.html">
@@ -298,7 +298,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-07 22:57:01" itemprop="dateModified" datetime="2023-04-07T22:57:01+08:00">2023-04-07</time>
+      <time title="修改时间：2023-04-08 20:00:14" itemprop="dateModified" datetime="2023-04-08T20:00:14+08:00">2023-04-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,7 +386,7 @@
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">longestCommonPrefix</span><span class="params">(String[] strs)</span> {</span><br><span class="line">        <span class="keyword">if</span> (strs.length == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拿第一个字符串当模版，匹配剩下几个字符串</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">commonPrefix</span> <span class="operator">=</span> strs[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; strs.length; i++) {</span><br><span class="line">            <span class="comment">// 如果commonPrefix在strs[i]的下标不是0</span></span><br><span class="line">            <span class="comment">// 那么就去掉commonPrefix的最后一个字母，直到下标为0</span></span><br><span class="line">            <span class="comment">// 如果没有common prefix，那么commonPrefix会被砍成空字符串</span></span><br><span class="line">            <span class="keyword">while</span> (strs[i].indexOf(commonPrefix) != <span class="number">0</span>) {</span><br><span class="line">                commonPrefix = commonPrefix.substring(<span class="number">0</span>, commonPrefix.length() - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> commonPrefix;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>计算过程：（语言描述太费劲，直接拿 Replit 放示意图算了）</p>
-<p><img data-src="https://bn02pap001files.storage.live.com/y4mo-0mHl8WwWsSHDX4V-7bYAUGZodjRGawnyJS2NygvakiR5dihCV8UzWHK5fCWseo_znk-QV23IbwhHmbYzDUV1L2RylbjtAdsI8Yc3Ab80dTy8IqmzAYV-nXAjsUHcVwD3Bk206U9ziDJ_ZJV05k9oT0rlAY4Ec3wFw2twnnfQCN3iCrbEgvjG9ENijPx7y_?width=1024&amp;height=227&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/leetcode-notes/longest-common-prefix.png"></p>
 <h2 id="49-Group-Anagrams"><a href="#49-Group-Anagrams" class="headerlink" title="49. Group Anagrams"></a><span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS5jb20vcHJvYmxlbXMvZ3JvdXAtYW5hZ3JhbXMv">49. Group Anagrams<i class="fa fa-external-link-alt"></i></span></h2><blockquote>
 <p>Example:</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: strs = ["eat","tea","tan","ate","nat","bat"]</span><br><span class="line">Output: [["bat"],["nat","tan"],["ate","eat","tea"]]</span><br></pre></td></tr></tbody></table></figure>
@@ -565,7 +565,7 @@
     
     
 
-    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
 <br>
 <!-- bottom ad -->
 <div class="post-body-adsense" style="text-align: center;">
@@ -587,15 +587,15 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
         <span>比特币</span>
       </div>
 

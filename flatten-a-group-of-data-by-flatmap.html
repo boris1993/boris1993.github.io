@@ -32,20 +32,20 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过 Java 8 中的 FlatMap 简化这个操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mjnzXMe1Hu9kKDyoZs0-ya9vhkBEDyyQJEGJU7CgruMkLCfF9n2bF6C8TOK3mnocFtfEE-ERhzcraLje7tCW5sX8RMtrhn89r0IhEYIGtdSPxbtjTt9Kx3P-1IlJpn6Yw8Pew9nJii9vsltsOYzpWvquyRfnYjk11-HsVTM_2Yy7WLbJRj4lNABpnXFy964kN?width=1664&amp;height=952&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4m5-CuCOjIWhXmUC0GxcY1XldTIXeaBIugbnQ5LJLQyRdoaDws_wmNbdwRWDi6AejuIqgzD8yymiLDowp2n2njKBAH84HVQlHU7WVvNPzBz5NTIMXnOFt99-pk0e65Kwaf-Zgv9Xhe9lehJ7GMlvhP4LwNbcywk8BKGW8RE6g33rCi6ZbJ1sIlwohxoKewvRp0?width=1664&amp;height=952&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mGO9WRWONjJoWdUvXH-EjuJ26XAQww6Tr34xEwhSnwAYC79zbbyXCsnHsd6rSYLOm-VV9co-U1mNlXuCvY44KPmdyD7C8UHqNC9MShJhxtRIa6eMBeD0D1CsCwdEeKsSj8RPS520WxV21lTs2epW0OtI_YeMML_UBMTi2fbOUkf4TkUdkH7D_Wv7LhDF6Ry3C?width=1664&amp;height=952&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4m9bvFB01BkSl8FTtb7lzJYyO87lZ6MsMk15vL-vvrJZLUngSAyzjrSxNHwY5wBgF1SqeBsCxM23Mf5vGTH97Cm4w4X7EA7lbUOKTcs_FOxNTCSNB9F7Unt2s6hFpiXvuQCznsdK5qF0_6VERdLdTyN__tIT-nG8xyTwwSp4ZTZzlMqt3o1ExO0yWMnw6faxGB?width=1664&amp;height=952&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mVN-jVFTrSBuQNlzzQK5J0f0eby3DRf1fe2VmZ-K0ObR2rVqFLclifQEhLt6QEVA2Sxly-Ywkpu7lnarsZsbG4-czqsos7XTIgXCbMohbfXKSmcDU7ub_XC-v4c3gdKoo7e9Xu7AdGxhGtkdq1psUu7Dg_YEgmoI6CZY8vqe4mKjmB89UatioC2GIs1ETcGVV?width=1664&amp;height=952&amp;cropmode=none">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/0-split.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/1-flatmap.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/2-trim.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/3-distinct.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/4-sort.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/5-collect.png">
 <meta property="article:published_time" content="2019-09-26T08:30:56.000Z">
-<meta property="article:modified_time" content="2023-04-07T14:57:01.715Z">
+<meta property="article:modified_time" content="2023-04-08T12:00:14.194Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="代码技巧">
 <meta property="article:tag" content="FlatMap">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/0-split.png">
 
 
 <link rel="canonical" href="https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html">
@@ -301,7 +301,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-07 22:57:01" itemprop="dateModified" datetime="2023-04-07T22:57:01+08:00">2023-04-07</time>
+      <time title="修改时间：2023-04-08 20:00:14" itemprop="dateModified" datetime="2023-04-08T20:00:14+08:00">2023-04-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -400,16 +400,16 @@
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; units = workSchedules.stream()</span><br><span class="line">        <span class="comment">// 根据逗号，将班组名拆分成 String[]</span></span><br><span class="line">        <span class="comment">// 这一步将生成8个新的 String[] 对象</span></span><br><span class="line">        .map(i -&gt; i.getUnits().split(<span class="string">","</span>))</span><br><span class="line">        <span class="comment">// 从上面的 String[] 生成一个新的</span></span><br><span class="line">        .flatMap(Arrays::stream)</span><br><span class="line">        <span class="comment">// 切掉每个元素两端的空格</span></span><br><span class="line">        .map(String::trim)</span><br><span class="line">        <span class="comment">// 去重</span></span><br><span class="line">        .distinct()</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        .sorted()</span><br><span class="line">        <span class="comment">// 收集到一个List中</span></span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢 <code>Intellij IDEA</code> 提供了这个强大的功能)</p>
-<p>首先，在 <code>map</code> 方法中，<code>List</code> 的每个元素都会根据逗号分隔，并生成一个 <code>String[]</code>对象。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mfLgU9Evq7ljCzPHXpnPUCmLyJ0EeFKZOrge71o2QjbFMf6ayeBN6wEgQOWfgntfVsQTMT6w0uwnhJDROh2b7GO_OZ557oSWQBcLIaABF4s2v-dYl9nPTM5fRD9kVdv_xNRW6ejzZ2vOG4RpdQSzV_qWZ6a4mR86oCjgOJF6hTgFqVyI1InWC-Nun9jSaqkf9?width=1664&amp;height=952&amp;cropmode=none" alt="Split"></p>
+<p>首先，在 <code>map</code> 方法中，<code>List</code> 的每个元素都会根据逗号分隔，并生成一个 <code>String[]</code> 对象。</p>
+<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
 <p><code>flatmap</code> 方法会将上面 <code>map</code> 方法返回的各个流 “拼接” 成为一个流，即 “展平”。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mjnzXMe1Hu9kKDyoZs0-ya9vhkBEDyyQJEGJU7CgruMkLCfF9n2bF6C8TOK3mnocFtfEE-ERhzcraLje7tCW5sX8RMtrhn89r0IhEYIGtdSPxbtjTt9Kx3P-1IlJpn6Yw8Pew9nJii9vsltsOYzpWvquyRfnYjk11-HsVTM_2Yy7WLbJRj4lNABpnXFy964kN?width=1664&amp;height=952&amp;cropmode=none" alt="FlatMap"></p>
+<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
 <p>接下来继续使用 <code>map</code> 方法，对流中的每个元素进行 <code>trim</code> 操作。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4m5-CuCOjIWhXmUC0GxcY1XldTIXeaBIugbnQ5LJLQyRdoaDws_wmNbdwRWDi6AejuIqgzD8yymiLDowp2n2njKBAH84HVQlHU7WVvNPzBz5NTIMXnOFt99-pk0e65Kwaf-Zgv9Xhe9lehJ7GMlvhP4LwNbcywk8BKGW8RE6g33rCi6ZbJ1sIlwohxoKewvRp0?width=1664&amp;height=952&amp;cropmode=none" alt="Trim"></p>
+<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
 <p>然后调用 <code>distinct</code> 和 <code>sorted</code> 方法实现去重和排序。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mGO9WRWONjJoWdUvXH-EjuJ26XAQww6Tr34xEwhSnwAYC79zbbyXCsnHsd6rSYLOm-VV9co-U1mNlXuCvY44KPmdyD7C8UHqNC9MShJhxtRIa6eMBeD0D1CsCwdEeKsSj8RPS520WxV21lTs2epW0OtI_YeMML_UBMTi2fbOUkf4TkUdkH7D_Wv7LhDF6Ry3C?width=1664&amp;height=952&amp;cropmode=none" alt="Distinct"><br><img data-src="https://sat02pap001files.storage.live.com/y4m9bvFB01BkSl8FTtb7lzJYyO87lZ6MsMk15vL-vvrJZLUngSAyzjrSxNHwY5wBgF1SqeBsCxM23Mf5vGTH97Cm4w4X7EA7lbUOKTcs_FOxNTCSNB9F7Unt2s6hFpiXvuQCznsdK5qF0_6VERdLdTyN__tIT-nG8xyTwwSp4ZTZzlMqt3o1ExO0yWMnw6faxGB?width=1664&amp;height=952&amp;cropmode=none" alt="Sort"></p>
+<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
 <p>最后，使用 <code>collect</code> 方法，将流中的数据 “收集” 到一个 <code>List</code> 中。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mVN-jVFTrSBuQNlzzQK5J0f0eby3DRf1fe2VmZ-K0ObR2rVqFLclifQEhLt6QEVA2Sxly-Ywkpu7lnarsZsbG4-czqsos7XTIgXCbMohbfXKSmcDU7ub_XC-v4c3gdKoo7e9Xu7AdGxhGtkdq1psUu7Dg_YEgmoI6CZY8vqe4mKjmB89UatioC2GIs1ETcGVV?width=1664&amp;height=952&amp;cropmode=none" alt="Collect"></p>
+<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
 
     </div>
 
@@ -417,7 +417,7 @@
     
     
 
-    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
 <br>
 <!-- bottom ad -->
 <div class="post-body-adsense" style="text-align: center;">
@@ -439,15 +439,15 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
         <span>比特币</span>
       </div>
 

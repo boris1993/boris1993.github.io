@@ -32,13 +32,13 @@
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mxJygAC6Sf_ZWFDW3UiiiskgVx8HPV3QiysgnQssDo1l1_XTHo2BtHl_RKywA_UXTQ0GIFQBfovfRfXxkB1goh5G_cFGOA_rCNT4IcuzOquY_W-YgXGg_HIr5YHiK9y8E-BtowMJX6nYI64PnziVU7NQJMHvbCNb6VM2T1l_lLazjTnUYsM0rKXmyBj1t8B02?width=6794&amp;height=4674&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mn-qliUcavLgr7DxNbuFPvtqBbJX7b69vg4pWQZABjx2BobJrAaeHnqaB1KgQh2U6Ao7cdlAc6PPXiccAS6nXt4JesKlRsiwDm_Lsh8-8esUD-wJ0P-31TyEuyyK7pXApOwBSRIm4AMPUrLz0GAJE5F9tGaeST3qgP2C-H1QBsiYprq2ngXsocdFsPsXY6zjK?width=722&amp;height=574&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4mDsMbIzsWb7WKzxkchzQLwbYWG8xi3VMfczRAZxw5h9NuVJ6b2mz-HQoM_oZxaEmkLpvHBkw9yggccgQgb52LfIoIn6k5XcyALA37xWoduHO_FwPoTqyAFJ31IEAADm5jMSj7vmFjc0ngh6_-01nx-rRH6FXhBrAeMqXa3YJppU57qcs5J2aB-1JHiShWm74k?width=2880&amp;height=1380&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4muIwoFgIgoYzIi8VyX1n_y-0n2Jm7JT3Sr_bPU_Km8-RAcJf6YGCnkyh9P8OSgxMEOEoTERVWZUh7nZJhgMBNsg9DWCjTr8o6s_81J7OZzb6X1YkQMhq88oqJZ5BCGOcqhRJWuevar6MIBQvPO8hA7ZS06AwJ1W9Sx5qmC8p2OfGJhjiYq2XDOgs5nOk_6y1v?width=1294&amp;height=456&amp;cropmode=none">
-<meta property="og:image" content="https://sat02pap001files.storage.live.com/y4m_Ae_E3bg9Wo3Sh_b1HC-nzLtWeyDQEAdMIndc0yRc0qdvvLxN3zHZzz7MyFqECdg0q10qZ5SkfV8DDntimVjjYVs07TJEt-a39cD7jqn--8sWrLBrYQoSnnSslRrznSegrjjMLnDBYlruYeOzH4UdLgEAdKKtcLYToVL5NrIlvSeKovm7kfBovubvh6jBHPk?width=1394&amp;height=303&amp;cropmode=none">
+<meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/mesh-vpn-with-wireguard.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-admin-portal.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-tailnet.png">
+<meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-magic-dns.png">
 <meta property="article:published_time" content="2022-10-24T02:16:39.000Z">
-<meta property="article:modified_time" content="2023-04-07T14:57:01.719Z">
+<meta property="article:modified_time" content="2023-04-08T12:00:14.198Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Tailscale">
 <meta property="article:tag" content="内网穿透">
@@ -46,7 +46,7 @@
 <meta property="article:tag" content="Virtual LAN">
 <meta property="article:tag" content="虚拟局域网">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sat02pap001files.storage.live.com/y4mxJygAC6Sf_ZWFDW3UiiiskgVx8HPV3QiysgnQssDo1l1_XTHo2BtHl_RKywA_UXTQ0GIFQBfovfRfXxkB1goh5G_cFGOA_rCNT4IcuzOquY_W-YgXGg_HIr5YHiK9y8E-BtowMJX6nYI64PnziVU7NQJMHvbCNb6VM2T1l_lLazjTnUYsM0rKXmyBj1t8B02?width=6794&amp;height=4674&amp;cropmode=none">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png">
 
 
 <link rel="canonical" href="https://www.boris1993.com/setting-up-tailscale.html">
@@ -302,7 +302,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-07 22:57:01" itemprop="dateModified" datetime="2023-04-07T22:57:01+08:00">2023-04-07</time>
+      <time title="修改时间：2023-04-08 20:00:14" itemprop="dateModified" datetime="2023-04-08T20:00:14+08:00">2023-04-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,21 +351,21 @@
 
 <h2 id="什么是Tailscale"><a href="#什么是Tailscale" class="headerlink" title="什么是Tailscale"></a>什么是 Tailscale</h2><p>说起 Tailscale，就不得不提到最近很火的 Mesh VPN 这个概念。</p>
 <p>经典的 VPN 是作为一个网关，让外网用户通过它来访问内网。比如传统的 L2TP VPN：</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mxJygAC6Sf_ZWFDW3UiiiskgVx8HPV3QiysgnQssDo1l1_XTHo2BtHl_RKywA_UXTQ0GIFQBfovfRfXxkB1goh5G_cFGOA_rCNT4IcuzOquY_W-YgXGg_HIr5YHiK9y8E-BtowMJX6nYI64PnziVU7NQJMHvbCNb6VM2T1l_lLazjTnUYsM0rKXmyBj1t8B02?width=6794&amp;height=4674&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png"></p>
 <p>但是 Mesh VPN 提出了一种全新的拓扑结构，这种结构中每个节点之间都相互连接，不再存在中心的 VPN 服务器。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mn-qliUcavLgr7DxNbuFPvtqBbJX7b69vg4pWQZABjx2BobJrAaeHnqaB1KgQh2U6Ao7cdlAc6PPXiccAS6nXt4JesKlRsiwDm_Lsh8-8esUD-wJ0P-31TyEuyyK7pXApOwBSRIm4AMPUrLz0GAJE5F9tGaeST3qgP2C-H1QBsiYprq2ngXsocdFsPsXY6zjK?width=722&amp;height=574&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/mesh-vpn-with-wireguard.png"></p>
 <p>上图提到的 <code>Wireguard</code> 就是一个 Mesh VPN 的实现，但是 <code>Wireguard</code> 配置比较繁琐，维护成本也比较高，所以 <code>Tailscale</code> 在基于 <code>Wireguard</code> 的基础上做了一些优化，比如用于 NAT 穿透的 <code>DERP</code> 协议、建立了公网 coordinator 服务器用于下发配置，以及集成了第三方 SSO 用于认证和权限管理。</p>
 <h2 id="如何安装和使用Tailscale"><a href="#如何安装和使用Tailscale" class="headerlink" title="如何安装和使用Tailscale"></a>如何安装和使用 Tailscale</h2><p>安装 Tailscale 很简单（除了国内群晖），跟着官网的<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwMTcvaW5zdGFsbC8="> Quickstart<i class="fa fa-external-link-alt"></i></span>走就行了。简单来说就是先在官网注册账号，然后在电脑上安装 Tailscale 并使用相同账号登陆，然后这些机器就处于同一个虚拟局域网上了。</p>
 <p>登陆的时候注意，千万不要用 GitHub 或者 Google 认证，原因我不用说，你懂的。就算电脑上你有办法，手机上也会很闹心。</p>
 <p>在机器成功加入 Tailscale 虚拟局域网后，就可以在 Tailscale 控制面板里面看到这些机器的 IP 地址了。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4mDsMbIzsWb7WKzxkchzQLwbYWG8xi3VMfczRAZxw5h9NuVJ6b2mz-HQoM_oZxaEmkLpvHBkw9yggccgQgb52LfIoIn6k5XcyALA37xWoduHO_FwPoTqyAFJ31IEAADm5jMSj7vmFjc0ngh6_-01nx-rRH6FXhBrAeMqXa3YJppU57qcs5J2aB-1JHiShWm74k?width=2880&amp;height=1380&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-admin-portal.png"></p>
 <p>这时候，就可以直接使用这些 IP 地址访问到对应的机器了。</p>
 <h3 id="国内群晖安装Tailscale"><a href="#国内群晖安装Tailscale" class="headerlink" title="国内群晖安装Tailscale"></a>国内群晖安装 Tailscale</h3><p>因为国内群晖的套件商店下架了所有 VPN 相关的套件，所以只能到官网的<span class="exturl" data-url="aHR0cHM6Ly9wa2dzLnRhaWxzY2FsZS5jb20vc3RhYmxlLyNzcGtz"> Tailscale Packages - stable track<i class="fa fa-external-link-alt"></i></span>手动下载对应 DSM 版本的 spk，然后到套件中心手动安装。安装成功后就可以在主菜单中看到 Tailscale 的图标，点击启动并在新页面中使用相同账号登陆，然后就能用了。</p>
 <h2 id="Tailnet和Magic-DNS"><a href="#Tailnet和Magic-DNS" class="headerlink" title="Tailnet和Magic DNS"></a>Tailnet 和 Magic DNS</h2><p>当然 Tailscale 并不仅支持通过 IP 地址访问机器，还可以通过域名访问。这里请放心，Tailnet 的域名解析是通过你本机的 Tailnet 客户端解析的。</p>
 <p>要启用这个功能，首先你需要选择一个 Tailnet 域名。Tailscale 会给你一系列域名让你选，选好之后就会在控制面板的 DNS 页面出现。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4muIwoFgIgoYzIi8VyX1n_y-0n2Jm7JT3Sr_bPU_Km8-RAcJf6YGCnkyh9P8OSgxMEOEoTERVWZUh7nZJhgMBNsg9DWCjTr8o6s_81J7OZzb6X1YkQMhq88oqJZ5BCGOcqhRJWuevar6MIBQvPO8hA7ZS06AwJ1W9Sx5qmC8p2OfGJhjiYq2XDOgs5nOk_6y1v?width=1294&amp;height=456&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-tailnet.png"></p>
 <p>然后，在 <code>Magic DNS</code> 栏目下面点 <code>Enable Magic DNS</code> 就可以了。</p>
-<p><img data-src="https://sat02pap001files.storage.live.com/y4m_Ae_E3bg9Wo3Sh_b1HC-nzLtWeyDQEAdMIndc0yRc0qdvvLxN3zHZzz7MyFqECdg0q10qZ5SkfV8DDntimVjjYVs07TJEt-a39cD7jqn--8sWrLBrYQoSnnSslRrznSegrjjMLnDBYlruYeOzH4UdLgEAdKKtcLYToVL5NrIlvSeKovm7kfBovubvh6jBHPk?width=1394&amp;height=303&amp;cropmode=none"></p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-magic-dns.png"></p>
 <p>在这之后，就可以直接用控制面板中的设备名，或者<code>设备名.Tailnet域名</code>的方式访问你的设备了。比如我要 SSH 到 <code>ds218plus</code> 这台机器上，我就可以 <code>ssh ds218plus</code> 或 <code>ssh ds218plus.tailnet-a8cf.ts.net</code>。</p>
 <h2 id="访问内网机器很慢"><a href="#访问内网机器很慢" class="headerlink" title="访问内网机器很慢"></a>访问内网机器很慢</h2><p>在我试用了几天之后，我发现了一个问题，如果节点双方都有 IPv6 的话，互联速度很快，但是如果节点一方没有 IPv6 的话，速度就出奇的慢。遂用 <code>tailscale status</code> 命令看了下连接情况，不出意外，看到了这样的返回：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; relay "sfo", tx 1778904 rx 63968652</span><br></pre></td></tr></tbody></table></figure>
@@ -388,7 +388,7 @@
     
     
 
-    <footer class="post-footer"><img src="https://sat02pap001files.storage.live.com/y4m9xNVYyq5hftWQNLViI8W6lejS3lrae9GsitNSk4WvcblzYGttzSx9xmX-rmB4Y268bR88bq8L83pgvputgP2ymRR7W23v_4eGvoTKB4HldW92ZUIJ64Rcr2gLljZDtLgjY94y7o8ck_ZBP8aR4xH6XX8KZcExXcs8qMu24MijGtDzBbgnY5le8Mcx_QSjX-3?width=2368&height=624&cropmode=none" />
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
 <br>
 <!-- bottom ad -->
 <div class="post-body-adsense" style="text-align: center;">
@@ -410,15 +410,15 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mRChq9zMZbQZK0gVO19Smbyt74YG1QWTI9RAgewZpJKn6BOEg0GK-_AgR9LwdjDSJriEgnz05YSc9fYUiH09i-PKnb40lZI0AqbvtcyXJvqVSdiWbGpeqPFmIktJb2t-bjIXqrupCzZxXWPXmrrFXXdFzgSWstjebkOujhr-ByhKWoLvgn3GHu2WpnGzbKgXs?width=602&height=599&cropmode=none" alt="Boris Zhao 微信">
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4mQubRjj6HwFcaRN5WA43bM81G13d2xI-3OAoLSsXXDxJQZ_inF6qA_OFDB51Pg3yfjXu8CSyioCTUI3StB_Dltd7vmBWNHRT0Ok8zMd9Rf_WU42mgDY-pJW_yCrJ0KEUsd32yi5xqB1wjR4lv8jzMboKmpphgwoeOpPR5xgnfhNbfU8ozvDcfnnEiCpvZ6rLk?width=548&height=542&cropmode=none" alt="Boris Zhao 支付宝">
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
         <span>支付宝</span>
       </div>
       <div>
-        <img src="https://sat02pap001files.storage.live.com/y4m7ll7ouERuCbkCXI1x-PQJMYTzonfgpFoEL7Odz8HwPC-O2DngJrulJd23PzD6dJnucGf1zC6zGp4PFyVZjJecRWVT69c06Y4OPdjpEh5Z3E6qkRNg1ZMuP9bxQ3R_YKt2HtjzG_BD3_a9gUkRwHm-zmNH1gxJxnSbysa_qbS8xoiFenQioB4RcU-tMZn71z8?width=1044&height=1098&cropmode=none" alt="Boris Zhao 比特币">
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
         <span>比特币</span>
       </div>
 
