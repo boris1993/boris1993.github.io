@@ -3749,6 +3749,35 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>MySQL 的最左匹配原则</title>
+    <url>/mysql-leftmost-prefix.html</url>
+    <content><![CDATA[<p>依旧是面试查漏补缺。这次是 MySQL 的最左匹配原则。</p>
+<p>废话不多说，直接看<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vOC4wL2VuL211bHRpcGxlLWNvbHVtbi1pbmRleGVzLmh0bWw="> MySQL 官方文档<i class="fa fa-external-link-alt"></i></span>给出的例子。</p>
+<p>有这么一个表：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    id         <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    last_name  <span class="type">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    first_name <span class="type">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (id),</span><br><span class="line">    INDEX name (last_name, first_name)</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以看出，表里面有一个联合索引 <code>(last_name, first_name)</code>。那么，查询的时候，这些语句就可以成功走索引：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> (first_name <span class="operator">=</span> <span class="string">'John'</span> <span class="keyword">OR</span> first_name <span class="operator">=</span> <span class="string">'Jane'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> first_name <span class="operator">&gt;=</span> <span class="string">'M'</span> <span class="keyword">AND</span> first_name <span class="operator">&lt;</span> <span class="string">'N'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>而这些查询就无法使用这个索引：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">OR</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>也就是说，上面例子中的 <code>last_name</code> 列就是索引的最左前缀，如果要在查询中使用这个索引，那么条件中必须包含 <code>last_name</code>，或者同时包含 <code>last_name</code> 和 <code>first_name</code>。</p>
+<blockquote>
+<p>MySQL can use multiple-column indexes for queries that test all the columns in the index, or queries that test just the first column, the first two columns, the first three columns, and so on. If you specify the columns in the right order in the index definition, a single composite index can speed up several kinds of queries on the same table.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>学知识</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>面试</tag>
+        <tag>最左匹配原则</tag>
+        <tag>leftmost prefix</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通过 Hexo 博客完成 NIP-05 验证</title>
     <url>/nostr-nip-05-with-hexo.html</url>
     <content><![CDATA[<h2 id="让Hexo在生成时包含-well-known目录"><a href="#让Hexo在生成时包含-well-known目录" class="headerlink" title="让Hexo在生成时包含.well-known目录"></a>让 Hexo 在生成时包含<code>.well-known</code> 目录</h2><p>编辑 <code>config.yml</code>，添加如下配置：</p>

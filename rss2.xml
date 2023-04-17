@@ -9,8 +9,41 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Sat, 15 Apr 2023 16:50:28 GMT</pubDate>
+    <pubDate>Mon, 17 Apr 2023 04:34:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MySQL 的最左匹配原则</title>
+      <link>https://www.boris1993.com/mysql-leftmost-prefix.html</link>
+      <guid>https://www.boris1993.com/mysql-leftmost-prefix.html</guid>
+      <pubDate>Mon, 17 Apr 2023 04:17:55 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;依旧是面试查漏补缺。这次是 MySQL 的最左匹配原则。&lt;/p&gt;
+&lt;p&gt;废话不多说，直接看&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vOC4wL2VuL211bHRpc</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>依旧是面试查漏补缺。这次是 MySQL 的最左匹配原则。</p><p>废话不多说，直接看<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vOC4wL2VuL211bHRpcGxlLWNvbHVtbi1pbmRleGVzLmh0bWw="> MySQL 官方文档<i class="fa fa-external-link-alt"></i></span>给出的例子。</p><p>有这么一个表：</p><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    id         <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    last_name  <span class="type">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    first_name <span class="type">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (id),</span><br><span class="line">    INDEX name (last_name, first_name)</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure><p>可以看出，表里面有一个联合索引 <code>(last_name, first_name)</code>。那么，查询的时候，这些语句就可以成功走索引：</p><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> (first_name <span class="operator">=</span> <span class="string">'John'</span> <span class="keyword">OR</span> first_name <span class="operator">=</span> <span class="string">'Jane'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">AND</span> first_name <span class="operator">&gt;=</span> <span class="string">'M'</span> <span class="keyword">AND</span> first_name <span class="operator">&lt;</span> <span class="string">'N'</span>;</span><br></pre></td></tr></tbody></table></figure><p>而这些查询就无法使用这个索引：</p><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> test <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">'Doe'</span> <span class="keyword">OR</span> first_name <span class="operator">=</span> <span class="string">'John'</span>;</span><br></pre></td></tr></tbody></table></figure><p>也就是说，上面例子中的 <code>last_name</code> 列就是索引的最左前缀，如果要在查询中使用这个索引，那么条件中必须包含 <code>last_name</code>，或者同时包含 <code>last_name</code> 和 <code>first_name</code>。</p><blockquote><p>MySQL can use multiple-column indexes for queries that test all the columns in the index, or queries that test just the first column, the first two columns, the first three columns, and so on. If you specify the columns in the right order in the index definition, a single composite index can speed up several kinds of queries on the same table.</p></blockquote>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/MySQL/">MySQL</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/">最左匹配原则</category>
+      
+      <category domain="https://www.boris1993.com/tags/leftmost-prefix/">leftmost prefix</category>
+      
+      
+      <comments>https://www.boris1993.com/mysql-leftmost-prefix.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>快速理解 Java 中的守护线程</title>
@@ -575,37 +608,6 @@
       
       
       <comments>https://www.boris1993.com/filter-vs-interceptor.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>使用 Tailscale 部署虚拟局域网</title>
-      <link>https://www.boris1993.com/setting-up-tailscale.html</link>
-      <guid>https://www.boris1993.com/setting-up-tailscale.html</guid>
-      <pubDate>Mon, 24 Oct 2022 02:16:39 GMT</pubDate>
-      
-      <description>&lt;p&gt;最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。&lt;/p&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<p>最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。</p><span id="more"></span><h2 id="什么是Tailscale"><a href="#什么是Tailscale" class="headerlink" title="什么是Tailscale"></a>什么是 Tailscale</h2><p>说起 Tailscale，就不得不提到最近很火的 Mesh VPN 这个概念。</p><p>经典的 VPN 是作为一个网关，让外网用户通过它来访问内网。比如传统的 L2TP VPN：</p><p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png"></p><p>但是 Mesh VPN 提出了一种全新的拓扑结构，这种结构中每个节点之间都相互连接，不再存在中心的 VPN 服务器。</p><p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/mesh-vpn-with-wireguard.png"></p><p>上图提到的 <code>Wireguard</code> 就是一个 Mesh VPN 的实现，但是 <code>Wireguard</code> 配置比较繁琐，维护成本也比较高，所以 <code>Tailscale</code> 在基于 <code>Wireguard</code> 的基础上做了一些优化，比如用于 NAT 穿透的 <code>DERP</code> 协议、建立了公网 coordinator 服务器用于下发配置，以及集成了第三方 SSO 用于认证和权限管理。</p><h2 id="如何安装和使用Tailscale"><a href="#如何安装和使用Tailscale" class="headerlink" title="如何安装和使用Tailscale"></a>如何安装和使用 Tailscale</h2><p>安装 Tailscale 很简单（除了国内群晖），跟着官网的<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwMTcvaW5zdGFsbC8="> Quickstart<i class="fa fa-external-link-alt"></i></span>走就行了。简单来说就是先在官网注册账号，然后在电脑上安装 Tailscale 并使用相同账号登陆，然后这些机器就处于同一个虚拟局域网上了。</p><p>登陆的时候注意，千万不要用 GitHub 或者 Google 认证，原因我不用说，你懂的。就算电脑上你有办法，手机上也会很闹心。</p><p>在机器成功加入 Tailscale 虚拟局域网后，就可以在 Tailscale 控制面板里面看到这些机器的 IP 地址了。</p><p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-admin-portal.png"></p><p>这时候，就可以直接使用这些 IP 地址访问到对应的机器了。</p><h3 id="国内群晖安装Tailscale"><a href="#国内群晖安装Tailscale" class="headerlink" title="国内群晖安装Tailscale"></a>国内群晖安装 Tailscale</h3><p>因为国内群晖的套件商店下架了所有 VPN 相关的套件，所以只能到官网的<span class="exturl" data-url="aHR0cHM6Ly9wa2dzLnRhaWxzY2FsZS5jb20vc3RhYmxlLyNzcGtz"> Tailscale Packages - stable track<i class="fa fa-external-link-alt"></i></span>手动下载对应 DSM 版本的 spk，然后到套件中心手动安装。安装成功后就可以在主菜单中看到 Tailscale 的图标，点击启动并在新页面中使用相同账号登陆，然后就能用了。</p><h2 id="Tailnet和Magic-DNS"><a href="#Tailnet和Magic-DNS" class="headerlink" title="Tailnet和Magic DNS"></a>Tailnet 和 Magic DNS</h2><p>当然 Tailscale 并不仅支持通过 IP 地址访问机器，还可以通过域名访问。这里请放心，Tailnet 的域名解析是通过你本机的 Tailnet 客户端解析的。</p><p>要启用这个功能，首先你需要选择一个 Tailnet 域名。Tailscale 会给你一系列域名让你选，选好之后就会在控制面板的 DNS 页面出现。</p><p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-tailnet.png"></p><p>然后，在 <code>Magic DNS</code> 栏目下面点 <code>Enable Magic DNS</code> 就可以了。</p><p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-magic-dns.png"></p><p>在这之后，就可以直接用控制面板中的设备名，或者<code>设备名.Tailnet域名</code>的方式访问你的设备了。比如我要 SSH 到 <code>ds218plus</code> 这台机器上，我就可以 <code>ssh ds218plus</code> 或 <code>ssh ds218plus.tailnet-a8cf.ts.net</code>。</p><h2 id="访问内网机器很慢"><a href="#访问内网机器很慢" class="headerlink" title="访问内网机器很慢"></a>访问内网机器很慢</h2><p>在我试用了几天之后，我发现了一个问题，如果节点双方都有 IPv6 的话，互联速度很快，但是如果节点一方没有 IPv6 的话，速度就出奇的慢。遂用 <code>tailscale status</code> 命令看了下连接情况，不出意外，看到了这样的返回：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; relay "sfo", tx 1778904 rx 63968652</span><br></pre></td></tr></tbody></table></figure><p>划重点，<code>relay "sfo"</code>，这说明我连接到 <code>ds218plus</code> 的通信，是经过位于旧金山的 <code>DERP</code> 服务器中转的，所以会慢。</p><p>虽然在<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwODIvZmlyZXdhbGwtcG9ydHMv"> What firewall ports should I open to use Tailscale?<i class="fa fa-external-link-alt"></i></span>里面说，</p><blockquote><p>Nearly all of the time, you don’t need to open any firewall ports for Tailscale. Tailscale uses various NAT traversal techniques to safely connect to other Tailscale nodes without manual intervention—it “just works.”</p></blockquote><p>也没错，它确实 work，但是我真的没法说它 work 的 well。好在，文章下面提到，除了 <code>443/tcp</code> 之外，Tailscale 还用到 <code>41641/udp</code> 来让 Wireguard 节点互联，以及 <code>3478/udp</code> 用于 STUN 协议。</p><p>在我的这个使用场景中，<code>ds218plus</code> 作为服务器，那么我就在 <code>ds218plus</code> 所在的网络中做了两件事，给 <code>41641/udp</code> 配置端口转发，并在防火墙上放行这个端口。然后我在作为客户端的 <code>macbook-pro</code> 上执行 <code>tailscale down</code> 和 <code>tailscale up</code> 来重启 Tailscale 连接。这时候再用 <code>tailscale status</code> 命令检查连接情况，发现输出变成了这样：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; direct 121.70.200.131:41641, tx 5884 rx 8500</span><br></pre></td></tr></tbody></table></figure><p>接着划重点，<code>direct</code>，说明现在节点之间已经是直连了，随便做点什么测试一下，果然快了很多。</p><p>不过端口转发只是权宜之计，毕竟没法同时让 <code>41641/udp</code> 转发给多个机器，只能解决一台机器不能直连的问题。要想彻底解决，还是得用 IPv6。</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/Tailscale/">Tailscale</category>
-      
-      <category domain="https://www.boris1993.com/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</category>
-      
-      <category domain="https://www.boris1993.com/tags/VPN/">VPN</category>
-      
-      <category domain="https://www.boris1993.com/tags/Virtual-LAN/">Virtual LAN</category>
-      
-      <category domain="https://www.boris1993.com/tags/%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91/">虚拟局域网</category>
-      
-      
-      <comments>https://www.boris1993.com/setting-up-tailscale.html#disqus_thread</comments>
       
     </item>
     
