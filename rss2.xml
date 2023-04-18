@@ -9,8 +9,34 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Tue, 18 Apr 2023 17:13:46 GMT</pubDate>
+    <pubDate>Tue, 18 Apr 2023 18:17:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>从 umami v1 迁移到 v2</title>
+      <link>https://www.boris1993.com/migrating-to-umami-v2.html</link>
+      <guid>https://www.boris1993.com/migrating-to-umami-v2.html</guid>
+      <pubDate>Tue, 18 Apr 2023 17:23:31 GMT</pubDate>
+      
+      <description>&lt;p&gt;昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 &lt;code&gt;umami&lt;/code&gt; 部署失败。检查之后发现是 &lt;code&gt;umami&lt;/code&gt; 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。&lt;/p&gt;
+&lt;p&gt;虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 <code>umami</code> 部署失败。检查之后发现是 <code>umami</code> 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。</p><p>虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。</p><span id="more"></span><h2 id="问题的根源"><a href="#问题的根源" class="headerlink" title="问题的根源"></a>问题的根源</h2><p>一开始发现自动迁移不成功，那么按照<span class="exturl" data-url="aHR0cHM6Ly91bWFtaS5pcy9kb2NzL21pZ3JhdGUtdjEtdjI=">官方的迁移文档<i class="fa fa-external-link-alt"></i></span>，我手动运行了迁移脚本，但是得到了这样的错误信息：<code>db error: ERROR: must be owner of table _prisma_migrations</code>。看起来是表的权限问题，<code>_prisma_migrations</code> 这个表的 <code>owner</code> 必须是我用来执行脚本的用户。</p><p>搜了一下，<code>PostgreSQL</code> 里面每个表都有一个所有者，而我一开始是用 <code>postgres</code> 这个用户初始化的数据库，所以这些表的所有者都是 <code>postgres</code>，之前没有问题，只是因为我给 umami 的用户读写这些表的授权了。</p><h2 id="修复数据库"><a href="#修复数据库" class="headerlink" title="修复数据库"></a>修复数据库</h2><p>首先执行了下 <code>select schemaname, tablename, tableowner from pg_tables where schemaname = 'umami'</code>，果不其然这些表的 owner 都是 <code>postgres</code>。</p><p>于是尝试执行了下 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，但是又报错 <code>ERROR: must be member of role umami_user</code>。好么，我一直以为 <code>postgres</code> 用户跟 MySQL 的 <code>root</code> 一样是超管，结果 PostgreSQL 世界里面人人生而平等？好吧，你要权限那我就给你授权，<code>grant postgres to umami_user</code>。</p><p>授权之后，重新执行 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，发现成功了，再执行 umami 的迁移脚本后，发现错误信息变成了 <code>db error: ERROR: must be owner of table account</code>。看来，上面的解决方案奏效了，接下来就是把剩下的表的所有者全都改过来。</p><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._event_old owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._prisma_migrations owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.account owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."event" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.event_data owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.pageview owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."session" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.website owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> schemaname, tablename, tableowner <span class="keyword">from</span> pg_tables <span class="keyword">where</span> schemaname <span class="operator">=</span> <span class="string">'umami_analytics'</span>;</span><br></pre></td></tr></tbody></table></figure><p>可以看到，umami 相关的表的所有者都正确了，回到 Vercel，重新运行失败的部署，发现还是报错。无奈，又试了试手动迁移脚本，竟然成功了，这时候数据库肯定是 v2 的了，再到 Vercel 重新部署，这次就成功了。</p><p>注意脚本执行到最后会问要不要删掉 v1 的表，记得不要删。我发现在删掉 v1 的旧表之后，Vercel 的部署又会出新的问题。（我为了验证到底是我的问题还是脚本的问题，回滚了两三次生产数据库。也就是这个数据不重要我才敢这么折腾，好孩子不要学我乱搞生产数据库哦～）</p><h2 id="更新博客的配置"><a href="#更新博客的配置" class="headerlink" title="更新博客的配置"></a>更新博客的配置</h2><p>NexT 主题是内建了对 umami 的支持的，但是需要手动指定脚本的位置。根据迁移文档的提示，修正<code>_config.next.yml</code> 中 <code>umami.script_url</code>，重新部署博客即可。</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/umami/">umami</category>
+      
+      <category domain="https://www.boris1993.com/tags/analytics/">analytics</category>
+      
+      
+      <comments>https://www.boris1993.com/migrating-to-umami-v2.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>MySQL 的最左匹配原则</title>
@@ -553,61 +579,6 @@
       
       
       <comments>https://www.boris1993.com/java-thread-security-deadlock.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Filter 与 interceptor 的区别</title>
-      <link>https://www.boris1993.com/filter-vs-interceptor.html</link>
-      <guid>https://www.boris1993.com/filter-vs-interceptor.html</guid>
-      <pubDate>Tue, 13 Dec 2022 07:36:21 GMT</pubDate>
-      
-      <description>&lt;h2 id=&quot;Filter&quot;&gt;&lt;a href=&quot;#Filter&quot; class=&quot;headerlink&quot; title=&quot;Filter&quot;&gt;&lt;/a&gt;Filter&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 是 &lt;code&gt;Servlet&lt;/code&gt; 规范制定的，受 &lt;code&gt;Servlet&lt;/code&gt; 容器支持，接口定义在 &lt;code&gt;javax.servlet&lt;/code&gt; 包中。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 是被 Web Server（如 &lt;code&gt;Tomcat&lt;/code&gt;）调用。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 需要在 &lt;code&gt;web.xml&lt;/code&gt; 中定义之后才会起作用。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 只在请求的前后起作用，&lt;code&gt;Servlet&lt;/code&gt; 对于 &lt;code&gt;Filter&lt;/code&gt; 来说是一个黑盒。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Filter&lt;/code&gt; 的执行顺序是：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;void init(FilterConfig)&lt;/code&gt; - 容器在初始化 &lt;code&gt;Filter&lt;/code&gt; 时调用，在 &lt;code&gt;Filter&lt;/code&gt; 生命周期内仅会被调用一次。方法可以抛出 &lt;code&gt;ServletException&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;doFilter(ServletRequest, ServletResponse, FilterChain)&lt;/code&gt; - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， &lt;code&gt;FilterChain&lt;/code&gt; 用来调用下一个 &lt;code&gt;Filter&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void destroy()&lt;/code&gt; - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Interceptor&quot;&gt;&lt;a href=&quot;#Interceptor&quot; class=&quot;headerlink&quot; title=&quot;Interceptor&quot;&gt;&lt;/a&gt;Interceptor&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 是 &lt;code&gt;Spring&lt;/code&gt; 容器内的，由 &lt;code&gt;Spring&lt;/code&gt; 框架提供支持。接口 &lt;code&gt;HandlerInterceptor&lt;/code&gt; 定义在 &lt;code&gt;org.springframework.web.servlet&lt;/code&gt; 包中。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 是被 &lt;code&gt;Spring&lt;/code&gt; 调用。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 可以深入到方法前后、异常抛出前后等，比起 &lt;code&gt;Filter&lt;/code&gt; 有更大的弹性。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Interceptor&lt;/code&gt; 的执行顺序是：&lt;ul&gt;
-&lt;li&gt;请求到达 &lt;code&gt;DispatcherServlet&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;DispatcherServlet&lt;/code&gt; 将请求发送至 &lt;code&gt;Interceptor&lt;/code&gt;，&lt;code&gt;Interceptor&lt;/code&gt; 执行 &lt;code&gt;preHandle()&lt;/code&gt; 方法&lt;/li&gt;
-&lt;li&gt;请求到达 &lt;code&gt;Controller&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;请求结束后，&lt;code&gt;Interceptor&lt;/code&gt; 执行 &lt;code&gt;postHandle()&lt;/code&gt; 方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul><li><code>Filter</code> 是 <code>Servlet</code> 规范制定的，受 <code>Servlet</code> 容器支持，接口定义在 <code>javax.servlet</code> 包中。</li><li><code>Filter</code> 是被 Web Server（如 <code>Tomcat</code>）调用。</li><li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li><li><code>Filter</code> 只在请求的前后起作用，<code>Servlet</code> 对于 <code>Filter</code> 来说是一个黑盒。</li><li><code>Filter</code> 的执行顺序是：<ul><li><code>void init(FilterConfig)</code> - 容器在初始化 <code>Filter</code> 时调用，在 <code>Filter</code> 生命周期内仅会被调用一次。方法可以抛出 <code>ServletException</code>。</li><li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code> 用来调用下一个 <code>Filter</code>。</li><li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li></ul></li></ul><h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul><li><code>Interceptor</code> 是 <code>Spring</code> 容器内的，由 <code>Spring</code> 框架提供支持。接口 <code>HandlerInterceptor</code> 定义在 <code>org.springframework.web.servlet</code> 包中。</li><li><code>Interceptor</code> 是被 <code>Spring</code> 调用。</li><li><code>Interceptor</code> 可以深入到方法前后、异常抛出前后等，比起 <code>Filter</code> 有更大的弹性。</li><li><code>Interceptor</code> 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li><li><code>Interceptor</code> 的执行顺序是：<ul><li>请求到达 <code>DispatcherServlet</code></li><li><code>DispatcherServlet</code> 将请求发送至 <code>Interceptor</code>，<code>Interceptor</code> 执行 <code>preHandle()</code> 方法</li><li>请求到达 <code>Controller</code></li><li>请求结束后，<code>Interceptor</code> 执行 <code>postHandle()</code> 方法</li></ul></li></ul><span id="more"></span><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9laW52ZXJuZS5naXRodWIuaW8vcG9zdC8yMDE3LzA4L3NwcmluZy1pbnRlcmNlcHRvci12cy1maWx0ZXIuaHRtbA==">Spring Interceptor vs Filter 拦截器和过滤器区别<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODQ0OTAzODI4OTcwNTUzMzU4">Spring Interceptor vs Filter - 掘金<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lY2xpcHNlLWVlNGouZ2l0aHViLmlvL2plcnNleS5naXRodWIuaW8vZG9jdW1lbnRhdGlvbi9sYXRlc3QvZmlsdGVycy1hbmQtaW50ZXJjZXB0b3JzLmh0bWw=">Chapter 10. Filters and Interceptors - Jersey 2.37 User Guide<i class="fa fa-external-link-alt"></i></span></li></ul>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/Java/">Java</category>
-      
-      <category domain="https://www.boris1993.com/tags/Servlet/">Servlet</category>
-      
-      <category domain="https://www.boris1993.com/tags/Spring-MVC/">Spring MVC</category>
-      
-      <category domain="https://www.boris1993.com/tags/Filter/">Filter</category>
-      
-      <category domain="https://www.boris1993.com/tags/Interceptor/">Interceptor</category>
-      
-      
-      <comments>https://www.boris1993.com/filter-vs-interceptor.html#disqus_thread</comments>
       
     </item>
     

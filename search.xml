@@ -3626,6 +3626,32 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>从 umami v1 迁移到 v2</title>
+    <url>/migrating-to-umami-v2.html</url>
+    <content><![CDATA[<p>昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 <code>umami</code> 部署失败。检查之后发现是 <code>umami</code> 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。</p>
+<p>虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。</p>
+<span id="more"></span>
+
+<h2 id="问题的根源"><a href="#问题的根源" class="headerlink" title="问题的根源"></a>问题的根源</h2><p>一开始发现自动迁移不成功，那么按照<span class="exturl" data-url="aHR0cHM6Ly91bWFtaS5pcy9kb2NzL21pZ3JhdGUtdjEtdjI=">官方的迁移文档<i class="fa fa-external-link-alt"></i></span>，我手动运行了迁移脚本，但是得到了这样的错误信息：<code>db error: ERROR: must be owner of table _prisma_migrations</code>。看起来是表的权限问题，<code>_prisma_migrations</code> 这个表的 <code>owner</code> 必须是我用来执行脚本的用户。</p>
+<p>搜了一下，<code>PostgreSQL</code> 里面每个表都有一个所有者，而我一开始是用 <code>postgres</code> 这个用户初始化的数据库，所以这些表的所有者都是 <code>postgres</code>，之前没有问题，只是因为我给 umami 的用户读写这些表的授权了。</p>
+<h2 id="修复数据库"><a href="#修复数据库" class="headerlink" title="修复数据库"></a>修复数据库</h2><p>首先执行了下 <code>select schemaname, tablename, tableowner from pg_tables where schemaname = 'umami'</code>，果不其然这些表的 owner 都是 <code>postgres</code>。</p>
+<p>于是尝试执行了下 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，但是又报错 <code>ERROR: must be member of role umami_user</code>。好么，我一直以为 <code>postgres</code> 用户跟 MySQL 的 <code>root</code> 一样是超管，结果 PostgreSQL 世界里面人人生而平等？好吧，你要权限那我就给你授权，<code>grant postgres to umami_user</code>。</p>
+<p>授权之后，重新执行 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，发现成功了，再执行 umami 的迁移脚本后，发现错误信息变成了 <code>db error: ERROR: must be owner of table account</code>。看来，上面的解决方案奏效了，接下来就是把剩下的表的所有者全都改过来。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._event_old owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._prisma_migrations owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.account owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."event" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.event_data owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.pageview owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."session" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.website owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> schemaname, tablename, tableowner <span class="keyword">from</span> pg_tables <span class="keyword">where</span> schemaname <span class="operator">=</span> <span class="string">'umami_analytics'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以看到，umami 相关的表的所有者都正确了，回到 Vercel，重新运行失败的部署，发现还是报错。无奈，又试了试手动迁移脚本，竟然成功了，这时候数据库肯定是 v2 的了，再到 Vercel 重新部署，这次就成功了。</p>
+<p>注意脚本执行到最后会问要不要删掉 v1 的表，记得不要删。我发现在删掉 v1 的旧表之后，Vercel 的部署又会出新的问题。（我为了验证到底是我的问题还是脚本的问题，回滚了两三次生产数据库。也就是这个数据不重要我才敢这么折腾，好孩子不要学我乱搞生产数据库哦～）</p>
+<h2 id="更新博客的配置"><a href="#更新博客的配置" class="headerlink" title="更新博客的配置"></a>更新博客的配置</h2><p>NexT 主题是内建了对 umami 的支持的，但是需要手动指定脚本的位置。根据迁移文档的提示，修正<code>_config.next.yml</code> 中 <code>umami.script_url</code>，重新部署博客即可。</p>
+]]></content>
+      <categories>
+        <category>瞎折腾</category>
+      </categories>
+      <tags>
+        <tag>umami</tag>
+        <tag>analytics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用 VisualVM 监控应用 GC</title>
     <url>/monitor-gc-with-visual-vm.html</url>
     <content><![CDATA[<p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件 <code>Visual GC</code> 来监控 Java 应用的垃圾回收情况。</p>
