@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题">
+<meta property="og:url" content="https://www.boris1993.com/routeros-mss-clamping.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg">
+<meta property="article:published_time" content="2023-05-14T04:37:15.000Z">
+<meta property="article:modified_time" content="2023-05-14T05:28:11.202Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="二手MicroServer Gen8折腾记">
+<meta property="article:tag" content="Gen8">
+<meta property="article:tag" content="软路由">
+<meta property="article:tag" content="RouterOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg">
+
+
+<link rel="canonical" href="https://www.boris1993.com/routeros-mss-clamping.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/routeros-mss-clamping.html","path":"routeros-mss-clamping.html","title":"在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+
+  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-探针"><span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw=="><i class="fa fa-link fa-fw"></i>探针</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMTU%E9%BB%91%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">PMTU 黑洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E5%85%89%E7%8C%AB%E6%88%96%E8%80%85%E7%A1%AC%E8%B7%AF%E7%94%B1%E6%8B%A8%E5%8F%B7%E5%B0%B1%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">为什么用光猫或者硬路由拨号就没有这个问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8RouterOS%E4%B8%AD%E9%85%8D%E7%BD%AEMSS-Clamping"><span class="nav-number">4.</span> <span class="nav-text">在 RouterOS 中配置 MSS Clamping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">137</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!-- sidebar ad 
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/routeros-mss-clamping.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-14 12:37:15 / 修改时间：13:28:11" itemprop="dateCreated datePublished" datetime="2023-05-14T12:37:15+08:00">2023-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/routeros-mss-clamping.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/routeros-mss-clamping.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/routeros-mss-clamping.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。</p>
+<span id="more"></span>
+
+<h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>最常见的就是微信公众号的图片始终加载不出来，就像这样（自己当时没截图，借用知乎文章的图）：</p>
+<p><img data-src="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg"></p>
+<p>说来也很奇怪，我在 iOS 的微信上是能正常加载的，但是换到我妈的 Android 微信就会出现这样的情况，之前一直以为是我妈的手机出毛病了……</p>
+<h2 id="PMTU黑洞"><a href="#PMTU黑洞" class="headerlink" title="PMTU黑洞"></a>PMTU 黑洞</h2><p>所谓 MTU，指的是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网默认的 MTU 是 1500 字节。但是从我的设备到目标服务器之间的路径上可能存在 MTU 小于 1500 的链路，那么这条路径上最小的 MTU，就是整条链路的 <code>Path MTU</code>（PMTU）。</p>
+<p>路由器在转发包的时候，如果包的大小超过了 MTU，那么这个包会被分片（fragmentation）。而终端设备在发包时，也可以设置 DF 标志位（Don’t Fragment）来告诉路由器不要对这个包分片，此时如果这个包大小超过了 MTU，那么路由器就会丢掉这个包，并回复一条 <code>ICMP Fragmentation Needed</code> 消息。发送者收到这个消息后，下次就会发送小一点的包。这个过程叫做 PMTU 发现（PMTU Discovery）。</p>
+<p>但是互联网中有大量的设备因为各种原因，会配置为不回应 <code>ICMP Fragmentation Needed</code> 消息，这使得大小超过 MTU 的包会被无声地丢掉，直到 TCP 协议发现超时丢包并进行重传。这种情况就是 <code>PMTU黑洞</code>。</p>
+<p>此外，IPv6 包不支持分片，换句话说就是所有 IPv6 数据包全都带有 DF 标记。中间的路由器在遇到尺寸大于 MTU 的包的时候，应该回应 <code>ICMPv6 Packet Too Big</code> 消息，而同样的，由于各种原因，某些中间设备可能会直接丢掉这个包而不返回这条消息，直到 TCP 协议发现超时而进行重传。</p>
+<h2 id="为什么用光猫或者硬路由拨号就没有这个问题"><a href="#为什么用光猫或者硬路由拨号就没有这个问题" class="headerlink" title="为什么用光猫或者硬路由拨号就没有这个问题"></a>为什么用光猫或者硬路由拨号就没有这个问题</h2><p>这是因为，多数家用路由器默认开启了一个叫 <code>MSS Clamping</code> 的功能。这是针对 PMTU 黑洞的一个 workaround，简单来说就是在 TCP 握手时，服务器会通过一个字段告知客户端它愿意接收的 TCP 包的最大尺寸，这样客户端就可以限制自己发送的包的大小，保证不会超出服务端要求的尺寸。</p>
+<h2 id="在RouterOS中配置MSS-Clamping"><a href="#在RouterOS中配置MSS-Clamping" class="headerlink" title="在RouterOS中配置MSS Clamping"></a>在 RouterOS 中配置 MSS Clamping</h2><p>配置非常简单，分别对 IPv4 和 IPv6 的防火墙 Mangle 表添加如下配置即可。</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将命令中 out-interface 参数的值替换成你的PPPoE接口的名字</span></span><br><span class="line">/ip/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv4 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br><span class="line"></span><br><span class="line">/ipv6/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv6 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudjJleC5jb20vdC84MDAwMjQ=">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzUzOTI4OTY=">ROS 修改 MTU 和 MSS 解决上网慢和页面显示不全问题<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2xvdWRmbGFyZS5jb20vemgtY24vbGVhcm5pbmcvbmV0d29yay1sYXllci93aGF0LWlzLW1zcy8=">什么是最大分段大小 (MSS)？ - CloudFlare<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense" style="text-align: center;">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/" rel="tag"># 二手MicroServer Gen8折腾记</a>
+              <a href="/tags/Gen8/" rel="tag"># Gen8</a>
+              <a href="/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/" rel="tag"># 软路由</a>
+              <a href="/tags/RouterOS/" rel="tag"># RouterOS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/migrating-to-umami-v2.html" rel="prev" title="从 umami v1 迁移到 v2">
+                  <i class="fa fa-chevron-left"></i> 从 umami v1 迁移到 v2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.3/algoliasearch-lite.umd.js" integrity="sha256-dyJcbGuYfdzNfifkHxYVd/rzeR6SLLcDFYEidcybldM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.50.1/instantsearch.production.min.js" integrity="sha256-xtz5Q60cdtw/7BDkzWiTgCXLvwLrUqlKqegFqvNHiNM=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/routeros-mss-clamping.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

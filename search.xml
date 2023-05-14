@@ -4168,6 +4168,39 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题</title>
+    <url>/routeros-mss-clamping.html</url>
+    <content><![CDATA[<p>换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。</p>
+<span id="more"></span>
+
+<h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>最常见的就是微信公众号的图片始终加载不出来，就像这样（自己当时没截图，借用知乎文章的图）：</p>
+<p><img data-src="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg"></p>
+<p>说来也很奇怪，我在 iOS 的微信上是能正常加载的，但是换到我妈的 Android 微信就会出现这样的情况，之前一直以为是我妈的手机出毛病了……</p>
+<h2 id="PMTU黑洞"><a href="#PMTU黑洞" class="headerlink" title="PMTU黑洞"></a>PMTU 黑洞</h2><p>所谓 MTU，指的是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网默认的 MTU 是 1500 字节。但是从我的设备到目标服务器之间的路径上可能存在 MTU 小于 1500 的链路，那么这条路径上最小的 MTU，就是整条链路的 <code>Path MTU</code>（PMTU）。</p>
+<p>路由器在转发包的时候，如果包的大小超过了 MTU，那么这个包会被分片（fragmentation）。而终端设备在发包时，也可以设置 DF 标志位（Don’t Fragment）来告诉路由器不要对这个包分片，此时如果这个包大小超过了 MTU，那么路由器就会丢掉这个包，并回复一条 <code>ICMP Fragmentation Needed</code> 消息。发送者收到这个消息后，下次就会发送小一点的包。这个过程叫做 PMTU 发现（PMTU Discovery）。</p>
+<p>但是互联网中有大量的设备因为各种原因，会配置为不回应 <code>ICMP Fragmentation Needed</code> 消息，这使得大小超过 MTU 的包会被无声地丢掉，直到 TCP 协议发现超时丢包并进行重传。这种情况就是 <code>PMTU黑洞</code>。</p>
+<p>此外，IPv6 包不支持分片，换句话说就是所有 IPv6 数据包全都带有 DF 标记。中间的路由器在遇到尺寸大于 MTU 的包的时候，应该回应 <code>ICMPv6 Packet Too Big</code> 消息，而同样的，由于各种原因，某些中间设备可能会直接丢掉这个包而不返回这条消息，直到 TCP 协议发现超时而进行重传。</p>
+<h2 id="为什么用光猫或者硬路由拨号就没有这个问题"><a href="#为什么用光猫或者硬路由拨号就没有这个问题" class="headerlink" title="为什么用光猫或者硬路由拨号就没有这个问题"></a>为什么用光猫或者硬路由拨号就没有这个问题</h2><p>这是因为，多数家用路由器默认开启了一个叫 <code>MSS Clamping</code> 的功能。这是针对 PMTU 黑洞的一个 workaround，简单来说就是在 TCP 握手时，服务器会通过一个字段告知客户端它愿意接收的 TCP 包的最大尺寸，这样客户端就可以限制自己发送的包的大小，保证不会超出服务端要求的尺寸。</p>
+<h2 id="在RouterOS中配置MSS-Clamping"><a href="#在RouterOS中配置MSS-Clamping" class="headerlink" title="在RouterOS中配置MSS Clamping"></a>在 RouterOS 中配置 MSS Clamping</h2><p>配置非常简单，分别对 IPv4 和 IPv6 的防火墙 Mangle 表添加如下配置即可。</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 将命令中 out-interface 参数的值替换成你的PPPoE接口的名字</span></span><br><span class="line">/ip/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv4 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br><span class="line"></span><br><span class="line">/ipv6/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv6 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudjJleC5jb20vdC84MDAwMjQ=">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzUzOTI4OTY=">ROS 修改 MTU 和 MSS 解决上网慢和页面显示不全问题<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2xvdWRmbGFyZS5jb20vemgtY24vbGVhcm5pbmcvbmV0d29yay1sYXllci93aGF0LWlzLW1zcy8=">什么是最大分段大小 (MSS)？ - CloudFlare<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>瞎折腾</category>
+      </categories>
+      <tags>
+        <tag>二手MicroServer Gen8折腾记</tag>
+        <tag>Gen8</tag>
+        <tag>软路由</tag>
+        <tag>RouterOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在群晖的 Docker 环境中运行甜糖星愿服务</title>
     <url>/run-tiantang-on-synology-docker.html</url>
     <content><![CDATA[<p>前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
