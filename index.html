@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,7 +190,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">143</span>
+        <span class="site-state-item-count">146</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -251,6 +251,114 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/swiftui-initialize-list-with-remote-data.html" class="post-title-link" itemprop="url">SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-10-28 21:23:36 / 修改时间：23:06:16" itemprop="dateCreated datePublished" datetime="2023-10-28T21:23:36+08:00">2023-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/swiftui-initialize-list-with-remote-data.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/swiftui-initialize-list-with-remote-data.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/swiftui-initialize-list-with-remote-data.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这两天又捡起来了之前开的一个老坑，继续完成<span class="exturl" data-url="aHR0cHM6Ly93d3cubm1ieGQxLmNvbS9Gb3J1bQ=="> X 岛揭示板<i class="fa fa-external-link-alt"></i></span>的 iOS 客户端，而且刚刚完成了从 JSON 初始化版面列表的功能。<br>这部分感觉最难的还是上手 <code>Alamofire</code>，因为它返回结果不像我平时做 Web 开发那样通过方法返回（也有可能是我没学到位），而是要把反序列化得到的对象传给一个回调方法。而这个思路的差异也导致我刚开始学的时候非常的痛苦，因为怎么也找不到我想要的那种返回方式。<br>我相信应该不止我一个人会遇到这种情况，所以打算在这里把完整的实现过程记录在这里，并希望后面有类似情况的同志能因为这篇文章而少掉几根头发。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/swiftui-initialize-list-with-remote-data.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/uwp-textblock-show-and-hide-content-on-hover.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -279,9 +387,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-10-21 13:51:20 / 修改时间：14:53:39" itemprop="dateCreated datePublished" datetime="2023-10-21T13:51:20+08:00">2023-10-21</time>
+      <time title="创建时间：2023-10-21 13:51:20" itemprop="dateCreated datePublished" datetime="2023-10-21T13:51:20+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -408,7 +522,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -522,7 +636,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -636,7 +750,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -751,7 +865,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -872,7 +986,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -986,7 +1100,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1100,7 +1214,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1214,7 +1328,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
+      <time title="修改时间：2023-10-28 23:06:16" itemprop="dateModified" datetime="2023-10-28T23:06:16+08:00">2023-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1284,122 +1398,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/hacking-zte-f450g-v2-onu.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hacking-zte-f450g-v2-onu.html" class="post-title-link" itemprop="url">为了改桥接，我决定破解中兴 F450G V2 光猫</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-16 13:13:37" itemprop="dateCreated datePublished" datetime="2023-03-16T13:13:37+08:00">2023-03-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-21 14:53:39" itemprop="dateModified" datetime="2023-10-21T14:53:39+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/hacking-zte-f450g-v2-onu.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/hacking-zte-f450g-v2-onu.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/hacking-zte-f450g-v2-onu.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>还记得我<a href="/setting-up-microserver-gen8-routeros.html">之前买了个猫棒来替换光猫</a>么？用了一个来月，发现这玩意真的不稳定，短则几分钟长则一两天它必定自己重启一次，导致我的网络时不时就会断线。这玩意不好使，我也没有别的光猫，只好找电信装维师傅给我改桥接。可哪成想一个师傅踢皮球让我找另一个师傅，另一个一听我说是<code>悦me</code> 直接就说不能改，只有 SDN 光猫能改。那你们逼我的，我自己改。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/hacking-zte-f450g-v2-onu.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
