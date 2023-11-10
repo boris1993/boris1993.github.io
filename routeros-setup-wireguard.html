@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前两天赶上阿里云搞活动，薅了一个 99 一年的 ECS。因为要接进咱的探针，就得跟我的服务器组个网。之前都是用 NAS 上装的 wgeasy，这回想想，咱的 RouterOS 也有 Wireguard，那干脆吃个螃蟹，看看能不能直接在软路由上组，慢慢的逐步把 wgeasy 淘汰掉，顺便正经的学学 Wireguard 组网。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RouterOS 配置 Wireguard 与阿里云 ECS 组网">
+<meta property="og:url" content="https://www.boris1993.com/routeros-setup-wireguard.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="前两天赶上阿里云搞活动，薅了一个 99 一年的 ECS。因为要接进咱的探针，就得跟我的服务器组个网。之前都是用 NAS 上装的 wgeasy，这回想想，咱的 RouterOS 也有 Wireguard，那干脆吃个螃蟹，看看能不能直接在软路由上组，慢慢的逐步把 wgeasy 淘汰掉，顺便正经的学学 Wireguard 组网。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-10T14:47:46.000Z">
+<meta property="article:modified_time" content="2023-11-10T15:36:42.850Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="RouterOS">
+<meta property="article:tag" content="Wireguard">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/routeros-setup-wireguard.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/routeros-setup-wireguard.html","path":"routeros-setup-wireguard.html","title":"RouterOS 配置 Wireguard 与阿里云 ECS 组网"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RouterOS 配置 Wireguard 与阿里云 ECS 组网 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+
+  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-探针"><span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw=="><i class="fa fa-link fa-fw"></i>探针</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">网络规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RouterOS%E7%AB%AF%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">RouterOS 端的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECS%E7%AB%AF%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">ECS 端的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%BB%84%E7%BD%91"><span class="nav-number">4.</span> <span class="nav-text">开始组网</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">147</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!-- sidebar ad 
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/routeros-setup-wireguard.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RouterOS 配置 Wireguard 与阿里云 ECS 组网 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RouterOS 配置 Wireguard 与阿里云 ECS 组网
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-10 22:47:46 / 修改时间：23:36:42" itemprop="dateCreated datePublished" datetime="2023-11-10T22:47:46+08:00">2023-11-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/routeros-setup-wireguard.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/routeros-setup-wireguard.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/routeros-setup-wireguard.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>前两天赶上阿里云搞活动，薅了一个 99 一年的 ECS。因为要接进咱的<span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw==">探针<i class="fa fa-external-link-alt"></i></span>，就得跟我的服务器组个网。之前都是用 NAS 上装的 <code>wgeasy</code>，这回想想，咱的 RouterOS 也有 Wireguard，那干脆吃个螃蟹，看看能不能直接在软路由上组，慢慢的逐步把 <code>wgeasy</code> 淘汰掉，顺便正经的学学 Wireguard 组网。</p>
+<span id="more"></span>
+
+<h2 id="网络规划"><a href="#网络规划" class="headerlink" title="网络规划"></a>网络规划</h2><p>我的 LAN 网段：<code>192.168.1.0/24</code><br>Wireguard 网段：<code>10.10.0.0/24</code><br>分配给 ECS 的 Wireguard 地址：<code>10.10.0.100/32</code></p>
+<h2 id="RouterOS端的准备"><a href="#RouterOS端的准备" class="headerlink" title="RouterOS端的准备"></a>RouterOS 端的准备</h2><p>首先添加一个 <code>Wireguard</code> 接口：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/interface/wireguard/<span class="built_in">add</span> <span class="attribute">disabled</span>=<span class="literal">no</span> <span class="attribute">listen-port</span>=13231 <span class="attribute">mtu</span>=1420 <span class="attribute">name</span>=wireguard1</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后添加防火墙规则，允许 <code>13231/udp</code> 端口：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in-interface更换成你的WAN接口的名字</span></span><br><span class="line">/ip/firewall<span class="built_in">/filter </span><span class="built_in">add</span> <span class="attribute">chain</span>=input <span class="attribute">in-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">dst-port</span>=13231 <span class="attribute">protocol</span>=udp <span class="attribute">action</span>=accept <span class="attribute">comment</span>=<span class="string">"Allow Wireguard"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后为 Wireguard 分配一个网段：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ip<span class="built_in">/address </span><span class="built_in">add</span> <span class="attribute">address</span>=10.10.0.0/24 <span class="attribute">network</span>=10.10.0.0 <span class="attribute">interface</span>=wireguard1 <span class="attribute">comment</span>=Wireguard</span><br></pre></td></tr></tbody></table></figure>
+
+<p>接下来配置转发规则，允许 LAN 和 Wireguard 网段互通：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/ip/firewall<span class="built_in">/filter </span><span class="built_in">add</span> <span class="attribute">chain</span>=forward <span class="attribute">src-address</span>=192.168.1.0/24 <span class="attribute">dst-address</span>=10.10.0.0/24 <span class="attribute">action</span>=accept <span class="attribute">comment</span>=<span class="string">"Forward Wireguard to LAN"</span></span><br><span class="line">/ip/firewall<span class="built_in">/filter </span><span class="built_in">add</span> <span class="attribute">chain</span>=forward <span class="attribute">src-address</span>=10.10.0.0/24 <span class="attribute">dst-address</span>=192.168.1.0/24 <span class="attribute">action</span>=accept <span class="attribute">comment</span>=<span class="string">"Forward LAN to Wireguard"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>至此，RouterOS 上的 Wireguard 接口配置完毕。接下来需要取得 RouterOS 端 Wireguard 的公钥备用。</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 记下输出中的 public-key 备用</span></span><br><span class="line">&gt; /interface/wireguard/<span class="built_in">print</span></span><br><span class="line">Flags: X - disabled; R - running </span><br><span class="line"> 0  R <span class="attribute">name</span>=<span class="string">"wireguard1"</span> <span class="attribute">mtu</span>=1420 <span class="attribute">listen-port</span>=13231 <span class="attribute">private-key</span>=<span class="string">"routeros-private-key"</span> <span class="attribute">public-key</span>=<span class="string">"routeros-public-key"</span> </span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="ECS端的准备"><a href="#ECS端的准备" class="headerlink" title="ECS端的准备"></a>ECS 端的准备</h2><p>接下来登陆到 ECS，安装 Wireguard。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Wireguard</span></span><br><span class="line">sudo apt install wireguard-tools</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成密钥对</span></span><br><span class="line"><span class="built_in">mkdir</span> wireguard &amp;&amp; <span class="built_in">cd</span> wireguard</span><br><span class="line">wg genkey | <span class="built_in">tee</span> privatekey | wg pubkey &gt; publickey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看公钥和私钥，备用</span></span><br><span class="line"><span class="built_in">cat</span> privatekey</span><br><span class="line"><span class="built_in">cat</span> publickey</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="开始组网"><a href="#开始组网" class="headerlink" title="开始组网"></a>开始组网</h2><p>先回到 RouterOS，为 Wireguard 添加一个 Peer：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># allowed-address为我们要分配给这个节点的地址</span></span><br><span class="line"><span class="comment"># public-key要填写上面在ECS上得到的publickey</span></span><br><span class="line"><span class="comment"># preshared-key相当于密码，用来保护这个peer不会被陌生的节点连接</span></span><br><span class="line"><span class="comment"># comment按需填写，用来标识这个节点</span></span><br><span class="line">/interface/wireguard/peers <span class="built_in">add</span> <span class="attribute">allowed-address</span>=10.10.0.100/32 <span class="attribute">interface</span>=wireguard1 <span class="attribute">public-key</span>=<span class="string">"ECS-PUBLIC-KEY"</span> <span class="attribute">preshared-key</span>=<span class="string">"the-preshared-key"</span> <span class="attribute">comment</span>=ECS-SH-1</span><br></pre></td></tr></tbody></table></figure>
+
+<p>接下来到 ECS，在 <code>/etc/wireguard</code> 目录下创建配置文件 <code>wg0.conf</code>，填写如下内容：</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Interface]</span></span><br><span class="line"><span class="attr">PrivateKey</span> = &lt;填写上面生成的私钥&gt;</span><br><span class="line"><span class="attr">Address</span> = <span class="number">10.10</span>.<span class="number">0.100</span>/<span class="number">32</span></span><br><span class="line"><span class="attr">DNS</span> = <span class="number">119.29</span>.<span class="number">29.29</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Peer]</span></span><br><span class="line"><span class="attr">PublicKey</span> = &lt;填写RouterOS的公钥&gt;</span><br><span class="line"><span class="attr">PresharedKey</span> = &lt;填写在RouterOS中Peer的preshared-key&gt;</span><br><span class="line"><span class="attr">AllowedIPs</span> = <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span></span><br><span class="line"><span class="attr">PersistentKeepalive</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">Endpoint</span> = &lt;你的公网IP或DDNS域名&gt;:<span class="number">13231</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>保存后就可以启动 <code>wg0</code> 这个接口并测试组网是否成功。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动wg0</span></span><br><span class="line">$ sudo systemctl start wg-quick@wg0</span><br><span class="line"></span><br><span class="line"><span class="comment"># ping一个内网地址看有没有响应</span></span><br><span class="line">$ ping 192.168.1.20</span><br><span class="line">PING 192.168.1.20 (192.168.1.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 192.168.1.20: icmp_seq=1 ttl=63 time=6.07 ms</span><br><span class="line">64 bytes from 192.168.1.20: icmp_seq=2 ttl=63 time=4.72 ms</span><br><span class="line">64 bytes from 192.168.1.20: icmp_seq=3 ttl=63 time=5.25 ms</span><br><span class="line">64 bytes from 192.168.1.20: icmp_seq=4 ttl=63 time=6.07 ms</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果能从 ECS 上 ping 通 LAN 侧的主机，那就说明组网成功了。接下来可以让 <code>wg0</code> 接口在开机后自动启动：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> wg-quick@wg0</span><br></pre></td></tr></tbody></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense" style="text-align: center;">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/RouterOS/" rel="tag"># RouterOS</a>
+              <a href="/tags/Wireguard/" rel="tag"># Wireguard</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/swiftui-initialize-list-with-remote-data.html" rel="prev" title="SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表">
+                  <i class="fa fa-chevron-left"></i> SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.3/algoliasearch-lite.umd.js" integrity="sha256-dyJcbGuYfdzNfifkHxYVd/rzeR6SLLcDFYEidcybldM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.50.1/instantsearch.production.min.js" integrity="sha256-xtz5Q60cdtw/7BDkzWiTgCXLvwLrUqlKqegFqvNHiNM=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/routeros-setup-wireguard.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
