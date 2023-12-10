@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Sun, 10 Dec 2023 09:55:50 GMT</pubDate>
+    <pubDate>Sun, 10 Dec 2023 10:03:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -22,7 +22,7 @@
       
       
       
-      <content:encoded><![CDATA[<p>在实现一个双检锁单例的时候，IDEA 提示我要给 <code>INSTANCE</code> 实例加上 <code>volatile</code> 修饰符。当时并不明白为啥，所以选择相信 IDE。但是还是那句话，不能知其然不知其所以然啊，自己写的代码，不能自己心里没底不是。于是乎我一顿网上冲浪，终于整明白了为啥双检单例必须要用 <code>volatile</code> 修饰符。</p><span id="more"></span><h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>这个单例类没什么好说的，就是一个平平无奇的双检锁单例实现。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) {</span><br><span class="line">                <span class="keyword">if</span> (INSTANCE == <span class="literal">null</span>) {</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span> {</span><br><span class="line">        <span class="comment">// Do something here</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>而 IDEA 在外层的 <code>if</code> 上标了一个警告，并且建议我给 <code>INSTANCE</code> 变量加上 <code>volatile</code> 修饰符。</p><p><img data-src="https://blog-static.boris1993.com/java-volatile-in-double-checked-singleton/suggestion-in-idea.png"></p><h2 id="如果不加volatile会有什么问题"><a href="#如果不加volatile会有什么问题" class="headerlink" title="如果不加volatile会有什么问题"></a>如果不加 <code>volatile</code> 会有什么问题</h2><p>上面的代码，乍一看非常严谨，在发现 <code>INSTANCE</code> 是 <code>null</code> 的时候，就对其加锁并再检查一次，还是 <code>null</code> 的话就为它创建一个新的实例，最后返回它。但是看了一些文章之后发现，在多线程场景下，有可能出现虽然成功获取到 <code>INSTANCE</code>，但在调用其中的方法时仍然抛出空指针异常的诡异情况。</p><p>比如有这样一个场景，<code>Thread 1</code> 和 <code>Thread 2</code> 同时请求了 <code>Singleton#getInstance()</code> 方法，<code>Thread 1</code> 执行到了第 8 行，开始实例化这个对象；而 <code>Thread 2</code> 执行到了第 5 行，开始检查 <code>INSTANCE</code> 是否为 <code>null</code>。这个时候，有一定几率，虽然 <code>Thread 2</code> 检查到 <code>INSTANCE</code> 并不是 <code>null</code>，但是调用 <code>Singleton#doSomething()</code> 方法的时候却会抛出空指针异常。</p><p><img data-src="https://blog-static.boris1993.com/java-volatile-in-double-checked-singleton/instance-accessed-by-multi-threads.png"></p><p>造成这个问题的原因就是 Java 的指令重排。</p><p>在搞清楚 <code>Thread 2</code> 看到 <code>INSTANCE</code> 虽然不是 <code>null</code> 却得到一个 <code>null</code> 的原因之前，先要搞清楚实例化对象的时候，JVM 到底干了什么。</p><p>JVM 实例化一个对象的过程，大致可以分为这几步：</p><ol><li>JVM 为这个对象分配一片内存</li><li>在这片内存上初始化这个对象</li><li>将这片内存的地址赋值给 <code>INSTANCE</code> 变量</li></ol><p>因为把内存地址赋值给 <code>INSTANCE</code> 是最后一步，所以 <code>Thread 1</code> 在这一步执行之前，<code>Thread 2</code> 对 <code>INSTANCE == null</code> 的判断一定为 <code>true</code>，进而因为拿不到 <code>Singleton</code> 类的锁而被阻塞，直到 <code>Thread 1</code> 完成对 <code>INSTANCE</code> 变量的实例化。</p><p>但是，上面这三步它不是个原子操作，并且 JVM 可能会进行重排序，也就是说上面这三步可能被重排成</p><ol><li>JVM 为这个对象分配一片内存</li><li>将这片内存的地址赋值给 <code>INSTANCE</code> 变量</li><li>在这片内存上初始化这个对象</li></ol><p>你看，这问题就来了，如果在 <code>Thread 1</code> 做完第二步但没做第三步的时候，<code>Thread 2</code> 开始检查 <code>INSTANCE</code> 是不是 <code>null</code> 就会得到 <code>false</code>，然后就走到 <code>return</code>，得到一个不完整的 <code>INSTANCE</code> 对象。这时候，虽然 <code>INSTANCE</code> 不是 <code>null</code>，但同时它也没有完成初始化，所以 <code>Thread 2</code> 在调用 <code>Singleton#doSomething()</code> 方法的时候，就会抛出空指针异常。</p><p>这个问题的解决方案就是 <code>volatile</code> 修饰符，因为它可以禁止指令重排，所以在给 <code>INSTANCE</code> 加上 <code>volatile</code> 之后，JVM 就会老老实实的先初始化好这个对象，再为 <code>INSTANCE</code> 赋值，这样多线程场景下每个线程得到的 <code>INSTANCE</code> 实例都会是一个初始化好了的 <code>Singleton</code> 对象。</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>在实现一个双检锁单例的时候，IDEA 提示我要给 <code>INSTANCE</code> 实例加上 <code>volatile</code> 修饰符。当时并不明白为啥，所以选择相信 IDE。但是还是那句话，不能知其然不知其所以然啊，自己写的代码，不能自己心里没底不是。于是乎我一顿网上冲浪，终于整明白了为啥双检单例必须要用 <code>volatile</code> 修饰符。</p><span id="more"></span><h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>这个单例类没什么好说的，就是一个平平无奇的双检锁单例实现。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE == <span class="literal">null</span>) {</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) {</span><br><span class="line">                <span class="keyword">if</span> (INSTANCE == <span class="literal">null</span>) {</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span> {</span><br><span class="line">        <span class="comment">// Do something here</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>而 IDEA 在外层的 <code>if</code> 上标了一个警告，并且建议我给 <code>INSTANCE</code> 变量加上 <code>volatile</code> 修饰符。</p><p><img data-src="https://blog-static.boris1993.com/java-volatile-in-double-checked-singleton/suggestion-in-idea.png"></p><h2 id="如果不加volatile会有什么问题"><a href="#如果不加volatile会有什么问题" class="headerlink" title="如果不加volatile会有什么问题"></a>如果不加 <code>volatile</code> 会有什么问题</h2><p>上面的代码，乍一看非常严谨，在发现 <code>INSTANCE</code> 是 <code>null</code> 的时候，就对其加锁并再检查一次，还是 <code>null</code> 的话就为它创建一个新的实例，最后返回它。但是看了一些文章之后发现，在多线程场景下，有可能出现虽然成功获取到 <code>INSTANCE</code>，但在调用其中的方法时仍然抛出空指针异常的诡异情况。</p><p>比如有这样一个场景，<code>Thread 1</code> 和 <code>Thread 2</code> 同时请求了 <code>Singleton#getInstance()</code> 方法，<code>Thread 1</code> 执行到了第 8 行，开始实例化这个对象；而 <code>Thread 2</code> 执行到了第 5 行，开始检查 <code>INSTANCE</code> 是否为 <code>null</code>。这个时候，有一定几率，虽然 <code>Thread 2</code> 检查到 <code>INSTANCE</code> 并不是 <code>null</code>，但是调用 <code>Singleton#doSomething()</code> 方法的时候却会抛出空指针异常。</p><p><img data-src="https://blog-static.boris1993.com/java-volatile-in-double-checked-singleton/instance-accessed-by-multi-threads.png"></p><p>造成这个问题的原因就是 Java 的指令重排。</p><p>在搞清楚 <code>Thread 2</code> 看到 <code>INSTANCE</code> 虽然不是 <code>null</code>，却在方法调用的时候会抛空指针异常的原因之前，先要搞清楚实例化对象的时候，JVM 到底干了什么。</p><p>JVM 实例化一个对象的过程，大致可以分为这几步：</p><ol><li>JVM 为这个对象分配一片内存</li><li>在这片内存上初始化这个对象</li><li>将这片内存的地址赋值给 <code>INSTANCE</code> 变量</li></ol><p>因为把内存地址赋值给 <code>INSTANCE</code> 是最后一步，所以 <code>Thread 1</code> 在这一步执行之前，<code>Thread 2</code> 对 <code>INSTANCE == null</code> 的判断一定为 <code>true</code>，进而因为拿不到 <code>Singleton</code> 类的锁而被阻塞，直到 <code>Thread 1</code> 完成对 <code>INSTANCE</code> 变量的实例化。</p><p>但是，上面这三步它不是个原子操作，并且 JVM 可能会进行重排序，也就是说上面这三步可能被重排成</p><ol><li>JVM 为这个对象分配一片内存</li><li>将这片内存的地址赋值给 <code>INSTANCE</code> 变量</li><li>在这片内存上初始化这个对象</li></ol><p>你看，这问题就来了，如果在 <code>Thread 1</code> 做完第二步但没做第三步的时候，<code>Thread 2</code> 开始检查 <code>INSTANCE</code> 是不是 <code>null</code> 就会得到 <code>false</code>，然后就走到 <code>return</code>，得到一个不完整的 <code>INSTANCE</code> 对象。这时候，虽然 <code>INSTANCE</code> 不是 <code>null</code>，但同时它也没有完成初始化，所以 <code>Thread 2</code> 在调用 <code>Singleton#doSomething()</code> 方法的时候，就会抛出空指针异常。</p><p>这个问题的解决方案就是 <code>volatile</code> 修饰符，因为它可以禁止指令重排，所以在给 <code>INSTANCE</code> 加上 <code>volatile</code> 之后，JVM 就会老老实实的先初始化好这个对象，再为 <code>INSTANCE</code> 赋值，这样多线程场景下每个线程得到的 <code>INSTANCE</code> 实例都会是一个初始化好了的 <code>Singleton</code> 对象。</p>]]></content:encoded>
       
       
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
@@ -86,9 +86,9 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
-      <category domain="https://www.boris1993.com/tags/Wireguard/">Wireguard</category>
-      
       <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
+      
+      <category domain="https://www.boris1993.com/tags/Wireguard/">Wireguard</category>
       
       
       <comments>https://www.boris1993.com/routeros-setup-wireguard.html#disqus_thread</comments>
@@ -207,13 +207,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
-      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
+      
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/routeros-mss-clamping.html#disqus_thread</comments>
@@ -295,11 +295,11 @@
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
       
       
+      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
+      
       <category domain="https://www.boris1993.com/tags/Java/">Java</category>
       
       <category domain="https://www.boris1993.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</category>
-      
-      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
       
       <category domain="https://www.boris1993.com/tags/%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B/">守护线程</category>
       
@@ -326,11 +326,11 @@
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
       
       
+      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
+      
       <category domain="https://www.boris1993.com/tags/Java/">Java</category>
       
       <category domain="https://www.boris1993.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</category>
-      
-      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
       
       <category domain="https://www.boris1993.com/tags/CountDownLatch/">CountDownLatch</category>
       
@@ -477,13 +477,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
-      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
+      
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/setting-up-microserver-gen8-routeros.html#disqus_thread</comments>
