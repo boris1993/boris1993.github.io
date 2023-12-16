@@ -9,8 +9,35 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Tue, 12 Dec 2023 15:40:05 GMT</pubDate>
+    <pubDate>Sat, 16 Dec 2023 13:55:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Java 源码阅读 - 类加载的双亲委派模型</title>
+      <link>https://www.boris1993.com/java-read-src-parent-delegation-model.html</link>
+      <guid>https://www.boris1993.com/java-read-src-parent-delegation-model.html</guid>
+      <pubDate>Wed, 13 Dec 2023 15:29:52 GMT</pubDate>
+      
+      <description>&lt;p&gt;关于 Java 的类加载机制，尽管我看过几篇文章，知道个&lt;code&gt;双亲委派模型&lt;/code&gt;，但是从来没钻进源码里看它到底是怎么委派的。&lt;/p&gt;</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p>关于 Java 的类加载机制，尽管我看过几篇文章，知道个<code>双亲委派模型</code>，但是从来没钻进源码里看它到底是怎么委派的。</p><span id="more"></span><h2 id="什么双亲？怎么委派？"><a href="#什么双亲？怎么委派？" class="headerlink" title="什么双亲？怎么委派？"></a>什么双亲？怎么委派？</h2><p>我刚一开始听到<code>双亲委派</code>，还纳闷咋还双亲？后来才知道，这纯纯就是 <code>Parent Delegation</code> 这个词的误译。<code>Parent</code> 这里指的并不是双亲，而是指父辈。所以看到有人翻译为 “向上委托模型”，我感觉这个翻译更好一点，至于另一个翻译 “啃老模型”…… 倒也没毛病……</p><p>至于怎么委托，相信各位都背的滚瓜烂熟了。那就是，当类加载器收到类加载请求的时候，它首先会把这个请求委托给上一层的类加载器去尝试加载，直到委托到启动类加载器；只有当上一层类加载器无法完成这个加载请求的时候，次一级类加载器才会尝试自己加载。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/classloader-relationship.png"></p><h2 id="代码上的实现"><a href="#代码上的实现" class="headerlink" title="代码上的实现"></a>代码上的实现</h2><p>截图里面的代码就是 <code>ClassLoader#loadClass</code> 方法的实现，来自 <code>Liberica JDK 8</code>。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/load-class-method-implementation.png"></p><p>看得出来，逻辑还是很简单易懂的。一进来先加个锁，防止出现并发问题。然后检查这个类是不是已经被加载了。没被加载的话，就一层层向上委托，直到到达启动类加载器。如果上一层类加载器返回了 <code>null</code> 或者抛出了 <code>ClassNotFoundException</code> 异常，就说明它没找到这个类，那么本层类加载器就会尝试加载这个类，如果找不到的话，它就接着把请求交回下一层的类加载器。</p><p>虽然上面的图和代码已经可以解释双亲委派的工作机制，但我还是喜欢调试进去看看代码具体是咋走的。所以我写了这么几行，用来调试类加载器。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException {</span><br><span class="line">        <span class="type">ClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> Main.class.getClassLoader();</span><br><span class="line">        System.out.println(classLoader.toString());</span><br><span class="line">        <span class="comment">// 在下面这一行下个断点，走到这一行之后再给 ClassLoader#loadClass 下个断点</span></span><br><span class="line">        classLoader.loadClass(<span class="string">"DaemonThreadDemo"</span>);</span><br><span class="line">        classLoader.loadClass(<span class="string">"java.util.HashMap"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>断点从 <code>classLoader.loadClass("DaemonThreadDemo")</code> 这一行进去并停留在 <code>if (c == null)</code> 之后可以看到，目前类加载的委托请求是交给 <code>AppClassLoader</code>，看得出来，这个就是应用类加载器。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/debug-classloader-1.png"></p><p>继续往下走到 <code>c = parent.loadClass(name, false)</code> 这一行，然后给 <code>parent</code> 变量添加一个监视，就可以看到接下来 <code>AppClassLoader</code> 要把这个类加载请求委托给 <code>ExtClassLoader</code>，同理可得，这个就是扩展类加载器。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/debug-classloader-2.png"></p><p>接着往下走，继续调试 <code>ExtClassLoader</code>，这时候可以看到 <code>parent</code> 是 <code>null</code>。没有了 <code>parent</code>，这个类加载器就会将这个类加载请求委托给启动类加载器并尝试加载这个类。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/debug-classloader-3.png"></p><p>逐层点进去，可以看到如下代码：</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/debug-classloader-4.png"></p><p>emmmm…… 走到了一个 native 方法了呢…… 嘛，里面的代码先不管了，看名字能猜得出来，在这里会调用启动类加载器来尝试加载这个类。</p><p>因为要加载的 <code>DaemonThreadDemo</code> 类并不归启动类加载器管，所以 <code>findBootstrapClassOrNull</code> 返回了 <code>null</code>。<code>ExtClassLoader</code> 得知启动类加载器加载失败，那么它自己就会再尝试加载。然而这个类也不归扩展类加载器管，所以在 <code>ExtClassLoader</code> 里面调用 <code>findClass</code> 方法会抛出 <code>ClassNotFoundException</code> 异常并返回到 <code>AppClassLoader</code>。</p><p>这时候，因为 <code>DaemonThreadDemo</code> 这个类归应用类加载器管，所以这一次调用 <code>findClass</code> 成功的找到了这个类。</p><p><img data-src="https://blog-static.boris1993.com/java-read-src-parent-delegation-model/debug-classloader-5.png"></p><p>所以代码可以成功走到 <code>return c</code> 这一行，来完成一个类的加载。</p><h2 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h2><p>说到双亲委派模型，必会谈到怎么破坏它。看完上面的代码就明白了，我们可以自己创建一个自定义类加载器，并重写 <code>loadClass</code> 方法，不让它向上委派就行了。</p><h2 id="番外：尝试理解findBootstrapClass"><a href="#番外：尝试理解findBootstrapClass" class="headerlink" title="番外：尝试理解findBootstrapClass"></a>番外：尝试理解 <code>findBootstrapClass</code></h2><p>虽然这部分是 C 和 C++ 的实现，但还是想硬着头皮尝试看一下。到 <code>Bellsoft</code> 的官网下载<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5iZWxsLXN3LmNvbS9qYXZhLzh1MzkyKzkvYmVsbHNvZnQtamRrOHUzOTIrOS1zcmMudGFyLmd6">虚拟机的源码<i class="fa fa-external-link-alt"></i></span>之后，我找到了 <code>FindBootStrapClass</code> 函数的实现：</p><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这部分代码在 java_md.c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The implementation for finding classes from the bootstrap</span></span><br><span class="line"><span class="comment"> * class loader, refer to java.h</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> FindClassFromBootLoader_t *findBootClass = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">jclass <span class="title function_">FindBootStrapClass</span><span class="params">(JNIEnv *env, <span class="type">const</span> <span class="type">char</span> *classname)</span></span><br><span class="line">{</span><br><span class="line">   HMODULE hJvm;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (findBootClass == <span class="literal">NULL</span>) {</span><br><span class="line">       hJvm = GetModuleHandle(JVM_DLL);</span><br><span class="line">       <span class="keyword">if</span> (hJvm == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">       <span class="comment">/* need to use the demangled entry point */</span></span><br><span class="line">       findBootClass = (FindClassFromBootLoader_t *)GetProcAddress(hJvm,</span><br><span class="line">            <span class="string">"JVM_FindClassFromBootLoader"</span>);</span><br><span class="line">       <span class="keyword">if</span> (findBootClass == <span class="literal">NULL</span>) {</span><br><span class="line">          JLI_ReportErrorMessage(DLL_ERROR4, <span class="string">"JVM_FindClassFromBootLoader"</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">       }</span><br><span class="line">   }</span><br><span class="line">   <span class="keyword">return</span> findBootClass(env, classname);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>这个 C 语言…… 确实跟我大学学的 C 语言不一样啊…… 爬了些文，大概理解这里是要找 <code>JVM_FindClassFromBootLoader</code> 这个函数的实际地址，然后赋给 <code>findBootClass</code> 指针并执行它的代码。于是我接着挖到了 <code>JVM_FindClassFromBootLoader</code> 函数的实现。</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这部分代码在 jvm.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Returns a class loaded by the bootstrap class loader; or null</span></span><br><span class="line"><span class="comment">// if not found.  ClassNotFoundException is not thrown.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Rationale behind JVM_FindClassFromBootLoader</span></span><br><span class="line"><span class="comment">// a&gt; JVM_FindClassFromClassLoader was never exported in the export tables.</span></span><br><span class="line"><span class="comment">// b&gt; because of (a) java.dll has a direct dependecy on the  unexported</span></span><br><span class="line"><span class="comment">//    private symbol "_JVM_FindClassFromClassLoader@20".</span></span><br><span class="line"><span class="comment">// c&gt; the launcher cannot use the private symbol as it dynamically opens</span></span><br><span class="line"><span class="comment">//    the entry point, so if something changes, the launcher will fail</span></span><br><span class="line"><span class="comment">//    unexpectedly at runtime, it is safest for the launcher to dlopen a</span></span><br><span class="line"><span class="comment">//    stable exported interface.</span></span><br><span class="line"><span class="comment">// d&gt; re-exporting JVM_FindClassFromClassLoader as public, will cause its</span></span><br><span class="line"><span class="comment">//    signature to change from _JVM_FindClassFromClassLoader@20 to</span></span><br><span class="line"><span class="comment">//    JVM_FindClassFromClassLoader and will not be backward compatible</span></span><br><span class="line"><span class="comment">//    with older JDKs.</span></span><br><span class="line"><span class="comment">// Thus a public/stable exported entry point is the right solution,</span></span><br><span class="line"><span class="comment">// public here means public in linker semantics, and is exported only</span></span><br><span class="line"><span class="comment">// to the JDK, and is not intended to be a public API.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">JVM_ENTRY</span>(jclass, <span class="built_in">JVM_FindClassFromBootLoader</span>(JNIEnv* env,</span><br><span class="line">                                              <span class="type">const</span> <span class="type">char</span>* name))</span><br><span class="line">  <span class="built_in">JVMWrapper2</span>(<span class="string">"JVM_FindClassFromBootLoader %s"</span>, name);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Java libraries should ensure that name is never null...</span></span><br><span class="line">  <span class="keyword">if</span> (name == <span class="literal">NULL</span> || (<span class="type">int</span>)<span class="built_in">strlen</span>(name) &gt; Symbol::<span class="built_in">max_length</span>()) {</span><br><span class="line">    <span class="comment">// It's impossible to create this class;  the name cannot fit</span></span><br><span class="line">    <span class="comment">// into the constant pool.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  TempNewSymbol h_name = SymbolTable::<span class="built_in">new_symbol</span>(name, CHECK_NULL);</span><br><span class="line">  Klass* k = SystemDictionary::<span class="built_in">resolve_or_null</span>(h_name, CHECK_NULL);</span><br><span class="line">  <span class="keyword">if</span> (k == <span class="literal">NULL</span>) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (TraceClassResolution) {</span><br><span class="line">    <span class="built_in">trace_class_resolution</span>(k);</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> (jclass) JNIHandles::<span class="built_in">make_local</span>(env, k-&gt;<span class="built_in">java_mirror</span>());</span><br><span class="line">JVM_END</span><br></pre></td></tr></tbody></table></figure><p>好吧，更看不懂了。继续爬了文之后，理解这里大致做了三件事：从常量池中拿到类名的信息；查找类的信息并实例化 <code>Klass</code>；将 <code>Klass</code> 对象转换为 <code>jclass</code> 类型并返回。</p><p>算了，虚拟机源码就看到这吧…… 有兴趣的同志可以看<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veW91Z2V3ZS9wLzE0NDI2OTM2Lmh0bWw="> JVM 系列 (四)：java 方法的查找过程实现<i class="fa fa-external-link-alt"></i></span>这篇博客。</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
+      
+      
+      <category domain="https://www.boris1993.com/tags/Java/">Java</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/">双亲委派</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">类加载</category>
+      
+      
+      <comments>https://www.boris1993.com/java-read-src-parent-delegation-model.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>volatile 修饰符在双检锁单例模式中的作用</title>
@@ -249,13 +276,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
+      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/routeros-mss-clamping.html#disqus_thread</comments>
@@ -308,9 +335,9 @@
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
       
       
-      <category domain="https://www.boris1993.com/tags/MySQL/">MySQL</category>
-      
       <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
+      
+      <category domain="https://www.boris1993.com/tags/MySQL/">MySQL</category>
       
       <category domain="https://www.boris1993.com/tags/%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/">最左匹配原则</category>
       
@@ -519,13 +546,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
+      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/setting-up-microserver-gen8-routeros.html#disqus_thread</comments>
@@ -587,36 +614,6 @@
       
       
       <comments>https://www.boris1993.com/swiftui-trigger-haptic-feedback-when-changing-tabs.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>通过 Hexo 博客完成 NIP-05 验证</title>
-      <link>https://www.boris1993.com/nostr-nip-05-with-hexo.html</link>
-      <guid>https://www.boris1993.com/nostr-nip-05-with-hexo.html</guid>
-      <pubDate>Sat, 04 Feb 2023 17:26:02 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;让Hexo在生成时包含-well-known目录&quot;&gt;&lt;a href=&quot;#让Hexo在生成时包含-well-known目录&quot; class=&quot;headerlink&quot; title=&quot;让Hexo在生成时包含.well-known目录&quot;&gt;&lt;/a&gt;让 Hexo 在生成时包含&lt;</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="让Hexo在生成时包含-well-known目录"><a href="#让Hexo在生成时包含-well-known目录" class="headerlink" title="让Hexo在生成时包含.well-known目录"></a>让 Hexo 在生成时包含<code>.well-known</code> 目录</h2><p>编辑 <code>config.yml</code>，添加如下配置：</p><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">include:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">".well-known/**"</span></span><br></pre></td></tr></tbody></table></figure><h2 id="转换公钥格式"><a href="#转换公钥格式" class="headerlink" title="转换公钥格式"></a>转换公钥格式</h2><p>Damus 生成的 <code>npub</code> 开头的公钥不能直接用，要先转换成十六进制格式的公钥。可以用<span class="exturl" data-url="aHR0cHM6Ly9kYW11cy5pby9rZXkv">这个网站<i class="fa fa-external-link-alt"></i></span>来转换。</p><p>把 <code>npub</code> 开头的公钥粘贴进 <code>damus key</code> 一栏，<code>hex key</code> 会自动计算出来，复制 <code>hex key</code> 的内容备用。</p><h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>在 <code>source</code> 目录下新建一个名为<code>.well-known</code> 的目录，然后在<code>.well-known</code> 目录中创建 <code>nostr.json</code>，填写如下信息：</p><figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"names"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"你的用户名"</span><span class="punctuation">:</span> <span class="string">"刚刚转换得到的hex key"</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure><p>在本地运行 <code>hexo clean &amp;&amp; hexo g</code>，生成成功后检查 <code>public</code> 目录中是否存在<code>.well-known/nostr.json</code> 文件，如存在则说明配置正确。</p><h2 id="配置Nostr"><a href="#配置Nostr" class="headerlink" title="配置Nostr"></a>配置 Nostr</h2><p>提交代码并部署成功后，即可在 <code>nostr</code> 客户端配置 <code>NIP-05</code> 认证，本文以 <code>Damus</code> 为例。</p><p>点击左上角头像，进入 <code>Profile</code>，点击 <code>Edit</code>，在 <code>NIP-05 VERIFICATION</code> 一栏中填写<code>你的username@你的博客网站</code>，比如我填写的是 <code>boris1993@www.boris1993.com</code>，最后点击 <code>Save</code>。</p><p>如果一切正常的话，在你的 Profile 页面就能看到一个对勾图标，代表验证成功。</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
-      
-      
-      <category domain="https://www.boris1993.com/tags/nostr/">nostr</category>
-      
-      <category domain="https://www.boris1993.com/tags/NIP-05/">NIP-05</category>
-      
-      <category domain="https://www.boris1993.com/tags/Damus/">Damus</category>
-      
-      
-      <comments>https://www.boris1993.com/nostr-nip-05-with-hexo.html#disqus_thread</comments>
       
     </item>
     
