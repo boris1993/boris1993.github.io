@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Sat, 06 Jan 2024 14:12:17 GMT</pubDate>
+    <pubDate>Sat, 06 Jan 2024 14:15:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -301,13 +301,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
+      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/routeros-mss-clamping.html#disqus_thread</comments>
@@ -360,9 +360,9 @@
       <category domain="https://www.boris1993.com/categories/learning/">学知识</category>
       
       
-      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
-      
       <category domain="https://www.boris1993.com/tags/MySQL/">MySQL</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
       
       <category domain="https://www.boris1993.com/tags/%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/">最左匹配原则</category>
       
@@ -571,13 +571,13 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
+      
       <category domain="https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</category>
       
       <category domain="https://www.boris1993.com/tags/Gen8/">Gen8</category>
       
       <category domain="https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/setting-up-microserver-gen8-routeros.html#disqus_thread</comments>

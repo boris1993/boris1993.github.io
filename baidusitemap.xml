@@ -1,43 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
+    <loc>https://www.boris1993.com/migrating-blog-images-to-backblaze.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/routeros-mss-clamping.html</loc>
+    <loc>https://www.boris1993.com/migrating-to-umami-v2.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/routeros-setup-wireguard.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/setting-up-microserver-gen8-routeros.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/setting-up-microserver-gen8.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
+    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
@@ -85,95 +57,55 @@
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
+    <loc>https://www.boris1993.com/resolving-nginx-sni-issue.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
+    <loc>https://www.boris1993.com/routeros-mss-clamping.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-read-src-timer.html</loc>
+    <loc>https://www.boris1993.com/routeros-setup-wireguard.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
+    <loc>https://www.boris1993.com/run-tiantang-on-synology-docker.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <loc>https://www.boris1993.com/scroll-view-auto-fit-height.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <loc>https://www.boris1993.com/self-hosting-tailscale-derp.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <loc>https://www.boris1993.com/set-up-caddy-server.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <loc>https://www.boris1993.com/setting-up-microserver-gen8-routeros.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/setting-up-microserver-gen8.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    <loc>https://www.boris1993.com/setting-up-tailscale.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-volatile-in-double-checked-singleton.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/migrating-blog-images-to-backblaze.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/migrating-to-umami-v2.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/monitor-gc-with-visual-vm.html</loc>
+    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
@@ -229,15 +161,11 @@
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/shell-set-ex.html</loc>
+    <loc>https://www.boris1993.com/java-read-src-timer.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
-    <lastmod>2024-01-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
+    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
@@ -342,6 +270,78 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-volatile-in-double-checked-singleton.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-configure-mirrors.html</loc>
+    <lastmod>2024-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html</loc>
     <lastmod>2024-01-06</lastmod>
   </url>
   <url>
