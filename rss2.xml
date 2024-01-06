@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Sat, 06 Jan 2024 14:35:16 GMT</pubDate>
+    <pubDate>Sat, 06 Jan 2024 14:37:47 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -180,9 +180,9 @@
       <category domain="https://www.boris1993.com/categories/playing/">瞎折腾</category>
       
       
-      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
-      
       <category domain="https://www.boris1993.com/tags/Wireguard/">Wireguard</category>
+      
+      <category domain="https://www.boris1993.com/tags/RouterOS/">RouterOS</category>
       
       
       <comments>https://www.boris1993.com/routeros-setup-wireguard.html#disqus_thread</comments>
