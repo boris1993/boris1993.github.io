@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -50,70 +58,6 @@
   </url>
   <url>
     <loc>https://www.boris1993.com/zos-xmit.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-timer.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-volatile-in-double-checked-singleton.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -193,6 +137,94 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-spring-bean-scopes.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-thread-security-deadlock.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-understand-parallel-gc-logs.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-volatile-in-double-checked-singleton.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/jdbc-transaction-and-isolation-level.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/leetcode-notes.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-producer-consumer-problem.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-timer.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-2-first-servlet.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-servlet-3-handle-get-and-post.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/routeros-setup-wireguard.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -229,22 +261,6 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/spring-boot-enable-https.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -257,19 +273,19 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/build-dns-server-on-macos.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
+    <loc>https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
     <loc>https://www.boris1993.com/caddy-and-github-custom-domain.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/change-google-play-market-location.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -285,11 +301,15 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/customize-context-xml-for-individual-webapp.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/concourse-using-vars.html</loc>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -305,10 +325,6 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -321,11 +337,11 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
+    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html</loc>
+    <loc>https://www.boris1993.com/git-commandline-unescape-chinese-characters.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -341,6 +357,10 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -349,11 +369,11 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/install-elk-part-kibana.html</loc>
+    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/install-elk-part-es.html</loc>
+    <loc>https://www.boris1993.com/install-elk-part-kibana.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -369,15 +389,19 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-daemon-thread.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-customized-annotations.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
+    <loc>https://www.boris1993.com/java-daemon-thread.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
     <loc>https://www.boris1993.com/java-gc-algorithms.html</loc>
+    <lastmod>2024-01-08</lastmod>
+  </url>
+  <url>
+    <loc>https://www.boris1993.com/java-how-to-wait-for-threads-before-continuing.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
@@ -393,10 +417,6 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-how-to-wait-for-threads-before-continuing.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-jvm-stack-frame.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
@@ -405,27 +425,7 @@
     <lastmod>2024-01-08</lastmod>
   </url>
   <url>
-    <loc>https://www.boris1993.com/java-multi-threading-producer-consumer-problem.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
     <loc>https://www.boris1993.com/java-multi-threading-how-to.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
-    <lastmod>2024-01-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.boris1993.com/i-cried-just-now.html</loc>
     <lastmod>2024-01-08</lastmod>
   </url>
 </urlset> 
