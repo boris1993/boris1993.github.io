@@ -9,13 +9,13 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Thu, 11 Jan 2024 16:33:40 GMT</pubDate>
+    <pubDate>Sun, 14 Jan 2024 08:04:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>Spring Boot 启动流程分析</title>
-      <link>https://www.boris1993.com/how-spring-boot-application-starts-up.html</link>
-      <guid>https://www.boris1993.com/how-spring-boot-application-starts-up.html</guid>
+      <link>https://www.boris1993.com/spring-boot-application-starts-up.html</link>
+      <guid>https://www.boris1993.com/spring-boot-application-starts-up.html</guid>
       <pubDate>Sat, 06 Jan 2024 14:54:15 GMT</pubDate>
       
       <description>&lt;p&gt;想来用了这么久的 Spring Boot，但一直没仔细了解它是怎么启动的。那既然想起来了，不如趁热打铁，从它的入口开始，深入看看 Spring Boot 在启动时都做了些什么。&lt;/p&gt;</description>
@@ -33,7 +33,7 @@
       <category domain="https://www.boris1993.com/tags/Spring-Boot/">Spring Boot</category>
       
       
-      <comments>https://www.boris1993.com/how-spring-boot-application-starts-up.html#disqus_thread</comments>
+      <comments>https://www.boris1993.com/spring-boot-application-starts-up.html#disqus_thread</comments>
       
     </item>
     
