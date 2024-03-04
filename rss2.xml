@@ -9,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Boris has arrived!</description>
-    <pubDate>Mon, 22 Jan 2024 12:42:51 GMT</pubDate>
+    <pubDate>Mon, 04 Mar 2024 12:33:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -447,9 +447,9 @@
       
       <category domain="https://www.boris1993.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</category>
       
-      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
-      
       <category domain="https://www.boris1993.com/tags/%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B/">守护线程</category>
+      
+      <category domain="https://www.boris1993.com/tags/%E9%9D%A2%E8%AF%95/">面试</category>
       
       <category domain="https://www.boris1993.com/tags/daemon-thread/">daemon thread</category>
       
