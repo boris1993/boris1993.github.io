@@ -5264,6 +5264,11 @@ reject_the_task --&gt; 结束
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> DefaultBootstrapContext <span class="title function_">createBootstrapContext</span><span class="params">()</span> {</span><br><span class="line">    <span class="type">DefaultBootstrapContext</span> <span class="variable">bootstrapContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultBootstrapContext</span>();</span><br><span class="line">    <span class="built_in">this</span>.bootstrapRegistryInitializers.forEach((initializer) -&gt; initializer.initialize(bootstrapContext));</span><br><span class="line">    <span class="keyword">return</span> bootstrapContext;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>在构造 <code>SpringApplication</code> 时准备的 <code>this.bootstrapRegistryInitializers</code> 在这用上了。看代码的话就是分别执行每个 initializer 的 <code>initailize</code> 方法。但是我这个应用里面没有 <code>BootstrapRegistryInitializer</code> 的实现类，所以也就没法深入进去看它到底干了什么。</p>
+<p>不过看了眼<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NwcmluZy1wcm9qZWN0cy9zcHJpbmctYm9vdC9ibGFtZS84MzcwNDdhYjc5YTIyNmQ0MTZkZjY2ZDY3ZDJmNzY4NmFiNzI5M2NkL3NwcmluZy1ib290LXByb2plY3Qvc3ByaW5nLWJvb3Qvc3JjL21haW4vamF2YS9vcmcvc3ByaW5nZnJhbWV3b3JrL2Jvb3QvU3ByaW5nQXBwbGljYXRpb24uamF2YSNMMzU3"> Git Blame<i class="fa fa-external-link-alt"></i></span>，发现了这么一段话：</p>
+<blockquote>
+<p>Refactor <code>BootstrapRegistry</code> support following initial prototype work with the Spring Cloud team.</p>
+</blockquote>
+<p>看起来是跟 Spring Cloud 相关的，那暂且就不关注了。</p>
 <h3 id="进入无头模式"><a href="#进入无头模式" class="headerlink" title="进入无头模式"></a>进入无头模式</h3><p>在 Oracle 的文档<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS90ZWNobmljYWwtcmVzb3VyY2VzL2FydGljbGVzL2phdmFzZS9oZWFkbGVzcy5odG1s"> Using Headless Mode in the Java SE Platform<i class="fa fa-external-link-alt"></i></span>中提到</p>
 <blockquote>
 <p>Headless mode is a system configuration in which the display device, keyboard, or mouse is lacking. Sounds unexpected, but actually you can perform different operations in this mode, even with graphic data.</p>
