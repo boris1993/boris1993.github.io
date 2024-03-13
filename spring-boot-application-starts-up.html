@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/how-spring-boot-application-starts-up/default-locations-for-searching-config-files.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/how-spring-boot-application-starts-up/loading-config-from-properties-with-profile.png">
 <meta property="article:published_time" content="2024-01-06T14:54:15.000Z">
-<meta property="article:modified_time" content="2024-03-13T14:33:49.839Z">
+<meta property="article:modified_time" content="2024-03-13T14:59:30.147Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
@@ -298,7 +298,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-13 22:33:49" itemprop="dateModified" datetime="2024-03-13T22:33:49+08:00">2024-03-13</time>
+      <time title="修改时间：2024-03-13 22:59:30" itemprop="dateModified" datetime="2024-03-13T22:59:30+08:00">2024-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -467,8 +467,14 @@
 <p>看下来就是，在注册一个单例 bean 的时候，会传进来 bean 的名字和实际的对象。在 <code>registerSingleton</code> 中首先检查这个名字是不是已经被注册过了，没有被注册过的话就会调用 <code>addSingleton</code> 来注册。而所谓注册，就是：</p>
 <ul>
 <li>在 <code>singletonObjects</code> 这个 Map 里面增加一个条目，key 是 bean 的名字，value 是 bean 对应的对象；</li>
-<li>从 <code>singletonFactories</code> 和 <code>earlySingletonObjects</code> 中删掉以这个 bean 名字为 key 的条目；（不过这两个 Map 我也暂时没看懂是干什么的）</li>
+<li>从 <code>singletonFactories</code> 和 <code>earlySingletonObjects</code> 中删掉以这个 bean 名字为 key 的条目；</li>
 <li>在 <code>registeredSingletons</code> 这个 Set 里面记录这次注册的 bean 的名字。</li>
+</ul>
+<p>上面提到的这三个 Map 实际上就是 Spring 的三级缓存。</p>
+<ul>
+<li><code>singletonObjects</code> 是一级缓存，存储的是完整创建好的单例 bean 对象。在创建一个单例 bean 时，Spring 会先从这里尝试获取这个 bean 的实例，如果找到则直接返回，否则继续创建这个 bean；</li>
+<li><code>earlySingletonObjects</code> 是二级缓存，存储的是尚未完全创建好的 “半成品” 单例 bean 对象。在创建单例 bean 时，如果发现这个 bean 存在循环依赖，那么 Spring 会先创建这个 bean 的 “半成品” 对象并将其存到这里。当循环依赖的 bean 创建完成后，Spring 再将这里存储的代理对象替换为完整的 bean 对象；</li>
+<li><code>singletonFactories</code> 是三级缓存，存储的是单例 bean 的创建工厂。当一个单例 bean 被创建时，Spring 会先将该 bean 的创建工厂存储到这里，然后再执行工厂的 <code>getObject()</code> 方法生成该 bean 的实例对象。在该 bean 被其他 bean 引用时，Spring 会从这里获取该 bean 的创建工厂来创建出这个 bean 的实例，并将这个实例存储到 <code>singletonObjects</code> 中。</li>
 </ul>
 <p>返回到 <code>registerSingleton</code> 之后，继续执行 <code>updateManualSingletonNames</code> 方法：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">updateManualSingletonNames</span><span class="params">(Consumer&lt;Set&lt;String&gt;&gt; action, Predicate&lt;Set&lt;String&gt;&gt; condition)</span> {</span><br><span class="line">    <span class="keyword">if</span> (hasBeanCreationStarted()) {</span><br><span class="line">        <span class="comment">// Cannot modify startup-time collection elements anymore (for stable iteration)</span></span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="built_in">this</span>.beanDefinitionMap) {</span><br><span class="line">            <span class="keyword">if</span> (condition.test(<span class="built_in">this</span>.manualSingletonNames)) {</span><br><span class="line">                Set&lt;String&gt; updatedSingletons = <span class="keyword">new</span> <span class="title class_">LinkedHashSet</span>&lt;&gt;(<span class="built_in">this</span>.manualSingletonNames);</span><br><span class="line">                action.accept(updatedSingletons);</span><br><span class="line">                <span class="built_in">this</span>.manualSingletonNames = updatedSingletons;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">// Still in startup registration phase</span></span><br><span class="line">        <span class="keyword">if</span> (condition.test(<span class="built_in">this</span>.manualSingletonNames)) {</span><br><span class="line">            action.accept(<span class="built_in">this</span>.manualSingletonNames);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>

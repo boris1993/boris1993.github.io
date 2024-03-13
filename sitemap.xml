@@ -2,33 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.boris1993.com/manifest.json</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/index.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/spring-boot-application-starts-up.html</loc>
     
     <lastmod>2024-03-13</lastmod>
@@ -164,6 +137,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/manifest.json</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/about/index.html</loc>
     
     <lastmod>2024-03-13</lastmod>
@@ -174,6 +156,69 @@
   
   <url>
     <loc>https://www.boris1993.com/categories/index.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/index.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/images/favicon/manifest.json</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
+    
+    <lastmod>2024-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
     
     <lastmod>2024-03-13</lastmod>
     
@@ -984,51 +1029,6 @@
   
   <url>
     <loc>https://www.boris1993.com/java-multi-threading-thread-pool.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-arraylist.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashcode-and-equals.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
-    
-    <lastmod>2024-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-parent-delegation-model.html</loc>
     
     <lastmod>2024-03-13</lastmod>
     
