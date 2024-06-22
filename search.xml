@@ -5235,6 +5235,86 @@ reject_the_task --&gt; 结束
       </tags>
   </entry>
   <entry>
+    <title>在 Spring Boot 应用中启用 HTTPS</title>
+    <url>/spring-boot-enable-https.html</url>
+    <content><![CDATA[<p>在 <code>application.yml</code> 中添加如下配置，即可在 Spring Boot 项目中开启 HTTPS。</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 如果有需要的话，配置应用监听HTTPS的默认端口</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">  <span class="attr">ssl:</span></span><br><span class="line">    <span class="comment"># 我把证书放在了 resources/cert/certificate.pfx下</span></span><br><span class="line">    <span class="comment"># 使用时需要按照实际情况修改下面的路径</span></span><br><span class="line">    <span class="attr">key-store:</span> <span class="string">classpath:cert/certificate.pfx</span></span><br><span class="line">    <span class="attr">key-store-password:</span> <span class="string">pA55w0Rd</span></span><br><span class="line">    <span class="comment"># 证书类型需要按照实际类型填写</span></span><br><span class="line">    <span class="comment"># 本例使用PKCS12格式，所以写PKCS12。如果是JKS格式，那么需要填写JKS</span></span><br><span class="line">    <span class="comment"># 因为PKCS12比JKS有更好的通用型，所以个人建议使用PKCS12格式</span></span><br><span class="line">    <span class="attr">key-store-type:</span> <span class="string">PKCS12</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+
+<span id="more"></span>
+
+<p>使用如下命令即可将 JKS 证书转换为 PKCS12 证书：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.pfx -deststoretype pkcs12</span><br></pre></td></tr></tbody></table></figure>
+
+<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly93d3cudGhvbWFzdml0YWxlLmNvbS9odHRwcy1zcHJpbmctYm9vdC1zc2wtY2VydGlmaWNhdGUv">How to enable HTTPS in a Spring Boot Java application<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmctYm9vdC9kb2NzLzIuMi4yLlJFTEVBU0UvcmVmZXJlbmNlL2h0bWwvaG93dG8uaHRtbCNob3d0by1jb25maWd1cmUtc3Ns">Spring Boot Docs - Configure SSL<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>学知识</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring Boot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 Spring 中通过配置类注入配置文件的值</title>
+    <url>/spring-injecting-property-value-with-configuration-bean.html</url>
+    <content><![CDATA[<p>我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用 <code>@Value()</code> 注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。</p>
+<span id="more"></span>
+
+<h2 id="旧的做法有什么问题"><a href="#旧的做法有什么问题" class="headerlink" title="旧的做法有什么问题"></a>旧的做法有什么问题</h2><p>假设我们现在有这样一个 <code>application.yml</code>，其中 <code>credentials</code> 部分是我自定义的一个属性：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">9999</span></span><br><span class="line"></span><br><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">A_VERY_SECRET_TOKEN</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后，我们会在用到它的地方，直接通过 <code>@Value</code> 注解把它注入进来，就像这样：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Value("${credientials.token}")</span></span><br><span class="line">  <span class="keyword">private</span> String token;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>好像没什么问题对吧，直接用表达式把值拿进来，然后该怎么用就怎么用。但是我不知道你们有没有注意过，这种做法其实既不利于后期重构，也不利于为代码生成好的文档。</p>
+<p>比如说，这个值在多个类中都有被引用，但某一天，我们觉得这个名字不够直观，我们想改成 <code>contactServiceAppToken</code>，那么我们就只能先改掉属性的名字，然后在代码里面全文替换，把 <code>credentials.token</code> 批量替换成 <code>credentials.contactServiceAppToken</code>。我不知道你们是怎么想的，我每次做这种文本批量替换都很慌，生怕一个没看见而改掉了不应该改的东西。</p>
+<p>而对于生成文档，我们都知道，在 Java 代码上面我们可以使用 JavaDoc 来编写文档，阐明这个类的作用等等。而对于 YAML 文件，则没有类似的东西，我们只能在属性上面写普通的注释。可是，大篇幅的注释又有可能会影响 YAML 文件的可读性，更不用说有谁会在看代码的时候专程去看 YAML 文件？</p>
+<p>所以，我会建议团队使用配置类，也就是本文下面要讲的这个东西，来管理和注入这些自定义的属性。</p>
+<h2 id="来个示例"><a href="#来个示例" class="headerlink" title="来个示例"></a>来个示例</h2><p>首先，我们需要创建一个配置类，来给这些属性找一个家。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 这个注解是重点，说明我们要把配置文件的 credentials 部分映射到这里</span></span><br><span class="line"><span class="meta">@ConfigurationProperties("credentials")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Credentials</span> {</span><br><span class="line">  <span class="comment">// 属性名与变量名保持一致即可，Spring会自动处理两者的绑定关系</span></span><br><span class="line">  <span class="comment">// 同时，Spring会自动完成不同命名方式的转换，比如 kebab-case 变成 camelCase</span></span><br><span class="line">  <span class="keyword">private</span> String token;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>接下来，在要使用这些属性的地方，把这个配置类注入，然后直接 get 属性的值，就可以了。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Credentials credentials;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Credentials credentials)</span> {</span><br><span class="line">    <span class="built_in">this</span>.credentials = credentials;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> credentials.getToken();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>与直接取值的方法比较起来，使用配置类有这么几个优点：</p>
+<ul>
+<li>如果在重构的时候要改变属性名，那么我们只需要修改配置文件里面的属性名，和配置类里面的属性名。当然要记得使用 IDE 里面的重构功能改名，这样 IDE 会自动分析这个属性的引用，并自动改正过来。</li>
+<li>使用配置类还可以方便我们生成文档。如果直接在配置文件里面写文档，一方面是不一定易读，另一方面，也不是所有人都会想到在配置文件里面还有文档。而使用配置类的话，我们只需要在类上面加上 JavaDoc 就好了。</li>
+<li>而且，我们还不需要担心打错字，导致 <code>@Value</code> 注入失败而使得应用起不来。虽然这不是什么大问题，改正就行了，但毕竟还是麻烦。</li>
+</ul>
+<h2 id="多层属性怎么办"><a href="#多层属性怎么办" class="headerlink" title="多层属性怎么办"></a>多层属性怎么办</h2><p>上面只是演示了只有一级子属性的情况，如果下面包含了多层属性，那配置类应该怎么写呢？</p>
+<p>假设现在配置文件变成了这样：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">token:</span></span><br><span class="line">    <span class="attr">contact:</span> <span class="string">TOKEN_FOR_CONTACT_API</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">TOKEN_FOR_USER_API</span></span><br><span class="line">  <span class="attr">oauth:</span></span><br><span class="line">    <span class="attr">client-id:</span> <span class="string">CLIENT_ID</span></span><br><span class="line">    <span class="attr">client-secret:</span> <span class="string">CLIENT_SECRET</span></span><br><span class="line"></span><br><span class="line"><span class="attr">endpoint:</span></span><br><span class="line">  <span class="attr">contact:</span></span><br><span class="line">    <span class="attr">v1:</span> <span class="string">URL_FOR_CONTACT_API_VERSION_1</span></span><br><span class="line">    <span class="attr">v2:</span> <span class="string">URL_FOR_CONTACT_API_VERSION_2</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>对于 <code>credentials</code> 部分，因为里面子属性的名字大致是确定的，我们用一个内部类就可以搞定（其实写在单独的类里面也可以，只是我不喜欢那么做）。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties("credentials")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Credentials</span> {</span><br><span class="line">  <span class="keyword">private</span> Token token;</span><br><span class="line">  <span class="keyword">private</span> Oauth oauth;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Token</span> {</span><br><span class="line">    <span class="keyword">private</span> String contact;</span><br><span class="line">    <span class="keyword">private</span> String user;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//getters and setters</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Oauth</span> {</span><br><span class="line">    <span class="keyword">private</span> String clientId;</span><br><span class="line">    <span class="keyword">private</span> String clientSecret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//getters and setters</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>取值的时候呢，逐层取到就好了：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Credentials credentials;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Credentials credentials)</span> {</span><br><span class="line">    <span class="built_in">this</span>.credentials = credentials;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">contactApiToken</span> <span class="operator">=</span> credentials.getToken().getContact();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>但是对于 <code>endpoint</code> 部分，因为里面的值是某个 API 各个版本的 URL，考虑到 API 还有可能会有新版本，每加一个版本都要再改配置类有点麻烦，所以我们可以直接用一个 Map 来存放。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties("endpoint")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Endpoint</span> {</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, String&gt; contact;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在取值的时候，就还是一样的套路，注入这个配置类，然后从 Map 中取值就行了。Map 的 key 就是属性名，比如 <code>v1</code>，值就是属性的值。当然这样做的话，就要处理一下取到 null 的情况。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Endpoint endpoint;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Endpoint endpoint)</span> {</span><br><span class="line">    <span class="built_in">this</span>.endpoint = endpoint;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">contactV1Url</span> <span class="operator">=</span> endpoint.getContact().get(<span class="string">"v1"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (contactV1Url == <span class="literal">null</span>) {</span><br><span class="line">      <span class="comment">// handle it here</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="给配置文件加上自动提示"><a href="#给配置文件加上自动提示" class="headerlink" title="给配置文件加上自动提示"></a>给配置文件加上自动提示</h2><p>其实，<code>Configuration properties</code> 配置类除了可以方便我们管理属性之外，他还可以搭配 <code>spring-boot-configuration-processor</code> 来实现配置文件的自动提示，当然这也需要 IDE 的支持。</p>
+<p>在 <code>pom.xml</code> 中加入如下依赖：</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后在编写完配置类之后，执行一下 build 操作，或者 <code>mvn compile</code>，来让它帮我们生成一个 <code>additional-spring-configuration-metadata.json</code> 文件。有了这个文件之后，IDE 就会参照它在配置文件里面给我们提供自动提示。</p>
+]]></content>
+      <categories>
+        <category>小技巧</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring Boot</tag>
+        <tag>ConfigurationProperties</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring Boot 启动流程分析</title>
     <url>/spring-boot-application-starts-up.html</url>
     <content><![CDATA[<p>想来用了这么久的 Spring Boot，但一直没仔细了解它是怎么启动的。那既然想起来了，不如趁热打铁，从它的入口开始，深入看看 Spring Boot 在启动时都做了些什么。</p>
@@ -5458,86 +5538,6 @@ reject_the_task --&gt; 结束
       <tags>
         <tag>Java</tag>
         <tag>Spring Boot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在 Spring Boot 应用中启用 HTTPS</title>
-    <url>/spring-boot-enable-https.html</url>
-    <content><![CDATA[<p>在 <code>application.yml</code> 中添加如下配置，即可在 Spring Boot 项目中开启 HTTPS。</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 如果有需要的话，配置应用监听HTTPS的默认端口</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">  <span class="attr">ssl:</span></span><br><span class="line">    <span class="comment"># 我把证书放在了 resources/cert/certificate.pfx下</span></span><br><span class="line">    <span class="comment"># 使用时需要按照实际情况修改下面的路径</span></span><br><span class="line">    <span class="attr">key-store:</span> <span class="string">classpath:cert/certificate.pfx</span></span><br><span class="line">    <span class="attr">key-store-password:</span> <span class="string">pA55w0Rd</span></span><br><span class="line">    <span class="comment"># 证书类型需要按照实际类型填写</span></span><br><span class="line">    <span class="comment"># 本例使用PKCS12格式，所以写PKCS12。如果是JKS格式，那么需要填写JKS</span></span><br><span class="line">    <span class="comment"># 因为PKCS12比JKS有更好的通用型，所以个人建议使用PKCS12格式</span></span><br><span class="line">    <span class="attr">key-store-type:</span> <span class="string">PKCS12</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-
-<span id="more"></span>
-
-<p>使用如下命令即可将 JKS 证书转换为 PKCS12 证书：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.pfx -deststoretype pkcs12</span><br></pre></td></tr></tbody></table></figure>
-
-<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly93d3cudGhvbWFzdml0YWxlLmNvbS9odHRwcy1zcHJpbmctYm9vdC1zc2wtY2VydGlmaWNhdGUv">How to enable HTTPS in a Spring Boot Java application<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmctYm9vdC9kb2NzLzIuMi4yLlJFTEVBU0UvcmVmZXJlbmNlL2h0bWwvaG93dG8uaHRtbCNob3d0by1jb25maWd1cmUtc3Ns">Spring Boot Docs - Configure SSL<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
-      <categories>
-        <category>学知识</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Spring Boot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在 Spring 中通过配置类注入配置文件的值</title>
-    <url>/spring-injecting-property-value-with-configuration-bean.html</url>
-    <content><![CDATA[<p>我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用 <code>@Value()</code> 注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。</p>
-<span id="more"></span>
-
-<h2 id="旧的做法有什么问题"><a href="#旧的做法有什么问题" class="headerlink" title="旧的做法有什么问题"></a>旧的做法有什么问题</h2><p>假设我们现在有这样一个 <code>application.yml</code>，其中 <code>credentials</code> 部分是我自定义的一个属性：</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">9999</span></span><br><span class="line"></span><br><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">A_VERY_SECRET_TOKEN</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后，我们会在用到它的地方，直接通过 <code>@Value</code> 注解把它注入进来，就像这样：</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Value("${credientials.token}")</span></span><br><span class="line">  <span class="keyword">private</span> String token;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>好像没什么问题对吧，直接用表达式把值拿进来，然后该怎么用就怎么用。但是我不知道你们有没有注意过，这种做法其实既不利于后期重构，也不利于为代码生成好的文档。</p>
-<p>比如说，这个值在多个类中都有被引用，但某一天，我们觉得这个名字不够直观，我们想改成 <code>contactServiceAppToken</code>，那么我们就只能先改掉属性的名字，然后在代码里面全文替换，把 <code>credentials.token</code> 批量替换成 <code>credentials.contactServiceAppToken</code>。我不知道你们是怎么想的，我每次做这种文本批量替换都很慌，生怕一个没看见而改掉了不应该改的东西。</p>
-<p>而对于生成文档，我们都知道，在 Java 代码上面我们可以使用 JavaDoc 来编写文档，阐明这个类的作用等等。而对于 YAML 文件，则没有类似的东西，我们只能在属性上面写普通的注释。可是，大篇幅的注释又有可能会影响 YAML 文件的可读性，更不用说有谁会在看代码的时候专程去看 YAML 文件？</p>
-<p>所以，我会建议团队使用配置类，也就是本文下面要讲的这个东西，来管理和注入这些自定义的属性。</p>
-<h2 id="来个示例"><a href="#来个示例" class="headerlink" title="来个示例"></a>来个示例</h2><p>首先，我们需要创建一个配置类，来给这些属性找一个家。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 这个注解是重点，说明我们要把配置文件的 credentials 部分映射到这里</span></span><br><span class="line"><span class="meta">@ConfigurationProperties("credentials")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Credentials</span> {</span><br><span class="line">  <span class="comment">// 属性名与变量名保持一致即可，Spring会自动处理两者的绑定关系</span></span><br><span class="line">  <span class="comment">// 同时，Spring会自动完成不同命名方式的转换，比如 kebab-case 变成 camelCase</span></span><br><span class="line">  <span class="keyword">private</span> String token;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>接下来，在要使用这些属性的地方，把这个配置类注入，然后直接 get 属性的值，就可以了。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Credentials credentials;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Credentials credentials)</span> {</span><br><span class="line">    <span class="built_in">this</span>.credentials = credentials;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> credentials.getToken();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>与直接取值的方法比较起来，使用配置类有这么几个优点：</p>
-<ul>
-<li>如果在重构的时候要改变属性名，那么我们只需要修改配置文件里面的属性名，和配置类里面的属性名。当然要记得使用 IDE 里面的重构功能改名，这样 IDE 会自动分析这个属性的引用，并自动改正过来。</li>
-<li>使用配置类还可以方便我们生成文档。如果直接在配置文件里面写文档，一方面是不一定易读，另一方面，也不是所有人都会想到在配置文件里面还有文档。而使用配置类的话，我们只需要在类上面加上 JavaDoc 就好了。</li>
-<li>而且，我们还不需要担心打错字，导致 <code>@Value</code> 注入失败而使得应用起不来。虽然这不是什么大问题，改正就行了，但毕竟还是麻烦。</li>
-</ul>
-<h2 id="多层属性怎么办"><a href="#多层属性怎么办" class="headerlink" title="多层属性怎么办"></a>多层属性怎么办</h2><p>上面只是演示了只有一级子属性的情况，如果下面包含了多层属性，那配置类应该怎么写呢？</p>
-<p>假设现在配置文件变成了这样：</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">credentials:</span></span><br><span class="line">  <span class="attr">token:</span></span><br><span class="line">    <span class="attr">contact:</span> <span class="string">TOKEN_FOR_CONTACT_API</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">TOKEN_FOR_USER_API</span></span><br><span class="line">  <span class="attr">oauth:</span></span><br><span class="line">    <span class="attr">client-id:</span> <span class="string">CLIENT_ID</span></span><br><span class="line">    <span class="attr">client-secret:</span> <span class="string">CLIENT_SECRET</span></span><br><span class="line"></span><br><span class="line"><span class="attr">endpoint:</span></span><br><span class="line">  <span class="attr">contact:</span></span><br><span class="line">    <span class="attr">v1:</span> <span class="string">URL_FOR_CONTACT_API_VERSION_1</span></span><br><span class="line">    <span class="attr">v2:</span> <span class="string">URL_FOR_CONTACT_API_VERSION_2</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>对于 <code>credentials</code> 部分，因为里面子属性的名字大致是确定的，我们用一个内部类就可以搞定（其实写在单独的类里面也可以，只是我不喜欢那么做）。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties("credentials")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Credentials</span> {</span><br><span class="line">  <span class="keyword">private</span> Token token;</span><br><span class="line">  <span class="keyword">private</span> Oauth oauth;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Token</span> {</span><br><span class="line">    <span class="keyword">private</span> String contact;</span><br><span class="line">    <span class="keyword">private</span> String user;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//getters and setters</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Oauth</span> {</span><br><span class="line">    <span class="keyword">private</span> String clientId;</span><br><span class="line">    <span class="keyword">private</span> String clientSecret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//getters and setters</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>取值的时候呢，逐层取到就好了：</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Credentials credentials;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Credentials credentials)</span> {</span><br><span class="line">    <span class="built_in">this</span>.credentials = credentials;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">contactApiToken</span> <span class="operator">=</span> credentials.getToken().getContact();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>但是对于 <code>endpoint</code> 部分，因为里面的值是某个 API 各个版本的 URL，考虑到 API 还有可能会有新版本，每加一个版本都要再改配置类有点麻烦，所以我们可以直接用一个 Map 来存放。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties("endpoint")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Endpoint</span> {</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, String&gt; contact;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//getters and setters</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>在取值的时候，就还是一样的套路，注入这个配置类，然后从 Map 中取值就行了。Map 的 key 就是属性名，比如 <code>v1</code>，值就是属性的值。当然这样做的话，就要处理一下取到 null 的情况。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeService</span> {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Endpoint endpoint;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">SomeService</span><span class="params">(Endpoint endpoint)</span> {</span><br><span class="line">    <span class="built_in">this</span>.endpoint = endpoint;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">someMethod</span><span class="params">()</span> {</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">contactV1Url</span> <span class="operator">=</span> endpoint.getContact().get(<span class="string">"v1"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (contactV1Url == <span class="literal">null</span>) {</span><br><span class="line">      <span class="comment">// handle it here</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="给配置文件加上自动提示"><a href="#给配置文件加上自动提示" class="headerlink" title="给配置文件加上自动提示"></a>给配置文件加上自动提示</h2><p>其实，<code>Configuration properties</code> 配置类除了可以方便我们管理属性之外，他还可以搭配 <code>spring-boot-configuration-processor</code> 来实现配置文件的自动提示，当然这也需要 IDE 的支持。</p>
-<p>在 <code>pom.xml</code> 中加入如下依赖：</p>
-<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后在编写完配置类之后，执行一下 build 操作，或者 <code>mvn compile</code>，来让它帮我们生成一个 <code>additional-spring-configuration-metadata.json</code> 文件。有了这个文件之后，IDE 就会参照它在配置文件里面给我们提供自动提示。</p>
-]]></content>
-      <categories>
-        <category>小技巧</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Spring Boot</tag>
-        <tag>ConfigurationProperties</tag>
       </tags>
   </entry>
   <entry>
@@ -5856,6 +5856,8 @@ reject_the_task --&gt; 结束
 <figure class="highlight typescript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">ErrorWithMessage</span> = {</span><br><span class="line">    <span class="attr">message</span>: <span class="built_in">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isErrorWithMessage</span>(<span class="params">error: <span class="built_in">unknown</span></span>): error is <span class="title class_">ErrorWithMessage</span> {</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="keyword">typeof</span> error === <span class="string">'object'</span> &amp;&amp;</span><br><span class="line">        error !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">        <span class="string">'message'</span> <span class="keyword">in</span> error &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> (error <span class="keyword">as</span> <span class="title class_">Record</span>&lt;<span class="built_in">string</span>, <span class="built_in">unknown</span>&gt;).<span class="property">message</span> === <span class="string">'string'</span></span><br><span class="line">    )</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">toErrorWithMessage</span>(<span class="params">maybeError: <span class="built_in">unknown</span></span>): <span class="title class_">ErrorWithMessage</span> {</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isErrorWithMessage</span>(maybeError)) <span class="keyword">return</span> maybeError</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(maybeError))</span><br><span class="line">    } <span class="keyword">catch</span> {</span><br><span class="line">        <span class="comment">// fallback in case there's an error stringifying the maybeError</span></span><br><span class="line">        <span class="comment">// like with circular references for example.</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="title class_">String</span>(maybeError))</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getErrorMessage</span>(<span class="params">error: <span class="built_in">unknown</span></span>) {</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">toErrorWithMessage</span>(error).<span class="property">message</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>简直太好使了！</p>
+<p><strong>结论</strong></p>
+<p>我觉得关键在于，尽管 TypeScript 有一些奇怪的地方，但也绝对不要因为你觉得这不可能就忽略 TypeScript 抛出的编译错误或警告。大多数情况下，意外是非常有可能发生的，而 TypeScript 很好的强制你去处理这些 “不太可能发生” 的情况…… 然后你也很有可能会发现，这些情况并没有你想的那么少见。</p>
 <hr>
 <p>译者的碎碎念：作为一个 TypeScript 纯新手的我，最后这段代码给我看傻了。Java 里面非常常见的 <code>try {...} catch (Exception e) {...}</code> 在 TypeScript 里面竟然能玩这么花……</p>
 ]]></content>
