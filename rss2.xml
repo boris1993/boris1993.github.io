@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<follow_challenge>
-    <feedId>59132913829684225</feedId>
-    <userId>81365198606215168</userId>
-</follow_challenge>
 <rss version="2.0"
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -13,7 +9,7 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
     <description>Boris has arrived!</description>
-    <pubDate>Mon, 18 Nov 2024 16:28:20 GMT</pubDate>
+    <pubDate>Mon, 18 Nov 2024 16:36:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -591,5 +587,9 @@
       
     </item>
     
+    <follow_challenge>
+        <feedId>59132913829684225</feedId>
+        <userId>81365198606215168</userId>
+    </follow_challenge>
   </channel>
 </rss>
