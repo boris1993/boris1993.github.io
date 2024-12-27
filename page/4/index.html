@@ -193,7 +193,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,7 +204,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">173</span>
+        <span class="site-state-item-count">175</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -265,6 +265,124 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/nostr-nip-05-with-hexo.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nostr-nip-05-with-hexo.html" class="post-title-link" itemprop="url">通过 Hexo 博客完成 NIP-05 验证</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-05 01:26:02" itemprop="dateCreated datePublished" datetime="2023-02-05T01:26:02+08:00">2023-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/nostr-nip-05-with-hexo.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/nostr-nip-05-with-hexo.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/nostr-nip-05-with-hexo.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="让Hexo在生成时包含-well-known目录"><a href="#让Hexo在生成时包含-well-known目录" class="headerlink" title="让Hexo在生成时包含.well-known目录"></a>让 Hexo 在生成时包含<code>.well-known</code> 目录</h2><p>编辑 <code>config.yml</code>，添加如下配置：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">include:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">".well-known/**"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="转换公钥格式"><a href="#转换公钥格式" class="headerlink" title="转换公钥格式"></a>转换公钥格式</h2><p>Damus 生成的 <code>npub</code> 开头的公钥不能直接用，要先转换成十六进制格式的公钥。可以用<span class="exturl" data-url="aHR0cHM6Ly9kYW11cy5pby9rZXkv">这个网站<i class="fa fa-external-link-alt"></i></span>来转换。</p>
+<p>把 <code>npub</code> 开头的公钥粘贴进 <code>damus key</code> 一栏，<code>hex key</code> 会自动计算出来，复制 <code>hex key</code> 的内容备用。</p>
+<h2 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h2><p>在 <code>source</code> 目录下新建一个名为<code>.well-known</code> 的目录，然后在<code>.well-known</code> 目录中创建 <code>nostr.json</code>，填写如下信息：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"names"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"你的用户名"</span><span class="punctuation">:</span> <span class="string">"刚刚转换得到的hex key"</span></span><br><span class="line">    <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在本地运行 <code>hexo clean &amp;&amp; hexo g</code>，生成成功后检查 <code>public</code> 目录中是否存在<code>.well-known/nostr.json</code> 文件，如存在则说明配置正确。</p>
+<h2 id="配置Nostr"><a href="#配置Nostr" class="headerlink" title="配置Nostr"></a>配置 Nostr</h2><p>提交代码并部署成功后，即可在 <code>nostr</code> 客户端配置 <code>NIP-05</code> 认证，本文以 <code>Damus</code> 为例。</p>
+<p>点击左上角头像，进入 <code>Profile</code>，点击 <code>Edit</code>，在 <code>NIP-05 VERIFICATION</code> 一栏中填写<code>你的username@你的博客网站</code>，比如我填写的是 <code>boris1993@www.boris1993.com</code>，最后点击 <code>Save</code>。</p>
+<p>如果一切正常的话，在你的 Profile 页面就能看到一个对勾图标，代表验证成功。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/designing-and-implementing-a-short-url-service.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,7 +419,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -415,7 +533,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -533,7 +651,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -647,7 +765,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -762,7 +880,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -876,7 +994,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -991,7 +1109,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1105,7 +1223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1219,7 +1337,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
+      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1291,120 +1409,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/filter-vs-interceptor.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/setting-up-tailscale.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/setting-up-tailscale.html" class="post-title-link" itemprop="url">使用 Tailscale 部署虚拟局域网</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-24 10:16:39" itemprop="dateCreated datePublished" datetime="2022-10-24T10:16:39+08:00">2022-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-09 21:35:39" itemprop="dateModified" datetime="2024-12-09T21:35:39+08:00">2024-12-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/setting-up-tailscale.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/setting-up-tailscale.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/setting-up-tailscale.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/setting-up-tailscale.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
