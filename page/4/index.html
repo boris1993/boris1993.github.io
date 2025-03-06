@@ -19,11 +19,11 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Boris has arrived!">
 <meta property="og:type" content="website">
@@ -193,7 +193,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -265,6 +265,120 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/swiftui-trigger-haptic-feedback-when-changing-tabs.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/swiftui-trigger-haptic-feedback-when-changing-tabs.html" class="post-title-link" itemprop="url">SwiftUI 学习记录 - 切换 TabView 的 tab 时触发震动反馈</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-06 00:02:10" itemprop="dateCreated datePublished" datetime="2023-02-06T00:02:10+08:00">2023-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/swiftui-trigger-haptic-feedback-when-changing-tabs.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/swiftui-trigger-haptic-feedback-when-changing-tabs.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/swiftui-trigger-haptic-feedback-when-changing-tabs.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近在折腾 iOS 开发的时候，想实现在切换 <code>TabView</code> 的 tab 时触发震动反馈，因为一边写一边学嘛，基础不牢，只能在网上瞎搜，试了各种方法都不奏效。直到前两天看到<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RpbWlsbGlhbi9JY2VDdWJlc0FwcC9ibG9iLzczMGU0NzE3MTgzODliNTRmMWM5MjgwNWM1NmY1YTQ3MjI1NjUwYTIvSWNlQ3ViZXNBcHAvQXBwL0ljZUN1YmVzQXBwLnN3aWZ0I0wxMzItTDE0NQ=="> Ice Cubes: for Mastodon 的这段代码<i class="fa fa-external-link-alt"></i></span>，豁然开朗。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/swiftui-trigger-haptic-feedback-when-changing-tabs.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/nostr-nip-05-with-hexo.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,7 +415,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -419,7 +533,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -533,7 +647,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -651,7 +765,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -765,7 +879,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -880,7 +994,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -994,7 +1108,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1109,7 +1223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1223,7 +1337,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
+      <time title="修改时间：2025-03-06 21:57:21" itemprop="dateModified" datetime="2025-03-06T21:57:21+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1293,144 +1407,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/filter-vs-interceptor.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/filter-vs-interceptor.html" class="post-title-link" itemprop="url">Filter 与 interceptor 的区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-12-13 15:36:21" itemprop="dateCreated datePublished" datetime="2022-12-13T15:36:21+08:00">2022-12-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-27 09:39:39" itemprop="dateModified" datetime="2024-12-27T09:39:39+08:00">2024-12-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/filter-vs-interceptor.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/filter-vs-interceptor.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/filter-vs-interceptor.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul>
-<li><code>Filter</code> 是 <code>Servlet</code> 规范制定的，受 <code>Servlet</code> 容器支持，接口定义在 <code>javax.servlet</code> 包中。</li>
-<li><code>Filter</code> 是被 Web Server（如 <code>Tomcat</code>）调用。</li>
-<li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li>
-<li><code>Filter</code> 只在请求的前后起作用，<code>Servlet</code> 对于 <code>Filter</code> 来说是一个黑盒。</li>
-<li><code>Filter</code> 的执行顺序是：<ul>
-<li><code>void init(FilterConfig)</code> - 容器在初始化 <code>Filter</code> 时调用，在 <code>Filter</code> 生命周期内仅会被调用一次。方法可以抛出 <code>ServletException</code>。</li>
-<li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code> 用来调用下一个 <code>Filter</code>。</li>
-<li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul>
-<li><code>Interceptor</code> 是 <code>Spring</code> 容器内的，由 <code>Spring</code> 框架提供支持。接口 <code>HandlerInterceptor</code> 定义在 <code>org.springframework.web.servlet</code> 包中。</li>
-<li><code>Interceptor</code> 是被 <code>Spring</code> 调用。</li>
-<li><code>Interceptor</code> 可以深入到方法前后、异常抛出前后等，比起 <code>Filter</code> 有更大的弹性。</li>
-<li><code>Interceptor</code> 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li>
-<li><code>Interceptor</code> 的执行顺序是：<ul>
-<li>请求到达 <code>DispatcherServlet</code></li>
-<li><code>DispatcherServlet</code> 将请求发送至 <code>Interceptor</code>，<code>Interceptor</code> 执行 <code>preHandle()</code> 方法</li>
-<li>请求到达 <code>Controller</code></li>
-<li>请求结束后，<code>Interceptor</code> 执行 <code>postHandle()</code> 方法</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/filter-vs-interceptor.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1443,7 +1419,7 @@
 
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
