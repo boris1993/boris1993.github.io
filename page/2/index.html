@@ -193,7 +193,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">120</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,7 +204,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">177</span>
+        <span class="site-state-item-count">179</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -265,6 +265,120 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-understand-aqs.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-understand-aqs.html" class="post-title-link" itemprop="url">理解 Java 中的抽象队列同步器（AQS）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-17 14:46:53" itemprop="dateCreated datePublished" datetime="2024-01-17T14:46:53+08:00">2024-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/java-understand-aqs.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/java-understand-aqs.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/java-understand-aqs.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近项目里用到了些 Lock，爬了些文了解到它们是基于 <code>AbstractQueuedSynchronizer</code>（即 <code>AQS</code>）实现的。那么，不如趁热打铁，看看里面是怎么工作的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-understand-aqs.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/spring-boot-application-start-up-post-processing.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,7 +415,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -415,7 +529,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -529,7 +643,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -643,7 +757,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -757,7 +871,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -871,7 +985,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -995,7 +1109,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1109,7 +1223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1223,7 +1337,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
+      <time title="修改时间：2025-03-22 00:20:27" itemprop="dateModified" datetime="2025-03-22T00:20:27+08:00">2025-03-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1271,133 +1385,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/swiftui-initialize-list-with-remote-data.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/uwp-textblock-show-and-hide-content-on-hover.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/uwp-textblock-show-and-hide-content-on-hover.html" class="post-title-link" itemprop="url">为 UWP 的 TextBlock 实现鼠标悬浮时显示和隐藏内容</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-21 13:51:20" itemprop="dateCreated datePublished" datetime="2023-10-21T13:51:20+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-20 22:33:01" itemprop="dateModified" datetime="2025-03-20T22:33:01+08:00">2025-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/uwp-textblock-show-and-hide-content-on-hover.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/uwp-textblock-show-and-hide-content-on-hover.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/uwp-textblock-show-and-hide-content-on-hover.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这两天给我的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My9Yb1c=">窗边岛<i class="fa fa-external-link-alt"></i></span>项目实现了<span class="exturl" data-url="aHR0cHM6Ly93d3cubm1ieGQxLmNvbS8="> X 岛揭示板<i class="fa fa-external-link-alt"></i></span>网页中的<code>防剧透</code>功能。这个功能本质上就是，当鼠标悬浮在文字上时显示原本的内容，当鼠标移出文字时则用黑块代替。即</p>
-<table>
-<thead>
-<tr>
-<th>X 岛揭示板</th>
-<th>窗边岛</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img data-src="https://blog-static.boris1993.com/uwp-textblock-show-and-hide-content-on-hover/nmbxd-anti-spoiler.gif"></td>
-<td><img data-src="https://blog-static.boris1993.com/uwp-textblock-show-and-hide-content-on-hover/xow-anti-spoiler.gif"></td>
-</tr>
-</tbody></table>
-<p>虽然说起来很简单，但是好像网上并没有针对这个需求有什么相关的内容，所以在这里记录下我的实现，权当抛砖引玉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/uwp-textblock-show-and-hide-content-on-hover.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
