@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" integrity="sha256-zM8WXtG4eUn7dKKNMTuoWZub++VnSfaOpA/8PJfvTBo=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有  pc (program counter) 寄存器 JVM 栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM 运行时的数据区域">
+<meta property="og:url" content="https://www.boris1993.com/java-jvm-runtime-data-areas.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：  线程专有  pc (program counter) 寄存器 JVM 栈 本地方法栈   线程间共享 堆 方法区 运行时常量池">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-27T02:19:51.000Z">
+<meta property="article:modified_time" content="2025-05-17T14:56:14.206Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="内存模型">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.boris1993.com/java-jvm-runtime-data-areas.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-jvm-runtime-data-areas.html","path":"java-jvm-runtime-data-areas.html","title":"JVM 运行时的数据区域"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JVM 运行时的数据区域 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+
+  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js" integrity="sha256-hiUEBwFEpLF6DlB8sGXlKo4kPZ46Ui4qGpd0vrVkOm4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.23.0/lite/builds/browser.umd.js" integrity="sha256-pfKeJRuGRsHDNu078bcMlWdxjw/Vgz5QLC6hyLFw9fA=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js","integrity":"sha256-2obLuIPcceEhkE3G09G33hBdmE55ivVcZUlcKcGNHjU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<!-- Vercel Web Analytics -->
+<script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Web Analytics -->
+
+<!-- Vercel Speed Insights -->
+<script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<!-- Vercel Speed Insights -->
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-探针"><span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw=="><i class="fa fa-link fa-fw"></i>探针</span></li><li class="menu-item menu-item-领支付宝红包"><span class="exturl" data-url="aHR0cHM6Ly96ZmJoYi5ib3JpczE5OTMuY29tLw=="><i class="fa-brands fa-alipay fa-fw"></i>领支付宝红包</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pc-program-counter-%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">pc (program counter) 寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E6%A0%88"><span class="nav-number">2.</span> <span class="nav-text">JVM 栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">4.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3-New-generation"><span class="nav-number">4.1.</span> <span class="nav-text">新生代 (New generation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%81%E5%B9%B4%E4%BB%A3-Tenured-generation"><span class="nav-number">4.2.</span> <span class="nav-text">老年代 (Tenured generation)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">5.</span> <span class="nav-text">方法区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E4%BB%A3%E5%92%8CMetaspace"><span class="nav-number">5.1.</span> <span class="nav-text">永久代和 Metaspace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">6.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">181</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!-- sidebar ad 
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-jvm-runtime-data-areas.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JVM 运行时的数据区域 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM 运行时的数据区域
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-27 10:19:51" itemprop="dateCreated datePublished" datetime="2019-03-27T10:19:51+08:00">2019-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-17 22:56:14" itemprop="dateModified" datetime="2025-05-17T22:56:14+08:00">2025-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/java-jvm-runtime-data-areas.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/java-jvm-runtime-data-areas.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/java-jvm-runtime-data-areas.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>JVM 在运行时，会按照程序执行的需要来创建一系列的运行时数据区域。有的区域只会随 JVM 起停而被创建和销毁，有的区域则会独立分配给各个线程，并随线程的起停而创建和销毁。这些运行时区域，按照功能和性质不同，会分成如下几部分：</p>
+<ul>
+<li>线程专有 <ul>
+<li><a href="#pc-program-counter-%E5%AF%84%E5%AD%98%E5%99%A8">pc (program counter) 寄存器</a></li>
+<li><a href="#JVM%E6%A0%88">JVM 栈</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88">本地方法栈</a></li>
+</ul>
+</li>
+<li>线程间共享<ul>
+<li><a href="#%E5%A0%86">堆</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95%E5%8C%BA">方法区</a><ul>
+<li><a href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0">运行时常量池</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="pc-program-counter-寄存器"><a href="#pc-program-counter-寄存器" class="headerlink" title="pc(program counter)寄存器"></a>pc (program counter) 寄存器</h2><p>JVM 允许同时运行多个线程，每个线程都有它自己的 PC 寄存器。在任意时刻，每个 JVM 线程都在执行一个方法中的某条语句，而这个正在被执行的方法，就叫做这个线程的 “当前方法”。</p>
+<p>如果当前方法不是一个本地 (native) 方法，那么 PC 寄存器的内容是当前正在执行的指令的地址；如果当前方法是本地方法，那么 PC 寄存器的值则是空 (undefined) 的。</p>
+<h2 id="JVM栈"><a href="#JVM栈" class="headerlink" title="JVM栈"></a>JVM 栈</h2><p>每个 JVM 都会在其启动时创建自己私有的 JVM 栈，栈之中存储的是<a href="/projects/java/fundamentals/java-jvm-stack-frame.html">栈帧</a>，用于存储局部变量和方法调用信息。</p>
+<p>规范中允许栈的深度可以是固定的，也可以根据要求动态的扩展和收缩。如果是固定深度的栈，那么每个栈的深度会在其创建时按照需要独立指定。</p>
+<p>当请求创建的栈大于所允许的深度，那么 JVM 会抛出 <code>StackOverflowError</code> 异常；当程序试图扩大一个可以动态伸缩的栈，或者试图为新的线程创建一个栈，但是可用内存不足以完成这个操作时，那么 JVM 会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>本地方法栈与 JVM 栈类似，保存了本地方法的调用信息。</p>
+<p>本地方法栈的空间可以是固定的，也可以是动态伸缩的。</p>
+<p>当程序申请了大于所允许的本地方法栈空间，那么 JVM 会抛出 <code>StackOverflowError</code> 异常；如果程序申请扩展一个可以动态伸缩的本地方法栈，或者试图创建一个栈，但是可用内存不足以满足要求时，JVM 会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>在 JVM 启动时，会创建一个共享于所有线程的堆空间，其中存放着所有的对象，和被分配好空间的数组。用于存放对象的空间由一个自动化的存储空间管理机制，即垃圾回收机制 (garbage collector)，来进行管理。堆空间可以是固定大小的，也可以是按需伸缩的。</p>
+<p>如果程序试图申请扩大堆空间，但是存储管理机制无法满足需求时，JVM 会抛出 <code>OutOfMemory</code> 异常。</p>
+<p>在堆中，JVM 又根据作用不同，将内存空间分为如下几部分：</p>
+<h3 id="新生代-New-generation"><a href="#新生代-New-generation" class="headerlink" title="新生代(New generation)"></a>新生代 (New generation)</h3><p>新生代保留的是生命周期短，并且很快就会被回收掉的对象。其中的空间又随着 “复制算法” 这一垃圾回收算法而被分为 <code>Eden Space</code> 和 <code>Survivor Space</code>。具体可以参考 <a href="/projects/java/fundamentals/java-gc-algorithms.html">Java 的垃圾回收算法</a>这篇博文。</p>
+<h3 id="老年代-Tenured-generation"><a href="#老年代-Tenured-generation" class="headerlink" title="老年代(Tenured generation)"></a>老年代 (Tenured generation)</h3><p>在多次垃圾回收后仍然存活的对象，将会被放到老年代空间中。因此可以认为，老年代中的对象的生命周期都是比较长的。</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区 (method area) 是一个共享于所有 JVM 线程的空间，创建于 JVM 启动时，其中主要存放的是类的元数据，包括类的类型信息、常量池、方法数据、方法的代码等，这些数据主要来源于 class 文件。方法区逻辑上属于堆的一部分，但是为了与堆区分开来，方法区通常又叫<code>非堆</code>。</p>
+<p>类型信息包括类的完整名称、父类的完整名称、类型修饰符 (<code>private</code>/<code>protected</code>/<code>public</code>)，和类型的直接接口类表。</p>
+<p>方法的数据包括方法的名称、返回类型、参数、方法的修饰符、字节码、操作数栈和方法栈帧的局部变量区大小，和异常表。</p>
+<p>方法区的大小可以是固定的，也可以是按需伸缩的，但是根据虚拟机实现的不同，垃圾回收机制可能不会回收或压缩方法区的空间。</p>
+<p>如果方法区的可用内存无法满足一次申请空间的请求，那么 JVM 会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h3 id="永久代和Metaspace"><a href="#永久代和Metaspace" class="headerlink" title="永久代和Metaspace"></a>永久代和 Metaspace</h3><p>在 HotSpot VM 中，永久代和 Metaspace 就是方法区的具体实现。在 Java 8 之前，方法区是以永久代的形式存在的；而从 Java 8 之后，永久代就被 Metaspace 取而代之了。</p>
+<p>在 Java 1.7 和之前版本中，永久代是一块独立于堆的内存空间，在物理内存上与堆是连续的。同时，在 Java 1.7 中，一部分原属于永久代的内容也在逐步被移动到其他位置，比如符号引用被移动到了本地内存 (native memory) 中，字符串常量池和类的静态变量则被移动到了堆中。</p>
+<p>从 Java 8 开始，永久代被 Metaspace 取而代之。Metaspace 的内存空间不再与堆连续，而是存在于本地内存中。</p>
+<h2 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h2><p>运行时常量池对应 class 文件中的 <a href="/projects/java/fundamentals/java-jvm-constant-pool.html"><code>constant_pool</code> 表</a>。</p>
+<p>运行时常量池中包含了数值常量和属性的引用。每个运行时常量池的空间都会在类或接口被创建时生成，并且从方法区中分配空间。在创建运行时方法区时，如果申请的空间大于方法区可提供的空间，那么 JVM 会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>[^1]: 《The Java Virtual Machine Specification (Java SE 8 Edition)》 - 2.5 Run-Time Data Areas<br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFlN2U1ZGU1MWQ0NTI0OTg1MGNmOWY=">面试官，Java8 JVM 内存结构变了，永久代到元空间<i class="fa fa-external-link-alt"></i></span><br>[^3]: <a href="/projects/java/fundamentals/java-jvm-runtime-data-areas.html#jvm-method-area">方法区 - JVM 运行时的数据区域</a><br>[^4]: <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veXN0ZXIvcC85NzY4Mjk4Lmh0bWwjJUU2JTk2JUI5JUU2JUIzJTk1JUU1JThDJUJBJUU2JUIwJUI4JUU0JUI5JTg1JUU1JThDJUJBJUU1JTg1JTgzJUU3JUE5JUJBJUU5JTk3JUI0">方法区（永久区、元空间） - 深入理解 JAVA 虚拟机（内存模型 + GC 算法 + JVM 调优）<i class="fa fa-external-link-alt"></i></span><br>[^5]: <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGFkZGl4L3AvNTMwOTU1MC5odG1s">Java8 内存模型 — 永久代 (PermGen) 和元空间 (Metaspace)<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense" style="text-align: center;">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="tag"># 内存模型</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/java-read-src-arraylist.html" rel="prev" title="Java 源码阅读 - ArrayList">
+                  <i class="fa fa-angle-left"></i> Java 源码阅读 - ArrayList
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/java-gc-algorithms.html" rel="next" title="Java 的垃圾回收算法">
+                  Java 的垃圾回收算法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/java-jvm-runtime-data-areas.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

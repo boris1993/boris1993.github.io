@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/manifest.json">
+  <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
+  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
+  <meta name="yandex-verification" content="4d238d70128aa114">
+  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.css" integrity="sha256-zM8WXtG4eUn7dKKNMTuoWZub++VnSfaOpA/8PJfvTBo=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="这两天又捡起来了之前开的一个老坑，继续完成 X 岛揭示板的 iOS 客户端，而且刚刚完成了从 JSON 初始化版面列表的功能。这部分感觉最难的还是上手 Alamofire，因为它返回结果不像我平时做 Web 开发那样通过方法返回（也有可能是我没学到位），而是要把反序列化得到的对象传给一个回调方法。而这个思路的差异也导致我刚开始学的时候非常的痛苦，因为怎么也找不到我想要的那种返回方式。我相信应该不止">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表">
+<meta property="og:url" content="https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html">
+<meta property="og:site_name" content="Code Life">
+<meta property="og:description" content="这两天又捡起来了之前开的一个老坑，继续完成 X 岛揭示板的 iOS 客户端，而且刚刚完成了从 JSON 初始化版面列表的功能。这部分感觉最难的还是上手 Alamofire，因为它返回结果不像我平时做 Web 开发那样通过方法返回（也有可能是我没学到位），而是要把反序列化得到的对象传给一个回调方法。而这个思路的差异也导致我刚开始学的时候非常的痛苦，因为怎么也找不到我想要的那种返回方式。我相信应该不止">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-static.boris1993.com/swiftui-initialize-list-with-remote-data/forum-list-view.jpeg">
+<meta property="article:published_time" content="2023-10-28T13:23:36.000Z">
+<meta property="article:modified_time" content="2025-05-17T14:56:14.213Z">
+<meta property="article:author" content="Boris Zhao">
+<meta property="article:tag" content="SwiftUI">
+<meta property="article:tag" content="List">
+<meta property="article:tag" content="Alamofire">
+<meta property="article:tag" content="iOS开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-static.boris1993.com/swiftui-initialize-list-with-remote-data/forum-list-view.jpeg">
+
+
+<link rel="canonical" href="https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html","path":"swiftui-initialize-list-with-remote-data.html","title":"SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表 | Code Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
+
+
+  <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
+
+
+
+  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.36/fancybox/fancybox.umd.js" integrity="sha256-hiUEBwFEpLF6DlB8sGXlKo4kPZ46Ui4qGpd0vrVkOm4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.23.0/lite/builds/browser.umd.js" integrity="sha256-pfKeJRuGRsHDNu078bcMlWdxjw/Vgz5QLC6hyLFw9fA=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js","integrity":"sha256-2obLuIPcceEhkE3G09G33hBdmE55ivVcZUlcKcGNHjU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://valine-api.boris1993.com"><script>
+    const mainSiteUrl = "https://www.boris1993.com";
+    const bypassRedirectionQueryParam = "bypassRedirection";
+
+    let shouldBypassRedirection = false;
+
+    let searchParams = new URLSearchParams(window.location.search);
+    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+
+    // Redirect to the main site from other sites like GitHub pages or GitEE pages
+    if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
+        location.href = mainSiteUrl + location.pathname;
+    }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1056823357231661" crossorigin="anonymous"></script>
+
+<!-- Vercel Web Analytics -->
+<script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Web Analytics -->
+
+<!-- Vercel Speed Insights -->
+<script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<!-- Vercel Speed Insights -->
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="Code Life" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Code Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">boris1993的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-探针"><span class="exturl" data-url="aHR0cHM6Ly9uZXpoYS5ib3JpczE5OTMuY29tLw=="><i class="fa fa-link fa-fw"></i>探针</span></li><li class="menu-item menu-item-领支付宝红包"><span class="exturl" data-url="aHR0cHM6Ly96ZmJoYi5ib3JpczE5OTMuY29tLw=="><i class="fa-brands fa-alipay fa-fw"></i>领支付宝红包</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89JSON%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">1.</span> <span class="nav-text">定义 JSON 对应的结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">编写网络请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">渲染列表</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Boris Zhao"
+      src="/images/favicon/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Boris Zhao</p>
+  <div class="site-description" itemprop="description">Boris has arrived!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">181</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGJvcmlzMTk5Mw==" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@boris1993"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!-- sidebar ad 
+<div class="sidebar-adsense">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="1718521250"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表 | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SwiftUI 学习记录 - 使用 Alamofire 加载 JSON 并初始化列表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-28 21:23:36" itemprop="dateCreated datePublished" datetime="2023-10-28T21:23:36+08:00">2023-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-17 22:56:14" itemprop="dateModified" datetime="2025-05-17T22:56:14+08:00">2025-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/swiftui-initialize-list-with-remote-data.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/swiftui-initialize-list-with-remote-data.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/swiftui-initialize-list-with-remote-data.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这两天又捡起来了之前开的一个老坑，继续完成<span class="exturl" data-url="aHR0cHM6Ly93d3cubm1ieGQxLmNvbS9Gb3J1bQ=="> X 岛揭示板<i class="fa fa-external-link-alt"></i></span>的 iOS 客户端，而且刚刚完成了从 JSON 初始化版面列表的功能。<br>这部分感觉最难的还是上手 <code>Alamofire</code>，因为它返回结果不像我平时做 Web 开发那样通过方法返回（也有可能是我没学到位），而是要把反序列化得到的对象传给一个回调方法。而这个思路的差异也导致我刚开始学的时候非常的痛苦，因为怎么也找不到我想要的那种返回方式。<br>我相信应该不止我一个人会遇到这种情况，所以打算在这里把完整的实现过程记录在这里，并希望后面有类似情况的同志能因为这篇文章而少掉几根头发。</p>
+<span id="more"></span>
+
+<h2 id="定义JSON对应的结构体"><a href="#定义JSON对应的结构体" class="headerlink" title="定义JSON对应的结构体"></a>定义 JSON 对应的结构体</h2><p>X 岛揭示板的<code>版面列表</code> API 会返回一个类似这样的 JSON：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"id"</span><span class="punctuation">:</span> <span class="string">"4"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sort"</span><span class="punctuation">:</span> <span class="string">"1"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"综合"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"status"</span><span class="punctuation">:</span> <span class="string">"n"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"forums"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"id"</span><span class="punctuation">:</span> <span class="string">"-1"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"时间线"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"msg"</span><span class="punctuation">:</span> <span class="string">"这里是匿名版最新的串"</span></span><br><span class="line">      <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"id"</span><span class="punctuation">:</span> <span class="string">"23"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"fgroup"</span><span class="punctuation">:</span> <span class="string">"3"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"sort"</span><span class="punctuation">:</span> <span class="string">"12"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"暴雪游戏"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"showName"</span><span class="punctuation">:</span> <span class="string">"暴雪游戏"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"msg"</span><span class="punctuation">:</span> <span class="string">"•本版发文间隔为15秒。"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"interval"</span><span class="punctuation">:</span> <span class="string">"15"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"safe_mode"</span><span class="punctuation">:</span> <span class="string">"0"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"auto_delete"</span><span class="punctuation">:</span> <span class="string">"0"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"thread_count"</span><span class="punctuation">:</span> <span class="string">"72"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"permission_level"</span><span class="punctuation">:</span> <span class="string">"0"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"forum_fuse_id"</span><span class="punctuation">:</span> <span class="string">"0"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"createdAt"</span><span class="punctuation">:</span> <span class="string">"2012-05-25 21:21:21"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"updateAt"</span><span class="punctuation">:</span> <span class="string">"2015-04-21 12:30:39"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">"status"</span><span class="punctuation">:</span> <span class="string">"n"</span></span><br><span class="line">      <span class="punctuation">}</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以，我们可以创建一个这样的结构体来用来反序列化它：</p>
+<figure class="highlight swift"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">ForumGroup</span>: <span class="title class_">Codable</span>, <span class="title class_">Identifiable</span> {</span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> sort: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> status: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> forums: [<span class="type">Forum</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">enum</span> <span class="title class_">CodingKeys</span>: <span class="title class_">String</span>, <span class="title class_">CodingKey</span> {</span><br><span class="line">        <span class="keyword">case</span> id</span><br><span class="line">        <span class="keyword">case</span> sort</span><br><span class="line">        <span class="keyword">case</span> name</span><br><span class="line">        <span class="keyword">case</span> status</span><br><span class="line">        <span class="keyword">case</span> forums</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Forum</span>: <span class="title class_">Codable</span>, <span class="title class_">Identifiable</span> {</span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">String</span> <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> fGroup: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> sort: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> showName: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> msg: <span class="type">String</span> <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> interval: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> threadCount: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> permissionLevel: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> forumFuseId: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> createdAt: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> updateAt: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">var</span> status: <span class="type">String</span>? <span class="operator">=</span> <span class="string">""</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">enum</span> <span class="title class_">CodingKeys</span>: <span class="title class_">String</span>, <span class="title class_">CodingKey</span> {</span><br><span class="line">        <span class="keyword">case</span> id</span><br><span class="line">        <span class="keyword">case</span> fGroup</span><br><span class="line">        <span class="keyword">case</span> sort</span><br><span class="line">        <span class="keyword">case</span> name</span><br><span class="line">        <span class="keyword">case</span> showName</span><br><span class="line">        <span class="keyword">case</span> msg</span><br><span class="line">        <span class="keyword">case</span> interval</span><br><span class="line">        <span class="comment">// 因为X岛揭示板的API存在CamelCase和snake_case混用的情况</span></span><br><span class="line">        <span class="comment">// 所以需要CodingKeys来配置正确的映射</span></span><br><span class="line">        <span class="keyword">case</span> threadCount <span class="operator">=</span> <span class="string">"thread_count"</span></span><br><span class="line">        <span class="keyword">case</span> permissionLevel <span class="operator">=</span> <span class="string">"permission_level"</span></span><br><span class="line">        <span class="keyword">case</span> forumFuseId <span class="operator">=</span> <span class="string">"forum_fuse_id"</span></span><br><span class="line">        <span class="keyword">case</span> createdAt</span><br><span class="line">        <span class="keyword">case</span> updateAt</span><br><span class="line">        <span class="keyword">case</span> status</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="编写网络请求"><a href="#编写网络请求" class="headerlink" title="编写网络请求"></a>编写网络请求</h2><p>创建一个新的 Swift 文件 <code>AnoBbsApiClient</code>，编写如下代码：</p>
+<figure class="highlight swift"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">AnoBbsApiClient</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">let</span> logger <span class="operator">=</span> <span class="type">LoggerHelper</span>.getLoggerForNetworkRequest(name: <span class="string">"AnoBbsApiClient"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="title function_">loadForumGroups</span>(</span><br><span class="line">        <span class="params">completion</span>:<span class="keyword">@escaping</span> ([<span class="type">ForumGroup</span>]) -&gt; <span class="type">Void</span>,</span><br><span class="line">        <span class="params">failure</span>:<span class="keyword">@escaping</span> (<span class="type">String</span>) -&gt; <span class="type">Void</span></span><br><span class="line">    ) {</span><br><span class="line">        <span class="keyword">let</span> url <span class="operator">=</span> <span class="type">URL</span>(string: <span class="type">XdnmbAPI</span>.<span class="type">GET_FORUM_LIST</span>)<span class="operator">!</span></span><br><span class="line">        <span class="type">AF</span>.request(url, method: .get, interceptor: .retryPolicy) { <span class="variable">$0</span>.timeoutInterval <span class="operator">=</span> <span class="number">10</span> }</span><br><span class="line">            .cacheResponse(using: .cache)</span><br><span class="line">            .validate()</span><br><span class="line">            .responseDecodable(of: [<span class="type">ForumGroup</span>].<span class="keyword">self</span>) { response <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">switch</span> response.result {</span><br><span class="line">                <span class="keyword">case</span> .success(<span class="keyword">let</span> data):</span><br><span class="line">                    completion(data)</span><br><span class="line">                <span class="keyword">case</span> .failure(<span class="keyword">let</span> error):</span><br><span class="line">                    failure(error.localizedDescription)</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>是的，就这几行代码，花了我大概一整天时间来学明白，定稿之前不知道来来回回试了多少遍。前面都很好懂，重点就是 <code>responseDecodable</code> 这个方法调用，<code>of</code> 参数指明我希望把返回的 JSON 反序列化成一个 <code>ForumGroup</code> 列表，后面的方法块中根据成功反序列化和发生任何错误的情况，分别调用 <code>completion</code> 和 <code>failure</code> 这两个回调方法。</p>
+<h2 id="渲染列表"><a href="#渲染列表" class="headerlink" title="渲染列表"></a>渲染列表</h2><p>现在回到展示版面的 <code>ForumsView</code>，在 <code>body</code> 里面做如下实现：</p>
+<figure class="highlight swift"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {</span><br><span class="line">    <span class="type">NavigationStack</span> {</span><br><span class="line">        <span class="type">List</span> {</span><br><span class="line">            <span class="type">ForEach</span>(<span class="variable">$forumGroups</span>) { <span class="variable">$forumGroup</span> <span class="keyword">in</span></span><br><span class="line">                <span class="type">Section</span> {</span><br><span class="line">                    <span class="type">ForEach</span>(forumGroup.forums) { forum <span class="keyword">in</span></span><br><span class="line">                        <span class="type">NavigationLink</span>(destination: <span class="type">CookieListView</span>(globalState: globalState)) {</span><br><span class="line">                            <span class="keyword">if</span> (forum.showName <span class="operator">==</span> <span class="literal">nil</span> <span class="operator">||</span> forum.showName<span class="operator">!</span>.isEmpty) {</span><br><span class="line">                                <span class="type">Text</span>(forum.name)</span><br><span class="line">                            } <span class="keyword">else</span> {</span><br><span class="line">                                <span class="type">Text</span>(forum.showName<span class="operator">!</span>)</span><br><span class="line">                            }</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                } header: {</span><br><span class="line">                    <span class="type">Text</span>(forumGroup.name)</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    .onAppear {</span><br><span class="line">        <span class="keyword">if</span> (<span class="operator">!</span>isContentLoaded) {</span><br><span class="line">            globalState.loadingStatus <span class="operator">=</span> <span class="type">String</span>(localized: <span class="string">"msgLoadingForumList"</span>);</span><br><span class="line">            shouldDisplayProgressView <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="type">AnoBbsApiClient</span>.loadForumGroups { forumGroups <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">self</span>.forumGroups <span class="operator">=</span> forumGroups</span><br><span class="line">                isContentLoaded <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">                shouldDisplayProgressView <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">            } failure: { error <span class="keyword">in</span></span><br><span class="line">                showErrorToast(message: error)</span><br><span class="line">                shouldDisplayProgressView <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    .toast(isPresenting: <span class="variable">$isErrorToastShowing</span>) {</span><br><span class="line">        <span class="type">AlertToast</span>(type: .regular, title: errorMessage)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这个 View 展示时，如果版面列表没有被加载，那么就调用刚刚写的 <code>loadForumGroups</code> 方法获取版面列表，后面的第一个代码块就是 <code>completion</code> 这个回调的实现，负责把 <code>loadForumGroups</code> 方法得到的结果传给一个 <code>@State</code> 变量 <code>forumGroups</code>，以及标记内容已经成功载入，并隐藏载入提示的风火轮；第二个代码块是 <code>failure</code> 这个回调的实现，负责显示一个带有错误信息的 <code>Toast</code> 并隐藏风火轮。</p>
+<p>在这个 <code>View</code> 的 <code>NavigationStack</code> 里面，就可以监听 <code>forumGroups</code> 这个 <code>@State</code> 变量，并用变量里面的内容来渲染整个列表了。最后，我们就可以得到这样一个结果：</p>
+<p><img data-src="https://blog-static.boris1993.com/swiftui-initialize-list-with-remote-data/forum-list-view.jpeg"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><img src="https://blog-static.boris1993.com/CodeLifeOfBorisBanner.png" />
+<br>
+<!-- bottom ad -->
+<div class="post-body-adsense" style="text-align: center;">
+     <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-1056823357231661"
+          data-ad-slot="5274622882"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+     <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+     </script>
+</div>
+
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/wechatpay.png" alt="Boris Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/alipay.jpg" alt="Boris Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="https://blog-static.boris1993.com/reward/bitcoin.png" alt="Boris Zhao 比特币">
+        <span>比特币</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SwiftUI/" rel="tag"># SwiftUI</a>
+              <a href="/tags/List/" rel="tag"># List</a>
+              <a href="/tags/Alamofire/" rel="tag"># Alamofire</a>
+              <a href="/tags/iOS%E5%BC%80%E5%8F%91/" rel="tag"># iOS开发</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/uwp-textblock-show-and-hide-content-on-hover.html" rel="prev" title="为 UWP 的 TextBlock 实现鼠标悬浮时显示和隐藏内容">
+                  <i class="fa fa-angle-left"></i> 为 UWP 的 TextBlock 实现鼠标悬浮时显示和隐藏内容
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/routeros-setup-wireguard.html" rel="next" title="RouterOS 配置 Wireguard 与阿里云 ECS 组网">
+                  RouterOS 配置 Wireguard 与阿里云 ECS 组网 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Boris Zhao</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://valine-api.boris1993.com","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"locale":{"placeholder":"说点什么"},"comment_count":true,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/swiftui-initialize-list-with-remote-data.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
