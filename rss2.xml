@@ -9,11 +9,11 @@
     <atom:link href="https://www.boris1993.com/rss2.xml" rel="self" type="application/rss+xml"/>
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
     <description>Boris has arrived!</description>
-    <pubDate>Sat, 07 Jun 2025 15:27:04 GMT</pubDate>
+    <pubDate>Sat, 07 Jun 2025 16:28:47 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>在 Docker 中的 PID 1 和 tini：为什么你的容器不响应 Ctrl-C</title>
+      <title>Docker 中的 PID 1 和 tini：为什么你的容器不响应 Ctrl-C</title>
       <link>https://www.boris1993.com/translation-docker-pid-1-and-tini.html</link>
       <guid>https://www.boris1993.com/translation-docker-pid-1-and-tini.html</guid>
       <pubDate>Sat, 07 Jun 2025 00:40:16 GMT</pubDate>
