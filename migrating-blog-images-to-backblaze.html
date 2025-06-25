@@ -25,12 +25,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="之前我一直把博客的图片放在个人的 OneDrive 上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问 OneDrive 的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从 OneDrive 迁到了 Backblaze 对象存储。">
+    <meta name="description" content="之前我一直把博客的图片放在个人的OneDrive上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问OneDrive的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从OneDrive迁到了Backblaze对象存储。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记我将博客的图片存储迁移到 Backblaze">
+<meta property="og:title" content="记我将博客的图片存储迁移到Backblaze">
 <meta property="og:url" content="https://www.boris1993.com/migrating-blog-images-to-backblaze.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="之前我一直把博客的图片放在个人的 OneDrive 上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问 OneDrive 的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从 OneDrive 迁到了 Backblaze 对象存储。">
+<meta property="og:description" content="之前我一直把博客的图片放在个人的OneDrive上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问OneDrive的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从OneDrive迁到了Backblaze对象存储。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/s3-browser-add-account.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/s3-browser-list-files.png">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-token-for-worker.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-worker-trigger.png">
 <meta property="article:published_time" content="2023-05-15T13:40:15.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.009Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.462Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="对象存储">
 <meta property="article:tag" content="OSS">
@@ -54,10 +54,10 @@
 <link rel="canonical" href="https://www.boris1993.com/migrating-blog-images-to-backblaze.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/migrating-blog-images-to-backblaze.html","path":"migrating-blog-images-to-backblaze.html","title":"记我将博客的图片存储迁移到 Backblaze"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/migrating-blog-images-to-backblaze.html","path":"migrating-blog-images-to-backblaze.html","title":"记我将博客的图片存储迁移到Backblaze"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>记我将博客的图片存储迁移到 Backblaze | Code Life</title>
+<title>记我将博客的图片存储迁移到Backblaze | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -219,7 +219,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8Backblaze%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E6%A1%B6%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">2.</span> <span class="nav-text">在 Backblaze 创建存储桶并上传图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8CloudFlare%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">在 CloudFlare 中配置域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AECloudFlare%E8%A7%84%E5%88%99"><span class="nav-number">4.</span> <span class="nav-text">为请求配置 CloudFlare 规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AE%BF%E9%97%AE%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84Token"><span class="nav-number">5.</span> <span class="nav-text">自动更新访问存储桶的 Token</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8Backblaze%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E6%A1%B6%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">2.</span> <span class="nav-text">在Backblaze创建存储桶并上传图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8CloudFlare%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">在CloudFlare中配置域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AECloudFlare%E8%A7%84%E5%88%99"><span class="nav-number">4.</span> <span class="nav-text">为请求配置CloudFlare规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%AE%BF%E9%97%AE%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84Token"><span class="nav-number">5.</span> <span class="nav-text">自动更新访问存储桶的Token</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -320,12 +320,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="记我将博客的图片存储迁移到 Backblaze | Code Life">
+      <meta itemprop="name" content="记我将博客的图片存储迁移到Backblaze | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          记我将博客的图片存储迁移到 Backblaze
+          记我将博客的图片存储迁移到Backblaze
         </h1>
 
         <div class="post-meta-container">
@@ -343,7 +343,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,42 +386,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>之前我一直把博客的图片放在个人的 OneDrive 上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问 OneDrive 的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从 OneDrive 迁到了 Backblaze 对象存储。</p>
+    <div class="post-body" itemprop="articleBody"><p>之前我一直把博客的图片放在个人的OneDrive上，然后用嵌入功能得到外链放在博客里。但是考虑到国内访问OneDrive的延迟还是偏高，以及不折腾不舒服的心理作祟，于是乎在三月份的时候，我把博客的图片从OneDrive迁到了Backblaze对象存储。</p>
 <span id="more"></span>
 
 <h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>开始之前，我们需要准备好这些东西：</p>
 <ul>
-<li>一个 Backblaze 免费账号</li>
-<li>一个 CloudFlare 免费账号</li>
+<li>一个Backblaze免费账号</li>
+<li>一个CloudFlare免费账号</li>
 <li>一个域名</li>
 <li>还有你的好心情 :-)</li>
 </ul>
-<p>可能你会担心用对象存储是不是会产生高额的账单，或者会因为超出配额导致图片全部无法加载。说实话我之前不敢用对象存储就是因为有这方面的顾虑，但是在 Backblaze 这里我们完全不用担心。首先，我们用的是免费的账户，而且 Backblaze 甚至不要求你添加信用卡。此外，Backblaze 和 CloudFlare 都是带宽联盟的成员，意味着 Backblaze 与 CloudFlare 之间的流量全部是免费的。</p>
-<h2 id="在Backblaze创建存储桶并上传图片"><a href="#在Backblaze创建存储桶并上传图片" class="headerlink" title="在Backblaze创建存储桶并上传图片"></a>在 Backblaze 创建存储桶并上传图片</h2><p>登录进 Backblaze 的 B2 Cloud Storage 之后，点 <code>Create a Bucket</code> 创建一个存储桶就行了。为了防止被人恶意刷流量，我建议创建一个私有的存储桶。加密和对象锁都不需要。</p>
-<p>创建成功后，打开这个存储桶的 <code>Bucket Settings</code>，在 <code>Bucket Info</code> 中添加 <code>{"cache-control":"max-age=43200"}</code> 来配置桶的缓存时间。虽然流量不要钱，但是能环保还是环保一点比较好不是？</p>
-<p>因为我们创建的是私有存储桶，所以需要创建一个 Application Key 来允许第三方服务访问这个桶。虽然 Backblaze 默认提供了一个 Master Application Key，但是这就像天天用 root 登录 Linux 主机一样，只有中午才能用，因为早晚会出事。在 Application Keys 页面，点 <code>Add a New Application Key</code>，<code>Allow access to Bucket(s)</code> 里面建议选我们这个桶而不是 All，权限当然是 Read and Write。创建成功之后，注意保存好 <code>keyID</code> 和 <code>applicationKey</code>，因为 <code>applicationKey</code> 只会显示一次。</p>
-<p>然后需要下载一个支持浏览对象存储的工具，比如我用的<span class="exturl" data-url="aHR0cHM6Ly9zM2Jyb3dzZXIuY29tLz92PTEwLjkuOSZmYW09eDY0"> S3 Browser<i class="fa fa-external-link-alt"></i></span>。然后在 S3 Browser 中新建一个连接，<code>REST Endpoint</code> 填写存储桶的 <code>Endpoint</code>，<code>Access Key ID</code> 就是刚才记下来的 <code>keyID</code>，<code>Secret Access Key</code> 就是 <code>applicationKey</code>。</p>
+<p>可能你会担心用对象存储是不是会产生高额的账单，或者会因为超出配额导致图片全部无法加载。说实话我之前不敢用对象存储就是因为有这方面的顾虑，但是在Backblaze这里我们完全不用担心。首先，我们用的是免费的账户，而且Backblaze甚至不要求你添加信用卡。此外，Backblaze和CloudFlare都是带宽联盟的成员，意味着Backblaze与CloudFlare之间的流量全部是免费的。</p>
+<h2 id="在Backblaze创建存储桶并上传图片"><a href="#在Backblaze创建存储桶并上传图片" class="headerlink" title="在Backblaze创建存储桶并上传图片"></a>在Backblaze创建存储桶并上传图片</h2><p>登录进Backblaze的B2 Cloud Storage之后，点<code>Create a Bucket</code>创建一个存储桶就行了。为了防止被人恶意刷流量，我建议创建一个私有的存储桶。加密和对象锁都不需要。</p>
+<p>创建成功后，打开这个存储桶的<code>Bucket Settings</code>，在<code>Bucket Info</code>中添加<code>&#123;&quot;cache-control&quot;:&quot;max-age=43200&quot;&#125;</code>来配置桶的缓存时间。虽然流量不要钱，但是能环保还是环保一点比较好不是？</p>
+<p>因为我们创建的是私有存储桶，所以需要创建一个Application Key来允许第三方服务访问这个桶。虽然Backblaze默认提供了一个Master Application Key，但是这就像天天用root登录Linux主机一样，只有中午才能用，因为早晚会出事。在Application Keys页面，点<code>Add a New Application Key</code>，<code>Allow access to Bucket(s)</code>里面建议选我们这个桶而不是All，权限当然是Read and Write。创建成功之后，注意保存好<code>keyID</code>和<code>applicationKey</code>，因为<code>applicationKey</code>只会显示一次。</p>
+<p>然后需要下载一个支持浏览对象存储的工具，比如我用的<span class="exturl" data-url="aHR0cHM6Ly9zM2Jyb3dzZXIuY29tLz92PTEwLjkuOSZmYW09eDY0">S3 Browser<i class="fa fa-external-link-alt"></i></span>。然后在S3 Browser中新建一个连接，<code>REST Endpoint</code>填写存储桶的<code>Endpoint</code>，<code>Access Key ID</code>就是刚才记下来的<code>keyID</code>，<code>Secret Access Key</code>就是<code>applicationKey</code>。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/s3-browser-add-account.png"></p>
-<p>如果 S3 Browser 可以成功连接到刚才创建的存储桶，那就说明配置正确了。这时候就可以想好目录结构，以及上传图片了。比如我选择把图片按照对应的博文来分类，每个有图的博文都有一个对应的图片目录。</p>
+<p>如果S3 Browser可以成功连接到刚才创建的存储桶，那就说明配置正确了。这时候就可以想好目录结构，以及上传图片了。比如我选择把图片按照对应的博文来分类，每个有图的博文都有一个对应的图片目录。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/s3-browser-list-files.png"></p>
-<h2 id="在CloudFlare中配置域名"><a href="#在CloudFlare中配置域名" class="headerlink" title="在CloudFlare中配置域名"></a>在 CloudFlare 中配置域名</h2><p>在到 CloudFlare 配置域名之前，我们先要知道指向一个文件的完整 URL。进入 Browse Files 页面，然后进入这个存储桶，接着随便挑一个文件，点它最右边的详情图标，这里的 <code>Friendly URL</code> 就是我们要找的东西。记下 URL 里面的域名，我们接下来要用到。</p>
+<h2 id="在CloudFlare中配置域名"><a href="#在CloudFlare中配置域名" class="headerlink" title="在CloudFlare中配置域名"></a>在CloudFlare中配置域名</h2><p>在到CloudFlare配置域名之前，我们先要知道指向一个文件的完整URL。进入Browse Files页面，然后进入这个存储桶，接着随便挑一个文件，点它最右边的详情图标，这里的<code>Friendly URL</code>就是我们要找的东西。记下URL里面的域名，我们接下来要用到。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/backblaze-file-details.png"></p>
-<p>接下来就可以到 CloudFlare 里面创建一条 CNAME 记录，并把刚才记下来的域名填到目标里面，并且启用 CloudFlare 的代理，这样我们才能享受到带宽联盟的优惠。此外，我们还会针对这个域名配置一些规则，这也需要打开 CloudFlare 的代理开关。</p>
-<p>要注意这里只能是二级域名，如 <code>blog-static.boris1993.com</code>，而不能是多级的（<code>blog.static.boris1993.com</code>），否则 CloudFlare 会无法申请证书，也就无法正常启用 HTTPS。</p>
+<p>接下来就可以到CloudFlare里面创建一条CNAME记录，并把刚才记下来的域名填到目标里面，并且启用CloudFlare的代理，这样我们才能享受到带宽联盟的优惠。此外，我们还会针对这个域名配置一些规则，这也需要打开CloudFlare的代理开关。</p>
+<p>要注意这里只能是二级域名，如<code>blog-static.boris1993.com</code>，而不能是多级的（<code>blog.static.boris1993.com</code>），否则CloudFlare会无法申请证书，也就无法正常启用HTTPS。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-cname-record.png"></p>
-<p>这时候我们就可以用 <code>https://sub-domain.your-domain.com/file/folder-name/image-name.png</code> 访问这个图片了，但是目前我们只能得到一个 401 页面，因为我们必须要带上一个 Access Token 才能访问私有存储桶的文件。</p>
-<h2 id="为请求配置CloudFlare规则"><a href="#为请求配置CloudFlare规则" class="headerlink" title="为请求配置CloudFlare规则"></a>为请求配置 CloudFlare 规则</h2><p>前往 CloudFlare 的规则页面，选择<code>转换规则(Transform Rule)</code>，然后在<code>重写URL</code> 这个 tab 中新增一个规则。</p>
-<p>首先，我希望我可以直接用 <code>https://blog-static.boris1993.com/folder-name/file-name.png</code> 就能访问到图片（因为这样看起来更好看），所以我配置了一个路径重写，如果路径中不包含 <code>/file/bucket-name</code>，那么就在路径中补上这一段。</p>
-<p>选择<code>路径</code>的<code>重写到</code>，表达式类型选择<code>动态</code>，表达式填写 <code>concat("/file/blog-pics", http.request.uri.path)</code>。这样 CloudFlare 就会自动补全完整的路径。</p>
-<p>然后就是访问私有存储桶的 Access Token。Backblaze 支持把 Access Token 放在 <code>Authorization</code> 这个 query parameter 中，所以我们可以选择<code>查询</code>的<code>重写到</code>，表达式类型选择<code>静态(Static)</code>，值目前可以随便写，因为你就算现在拿到一个 token，在 24 小时后也是会过期的，所以后面我会讲怎么用 CloudFlare Workers 来更新这个字段。</p>
+<p>这时候我们就可以用<code>https://sub-domain.your-domain.com/file/folder-name/image-name.png</code>访问这个图片了，但是目前我们只能得到一个401页面，因为我们必须要带上一个Access Token才能访问私有存储桶的文件。</p>
+<h2 id="为请求配置CloudFlare规则"><a href="#为请求配置CloudFlare规则" class="headerlink" title="为请求配置CloudFlare规则"></a>为请求配置CloudFlare规则</h2><p>前往CloudFlare的规则页面，选择<code>转换规则(Transform Rule)</code>，然后在<code>重写URL</code>这个tab中新增一个规则。</p>
+<p>首先，我希望我可以直接用<code>https://blog-static.boris1993.com/folder-name/file-name.png</code>就能访问到图片（因为这样看起来更好看），所以我配置了一个路径重写，如果路径中不包含<code>/file/bucket-name</code>，那么就在路径中补上这一段。</p>
+<p>选择<code>路径</code>的<code>重写到</code>，表达式类型选择<code>动态</code>，表达式填写<code>concat(&quot;/file/blog-pics&quot;, http.request.uri.path)</code>。这样CloudFlare就会自动补全完整的路径。</p>
+<p>然后就是访问私有存储桶的Access Token。Backblaze支持把Access Token放在<code>Authorization</code>这个query parameter中，所以我们可以选择<code>查询</code>的<code>重写到</code>，表达式类型选择<code>静态(Static)</code>，值目前可以随便写，因为你就算现在拿到一个token，在24小时后也是会过期的，所以后面我会讲怎么用CloudFlare Workers来更新这个字段。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-transform-rule.png"></p>
-<p>接下来，根据 Backblaze 官方的建议，我们需要对响应头做一些修改。</p>
+<p>接下来，根据Backblaze官方的建议，我们需要对响应头做一些修改。</p>
 <p>切换到<code>修改响应头</code>，新增这样一条规则：</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-update-headers.png"></p>
-<p>首先要正确配置 <code>Access-Control-Allow-Origin</code>，来避免跨域问题，我偷懒了直接配了个 <code>*</code>，不知道这么配会不会有盗链的问题，暂时先这样吧。</p>
-<p>其次 Backblaze 建议修改 <code>cache-control</code> 这个 header，来延长缓存的有效时间。</p>
-<p>最后，需要从响应头中删掉一些 Backblaze 的 header 来增强安全性。</p>
-<p>为了方便，我把要删掉的 header 放在这里：</p>
+<p>首先要正确配置<code>Access-Control-Allow-Origin</code>，来避免跨域问题，我偷懒了直接配了个<code>*</code>，不知道这么配会不会有盗链的问题，暂时先这样吧。</p>
+<p>其次Backblaze建议修改<code>cache-control</code>这个header，来延长缓存的有效时间。</p>
+<p>最后，需要从响应头中删掉一些Backblaze的header来增强安全性。</p>
+<p>为了方便，我把要删掉的header放在这里：</p>
 <ul>
 <li>x-bz-content-sha1</li>
 <li>x-bz-file-id</li>
@@ -431,19 +431,19 @@
 <li>x-bz-info-src_last_modified_millis</li>
 <li>x-bz-upload-timestamp</li>
 </ul>
-<p>同时我为了能让浏览器缓存这个图片，我还让它添加了 <code>ETag</code> 这个 header，但是我在浏览器里一直看不到这个 header，如果有大佬知道为什么，还请不吝赐教。</p>
-<h2 id="自动更新访问存储桶的Token"><a href="#自动更新访问存储桶的Token" class="headerlink" title="自动更新访问存储桶的Token"></a>自动更新访问存储桶的 Token</h2><p>因为后面要修改规则的内容，所以先得拿到规则集和规则的 ID。规则 ID 好办，打开<code>重写URL</code> 规则的编辑页面，我们就能在 URL 的最后一段得到这个规则的 ID。但是规则集 ID 只能调 CloudFlare API 取得。</p>
-<figure class="highlight http"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/rulesets</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></tbody></table></figure>
+<p>同时我为了能让浏览器缓存这个图片，我还让它添加了<code>ETag</code>这个header，但是我在浏览器里一直看不到这个header，如果有大佬知道为什么，还请不吝赐教。</p>
+<h2 id="自动更新访问存储桶的Token"><a href="#自动更新访问存储桶的Token" class="headerlink" title="自动更新访问存储桶的Token"></a>自动更新访问存储桶的Token</h2><p>因为后面要修改规则的内容，所以先得拿到规则集和规则的ID。规则ID好办，打开<code>重写URL</code>规则的编辑页面，我们就能在URL的最后一段得到这个规则的ID。但是规则集ID只能调CloudFlare API取得。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/rulesets</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></table></figure>
 
-<p>把 <code>YOUR_ZONE_ID</code> 替换为你的域名的区域 ID，以及把 <code>YOUR_CLOUDFLARE_API_TOKEN</code> 换成你的 API 令牌。我当时因为不知道这个 API 需要哪些权限，始终创建不出带有正确权限的 API 令牌，所以干脆用了 <code>Global API Key</code>。</p>
-<p>这个请求会返回一系列规则集，有 CloudFlare 内部的，也有我们自己的。理论上，名字是 <code>default</code> 并且 <code>phase</code> 是 <code>http_request_transform</code> 的那个就是我们要的。但是为了确认，可以再执行这个请求：</p>
-<figure class="highlight http"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/rulesets/RULE_SET_ID</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></tbody></table></figure>
+<p>把<code>YOUR_ZONE_ID</code>替换为你的域名的区域ID，以及把<code>YOUR_CLOUDFLARE_API_TOKEN</code>换成你的API令牌。我当时因为不知道这个API需要哪些权限，始终创建不出带有正确权限的API令牌，所以干脆用了<code>Global API Key</code>。</p>
+<p>这个请求会返回一系列规则集，有CloudFlare内部的，也有我们自己的。理论上，名字是<code>default</code>并且<code>phase</code>是<code>http_request_transform</code>的那个就是我们要的。但是为了确认，可以再执行这个请求：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/rulesets/RULE_SET_ID</span><br><span class="line"><span class="attribute">Authorization</span><span class="punctuation">: </span>Bearer YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></table></figure>
 
-<p>跟上条请求一样，替换掉 <code>YOUR_ZONE_ID</code> 和 <code>YOUR_CLOUDFLARE_API_TOKEN</code>，以及将 <code>RULE_SET_ID</code> 替换为上面找到的规则集的 <code>id</code>。执行后会返回这个规则集下的规则。如果返回内容中有我们之前创建的那条<code>重写URL</code> 的规则，那么这就是我们要找的规则集。</p>
-<p>然后为了安全起见，我们要为这个 CloudFlare Worker 创建一个 API 令牌。进入<code>我的个人资料</code> –&gt; <code>API令牌</code>，然后点击<code>创建令牌</code>，在接下来的页面中中选择<code>创建自定义令牌</code>，然后如图创建一个令牌。</p>
+<p>跟上条请求一样，替换掉<code>YOUR_ZONE_ID</code>和<code>YOUR_CLOUDFLARE_API_TOKEN</code>，以及将<code>RULE_SET_ID</code>替换为上面找到的规则集的<code>id</code>。执行后会返回这个规则集下的规则。如果返回内容中有我们之前创建的那条<code>重写URL</code>的规则，那么这就是我们要找的规则集。</p>
+<p>然后为了安全起见，我们要为这个CloudFlare Worker创建一个API令牌。进入<code>我的个人资料</code> –&gt; <code>API令牌</code>，然后点击<code>创建令牌</code>，在接下来的页面中中选择<code>创建自定义令牌</code>，然后如图创建一个令牌。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-token-for-worker.png"></p>
 <p>添加成功后，妥善保存这个令牌。</p>
-<p>接下来前往 CloudFlare Workers，创建一个新的 Worker。然后到<code>设置</code> –&gt; <code>变量</code>，添加如下环境变量：</p>
+<p>接下来前往CloudFlare Workers，创建一个新的Worker。然后到<code>设置</code> –&gt; <code>变量</code>，添加如下环境变量：</p>
 <table>
 <thead>
 <tr>
@@ -452,44 +452,44 @@
 </tr>
 </thead>
 <tbody><tr>
-<td> B2KeyID</td>
-<td>Backblaze 的 <code>keyID</code></td>
+<td>B2KeyID</td>
+<td>Backblaze的<code>keyID</code></td>
 </tr>
 <tr>
 <td>B2AppKey</td>
-<td>Backblaze 的 <code>applicationKey</code></td>
+<td>Backblaze的<code>applicationKey</code></td>
 </tr>
 <tr>
 <td>B2BucketName</td>
-<td>Backblaze 的存储桶名</td>
+<td>Backblaze的存储桶名</td>
 </tr>
 <tr>
-<td> CfAuthKey</td>
-<td> 上面创建的 CloudFlare API 令牌</td>
+<td>CfAuthKey</td>
+<td>上面创建的CloudFlare API令牌</td>
 </tr>
 <tr>
-<td> CfHostname</td>
-<td> 上面在 CloudFlare 创建的二级域名</td>
+<td>CfHostname</td>
+<td>上面在CloudFlare创建的二级域名</td>
 </tr>
 <tr>
-<td> CfZoneID</td>
-<td> 你的域名的区域 ID</td>
+<td>CfZoneID</td>
+<td>你的域名的区域ID</td>
 </tr>
 <tr>
 <td>CfRulesetID</td>
-<td> 上面拿到的规则集 ID</td>
+<td>上面拿到的规则集ID</td>
 </tr>
 <tr>
 <td>CfRuleID</td>
-<td> 上面拿到的规则 ID</td>
+<td>上面拿到的规则ID</td>
 </tr>
 </tbody></table>
-<p>然后进入<code>触发器</code>，将<code>路由</code>中的那条记录禁用，因为我们不会用 HTTP 请求来触发这个 Worker。然后再 <code>Cron触发器</code>中添加一个 Cron 触发器。Backblaze 说一个 token 的有效期最大不超过 24 小时，我为了保险起见，选择每半小时就触发这个 Worker 来生成一个新的 token，即 <code>*/30 * * * *</code>。</p>
+<p>然后进入<code>触发器</code>，将<code>路由</code>中的那条记录禁用，因为我们不会用HTTP请求来触发这个Worker。然后再<code>Cron触发器</code>中添加一个Cron触发器。Backblaze说一个token的有效期最大不超过24小时，我为了保险起见，选择每半小时就触发这个Worker来生成一个新的token，即<code>*/30 * * * *</code>。</p>
 <p><img data-src="https://blog-static.boris1993.com/migrating-blog-images-to-backblaze/cloudflare-worker-trigger.png"></p>
 <p>至此前置任务完成，点击右上角的<code>快速编辑</code>，然后将如下脚本粘贴进去，然后点击<code>保存并部署</code>。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">"fetch"</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> {</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">});</span><br><span class="line"><span class="title function_">addEventListener</span>(<span class="string">"scheduled"</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> {</span><br><span class="line">  event.<span class="title function_">waitUntil</span>(<span class="title function_">updateRule</span>());</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getB2Token</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; {</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">    <span class="string">"https://api.backblazeb2.com/b2api/v2/b2_authorize_account"</span>,</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">headers</span>: {</span><br><span class="line">        <span class="title class_">Authorization</span>: <span class="string">"Basic "</span> + <span class="title function_">btoa</span>(B2KeyID + <span class="string">":"</span> + B2AppKey),</span><br><span class="line">      },</span><br><span class="line">    }</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  <span class="keyword">return</span> data.<span class="property">authorizationToken</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">updateRule</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; {</span><br><span class="line">  <span class="keyword">const</span> b2Token = <span class="keyword">await</span> <span class="title function_">getB2Token</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">    <span class="string">`https://api.cloudflare.com/client/v4/zones/<span class="subst">${CfZoneID}</span>/rulesets/<span class="subst">${CfRulesetID}</span>/rules/<span class="subst">${CfRuleID}</span>`</span>,</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">method</span>: <span class="string">"PATCH"</span>,</span><br><span class="line">      <span class="attr">headers</span>: {</span><br><span class="line">        <span class="string">"Authorization"</span>: <span class="string">`Bearer <span class="subst">${CfAuthKey}</span>`</span></span><br><span class="line">      },</span><br><span class="line">      <span class="attr">body</span>: </span><br><span class="line">      <span class="string">`{</span></span><br><span class="line"><span class="string">        "description": "Replace path for static files for blog",</span></span><br><span class="line"><span class="string">        "action": "rewrite",</span></span><br><span class="line"><span class="string">        "expression": "(http.host eq \\\"<span class="subst">${CfHostname}</span>\\\" and not starts_with(http.request.uri.path, \\\"/file/<span class="subst">${B2BucketName}</span>\\\"))",</span></span><br><span class="line"><span class="string">        "action_parameters": {</span></span><br><span class="line"><span class="string">          "uri": {</span></span><br><span class="line"><span class="string">              "path": {</span></span><br><span class="line"><span class="string">                  "expression": "concat(\\\"/file/<span class="subst">${B2BucketName}</span>\\\", http.request.uri.path)"</span></span><br><span class="line"><span class="string">              },</span></span><br><span class="line"><span class="string">              "query": {</span></span><br><span class="line"><span class="string">                  "value": "Authorization=<span class="subst">${b2Token}</span>"</span></span><br><span class="line"><span class="string">              }</span></span><br><span class="line"><span class="string">          }</span></span><br><span class="line"><span class="string">        }</span></span><br><span class="line"><span class="string">      }`</span>,</span><br><span class="line">    }</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">text</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) {</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">updateRule</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(data);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&quot;fetch&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&quot;scheduled&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">waitUntil</span>(<span class="title function_">updateRule</span>());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getB2Token</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">    <span class="string">&quot;https://api.backblazeb2.com/b2api/v2/b2_authorize_account&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="title class_">Authorization</span>: <span class="string">&quot;Basic &quot;</span> + <span class="title function_">btoa</span>(B2KeyID + <span class="string">&quot;:&quot;</span> + B2AppKey),</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  <span class="keyword">return</span> data.<span class="property">authorizationToken</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">updateRule</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> b2Token = <span class="keyword">await</span> <span class="title function_">getB2Token</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(</span><br><span class="line">    <span class="string">`https://api.cloudflare.com/client/v4/zones/<span class="subst">$&#123;CfZoneID&#125;</span>/rulesets/<span class="subst">$&#123;CfRulesetID&#125;</span>/rules/<span class="subst">$&#123;CfRuleID&#125;</span>`</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;PATCH&quot;</span>,</span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="string">&quot;Authorization&quot;</span>: <span class="string">`Bearer <span class="subst">$&#123;CfAuthKey&#125;</span>`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">body</span>: </span><br><span class="line">      <span class="string">`&#123;</span></span><br><span class="line"><span class="string">        &quot;description&quot;: &quot;Replace path for static files for blog&quot;,</span></span><br><span class="line"><span class="string">        &quot;action&quot;: &quot;rewrite&quot;,</span></span><br><span class="line"><span class="string">        &quot;expression&quot;: &quot;(http.host eq \\\&quot;<span class="subst">$&#123;CfHostname&#125;</span>\\\&quot; and not starts_with(http.request.uri.path, \\\&quot;/file/<span class="subst">$&#123;B2BucketName&#125;</span>\\\&quot;))&quot;,</span></span><br><span class="line"><span class="string">        &quot;action_parameters&quot;: &#123;</span></span><br><span class="line"><span class="string">          &quot;uri&quot;: &#123;</span></span><br><span class="line"><span class="string">              &quot;path&quot;: &#123;</span></span><br><span class="line"><span class="string">                  &quot;expression&quot;: &quot;concat(\\\&quot;/file/<span class="subst">$&#123;B2BucketName&#125;</span>\\\&quot;, http.request.uri.path)&quot;</span></span><br><span class="line"><span class="string">              &#125;,</span></span><br><span class="line"><span class="string">              &quot;query&quot;: &#123;</span></span><br><span class="line"><span class="string">                  &quot;value&quot;: &quot;Authorization=<span class="subst">$&#123;b2Token&#125;</span>&quot;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;`</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">text</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">updateRule</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>等 Worker 被触发之后，就可以在浏览器中访问上面配置的域名，来测试到存储桶的连接是否正常。如果测试没问题，就可以把博客中的图片链接换到新地址了。</p>
+<p>等Worker被触发之后，就可以在浏览器中访问上面配置的域名，来测试到存储桶的连接是否正常。如果测试没问题，就可以把博客中的图片链接换到新地址了。</p>
 
     </div>
 
@@ -545,13 +545,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/routeros-mss-clamping.html" rel="prev" title="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题">
-                  <i class="fa fa-angle-left"></i> 在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题
+                <a href="/routeros-mss-clamping.html" rel="prev" title="在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题">
+                  <i class="fa fa-angle-left"></i> 在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/uwp-textblock-show-and-hide-content-on-hover.html" rel="next" title="为 UWP 的 TextBlock 实现鼠标悬浮时显示和隐藏内容">
-                  为 UWP 的 TextBlock 实现鼠标悬浮时显示和隐藏内容 <i class="fa fa-angle-right"></i>
+                <a href="/uwp-textblock-show-and-hide-content-on-hover.html" rel="next" title="为UWP的TextBlock实现鼠标悬浮时显示和隐藏内容">
+                  为UWP的TextBlock实现鼠标悬浮时显示和隐藏内容 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

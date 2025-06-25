@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+ 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那">
+    <meta name="description" content="前段时间在网上看到了一个叫“甜糖星愿计划”的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何x86架构的平台，但并不保证运行效果。而且本文目标平台是x86，如果你拥有ARM平台的机器，那根本不需要废这个劲">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在群晖的 Docker 环境中运行甜糖星愿服务">
+<meta property="og:title" content="在群晖的Docker环境中运行甜糖星愿服务">
 <meta property="og:url" content="https://www.boris1993.com/run-tiantang-on-synology-docker.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+ 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那">
+<meta property="og:description" content="前段时间在网上看到了一个叫“甜糖星愿计划”的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。 需要注意的一点是，本文提到的镜像仅在我的群晖DS218+上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何x86架构的平台，但并不保证运行效果。而且本文目标平台是x86，如果你拥有ARM平台的机器，那根本不需要废这个劲">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-04T14:14:48.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.010Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.463Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="甜糖星愿">
 <meta property="article:tag" content="甜糖">
@@ -43,10 +43,10 @@
 <link rel="canonical" href="https://www.boris1993.com/run-tiantang-on-synology-docker.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/run-tiantang-on-synology-docker.html","path":"run-tiantang-on-synology-docker.html","title":"在群晖的 Docker 环境中运行甜糖星愿服务"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/run-tiantang-on-synology-docker.html","path":"run-tiantang-on-synology-docker.html","title":"在群晖的Docker环境中运行甜糖星愿服务"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在群晖的 Docker 环境中运行甜糖星愿服务 | Code Life</title>
+<title>在群晖的Docker环境中运行甜糖星愿服务 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -208,7 +208,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">我的网络环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text">安装 Docker 及配置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">准备二进制翻译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">运行镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">深入了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%82%80%E8%AF%B7%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">我的邀请码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">我的网络环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text">安装Docker及配置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">准备二进制翻译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">运行镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">深入了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%82%80%E8%AF%B7%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">我的邀请码</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,12 +309,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="在群晖的 Docker 环境中运行甜糖星愿服务 | Code Life">
+      <meta itemprop="name" content="在群晖的Docker环境中运行甜糖星愿服务 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在群晖的 Docker 环境中运行甜糖星愿服务
+          在群晖的Docker环境中运行甜糖星愿服务
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,42 +375,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
-<p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code> 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
-<p>本文提到的操作全部基于 Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用 <code>Docker</code> 和 <code>docker-compose</code>。</p>
+    <div class="post-body" itemprop="articleBody"><p>前段时间在网上看到了一个叫“甜糖星愿计划”的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
+<p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code>上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何x86架构的平台，但并不保证运行效果。而且本文目标平台是x86，如果你拥有ARM平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
+<p>本文提到的操作全部基于Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用<code>Docker</code>和<code>docker-compose</code>。</p>
 <span id="more"></span>
 
 <h2 id="我的网络环境"><a href="#我的网络环境" class="headerlink" title="我的网络环境"></a>我的网络环境</h2><p>因为这个镜像相关的一些配置是以我的网络结构为基础的，所以我觉得有必要简单说一下我的网络结构是什么样的。</p>
 <p>简单来说，我的网络就是这样子的。虽然网络里还有别的设备，但是因为与本文无关，我就略掉了。</p>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[公网] -- [光猫] -- [群晖]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[公网] -- [光猫] -- [群晖]</span><br></pre></td></tr></table></figure>
 
-<p>其中光猫负责拨号，所以它也是最外层的一个路由器，光猫的 IP 地址是 <code>192.168.1.1</code>，它下面有一个 <code>192.168.1.0/24</code> 的子网，群晖与光猫直连，有一个 <code>192.168.1.0/24</code> 子网下的 IP 地址。在群晖的 Docker 中，会有一个 <code>macvlan</code> 驱动的网络，与物理网卡共享同一个子网。甜糖星愿的容器将会接入到这个 <code>macvlan</code> 网络，在接入时我会手动为其分配一个 IP 地址。</p>
-<h2 id="安装Docker及配置网络"><a href="#安装Docker及配置网络" class="headerlink" title="安装Docker及配置网络"></a>安装 Docker 及配置网络</h2><p>因为本文是通过 Docker 来实现的，所以第一步当然是安装 Docker。群晖嘛就从套件商店安装，其他平台就用自己平台的方法安装，总之装上 Docker 就行。安装好 Docker 之后，进入<code>控制面板 -- 网络 -- 网络界面</code>，选择连接公网的接口，如<code>局域网1</code>，点击<code>管理 -- Open vSwitch设置</code>，勾选<code>启用 Open vSwitch</code>。</p>
-<p>然后我们需要在 Docker 里面创建一个 <code>macvlan</code> 驱动的网络，命令如：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network create \</span><br><span class="line">    -d macvlan \</span><br><span class="line">    --subnet=192.168.1.0/24 \</span><br><span class="line">    --gateway=192.168.1.1 \</span><br><span class="line">    -o parent=ovs_eth0 \</span><br><span class="line">    macvlan</span><br></pre></td></tr></tbody></table></figure>
+<p>其中光猫负责拨号，所以它也是最外层的一个路由器，光猫的IP地址是<code>192.168.1.1</code>，它下面有一个<code>192.168.1.0/24</code>的子网，群晖与光猫直连，有一个<code>192.168.1.0/24</code>子网下的IP地址。在群晖的Docker中，会有一个<code>macvlan</code>驱动的网络，与物理网卡共享同一个子网。甜糖星愿的容器将会接入到这个<code>macvlan</code>网络，在接入时我会手动为其分配一个IP地址。</p>
+<h2 id="安装Docker及配置网络"><a href="#安装Docker及配置网络" class="headerlink" title="安装Docker及配置网络"></a>安装Docker及配置网络</h2><p>因为本文是通过Docker来实现的，所以第一步当然是安装Docker。群晖嘛就从套件商店安装，其他平台就用自己平台的方法安装，总之装上Docker就行。安装好Docker之后，进入<code>控制面板 -- 网络 -- 网络界面</code>，选择连接公网的接口，如<code>局域网1</code>，点击<code>管理 -- Open vSwitch设置</code>，勾选<code>启用 Open vSwitch</code>。</p>
+<p>然后我们需要在Docker里面创建一个<code>macvlan</code>驱动的网络，命令如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network create \</span><br><span class="line">    -d macvlan \</span><br><span class="line">    --subnet=192.168.1.0/24 \</span><br><span class="line">    --gateway=192.168.1.1 \</span><br><span class="line">    -o parent=ovs_eth0 \</span><br><span class="line">    macvlan</span><br></pre></td></tr></table></figure>
 
-<p>上面命令中 <code>subnet</code> 的值替换成群晖所在网络的子网，<code>gateway</code> 指向该子网的网关，<code>parent</code> 指向要绑定的物理网卡，最后面的 <code>macvlan</code> 是网络名，可以按需修改。</p>
-<h2 id="准备二进制翻译器"><a href="#准备二进制翻译器" class="headerlink" title="准备二进制翻译器"></a>准备二进制翻译器</h2><p>接下来，我们要借助 QEMU 的力量，放一个幻术。毕竟，甜糖星愿只给了 ARM 平台的可执行程序，直接在 x86 平台跑肯定是跑不起来的，所以我们要向内核注册一个翻译器，这样 Docker 在执行其他平台的机器码时就可以通过这个翻译器将其翻译成 x86 指令来执行了。是的，我知道这玩意效率不高，我已经体验过了。</p>
-<p>首先，克隆这个镜像的源码仓库 [^2]，找到 <code>resources/qemu-aarch64-static</code>，或者你直接<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211bHRpYXJjaC9xZW11LXVzZXItc3RhdGljL3JlbGVhc2VzL2Rvd25sb2FkL3Y1LjIuMC0yL3FlbXUtYWFyY2g2NC1zdGF0aWM=">从 GitHub 下载 qemu-aarch64-static<i class="fa fa-external-link-alt"></i></span>也行，把这个文件放到 <code>$PATH</code> 指定的目录，赋予执行权限。</p>
+<p>上面命令中<code>subnet</code>的值替换成群晖所在网络的子网，<code>gateway</code>指向该子网的网关，<code>parent</code>指向要绑定的物理网卡，最后面的<code>macvlan</code>是网络名，可以按需修改。</p>
+<h2 id="准备二进制翻译器"><a href="#准备二进制翻译器" class="headerlink" title="准备二进制翻译器"></a>准备二进制翻译器</h2><p>接下来，我们要借助QEMU的力量，放一个幻术。毕竟，甜糖星愿只给了ARM平台的可执行程序，直接在x86平台跑肯定是跑不起来的，所以我们要向内核注册一个翻译器，这样Docker在执行其他平台的机器码时就可以通过这个翻译器将其翻译成x86指令来执行了。是的，我知道这玩意效率不高，我已经体验过了。</p>
+<p>首先，克隆这个镜像的源码仓库[^2]，找到<code>resources/qemu-aarch64-static</code>，或者你直接<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211bHRpYXJjaC9xZW11LXVzZXItc3RhdGljL3JlbGVhc2VzL2Rvd25sb2FkL3Y1LjIuMC0yL3FlbXUtYWFyY2g2NC1zdGF0aWM=">从GitHub下载qemu-aarch64-static<i class="fa fa-external-link-alt"></i></span>也行，把这个文件放到<code>$PATH</code>指定的目录，赋予执行权限。</p>
 <p>然后施法吟唱，很简单，就一句话：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --<span class="built_in">rm</span> --privileged multiarch/qemu-user-static:register</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --<span class="built_in">rm</span> --privileged multiarch/qemu-user-static:register</span><br></pre></td></tr></table></figure>
 
-<p>但是，这个幻术在群晖重启之后就会消失，幻术没了，甜糖星愿就起不来。所以我们还得配一个开机后的自启动任务，让群晖帮我们自动吟唱。操作也很简单，首先将本仓库的 <code>set_qemu_user_static.sh</code> 放到一个合适的位置，比如我放到了 <code>/var/services/homes/boris1993/scripts</code>，然后前往<code>控制面板 -- 任务计划</code>，然后按照如下说明新增一个任务计划：</p>
+<p>但是，这个幻术在群晖重启之后就会消失，幻术没了，甜糖星愿就起不来。所以我们还得配一个开机后的自启动任务，让群晖帮我们自动吟唱。操作也很简单，首先将本仓库的<code>set_qemu_user_static.sh</code>放到一个合适的位置，比如我放到了<code>/var/services/homes/boris1993/scripts</code>，然后前往<code>控制面板 -- 任务计划</code>，然后按照如下说明新增一个任务计划：</p>
 <ul>
 <li>任务名称：可自选</li>
 <li>用户账号：root</li>
-<li> 事件：开机</li>
+<li>事件：开机</li>
 <li>任务设置页面的运行命令：<br><code>/var/services/homes/boris1993/scripts/set_qemu_user_static.sh</code></li>
 </ul>
 <p>如果要看这个脚本的日志的话，在<code>运行命令</code>里面把脚本输出重定向到一个文件就可以了。</p>
-<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>进入本仓库所在目录，或者下载<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2VyL21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw="> docker-compose.yml<i class="fa fa-external-link-alt"></i></span>到一个合适的目录下，然后稍微编辑一下，以符合你的网络状况。主要要检查的就是 <code>networks.macvlan.ipv4_address</code> 的值，要确保它处在上面创建的那个 <code>macvlan</code> 网络的子网中。</p>
-<p>确认无误后，执行 <code>sudo docker-compose up -d</code>，Docker 就会自动拉取镜像，并启动一个名为 <code>tiantang</code> 的容器。</p>
+<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>进入本仓库所在目录，或者下载<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2VyL21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw=">docker-compose.yml<i class="fa fa-external-link-alt"></i></span>到一个合适的目录下，然后稍微编辑一下，以符合你的网络状况。主要要检查的就是<code>networks.macvlan.ipv4_address</code>的值，要确保它处在上面创建的那个<code>macvlan</code>网络的子网中。</p>
+<p>确认无误后，执行<code>sudo docker-compose up -d</code>，Docker就会自动拉取镜像，并启动一个名为<code>tiantang</code>的容器。</p>
 <p>容器内的甜糖星愿在首次启动时会自动退出，这是因为它在自我更新（我就不说这个操作一开始给了我多大的困扰了）。不要怕，容器里面有一个每分钟执行一次的定时任务，在没有发现甜糖星愿的进程时会自动将它启动。</p>
-<p>除此之外，我会在容器启动两分钟后，检测甜糖星愿监听了哪些端口，然后通过脚本自动设置路由器上的 UPnP 规则，这样你就不需要将甜糖星愿容器的 IP 放到 DMZ 里，也不需要手动配置端口转发了。当然这个操作的前提是，你的路由器支持 UPnP，并且你启用了 UPnP，如果没有的话，那你只能手动操作了。或者，如果你不想让脚本自动配置 UPnP，或者客观条件下不允许你这么做，那么你可以把 <code>docker-compose.yml</code> 中 <code>SKIP_UPNP_AUTOCONFIG</code> 这一环境变量置为 <code>true</code>，这样脚本就不会执行了。</p>
-<p>在甜糖星愿稳定运行，且端口转发规则也配置成功后，就可以通过手机客户端绑定这个节点了。但是这里有个问题，就是手机与甜糖星愿必须处在同一个子网里才能自动发现，如果因为各种原因没能自动发现，那么你可以在 <code>tiantang</code> 这个容器中打开一个 <code>bash</code> 终端，执行 <code>ttnode_168 -p /data</code>，在输出中会打印出这个节点的 UID，将其复制到任意二维码生成工具中生成一个二维码，然后用手机端扫描这个二维码，即可完成绑定。</p>
-<p>在这之后，就没什么我们能做的了。我们就慢慢等着甜糖星愿给你分配任务吧。我是等了大概有两三天才开始跑流量的。如果在配置好 UPnP 后，手机端仍提示 “未配置网络”，那有可能是在配置 UPnP 的脚本启动时，甜糖星愿尚未打开所有端口，导致 UPnP 规则不完整。你可以前往路由器的 UPnP 页面，将页面显示结果与 <code>netstat -nlp | grep qemu</code> 命令的输出做对比，如果不一致的话，重新手动运行 <code>set-port-forwarding.sh</code> 脚本即可。</p>
-<h2 id="深入了解"><a href="#深入了解" class="headerlink" title="深入了解"></a>深入了解</h2><p>如果你不止满足于把它跑起来，还想要了解这个镜像背后的运作方式，那么你可以前往这个镜像的 GitHub 仓库 [^3] 阅读该镜像相关的源码。在源码中我也写了注释，可以方便你理解我的想法。</p>
-<h2 id="我的邀请码"><a href="#我的邀请码" class="headerlink" title="我的邀请码"></a>我的邀请码</h2><p>如果我的镜像帮到了你，或者我的这篇文章帮到了你，那么如果你愿意的话，你可以在手机客户端的<code>填写邀请码</code>处，填上我的邀请码 **<code>804744</code>**，这样你可以获得 15 张加成卡，当然我也会得到一些加成。反正互利互惠，我的加成不会从你的身上扣掉，何乐而不为呢？</p>
+<p>除此之外，我会在容器启动两分钟后，检测甜糖星愿监听了哪些端口，然后通过脚本自动设置路由器上的UPnP规则，这样你就不需要将甜糖星愿容器的IP放到DMZ里，也不需要手动配置端口转发了。当然这个操作的前提是，你的路由器支持UPnP，并且你启用了UPnP，如果没有的话，那你只能手动操作了。或者，如果你不想让脚本自动配置UPnP，或者客观条件下不允许你这么做，那么你可以把<code>docker-compose.yml</code>中<code>SKIP_UPNP_AUTOCONFIG</code>这一环境变量置为<code>true</code>，这样脚本就不会执行了。</p>
+<p>在甜糖星愿稳定运行，且端口转发规则也配置成功后，就可以通过手机客户端绑定这个节点了。但是这里有个问题，就是手机与甜糖星愿必须处在同一个子网里才能自动发现，如果因为各种原因没能自动发现，那么你可以在<code>tiantang</code>这个容器中打开一个<code>bash</code>终端，执行<code>ttnode_168 -p /data</code>，在输出中会打印出这个节点的UID，将其复制到任意二维码生成工具中生成一个二维码，然后用手机端扫描这个二维码，即可完成绑定。</p>
+<p>在这之后，就没什么我们能做的了。我们就慢慢等着甜糖星愿给你分配任务吧。我是等了大概有两三天才开始跑流量的。如果在配置好UPnP后，手机端仍提示“未配置网络”，那有可能是在配置UPnP的脚本启动时，甜糖星愿尚未打开所有端口，导致UPnP规则不完整。你可以前往路由器的UPnP页面，将页面显示结果与<code>netstat -nlp | grep qemu</code>命令的输出做对比，如果不一致的话，重新手动运行<code>set-port-forwarding.sh</code>脚本即可。</p>
+<h2 id="深入了解"><a href="#深入了解" class="headerlink" title="深入了解"></a>深入了解</h2><p>如果你不止满足于把它跑起来，还想要了解这个镜像背后的运作方式，那么你可以前往这个镜像的GitHub仓库[^3]阅读该镜像相关的源码。在源码中我也写了注释，可以方便你理解我的想法。</p>
+<h2 id="我的邀请码"><a href="#我的邀请码" class="headerlink" title="我的邀请码"></a>我的邀请码</h2><p>如果我的镜像帮到了你，或者我的这篇文章帮到了你，那么如果你愿意的话，你可以在手机客户端的<code>填写邀请码</code>处，填上我的邀请码**<code>804744</code>**，这样你可以获得15张加成卡，当然我也会得到一些加成。反正互利互惠，我的加成不会从你的身上扣掉，何乐而不为呢？</p>
 <p>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yZXBvc2l0b3J5L2RvY2tlci9ib3JpczE5OTMvdGlhbnRhbmcteDg2LWRvY2tlcg==">tiantang-x86-docker - Docker Hub<i class="fa fa-external-link-alt"></i></span><br>[^3]: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5My90aWFudGFuZy14ODYtZG9ja2Vy">tiantang-x86-docker - GitHub<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
@@ -465,13 +465,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/gcp-logging-show-class-and-method-name.html" rel="prev" title="在 Google Cloud Logging 的日志输出中增加类名、方法名和行数">
-                  <i class="fa fa-angle-left"></i> 在 Google Cloud Logging 的日志输出中增加类名、方法名和行数
+                <a href="/gcp-logging-show-class-and-method-name.html" rel="prev" title="在Google Cloud Logging的日志输出中增加类名、方法名和行数">
+                  <i class="fa fa-angle-left"></i> 在Google Cloud Logging的日志输出中增加类名、方法名和行数
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/resolving-nginx-sni-issue.html" rel="next" title="记一次修复生产环境中 nginx 出现的 SNI 相关的问题">
-                  记一次修复生产环境中 nginx 出现的 SNI 相关的问题 <i class="fa fa-angle-right"></i>
+                <a href="/resolving-nginx-sni-issue.html" rel="next" title="记一次修复生产环境中nginx出现的SNI相关的问题">
+                  记一次修复生产环境中nginx出现的SNI相关的问题 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

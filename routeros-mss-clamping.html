@@ -25,16 +25,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。">
+    <meta name="description" content="换成自己用RouterOS拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在RouterOS中没有正确配置MTU及MSS，导致部分包被丢弃，也就是传说中的PMTU黑洞。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题">
+<meta property="og:title" content="在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题">
 <meta property="og:url" content="https://www.boris1993.com/routeros-mss-clamping.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。">
+<meta property="og:description" content="换成自己用RouterOS拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在RouterOS中没有正确配置MTU及MSS，导致部分包被丢弃，也就是传说中的PMTU黑洞。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg">
 <meta property="article:published_time" content="2023-05-14T04:37:15.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.010Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.463Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="RouterOS">
 <meta property="article:tag" content="二手MicroServer Gen8折腾记">
@@ -47,10 +47,10 @@
 <link rel="canonical" href="https://www.boris1993.com/routeros-mss-clamping.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/routeros-mss-clamping.html","path":"routeros-mss-clamping.html","title":"在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/routeros-mss-clamping.html","path":"routeros-mss-clamping.html","title":"在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题 | Code Life</title>
+<title>在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -212,7 +212,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMTU%E9%BB%91%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">PMTU 黑洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E5%85%89%E7%8C%AB%E6%88%96%E8%80%85%E7%A1%AC%E8%B7%AF%E7%94%B1%E6%8B%A8%E5%8F%B7%E5%B0%B1%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">为什么用光猫或者硬路由拨号就没有这个问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8RouterOS%E4%B8%AD%E9%85%8D%E7%BD%AEMSS-Clamping"><span class="nav-number">4.</span> <span class="nav-text">在 RouterOS 中配置 MSS Clamping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%87%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">症状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMTU%E9%BB%91%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">PMTU黑洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E5%85%89%E7%8C%AB%E6%88%96%E8%80%85%E7%A1%AC%E8%B7%AF%E7%94%B1%E6%8B%A8%E5%8F%B7%E5%B0%B1%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">为什么用光猫或者硬路由拨号就没有这个问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8RouterOS%E4%B8%AD%E9%85%8D%E7%BD%AEMSS-Clamping"><span class="nav-number">4.</span> <span class="nav-text">在RouterOS中配置MSS Clamping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -313,12 +313,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题 | Code Life">
+      <meta itemprop="name" content="在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题
+          在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题
         </h1>
 
         <div class="post-meta-container">
@@ -336,7 +336,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -379,23 +379,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>换成自己用 RouterOS 拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在 RouterOS 中没有正确配置 MTU 及 MSS，导致部分包被丢弃，也就是传说中的 PMTU 黑洞。</p>
+    <div class="post-body" itemprop="articleBody"><p>换成自己用RouterOS拨号之后，经常发现有的图片加载不出来，网上一顿冲浪之后发现可能是在RouterOS中没有正确配置MTU及MSS，导致部分包被丢弃，也就是传说中的PMTU黑洞。</p>
 <span id="more"></span>
 
 <h2 id="症状"><a href="#症状" class="headerlink" title="症状"></a>症状</h2><p>最常见的就是微信公众号的图片始终加载不出来，就像这样（自己当时没截图，借用知乎文章的图）：</p>
 <p><img data-src="https://blog-static.boris1993.com/routeros-mss-clamping/symptom.jpg"></p>
-<p>说来也很奇怪，我在 iOS 的微信上是能正常加载的，但是换到我妈的 Android 微信就会出现这样的情况，之前一直以为是我妈的手机出毛病了……</p>
-<h2 id="PMTU黑洞"><a href="#PMTU黑洞" class="headerlink" title="PMTU黑洞"></a>PMTU 黑洞</h2><p>所谓 MTU，指的是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网默认的 MTU 是 1500 字节。但是从我的设备到目标服务器之间的路径上可能存在 MTU 小于 1500 的链路，那么这条路径上最小的 MTU，就是整条链路的 <code>Path MTU</code>（PMTU）。</p>
-<p>路由器在转发包的时候，如果包的大小超过了 MTU，那么这个包会被分片（fragmentation）。而终端设备在发包时，也可以设置 DF 标志位（Don’t Fragment）来告诉路由器不要对这个包分片，此时如果这个包大小超过了 MTU，那么路由器就会丢掉这个包，并回复一条 <code>ICMP Fragmentation Needed</code> 消息。发送者收到这个消息后，下次就会发送小一点的包。这个过程叫做 PMTU 发现（PMTU Discovery）。</p>
-<p>但是互联网中有大量的设备因为各种原因，会配置为不回应 <code>ICMP Fragmentation Needed</code> 消息，这使得大小超过 MTU 的包会被无声地丢掉，直到 TCP 协议发现超时丢包并进行重传。这种情况就是 <code>PMTU黑洞</code>。</p>
-<p>此外，IPv6 包不支持分片，换句话说就是所有 IPv6 数据包全都带有 DF 标记。中间的路由器在遇到尺寸大于 MTU 的包的时候，应该回应 <code>ICMPv6 Packet Too Big</code> 消息，而同样的，由于各种原因，某些中间设备可能会直接丢掉这个包而不返回这条消息，直到 TCP 协议发现超时而进行重传。</p>
-<h2 id="为什么用光猫或者硬路由拨号就没有这个问题"><a href="#为什么用光猫或者硬路由拨号就没有这个问题" class="headerlink" title="为什么用光猫或者硬路由拨号就没有这个问题"></a>为什么用光猫或者硬路由拨号就没有这个问题</h2><p>这是因为，多数家用路由器默认开启了一个叫 <code>MSS Clamping</code> 的功能。这是针对 PMTU 黑洞的一个 workaround，简单来说就是在 TCP 握手时，服务器会通过一个字段告知客户端它愿意接收的 TCP 包的最大尺寸，这样客户端就可以限制自己发送的包的大小，保证不会超出服务端要求的尺寸。</p>
-<h2 id="在RouterOS中配置MSS-Clamping"><a href="#在RouterOS中配置MSS-Clamping" class="headerlink" title="在RouterOS中配置MSS Clamping"></a>在 RouterOS 中配置 MSS Clamping</h2><p>配置非常简单，分别对 IPv4 和 IPv6 的防火墙 Mangle 表添加如下配置即可。</p>
-<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将命令中 out-interface 参数的值替换成你的PPPoE接口的名字</span></span><br><span class="line">/ip/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv4 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br><span class="line"></span><br><span class="line">/ipv6/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">"IPv6 MSS clamp to PMTU"</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">"China Telecom"</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br></pre></td></tr></tbody></table></figure>
+<p>说来也很奇怪，我在iOS的微信上是能正常加载的，但是换到我妈的Android微信就会出现这样的情况，之前一直以为是我妈的手机出毛病了……</p>
+<h2 id="PMTU黑洞"><a href="#PMTU黑洞" class="headerlink" title="PMTU黑洞"></a>PMTU黑洞</h2><p>所谓MTU，指的是一条链路上可以通过的三层数据包的最大尺寸（包含IP包头）。以太网默认的MTU是1500字节。但是从我的设备到目标服务器之间的路径上可能存在MTU小于1500的链路，那么这条路径上最小的MTU，就是整条链路的<code>Path MTU</code>（PMTU）。</p>
+<p>路由器在转发包的时候，如果包的大小超过了MTU，那么这个包会被分片（fragmentation）。而终端设备在发包时，也可以设置DF标志位（Don’t Fragment）来告诉路由器不要对这个包分片，此时如果这个包大小超过了MTU，那么路由器就会丢掉这个包，并回复一条<code>ICMP Fragmentation Needed</code>消息。发送者收到这个消息后，下次就会发送小一点的包。这个过程叫做PMTU发现（PMTU Discovery）。</p>
+<p>但是互联网中有大量的设备因为各种原因，会配置为不回应<code>ICMP Fragmentation Needed</code>消息，这使得大小超过MTU的包会被无声地丢掉，直到TCP协议发现超时丢包并进行重传。这种情况就是<code>PMTU黑洞</code>。</p>
+<p>此外，IPv6包不支持分片，换句话说就是所有IPv6数据包全都带有DF标记。中间的路由器在遇到尺寸大于MTU的包的时候，应该回应<code>ICMPv6 Packet Too Big</code>消息，而同样的，由于各种原因，某些中间设备可能会直接丢掉这个包而不返回这条消息，直到TCP协议发现超时而进行重传。</p>
+<h2 id="为什么用光猫或者硬路由拨号就没有这个问题"><a href="#为什么用光猫或者硬路由拨号就没有这个问题" class="headerlink" title="为什么用光猫或者硬路由拨号就没有这个问题"></a>为什么用光猫或者硬路由拨号就没有这个问题</h2><p>这是因为，多数家用路由器默认开启了一个叫<code>MSS Clamping</code>的功能。这是针对PMTU黑洞的一个workaround，简单来说就是在TCP握手时，服务器会通过一个字段告知客户端它愿意接收的TCP包的最大尺寸，这样客户端就可以限制自己发送的包的大小，保证不会超出服务端要求的尺寸。</p>
+<h2 id="在RouterOS中配置MSS-Clamping"><a href="#在RouterOS中配置MSS-Clamping" class="headerlink" title="在RouterOS中配置MSS Clamping"></a>在RouterOS中配置MSS Clamping</h2><p>配置非常简单，分别对IPv4和IPv6的防火墙Mangle表添加如下配置即可。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将命令中 out-interface 参数的值替换成你的PPPoE接口的名字</span></span><br><span class="line">/ip/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">&quot;IPv4 MSS clamp to PMTU&quot;</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">&quot;China Telecom&quot;</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br><span class="line"></span><br><span class="line">/ipv6/firewall<span class="built_in">/mangle</span></span><br><span class="line"><span class="built_in"></span><span class="built_in">add</span> <span class="attribute">action</span>=change-mss <span class="attribute">chain</span>=forward <span class="attribute">comment</span>=<span class="string">&quot;IPv6 MSS clamp to PMTU&quot;</span> \</span><br><span class="line">    <span class="attribute">new-mss</span>=clamp-to-pmtu <span class="attribute">out-interface</span>=<span class="string">&quot;China Telecom&quot;</span> <span class="attribute">passthrough</span>=<span class="literal">yes</span> \</span><br><span class="line">    <span class="attribute">protocol</span>=tcp <span class="attribute">tcp-flags</span>=syn</span><br></pre></td></tr></table></figure>
 
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cudjJleC5jb20vdC84MDAwMjQ=">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzUzOTI4OTY=">ROS 修改 MTU 和 MSS 解决上网慢和页面显示不全问题<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzUzOTI4OTY=">ROS修改MTU和MSS解决上网慢和页面显示不全问题<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2xvdWRmbGFyZS5jb20vemgtY24vbGVhcm5pbmcvbmV0d29yay1sYXllci93aGF0LWlzLW1zcy8=">什么是最大分段大小 (MSS)？ - CloudFlare<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
@@ -453,13 +453,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/migrating-to-umami-v2.html" rel="prev" title="从 umami v1 迁移到 v2">
-                  <i class="fa fa-angle-left"></i> 从 umami v1 迁移到 v2
+                <a href="/migrating-to-umami-v2.html" rel="prev" title="从umami v1迁移到v2">
+                  <i class="fa fa-angle-left"></i> 从umami v1迁移到v2
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/migrating-blog-images-to-backblaze.html" rel="next" title="记我将博客的图片存储迁移到 Backblaze">
-                  记我将博客的图片存储迁移到 Backblaze <i class="fa fa-angle-right"></i>
+                <a href="/migrating-blog-images-to-backblaze.html" rel="next" title="记我将博客的图片存储迁移到Backblaze">
+                  记我将博客的图片存储迁移到Backblaze <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

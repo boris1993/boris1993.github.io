@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="上一次我们安装好了 Elastic Search 和 Logstash，本次我们继续安装 Kibana。">
+    <meta name="description" content="上一次我们安装好了Elastic Search和Logstash，本次我们继续安装Kibana。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建 ELK 日志平台 - 安装 Kibana">
+<meta property="og:title" content="搭建ELK日志平台 - 安装Kibana">
 <meta property="og:url" content="https://www.boris1993.com/install-elk-part-kibana.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="上一次我们安装好了 Elastic Search 和 Logstash，本次我们继续安装 Kibana。">
+<meta property="og:description" content="上一次我们安装好了Elastic Search和Logstash，本次我们继续安装Kibana。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-02-27T02:20:14.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.006Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.459Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="ELK">
 <meta property="article:tag" content="Kibana">
@@ -43,10 +43,10 @@
 <link rel="canonical" href="https://www.boris1993.com/install-elk-part-kibana.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/install-elk-part-kibana.html","path":"install-elk-part-kibana.html","title":"搭建 ELK 日志平台 - 安装 Kibana"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/install-elk-part-kibana.html","path":"install-elk-part-kibana.html","title":"搭建ELK日志平台 - 安装Kibana"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>搭建 ELK 日志平台 - 安装 Kibana | Code Life</title>
+<title>搭建ELK日志平台 - 安装Kibana | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -208,7 +208,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Kibana"><span class="nav-number">1.</span> <span class="nav-text">安装 Kibana</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEKibana%E5%8F%8A%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">配置 Kibana 及防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Kibana"><span class="nav-number">3.</span> <span class="nav-text">启动 Kibana</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEindex-pattern"><span class="nav-number">4.</span> <span class="nav-text">配置 index pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Kibana"><span class="nav-number">1.</span> <span class="nav-text">安装Kibana</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEKibana%E5%8F%8A%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">配置Kibana及防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Kibana"><span class="nav-number">3.</span> <span class="nav-text">启动Kibana</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEindex-pattern"><span class="nav-number">4.</span> <span class="nav-text">配置index pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,12 +309,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="搭建 ELK 日志平台 - 安装 Kibana | Code Life">
+      <meta itemprop="name" content="搭建ELK日志平台 - 安装Kibana | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          搭建 ELK 日志平台 - 安装 Kibana
+          搭建ELK日志平台 - 安装Kibana
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,27 +375,27 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>上一次我们安装好了 Elastic Search 和 Logstash，本次我们继续安装 Kibana。</p>
+    <div class="post-body" itemprop="articleBody"><p>上一次我们安装好了Elastic Search和Logstash，本次我们继续安装Kibana。</p>
 <span id="more"></span>
 
-<h1 id="安装Kibana"><a href="#安装Kibana" class="headerlink" title="安装Kibana"></a>安装 Kibana</h1><p>Kibana 也提供了 RPM 安装包，所以还是一样的套路：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh kibana-6.2.2-x86_64.rpm</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装Kibana"><a href="#安装Kibana" class="headerlink" title="安装Kibana"></a>安装Kibana</h1><p>Kibana也提供了RPM安装包，所以还是一样的套路：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh kibana-6.2.2-x86_64.rpm</span><br></pre></td></tr></table></figure>
 
-<h1 id="配置Kibana及防火墙"><a href="#配置Kibana及防火墙" class="headerlink" title="配置Kibana及防火墙"></a>配置 Kibana 及防火墙</h1><p>编辑 <code>/etc/kibana.yml</code></p>
-<p>这里比较关键的一点，是要指定 Elastic Search 的位置。如果 Elastic Search 是安装在本机，并监听默认的 9200 端口的话，则不需要修改该配置。</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The URL of the Elasticsearch instance to use for all your queries.</span></span><br><span class="line"><span class="comment">#elasticsearch.url: "http://localhost:9200"</span></span><br></pre></td></tr></tbody></table></figure>
+<h1 id="配置Kibana及防火墙"><a href="#配置Kibana及防火墙" class="headerlink" title="配置Kibana及防火墙"></a>配置Kibana及防火墙</h1><p>编辑<code>/etc/kibana.yml</code></p>
+<p>这里比较关键的一点，是要指定Elastic Search的位置。如果Elastic Search是安装在本机，并监听默认的9200端口的话，则不需要修改该配置。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The URL of the Elasticsearch instance to use for all your queries.</span></span><br><span class="line"><span class="comment">#elasticsearch.url: &quot;http://localhost:9200&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>另外 Kibana 默认仅能从本机访问，若要开放给局域网，还需要修改 Kibana 监听的地址和端口号，并配置防火墙允许该端口通信：</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kibana is served by a back end server. This setting specifies the port to use.</span></span><br><span class="line"><span class="comment">#server.port: 5601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.</span></span><br><span class="line"><span class="comment"># The default is 'localhost', which usually means remote machines will not be able to connect.</span></span><br><span class="line"><span class="comment"># To allow connections from remote users, set this parameter to a non-loopback address.</span></span><br><span class="line"><span class="comment"># 如果要绑定到特定的某一块网卡，那么就将这里的地址设为那块网卡的IP地址</span></span><br><span class="line"><span class="attr">server.host:</span> <span class="string">"0.0.0.0"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>另外Kibana默认仅能从本机访问，若要开放给局域网，还需要修改Kibana监听的地址和端口号，并配置防火墙允许该端口通信：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kibana is served by a back end server. This setting specifies the port to use.</span></span><br><span class="line"><span class="comment">#server.port: 5601</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.</span></span><br><span class="line"><span class="comment"># The default is &#x27;localhost&#x27;, which usually means remote machines will not be able to connect.</span></span><br><span class="line"><span class="comment"># To allow connections from remote users, set this parameter to a non-loopback address.</span></span><br><span class="line"><span class="comment"># 如果要绑定到特定的某一块网卡，那么就将这里的地址设为那块网卡的IP地址</span></span><br><span class="line"><span class="attr">server.host:</span> <span class="string">&quot;0.0.0.0&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>Cent OS 7 使用 firewalld 管理防火墙，所以使用如下命令开放 Kibana 的端口：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --add-port=5601/tcp --permanent</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></tbody></table></figure>
+<p>Cent OS 7使用firewalld管理防火墙，所以使用如下命令开放Kibana的端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --add-port=5601/tcp --permanent</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
-<h1 id="启动Kibana"><a href="#启动Kibana" class="headerlink" title="启动Kibana"></a>启动 Kibana</h1><p>我们这里同样使用 systemd 来管理 Kibana 的起停和自启动。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> kibana</span><br><span class="line">sudo systemctl start kibana</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="启动Kibana"><a href="#启动Kibana" class="headerlink" title="启动Kibana"></a>启动Kibana</h1><p>我们这里同样使用systemd来管理Kibana的起停和自启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> kibana</span><br><span class="line">sudo systemctl start kibana</span><br></pre></td></tr></table></figure>
 
-<p>然后即可使用浏览器访问 Kibana</p>
-<h1 id="配置index-pattern"><a href="#配置index-pattern" class="headerlink" title="配置index pattern"></a>配置 index pattern</h1><p>Kibana 启动后，会要求配置索引，根据提示步骤配置即可。配置过程结束后，可到 Discover 页检查是否读到数据。</p>
+<p>然后即可使用浏览器访问Kibana</p>
+<h1 id="配置index-pattern"><a href="#配置index-pattern" class="headerlink" title="配置index pattern"></a>配置index pattern</h1><p>Kibana启动后，会要求配置索引，根据提示步骤配置即可。配置过程结束后，可到Discover页检查是否读到数据。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxhc3RpYy5jby9ndWlkZS9lbi9raWJhbmEvY3VycmVudC9pbmRleC5odG1s">Kibana User Guide<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
@@ -450,13 +450,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/install-elk-part-logstash.html" rel="prev" title="搭建 ELK 日志平台 - 安装 Logstash">
-                  <i class="fa fa-angle-left"></i> 搭建 ELK 日志平台 - 安装 Logstash
+                <a href="/install-elk-part-logstash.html" rel="prev" title="搭建ELK日志平台 - 安装Logstash">
+                  <i class="fa fa-angle-left"></i> 搭建ELK日志平台 - 安装Logstash
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/build-dns-server-on-macos.html" rel="next" title="在 macOS 中搭建自己的 DNS 服务器">
-                  在 macOS 中搭建自己的 DNS 服务器 <i class="fa fa-angle-right"></i>
+                <a href="/build-dns-server-on-macos.html" rel="next" title="在macOS中搭建自己的DNS服务器">
+                  在macOS中搭建自己的DNS服务器 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

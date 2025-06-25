@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="这里简单写一下我对 JDBC 的事务和隔离级别的理解。">
+    <meta name="description" content="这里简单写一下我对JDBC的事务和隔离级别的理解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDBC 的事务和隔离级别">
+<meta property="og:title" content="JDBC的事务和隔离级别">
 <meta property="og:url" content="https://www.boris1993.com/jdbc-transaction-and-isolation-level.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="这里简单写一下我对 JDBC 的事务和隔离级别的理解。">
+<meta property="og:description" content="这里简单写一下我对JDBC的事务和隔离级别的理解。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-02-27T08:14:58.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.008Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.462Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JDBC">
@@ -45,10 +45,10 @@
 <link rel="canonical" href="https://www.boris1993.com/jdbc-transaction-and-isolation-level.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/jdbc-transaction-and-isolation-level.html","path":"jdbc-transaction-and-isolation-level.html","title":"JDBC 的事务和隔离级别"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/jdbc-transaction-and-isolation-level.html","path":"jdbc-transaction-and-isolation-level.html","title":"JDBC的事务和隔离级别"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>JDBC 的事务和隔离级别 | Code Life</title>
+<title>JDBC的事务和隔离级别 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -210,7 +210,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">读现象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NONE"><span class="nav-number">2.1.</span> <span class="nav-text">NONE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%8F%90%E4%BA%A4%E8%AF%BB-READ-UNCOMMITED"><span class="nav-number">2.2.</span> <span class="nav-text">未提交读 (READ UNCOMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%AF%BB-READ-COMMITED"><span class="nav-number">2.3.</span> <span class="nav-text">提交读 (READ COMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB-REPEATABLE-READ"><span class="nav-number">2.4.</span> <span class="nav-text">可重复读 (REPEATABLE READ)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%B8%B2%E8%A1%8C%E5%8C%96-SERIALIZABLE"><span class="nav-number">2.5.</span> <span class="nav-text">可串行化 (SERIALIZABLE)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E8%AF%BB%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">隔离级别与读现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%81%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4"><span class="nav-number">4.</span> <span class="nav-text">隔离级别与锁持续时间</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">读现象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NONE"><span class="nav-number">2.1.</span> <span class="nav-text">NONE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%8F%90%E4%BA%A4%E8%AF%BB-READ-UNCOMMITED"><span class="nav-number">2.2.</span> <span class="nav-text">未提交读(READ UNCOMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%AF%BB-READ-COMMITED"><span class="nav-number">2.3.</span> <span class="nav-text">提交读(READ COMMITED)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB-REPEATABLE-READ"><span class="nav-number">2.4.</span> <span class="nav-text">可重复读(REPEATABLE READ)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%B8%B2%E8%A1%8C%E5%8C%96-SERIALIZABLE"><span class="nav-number">2.5.</span> <span class="nav-text">可串行化(SERIALIZABLE)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E8%AF%BB%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">隔离级别与读现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%81%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4"><span class="nav-number">4.</span> <span class="nav-text">隔离级别与锁持续时间</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -311,12 +311,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="JDBC 的事务和隔离级别 | Code Life">
+      <meta itemprop="name" content="JDBC的事务和隔离级别 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JDBC 的事务和隔离级别
+          JDBC的事务和隔离级别
         </h1>
 
         <div class="post-meta-container">
@@ -334,7 +334,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,10 +377,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>这里简单写一下我对 <code>JDBC</code> 的事务和隔离级别的理解。</p>
+    <div class="post-body" itemprop="articleBody"><p>这里简单写一下我对<code>JDBC</code>的事务和隔离级别的理解。</p>
 <span id="more"></span>
 
-<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是 DBMS 执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即 <code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code> 和查询语句。<br>通常来说，事务会依照如下的流程执行：</p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务是DBMS执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>一个事务一定是具有<code>原子性(atomic)</code>、<code>一致性(consistency)</code>、<code>隔离性(isolation)</code>、<code>持久性(durability)</code>，即<code>ACID</code>。<br>一个事务会包含一个或多个<code>数据操作语句(data-manipulation statements)</code>和查询语句。<br>通常来说，事务会依照如下的流程执行：</p>
 <ol>
 <li><p>开始一个事务</p>
 </li>
@@ -414,16 +414,16 @@
 <ul>
 <li>不可重复读</li>
 </ul>
-<p>在一次事务中，对一行数据的两次读取获得了不同的结果。<br>该现象发生于在执行 <code>SELECT</code> 时没有获得读锁，或者在读取完毕后立刻释放了读锁。</p>
+<p>在一次事务中，对一行数据的两次读取获得了不同的结果。<br>该现象发生于在执行<code>SELECT</code>时没有获得读锁，或者在读取完毕后立刻释放了读锁。</p>
 <ul>
 <li>幻读</li>
 </ul>
-<p>在事务执行过程中，两个完全一样的查询得到了不同的结果集，即是幻读。它是不可重复读的一个特殊场景。<br>当事务 1 在执行两次 <code>SELECT ... WHERE</code> 操作中间，事务 2 在这个表中生成了一行新数据，而这条新数据正好满足事务 1 的 <code>WHERE</code> 条件，导致事务 1 的两次查询得到了不同的结果集。</p>
-<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="NONE"><a href="#NONE" class="headerlink" title="NONE"></a><code>NONE</code></h2><p><code>NONE</code> 是一个特殊的级别，代表 <code>JDBC</code> 驱动不支持事务。</p>
-<h2 id="未提交读-READ-UNCOMMITED"><a href="#未提交读-READ-UNCOMMITED" class="headerlink" title="未提交读(READ UNCOMMITED)"></a>未提交读 (<code>READ UNCOMMITED</code>)</h2><p>这个是最低的隔离级别。<br>这个隔离级别允许事务读取到其他事务尚未提交 (commit) 的数据，即允许脏读。</p>
-<h2 id="提交读-READ-COMMITED"><a href="#提交读-READ-COMMITED" class="headerlink" title="提交读(READ COMMITED)"></a>提交读 (<code>READ COMMITED</code>)</h2><p>这个隔离级别中，DBMS 需要选定对象的写锁一直保持到事务结束，但是读锁会在 <code>SELECT</code> 操作完成后马上释放，所以有可能会发生 “不可重复读”。</p>
-<h2 id="可重复读-REPEATABLE-READ"><a href="#可重复读-REPEATABLE-READ" class="headerlink" title="可重复读(REPEATABLE READ)"></a>可重复读 (<code>REPEATABLE READ</code>)</h2><p>在这个隔离级别下，DBMS 需要对选定对象的读锁和写锁一直保持到事务结束，但是不要求范围锁，所以有可能发生幻读。</p>
-<h2 id="可串行化-SERIALIZABLE"><a href="#可串行化-SERIALIZABLE" class="headerlink" title="可串行化(SERIALIZABLE)"></a>可串行化 (<code>SERIALIZABLE</code>)</h2><p>这是最高的隔离级别。<br>在这个隔离级别下，要求 DBMS 在选定对象上的读锁和写锁一直保持到事务结束，如果使用了 <code>WHERE</code> 来描述范围时，则应当获取一个范围锁。这个隔离级别可以防止幻读。</p>
+<p>在事务执行过程中，两个完全一样的查询得到了不同的结果集，即是幻读。它是不可重复读的一个特殊场景。<br>当事务1在执行两次<code>SELECT ... WHERE</code>操作中间，事务2在这个表中生成了一行新数据，而这条新数据正好满足事务1的<code>WHERE</code>条件，导致事务1的两次查询得到了不同的结果集。</p>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="NONE"><a href="#NONE" class="headerlink" title="NONE"></a><code>NONE</code></h2><p><code>NONE</code>是一个特殊的级别，代表<code>JDBC</code>驱动不支持事务。</p>
+<h2 id="未提交读-READ-UNCOMMITED"><a href="#未提交读-READ-UNCOMMITED" class="headerlink" title="未提交读(READ UNCOMMITED)"></a>未提交读(<code>READ UNCOMMITED</code>)</h2><p>这个是最低的隔离级别。<br>这个隔离级别允许事务读取到其他事务尚未提交(commit)的数据，即允许脏读。</p>
+<h2 id="提交读-READ-COMMITED"><a href="#提交读-READ-COMMITED" class="headerlink" title="提交读(READ COMMITED)"></a>提交读(<code>READ COMMITED</code>)</h2><p>这个隔离级别中，DBMS需要选定对象的写锁一直保持到事务结束，但是读锁会在<code>SELECT</code>操作完成后马上释放，所以有可能会发生“不可重复读”。</p>
+<h2 id="可重复读-REPEATABLE-READ"><a href="#可重复读-REPEATABLE-READ" class="headerlink" title="可重复读(REPEATABLE READ)"></a>可重复读(<code>REPEATABLE READ</code>)</h2><p>在这个隔离级别下，DBMS需要对选定对象的读锁和写锁一直保持到事务结束，但是不要求范围锁，所以有可能发生幻读。</p>
+<h2 id="可串行化-SERIALIZABLE"><a href="#可串行化-SERIALIZABLE" class="headerlink" title="可串行化(SERIALIZABLE)"></a>可串行化(<code>SERIALIZABLE</code>)</h2><p>这是最高的隔离级别。<br>在这个隔离级别下，要求DBMS在选定对象上的读锁和写锁一直保持到事务结束，如果使用了<code>WHERE</code>来描述范围时，则应当获取一个范围锁。这个隔离级别可以防止幻读。</p>
 <h1 id="隔离级别与读现象"><a href="#隔离级别与读现象" class="headerlink" title="隔离级别与读现象"></a>隔离级别与读现象</h1><table>
 <thead>
 <tr>
@@ -547,13 +547,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/shell-set-ex.html" rel="prev" title="Shell 脚本中 set -ex 命令的作用">
-                  <i class="fa fa-angle-left"></i> Shell 脚本中 set -ex 命令的作用
+                <a href="/shell-set-ex.html" rel="prev" title="Shell脚本中 set -ex 命令的作用">
+                  <i class="fa fa-angle-left"></i> Shell脚本中 set -ex 命令的作用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/java-multi-threading-how-to.html" rel="next" title="Java 如何创建和运行多线程">
-                  Java 如何创建和运行多线程 <i class="fa fa-angle-right"></i>
+                <a href="/java-multi-threading-how-to.html" rel="next" title="Java如何创建和运行多线程">
+                  Java如何创建和运行多线程 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

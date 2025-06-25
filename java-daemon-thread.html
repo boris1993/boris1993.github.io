@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="面试的时候被问到 “了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。">
+    <meta name="description" content="面试的时候被问到“了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速理解 Java 中的守护线程">
+<meta property="og:title" content="快速理解Java中的守护线程">
 <meta property="og:url" content="https://www.boris1993.com/java-daemon-thread.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="面试的时候被问到 “了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。">
+<meta property="og:description" content="面试的时候被问到“了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-15T16:18:51.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:43:59.006Z">
+<meta property="article:modified_time" content="2025-06-25T12:46:34.460Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="多线程">
@@ -46,10 +46,10 @@
 <link rel="canonical" href="https://www.boris1993.com/java-daemon-thread.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-daemon-thread.html","path":"java-daemon-thread.html","title":"快速理解 Java 中的守护线程"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-daemon-thread.html","path":"java-daemon-thread.html","title":"快速理解Java中的守护线程"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>快速理解 Java 中的守护线程 | Code Life</title>
+<title>快速理解Java中的守护线程 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -312,12 +312,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="快速理解 Java 中的守护线程 | Code Life">
+      <meta itemprop="name" content="快速理解Java中的守护线程 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          快速理解 Java 中的守护线程
+          快速理解Java中的守护线程
         </h1>
 
         <div class="post-meta-container">
@@ -335,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-22 14:43:59" itemprop="dateModified" datetime="2025-06-22T14:43:59+08:00">2025-06-22</time>
+      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -378,23 +378,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>面试的时候被问到 “了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。</p>
+    <div class="post-body" itemprop="articleBody"><p>面试的时候被问到“了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。</p>
 <span id="more"></span>
 
-<h2 id="什么是守护线程"><a href="#什么是守护线程" class="headerlink" title="什么是守护线程"></a>什么是守护线程</h2><p>首先我们要知道，Java 中存在两种线程，用户线程和守护线程。</p>
-<p>用户线程就是我们平时最常用到的那种线程，它属于高优先级线程，JVM 在退出前会等待所有用户线程完成。</p>
-<p>守护线程则是低优先级线程，它的作用是为用户线程提供服务，不会阻止 JVM 退出（不能 100% 保证，不良的代码仍会阻止 JVM 退出）。</p>
+<h2 id="什么是守护线程"><a href="#什么是守护线程" class="headerlink" title="什么是守护线程"></a>什么是守护线程</h2><p>首先我们要知道，Java中存在两种线程，用户线程和守护线程。</p>
+<p>用户线程就是我们平时最常用到的那种线程，它属于高优先级线程，JVM在退出前会等待所有用户线程完成。</p>
+<p>守护线程则是低优先级线程，它的作用是为用户线程提供服务，不会阻止JVM退出（不能100%保证，不良的代码仍会阻止JVM退出）。</p>
 <blockquote>
-<p>即 Thread#setDaemon (boolean) 方法的 JavaDoc 提到的<br>The Java Virtual Machine exits when the only threads running are all daemon threads.</p>
+<p>即Thread#setDaemon(boolean)方法的JavaDoc提到的<br>The Java Virtual Machine exits when the only threads running are all daemon threads.</p>
 </blockquote>
 <h2 id="守护线程能干什么"><a href="#守护线程能干什么" class="headerlink" title="守护线程能干什么"></a>守护线程能干什么</h2><p>常见的场景有垃圾回收、释放未使用的对象的内存、从缓存中释放不需要的条目等等。</p>
-<h2 id="怎么创建守护线程"><a href="#怎么创建守护线程" class="headerlink" title="怎么创建守护线程"></a>怎么创建守护线程</h2><p>调用 <code>Thread#setDaemon(boolean)</code> 方法就可以让一个线程变成守护线程，如：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException {</span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            System.out.println(<span class="string">"Main thread exited."</span>);</span><br><span class="line">        }));</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                    System.out.println(<span class="string">"Thread is running..."</span>);</span><br><span class="line">                }</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            } <span class="keyword">finally</span> {</span><br><span class="line">                System.out.println(<span class="string">"Thread exited."</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 一定要在Thread#start()前调用，否则会抛IllegalThreadStateException异常</span></span><br><span class="line">        thread.setDaemon(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Main thread exiting....."</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="怎么创建守护线程"><a href="#怎么创建守护线程" class="headerlink" title="怎么创建守护线程"></a>怎么创建守护线程</h2><p>调用<code>Thread#setDaemon(boolean)</code>方法就可以让一个线程变成守护线程，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Main thread exited.&quot;</span>);</span><br><span class="line">        &#125;));</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                    System.out.println(<span class="string">&quot;Thread is running...&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Thread exited.&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 一定要在Thread#start()前调用，否则会抛IllegalThreadStateException异常</span></span><br><span class="line">        thread.setDaemon(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Main thread exiting.....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>将上面代码运行后，可以在控制台看到如下输出：</p>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Main thread exiting.....</span><br><span class="line">Main thread exited.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Main thread exiting.....</span><br><span class="line">Main thread exited.</span><br></pre></td></tr></table></figure>
 
-<p>可见，虽然线程中执行的是一个死循环，但是 JVM 在结束时，不会理会 <code>thread</code> 还在运行，直接就退出了。同样还可以看到的是，<code>finally</code> 块并没有执行，所以在守护线程中不要使用任何需要关闭的资源，比如打开文件，因为守护线程退出的时候，它没有任何机会来关闭文件，就会导致数据丢失（我感觉就像 <code>kill -9</code> 掉一个正在内存中处理文件内容的进程，<code>SIGKILL</code> 信号不会给这个进程任何善后的时间）。</p>
+<p>可见，虽然线程中执行的是一个死循环，但是JVM在结束时，不会理会<code>thread</code>还在运行，直接就退出了。同样还可以看到的是，<code>finally</code>块并没有执行，所以在守护线程中不要使用任何需要关闭的资源，比如打开文件，因为守护线程退出的时候，它没有任何机会来关闭文件，就会导致数据丢失（我感觉就像<code>kill -9</code>掉一个正在内存中处理文件内容的进程，<code>SIGKILL</code>信号不会给这个进程任何善后的时间）。</p>
 
     </div>
 
@@ -451,13 +451,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/java-how-to-wait-for-threads-before-continuing.html" rel="prev" title="在 Java 中如何实现在多个线程全部完成后再执行后续的代码">
-                  <i class="fa fa-angle-left"></i> 在 Java 中如何实现在多个线程全部完成后再执行后续的代码
+                <a href="/java-how-to-wait-for-threads-before-continuing.html" rel="prev" title="在Java中如何实现在多个线程全部完成后再执行后续的代码">
+                  <i class="fa fa-angle-left"></i> 在Java中如何实现在多个线程全部完成后再执行后续的代码
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/mysql-leftmost-prefix.html" rel="next" title="MySQL 的最左匹配原则">
-                  MySQL 的最左匹配原则 <i class="fa fa-angle-right"></i>
+                <a href="/mysql-leftmost-prefix.html" rel="next" title="MySQL的最左匹配原则">
+                  MySQL的最左匹配原则 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
