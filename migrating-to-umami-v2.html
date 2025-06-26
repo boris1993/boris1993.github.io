@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="昨天收到Vercel发的报警邮件，说我自己部署的分析平台umami部署失败。检查之后发现是umami有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。 虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。">
+    <meta name="description" content="昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 umami 部署失败。检查之后发现是 umami 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。 虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从umami v1迁移到v2">
+<meta property="og:title" content="从 umami v1 迁移到 v2">
 <meta property="og:url" content="https://www.boris1993.com/migrating-to-umami-v2.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="昨天收到Vercel发的报警邮件，说我自己部署的分析平台umami部署失败。检查之后发现是umami有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。 虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。">
+<meta property="og:description" content="昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 umami 部署失败。检查之后发现是 umami 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。 虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-18T17:23:31.000Z">
-<meta property="article:modified_time" content="2025-06-25T12:46:34.462Z">
+<meta property="article:modified_time" content="2025-06-26T12:34:19.752Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="umami">
 <meta property="article:tag" content="analytics">
@@ -43,10 +43,10 @@
 <link rel="canonical" href="https://www.boris1993.com/migrating-to-umami-v2.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/migrating-to-umami-v2.html","path":"migrating-to-umami-v2.html","title":"从umami v1迁移到v2"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/migrating-to-umami-v2.html","path":"migrating-to-umami-v2.html","title":"从 umami v1 迁移到 v2"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>从umami v1迁移到v2 | Code Life</title>
+<title>从 umami v1 迁移到 v2 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -309,12 +309,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="从umami v1迁移到v2 | Code Life">
+      <meta itemprop="name" content="从 umami v1 迁移到 v2 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          从umami v1迁移到v2
+          从 umami v1 迁移到 v2
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
+      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,20 +375,20 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>昨天收到Vercel发的报警邮件，说我自己部署的分析平台<code>umami</code>部署失败。检查之后发现是<code>umami</code>有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。</p>
+    <div class="post-body" itemprop="articleBody"><p>昨天收到 Vercel 发的报警邮件，说我自己部署的分析平台 <code>umami</code> 部署失败。检查之后发现是 <code>umami</code> 有个大版本升级，而升级脚本失败导致新版本部署失败了。那既然报错了，就修呗。</p>
 <p>虽然不是什么复杂的问题，但还是记录一下好了，也当是水一篇文。</p>
 <span id="more"></span>
 
-<h2 id="问题的根源"><a href="#问题的根源" class="headerlink" title="问题的根源"></a>问题的根源</h2><p>一开始发现自动迁移不成功，那么按照<span class="exturl" data-url="aHR0cHM6Ly91bWFtaS5pcy9kb2NzL21pZ3JhdGUtdjEtdjI=">官方的迁移文档<i class="fa fa-external-link-alt"></i></span>，我手动运行了迁移脚本，但是得到了这样的错误信息：<code>db error: ERROR: must be owner of table _prisma_migrations</code>。看起来是表的权限问题，<code>_prisma_migrations</code>这个表的<code>owner</code>必须是我用来执行脚本的用户。</p>
-<p>搜了一下，<code>PostgreSQL</code>里面每个表都有一个所有者，而我一开始是用<code>postgres</code>这个用户初始化的数据库，所以这些表的所有者都是<code>postgres</code>，之前没有问题，只是因为我给umami的用户读写这些表的授权了。</p>
-<h2 id="修复数据库"><a href="#修复数据库" class="headerlink" title="修复数据库"></a>修复数据库</h2><p>首先执行了下<code>select schemaname, tablename, tableowner from pg_tables where schemaname = &#39;umami&#39;</code>，果不其然这些表的owner都是<code>postgres</code>。</p>
-<p>于是尝试执行了下<code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，但是又报错<code>ERROR: must be member of role umami_user</code>。好么，我一直以为<code>postgres</code>用户跟MySQL的<code>root</code>一样是超管，结果PostgreSQL世界里面人人生而平等？好吧，你要权限那我就给你授权，<code>grant postgres to umami_user</code>。</p>
-<p>授权之后，重新执行<code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，发现成功了，再执行umami的迁移脚本后，发现错误信息变成了<code>db error: ERROR: must be owner of table account</code>。看来，上面的解决方案奏效了，接下来就是把剩下的表的所有者全都改过来。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._event_old owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._prisma_migrations owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.account owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.&quot;event&quot; owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.event_data owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.pageview owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.&quot;session&quot; owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.website owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> schemaname, tablename, tableowner <span class="keyword">from</span> pg_tables <span class="keyword">where</span> schemaname <span class="operator">=</span> <span class="string">&#x27;umami_analytics&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="问题的根源"><a href="#问题的根源" class="headerlink" title="问题的根源"></a>问题的根源</h2><p>一开始发现自动迁移不成功，那么按照<span class="exturl" data-url="aHR0cHM6Ly91bWFtaS5pcy9kb2NzL21pZ3JhdGUtdjEtdjI=">官方的迁移文档<i class="fa fa-external-link-alt"></i></span>，我手动运行了迁移脚本，但是得到了这样的错误信息：<code>db error: ERROR: must be owner of table _prisma_migrations</code>。看起来是表的权限问题，<code>_prisma_migrations</code> 这个表的 <code>owner</code> 必须是我用来执行脚本的用户。</p>
+<p>搜了一下，<code>PostgreSQL</code> 里面每个表都有一个所有者，而我一开始是用 <code>postgres</code> 这个用户初始化的数据库，所以这些表的所有者都是 <code>postgres</code>，之前没有问题，只是因为我给 umami 的用户读写这些表的授权了。</p>
+<h2 id="修复数据库"><a href="#修复数据库" class="headerlink" title="修复数据库"></a>修复数据库</h2><p>首先执行了下 <code>select schemaname, tablename, tableowner from pg_tables where schemaname = 'umami'</code>，果不其然这些表的 owner 都是 <code>postgres</code>。</p>
+<p>于是尝试执行了下 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，但是又报错 <code>ERROR: must be member of role umami_user</code>。好么，我一直以为 <code>postgres</code> 用户跟 MySQL 的 <code>root</code> 一样是超管，结果 PostgreSQL 世界里面人人生而平等？好吧，你要权限那我就给你授权，<code>grant postgres to umami_user</code>。</p>
+<p>授权之后，重新执行 <code>alter table umami_analytics._prisma_migrations owner to umami_analytics</code>，发现成功了，再执行 umami 的迁移脚本后，发现错误信息变成了 <code>db error: ERROR: must be owner of table account</code>。看来，上面的解决方案奏效了，接下来就是把剩下的表的所有者全都改过来。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._event_old owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics._prisma_migrations owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.account owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."event" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.event_data owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.pageview owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics."session" owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> umami_analytics.website owner <span class="keyword">to</span> umami_analytics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> schemaname, tablename, tableowner <span class="keyword">from</span> pg_tables <span class="keyword">where</span> schemaname <span class="operator">=</span> <span class="string">'umami_analytics'</span>;</span><br></pre></td></tr></tbody></table></figure>
 
-<p>可以看到，umami相关的表的所有者都正确了，回到Vercel，重新运行失败的部署，发现还是报错。无奈，又试了试手动迁移脚本，竟然成功了，这时候数据库肯定是v2的了，再到Vercel重新部署，这次就成功了。</p>
-<p>注意脚本执行到最后会问要不要删掉v1的表，记得不要删。我发现在删掉v1的旧表之后，Vercel的部署又会出新的问题。（我为了验证到底是我的问题还是脚本的问题，回滚了两三次生产数据库。也就是这个数据不重要我才敢这么折腾，好孩子不要学我乱搞生产数据库哦～）</p>
-<h2 id="更新博客的配置"><a href="#更新博客的配置" class="headerlink" title="更新博客的配置"></a>更新博客的配置</h2><p>NexT主题是内建了对umami的支持的，但是需要手动指定脚本的位置。根据迁移文档的提示，修正<code>_config.next.yml</code>中<code>umami.script_url</code>，重新部署博客即可。</p>
+<p>可以看到，umami 相关的表的所有者都正确了，回到 Vercel，重新运行失败的部署，发现还是报错。无奈，又试了试手动迁移脚本，竟然成功了，这时候数据库肯定是 v2 的了，再到 Vercel 重新部署，这次就成功了。</p>
+<p>注意脚本执行到最后会问要不要删掉 v1 的表，记得不要删。我发现在删掉 v1 的旧表之后，Vercel 的部署又会出新的问题。（我为了验证到底是我的问题还是脚本的问题，回滚了两三次生产数据库。也就是这个数据不重要我才敢这么折腾，好孩子不要学我乱搞生产数据库哦～）</p>
+<h2 id="更新博客的配置"><a href="#更新博客的配置" class="headerlink" title="更新博客的配置"></a>更新博客的配置</h2><p>NexT 主题是内建了对 umami 的支持的，但是需要手动指定脚本的位置。根据迁移文档的提示，修正<code>_config.next.yml</code> 中 <code>umami.script_url</code>，重新部署博客即可。</p>
 
     </div>
 
@@ -442,13 +442,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/mysql-leftmost-prefix.html" rel="prev" title="MySQL的最左匹配原则">
-                  <i class="fa fa-angle-left"></i> MySQL的最左匹配原则
+                <a href="/mysql-leftmost-prefix.html" rel="prev" title="MySQL 的最左匹配原则">
+                  <i class="fa fa-angle-left"></i> MySQL 的最左匹配原则
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/routeros-mss-clamping.html" rel="next" title="在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题">
-                  在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题 <i class="fa fa-angle-right"></i>
+                <a href="/routeros-mss-clamping.html" rel="next" title="在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题">
+                  在 RouterOS 中配置 MSS Clamping 解决部分网站图片无法加载的问题 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -25,12 +25,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="最近折腾了下用Tailscale搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。">
+    <meta name="description" content="最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Tailscale部署虚拟局域网">
+<meta property="og:title" content="使用 Tailscale 部署虚拟局域网">
 <meta property="og:url" content="https://www.boris1993.com/setting-up-tailscale.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="最近折腾了下用Tailscale搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。">
+<meta property="og:description" content="最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/mesh-vpn-with-wireguard.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-tailnet.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-magic-dns.png">
 <meta property="article:published_time" content="2022-10-24T02:16:39.000Z">
-<meta property="article:modified_time" content="2025-06-25T12:46:34.464Z">
+<meta property="article:modified_time" content="2025-06-26T12:34:19.753Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Tailscale">
 <meta property="article:tag" content="内网穿透">
@@ -52,10 +52,10 @@
 <link rel="canonical" href="https://www.boris1993.com/setting-up-tailscale.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-tailscale.html","path":"setting-up-tailscale.html","title":"使用Tailscale部署虚拟局域网"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-tailscale.html","path":"setting-up-tailscale.html","title":"使用 Tailscale 部署虚拟局域网"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>使用Tailscale部署虚拟局域网 | Code Life</title>
+<title>使用 Tailscale 部署虚拟局域网 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -217,7 +217,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTailscale"><span class="nav-number">1.</span> <span class="nav-text">什么是Tailscale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8Tailscale"><span class="nav-number">2.</span> <span class="nav-text">如何安装和使用Tailscale</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85Tailscale"><span class="nav-number">2.1.</span> <span class="nav-text">国内群晖安装Tailscale</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tailnet%E5%92%8CMagic-DNS"><span class="nav-number">3.</span> <span class="nav-text">Tailnet和Magic DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8%E5%BE%88%E6%85%A2"><span class="nav-number">4.</span> <span class="nav-text">访问内网机器很慢</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTailscale"><span class="nav-number">1.</span> <span class="nav-text">什么是 Tailscale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8Tailscale"><span class="nav-number">2.</span> <span class="nav-text">如何安装和使用 Tailscale</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BD%E5%86%85%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85Tailscale"><span class="nav-number">2.1.</span> <span class="nav-text">国内群晖安装 Tailscale</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tailnet%E5%92%8CMagic-DNS"><span class="nav-number">3.</span> <span class="nav-text">Tailnet 和 Magic DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8%E5%BE%88%E6%85%A2"><span class="nav-number">4.</span> <span class="nav-text">访问内网机器很慢</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -318,12 +318,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="使用Tailscale部署虚拟局域网 | Code Life">
+      <meta itemprop="name" content="使用 Tailscale 部署虚拟局域网 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用Tailscale部署虚拟局域网
+          使用 Tailscale 部署虚拟局域网
         </h1>
 
         <div class="post-meta-container">
@@ -341,7 +341,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
+      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -384,41 +384,41 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>最近折腾了下用Tailscale搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。</p>
+    <div class="post-body" itemprop="articleBody"><p>最近折腾了下用 Tailscale 搭建虚拟局域网，在这里记录一下折腾的过程和一些心得。</p>
 <span id="more"></span>
 
-<h2 id="什么是Tailscale"><a href="#什么是Tailscale" class="headerlink" title="什么是Tailscale"></a>什么是Tailscale</h2><p>说起Tailscale，就不得不提到最近很火的Mesh VPN这个概念。</p>
-<p>经典的VPN是作为一个网关，让外网用户通过它来访问内网。比如传统的L2TP VPN：</p>
+<h2 id="什么是Tailscale"><a href="#什么是Tailscale" class="headerlink" title="什么是Tailscale"></a>什么是 Tailscale</h2><p>说起 Tailscale，就不得不提到最近很火的 Mesh VPN 这个概念。</p>
+<p>经典的 VPN 是作为一个网关，让外网用户通过它来访问内网。比如传统的 L2TP VPN：</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/network-topology-with-l2tp-vpn.png"></p>
-<p>但是Mesh VPN提出了一种全新的拓扑结构，这种结构中每个节点之间都相互连接，不再存在中心的VPN服务器。</p>
+<p>但是 Mesh VPN 提出了一种全新的拓扑结构，这种结构中每个节点之间都相互连接，不再存在中心的 VPN 服务器。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/mesh-vpn-with-wireguard.png"></p>
-<p>上图提到的<code>Wireguard</code>就是一个Mesh VPN的实现，但是<code>Wireguard</code>配置比较繁琐，维护成本也比较高，所以<code>Tailscale</code>在基于<code>Wireguard</code>的基础上做了一些优化，比如用于NAT穿透的<code>DERP</code>协议、建立了公网coordinator服务器用于下发配置，以及集成了第三方SSO用于认证和权限管理。</p>
-<h2 id="如何安装和使用Tailscale"><a href="#如何安装和使用Tailscale" class="headerlink" title="如何安装和使用Tailscale"></a>如何安装和使用Tailscale</h2><p>安装Tailscale很简单（除了国内群晖），跟着官网的<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwMTcvaW5zdGFsbC8=">Quickstart<i class="fa fa-external-link-alt"></i></span>走就行了。简单来说就是先在官网注册账号，然后在电脑上安装Tailscale并使用相同账号登陆，然后这些机器就处于同一个虚拟局域网上了。</p>
-<p>登陆的时候注意，千万不要用GitHub或者Google认证，原因我不用说，你懂的。就算电脑上你有办法，手机上也会很闹心。</p>
-<p>在机器成功加入Tailscale虚拟局域网后，就可以在Tailscale控制面板里面看到这些机器的IP地址了。</p>
+<p>上图提到的 <code>Wireguard</code> 就是一个 Mesh VPN 的实现，但是 <code>Wireguard</code> 配置比较繁琐，维护成本也比较高，所以 <code>Tailscale</code> 在基于 <code>Wireguard</code> 的基础上做了一些优化，比如用于 NAT 穿透的 <code>DERP</code> 协议、建立了公网 coordinator 服务器用于下发配置，以及集成了第三方 SSO 用于认证和权限管理。</p>
+<h2 id="如何安装和使用Tailscale"><a href="#如何安装和使用Tailscale" class="headerlink" title="如何安装和使用Tailscale"></a>如何安装和使用 Tailscale</h2><p>安装 Tailscale 很简单（除了国内群晖），跟着官网的<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwMTcvaW5zdGFsbC8="> Quickstart<i class="fa fa-external-link-alt"></i></span>走就行了。简单来说就是先在官网注册账号，然后在电脑上安装 Tailscale 并使用相同账号登陆，然后这些机器就处于同一个虚拟局域网上了。</p>
+<p>登陆的时候注意，千万不要用 GitHub 或者 Google 认证，原因我不用说，你懂的。就算电脑上你有办法，手机上也会很闹心。</p>
+<p>在机器成功加入 Tailscale 虚拟局域网后，就可以在 Tailscale 控制面板里面看到这些机器的 IP 地址了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-admin-portal.png"></p>
-<p>这时候，就可以直接使用这些IP地址访问到对应的机器了。</p>
-<h3 id="国内群晖安装Tailscale"><a href="#国内群晖安装Tailscale" class="headerlink" title="国内群晖安装Tailscale"></a>国内群晖安装Tailscale</h3><p>因为国内群晖的套件商店下架了所有VPN相关的套件，所以只能到官网的<span class="exturl" data-url="aHR0cHM6Ly9wa2dzLnRhaWxzY2FsZS5jb20vc3RhYmxlLyNzcGtz">Tailscale Packages - stable track<i class="fa fa-external-link-alt"></i></span>手动下载对应DSM版本的spk，然后到套件中心手动安装。安装成功后就可以在主菜单中看到Tailscale的图标，点击启动并在新页面中使用相同账号登陆，然后就能用了。</p>
-<h2 id="Tailnet和Magic-DNS"><a href="#Tailnet和Magic-DNS" class="headerlink" title="Tailnet和Magic DNS"></a>Tailnet和Magic DNS</h2><p>当然Tailscale并不仅支持通过IP地址访问机器，还可以通过域名访问。这里请放心，Tailnet的域名解析是通过你本机的Tailnet客户端解析的。</p>
-<p>要启用这个功能，首先你需要选择一个Tailnet域名。Tailscale会给你一系列域名让你选，选好之后就会在控制面板的DNS页面出现。</p>
+<p>这时候，就可以直接使用这些 IP 地址访问到对应的机器了。</p>
+<h3 id="国内群晖安装Tailscale"><a href="#国内群晖安装Tailscale" class="headerlink" title="国内群晖安装Tailscale"></a>国内群晖安装 Tailscale</h3><p>因为国内群晖的套件商店下架了所有 VPN 相关的套件，所以只能到官网的<span class="exturl" data-url="aHR0cHM6Ly9wa2dzLnRhaWxzY2FsZS5jb20vc3RhYmxlLyNzcGtz"> Tailscale Packages - stable track<i class="fa fa-external-link-alt"></i></span>手动下载对应 DSM 版本的 spk，然后到套件中心手动安装。安装成功后就可以在主菜单中看到 Tailscale 的图标，点击启动并在新页面中使用相同账号登陆，然后就能用了。</p>
+<h2 id="Tailnet和Magic-DNS"><a href="#Tailnet和Magic-DNS" class="headerlink" title="Tailnet和Magic DNS"></a>Tailnet 和 Magic DNS</h2><p>当然 Tailscale 并不仅支持通过 IP 地址访问机器，还可以通过域名访问。这里请放心，Tailnet 的域名解析是通过你本机的 Tailnet 客户端解析的。</p>
+<p>要启用这个功能，首先你需要选择一个 Tailnet 域名。Tailscale 会给你一系列域名让你选，选好之后就会在控制面板的 DNS 页面出现。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-tailnet.png"></p>
-<p>然后，在<code>Magic DNS</code>栏目下面点<code>Enable Magic DNS</code>就可以了。</p>
+<p>然后，在 <code>Magic DNS</code> 栏目下面点 <code>Enable Magic DNS</code> 就可以了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-tailscale/tailscale-dns-magic-dns.png"></p>
-<p>在这之后，就可以直接用控制面板中的设备名，或者<code>设备名.Tailnet域名</code>的方式访问你的设备了。比如我要SSH到<code>ds218plus</code>这台机器上，我就可以<code>ssh ds218plus</code>或<code>ssh ds218plus.tailnet-a8cf.ts.net</code>。</p>
-<h2 id="访问内网机器很慢"><a href="#访问内网机器很慢" class="headerlink" title="访问内网机器很慢"></a>访问内网机器很慢</h2><p>在我试用了几天之后，我发现了一个问题，如果节点双方都有IPv6的话，互联速度很快，但是如果节点一方没有IPv6的话，速度就出奇的慢。遂用<code>tailscale status</code>命令看了下连接情况，不出意外，看到了这样的返回：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; relay &quot;sfo&quot;, tx 1778904 rx 63968652</span><br></pre></td></tr></table></figure>
+<p>在这之后，就可以直接用控制面板中的设备名，或者<code>设备名.Tailnet域名</code>的方式访问你的设备了。比如我要 SSH 到 <code>ds218plus</code> 这台机器上，我就可以 <code>ssh ds218plus</code> 或 <code>ssh ds218plus.tailnet-a8cf.ts.net</code>。</p>
+<h2 id="访问内网机器很慢"><a href="#访问内网机器很慢" class="headerlink" title="访问内网机器很慢"></a>访问内网机器很慢</h2><p>在我试用了几天之后，我发现了一个问题，如果节点双方都有 IPv6 的话，互联速度很快，但是如果节点一方没有 IPv6 的话，速度就出奇的慢。遂用 <code>tailscale status</code> 命令看了下连接情况，不出意外，看到了这样的返回：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; relay "sfo", tx 1778904 rx 63968652</span><br></pre></td></tr></tbody></table></figure>
 
-<p>划重点，<code>relay &quot;sfo&quot;</code>，这说明我连接到<code>ds218plus</code>的通信，是经过位于旧金山的<code>DERP</code>服务器中转的，所以会慢。</p>
-<p>虽然在<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwODIvZmlyZXdhbGwtcG9ydHMv">What firewall ports should I open to use Tailscale?<i class="fa fa-external-link-alt"></i></span>里面说，</p>
+<p>划重点，<code>relay "sfo"</code>，这说明我连接到 <code>ds218plus</code> 的通信，是经过位于旧金山的 <code>DERP</code> 服务器中转的，所以会慢。</p>
+<p>虽然在<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwODIvZmlyZXdhbGwtcG9ydHMv"> What firewall ports should I open to use Tailscale?<i class="fa fa-external-link-alt"></i></span>里面说，</p>
 <blockquote>
 <p>Nearly all of the time, you don’t need to open any firewall ports for Tailscale. Tailscale uses various NAT traversal techniques to safely connect to other Tailscale nodes without manual intervention—it “just works.”</p>
 </blockquote>
-<p>也没错，它确实work，但是我真的没法说它work的well。好在，文章下面提到，除了<code>443/tcp</code>之外，Tailscale还用到<code>41641/udp</code>来让Wireguard节点互联，以及<code>3478/udp</code>用于STUN协议。</p>
-<p>在我的这个使用场景中，<code>ds218plus</code>作为服务器，那么我就在<code>ds218plus</code>所在的网络中做了两件事，给<code>41641/udp</code>配置端口转发，并在防火墙上放行这个端口。然后我在作为客户端的<code>macbook-pro</code>上执行<code>tailscale down</code>和<code>tailscale up</code>来重启Tailscale连接。这时候再用<code>tailscale status</code>命令检查连接情况，发现输出变成了这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; direct 121.70.200.131:41641, tx 5884 rx 8500</span><br></pre></td></tr></table></figure>
+<p>也没错，它确实 work，但是我真的没法说它 work 的 well。好在，文章下面提到，除了 <code>443/tcp</code> 之外，Tailscale 还用到 <code>41641/udp</code> 来让 Wireguard 节点互联，以及 <code>3478/udp</code> 用于 STUN 协议。</p>
+<p>在我的这个使用场景中，<code>ds218plus</code> 作为服务器，那么我就在 <code>ds218plus</code> 所在的网络中做了两件事，给 <code>41641/udp</code> 配置端口转发，并在防火墙上放行这个端口。然后我在作为客户端的 <code>macbook-pro</code> 上执行 <code>tailscale down</code> 和 <code>tailscale up</code> 来重启 Tailscale 连接。这时候再用 <code>tailscale status</code> 命令检查连接情况，发现输出变成了这样：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tailscale status</span><br><span class="line">100.98.89.5     macbook-pro          boris1993@   macOS   -</span><br><span class="line">100.88.234.12   boris-iphone         boris1993@   iOS     offline</span><br><span class="line">100.105.198.123 ds218plus            boris1993@   linux   active; direct 121.70.200.131:41641, tx 5884 rx 8500</span><br></pre></td></tr></tbody></table></figure>
 
 <p>接着划重点，<code>direct</code>，说明现在节点之间已经是直连了，随便做点什么测试一下，果然快了很多。</p>
-<p>不过端口转发只是权宜之计，毕竟没法同时让<code>41641/udp</code>转发给多个机器，只能解决一台机器不能直连的问题。要想彻底解决，还是得用IPv6。</p>
+<p>不过端口转发只是权宜之计，毕竟没法同时让 <code>41641/udp</code> 转发给多个机器，只能解决一台机器不能直连的问题。要想彻底解决，还是得用 IPv6。</p>
 
     </div>
 
@@ -475,13 +475,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/rescuing-my-github-repo-from-force-push.html" rel="prev" title="记一次抢救被force push的GitHub仓库">
-                  <i class="fa fa-angle-left"></i> 记一次抢救被force push的GitHub仓库
+                <a href="/rescuing-my-github-repo-from-force-push.html" rel="prev" title="记一次抢救被 force push 的 GitHub 仓库">
+                  <i class="fa fa-angle-left"></i> 记一次抢救被 force push 的 GitHub 仓库
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/filter-vs-interceptor.html" rel="next" title="Filter与interceptor的区别">
-                  Filter与interceptor的区别 <i class="fa fa-angle-right"></i>
+                <a href="/filter-vs-interceptor.html" rel="next" title="Filter 与 interceptor 的区别">
+                  Filter 与 interceptor 的区别 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

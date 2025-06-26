@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="前些天在Atlassian的文档中看到一篇关于管理点文件（即.bashrc之类以点开头的文件）的文章《Dotfiles: Best way to store in a bare git repository》，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。 以下内容除特别注明外，皆翻译自原文。我亦不对内容做任何的担保，并不对任何可能产生的后果（包括但不限于文件丢失）负责。">
+    <meta name="description" content="前些天在 Atlassian 的文档中看到一篇关于管理点文件（即.bashrc 之类以点开头的文件）的文章《Dotfiles: Best way to store in a bare git repository》，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。 以下内容除特别注明外，皆翻译自原文。我亦不对内容做任何的担保，并不对任何可能产生的后果（包括但不限于文件丢失）负责。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用裸git仓库管理点文件的最佳方式">
+<meta property="og:title" content="用裸 git 仓库管理点文件的最佳方式">
 <meta property="og:url" content="https://www.boris1993.com/translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="前些天在Atlassian的文档中看到一篇关于管理点文件（即.bashrc之类以点开头的文件）的文章《Dotfiles: Best way to store in a bare git repository》，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。 以下内容除特别注明外，皆翻译自原文。我亦不对内容做任何的担保，并不对任何可能产生的后果（包括但不限于文件丢失）负责。">
+<meta property="og:description" content="前些天在 Atlassian 的文档中看到一篇关于管理点文件（即.bashrc 之类以点开头的文件）的文章《Dotfiles: Best way to store in a bare git repository》，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。 以下内容除特别注明外，皆翻译自原文。我亦不对内容做任何的担保，并不对任何可能产生的后果（包括但不限于文件丢失）负责。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-09T13:13:41.000Z">
-<meta property="article:modified_time" content="2025-06-25T12:46:34.465Z">
+<meta property="article:modified_time" content="2025-06-26T12:34:19.754Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="dotfiles">
@@ -44,10 +44,10 @@
 <link rel="canonical" href="https://www.boris1993.com/translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html","path":"translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html","title":"用裸git仓库管理点文件的最佳方式"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html","path":"translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html","title":"用裸 git 仓库管理点文件的最佳方式"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>用裸git仓库管理点文件的最佳方式 | Code Life</title>
+<title>用裸 git 仓库管理点文件的最佳方式 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -310,12 +310,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="用裸git仓库管理点文件的最佳方式 | Code Life">
+      <meta itemprop="name" content="用裸 git 仓库管理点文件的最佳方式 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          用裸git仓库管理点文件的最佳方式
+          用裸 git 仓库管理点文件的最佳方式
         </h1>
 
         <div class="post-meta-container">
@@ -333,7 +333,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
+      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -376,80 +376,80 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>前些天在Atlassian的文档中看到一篇关于管理点文件（即<code>.bashrc</code>之类以点开头的文件）的文章<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXRsYXNzaWFuLmNvbS9naXQvdHV0b3JpYWxzL2RvdGZpbGVz">《Dotfiles: Best way to store in a bare git repository》<i class="fa fa-external-link-alt"></i></span>，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。</p>
+    <div class="post-body" itemprop="articleBody"><p>前些天在 Atlassian 的文档中看到一篇关于管理点文件（即<code>.bashrc</code> 之类以点开头的文件）的文章<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXRsYXNzaWFuLmNvbS9naXQvdHV0b3JpYWxzL2RvdGZpbGVz">《Dotfiles: Best way to store in a bare git repository》<i class="fa fa-external-link-alt"></i></span>，感觉很有参考价值，遂决定翻译出来，希望能帮到更多的人。</p>
 <p>以下内容除特别注明外，皆翻译自原文。我亦不对内容做任何的担保，并不对任何可能产生的后果（包括但不限于文件丢失）负责。</p>
 <span id="more"></span>
 
 <hr>
 <p>免责声明：标题有些夸大其词了，而且针对这个问题也有其他好用的解决方案。但我确实觉得这也是一个优雅的技巧。</p>
-<p>最近我在Hacker News中看到一篇<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLnljb21iaW5hdG9yLmNvbS9pdGVtP2lkPTExMDcwNzk3">帖子<i class="fa fa-external-link-alt"></i></span>，是讨论人们怎么管理他们的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG90LWZpbGU=">点文件<i class="fa fa-external-link-alt"></i></span>的。在这篇帖子中，用户<code>StreakyCobra</code>分享了一个他的<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLnljb21iaW5hdG9yLmNvbS9pdGVtP2lkPTExMDcxNzU0">很优雅的配置<i class="fa fa-external-link-alt"></i></span>，而且我觉得非常的靠谱。正巧我也在开始用同样的技巧来管理我的系统。这个技巧也只有一个前置条件：你安装了<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXRsYXNzaWFuLmNvbS9naXQ=">Git<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>最近我在 Hacker News 中看到一篇<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLnljb21iaW5hdG9yLmNvbS9pdGVtP2lkPTExMDcwNzk3">帖子<i class="fa fa-external-link-alt"></i></span>，是讨论人们怎么管理他们的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG90LWZpbGU=">点文件<i class="fa fa-external-link-alt"></i></span>的。在这篇帖子中，用户 <code>StreakyCobra</code> 分享了一个他的<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLnljb21iaW5hdG9yLmNvbS9pdGVtP2lkPTExMDcxNzU0">很优雅的配置<i class="fa fa-external-link-alt"></i></span>，而且我觉得非常的靠谱。正巧我也在开始用同样的技巧来管理我的系统。这个技巧也只有一个前置条件：你安装了<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXRsYXNzaWFuLmNvbS9naXQ="> Git<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>按他的说法，这个技巧：</p>
 <blockquote>
 <p>不需要别的工具，不需要创建符号链接，文件都被版本控制系统跟踪，你可以用不同的分支来管理不同的系统，在全新的系统中你也可以轻松复用你的配置。</p>
 </blockquote>
-<p>这个技巧包括两个部分：用一个单独的文件夹（如<code>$HOME/.cfg</code>或<code>$HOME/.myconfig</code>）作为<span class="exturl" data-url="aHR0cDovL3d3dy5zYWludHNqZC5jb20vMjAxMS8wMS93aGF0LWlzLWEtYmFyZS1naXQtcmVwb3NpdG9yeS8=">裸Git仓库<i class="fa fa-external-link-alt"></i></span>；和一个专门用来操作这个仓库的命令别名（译者注：<code>alias</code>）。</p>
-<h2 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h2><p>如果你还没有用一个Git仓库来跟踪你的配置文件，那么你可以从下面这几个简单的命令开始，一步步实现这个技巧。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init --bare <span class="variable">$HOME</span>/.cfg</span><br><span class="line"><span class="built_in">alias</span> config=<span class="string">&#x27;/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME&#x27;</span></span><br><span class="line">config config --<span class="built_in">local</span> status.showUntrackedFiles no</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias config=&#x27;/usr/bin/git --git-dir=<span class="variable">$HOME</span>/.cfg/ --work-tree=<span class="variable">$HOME</span>&#x27;&quot;</span> &gt;&gt; <span class="variable">$HOME</span>/.bashrc</span><br></pre></td></tr></table></figure>
+<p>这个技巧包括两个部分：用一个单独的文件夹（如 <code>$HOME/.cfg</code> 或 <code>$HOME/.myconfig</code>）作为<span class="exturl" data-url="aHR0cDovL3d3dy5zYWludHNqZC5jb20vMjAxMS8wMS93aGF0LWlzLWEtYmFyZS1naXQtcmVwb3NpdG9yeS8=">裸 Git 仓库<i class="fa fa-external-link-alt"></i></span>；和一个专门用来操作这个仓库的命令别名（译者注：<code>alias</code>）。</p>
+<h2 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h2><p>如果你还没有用一个 Git 仓库来跟踪你的配置文件，那么你可以从下面这几个简单的命令开始，一步步实现这个技巧。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init --bare <span class="variable">$HOME</span>/.cfg</span><br><span class="line"><span class="built_in">alias</span> config=<span class="string">'/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'</span></span><br><span class="line">config config --<span class="built_in">local</span> status.showUntrackedFiles no</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"alias config='/usr/bin/git --git-dir=<span class="variable">$HOME</span>/.cfg/ --work-tree=<span class="variable">$HOME</span>'"</span> &gt;&gt; <span class="variable">$HOME</span>/.bashrc</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>第一条命令会创建一个用来跟踪文件的裸Git仓库<code>~/.cfg</code>（配置仓库）</li>
-<li>接下来创建一个命令别名<code>config</code>，在我们要操作配置仓库时就会用这个命令，而不是<code>git</code>命令</li>
-<li>设定一个仅对配置仓库生效的设定 —— 不显示未追踪的文件，这样在我们执行<code>config status</code>等命令的时候，我们不想跟踪的文件就不会以<code>untracked</code>状态被显示出来</li>
-<li>此外我们可以把这个别名的声明添加到<code>.bashrc</code>里面，方便以后使用</li>
+<li>第一条命令会创建一个用来跟踪文件的裸 Git 仓库 <code>~/.cfg</code>（配置仓库）</li>
+<li>接下来创建一个命令别名 <code>config</code>，在我们要操作配置仓库时就会用这个命令，而不是 <code>git</code> 命令</li>
+<li>设定一个仅对配置仓库生效的设定 —— 不显示未追踪的文件，这样在我们执行 <code>config status</code> 等命令的时候，我们不想跟踪的文件就不会以 <code>untracked</code> 状态被显示出来</li>
+<li>此外我们可以把这个别名的声明添加到<code>.bashrc</code> 里面，方便以后使用</li>
 </ul>
-<p>我把上面这些命令集合成了一个<span class="exturl" data-url="aHR0cHM6Ly9iaXRidWNrZXQub3JnL3NuaXBwZXRzL25pY29sYXBhb2x1Y2NpL2VyZ1g5">代码片段<i class="fa fa-external-link-alt"></i></span>放到了Bitbucket上，并给它做了一个短链接，所以你可以用下面的命令一键执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lks http://bit.do/cfg-init | /bin/bash</span><br></pre></td></tr></table></figure>
+<p>我把上面这些命令集合成了一个<span class="exturl" data-url="aHR0cHM6Ly9iaXRidWNrZXQub3JnL3NuaXBwZXRzL25pY29sYXBhb2x1Y2NpL2VyZ1g5">代码片段<i class="fa fa-external-link-alt"></i></span>放到了 Bitbucket 上，并给它做了一个短链接，所以你可以用下面的命令一键执行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lks http://bit.do/cfg-init | /bin/bash</span><br></pre></td></tr></tbody></table></figure>
 
 <p>（译者注：在执行来自网络的代码之前，一定记得先看看内容。闭著眼执行远程命令是一件很危险的事，因为你不知道这个链接的内容是否还正确，比如曾经课本上本来指向《历朝历代咏武侯诗词大全》的网址，在域名过期之后被黄网搞去了……）</p>
-<p>在配置完成后，<code>$HOME</code>目录下的文件就可以用刚刚创建的<code>config</code>别名来进行版本控制了，比如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config status</span><br><span class="line">config add .vimrc</span><br><span class="line">config commit -m <span class="string">&quot;Add .vimrc&quot;</span></span><br><span class="line">config add .bashrc</span><br><span class="line">config commit -m <span class="string">&quot;Add .bashrc&quot;</span></span><br><span class="line">config push</span><br></pre></td></tr></table></figure>
+<p>在配置完成后，<code>$HOME</code> 目录下的文件就可以用刚刚创建的 <code>config</code> 别名来进行版本控制了，比如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config status</span><br><span class="line">config add .vimrc</span><br><span class="line">config commit -m <span class="string">"Add .vimrc"</span></span><br><span class="line">config add .bashrc</span><br><span class="line">config commit -m <span class="string">"Add .bashrc"</span></span><br><span class="line">config push</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="把这些点文件安装到新系统（或迁移到本系统）"><a href="#把这些点文件安装到新系统（或迁移到本系统）" class="headerlink" title="把这些点文件安装到新系统（或迁移到本系统）"></a>把这些点文件安装到新系统（或迁移到本系统）</h2><p>如果你已经用Git仓库管理你的配置或者点文件，那你可以跟着下面的步骤，来把这个配置迁移到新的系统：</p>
+<h2 id="把这些点文件安装到新系统（或迁移到本系统）"><a href="#把这些点文件安装到新系统（或迁移到本系统）" class="headerlink" title="把这些点文件安装到新系统（或迁移到本系统）"></a>把这些点文件安装到新系统（或迁移到本系统）</h2><p>如果你已经用 Git 仓库管理你的配置或者点文件，那你可以跟着下面的步骤，来把这个配置迁移到新的系统：</p>
 <ul>
-<li>首先确认你已经配置好了命令别名</li>
+<li>首先确认你已经配置好了命令别名 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> config=<span class="string">&#x27;/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在克隆你的配置仓库前，记得让git忽略它，以避免各种奇怪的问题</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;.cfg&quot;</span> &gt;&gt; .gitignore</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> config=<span class="string">'/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>然后你就可以把你的点文件克隆到一个存在于“点目录”的裸仓库中</li>
+<li>在克隆你的配置仓库前，记得让 git 忽略它，以避免各种奇怪的问题 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --bare &lt;git-repo-url&gt; <span class="variable">$HOME</span>/.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">".cfg"</span> &gt;&gt; .gitignore</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>在当前shell会话中定义好<code>config</code>这个别名</li>
+<li>然后你就可以把你的点文件克隆到一个存在于 “点目录” 的裸仓库中 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> config=<span class="string">&#x27;/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --bare &lt;git-repo-url&gt; <span class="variable">$HOME</span>/.cfg</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>从裸仓库中把配置checkout到<code>$HOME</code></li>
+<li>在当前 shell 会话中定义好 <code>config</code> 这个别名 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config checkout</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> config=<span class="string">'/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>从裸仓库中把配置 checkout 到 <code>$HOME</code></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config checkout</span><br></pre></td></tr></tbody></table></figure>
 <p>这一步可能会报这样的错误</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">error: The following untracked working tree files would be overwritten by checkout:</span><br><span class="line">    .bashrc</span><br><span class="line">    .gitignore</span><br><span class="line">Please move or remove them before you can switch branches.</span><br><span class="line">Aborting</span><br></pre></td></tr></table></figure>
-<p>这是因为你的<code>$HOME</code>目录可能已经有这些文件，而checkout操作可能会让它们被覆盖。解决方法也很简单：这些文件要是有用，那就备份出来，没用那就删了。你可以用我这个比较粗糙的命令，来一键把有冲突的文件移动到备份目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p .config-backup &amp;&amp; \</span><br><span class="line">config checkout 2&gt;&amp;1 | egrep <span class="string">&quot;\s+\.&quot;</span> | awk &#123;<span class="string">&#x27;print $1&#x27;</span>&#125; | \</span><br><span class="line">xargs -I&#123;&#125; <span class="built_in">mv</span> &#123;&#125; .config-backup/&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>然后重新执行<code>config checkout</code></p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">error: The following untracked working tree files would be overwritten by checkout:</span><br><span class="line">    .bashrc</span><br><span class="line">    .gitignore</span><br><span class="line">Please move or remove them before you can switch branches.</span><br><span class="line">Aborting</span><br></pre></td></tr></tbody></table></figure>
+<p>这是因为你的 <code>$HOME</code> 目录可能已经有这些文件，而 checkout 操作可能会让它们被覆盖。解决方法也很简单：这些文件要是有用，那就备份出来，没用那就删了。你可以用我这个比较粗糙的命令，来一键把有冲突的文件移动到备份目录：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p .config-backup &amp;&amp; \</span><br><span class="line">config checkout 2&gt;&amp;1 | egrep <span class="string">"\s+\."</span> | awk {<span class="string">'print $1'</span>} | \</span><br><span class="line">xargs -I{} <span class="built_in">mv</span> {} .config-backup/{}</span><br></pre></td></tr></tbody></table></figure>
+<p>然后重新执行 <code>config checkout</code></p>
 <ul>
-<li>为配置仓库设定不显示未跟踪的文件</li>
+<li>为配置仓库设定不显示未跟踪的文件 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config config --<span class="built_in">local</span> status.showUntrackedFiles no</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config config --<span class="built_in">local</span> status.showUntrackedFiles no</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>到此就完成了，接下来你就可以和之前一样用<code>config</code>命令来管理你的点文件了。</li>
+<li>到此就完成了，接下来你就可以和之前一样用 <code>config</code> 命令来管理你的点文件了。</li>
 </ul>
-<p>同样，我也提供了一个一键脚本，把它作为代码片段放在了Bitbucket上。你可以用这个命令来执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lks http://bit.do/cfg-install | /bin/bash</span><br></pre></td></tr></table></figure>
+<p>同样，我也提供了一个一键脚本，把它作为代码片段放在了 Bitbucket 上。你可以用这个命令来执行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Lks http://bit.do/cfg-install | /bin/bash</span><br></pre></td></tr></tbody></table></figure>
 
-<p>为了文章的完整起见，这是我最终得到的脚本（已经在很多个全新启动的Alpine Linux容器中做过测试）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --bare https://bitbucket.org/durdn/cfg.git <span class="variable">$HOME</span>/.cfg</span><br><span class="line"><span class="keyword">function</span> config &#123;</span><br><span class="line">   /usr/bin/git --git-dir=<span class="variable">$HOME</span>/.cfg/ --work-tree=<span class="variable">$HOME</span> <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">mkdir</span> -p .config-backup</span><br><span class="line">config checkout</span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Checked out config.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Backing up pre-existing dot files.&quot;</span>;</span><br><span class="line">  config checkout 2&gt;&amp;1 | egrep <span class="string">&quot;\s+\.&quot;</span> | awk &#123;<span class="string">&#x27;print $1&#x27;</span>&#125; | xargs -I&#123;&#125; <span class="built_in">mv</span> &#123;&#125; .config-backup/&#123;&#125;</span><br><span class="line"><span class="keyword">fi</span>;</span><br><span class="line">config checkout</span><br><span class="line">config config status.showUntrackedFiles no</span><br></pre></td></tr></table></figure>
+<p>为了文章的完整起见，这是我最终得到的脚本（已经在很多个全新启动的 Alpine Linux 容器中做过测试）</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --bare https://bitbucket.org/durdn/cfg.git <span class="variable">$HOME</span>/.cfg</span><br><span class="line"><span class="keyword">function</span> config {</span><br><span class="line">   /usr/bin/git --git-dir=<span class="variable">$HOME</span>/.cfg/ --work-tree=<span class="variable">$HOME</span> <span class="variable">$@</span></span><br><span class="line">}</span><br><span class="line"><span class="built_in">mkdir</span> -p .config-backup</span><br><span class="line">config checkout</span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Checked out config."</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Backing up pre-existing dot files."</span>;</span><br><span class="line">  config checkout 2&gt;&amp;1 | egrep <span class="string">"\s+\."</span> | awk {<span class="string">'print $1'</span>} | xargs -I{} <span class="built_in">mv</span> {} .config-backup/{}</span><br><span class="line"><span class="keyword">fi</span>;</span><br><span class="line">config checkout</span><br><span class="line">config config status.showUntrackedFiles no</span><br></pre></td></tr></tbody></table></figure>
 
-<p>（译者注：原文的<code>if-else</code>部分似乎缩进有问题，我调整了下格式，未对脚本内容做改动）</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>我希望你们能觉得这个管理点文件的小技巧能产生帮助。如果你有兴趣的话，可以到<span class="exturl" data-url="aHR0cHM6Ly9iaXRidWNrZXQub3JnL2R1cmRuL2NmZy5naXQ=">这里看我的点文件<i class="fa fa-external-link-alt"></i></span>。另外别忘了关注<span class="exturl" data-url="aHR0cHM6Ly93d3cudHdpdHRlci5jb20vZHVyZG4=">@durdn<i class="fa fa-external-link-alt"></i></span>或我那炫酷的小组<span class="exturl" data-url="aHR0cHM6Ly93d3cudHdpdHRlci5jb20vYXRsYXNzaWFuZGV2">@atlassiandev<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>（译者注：原文的 <code>if-else</code> 部分似乎缩进有问题，我调整了下格式，未对脚本内容做改动）</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>我希望你们能觉得这个管理点文件的小技巧能产生帮助。如果你有兴趣的话，可以到<span class="exturl" data-url="aHR0cHM6Ly9iaXRidWNrZXQub3JnL2R1cmRuL2NmZy5naXQ=">这里看我的点文件<i class="fa fa-external-link-alt"></i></span>。另外别忘了关注<span class="exturl" data-url="aHR0cHM6Ly93d3cudHdpdHRlci5jb20vZHVyZG4="> @durdn<i class="fa fa-external-link-alt"></i></span>或我那炫酷的小组<span class="exturl" data-url="aHR0cHM6Ly93d3cudHdpdHRlci5jb20vYXRsYXNzaWFuZGV2"> @atlassiandev<i class="fa fa-external-link-alt"></i></span>。</p>
 
     </div>
 
@@ -504,13 +504,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/macos-manage-softwares-with-homebrew-bundle.html" rel="prev" title="使用Homebrew Bundle管理电脑上安装的软件">
-                  <i class="fa fa-angle-left"></i> 使用Homebrew Bundle管理电脑上安装的软件
+                <a href="/macos-manage-softwares-with-homebrew-bundle.html" rel="prev" title="使用 Homebrew Bundle 管理电脑上安装的软件">
+                  <i class="fa fa-angle-left"></i> 使用 Homebrew Bundle 管理电脑上安装的软件
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/translation-get-a-catch-block-error-message-with-typescript.html" rel="next" title="在TypeScript的catch代码块中获取错误信息">
-                  在TypeScript的catch代码块中获取错误信息 <i class="fa fa-angle-right"></i>
+                <a href="/translation-get-a-catch-block-error-message-with-typescript.html" rel="next" title="在 TypeScript 的 catch 代码块中获取错误信息">
+                  在 TypeScript 的 catch 代码块中获取错误信息 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

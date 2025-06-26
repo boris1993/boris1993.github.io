@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。">
+    <meta name="description" content="在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring bean的作用域">
+<meta property="og:title" content="Spring bean 的作用域">
 <meta property="og:url" content="https://www.boris1993.com/java-spring-bean-scopes.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。">
+<meta property="og:description" content="在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-22T03:00:12.000Z">
-<meta property="article:modified_time" content="2025-06-25T12:46:34.461Z">
+<meta property="article:modified_time" content="2025-06-26T12:34:19.751Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
@@ -43,10 +43,10 @@
 <link rel="canonical" href="https://www.boris1993.com/java-spring-bean-scopes.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-spring-bean-scopes.html","path":"java-spring-bean-scopes.html","title":"Spring bean的作用域"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-spring-bean-scopes.html","path":"java-spring-bean-scopes.html","title":"Spring bean 的作用域"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Spring bean的作用域 | Code Life</title>
+<title>Spring bean 的作用域 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -208,7 +208,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">支持的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9Abean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">指定bean的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#singleton%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">singleton作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">prototype作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91singleton-bean%E6%B3%A8%E5%85%A5prototype-bean"><span class="nav-number">5.</span> <span class="nav-text">向singleton bean注入prototype bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request%E3%80%81session%E3%80%81global-session%E3%80%81application%E5%92%8Cwebsocket%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">request、session、global session、application和websocket作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.1.</span> <span class="nav-text">request作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.2.</span> <span class="nav-text">session作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#globalSession%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.3.</span> <span class="nav-text">globalSession作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.4.</span> <span class="nav-text">application作用域</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">支持的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9Abean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">指定 bean 的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#singleton%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">singleton 作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">prototype 作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91singleton-bean%E6%B3%A8%E5%85%A5prototype-bean"><span class="nav-number">5.</span> <span class="nav-text">向 singleton bean 注入 prototype bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request%E3%80%81session%E3%80%81global-session%E3%80%81application%E5%92%8Cwebsocket%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">request、session、global session、application 和 websocket 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.1.</span> <span class="nav-text">request 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.2.</span> <span class="nav-text">session 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#globalSession%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.3.</span> <span class="nav-text">globalSession 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.4.</span> <span class="nav-text">application 作用域</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,12 +309,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Spring bean的作用域 | Code Life">
+      <meta itemprop="name" content="Spring bean 的作用域 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring bean的作用域
+          Spring bean 的作用域
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
+      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,10 +375,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在Spring中，那些由IoC容器所管理的对象被称之为bean。而一个bean的定义，其实只是一个“蓝图”，指导着Spring如何去创建这样一个bean。而在这个蓝图中，有一个属性叫做“作用域”，它规定了这个bean的可见范围。这里我们看一下Spring的bean都有哪些作用域。</p>
+    <div class="post-body" itemprop="articleBody"><p>在 Spring 中，那些由 IoC 容器所管理的对象被称之为 bean。而一个 bean 的定义，其实只是一个 “蓝图”，指导着 Spring 如何去创建这样一个 bean。而在这个蓝图中，有一个属性叫做 “作用域”，它规定了这个 bean 的可见范围。这里我们看一下 Spring 的 bean 都有哪些作用域。</p>
 <span id="more"></span>
 
-<h2 id="支持的作用域"><a href="#支持的作用域" class="headerlink" title="支持的作用域"></a>支持的作用域</h2><p>我们先来看一下Spring支持哪些作用域。</p>
+<h2 id="支持的作用域"><a href="#支持的作用域" class="headerlink" title="支持的作用域"></a>支持的作用域</h2><p>我们先来看一下 Spring 支持哪些作用域。</p>
 <table>
 <thead>
 <tr>
@@ -387,63 +387,63 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="right">singleton</td>
-<td>在Spring容器中仅存在一个bean的实例，bean以单例形式存在。这是默认的作用域</td>
+<td align="right"> singleton</td>
+<td> 在 Spring 容器中仅存在一个 bean 的实例，bean 以单例形式存在。这是默认的作用域</td>
 </tr>
 <tr>
-<td align="right">prototype</td>
-<td>每次从容器中获取bean时，都将生成一个新的实例，即相当于每次都执行<code>new xxxBean()</code></td>
+<td align="right"> prototype</td>
+<td> 每次从容器中获取 bean 时，都将生成一个新的实例，即相当于每次都执行 <code>new xxxBean()</code></td>
 </tr>
 <tr>
 <td align="right">request</td>
-<td>在HTTP请求(request)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicatonContext</code>环境</td>
+<td> 在 HTTP 请求 (request) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicatonContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">session</td>
-<td>在HTTP会话(session)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td align="right"> session</td>
+<td> 在 HTTP 会话 (session) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">globalSession</td>
-<td>在全局的HTTP会话(session)的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境，且通常只能用在<code>Portlet</code>环境中。</td>
+<td align="right"> globalSession</td>
+<td> 在全局的 HTTP 会话 (session) 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境，且通常只能用在 <code>Portlet</code> 环境中。</td>
 </tr>
 <tr>
 <td align="right">application</td>
-<td>在<code>ServletContext</code>的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td> 在 <code>ServletContext</code> 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 <tr>
-<td align="right">websocket</td>
-<td>在<code>WebSocket</code>的完整生命周期中，将创建并使用单个实例。该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+<td align="right"> websocket</td>
+<td> 在 <code>WebSocket</code> 的完整生命周期中，将创建并使用单个实例。该作用域仅适用于 <code>WebApplicationContext</code> 环境</td>
 </tr>
 </tbody></table>
-<h2 id="指定bean的作用域"><a href="#指定bean的作用域" class="headerlink" title="指定bean的作用域"></a>指定bean的作用域</h2><p>要指定一个bean的作用域，我们可以通过XML的方式或注解的方式来设定。</p>
-<p>使用XML指定配置bean时，可以通过<code>scope</code>属性来指定作用域：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;someBean&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.demo.SomeClass&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="指定bean的作用域"><a href="#指定bean的作用域" class="headerlink" title="指定bean的作用域"></a>指定 bean 的作用域</h2><p>要指定一个 bean 的作用域，我们可以通过 XML 的方式或注解的方式来设定。</p>
+<p>使用 XML 指定配置 bean 时，可以通过 <code>scope</code> 属性来指定作用域：</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"someBean"</span> <span class="attr">class</span>=<span class="string">"com.demo.SomeClass"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>/&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>使用注解方式配置bean时，可以通过<code>@Scope</code>注解来指定作用域：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeClass</span> &#123;</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用注解方式配置 bean 时，可以通过 <code>@Scope</code> 注解来指定作用域：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeClass</span> {</span><br><span class="line">    <span class="comment">// Class definitions goes here</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>此外，如果使用注解方式配置作用域，Spring也提供了一系列常量值来方便我们配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SINGLETON</span> <span class="operator">=</span> <span class="string">&quot;singleton&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_PROTOTYPE</span> <span class="operator">=</span> <span class="string">&quot;prototype&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_REQUEST</span> <span class="operator">=</span> <span class="string">&quot;request&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SESSION</span> <span class="operator">=</span> <span class="string">&quot;session&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_APPLICATION</span> <span class="operator">=</span> <span class="string">&quot;application&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>此外，如果使用注解方式配置作用域，Spring 也提供了一系列常量值来方便我们配置：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在ConfigurableBeanFactory类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SINGLETON</span> <span class="operator">=</span> <span class="string">"singleton"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_PROTOTYPE</span> <span class="operator">=</span> <span class="string">"prototype"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在WebApplicationContext类中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_REQUEST</span> <span class="operator">=</span> <span class="string">"request"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_SESSION</span> <span class="operator">=</span> <span class="string">"session"</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">SCOPE_APPLICATION</span> <span class="operator">=</span> <span class="string">"application"</span>;</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="singleton作用域"><a href="#singleton作用域" class="headerlink" title="singleton作用域"></a>singleton作用域</h2><p><code>singleton</code>是Spring容器中的默认作用域。这个作用域下，容器中只创建各管理一个bean实例，实例存在于缓存中，并在后续对该bean的请求中都返回这个实例。</p>
-<h2 id="prototype作用域"><a href="#prototype作用域" class="headerlink" title="prototype作用域"></a>prototype作用域</h2><p>与<code>singleton</code>正相反，每次对<code>prototype</code>作用域的bean的请求，Spring都会生成一个新的实例，即类似我们手动使用<code>new XxxBean()</code>方式创建实例。</p>
-<p>需要注意的是，Spring不会完整的管理一个<code>prototype</code>的bean的生命周期。容器在初始化、配置，并将bean交由请求方(client)之后，就撒手不管了。也就是说，在销毁一个<code>prototype</code>的bean时，销毁bean的回调方法是不会被调用的，所以在销毁一个<code>prototype</code>的bean时，开发者必须手动释放它所使用的资源，或者可以尝试使用一个自定义的<a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-extension-bpp"><code>bean post-processor</code></a>来让Spring做这些事。</p>
-<p>对于有状态的bean，应当使用<code>prototype</code>作用域；对于无状态的bean，则应当使用<code>singleton</code>作用域。</p>
-<h2 id="向singleton-bean注入prototype-bean"><a href="#向singleton-bean注入prototype-bean" class="headerlink" title="向singleton bean注入prototype bean"></a>向singleton bean注入prototype bean</h2><p>因为bean的依赖关系在实例化bean时才会被解析，所以通常来说，我们不可以将一个prototype bean注入到一个singleton bean中。</p>
-<p>如果我们向一个singleton bean中注入一个prototype bean，因为这个singleton bean只会被实例化一次，使得它的依赖也只会被注入一次，最终导致它依赖的那个singleton bean也只存在一个实例。</p>
-<h2 id="request、session、global-session、application和websocket作用域"><a href="#request、session、global-session、application和websocket作用域" class="headerlink" title="request、session、global session、application和websocket作用域"></a>request、session、global session、application和websocket作用域</h2><p>这几种作用域只能用在<code>web-aware</code>的Spring上下文中，比如<code>XmlWebApplicationContext</code>。如果用在一般的IoC容器中，比如<code>ClassPathXmlApplicationContext</code>中，那么容器会抛出一个<code>IllegalStateException</code>。</p>
-<p>要使用这几个作用域，你可能需要对你的应用进行一些配置。因为这些内容与本文无关，所以在这里就不详细说明了。感兴趣的话可以看<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcy1vdGhlci13ZWItY29uZmlndXJhdGlvbg==">Spring参考手册中的内容<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>注：<code>web-aware</code>这个词，我也不知道怎么翻译才合适。查阅了一些资料之后，感觉一个<code>web-aware</code>的Spring应用就是一个运行在web容器(比如Tomcat)中的应用，因为上面提到的这些作用域也是与web应用相关的。如果有好的理解，请一定在留言区写下来让在下知道。</p>
-<h3 id="request作用域"><a href="#request作用域" class="headerlink" title="request作用域"></a>request作用域</h3><p><code>request</code>作用域下的bean，在每次HTTP请求中，都会创建一个新的实例。当请求完成时，对应的bean就会被销毁。对一个实例的任何更改，对其他的所有实例来说都是不可见的。</p>
-<h3 id="session作用域"><a href="#session作用域" class="headerlink" title="session作用域"></a>session作用域</h3><p><code>session</code>作用域下的bean，在每个活动的HTTP会话中，都有一个独自的实例，而当会话结束后，对应的bean就会被销毁。对一个实例的任何更改，对其他所有的实例来说都是不可见的。</p>
-<h3 id="globalSession作用域"><a href="#globalSession作用域" class="headerlink" title="globalSession作用域"></a>globalSession作用域</h3><p>这个作用域只能用在<code>portlet</code>应用中。一个<code>portlet</code>站点中可能有多个<code>portlet</code>应用，而它们相关的session中都会共享同一个<code>globalSession</code>作用域的bean。</p>
-<p>注：其实我也不知道<code>portlet</code>到底是个啥，就算看过维基百科的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmF2YV9Qb3J0bGV0X1NwZWNpZmljYXRpb24=">Portlet条目<i class="fa fa-external-link-alt"></i></span>也没看明白。</p>
-<h3 id="application作用域"><a href="#application作用域" class="headerlink" title="application作用域"></a>application作用域</h3><p>在整个应用范围内，容器为每个web应用程序运行时创建一个实例。这个作用域与<code>singleton</code>很类似，但是还是有两个不同点：</p>
+<h2 id="singleton作用域"><a href="#singleton作用域" class="headerlink" title="singleton作用域"></a>singleton 作用域</h2><p><code>singleton</code> 是 Spring 容器中的默认作用域。这个作用域下，容器中只创建各管理一个 bean 实例，实例存在于缓存中，并在后续对该 bean 的请求中都返回这个实例。</p>
+<h2 id="prototype作用域"><a href="#prototype作用域" class="headerlink" title="prototype作用域"></a>prototype 作用域</h2><p>与 <code>singleton</code> 正相反，每次对 <code>prototype</code> 作用域的 bean 的请求，Spring 都会生成一个新的实例，即类似我们手动使用 <code>new XxxBean()</code> 方式创建实例。</p>
+<p>需要注意的是，Spring 不会完整的管理一个 <code>prototype</code> 的 bean 的生命周期。容器在初始化、配置，并将 bean 交由请求方 (client) 之后，就撒手不管了。也就是说，在销毁一个 <code>prototype</code> 的 bean 时，销毁 bean 的回调方法是不会被调用的，所以在销毁一个 <code>prototype</code> 的 bean 时，开发者必须手动释放它所使用的资源，或者可以尝试使用一个自定义的 <a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-extension-bpp"><code>bean post-processor</code></a>来让 Spring 做这些事。</p>
+<p>对于有状态的 bean，应当使用 <code>prototype</code> 作用域；对于无状态的 bean，则应当使用 <code>singleton</code> 作用域。</p>
+<h2 id="向singleton-bean注入prototype-bean"><a href="#向singleton-bean注入prototype-bean" class="headerlink" title="向singleton bean注入prototype bean"></a>向 singleton bean 注入 prototype bean</h2><p>因为 bean 的依赖关系在实例化 bean 时才会被解析，所以通常来说，我们不可以将一个 prototype bean 注入到一个 singleton bean 中。</p>
+<p>如果我们向一个 singleton bean 中注入一个 prototype bean，因为这个 singleton bean 只会被实例化一次，使得它的依赖也只会被注入一次，最终导致它依赖的那个 singleton bean 也只存在一个实例。</p>
+<h2 id="request、session、global-session、application和websocket作用域"><a href="#request、session、global-session、application和websocket作用域" class="headerlink" title="request、session、global session、application和websocket作用域"></a>request、session、global session、application 和 websocket 作用域</h2><p>这几种作用域只能用在 <code>web-aware</code> 的 Spring 上下文中，比如 <code>XmlWebApplicationContext</code>。如果用在一般的 IoC 容器中，比如 <code>ClassPathXmlApplicationContext</code> 中，那么容器会抛出一个 <code>IllegalStateException</code>。</p>
+<p>要使用这几个作用域，你可能需要对你的应用进行一些配置。因为这些内容与本文无关，所以在这里就不详细说明了。感兴趣的话可以看<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcy1vdGhlci13ZWItY29uZmlndXJhdGlvbg=="> Spring 参考手册中的内容<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>注：<code>web-aware</code> 这个词，我也不知道怎么翻译才合适。查阅了一些资料之后，感觉一个 <code>web-aware</code> 的 Spring 应用就是一个运行在 web 容器 (比如 Tomcat) 中的应用，因为上面提到的这些作用域也是与 web 应用相关的。如果有好的理解，请一定在留言区写下来让在下知道。</p>
+<h3 id="request作用域"><a href="#request作用域" class="headerlink" title="request作用域"></a>request 作用域</h3><p><code>request</code> 作用域下的 bean，在每次 HTTP 请求中，都会创建一个新的实例。当请求完成时，对应的 bean 就会被销毁。对一个实例的任何更改，对其他的所有实例来说都是不可见的。</p>
+<h3 id="session作用域"><a href="#session作用域" class="headerlink" title="session作用域"></a>session 作用域</h3><p><code>session</code> 作用域下的 bean，在每个活动的 HTTP 会话中，都有一个独自的实例，而当会话结束后，对应的 bean 就会被销毁。对一个实例的任何更改，对其他所有的实例来说都是不可见的。</p>
+<h3 id="globalSession作用域"><a href="#globalSession作用域" class="headerlink" title="globalSession作用域"></a>globalSession 作用域</h3><p>这个作用域只能用在 <code>portlet</code> 应用中。一个 <code>portlet</code> 站点中可能有多个 <code>portlet</code> 应用，而它们相关的 session 中都会共享同一个 <code>globalSession</code> 作用域的 bean。</p>
+<p>注：其实我也不知道 <code>portlet</code> 到底是个啥，就算看过维基百科的<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSmF2YV9Qb3J0bGV0X1NwZWNpZmljYXRpb24="> Portlet 条目<i class="fa fa-external-link-alt"></i></span>也没看明白。</p>
+<h3 id="application作用域"><a href="#application作用域" class="headerlink" title="application作用域"></a>application 作用域</h3><p>在整个应用范围内，容器为每个 web 应用程序运行时创建一个实例。这个作用域与 <code>singleton</code> 很类似，但是还是有两个不同点：</p>
 <ul>
-<li>在不同<code>ServletContext</code>中有不同的bean单例对象；singleton作用域的bean是每个<code>ApplicationContext</code>的单例对象。而一个应用可能有多个<code>ApplicationContext</code></li>
-<li>bean作为<code>ServletContext</code>属性可见</li>
+<li>在不同 <code>ServletContext</code> 中有不同的 bean 单例对象；singleton 作用域的 bean 是每个 <code>ApplicationContext</code> 的单例对象。而一个应用可能有多个 <code>ApplicationContext</code></li>
+<li>bean 作为 <code>ServletContext</code> 属性可见</li>
 </ul>
-<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcw==">Bean Scopes - The IoC container<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFkMTQ1NWYyNjVkYTViNjAwNmZhNmE=">Spring系列四：Bean Scopes作用域<i class="fa fa-external-link-alt"></i></span><br>[^3]: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ljYXJ1c193YW5nL2FydGljbGUvZGV0YWlscy81MTU4Njc3Ng==">Spring学习（十五）Spring Bean 的5种作用域介绍<i class="fa fa-external-link-alt"></i></span></p>
+<p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmcvZG9jcy9jdXJyZW50L3NwcmluZy1mcmFtZXdvcmstcmVmZXJlbmNlL2NvcmUuaHRtbCNiZWFucy1mYWN0b3J5LXNjb3Blcw==">Bean Scopes - The IoC container<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFkMTQ1NWYyNjVkYTViNjAwNmZhNmE=">Spring 系列四：Bean Scopes 作用域<i class="fa fa-external-link-alt"></i></span><br>[^3]: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ljYXJ1c193YW5nL2FydGljbGUvZGV0YWlscy81MTU4Njc3Ng==">Spring 学习（十五）Spring Bean 的 5 种作用域介绍<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
 
@@ -502,8 +502,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/java-inner-class-and-private-identifier.html" rel="next" title="Java的内部类和private修饰符">
-                  Java的内部类和private修饰符 <i class="fa fa-angle-right"></i>
+                <a href="/java-inner-class-and-private-identifier.html" rel="next" title="Java 的内部类和 private 修饰符">
+                  Java 的内部类和 private 修饰符 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

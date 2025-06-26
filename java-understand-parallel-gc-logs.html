@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。">
+    <meta name="description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂 Java 的垃圾回收日志。本文将介绍打印 GC 日志相关的 JVM 参数，以及使用不同参数时 JVM 将会打印出的日志内容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="看懂ParallelGC的日志">
+<meta property="og:title" content="看懂 ParallelGC 的日志">
 <meta property="og:url" content="https://www.boris1993.com/java-understand-parallel-gc-logs.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。">
+<meta property="og:description" content="在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂 Java 的垃圾回收日志。本文将介绍打印 GC 日志相关的 JVM 参数，以及使用不同参数时 JVM 将会打印出的日志内容。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-05T06:45:25.000Z">
-<meta property="article:modified_time" content="2025-06-25T12:46:34.462Z">
+<meta property="article:modified_time" content="2025-06-26T12:34:19.751Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="垃圾回收">
@@ -45,10 +45,10 @@
 <link rel="canonical" href="https://www.boris1993.com/java-understand-parallel-gc-logs.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-understand-parallel-gc-logs.html","path":"java-understand-parallel-gc-logs.html","title":"看懂ParallelGC的日志"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-understand-parallel-gc-logs.html","path":"java-understand-parallel-gc-logs.html","title":"看懂 ParallelGC 的日志"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>看懂ParallelGC的日志 | Code Life</title>
+<title>看懂 ParallelGC 的日志 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -210,7 +210,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">JDK版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%9A%84JVM%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">GC日志相关的JVM参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XX-PrintGC%E4%B8%8E-verbose-gc"><span class="nav-number">3.1.</span> <span class="nav-text">-XX:+PrintGC与-verbose:gc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-verbose-gc"><span class="nav-number">4.</span> <span class="nav-text">打开-verbose:gc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCDetails"><span class="nav-number">5.</span> <span class="nav-text">打开-XX:+PrintGCDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCTimeStamps"><span class="nav-number">6.</span> <span class="nav-text">打开-XX:+PrintGCTimeStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCDateStamps"><span class="nav-number">7.</span> <span class="nav-text">打开-XX:+PrintGCDateStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintHeapAtGC"><span class="nav-number">8.</span> <span class="nav-text">打开-XX:+PrintHeapAtGC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintReferenceGC"><span class="nav-number">9.</span> <span class="nav-text">打开-XX:+PrintReferenceGC</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">JDK 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%9A%84JVM%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">GC 日志相关的 JVM 参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XX-PrintGC%E4%B8%8E-verbose-gc"><span class="nav-number">3.1.</span> <span class="nav-text">-XX:+PrintGC 与 -verbose:gc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-verbose-gc"><span class="nav-number">4.</span> <span class="nav-text">打开 -verbose:gc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCDetails"><span class="nav-number">5.</span> <span class="nav-text">打开 -XX:+PrintGCDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCTimeStamps"><span class="nav-number">6.</span> <span class="nav-text">打开 -XX:+PrintGCTimeStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintGCDateStamps"><span class="nav-number">7.</span> <span class="nav-text">打开 -XX:+PrintGCDateStamps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintHeapAtGC"><span class="nav-number">8.</span> <span class="nav-text">打开 -XX:+PrintHeapAtGC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-XX-PrintReferenceGC"><span class="nav-number">9.</span> <span class="nav-text">打开 -XX:+PrintReferenceGC</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -311,12 +311,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="看懂ParallelGC的日志 | Code Life">
+      <meta itemprop="name" content="看懂 ParallelGC 的日志 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          看懂ParallelGC的日志
+          看懂 ParallelGC 的日志
         </h1>
 
         <div class="post-meta-container">
@@ -334,7 +334,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-25 20:46:34" itemprop="dateModified" datetime="2025-06-25T20:46:34+08:00">2025-06-25</time>
+      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,18 +377,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂Java的垃圾回收日志。本文将介绍打印GC日志相关的JVM参数，以及使用不同参数时JVM将会打印出的日志内容。</p>
+    <div class="post-body" itemprop="articleBody"><p>在排查垃圾回收相关的问题时，一个必不可少的技能就是要能看懂 Java 的垃圾回收日志。本文将介绍打印 GC 日志相关的 JVM 参数，以及使用不同参数时 JVM 将会打印出的日志内容。</p>
 <span id="more"></span>
 
-<h2 id="JDK版本"><a href="#JDK版本" class="headerlink" title="JDK版本"></a>JDK版本</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openjdk version &quot;1.8.0_232&quot;</span><br><span class="line">OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_232-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.232-b09, mixed mode)</span><br></pre></td></tr></table></figure>
+<h2 id="JDK版本"><a href="#JDK版本" class="headerlink" title="JDK版本"></a>JDK 版本</h2><figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openjdk version "1.8.0_232"</span><br><span class="line">OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_232-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.232-b09, mixed mode)</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>在演示过程中，我们将通过在死循环中构造大对象的方式来触发垃圾回收</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GCExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        String[] strings;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            strings = <span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">1024</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GCExample</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        String[] strings;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">            strings = <span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">1024</span>];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>同时，为了让垃圾回收更早的开始，我们还需要指定一个较小的堆内存，比如我选择只分配10MB的空间。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xmx10m</span><br><span class="line">-Xms10m</span><br></pre></td></tr></table></figure>
+<p>同时，为了让垃圾回收更早的开始，我们还需要指定一个较小的堆内存，比如我选择只分配 10MB 的空间。</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xmx10m</span><br><span class="line">-Xms10m</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="GC日志相关的JVM参数"><a href="#GC日志相关的JVM参数" class="headerlink" title="GC日志相关的JVM参数"></a>GC日志相关的JVM参数</h2><p>与GC日志相关的JVM参数有如下8个：</p>
+<h2 id="GC日志相关的JVM参数"><a href="#GC日志相关的JVM参数" class="headerlink" title="GC日志相关的JVM参数"></a>GC 日志相关的 JVM 参数</h2><p>与 GC 日志相关的 JVM 参数有如下 8 个：</p>
 <table>
 <thead>
 <tr>
@@ -397,76 +397,76 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>-XX:+PrintGC</td>
-<td>输出简要GC日志</td>
+<td> -XX:+PrintGC</td>
+<td> 输出简要 GC 日志</td>
 </tr>
 <tr>
-<td>-verbose:gc</td>
-<td>等同于 -XX:+PrintGC</td>
+<td> -verbose:gc</td>
+<td> 等同于 -XX:+PrintGC</td>
 </tr>
 <tr>
 <td>-XX:+PrintGCDetails</td>
-<td>输出详细GC日志</td>
+<td> 输出详细 GC 日志</td>
 </tr>
 <tr>
-<td>-Xloggc:gc.log</td>
-<td>输出GC日志到文件gc.log</td>
+<td> -Xloggc:gc.log</td>
+<td> 输出 GC 日志到文件 gc.log</td>
 </tr>
 <tr>
 <td>-XX:+PrintGCTimeStamps</td>
-<td>输出GC的时间戳（以JVM启动到当期的总时长的时间戳形式）</td>
+<td> 输出 GC 的时间戳（以 JVM 启动到当期的总时长的时间戳形式）</td>
 </tr>
 <tr>
 <td>-XX:+PrintGCDateStamps</td>
-<td>输出GC的时间戳（以日期的形式，如 2013-05-04T21:53:59.234+0800）</td>
+<td> 输出 GC 的时间戳（以日期的形式，如 2013-05-04T21:53:59.234+0800）</td>
 </tr>
 <tr>
 <td>-XX:+PrintHeapAtGC</td>
-<td>在进行GC的前后打印出堆的信息</td>
+<td> 在进行 GC 的前后打印出堆的信息</td>
 </tr>
 <tr>
-<td>-XX:+PrintReferenceGC</td>
-<td>打印年轻代各个引用的数量以及时长</td>
+<td> -XX:+PrintReferenceGC</td>
+<td> 打印年轻代各个引用的数量以及时长</td>
 </tr>
 </tbody></table>
-<h3 id="XX-PrintGC与-verbose-gc"><a href="#XX-PrintGC与-verbose-gc" class="headerlink" title="-XX:+PrintGC与-verbose:gc"></a><code>-XX:+PrintGC</code>与<code>-verbose:gc</code></h3><p>虽然上面说这两个参数是等价的，但是，<code>-verbose:gc</code>是一个标准的参数，而<code>-XX:+PrintGC</code>则在JDK 9之后被标为废弃的(deprecated)，所以建议使用<code>-verbose:gc</code>代替<code>-XX:+PrintGC</code>。</p>
-<h2 id="打开-verbose-gc"><a href="#打开-verbose-gc" class="headerlink" title="打开-verbose:gc"></a>打开<code>-verbose:gc</code></h2><p>使用这个参数将会打开简略的GC日志。打开这个参数并运行程序，很快就可以看到这样的GC日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure)  2520K-&gt;472K(9728K), 0.0005722 secs]</span><br></pre></td></tr></table></figure>
+<h3 id="XX-PrintGC与-verbose-gc"><a href="#XX-PrintGC与-verbose-gc" class="headerlink" title="-XX:+PrintGC与-verbose:gc"></a><code>-XX:+PrintGC</code> 与 <code>-verbose:gc</code></h3><p>虽然上面说这两个参数是等价的，但是，<code>-verbose:gc</code> 是一个标准的参数，而 <code>-XX:+PrintGC</code> 则在 JDK 9 之后被标为废弃的 (deprecated)，所以建议使用 <code>-verbose:gc</code> 代替 <code>-XX:+PrintGC</code>。</p>
+<h2 id="打开-verbose-gc"><a href="#打开-verbose-gc" class="headerlink" title="打开-verbose:gc"></a>打开 <code>-verbose:gc</code></h2><p>使用这个参数将会打开简略的 GC 日志。打开这个参数并运行程序，很快就可以看到这样的 GC 日志：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure)  2520K-&gt;472K(9728K), 0.0005722 secs]</span><br></pre></td></tr></tbody></table></figure>
 
 <p>我们将上面的日志拆分开来：</p>
 <ul>
-<li><code>GC</code>代表这次垃圾回收的类型。<code>GC</code>代表发生了<code>Minor GC</code>，<code>Full GC</code>代表发生了<code>Full GC</code></li>
-<li><code>Allocation Failure</code>简述了发生GC的原因。在这个例子中，是因为在年轻代中没有合适的空间导致新的对象分配失败，从而发生GC</li>
-<li><code>2520K-&gt;472K</code>说明了年轻代的占用量变化。在这个例子中，年轻代的使用量从2520KB减少到了472KB</li>
-<li><code>9728K</code>表示整个堆的大小</li>
-<li><code>0.0005722 secs</code>表示了本次GC消耗的时间</li>
+<li><code>GC</code> 代表这次垃圾回收的类型。<code>GC</code> 代表发生了 <code>Minor GC</code>，<code>Full GC</code> 代表发生了 <code>Full GC</code></li>
+<li><code>Allocation Failure</code> 简述了发生 GC 的原因。在这个例子中，是因为在年轻代中没有合适的空间导致新的对象分配失败，从而发生 GC</li>
+<li><code>2520K-&gt;472K</code> 说明了年轻代的占用量变化。在这个例子中，年轻代的使用量从 2520KB 减少到了 472KB</li>
+<li><code>9728K</code> 表示整个堆的大小</li>
+<li><code>0.0005722 secs</code> 表示了本次 GC 消耗的时间</li>
 </ul>
-<h2 id="打开-XX-PrintGCDetails"><a href="#打开-XX-PrintGCDetails" class="headerlink" title="打开-XX:+PrintGCDetails"></a>打开<code>-XX:+PrintGCDetails</code></h2><p>使用这个参数后，将会打印详细的GC日志，它打印的内容包含了<code>-verbose:gc</code>参数打印的内容。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 2500K-&gt;452K(9728K), 0.0003785 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+<h2 id="打开-XX-PrintGCDetails"><a href="#打开-XX-PrintGCDetails" class="headerlink" title="打开-XX:+PrintGCDetails"></a>打开 <code>-XX:+PrintGCDetails</code></h2><p>使用这个参数后，将会打印详细的 GC 日志，它打印的内容包含了 <code>-verbose:gc</code> 参数打印的内容。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 2500K-&gt;452K(9728K), 0.0003785 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这个参数打印的日志与上一个参数打印的日志有一部分重合，这里我们关注新增的内容：</p>
 <ul>
-<li><code>[PSYoungGen: 2048K-&gt;0K(2560K)]</code>表明了使用的垃圾回收器、年轻代的占用量变化，和年轻代的大小</li>
-<li><code>2500K-&gt;452K(9728K)</code>表明了整个堆的占用量变化，和整个堆的大小</li>
-<li><code>[Times: user=0.00 sys=0.00, real=0.00 secs]</code>表示本次GC消耗的时间<ul>
-<li><code>user</code>代表垃圾回收器消耗的CPU时间</li>
-<li><code>sys</code>代表系统调用或等待系统事件消耗的时间</li>
-<li><code>real</code>代表应用实际停止的时间，近似于<code>(user + sys) / 垃圾回收器使用的线程数</code></li>
+<li><code>[PSYoungGen: 2048K-&gt;0K(2560K)]</code> 表明了使用的垃圾回收器、年轻代的占用量变化，和年轻代的大小</li>
+<li><code>2500K-&gt;452K(9728K)</code> 表明了整个堆的占用量变化，和整个堆的大小</li>
+<li><code>[Times: user=0.00 sys=0.00, real=0.00 secs]</code> 表示本次 GC 消耗的时间<ul>
+<li><code>user</code> 代表垃圾回收器消耗的 CPU 时间</li>
+<li><code>sys</code> 代表系统调用或等待系统事件消耗的时间</li>
+<li><code>real</code> 代表应用实际停止的时间，近似于 <code>(user + sys) / 垃圾回收器使用的线程数</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="打开-XX-PrintGCTimeStamps"><a href="#打开-XX-PrintGCTimeStamps" class="headerlink" title="打开-XX:+PrintGCTimeStamps"></a>打开<code>-XX:+PrintGCTimeStamps</code></h2><p>这个参数不影响日志的详细程度，在打开之后，日志中会出现从JVM启动到出现日志时的毫秒数，比如下面例子的<code>1.523</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.523: [GC (Allocation Failure) [PSYoungGen: 2141K-&gt;96K(2560K)] 4805K-&gt;2776K(9728K), 0.0004359 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+<h2 id="打开-XX-PrintGCTimeStamps"><a href="#打开-XX-PrintGCTimeStamps" class="headerlink" title="打开-XX:+PrintGCTimeStamps"></a>打开 <code>-XX:+PrintGCTimeStamps</code></h2><p>这个参数不影响日志的详细程度，在打开之后，日志中会出现从 JVM 启动到出现日志时的毫秒数，比如下面例子的 <code>1.523</code>。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.523: [GC (Allocation Failure) [PSYoungGen: 2141K-&gt;96K(2560K)] 4805K-&gt;2776K(9728K), 0.0004359 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="打开-XX-PrintGCDateStamps"><a href="#打开-XX-PrintGCDateStamps" class="headerlink" title="打开-XX:+PrintGCDateStamps"></a>打开<code>-XX:+PrintGCDateStamps</code></h2><p>这个参数也不影响日志的详细程度，在打开之后，日志头部会加上打印日志的时间和时区，比如下面例子的<code>2020-02-06T10:13:08.634-0800</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2020-02-06T10:13:08.634-0800: 1.122: [GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 3328K-&gt;1280K(9728K), 0.0004243 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+<h2 id="打开-XX-PrintGCDateStamps"><a href="#打开-XX-PrintGCDateStamps" class="headerlink" title="打开-XX:+PrintGCDateStamps"></a>打开 <code>-XX:+PrintGCDateStamps</code></h2><p>这个参数也不影响日志的详细程度，在打开之后，日志头部会加上打印日志的时间和时区，比如下面例子的 <code>2020-02-06T10:13:08.634-0800</code>。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2020-02-06T10:13:08.634-0800: 1.122: [GC (Allocation Failure) [PSYoungGen: 2048K-&gt;0K(2560K)] 3328K-&gt;1280K(9728K), 0.0004243 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="打开-XX-PrintHeapAtGC"><a href="#打开-XX-PrintHeapAtGC" class="headerlink" title="打开-XX:+PrintHeapAtGC"></a>打开<code>-XX:+PrintHeapAtGC</code></h2><p>使用这个参数后，在打印GC日志时，会同时打印出堆在GC前后的信息，即根据不同的内存区域，分别显示在垃圾回收前后的空间使用情况。同时，日志中还以<code>[bottom,top,end)</code>的格式展现出了各个内存区域的地址，其中<code>bottom</code>为这个区域的起始位置，<code>top</code>为这个区域当前的顶部位置，<code>end</code>为这个区域可使用的地址上限[^1]。</p>
-<p>此外，日志中关于<code>Metaspace</code>相关的信息可以参考注脚4[^4]指向的那篇回答。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;Heap before GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 2047K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 99% used [0x00000007bfd00000,0x00000007bfeffe78,0x00000007bff00000)</span><br><span class="line">  from space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007bff80000)</span><br><span class="line"> ParOldGen       total 7168K, used 0K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf600000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">2020-02-06T10:21:05.317-0800: 0.219: [GC (Allocation Failure) [PSYoungGen: 2047K-&gt;496K(2560K)] 2047K-&gt;512K(9728K), 0.0019061 secs] [Times: user=0.01 sys=0.00, real=0.00 secs]</span><br><span class="line">Heap after GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 496K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 0% used [0x00000007bfd00000,0x00000007bfd00000,0x00000007bff00000)</span><br><span class="line">  from space 512K, 96% used [0x00000007bff00000,0x00000007bff7c010,0x00000007bff80000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line"> ParOldGen       total 7168K, used 16K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf604000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打开-XX-PrintHeapAtGC"><a href="#打开-XX-PrintHeapAtGC" class="headerlink" title="打开-XX:+PrintHeapAtGC"></a>打开 <code>-XX:+PrintHeapAtGC</code></h2><p>使用这个参数后，在打印 GC 日志时，会同时打印出堆在 GC 前后的信息，即根据不同的内存区域，分别显示在垃圾回收前后的空间使用情况。同时，日志中还以 <code>[bottom,top,end)</code> 的格式展现出了各个内存区域的地址，其中 <code>bottom</code> 为这个区域的起始位置，<code>top</code> 为这个区域当前的顶部位置，<code>end</code> 为这个区域可使用的地址上限 [^1]。</p>
+<p>此外，日志中关于 <code>Metaspace</code> 相关的信息可以参考注脚 4 [^4] 指向的那篇回答。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">{Heap before GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 2047K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 99% used [0x00000007bfd00000,0x00000007bfeffe78,0x00000007bff00000)</span><br><span class="line">  from space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007bff80000)</span><br><span class="line"> ParOldGen       total 7168K, used 0K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf600000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">2020-02-06T10:21:05.317-0800: 0.219: [GC (Allocation Failure) [PSYoungGen: 2047K-&gt;496K(2560K)] 2047K-&gt;512K(9728K), 0.0019061 secs] [Times: user=0.01 sys=0.00, real=0.00 secs]</span><br><span class="line">Heap after GC invocations=1 (full 0):</span><br><span class="line"> PSYoungGen      total 2560K, used 496K [0x00000007bfd00000, 0x00000007c0000000, 0x00000007c0000000)</span><br><span class="line">  eden space 2048K, 0% used [0x00000007bfd00000,0x00000007bfd00000,0x00000007bff00000)</span><br><span class="line">  from space 512K, 96% used [0x00000007bff00000,0x00000007bff7c010,0x00000007bff80000)</span><br><span class="line">  to   space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)</span><br><span class="line"> ParOldGen       total 7168K, used 16K [0x00000007bf600000, 0x00000007bfd00000, 0x00000007bfd00000)</span><br><span class="line">  object space 7168K, 0% used [0x00000007bf600000,0x00000007bf604000,0x00000007bfd00000)</span><br><span class="line"> Metaspace       used 3045K, capacity 4496K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 320K, capacity 388K, committed 512K, reserved 1048576K</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="打开-XX-PrintReferenceGC"><a href="#打开-XX-PrintReferenceGC" class="headerlink" title="打开-XX:+PrintReferenceGC"></a>打开<code>-XX:+PrintReferenceGC</code></h2><p>打开这个参数后，就可以看到各种引用的数量，以及对其垃圾回收所消耗的时长。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [SoftReference, 0 refs, 0.0000125 secs][WeakReference, 0 refs, 0.0000054 secs][FinalReference, 0 refs, 0.0000045 secs][PhantomReference, 0 refs, 0 refs, 0.0000222 secs][JNI Weak Reference, 0.0000037 secs][PSYoungGen: 2112K-&gt;64K(2560K)] 3488K-&gt;1456K(9728K), 0.0005389 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+<h2 id="打开-XX-PrintReferenceGC"><a href="#打开-XX-PrintReferenceGC" class="headerlink" title="打开-XX:+PrintReferenceGC"></a>打开 <code>-XX:+PrintReferenceGC</code></h2><p>打开这个参数后，就可以看到各种引用的数量，以及对其垃圾回收所消耗的时长。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [SoftReference, 0 refs, 0.0000125 secs][WeakReference, 0 refs, 0.0000054 secs][FinalReference, 0 refs, 0.0000045 secs][PhantomReference, 0 refs, 0 refs, 0.0000222 secs][JNI Weak Reference, 0.0000037 secs][PSYoungGen: 2112K-&gt;64K(2560K)] 3488K-&gt;1456K(9728K), 0.0005389 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></tbody></table></figure>
 
 <p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjgzNDQ0NTEvbWVhbmluZy1vZi1oZWFwLW1lbW9yeS1hZGRyZXNzZXMtaW4tZ2MtbG9ncy11c2luZy14eHByaW50aGVhcGF0Z2M=">Meaning of heap memory addresses in GC logs using -XX:+PrintHeapAtGC?<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9wbHVtYnIuaW8vaGFuZGJvb2svZ2FyYmFnZS1jb2xsZWN0aW9uLWFsZ29yaXRobXMtaW1wbGVtZW50YXRpb25zL3BhcmFsbGVsLWdj">Parallel GC - Plumber<i class="fa fa-external-link-alt"></i></span><br>[^3]: <span class="exturl" data-url="aHR0cHM6Ly9wbHVtYnIuaW8vaGFuZGJvb2svZ2FyYmFnZS1jb2xsZWN0aW9uLWFsZ29yaXRobXMtaW1wbGVtZW50YXRpb25zL3BhcmFsbGVsLWdjL3BhcmFsbGVsLWZ1bGwtZ2M=">Parallel Full GC - Plumber<i class="fa fa-external-link-alt"></i></span><br>[^4]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNDA4OTE0MzMvdW5kZXJzdGFuZGluZy1tZXRhc3BhY2UtbGluZS1pbi1qdm0taGVhcC1wcmludG91dA==">Understanding metaspace line in JVM heap printout<i class="fa fa-external-link-alt"></i></span></p>
 
@@ -524,13 +524,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/java-read-src-hashmap.html" rel="prev" title="Java源码阅读 - HashMap">
-                  <i class="fa fa-angle-left"></i> Java源码阅读 - HashMap
+                <a href="/java-read-src-hashmap.html" rel="prev" title="Java 源码阅读 - HashMap">
+                  <i class="fa fa-angle-left"></i> Java 源码阅读 - HashMap
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/java-jvm-reference.html" rel="next" title="简谈JVM中的几种引用">
-                  简谈JVM中的几种引用 <i class="fa fa-angle-right"></i>
+                <a href="/java-jvm-reference.html" rel="next" title="简谈 JVM 中的几种引用">
+                  简谈 JVM 中的几种引用 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
