@@ -25,12 +25,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="看到一篇深入讲解 Redis 中 Pub&#x2F;Sub 的文章 Redis Pub&#x2F;Sub In-Depth，所以打算将它翻译出来，顺便深化自己的理解。">
+    <meta name="description" content="看到一篇深入讲解 Redis 中 Pub &#x2F; Sub 的文章 Redis Pub&#x2F;Sub In-Depth，所以打算将它翻译出来，顺便深化自己的理解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入了解 Redis 的 Pub&#x2F;Sub">
+<meta property="og:title" content="深入了解 Redis 的 Pub &#x2F; Sub">
 <meta property="og:url" content="https://www.boris1993.com/translation-redis-pubsub-in-depth.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="看到一篇深入讲解 Redis 中 Pub&#x2F;Sub 的文章 Redis Pub&#x2F;Sub In-Depth，所以打算将它翻译出来，顺便深化自己的理解。">
+<meta property="og:description" content="看到一篇深入讲解 Redis 中 Pub &#x2F; Sub 的文章 Redis Pub&#x2F;Sub In-Depth，所以打算将它翻译出来，顺便深化自己的理解。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-data-flow.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-relationship.png">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-hashtable-resizing.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-pattern-subscriptions.png">
 <meta property="article:published_time" content="2025-03-15T01:18:06.000Z">
-<meta property="article:modified_time" content="2025-06-26T12:34:19.755Z">
+<meta property="article:modified_time" content="2025-06-30T15:20:47.146Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="Pub&#x2F;Sub">
@@ -57,10 +57,10 @@
 <link rel="canonical" href="https://www.boris1993.com/translation-redis-pubsub-in-depth.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/translation-redis-pubsub-in-depth.html","path":"translation-redis-pubsub-in-depth.html","title":"深入了解 Redis 的 Pub/Sub"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/translation-redis-pubsub-in-depth.html","path":"translation-redis-pubsub-in-depth.html","title":"深入了解 Redis 的 Pub / Sub"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>深入了解 Redis 的 Pub/Sub | Code Life</title>
+<title>深入了解 Redis 的 Pub / Sub | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -222,7 +222,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Pub&#x2F;Sub 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">Pub&#x2F;Sub 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Pub&#x2F;Sub 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Pub-Sub"><span class="nav-number">4.</span> <span class="nav-text">Redis Pub&#x2F;Sub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E9%80%9A%E4%BF%A1"><span class="nav-number">4.1.</span> <span class="nav-text">同步通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E5%90%8E%E4%B8%8D%E7%AE%A1-Fire-Forget"><span class="nav-number">4.2.</span> <span class="nav-text">发射后不管 (Fire &amp; Forget)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%85%E5%90%91%E5%A4%96%E6%92%AD%E6%95%A3-Fan-out-Only"><span class="nav-number">4.3.</span> <span class="nav-text">仅向外播散 (Fan-out Only)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%80%E5%BC%80Redis-Pub-Sub%E7%9A%84%E5%BC%95%E6%93%8E%E7%9B%96"><span class="nav-number">5.</span> <span class="nav-text">掀开 Redis Pub&#x2F;Sub 的引擎盖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80"><span class="nav-number">5.1.</span> <span class="nav-text">处理连接断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%90%BD%E5%AE%9E%E7%90%86%E8%AE%BA"><span class="nav-number">5.2.</span> <span class="nav-text">落实理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">5.3.</span> <span class="nav-text">可以实时操作的哈希表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%86%8D%E8%AE%A2%E9%98%85%E6%98%82%E8%B4%B5%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%88Expensive-unsubscribed%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">不再订阅昂贵的东西（Expensive unsubscribed）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E8%AE%A2%E9%98%85%EF%BC%88Pattern-subscriptions%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">按照表达式匹配订阅（Pattern subscriptions）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">6.</span> <span class="nav-text">Pub&#x2F;Sub 的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Pub &#x2F; Sub 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">Pub &#x2F; Sub 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Pub &#x2F; Sub 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Pub-Sub"><span class="nav-number">4.</span> <span class="nav-text">Redis Pub&#x2F;Sub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E9%80%9A%E4%BF%A1"><span class="nav-number">4.1.</span> <span class="nav-text">同步通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E5%90%8E%E4%B8%8D%E7%AE%A1-Fire-Forget"><span class="nav-number">4.2.</span> <span class="nav-text">发射后不管 (Fire &amp; Forget)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%85%E5%90%91%E5%A4%96%E6%92%AD%E6%95%A3-Fan-out-Only"><span class="nav-number">4.3.</span> <span class="nav-text">仅向外播散 (Fan-out Only)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%80%E5%BC%80Redis-Pub-Sub%E7%9A%84%E5%BC%95%E6%93%8E%E7%9B%96"><span class="nav-number">5.</span> <span class="nav-text">掀开 Redis Pub &#x2F; Sub 的引擎盖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80"><span class="nav-number">5.1.</span> <span class="nav-text">处理连接断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%90%BD%E5%AE%9E%E7%90%86%E8%AE%BA"><span class="nav-number">5.2.</span> <span class="nav-text">落实理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">5.3.</span> <span class="nav-text">可以实时操作的哈希表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%86%8D%E8%AE%A2%E9%98%85%E6%98%82%E8%B4%B5%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%88Expensive-unsubscribed%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">不再订阅昂贵的东西（Expensive unsubscribed）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E8%AE%A2%E9%98%85%EF%BC%88Pattern-subscriptions%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">按照表达式匹配订阅（Pattern subscriptions）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pub-Sub%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">6.</span> <span class="nav-text">Pub &#x2F; Sub 的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -323,12 +323,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="深入了解 Redis 的 Pub&#x2F;Sub | Code Life">
+      <meta itemprop="name" content="深入了解 Redis 的 Pub &#x2F; Sub | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          深入了解 Redis 的 Pub/Sub
+          深入了解 Redis 的 Pub / Sub
         </h1>
 
         <div class="post-meta-container">
@@ -346,7 +346,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
+      <time title="修改时间：2025-06-30 23:20:47" itemprop="dateModified" datetime="2025-06-30T23:20:47+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -389,17 +389,17 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>看到一篇深入讲解 Redis 中 Pub/Sub 的文章<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0Bqb3Vkd2F3YWQvcmVkaXMtcHViLXN1Yi1pbi1kZXB0aC1kMmM2ZjQzMzQ4MjY="> Redis Pub/Sub In-Depth<i class="fa fa-external-link-alt"></i></span>，所以打算将它翻译出来，顺便深化自己的理解。</p>
+    <div class="post-body" itemprop="articleBody"><p>看到一篇深入讲解 Redis 中 Pub / Sub 的文章<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0Bqb3Vkd2F3YWQvcmVkaXMtcHViLXN1Yi1pbi1kZXB0aC1kMmM2ZjQzMzQ4MjY="> Redis Pub/Sub In-Depth<i class="fa fa-external-link-alt"></i></span>，所以打算将它翻译出来，顺便深化自己的理解。</p>
 <span id="more"></span>
 
 <p>Pub/Sub（即 publish/subscribe 的简称）是一个在分布式系统中给不同组件互相通信的一种消息传递技术。这种消息传递技术与传统的点对点通信（即一个服务直接向另一个服务发送消息）不同，它是一种异步且可伸缩的消息服务，并且它可以将负责发布消息的服务与负责处理消息的服务分隔开。</p>
 <p>在这篇博客中，我们会探索 Pub/Sub 的原理，以及 Redis 是如何实现这个通信模型的。我们会分析 Redis 中错综复杂的实现，将目光聚焦并深入到内存级别的实现的细节上，来让我们完全理解 Pub/Sub 机制，以及通过 Redis 完成的项目实践。</p>
-<h2 id="Pub-Sub入门"><a href="#Pub-Sub入门" class="headerlink" title="Pub/Sub入门"></a>Pub/Sub 入门</h2><p>Pub/Sub 是一个消息模型，它可以让分布式系统中的不同组件互相通信。发布者向一个主题（topic）发送信息，订阅者则从这个主题中接收信息。发送者在这个过程中可以保持匿名，当然如果在消息中包含了发送者的信息，那么订阅者也可以通过它来确定发送者的身份。Pub/Sub 系统保证了消息可以被送达到所有对这个主题感兴趣的订阅者。在恰当的配置下，这将会是一个高度可扩展并且很可靠的消息传递系统，它将可以处理大量的数据。此外，在适当的大小、网络状况，以及订阅者的处理时间的前提下，Pub/Sub 允许服务以 1 毫秒的延迟进行异步通信，因此它非常适合现代快速的分布式应用程序。</p>
-<h2 id="Pub-Sub模型"><a href="#Pub-Sub模型" class="headerlink" title="Pub/Sub模型"></a>Pub/Sub 模型</h2><p>Pub/Sub 的模型很简单，消息中介从发布者收到消息，然后将消息分发到各个订阅者。订阅者在得到消息后，就可以根据实际的场景对消息进行处理。基于发布者和订阅者的数量，这个模型通常可以被归为四类，即一对一、一对多、多对一、多对多。</p>
+<h2 id="Pub-Sub入门"><a href="#Pub-Sub入门" class="headerlink" title="Pub/Sub入门"></a>Pub / Sub 入门</h2><p>Pub/Sub 是一个消息模型，它可以让分布式系统中的不同组件互相通信。发布者向一个主题（topic）发送信息，订阅者则从这个主题中接收信息。发送者在这个过程中可以保持匿名，当然如果在消息中包含了发送者的信息，那么订阅者也可以通过它来确定发送者的身份。Pub/Sub 系统保证了消息可以被送达到所有对这个主题感兴趣的订阅者。在恰当的配置下，这将会是一个高度可扩展并且很可靠的消息传递系统，它将可以处理大量的数据。此外，在适当的大小、网络状况，以及订阅者的处理时间的前提下，Pub/Sub 允许服务以 1 毫秒的延迟进行异步通信，因此它非常适合现代快速的分布式应用程序。</p>
+<h2 id="Pub-Sub模型"><a href="#Pub-Sub模型" class="headerlink" title="Pub/Sub模型"></a>Pub / Sub 模型</h2><p>Pub / Sub 的模型很简单，消息中介从发布者收到消息，然后将消息分发到各个订阅者。订阅者在得到消息后，就可以根据实际的场景对消息进行处理。基于发布者和订阅者的数量，这个模型通常可以被归为四类，即一对一、一对多、多对一、多对多。</p>
 <table>
 <thead>
 <tr>
-<th>Pub/Sub 类型</th>
+<th>Pub / Sub 类型</th>
 <th>描述</th>
 </tr>
 </thead>
@@ -420,7 +420,7 @@
 <td>包括多个发布者和多个订阅者。各个发布者都向某个主题发送消息，而各个订阅者都将收到这些消息。</td>
 </tr>
 </tbody></table>
-<h2 id="Pub-Sub核心概念"><a href="#Pub-Sub核心概念" class="headerlink" title="Pub/Sub核心概念"></a>Pub/Sub 核心概念</h2><p>在我们深入去了解 Pub/Sub 的细节和实现之前，我们需要先对 Pub/Sub 相关的核心概念有所了解。Pub/Sub 系统包含多个组件，下表描述了其中的一些主要的组件：</p>
+<h2 id="Pub-Sub核心概念"><a href="#Pub-Sub核心概念" class="headerlink" title="Pub/Sub核心概念"></a>Pub / Sub 核心概念</h2><p>在我们深入去了解 Pub/Sub 的细节和实现之前，我们需要先对 Pub/Sub 相关的核心概念有所了解。Pub/Sub 系统包含多个组件，下表描述了其中的一些主要的组件：</p>
 <table>
 <thead>
 <tr>
@@ -454,24 +454,24 @@
 </tr>
 </tbody></table>
 <h2 id="Redis-Pub-Sub"><a href="#Redis-Pub-Sub" class="headerlink" title="Redis Pub/Sub"></a>Redis Pub/Sub</h2><p>现在我们已经了解了关于 Pub/Sub 的一些抽象概念，并且知道了它是如何工作的。接下来我们需要深入到 Redis 针对 Pub/Sub 的实现，来了解消息从发布者发布出来，到结束于订阅者这个过程中，系统是如何通信的。</p>
-<p>Redis 通过在客户端之间实现一个简单而高效的消息系统来实现 Pub/Sub。在 Redis 中，一个客户端可以 “发布” 一条消息到一个命名的通道，其他客户端则可以 “订阅” 这个通道来接收消息。</p>
+<p>Redis 通过在客户端之间实现一个简单而高效的消息系统来实现 Pub / Sub。在 Redis 中，一个客户端可以 “发布” 一条消息到一个命名的通道，其他客户端则可以 “订阅” 这个通道来接收消息。</p>
 <p>当一个客户端向这个通道发布了一条消息，Redis 将会把这个消息发送到所有订阅了这个通道的客户端。这样，应用程序的不同组件之间就可以实时地通信并交换信息。</p>
-<p>Redis Pub/Sub 提供了一个轻量级、高速，并且可扩展的消息传递解决方案，并且可以用于各种场景下，比如实现一个实时通知、在不同微服务之间发送消息，或在一个应用的不同组件之间通信。</p>
-<h3 id="同步通信"><a href="#同步通信" class="headerlink" title="同步通信"></a>同步通信</h3><p>Redis Pub/Sub 是同步的。<strong>为了保证消息可以成功被传递，订阅者和发布者必须同时连接到 Redis。</strong></p>
+<p>Redis Pub / Sub 提供了一个轻量级、高速，并且可扩展的消息传递解决方案，并且可以用于各种场景下，比如实现一个实时通知、在不同微服务之间发送消息，或在一个应用的不同组件之间通信。</p>
+<h3 id="同步通信"><a href="#同步通信" class="headerlink" title="同步通信"></a>同步通信</h3><p>Redis Pub / Sub 是同步的。<strong>为了保证消息可以成功被传递，订阅者和发布者必须同时连接到 Redis。</strong></p>
 <p>你可以将它想象成一个收音机电台，在调频到这个频道之后，你就可以收听它的内容。然而，在收音机被关掉之后，你就没法再收听了。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-data-flow.png"></p>
-<p>这意味着如果一个订阅者断开了连接，过了一会又连了上来，那么它将无法收到断开期间发出来的消息。也就是说，这限制了 Redis Pub/Sub 只能用在允许数据可能丢失的场景下。</p>
+<p>这意味着如果一个订阅者断开了连接，过了一会又连了上来，那么它将无法收到断开期间发出来的消息。也就是说，这限制了 Redis Pub / Sub 只能用在允许数据可能丢失的场景下。</p>
 <h3 id="发射后不管-Fire-Forget"><a href="#发射后不管-Fire-Forget" class="headerlink" title="发射后不管 (Fire &amp; Forget)"></a>发射后不管 (Fire &amp; Forget)</h3><p>“发射后不管” 是一种信息传递模式，在这种模式下，发送方不会期望从接收方明确确认信息已经被收到。发送方只会将消息发出去，然后就继续开始做后面的事，不管消息有没有被接收方收到。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-relationship.png"></p>
-<h3 id="仅向外播散-Fan-out-Only"><a href="#仅向外播散-Fan-out-Only" class="headerlink" title="仅向外播散 (Fan-out Only)"></a>仅向外播散 (Fan-out Only)</h3><p>Redis Pub/Sub 只管向外播散消息，也就是说，当发布者发布了一条消息后，这条消息会被广播到所有当前活动的订阅者。所有订阅者都会收到这条消息的副本，不管它们是不是对这条消息感兴趣。</p>
-<h2 id="掀开Redis-Pub-Sub的引擎盖"><a href="#掀开Redis-Pub-Sub的引擎盖" class="headerlink" title="掀开Redis Pub/Sub的引擎盖"></a>掀开 Redis Pub/Sub 的引擎盖</h2><p>Redis 最著名的功能是键值服务器。当客户端连接到 Redis 服务器后，它将会与服务器建立 TCP 连接，并开始向服务器发送命令。</p>
+<h3 id="仅向外播散-Fan-out-Only"><a href="#仅向外播散-Fan-out-Only" class="headerlink" title="仅向外播散 (Fan-out Only)"></a>仅向外播散 (Fan-out Only)</h3><p>Redis Pub / Sub 只管向外播散消息，也就是说，当发布者发布了一条消息后，这条消息会被广播到所有当前活动的订阅者。所有订阅者都会收到这条消息的副本，不管它们是不是对这条消息感兴趣。</p>
+<h2 id="掀开Redis-Pub-Sub的引擎盖"><a href="#掀开Redis-Pub-Sub的引擎盖" class="headerlink" title="掀开Redis Pub/Sub的引擎盖"></a>掀开 Redis Pub / Sub 的引擎盖</h2><p>Redis 最著名的功能是键值服务器。当客户端连接到 Redis 服务器后，它将会与服务器建立 TCP 连接，并开始向服务器发送命令。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-server-and-client.png"></p>
 <p>但是 Redis 也是个消息服务器！一个对 <code>topicA</code> 感兴趣的客户端可以向 Redis 服务器建立一个 TCP 连接，发送 <code>SUBSCRIBE topicA</code> 命令，然后等待与 <code>topicA</code> 相关的新闻。“新闻机构” 也可以连接到 Redis 服务器，发送 <code>PUBLISH topicA message-data</code>，然后所有订阅了这个主题的客户端都将收到这条价值连城的消息。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-publish-and-subscribe.png"></p>
 <p>如果放大了看 Redis 里面发生了什么，我们可以想象 Redis 会跟踪每个套接字 (socket) 的订阅集：</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-subscription-set.png"></p>
 <p>咱们继续深入看看 Redis 是怎么做的。</p>
-<p>最初的 Pub/Sub 实现允许客户端发送三个新的命令：<code>PUBLISH</code>，<code>SUBSCRIBE</code>，和 <code>UNSUBSCRIBE</code>。Redis 使用了一个全局变量 <code>pubsub_channels</code> 来跟踪各个订阅，在其中 Redis 维护了一个通道名和订阅它的客户端对象的映射关系。每个客户端对象代表一个 TCP 连接的客户端，并通过其对应的文件描述符来跟踪。</p>
+<p>最初的 Pub / Sub 实现允许客户端发送三个新的命令：<code>PUBLISH</code>，<code>SUBSCRIBE</code>，和 <code>UNSUBSCRIBE</code>。Redis 使用了一个全局变量 <code>pubsub_channels</code> 来跟踪各个订阅，在其中 Redis 维护了一个通道名和订阅它的客户端对象的映射关系。每个客户端对象代表一个 TCP 连接的客户端，并通过其对应的文件描述符来跟踪。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-pubsub-channels.png"></p>
 <p>当一个客户端发送 <code>SUBSCRIBE</code> 命令后，它对应的客户端对象就会被加到对应通道的客户端对象集中。<br>在发布信息时，Redis 会从 <code>pubsub_channel</code> 中找到这个主题对应的订阅者，并针对每个客户端启动一个计划任务来向对应的套接字发送信息。</p>
 <h3 id="处理连接断开"><a href="#处理连接断开" class="headerlink" title="处理连接断开"></a>处理连接断开</h3><p>客户端的连接可能会因为客户端断开连接，或者网线被拔掉而断开。当有连接断开时，Redis 必须将对应的订阅清理掉。假设客户端 A 断开了连接，那么为了将这个客户端从 <code>pubsub_channels</code> 中清除，Redis 需要遍历每个通道 (“topicA” 和” topicB”)，并从它们的客户端对象集中删掉它。</p>
@@ -498,11 +498,11 @@
 <p>答案是：Redis 会逐步的调整哈希表的大小。它在底层维护了新旧两个哈希表。假设 <code>pubsub_channels</code> 这个哈希表正在经历调整。</p>
 <p>每当 Redis 对哈希表进行操作时（查询、插入、删除……），它都会稍微调整一下哈希表的大小。它会跟踪有多少老的桶被移动到了新的桶中，然后在每次操作中，它都会再移动几个过去。这样一来，调整大小的工作量就会被限制，使得 Redis 在调整期间也可以保证响应。</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-hashtable-resizing.png"></p>
-<h3 id="不再订阅昂贵的东西（Expensive-unsubscribed）"><a href="#不再订阅昂贵的东西（Expensive-unsubscribed）" class="headerlink" title="不再订阅昂贵的东西（Expensive unsubscribed）"></a>不再订阅昂贵的东西（Expensive unsubscribed）</h3><p>在 Pub/Sub 中还有一个很重要的操作：<code>UNSUBSCRIBE</code>，它所做的与 <code>SUBSCRIBE</code> 正相反，它会使客户端不再订阅到指定的通道，也不会再收到来自这个通道的消息。那么利用上面说过的数据结构，你会怎么实现 <code>UNSUBSCRIBE</code> 功能呢？Redis 是这样做的：</p>
+<h3 id="不再订阅昂贵的东西（Expensive-unsubscribed）"><a href="#不再订阅昂贵的东西（Expensive-unsubscribed）" class="headerlink" title="不再订阅昂贵的东西（Expensive unsubscribed）"></a>不再订阅昂贵的东西（Expensive unsubscribed）</h3><p>在 Pub / Sub 中还有一个很重要的操作：<code>UNSUBSCRIBE</code>，它所做的与 <code>SUBSCRIBE</code> 正相反，它会使客户端不再订阅到指定的通道，也不会再收到来自这个通道的消息。那么利用上面说过的数据结构，你会怎么实现 <code>UNSUBSCRIBE</code> 功能呢？Redis 是这样做的：</p>
 <p>在 <code>UNSUBSCRIBE</code> 时，首先找到这个通道对应的客户端链表，然后遍历整个链表直到找到我们要删除的那个客户端。</p>
 <p>也就是说，<code>UNSUBSCRIBE</code> 操作的耗时是 <code>O(n)</code>，其中 <code>n</code> 就是客户端的数量。如果一个通道有大量的客户端订阅，那么 <code>UNSUBSCRIBE</code> 操作就会变得很昂贵。<strong>所以，你要么需要限制你的客户端数量，要么需要限制它们订阅的通道的数量。</strong><span class="exturl" data-url="aHR0cHM6Ly9wdXNoZXIuY29tLw==">Pusher<i class="fa fa-external-link-alt"></i></span>的一个优化就是去掉重复的订阅，数百万的 Pusher 订阅会被折叠为数量更少的 Redis 订阅。</p>
 <p>Redis 可以通过把存放客户端订阅的链表换成哈希表来优化，但也可能不会很理想，会导致发布消息稍稍变慢，因为遍历哈希表比遍历链表慢。Redis 选择针对 <code>PUBLISH</code> 操作去做优化，因为它们比变更订阅更加常见。</p>
-<h3 id="按照表达式匹配订阅（Pattern-subscriptions）"><a href="#按照表达式匹配订阅（Pattern-subscriptions）" class="headerlink" title="按照表达式匹配订阅（Pattern subscriptions）"></a>按照表达式匹配订阅（Pattern subscriptions）</h3><p>最初的 Pub/Sub 提供了 <code>PUBLISH</code>、<code>SUBSCRIBE</code> 和 <code>UNSUBSCRIBE</code> 三个命令。不久之后，Redis 引入了一个名为 “按照表达式匹配订阅” 的新功能及其命令 <code>PSUBSCRIBE</code>，这个可以让客户端订阅所有匹配了某个正则表达式的主题。</p>
+<h3 id="按照表达式匹配订阅（Pattern-subscriptions）"><a href="#按照表达式匹配订阅（Pattern-subscriptions）" class="headerlink" title="按照表达式匹配订阅（Pattern subscriptions）"></a>按照表达式匹配订阅（Pattern subscriptions）</h3><p>最初的 Pub / Sub 提供了 <code>PUBLISH</code>、<code>SUBSCRIBE</code> 和 <code>UNSUBSCRIBE</code> 三个命令。不久之后，Redis 引入了一个名为 “按照表达式匹配订阅” 的新功能及其命令 <code>PSUBSCRIBE</code>，这个可以让客户端订阅所有匹配了某个正则表达式的主题。</p>
 <p>现在，如果一个客户端发送了命令 <code>PSUBSCRIBE food.donuts.*</code>，然后一个发布者发送了命令 <code>PUBLISH food.donuts.glazed 2-for-£2</code>，那么订阅者也会收到消息，因为 <code>food.donuts.glazed</code> 匹配了正则表达式 <code>food.donuts.*</code>。</p>
 <p>按照表达式订阅的实现是与普通的订阅完全不同的。除了全局的 <code>pubsub_channels</code> 哈希表之外，还有一个全局的 <code>pubsub_patterns</code> 列表。这是一个包含了 <code>pubsubPattern</code> 对象的列表，每个对象与一个客户端订阅的一个表达式相关联。类似地，每个客户端对象也有一个包含着它订阅的表达式的链表。下图展示了当客户端 B 订阅了 <code>drink?</code>，同时客户端 A 和客户端 B 订阅了 <code>food.*</code> 之后，redis-server 进程的内存的样子：</p>
 <p><img data-src="https://blog-static.boris1993.com/translation-redis-pubsub-in-depth/redis-pub-sub-pattern-subscriptions.png"></p>
@@ -514,7 +514,7 @@
 
 <p>这种带有许多 <code>glob</code> 的恶意表达式会导致匹配的执行时间爆炸性增长。Redis 的表达式语言虽然可以被编译成确定有限状态自动机（DFA），来让匹配耗时变得线性，但却没这么做。</p>
 <p>所以长话短说，你不应该把 Redis 的按表达式匹配功能开放给不被信任的客户端，因为这可能会引来两种攻击：一种是订阅大量的表达式，另一种就是刻意制造的表达式。在 Pusher，我们会非常小心地处理 Redis 的按表达式订阅功能。</p>
-<h2 id="Pub-Sub的使用场景"><a href="#Pub-Sub的使用场景" class="headerlink" title="Pub/Sub的使用场景"></a>Pub/Sub 的使用场景</h2><p>我们现在知道了 Pub/Sub 的技术细节，以及在 Redis 中是怎么实现的。接下来我们看看有哪些使用场景。</p>
+<h2 id="Pub-Sub的使用场景"><a href="#Pub-Sub的使用场景" class="headerlink" title="Pub/Sub的使用场景"></a>Pub / Sub 的使用场景</h2><p>我们现在知道了 Pub / Sub 的技术细节，以及在 Redis 中是怎么实现的。接下来我们看看有哪些使用场景。</p>
 <p>Redis 提供的异步集成功能提高了系统的整体灵活性和稳定性，使其能够满足各种场景，包括：</p>
 <ul>
 <li>实时消息和聊天</li>
@@ -526,8 +526,8 @@
 <li>扇入处理（Fan-in processing）—— 将多个消息组合成一个消息的过程被称为扇入处理。</li>
 <li>刷新分布式缓存</li>
 </ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Redis 是实现 Pub/Sub 最常用的工具之一。它因扩展性、低延迟和易于集成而广为人知。我们也在内存块级别探讨了 Redis 的工作原理。</p>
-<p>Redis Pub/Sub 是一个高效的分发消息的方法，但我们也要知道它在哪些方面做了优化，以及在哪有陷阱。要想彻底了解的话，那就去研究源码吧！一句话，记得只在可信的环境中使用 Redis，并要限制客户端的数量，并且小心处理按照表达式的订阅。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Redis 是实现 Pub / Sub 最常用的工具之一。它因扩展性、低延迟和易于集成而广为人知。我们也在内存块级别探讨了 Redis 的工作原理。</p>
+<p>Redis Pub / Sub 是一个高效的分发消息的方法，但我们也要知道它在哪些方面做了优化，以及在哪有陷阱。要想彻底了解的话，那就去研究源码吧！一句话，记得只在可信的环境中使用 Redis，并要限制客户端的数量，并且小心处理按照表达式的订阅。</p>
 
     </div>
 

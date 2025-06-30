@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/hexo-next-enable-google-adsense/adsense-conf-ad-module.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/hexo-next-enable-google-adsense/adsense-conf-ad-module-sidebar.png">
 <meta property="article:published_time" content="2020-04-05T06:58:01.000Z">
-<meta property="article:modified_time" content="2025-06-26T12:34:19.748Z">
+<meta property="article:modified_time" content="2025-06-30T15:20:47.139Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="NexT">
@@ -336,7 +336,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
+      <time title="修改时间：2025-06-30 23:20:47" itemprop="dateModified" datetime="2025-06-30T23:20:47+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -383,7 +383,7 @@
 <p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 <code>v6.0.2</code> 或后续版本，因为本文涉及的功能是在 <code>v6.0.2</code> 引入的。</p>
 <span id="more"></span>
 
-<p>虽然网上已经有很多类似的博文了，我为什么还要再写一篇呢？主要是因为，很多文章在添加认证代码的时候，都是直接修改 <code>themes/next/layout/_partials/head.swig</code> 或者 <code>themes/next/layout/_custom/google_adsense.ejs</code> 等位置，说白了就是在 NexT 主题所在的目录动手了，而我并不喜欢这种侵入性强的操作。经过一点简单的搜索，我发现是可以通过数据文件来实现非侵入性的修改的，所以就想讲一下我的做法。<del>当然借此机会还能水一篇博文何乐而不为 / 滑稽</del></p>
+<p>虽然网上已经有很多类似的博文了，我为什么还要再写一篇呢？主要是因为，很多文章在添加认证代码的时候，都是直接修改 <code>themes/next/layout/_partials/head.swig</code> 或者 <code>themes/next/layout/_custom/google_adsense.ejs</code> 等位置，说白了就是在 NexT 主题所在的目录动手了，而我并不喜欢这种侵入性强的操作。经过一点简单的搜索，我发现是可以通过数据文件来实现非侵入性的修改的，所以就想讲一下我的做法。<del>当然借此机会还能水一篇博文何乐而不为 /滑稽</del></p>
 <p>那么言归正传，一起来看一下我是怎么配置的吧。</p>
 <h2 id="注册Google-AdSense"><a href="#注册Google-AdSense" class="headerlink" title="注册Google AdSense"></a>注册 Google AdSense</h2><p>要接入 AdSense，那当然要有一个 AdSense 的账户。进入<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNuL2Fkc2Vuc2Uvc3RhcnQv"> Google AdSense<i class="fa fa-external-link-alt"></i></span>主页，点击 “开始使用”，跟随页面提示填好各项信息，这部分操作很简单，就不多废话了。</p>
 <p>但是这里可能有一个坑，就是我只能接入一个裸域名，不知道是我的问题还是 AdSense 就是这么要求的。我的博客地址是 <code>https://www.boris1993.com</code>，但是在页面上输入网站地址之后，AdSense 会把 <code>www</code> 这个二级域名去掉，变成裸域名 <code>https://boris1993.com</code>，所以我只好把裸域名也关联到了我的博客站上。你们在配置的时候，记得注意一下这个地方。如果你知道具体的原因，或者解决方案，那么也请不吝赐教，在留言区告诉我。</p>
@@ -408,7 +408,7 @@
 <p><img data-src="https://blog-static.boris1993.com/hexo-next-enable-google-adsense/adsense-conf-ad-module-sidebar.png" alt="Sidebar ad module"></p>
 <p>按照同样的操作，继续添加一个名为 <code>bottom ad</code> 的展示广告。这样，我们就添加好了两个广告模块。</p>
 <h3 id="配置博客页面"><a href="#配置博客页面" class="headerlink" title="配置博客页面"></a>配置博客页面</h3><p>广告模块是创建好了，但是我们还需要配置广告展示的位置。这里我依旧使用数据文件功能，来实现非侵入性的修改。</p>
-<p>首先，在 <code>source/_data/</code> 目录新建两个文件，分别命名为 <code>sidebar.swig</code> 和 <code>post-body-end.swig</code>，分别用来存放侧边栏广告和文章底部广告的代码。</p>
+<p>首先，在 <code>source/_data/</code>目录新建两个文件，分别命名为 <code>sidebar.swig</code> 和 <code>post-body-end.swig</code>，分别用来存放侧边栏广告和文章底部广告的代码。</p>
 <p>还记得刚才添加完广告模块之后弹出的那一片代码吗？把它们原样默写到这两个文件里就好啦。开玩笑的，谁记得住那一大堆东西啊。回到<code>按广告单元</code>这个页面，在刚才添加的广告单元那里，有一个形似 <code>&lt;&gt;</code> 的按钮，点击它，就可以看到这个广告单元的配置代码了。</p>
 <p>把 <code>side ad</code> 的代码复制到 <code>sidebar.swig</code> 中，来把这个侧边栏广告真正的放到侧边栏上。比如我的广告代码是这样的：</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- side ad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"████████████████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"██████████"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     <span class="comment">// 因为直接执行AdSense的代码会出现 No slot size for availableWidth=0 的错误</span></span></span><br><span class="line"><span class="language-javascript">     <span class="comment">// 并且这个广告位会无法正常展示</span></span></span><br><span class="line"><span class="language-javascript">     <span class="comment">// 所以加一个 event listener，在页面加载完毕之后再执行</span></span></span><br><span class="line"><span class="language-javascript">     <span class="comment">// 参考：https://stackoverflow.com/a/37822404/3833858</span></span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">'load'</span>, <span class="keyword">function</span>(<span class="params"></span>) {</span></span><br><span class="line"><span class="language-javascript">          (adsbygoogle = <span class="variable language_">window</span>.<span class="property">adsbygoogle</span> || []).<span class="title function_">push</span>({});</span></span><br><span class="line"><span class="language-javascript">     });</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>

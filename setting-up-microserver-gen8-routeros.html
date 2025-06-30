@@ -27,7 +27,7 @@
 
     <meta name="description" content="我之前宽带一直都是光猫拨号，电脑和 NAS 直连光猫，光猫下挂个二级无线路由器来给其他设备联网，但我早就对这个拓扑不爽了，主要原因是自己花大钱买的 AC86U 派不上用场，只能干点边缘的杂活，而且搞两套局域网怎么看都挺恶心的。之前也试过把路由器改成 AP 模式，让所有设备都直连光猫，但是万恶的电信光猫限制了设备数，只有前 5 台机器能上网，其它的机器虽然能拿到地址，但是上网必定超时。那现在既然有了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二手 MicroServer Gen8 折腾记 (2&#x2F;n) - 配置 RouterOS 软路由">
+<meta property="og:title" content="二手 MicroServer Gen8 折腾记 (2 &#x2F; n) - 配置 RouterOS 软路由">
 <meta property="og:url" content="https://www.boris1993.com/setting-up-microserver-gen8-routeros.html">
 <meta property="og:site_name" content="Code Life">
 <meta property="og:description" content="我之前宽带一直都是光猫拨号，电脑和 NAS 直连光猫，光猫下挂个二级无线路由器来给其他设备联网，但我早就对这个拓扑不爽了，主要原因是自己花大钱买的 AC86U 派不上用场，只能干点边缘的杂活，而且搞两套局域网怎么看都挺恶心的。之前也试过把路由器改成 AP 模式，让所有设备都直连光猫，但是万恶的电信光猫限制了设备数，只有前 5 台机器能上网，其它的机器虽然能拿到地址，但是上网必定超时。那现在既然有了">
@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png">
 <meta property="article:published_time" content="2023-02-14T09:51:37.000Z">
-<meta property="article:modified_time" content="2025-06-26T12:34:19.753Z">
+<meta property="article:modified_time" content="2025-06-30T15:20:47.144Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="RouterOS">
 <meta property="article:tag" content="二手MicroServer Gen8折腾记">
@@ -56,10 +56,10 @@
 <link rel="canonical" href="https://www.boris1993.com/setting-up-microserver-gen8-routeros.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8-routeros.html","path":"setting-up-microserver-gen8-routeros.html","title":"二手 MicroServer Gen8 折腾记 (2/n) - 配置 RouterOS 软路由"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8-routeros.html","path":"setting-up-microserver-gen8-routeros.html","title":"二手 MicroServer Gen8 折腾记 (2 / n) - 配置 RouterOS 软路由"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>二手 MicroServer Gen8 折腾记 (2/n) - 配置 RouterOS 软路由 | Code Life</title>
+<title>二手 MicroServer Gen8 折腾记 (2 / n) - 配置 RouterOS 软路由 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -322,12 +322,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="二手 MicroServer Gen8 折腾记 (2&#x2F;n) - 配置 RouterOS 软路由 | Code Life">
+      <meta itemprop="name" content="二手 MicroServer Gen8 折腾记 (2 &#x2F; n) - 配置 RouterOS 软路由 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          二手 MicroServer Gen8 折腾记 (2/n) - 配置 RouterOS 软路由
+          二手 MicroServer Gen8 折腾记 (2 / n) - 配置 RouterOS 软路由
         </h1>
 
         <div class="post-meta-container">
@@ -345,7 +345,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-26 20:34:19" itemprop="dateModified" datetime="2025-06-26T20:34:19+08:00">2025-06-26</time>
+      <time title="修改时间：2025-06-30 23:20:47" itemprop="dateModified" datetime="2025-06-30T23:20:47+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -404,10 +404,10 @@
 <p>稍等几分钟等猫棒开机，开机之后，转换器在猫棒方向的灯会亮起来。这时候先把网线跟电脑连起来，给电脑分配一个 <code>192.168.1.0/24</code> 范围的地址（当然别用 <code>192.168.1.1</code>，那是猫棒后台的地址），然后用浏览器打开 <code>192.168.1.1</code>，就能看见猫棒后台的登陆页面了。账号和密码找商家要，我这款是 <code>admin/admin</code>，但不保证所有 ODI 猫棒都是这一对账号密码。登陆进去后，进入 <code>Settings</code> 页面，填入 <code>LOID</code>，点 <code>Apply Changes</code>，然后进入 <code>Commit/Reboot</code> 页面，点 <code>Commit and Reboot</code> 按钮保存配置并重启，猫棒端就配置完成了。</p>
 <p>不过电信、联通、移动的光猫注册方式各有不同，上面说的操作都是针对电信的。其他运营商可以参考猫棒商家发的文档，或参考网上其他人的成功案例。这里引用猫棒说明中的一部分内容：</p>
 <blockquote>
-<p>★注册 - 初级:（部分型号光猫没有 GPON SN，可不修改）<br>电信 &amp; 联通 GPON/XGPON/XGSPON：Loid<br>移动 GPON/XGPON/XGSPON：Ploam 密码<br>电信 &amp; 联通 &amp; 移动 EPON/10G EPON：Loid</p>
-<p>★注册 - 中级:<br>电信 &amp; 联 &amp; 移动 GPON/XGPON/XGSPON：GPON SN<br>电信 &amp; 联通 &amp; 移动 EPON/10G EPON：MAC/PON MAC+MAC KEY</p>
-<p>★注册 - 高级：（GPON/XGPON/XGSPON）<br>厂商 ID/Vendor ID：如 HWTC / 华为、FHTT / 烽火、ZTEG / 中兴、SCTY / 天邑、YHTC / 友华<br>设备型号<br>OUI：6 位<br>设备标号：一般为 17 位<br>软件版本号<br>ONT 版本 / 硬件版本号</p>
-<p>★注册 - 高级：（EPON/10G EPON）<br>设备型号<br>ONT 版本 / 硬件版本号</p>
+<p>★注册 - 初级:（部分型号光猫没有 GPON SN，可不修改）<br>电信 &amp; 联通 GPON/XGPON/XGSPON：Loid<br>移动 GPON/XGPON/XGSPON：Ploam 密码<br>电信 &amp; 联通 &amp; 移动 EPON / 10G EPON：Loid</p>
+<p>★注册 - 中级:<br>电信 &amp; 联 &amp; 移动 GPON/XGPON/XGSPON：GPON SN<br>电信 &amp; 联通 &amp; 移动 EPON/10G EPON：MAC/PON MAC + MAC KEY</p>
+<p>★注册 - 高级：（GPON/XGPON/XGSPON）<br>厂商 ID/Vendor ID：如 HWTC/华为、FHTT/烽火、ZTEG/中兴、SCTY/天邑、YHTC/友华<br>设备型号<br>OUI：6 位<br>设备标号：一般为 17 位<br>软件版本号<br>ONT 版本 / 硬件版本号</p>
+<p>★注册 - 高级：（EPON / 10G EPON）<br>设备型号<br>ONT 版本 / 硬件版本号</p>
 </blockquote>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/pon-stick-settings-loid.png"></p>
 <p>本来重启之后，应该先看一下 ONU 状态是不是 <code>O5</code> 来着，但是当时我忘了看，直接电脑上拨号成功，间接也证明了 LOID 注册成功。不过还是放个文档里扒出来的图好了。</p>
