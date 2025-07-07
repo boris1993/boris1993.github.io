@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png">
 <meta property="article:published_time" content="2023-02-14T09:51:37.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.687Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.629Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="RouterOS">
 <meta property="article:tag" content="二手MicroServer Gen8折腾记">
@@ -345,7 +345,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -389,7 +389,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>我之前宽带一直都是光猫拨号，电脑和 NAS 直连光猫，光猫下挂个二级无线路由器来给其他设备联网，但我早就对这个拓扑不爽了，主要原因是自己花大钱买的 AC86U 派不上用场，只能干点边缘的杂活，而且搞两套局域网怎么看都挺恶心的。之前也试过把路由器改成 AP 模式，让所有设备都直连光猫，但是万恶的电信光猫限制了设备数，只有前 5 台机器能上网，其它的机器虽然能拿到地址，但是上网必定超时。那现在既然有了台服务器，那干脆装个软路由。</p>
-<p>软路由系统我打算玩玩 <code>RouterOS</code>，毕竟 <code>iKuai</code> 听说过没用过，据说还出过劫持流量这种问题，不敢用也不想用；<code>OpenWRT</code> 以前玩过，没啥新鲜感，而 <code>RouterOS</code>，之前装着玩的时候就觉得倍有逼格，早就想搞搞它玩玩了。</p>
+<p>软路由系统我打算玩玩<code>RouterOS</code>，毕竟<code>iKuai</code>听说过没用过，据说还出过劫持流量这种问题，不敢用也不想用；<code>OpenWRT</code>以前玩过，没啥新鲜感，而<code>RouterOS</code>，之前装着玩的时候就觉得倍有逼格，早就想搞搞它玩玩了。</p>
 <p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手 MicroServer Gen8 折腾记</a>的第二篇，记录配置猫棒和搭建 RouterOS 软路由的过程。</p>
 <span id="more"></span>
 
@@ -401,7 +401,7 @@
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/types-of-fiber-connector.jpg"></p>
 <p>抓住光纤的蓝色滑套，往后抽，就可以把光纤从光猫上拔出来，然后对准接口插进猫棒，再把猫棒插进光电转换器，然后接上网线和电源，就可以了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-and-converter.jpg"></p>
-<p>稍等几分钟等猫棒开机，开机之后，转换器在猫棒方向的灯会亮起来。这时候先把网线跟电脑连起来，给电脑分配一个 <code>192.168.1.0/24</code> 范围的地址（当然别用 <code>192.168.1.1</code>，那是猫棒后台的地址），然后用浏览器打开 <code>192.168.1.1</code>，就能看见猫棒后台的登陆页面了。账号和密码找商家要，我这款是 <code>admin/admin</code>，但不保证所有 ODI 猫棒都是这一对账号密码。登陆进去后，进入 <code>Settings</code> 页面，填入 <code>LOID</code>，点 <code>Apply Changes</code>，然后进入 <code>Commit/Reboot</code> 页面，点 <code>Commit and Reboot</code> 按钮保存配置并重启，猫棒端就配置完成了。</p>
+<p>稍等几分钟等猫棒开机，开机之后，转换器在猫棒方向的灯会亮起来。这时候先把网线跟电脑连起来，给电脑分配一个<code>192.168.1.0/24</code>范围的地址（当然别用<code>192.168.1.1</code>，那是猫棒后台的地址），然后用浏览器打开<code>192.168.1.1</code>，就能看见猫棒后台的登陆页面了。账号和密码找商家要，我这款是<code>admin/admin</code>，但不保证所有 ODI 猫棒都是这一对账号密码。登陆进去后，进入<code>Settings</code>页面，填入<code>LOID</code>，点<code>Apply Changes</code>，然后进入<code>Commit/Reboot</code>页面，点<code>Commit and Reboot</code>按钮保存配置并重启，猫棒端就配置完成了。</p>
 <p>不过电信、联通、移动的光猫注册方式各有不同，上面说的操作都是针对电信的。其他运营商可以参考猫棒商家发的文档，或参考网上其他人的成功案例。这里引用猫棒说明中的一部分内容：</p>
 <blockquote>
 <p>★注册 - 初级:（部分型号光猫没有 GPON SN，可不修改）<br>电信 &amp; 联通 GPON/XGPON/XGSPON：Loid<br>移动 GPON/XGPON/XGSPON：Ploam 密码<br>电信 &amp; 联通 &amp; 移动 EPON / 10G EPON：Loid</p>
@@ -410,32 +410,32 @@
 <p>★注册 - 高级：（EPON / 10G EPON）<br>设备型号<br>ONT 版本 / 硬件版本号</p>
 </blockquote>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/pon-stick-settings-loid.png"></p>
-<p>本来重启之后，应该先看一下 ONU 状态是不是 <code>O5</code> 来着，但是当时我忘了看，直接电脑上拨号成功，间接也证明了 LOID 注册成功。不过还是放个文档里扒出来的图好了。</p>
+<p>本来重启之后，应该先看一下 ONU 状态是不是<code>O5</code>来着，但是当时我忘了看，直接电脑上拨号成功，间接也证明了 LOID 注册成功。不过还是放个文档里扒出来的图好了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-status-o5.png"></p>
-<h2 id="安装RouterOS"><a href="#安装RouterOS" class="headerlink" title="安装RouterOS"></a>安装 RouterOS</h2><p>一开始我以为装这玩意跟装别的系统没啥区别，就 ISO 一挂，顺着向导装就行。可看了文档发现，RouterOS 有一个专门面向虚拟平台的版本，叫 <code>Cloud Hosted Router (CHR)</code>，在<span class="exturl" data-url="aHR0cHM6Ly9taWtyb3Rpay5jb20vZG93bmxvYWQ=">官网的下载页面<i class="fa fa-external-link-alt"></i></span>下载 <code>OVA Template</code>，然后导入 ESXi 就行。具体的安装方法可以看<span class="exturl" data-url="aHR0cHM6Ly93aWtpLm1pa3JvdGlrLmNvbS93aWtpL01hbnVhbDpDSFJfVk1XYXJlX2luc3RhbGxhdGlvbiNIb3dfdG9fSW5zdGFsbF9DbG91ZF9Ib3N0ZWRfUm91dGVyX29uX1ZNV2FyZV9FU1hpXzYuNQ=="> Mikrotik 的 Wiki<i class="fa fa-external-link-alt"></i></span>。</p>
-<p><code>RouterOS CHR</code> 作为一个付费的系统，当然也需要买授权才能用。买授权的方法也可以跟着<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLm1pa3JvdGlrLmNvbS9kb2NzL3BhZ2VzL3ZpZXdwYWdlLmFjdGlvbj9wYWdlSWQ9MTgzNTAyMzQjQ2xvdWRIb3N0ZWRSb3V0ZXIoQ0hSKS1HZXR0aW5ndGhlTGljZW5zZQ=="> Mikrotik 的 Wiki<i class="fa fa-external-link-alt"></i></span>操作，就是注意别买成 <code>RouterOS</code> 的 Key，这两者是不通用的。</p>
+<h2 id="安装RouterOS"><a href="#安装RouterOS" class="headerlink" title="安装RouterOS"></a>安装 RouterOS</h2><p>一开始我以为装这玩意跟装别的系统没啥区别，就 ISO 一挂，顺着向导装就行。可看了文档发现，RouterOS 有一个专门面向虚拟平台的版本，叫<code>Cloud Hosted Router (CHR)</code>，在<span class="exturl" data-url="aHR0cHM6Ly9taWtyb3Rpay5jb20vZG93bmxvYWQ=">官网的下载页面<i class="fa fa-external-link-alt"></i></span>下载<code>OVA Template</code>，然后导入 ESXi 就行。具体的安装方法可以看<span class="exturl" data-url="aHR0cHM6Ly93aWtpLm1pa3JvdGlrLmNvbS93aWtpL01hbnVhbDpDSFJfVk1XYXJlX2luc3RhbGxhdGlvbiNIb3dfdG9fSW5zdGFsbF9DbG91ZF9Ib3N0ZWRfUm91dGVyX29uX1ZNV2FyZV9FU1hpXzYuNQ=="> Mikrotik 的 Wiki<i class="fa fa-external-link-alt"></i></span>。</p>
+<p><code>RouterOS CHR</code>作为一个付费的系统，当然也需要买授权才能用。买授权的方法也可以跟着<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLm1pa3JvdGlrLmNvbS9kb2NzL3BhZ2VzL3ZpZXdwYWdlLmFjdGlvbj9wYWdlSWQ9MTgzNTAyMzQjQ2xvdWRIb3N0ZWRSb3V0ZXIoQ0hSKS1HZXR0aW5ndGhlTGljZW5zZQ=="> Mikrotik 的 Wiki<i class="fa fa-external-link-alt"></i></span>操作，就是注意别买成<code>RouterOS</code>的 Key，这两者是不通用的。</p>
 <p>另外安装之后，如果你更改了 RouterOS 的 CPU 数量，那么内存大小也要跟着调整。<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLm1pa3JvdGlrLmNvbS9kb2NzL3BhZ2VzL3ZpZXdwYWdlLmFjdGlvbj9wYWdlSWQ9MTgzNTAyMzQjQ2xvdWRIb3N0ZWRSb3V0ZXIoQ0hSKS1TeXN0ZW1SZXF1aXJlbWVudHM=">官方文档<i class="fa fa-external-link-alt"></i></span>提供了如下公式：</p>
 <blockquote>
 <p>RouterOS 6：RAM = 128 + [8 * CPU 数量 * (网络接口数量 - 1)]<br>RouterOS 7：RAM = 256 + [8 * CPU 数量 * (网络接口数量 - 1)]<br>注：建议为 CHR 实例分配至少 1024MB 内存。</p>
 </blockquote>
-<p>我因为没注意到这个信息，只把 CPU 改成了 4 核心，但内存还是 160MB，导致几乎每 24 小时就会出一次 <code>kernel failure in previous boot</code> 错误，为这事我还给 MikroTik 开了个工单……</p>
+<p>我因为没注意到这个信息，只把 CPU 改成了 4 核心，但内存还是 160MB，导致几乎每 24 小时就会出一次<code>kernel failure in previous boot</code>错误，为这事我还给 MikroTik 开了个工单……</p>
 <h2 id="配置ESXi的网络"><a href="#配置ESXi的网络" class="headerlink" title="配置ESXi的网络"></a>配置 ESXi 的网络</h2><p>如果我没记错的话，ESXi 一开始只给 Ethernet 1 口做了配置，我们得手动给 Ethernet 2 配置虚拟网络。</p>
-<p>首先到<code>网络</code>的<code>虚拟交换机</code>页面，创建一个新的虚拟交换机，名字按自己喜好起就行，比如我就顺着已有的 <code>vSwitch0</code> 给它命名 <code>vSwitch1</code>。然后点进 <code>vSwitch1</code>，点<code>添加上行链路</code>，把 <code>vmnic1</code> 分配给它，这样在 ESXi 里面就可以用这个接口了。</p>
+<p>首先到<code>网络</code>的<code>虚拟交换机</code>页面，创建一个新的虚拟交换机，名字按自己喜好起就行，比如我就顺着已有的<code>vSwitch0</code>给它命名<code>vSwitch1</code>。然后点进<code>vSwitch1</code>，点<code>添加上行链路</code>，把<code>vmnic1</code>分配给它，这样在 ESXi 里面就可以用这个接口了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/esxi-vswitch1.png"></p>
-<p>然后到<code>端口组</code>页面，添加一个新的端口组 <code>VM Network 2</code>，虚拟交换机选择刚创建的 <code>vSwitch1</code>。</p>
+<p>然后到<code>端口组</code>页面，添加一个新的端口组<code>VM Network 2</code>，虚拟交换机选择刚创建的<code>vSwitch1</code>。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-network-2.png"></p>
-<p>接下来点进虚拟机 <code>RouterOS</code>，关机之后编辑设置，给它添加一个网络适配器，然后给<code>网络适配器1</code> 分配 <code>VM Network 2</code>，给<code>网络适配器2</code> 分配 <code>VM Network 1</code>，保存，开机。</p>
+<p>接下来点进虚拟机<code>RouterOS</code>，关机之后编辑设置，给它添加一个网络适配器，然后给<code>网络适配器1</code>分配<code>VM Network 2</code>，给<code>网络适配器2</code>分配<code>VM Network 1</code>，保存，开机。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-routeros-settings.png"></p>
 <h2 id="配置RouterOS"><a href="#配置RouterOS" class="headerlink" title="配置RouterOS"></a>配置 RouterOS</h2><p>如果猫棒的 ONU 状态是 O5，那就可以把转换器连到 Gen 8 的 Ethernet 2 口上了。你问为啥不是 Ethernet 1？因为 Ethernet 1 我改成了与 iLO 共享，所以只能拿 Ethernet 2 当 WAN 口。下面进入 RouterOS，开始配置软路由。</p>
-<h3 id="首次登录"><a href="#首次登录" class="headerlink" title="首次登录"></a>首次登录</h3><p>第一次登录的时候，因为我并不知道路由器的地址，所以没办法用 IP 地址打开 RouterOS 的配置页面，但 MikroTik 很贴心的提供了用 MAC 地址连接的功能。在 WinBox 的 Neighbors 页面双击 RouterOS 的条目，用 <code>admin</code> 用户和空密码登录就可以。</p>
+<h3 id="首次登录"><a href="#首次登录" class="headerlink" title="首次登录"></a>首次登录</h3><p>第一次登录的时候，因为我并不知道路由器的地址，所以没办法用 IP 地址打开 RouterOS 的配置页面，但 MikroTik 很贴心的提供了用 MAC 地址连接的功能。在 WinBox 的 Neighbors 页面双击 RouterOS 的条目，用<code>admin</code>用户和空密码登录就可以。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png"></p>
-<p>为了后面分的清楚，我先到 <code>Interfaces</code> 页面，把 LAN 口和 WAN 口对应接口的名字改了过来，毕竟默认的 <code>ether1</code> 和 <code>ether2</code> 不如 <code>LAN</code> 和 <code>WAN</code> 看的清楚。通常来说观察接口的 <code>Tx</code> 和 <code>Rx</code> 就能分清哪个是 LAN 口，因为这时候没配置拨号，WAN 口的流量通常只会是 0。如果分不清，那就先把 Gen 8 的 Ethernet 1 拔了。</p>
+<p>为了后面分的清楚，我先到<code>Interfaces</code>页面，把 LAN 口和 WAN 口对应接口的名字改了过来，毕竟默认的<code>ether1</code>和<code>ether2</code>不如<code>LAN</code>和<code>WAN</code>看的清楚。通常来说观察接口的<code>Tx</code>和<code>Rx</code>就能分清哪个是 LAN 口，因为这时候没配置拨号，WAN 口的流量通常只会是 0。如果分不清，那就先把 Gen 8 的 Ethernet 1 拔了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png" alt="请暂时忽略China Telecom和wireguard1"></p>
-<h3 id="规划地址范围，配置DHCP、DNS"><a href="#规划地址范围，配置DHCP、DNS" class="headerlink" title="规划地址范围，配置DHCP、DNS"></a>规划地址范围，配置 DHCP、DNS</h3><p>在配置 DHCP 服务器前，要先规划好自己的局域网的网段。地址范围可以从 IPv4 的三个私有地址范围 <code>10.0.0.0/8</code>、<code>172.16.0.0/12</code> 和 <code>192.168.0.0/16</code> 之间选，一定不要作死用公网网段（比如一些无能 IT 给路由器配了个 <code>1.1.1.1</code>），不然我很难说你的网络会出什么奇怪的问题。我干脆就遵循之前的网络，用了 <code>192.168.1.0/24</code> 段作为我的内网网段。</p>
+<h3 id="规划地址范围，配置DHCP、DNS"><a href="#规划地址范围，配置DHCP、DNS" class="headerlink" title="规划地址范围，配置DHCP、DNS"></a>规划地址范围，配置 DHCP、DNS</h3><p>在配置 DHCP 服务器前，要先规划好自己的局域网的网段。地址范围可以从 IPv4 的三个私有地址范围<code>10.0.0.0/8</code>、<code>172.16.0.0/12</code>和<code>192.168.0.0/16</code>之间选，一定不要作死用公网网段（比如一些无能 IT 给路由器配了个<code>1.1.1.1</code>），不然我很难说你的网络会出什么奇怪的问题。我干脆就遵循之前的网络，用了<code>192.168.1.0/24</code>段作为我的内网网段。</p>
 <p>确定好地址范围之后，就可以用这条命令给 LAN 口指定一个静态 IP 地址：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/ip/address/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">interface</span>=LAN \</span><br><span class="line">  <span class="attribute">address</span>=192.168.1.3/24 \</span><br><span class="line">  <span class="attribute">network</span>=192.168.1.0</span><br></pre></td></tr></tbody></table></figure>
 
-<p>选择给 RouterOS 分配 <code>192.168.1.3</code> 的原因是，<code>192.168.1.1</code> 留给猫棒（虽然后来发现连不上），<code>192.168.1.2</code> 留给 AC86U 路由器，它本来就是这个地址，我懒得再动它。</p>
+<p>选择给 RouterOS 分配<code>192.168.1.3</code>的原因是，<code>192.168.1.1</code>留给猫棒（虽然后来发现连不上），<code>192.168.1.2</code>留给 AC86U 路由器，它本来就是这个地址，我懒得再动它。</p>
 <p>然后先给 DHCP 服务器添加一个地址池：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ip/pool/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">name</span>=192.168.1.0/24 \</span><br><span class="line">  <span class="attribute">ranges</span>=192.168.1.2-192.168.1.254</span><br></pre></td></tr></tbody></table></figure>
 
@@ -445,16 +445,16 @@
 <p>此外我还想要给 ESXi 之类的机器配置一个固定的地址，于是：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/ip/dhcp-server/lease/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">address</span>=192.168.1.4 \</span><br><span class="line">  <span class="attribute">mac-address</span>=D0:BF:9C:46:94:D8 \</span><br><span class="line">  <span class="attribute">server</span>=LAN \</span><br><span class="line">  <span class="attribute">comment</span>=ESXi</span><br></pre></td></tr></tbody></table></figure>
 
-<p>上面 DHCP 网络参数中的 <code>dns-server=192.168.1.3</code> 配置的是让 RouterOS 作为 DNS 服务器，但现在 RouterOS 还不能响应远程的 DNS 请求，所以要用下面这条命令更改 DNS 的配置：</p>
+<p>上面 DHCP 网络参数中的<code>dns-server=192.168.1.3</code>配置的是让 RouterOS 作为 DNS 服务器，但现在 RouterOS 还不能响应远程的 DNS 请求，所以要用下面这条命令更改 DNS 的配置：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ip/dns/<span class="built_in">set</span> <span class="attribute">allow-remote-requests</span>=<span class="literal">yes</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="创建本地管理员，禁用admin"><a href="#创建本地管理员，禁用admin" class="headerlink" title="创建本地管理员，禁用admin"></a>创建本地管理员，禁用 admin</h3><p>安全起见，我建议给 RouterOS 创建一个新的管理员账户，并禁用默认的 <code>admin</code> 账户。</p>
+<h3 id="创建本地管理员，禁用admin"><a href="#创建本地管理员，禁用admin" class="headerlink" title="创建本地管理员，禁用admin"></a>创建本地管理员，禁用 admin</h3><p>安全起见，我建议给 RouterOS 创建一个新的管理员账户，并禁用默认的<code>admin</code>账户。</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新的管理员用户，仅允许在192.168.1.0/24网络内登录</span></span><br><span class="line">/user/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">name</span>=新用户的用户名 \</span><br><span class="line">  <span class="attribute">password</span>=新用户的密码 \</span><br><span class="line">  <span class="attribute">group</span>=full \</span><br><span class="line">  <span class="attribute">address</span>=192.168.1.0/24</span><br><span class="line"><span class="comment"># 禁用admin</span></span><br><span class="line">/user/<span class="built_in">set</span> [ <span class="built_in">find</span> <span class="attribute">name</span>=<span class="string">"admin"</span> ] <span class="attribute">disabled</span>=<span class="literal">yes</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="配置PPPoE拨号和NAT规则"><a href="#配置PPPoE拨号和NAT规则" class="headerlink" title="配置PPPoE拨号和NAT规则"></a>配置 PPPoE 拨号和 NAT 规则</h3><p>首先创建一个 PPPoE 客户端来拨号：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/interface/pppoe-client/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">name</span>=<span class="string">"PPPoE客户端名字"</span> \</span><br><span class="line">  <span class="attribute">interface</span>=WAN \</span><br><span class="line">  <span class="attribute">user</span>=<span class="string">"宽带账号"</span> \</span><br><span class="line">  <span class="attribute">password</span>=<span class="string">"宽带密码"</span> \</span><br><span class="line">  <span class="attribute">profile</span>=default \</span><br><span class="line">  <span class="attribute">use-peer-dns</span>=<span class="literal">yes</span> \</span><br><span class="line">  <span class="attribute">add-default-route</span>=<span class="literal">yes</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>添加成功后，RouterOS 会自动开始拨号，在终端也可以用 <code>monitor</code> 命令实时监控 PPPoE 拨号端口的状态：</p>
+<p>添加成功后，RouterOS 会自动开始拨号，在终端也可以用<code>monitor</code>命令实时监控 PPPoE 拨号端口的状态：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/interface/pppoe-client/monitor [ <span class="built_in">find</span> running ]</span><br><span class="line">               status: connected</span><br><span class="line">               uptime: 13h59m53s</span><br><span class="line">         active-links: 1</span><br><span class="line">             encoding: </span><br><span class="line">         service-name: </span><br><span class="line">              ac-name: SH-SH-ML-MSE-2.MAN.NE40E</span><br><span class="line">               ac-mac: D0:D0:4B:06:EC:CC</span><br><span class="line">                  mtu: 1492</span><br><span class="line">                  mru: 1492</span><br><span class="line">        local-address: 124.78.123.123</span><br><span class="line">       remote-address: 124.78.123.1</span><br><span class="line">   local-ipv6-address: fe80::5</span><br><span class="line">  remote-ipv6-address: fe80::d2d0:4bff:fe06:eccc</span><br><span class="line">-- [Q quit|D dump|C-z pause]</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这时候 RouterOS 自己已经可以上网了，但是路由器下面的设备还不行，因为没有配置 NAT。在终端执行这条命令，来创建一条 NAT 规则：</p>
@@ -464,7 +464,7 @@
 <h3 id="配置IPv6"><a href="#配置IPv6" class="headerlink" title="配置IPv6"></a>配置 IPv6</h3><p>电信宽带已经支持了 IPv6，那既然有了，我不能不用。电信会给宽带分配一个前缀，下级设备通过前缀来分配自己的地址，就是 prefix delegation。所以我只需要在 RouterOS 中配置一个 IPv6 的 DHCP client 就行。</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/ipv6/dhcp-client/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">interface</span>=<span class="string">"PPPoE客户端名字"</span> \</span><br><span class="line">  <span class="attribute">add-default-route</span>=<span class="literal">yes</span> \</span><br><span class="line">  <span class="attribute">pool-name</span>=ipv6_pool \</span><br><span class="line">  <span class="attribute">pool-prefix-length</span>=60 \</span><br><span class="line">  <span class="attribute">prefix-hint</span>=::/56 \</span><br><span class="line">  <span class="attribute">request</span>=prefix \</span><br><span class="line">  <span class="attribute">use-interface-duid</span>=<span class="literal">yes</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>然后检查 DHCP client 的状态，是 <code>bound</code> 的话就说明已经成功获取到地址和前缀。</p>
+<p>然后检查 DHCP client 的状态，是<code>bound</code>的话就说明已经成功获取到地址和前缀。</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/ipv6/dhcp-client/<span class="built_in">print</span></span><br><span class="line">Columns: INTERFACE, STATUS, REQUEST,<span class="built_in"> PREFIX</span></span><br><span class="line"><span class="built_in"></span><span class="comment"># INTERFACE      STATUS  REQUEST  PREFIX                              </span></span><br><span class="line">0 China Telecom  bound  <span class="built_in"> prefix </span>  240e:38a:5d27:5c00::/56, 2d21h48m59s</span><br></pre></td></tr></tbody></table></figure>
 
 <p>然后让电脑重新连接路由，就能看到电脑成功获取到 IPv6 地址了。</p>

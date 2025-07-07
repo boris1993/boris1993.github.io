@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.2","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Filter Filter 是 Servlet 规范制定的，受 Servlet 容器支持，接口定义在 javax.servlet 包中。 Filter 是被 Web Server（如 Tomcat）调用。 Filter 需要在 web.xml 中定义之后才会起作用。 Filter 只在请求的前后起作用，Servlet 对于 Filter 来说是一个黑盒。 Filter 的执行顺序是： void i">
+    <meta name="description" content="Filter Filter是Servlet规范制定的，受Servlet容器支持，接口定义在javax.servlet包中。 Filter是被 Web Server（如Tomcat）调用。 Filter 需要在 web.xml 中定义之后才会起作用。 Filter只在请求的前后起作用，Servlet对于Filter来说是一个黑盒。 Filter的执行顺序是： void init(FilterConf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Filter 与 interceptor 的区别">
 <meta property="og:url" content="https://www.boris1993.com/filter-vs-interceptor.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="Filter Filter 是 Servlet 规范制定的，受 Servlet 容器支持，接口定义在 javax.servlet 包中。 Filter 是被 Web Server（如 Tomcat）调用。 Filter 需要在 web.xml 中定义之后才会起作用。 Filter 只在请求的前后起作用，Servlet 对于 Filter 来说是一个黑盒。 Filter 的执行顺序是： void i">
+<meta property="og:description" content="Filter Filter是Servlet规范制定的，受Servlet容器支持，接口定义在javax.servlet包中。 Filter是被 Web Server（如Tomcat）调用。 Filter 需要在 web.xml 中定义之后才会起作用。 Filter只在请求的前后起作用，Servlet对于Filter来说是一个黑盒。 Filter的执行顺序是： void init(FilterConf">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-13T07:36:21.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.679Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.623Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Servlet">
@@ -335,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -379,27 +379,27 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul>
-<li><code>Filter</code> 是 <code>Servlet</code> 规范制定的，受 <code>Servlet</code> 容器支持，接口定义在 <code>javax.servlet</code> 包中。</li>
-<li><code>Filter</code> 是被 Web Server（如 <code>Tomcat</code>）调用。</li>
+<li><code>Filter</code>是<code>Servlet</code>规范制定的，受<code>Servlet</code>容器支持，接口定义在<code>javax.servlet</code>包中。</li>
+<li><code>Filter</code>是被 Web Server（如<code>Tomcat</code>）调用。</li>
 <li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li>
-<li><code>Filter</code> 只在请求的前后起作用，<code>Servlet</code> 对于 <code>Filter</code> 来说是一个黑盒。</li>
-<li><code>Filter</code> 的执行顺序是：<ul>
-<li><code>void init(FilterConfig)</code> - 容器在初始化 <code>Filter</code> 时调用，在 <code>Filter</code> 生命周期内仅会被调用一次。方法可以抛出 <code>ServletException</code>。</li>
-<li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code> 用来调用下一个 <code>Filter</code>。</li>
+<li><code>Filter</code>只在请求的前后起作用，<code>Servlet</code>对于<code>Filter</code>来说是一个黑盒。</li>
+<li><code>Filter</code>的执行顺序是：<ul>
+<li><code>void init(FilterConfig)</code> - 容器在初始化<code>Filter</code>时调用，在<code>Filter</code>生命周期内仅会被调用一次。方法可以抛出<code>ServletException</code>。</li>
+<li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code>用来调用下一个<code>Filter</code>。</li>
 <li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li>
 </ul>
 </li>
 </ul>
 <h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul>
-<li><code>Interceptor</code> 是 <code>Spring</code> 容器内的，由 <code>Spring</code> 框架提供支持。接口 <code>HandlerInterceptor</code> 定义在 <code>org.springframework.web.servlet</code> 包中。</li>
-<li><code>Interceptor</code> 是被 <code>Spring</code> 调用。</li>
-<li><code>Interceptor</code> 可以深入到方法前后、异常抛出前后等，比起 <code>Filter</code> 有更大的弹性。</li>
-<li><code>Interceptor</code> 还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li>
-<li><code>Interceptor</code> 的执行顺序是：<ul>
-<li>请求到达 <code>DispatcherServlet</code></li>
-<li><code>DispatcherServlet</code> 将请求发送至 <code>Interceptor</code>，<code>Interceptor</code> 执行 <code>preHandle()</code> 方法</li>
-<li>请求到达 <code>Controller</code></li>
-<li>请求结束后，<code>Interceptor</code> 执行 <code>postHandle()</code> 方法</li>
+<li><code>Interceptor</code>是<code>Spring</code>容器内的，由<code>Spring</code>框架提供支持。接口<code>HandlerInterceptor</code>定义在<code>org.springframework.web.servlet</code>包中。</li>
+<li><code>Interceptor</code>是被<code>Spring</code>调用。</li>
+<li><code>Interceptor</code>可以深入到方法前后、异常抛出前后等，比起<code>Filter</code>有更大的弹性。</li>
+<li><code>Interceptor</code>还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li>
+<li><code>Interceptor</code>的执行顺序是：<ul>
+<li>请求到达<code>DispatcherServlet</code></li>
+<li><code>DispatcherServlet</code>将请求发送至<code>Interceptor</code>，<code>Interceptor</code>执行<code>preHandle()</code>方法</li>
+<li>请求到达<code>Controller</code></li>
+<li>请求结束后，<code>Interceptor</code>执行<code>postHandle()</code>方法</li>
 </ul>
 </li>
 </ul>

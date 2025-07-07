@@ -33,7 +33,7 @@
 <meta property="og:description" content="面试的时候被问到 “了解不了解守护线程”，可本菜别提了解了，听都没听说过。所以面试之后赶紧上网冲浪学习起来。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-15T16:18:51.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.681Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.625Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="多线程">
@@ -335,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -388,13 +388,13 @@
 <p>即 Thread#setDaemon (boolean) 方法的 JavaDoc 提到的<br>The Java Virtual Machine exits when the only threads running are all daemon threads.</p>
 </blockquote>
 <h2 id="守护线程能干什么"><a href="#守护线程能干什么" class="headerlink" title="守护线程能干什么"></a>守护线程能干什么</h2><p>常见的场景有垃圾回收、释放未使用的对象的内存、从缓存中释放不需要的条目等等。</p>
-<h2 id="怎么创建守护线程"><a href="#怎么创建守护线程" class="headerlink" title="怎么创建守护线程"></a>怎么创建守护线程</h2><p>调用 <code>Thread#setDaemon(boolean)</code> 方法就可以让一个线程变成守护线程，如：</p>
+<h2 id="怎么创建守护线程"><a href="#怎么创建守护线程" class="headerlink" title="怎么创建守护线程"></a>怎么创建守护线程</h2><p>调用<code>Thread#setDaemon(boolean)</code>方法就可以让一个线程变成守护线程，如：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException {</span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            System.out.println(<span class="string">"Main thread exited."</span>);</span><br><span class="line">        }));</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                    System.out.println(<span class="string">"Thread is running..."</span>);</span><br><span class="line">                }</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            } <span class="keyword">finally</span> {</span><br><span class="line">                System.out.println(<span class="string">"Thread exited."</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 一定要在Thread#start()前调用，否则会抛IllegalThreadStateException异常</span></span><br><span class="line">        thread.setDaemon(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Main thread exiting....."</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>将上面代码运行后，可以在控制台看到如下输出：</p>
 <figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Thread is running...</span><br><span class="line">Main thread exiting.....</span><br><span class="line">Main thread exited.</span><br></pre></td></tr></tbody></table></figure>
 
-<p>可见，虽然线程中执行的是一个死循环，但是 JVM 在结束时，不会理会 <code>thread</code> 还在运行，直接就退出了。同样还可以看到的是，<code>finally</code> 块并没有执行，所以在守护线程中不要使用任何需要关闭的资源，比如打开文件，因为守护线程退出的时候，它没有任何机会来关闭文件，就会导致数据丢失（我感觉就像 <code>kill -9</code> 掉一个正在内存中处理文件内容的进程，<code>SIGKILL</code> 信号不会给这个进程任何善后的时间）。</p>
+<p>可见，虽然线程中执行的是一个死循环，但是 JVM 在结束时，不会理会<code>thread</code>还在运行，直接就退出了。同样还可以看到的是，<code>finally</code>块并没有执行，所以在守护线程中不要使用任何需要关闭的资源，比如打开文件，因为守护线程退出的时候，它没有任何机会来关闭文件，就会导致数据丢失（我感觉就像<code>kill -9</code>掉一个正在内存中处理文件内容的进程，<code>SIGKILL</code>信号不会给这个进程任何善后的时间）。</p>
 
     </div>
 

@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/caddy/caddy-download-choose-license.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/caddy/caddy-download-methods.png">
 <meta property="article:published_time" content="2018-07-19T08:42:30.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.687Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.629Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Caddy">
 <meta property="article:tag" content="WebServer">
@@ -338,7 +338,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -387,16 +387,16 @@
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>万事第一步，先安装。</p>
 <h2 id="下载页面概览"><a href="#下载页面概览" class="headerlink" title="下载页面概览"></a>下载页面概览</h2><p>打开<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG93bmxvYWQ="> Caddy<i class="fa fa-external-link-alt"></i></span>的下载页面，页面的内容简洁明了，左侧是 4 个要配置的项，右侧是每个配置项实际的内容。</p>
 <p><img data-src="https://blog-static.boris1993.com/caddy/caddy-download-overview.png" alt="Download Page Overview"></p>
-<h2 id="选择运行平台"><a href="#选择运行平台" class="headerlink" title="选择运行平台"></a>选择运行平台</h2><p>首先，选择好 Caddy 要在哪个操作系统下运行。Caddy 支持的平台还是足够多的，而且覆盖到了主流的操作系统，所以甭管您是 Windows，还是 Linux，抑或是 BSD，都可以运行 Caddy。因为我的服务器运行的是 64 位 Ubuntu，所以选择 <code>Linux 64-bit</code>。</p>
+<h2 id="选择运行平台"><a href="#选择运行平台" class="headerlink" title="选择运行平台"></a>选择运行平台</h2><p>首先，选择好 Caddy 要在哪个操作系统下运行。Caddy 支持的平台还是足够多的，而且覆盖到了主流的操作系统，所以甭管您是 Windows，还是 Linux，抑或是 BSD，都可以运行 Caddy。因为我的服务器运行的是 64 位 Ubuntu，所以选择<code>Linux 64-bit</code>。</p>
 <p>实话说，看到 Plan 9 的时候，心里还是被惊到了。</p>
 <p><img data-src="https://blog-static.boris1993.com/caddy/caddy-download-choose-platform.png" alt="Choosing Platform"></p>
 <h2 id="选择插件"><a href="#选择插件" class="headerlink" title="选择插件"></a>选择插件</h2><p>接下来是选择要安装哪些插件，通常来说，根据自己的需要来选择就可以了。如果后期要安装更多的插件的话，重新来下载页面勾选需要的插件并重新安装就可以了。毕竟是用 Go 写的，最后就一个可执行文件，替换掉原来的，就算重装好了。</p>
 <p>我的需求有这么几点：</p>
 <ol>
-<li>我需要 Caddy 可以作为一个反向代理，所以选择了 <code>http.forwardproxy</code> 插件</li>
-<li>我的博客的源文件放置于我的 GitHub 中，我希望 Caddy 可以直接 clone 这个仓库，并且能通过 WebHook 监听这个仓库的更新事件，所以选择了 <code>http.git</code> 插件</li>
-<li>我在使用 Cloudflare 的 DNS 服务，并且 Caddy 可以通过 DNS 验证的方式申请 HTTPS 证书，所以需要 <code>tls.dns.cloudflare</code> 插件</li>
-<li>我想要 Caddy 作为一个系统服务，并且可以随系统自动启动，但是我又懒得自己写配置文件，所以使用 <code>hook.service</code> 插件来为我提供已经写好并经过了测试的配置文件</li>
+<li>我需要 Caddy 可以作为一个反向代理，所以选择了<code>http.forwardproxy</code>插件</li>
+<li>我的博客的源文件放置于我的 GitHub 中，我希望 Caddy 可以直接 clone 这个仓库，并且能通过 WebHook 监听这个仓库的更新事件，所以选择了<code>http.git</code>插件</li>
+<li>我在使用 Cloudflare 的 DNS 服务，并且 Caddy 可以通过 DNS 验证的方式申请 HTTPS 证书，所以需要<code>tls.dns.cloudflare</code>插件</li>
+<li>我想要 Caddy 作为一个系统服务，并且可以随系统自动启动，但是我又懒得自己写配置文件，所以使用<code>hook.service</code>插件来为我提供已经写好并经过了测试的配置文件</li>
 </ol>
 <p><img data-src="https://blog-static.boris1993.com/caddy/caddy-download-choose-plugins.png" alt="Choosing Plugins"></p>
 <h2 id="选择是否开启遥测功能"><a href="#选择是否开启遥测功能" class="headerlink" title="选择是否开启遥测功能"></a>选择是否开启遥测功能</h2><p>Caddy 提供了一个叫做 “遥测” 的功能，可以监控您的 Caddy 实例的状态。具体针对该功能的描述，可以到其文档页面<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy90ZWxlbWV0cnk="> Telemetry<i class="fa fa-external-link-alt"></i></span>阅读。这个功能开启与否与功能无关，开不开看您心情。</p>
@@ -404,62 +404,62 @@
 <p><img data-src="https://blog-static.boris1993.com/caddy/caddy-download-choose-license.png" alt="Choosing License"></p>
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>终于，到了下载这一步了。Caddy 提供了多种下载的方式，您可以在浏览器中将可执行文件下载到本地，或者通过命令行来下载，还可以直接使用一句话脚本来安装。</p>
 <p><img data-src="https://blog-static.boris1993.com/caddy/caddy-download-methods.png" alt="Install Methods"></p>
-<p>如果使用自动安装脚本的话，Caddy 会被安装到<code>/usr/local/bin/caddy</code> 中。如果选择手动安装，那么需要将 Caddy 的可执行文件放到 <code>PATH</code> 所包含的目录中，或者将 Caddy 所在的位置加入到 <code>PATH</code> 中。</p>
-<h2 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h2><p>完成安装后，可以直接使用 <code>caddy</code> 命令启动一个 Caddy 服务器，它会开始监听本机的 <code>2015</code> 端口，并列出当前工作目录的内容。使用 <code>http://localhost:2015</code> 即可访问。如果能成功打开，或者可以看到一个 <code>404</code> 页面，那么说明 Caddy 安装成功了。</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>Caddy 的所有配置都将被写到一个名为 <code>Caddyfile</code> 的文件中。<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vdHV0b3JpYWwvY2FkZHlmaWxl">点击这里阅读 Caddy 官方提供的入门指导<i class="fa fa-external-link-alt"></i></span>，以及<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcw=="> Caddy 官方文档<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>在以下实例中，我们假定 <code>Caddyfile</code> 的位置是<code>/etc/caddy/Caddyfile</code>，并且所有与 Caddy 相关的文件、目录，都存放于<code>/etc/caddy</code> 下。</p>
-<h2 id="配置网站的地址"><a href="#配置网站的地址" class="headerlink" title="配置网站的地址"></a>配置网站的地址</h2><p>首先要配置 Caddy 所服务的网站的地址，如果只有一个地址的话，那么可以将地址写到 <code>Caddyfile</code> 的第一行，同时 <code>Caddyfile</code> 的第一行也必须是网站的地址。比如下面这样：</p>
+<p>如果使用自动安装脚本的话，Caddy 会被安装到<code>/usr/local/bin/caddy</code>中。如果选择手动安装，那么需要将 Caddy 的可执行文件放到<code>PATH</code>所包含的目录中，或者将 Caddy 所在的位置加入到<code>PATH</code>中。</p>
+<h2 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h2><p>完成安装后，可以直接使用<code>caddy</code>命令启动一个 Caddy 服务器，它会开始监听本机的<code>2015</code>端口，并列出当前工作目录的内容。使用<code>http://localhost:2015</code>即可访问。如果能成功打开，或者可以看到一个<code>404</code>页面，那么说明 Caddy 安装成功了。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>Caddy 的所有配置都将被写到一个名为<code>Caddyfile</code>的文件中。<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vdHV0b3JpYWwvY2FkZHlmaWxl">点击这里阅读 Caddy 官方提供的入门指导<i class="fa fa-external-link-alt"></i></span>，以及<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcw=="> Caddy 官方文档<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>在以下实例中，我们假定<code>Caddyfile</code>的位置是<code>/etc/caddy/Caddyfile</code>，并且所有与 Caddy 相关的文件、目录，都存放于<code>/etc/caddy</code>下。</p>
+<h2 id="配置网站的地址"><a href="#配置网站的地址" class="headerlink" title="配置网站的地址"></a>配置网站的地址</h2><p>首先要配置 Caddy 所服务的网站的地址，如果只有一个地址的话，那么可以将地址写到<code>Caddyfile</code>的第一行，同时<code>Caddyfile</code>的第一行也必须是网站的地址。比如下面这样：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.boris1993.tk</span><br></pre></td></tr></tbody></table></figure>
 
-<p>这样 Caddy 就会监听 <code>www.boris1993.tk</code> 所绑定的地址，并监听 80 端口提供 HTTP 服务，以及 443 端口提供 HTTPS 服务。在默认情况下，Caddy 会自动将 HTTP 请求使用 HTTP 301 返回码重定向到 HTTPS，除非显式配置禁用 HTTPS 服务。</p>
-<p>如果需要指定端口号，那么可以在地址后面跟上端口号，比如 <code>www.boris1993.tk:8080</code>。因为我没有用到这项功能，所以没有测试过这样配置的效果。如果您有需要还请自行测试。</p>
+<p>这样 Caddy 就会监听<code>www.boris1993.tk</code>所绑定的地址，并监听 80 端口提供 HTTP 服务，以及 443 端口提供 HTTPS 服务。在默认情况下，Caddy 会自动将 HTTP 请求使用 HTTP 301 返回码重定向到 HTTPS，除非显式配置禁用 HTTPS 服务。</p>
+<p>如果需要指定端口号，那么可以在地址后面跟上端口号，比如<code>www.boris1993.tk:8080</code>。因为我没有用到这项功能，所以没有测试过这样配置的效果。如果您有需要还请自行测试。</p>
 <p>如果要同时开启多个网站，那么各个网站的配置需要以大括号包围起来，比如下面这样：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">www.boris1993.tk {</span><br><span class="line">    </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">www2.boris1993.tk {</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>我们这里就只演示仅有一个地址的情况。多个地址的配置与单个地址的配置方式相同，故不再赘述。</p>
-<h2 id="配置静态文件所在的位置并启用gzip压缩"><a href="#配置静态文件所在的位置并启用gzip压缩" class="headerlink" title="配置静态文件所在的位置并启用gzip压缩"></a>配置静态文件所在的位置并启用 gzip 压缩</h2><p>有了地址之后，我们需要告诉 Caddy 要提供的静态文件在什么位置，这个可以使用 <code>root</code> 指令来制定，如下面这样：</p>
+<h2 id="配置静态文件所在的位置并启用gzip压缩"><a href="#配置静态文件所在的位置并启用gzip压缩" class="headerlink" title="配置静态文件所在的位置并启用gzip压缩"></a>配置静态文件所在的位置并启用 gzip 压缩</h2><p>有了地址之后，我们需要告诉 Caddy 要提供的静态文件在什么位置，这个可以使用<code>root</code>指令来制定，如下面这样：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">www.boris1993.tk {</span><br><span class="line">    root    /var/www</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>然后 Caddy 就会到<code>/var/www</code> 目录寻找 <code>index.html</code> 等默认的主页文件。</p>
+<p>然后 Caddy 就会到<code>/var/www</code>目录寻找<code>index.html</code>等默认的主页文件。</p>
 <p>启用 gzip 压缩，可以使我们的网站打开的更快。在 Caddy 中启用 gzip，也只需要一条指令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">www.boris1993.tk {</span><br><span class="line">    root    /var/www</span><br><span class="line">    gzip</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="提供申请HTTPS证书的信息"><a href="#提供申请HTTPS证书的信息" class="headerlink" title="提供申请HTTPS证书的信息"></a>提供申请 HTTPS 证书的信息</h2><p>在默认情况下，Caddy 会自动搞定申请 HTTPS 证书的事情，不需要用户进行干预。如果需要覆盖默认的配置，可以参考<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy90bHM="> Caddy 文档的 TLS 部分<i class="fa fa-external-link-alt"></i></span>。</p>
-<h2 id="配置日志"><a href="#配置日志" class="headerlink" title="配置日志"></a>配置日志</h2><h3 id="访问日志"><a href="#访问日志" class="headerlink" title="访问日志"></a>访问日志</h3><p>网站的访问日志可以使用 <code>log</code> 指令来配置，该指令的文档可以参考<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy9sb2c=">这里<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="配置日志"><a href="#配置日志" class="headerlink" title="配置日志"></a>配置日志</h2><h3 id="访问日志"><a href="#访问日志" class="headerlink" title="访问日志"></a>访问日志</h3><p>网站的访问日志可以使用<code>log</code>指令来配置，该指令的文档可以参考<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy9sb2c=">这里<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>在这里我先放出我的配置，然后再逐行来解释。简明起见，我就只写出日志的部分，其余无关内容就不在这里写出来了。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log /   /var/log/caddy/access.log   "{combined}" {</span><br><span class="line">    rotate_size 1</span><br><span class="line">    rotate_age  7</span><br><span class="line">    rotate_keep 2</span><br><span class="line">    rotate_compress</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>第一行中，我指定要记录所有对网站根目录<code>/</code>的访问，将日志写到<code>/var/log/caddy/access.log</code> 中，记录的方式是 <code>combined</code>。</p>
-<p>Caddy 提供了两种日志格式，<code>common</code> 和 <code>combined</code>，<code>common</code> 是默认的记录格式。</p>
-<p><code>common</code> 的格式是这样子的：</p>
+<p>第一行中，我指定要记录所有对网站根目录<code>/</code>的访问，将日志写到<code>/var/log/caddy/access.log</code>中，记录的方式是<code>combined</code>。</p>
+<p>Caddy 提供了两种日志格式，<code>common</code>和<code>combined</code>，<code>common</code>是默认的记录格式。</p>
+<p><code>common</code>的格式是这样子的：</p>
 <p><code>{客户端IP地址} - {HTTP基础验证的用户名} [{访问时间}] \"{HTTP方式} {请求的URI} {协议版本}\" {HTTP状态码} {响应体的大小}</code></p>
-<p>而 <code>combined</code> 格式，则是在 <code>common</code> 格式的末尾，追加如下内容：</p>
+<p>而<code>combined</code>格式，则是在<code>common</code>格式的末尾，追加如下内容：</p>
 <p><code>\"{&gt;Referer}\" \"{&gt;User-Agent}\"</code></p>
-<p>第二行 <code>rotate_size</code> 指定了在日志到达 1MB 大小之前不进行日志翻转，这个指令的单位是 <code>MB</code>。</p>
-<p>第三行 <code>rotate_age</code> 指定了保留 7 天的翻转日志。</p>
-<p>第四行 <code>rotate_keep</code> 指定了只保留最近 2 个翻转日志，之前的版本将被删除。</p>
-<p>第五行 <code>rotate_compress</code> 指定使用 gzip 压缩翻转日志。</p>
-<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3><p>错误日志可以使用 <code>errors</code> 指令来配置，该指令的文档可以参考<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy9lcnJvcnM=">这里<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>第二行<code>rotate_size</code>指定了在日志到达 1MB 大小之前不进行日志翻转，这个指令的单位是<code>MB</code>。</p>
+<p>第三行<code>rotate_age</code>指定了保留 7 天的翻转日志。</p>
+<p>第四行<code>rotate_keep</code>指定了只保留最近 2 个翻转日志，之前的版本将被删除。</p>
+<p>第五行<code>rotate_compress</code>指定使用 gzip 压缩翻转日志。</p>
+<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3><p>错误日志可以使用<code>errors</code>指令来配置，该指令的文档可以参考<span class="exturl" data-url="aHR0cHM6Ly9jYWRkeXNlcnZlci5jb20vZG9jcy9lcnJvcnM=">这里<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>同样，我将以我的配置作为范例来解释，如果需要其他的配置可以参考官方文档。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">errors  /var/log/Caddy/error.log {</span><br><span class="line">    404         /var/www/error/HTTP404.html</span><br><span class="line">    rotate_age  7</span><br><span class="line">    rotate_keep 2</span><br><span class="line">    rotate_compress</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>第一行配置了错误日志将被写入到<code>/var/log/Caddy/error.log</code> 中。</p>
-<p>第二行配置了当发生 <code>404</code> 错误后显示的页面，这里还可以为其他错误码指定错误页面，语法参见官方文档。</p>
-<p>其余三行的含义与上文 <code>log</code> 指令中对应参数的含义一致，不再赘述。</p>
+<p>第一行配置了错误日志将被写入到<code>/var/log/Caddy/error.log</code>中。</p>
+<p>第二行配置了当发生<code>404</code>错误后显示的页面，这里还可以为其他错误码指定错误页面，语法参见官方文档。</p>
+<p>其余三行的含义与上文<code>log</code>指令中对应参数的含义一致，不再赘述。</p>
 <h2 id="配置自动从Git拉取页面内容"><a href="#配置自动从Git拉取页面内容" class="headerlink" title="配置自动从Git拉取页面内容"></a>配置自动从 Git 拉取页面内容</h2><p>Caddy 支持从一个指定的 Git 仓库克隆以及更新页面的内容到某个目录，并可以通过 WebHook 来监视仓库的更新，参考配置如下：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git https://github.com/boris1993/boris1993.github.io.git {</span><br><span class="line">    path        /var/www</span><br><span class="line">    hook        /hook       hook.password</span><br><span class="line">    hook_type   github</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>这里我配置 Caddy 从 <code>https://github.com/boris1993/boris1993.github.io.git</code> 这个仓库拉取静态页面文件，这就是本博客所在的 GitHub 仓库，拉去之后文件将被放到<code>/var/www</code> 目录下。因为我要实现博客文件自动更新，所以这里的地址需要与 <code>root</code> 指令配置的位置相同。</p>
-<p><code>hook</code> 参数配置 Caddy 使用 <code>www.boris1993.tk/hook</code> 作为 WebHook 的监听地址，这个 hook 的访问密码是 <code>hook.password</code>，并且使用下一行中的 <code>hook_type</code> 指令显式指定 Hook 的类型是 <code>github</code>，也就是来自 GitHub 的 hook。</p>
+<p>这里我配置 Caddy 从<code>https://github.com/boris1993/boris1993.github.io.git</code>这个仓库拉取静态页面文件，这就是本博客所在的 GitHub 仓库，拉去之后文件将被放到<code>/var/www</code>目录下。因为我要实现博客文件自动更新，所以这里的地址需要与<code>root</code>指令配置的位置相同。</p>
+<p><code>hook</code>参数配置 Caddy 使用<code>www.boris1993.tk/hook</code>作为 WebHook 的监听地址，这个 hook 的访问密码是<code>hook.password</code>，并且使用下一行中的<code>hook_type</code>指令显式指定 Hook 的类型是<code>github</code>，也就是来自 GitHub 的 hook。</p>
 <p>这样配置完毕后，还需要为远程 Git 仓库配置 hook，然后才可以实现自动更新。具体配置方式请参考 Git 仓库服务商的文档。</p>
 <h2 id="配置Caddy作为前置代理"><a href="#配置Caddy作为前置代理" class="headerlink" title="配置Caddy作为前置代理"></a>配置 Caddy 作为前置代理</h2><p>一部分代理工具，比如 v2ray，支持使用一个 HTTP 服务器作为其前置代理，Caddy 就可以实现这样的功能。本示例中我配置 Caddy 作为 v2ray 的 WebSocket 代理，配置文件片段如下：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy /v2ray localhost:12345 {</span><br><span class="line">    websocket</span><br><span class="line">    header_upstream -Origin</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>这段配置指定了将<code>/v2ray</code> 这个路径作为 <code>localhost:12345</code> 这个地址的前置代理，代理协议为 <code>websocket</code>。具体的配置方法请参考被代理程序的文档。</p>
-<h2 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h2><p><code>hook.service</code> 插件可以一键生成 <code>systemd</code> 格式的自启动配置文件，只需要如下命令即可完成配置：</p>
+<p>这段配置指定了将<code>/v2ray</code>这个路径作为<code>localhost:12345</code>这个地址的前置代理，代理协议为<code>websocket</code>。具体的配置方法请参考被代理程序的文档。</p>
+<h2 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h2><p><code>hook.service</code>插件可以一键生成<code>systemd</code>格式的自启动配置文件，只需要如下命令即可完成配置：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">caddy -service install -conf /etc/caddy/Caddyfile</span><br></pre></td></tr></tbody></table></figure>
 
-<p>注意将 <code>-conf</code> 参数的值指向实际的 <code>Caddyfile</code> 的路径。</p>
+<p>注意将<code>-conf</code>参数的值指向实际的<code>Caddyfile</code>的路径。</p>
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>至此，一个可以正常提供服务的 Caddy 服务器就配置完成了，现在 Caddy 可以提供正常的 HTTP 和 HTTPS 访问，并且会自动申请和续订 HTTPS 证书，在远端 Git 仓库有更新之后，Caddy 也会自动更新本地的文件，一切都变成了自动化操作，正常情况下完全可以实现无人值守运行。怎么样，是不是很方便？</p>
 
     </div>

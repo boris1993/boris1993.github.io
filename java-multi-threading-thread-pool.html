@@ -33,7 +33,7 @@
 <meta property="og:description" content="就像数据库连接可以使用连接池管理一样，Java 中的线程也可以使用线程池来管理。本文介绍在 Java 中如何使用线程池，以及有哪些线程池。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-04T02:43:02.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.682Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.625Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="多线程">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -388,25 +388,25 @@
 <p>运行后得到如下结果：</p>
 <figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Thread pool created</span><br><span class="line">Assigning jobs to thread pool</span><br><span class="line">pool-1-thread-2 started.</span><br><span class="line">pool-1-thread-1 started.</span><br><span class="line">pool-1-thread-1 has 20 tickets</span><br><span class="line">pool-1-thread-2 has 19 tickets</span><br><span class="line">pool-1-thread-1 has 18 tickets</span><br><span class="line">pool-1-thread-2 has 17 tickets</span><br><span class="line">pool-1-thread-1 has 16 tickets</span><br><span class="line">pool-1-thread-2 has 15 tickets</span><br><span class="line">pool-1-thread-1 has 14 tickets</span><br><span class="line">pool-1-thread-2 has 13 tickets</span><br><span class="line">pool-1-thread-2 has 12 tickets</span><br><span class="line">pool-1-thread-1 has 11 tickets</span><br><span class="line">pool-1-thread-1 has 10 tickets</span><br><span class="line">pool-1-thread-2 has 9 tickets</span><br><span class="line">pool-1-thread-1 has 8 tickets</span><br><span class="line">pool-1-thread-2 has 7 tickets</span><br><span class="line">pool-1-thread-2 has 6 tickets</span><br><span class="line">pool-1-thread-1 has 5 tickets</span><br><span class="line">pool-1-thread-2 has 4 tickets</span><br><span class="line">pool-1-thread-1 has 3 tickets</span><br><span class="line">pool-1-thread-2 has 2 tickets</span><br><span class="line">pool-1-thread-1 has 1 tickets</span><br><span class="line">pool-1-thread-1 stopped.</span><br><span class="line">pool-1-thread-2 stopped.</span><br><span class="line">Thread pool is down</span><br></pre></td></tr></tbody></table></figure>
 
-<h1 id="几种线程池的简介"><a href="#几种线程池的简介" class="headerlink" title="几种线程池的简介"></a>几种线程池的简介</h1><h2 id="Single-thread-pool"><a href="#Single-thread-pool" class="headerlink" title="Single thread pool"></a>Single thread pool</h2><p>是用 <code>Executors.newSingleThreadExecutor()</code> 创建。</p>
+<h1 id="几种线程池的简介"><a href="#几种线程池的简介" class="headerlink" title="几种线程池的简介"></a>几种线程池的简介</h1><h2 id="Single-thread-pool"><a href="#Single-thread-pool" class="headerlink" title="Single thread pool"></a>Single thread pool</h2><p>是用<code>Executors.newSingleThreadExecutor()</code>创建。</p>
 <p>该线程池仅有一个线程，并拥有一个无边界的队列。提交到队列中的任务将会按顺序执行。如果当前线程在执行过程中出现错误而被终止，那么线程池会创建一个新的线程并继续执行队列中后续的任务。</p>
-<p>与使用 <code>Executors.newFixedThreadPool(1)</code> 创建的线程池不同的是，我们不能为 single thread pool 分配更多的线程数。</p>
-<h2 id="Fixed-thread-pool"><a href="#Fixed-thread-pool" class="headerlink" title="Fixed thread pool"></a>Fixed thread pool</h2><p>使用 <code>Executors.newFixedThreadPool(int nThreads)</code> 创建。</p>
+<p>与使用<code>Executors.newFixedThreadPool(1)</code>创建的线程池不同的是，我们不能为 single thread pool 分配更多的线程数。</p>
+<h2 id="Fixed-thread-pool"><a href="#Fixed-thread-pool" class="headerlink" title="Fixed thread pool"></a>Fixed thread pool</h2><p>使用<code>Executors.newFixedThreadPool(int nThreads)</code>创建。</p>
 <p>该线程池维护着固定数量的线程 (nThreads 个)，在任何时间只允许最多 nThreads 个线程执行任务，多出来的任务将会在队列中等待，直到有空闲的线程出现。如果其中一个线程在执行过程中因为错误而异常退出，则线程池会立刻创建一个新的线程并执行后续的任务。</p>
 <p>该线程池在显式关闭 (<code>ExecutorService#shutdown</code>) 前将一直存在。</p>
-<h2 id="Work-stealing-pool"><a href="#Work-stealing-pool" class="headerlink" title="Work stealing pool"></a>Work stealing pool</h2><p>使用 <code>Executors.newWorkStealingPool(int parallelism)</code> 或 <code>Executors.newWorkStealingPool()</code> 创建。</p>
+<h2 id="Work-stealing-pool"><a href="#Work-stealing-pool" class="headerlink" title="Work stealing pool"></a>Work stealing pool</h2><p>使用<code>Executors.newWorkStealingPool(int parallelism)</code>或<code>Executors.newWorkStealingPool()</code>创建。</p>
 <p>该线程池无法保证各个被提交的任务将会以何种顺序执行。</p>
 <h3 id="newWorkStealingPool-int-parallelism"><a href="#newWorkStealingPool-int-parallelism" class="headerlink" title="newWorkStealingPool(int parallelism)"></a><code>newWorkStealingPool(int parallelism)</code></h3><p>该方法将根据给定的 “并行量 (parallelism)”，来创建一个包含足够数量线程的线程池，并会<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQxMzQzNTAxLzM4MzM4NTg=">使用多个队列来减少线程与队列的争抢<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>“并行量” 的值对应于最多允许参与执行任务的线程数量。但实际存在的线程数可能会动态的增减。</p>
 <h3 id="Executors-newWorkStealingPool"><a href="#Executors-newWorkStealingPool" class="headerlink" title="Executors.newWorkStealingPool()"></a><code>Executors.newWorkStealingPool()</code></h3><p>将所有的 “可用的处理器” 的数目作为 “并行量” 来创建线程池。</p>
-<p>可用的处理器数量使用 <code>Runtime.getRuntime().availableProcessors()</code> 获取，<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzExODc4MDI4LzM4MzM4NTg=">其值等同于 CPU 中逻辑处理器的数量<i class="fa fa-external-link-alt"></i></span>。</p>
-<h2 id="Cached-thread-pool"><a href="#Cached-thread-pool" class="headerlink" title="Cached thread pool"></a>Cached thread pool</h2><p>使用 <code>Executors.newCachedThreadPool()</code> 创建。</p>
+<p>可用的处理器数量使用<code>Runtime.getRuntime().availableProcessors()</code>获取，<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzExODc4MDI4LzM4MzM4NTg=">其值等同于 CPU 中逻辑处理器的数量<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="Cached-thread-pool"><a href="#Cached-thread-pool" class="headerlink" title="Cached thread pool"></a>Cached thread pool</h2><p>使用<code>Executors.newCachedThreadPool()</code>创建。</p>
 <p>当接收到新的任务后，线程池会根据有无可用线程，来决定使用线程池中的空闲线程，或者在线程池中创建新的线程。</p>
 <p>如果线程池中有线程空置超过 60 秒，则该线程就会被终止并从线程池中移除。</p>
-<h2 id="Scheduled-thread-pool"><a href="#Scheduled-thread-pool" class="headerlink" title="Scheduled thread pool"></a>Scheduled thread pool</h2><p>使用 <code>Executors.newScheduledThreadPool(int corePoolSize)</code> 创建。<code>corePoolSize</code> 为线程池中保持的线程数。</p>
+<h2 id="Scheduled-thread-pool"><a href="#Scheduled-thread-pool" class="headerlink" title="Scheduled thread pool"></a>Scheduled thread pool</h2><p>使用<code>Executors.newScheduledThreadPool(int corePoolSize)</code>创建。<code>corePoolSize</code>为线程池中保持的线程数。</p>
 <p>该线程池可以指定一个延迟，或指定一个周期，并按照这个计划执行任务。</p>
-<h1 id="线程池是如何工作的"><a href="#线程池是如何工作的" class="headerlink" title="线程池是如何工作的"></a>线程池是如何工作的</h1><p>那么，在调用 <code>ExecutorService#execute(Runnable)</code> 之后，线程池究竟做了些什么呢？</p>
-<p>在 <code>ThreadPoolExecutor#execute(Runnable)</code> 方法中，有这样一段注释：</p>
+<h1 id="线程池是如何工作的"><a href="#线程池是如何工作的" class="headerlink" title="线程池是如何工作的"></a>线程池是如何工作的</h1><p>那么，在调用<code>ExecutorService#execute(Runnable)</code>之后，线程池究竟做了些什么呢？</p>
+<p>在<code>ThreadPoolExecutor#execute(Runnable)</code>方法中，有这样一段注释：</p>
 <blockquote>
 <p>Proceed in 3 steps:</p>
 <ol>
@@ -434,7 +434,7 @@ reject_the_task --&gt; 结束
 </code>
 </pre>
 
-<p>这里要注意一个比较容易引起误解的点，就是在 <code>core pool size &lt; 当前正在运行的线程数量 &lt; max pool size</code> 时，如果有新的任务进来，那么这个任务首先会被放入队列。仅当队列满了的时候，线程池才会为这个新来的任务创建新的线程。</p>
+<p>这里要注意一个比较容易引起误解的点，就是在<code>core pool size &lt; 当前正在运行的线程数量 &lt; max pool size</code>时，如果有新的任务进来，那么这个任务首先会被放入队列。仅当队列满了的时候，线程池才会为这个新来的任务创建新的线程。</p>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuaWJtLmNvbS9kZXZlbG9wZXJ3b3Jrcy9saWJyYXJ5L2otanRwMDczMC9pbmRleC5odG1s">Thread pools and work queues<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9hLzQ4NDczMTQ5LzM4MzM4NTg=">Core pool size vs maximum pool size in ThreadPoolExecutor - StackOverflow<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>

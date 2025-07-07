@@ -33,7 +33,7 @@
 <meta property="og:description" content="当需要从 z &#x2F; OS 中下载一个 PS 文件，或者下载一个 Member 时，我们可以简单地使用 FTP 或者 IND$FILE 将文件下载回来，但是如果想要下载一整个 PDS 呢？总不能一个个地去下载吧，此时，XMIT 命令就派上用场了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-11-19T12:58:35.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.689Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.631Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Mainframe">
 <meta property="article:tag" content="z&#x2F;OS">
@@ -335,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -390,7 +390,7 @@
 <li>(nodeid.username) 为目标机器的 JES2 Node 名，以及接收用户的 TSOID，不过亲测在这里写自己的 Node 名和 TSOID 也能正常使用。通常来说，本机的 Node name 为 N1</li>
 <li>DSNAME 为要打包的数据集名字</li>
 <li>如果只打包这个 PDS 中的一部分 member，则可以在 MEMBERS 参数中指定。因为目前还没有用过，所以不知道可不可以指定通配符</li>
-<li> OUTDSN 为打包之后输出文件的数据集名字</li>
+<li>OUTDSN 为打包之后输出文件的数据集名字</li>
 </ul>
 <p>TRANSMIT 命令的官方手册在 <a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.ikjc500/transmi.htm"><strong>这里</strong></a> ，完整的 TRANSMIT 命令的语法在 <a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.ikjc500/transsyn.htm"><strong>这里</strong></a> ，参数的详细说明在 <a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.ikjc500/transmitcomop.htm"><strong>这里</strong></a> 。</p>
 <p>另外，根据 IBM 员工 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaWJtLmNvbS9kZXZlbG9wZXJ3b3Jrcy9jb21tdW5pdHkvcHJvZmlsZXMvaHRtbC9wcm9maWxlVmlldy5kbz91c2VyaWQ9MDYwMDAwQUVRMiZsYW5nPWVu">Isabel Arnold<i class="fa fa-external-link-alt"></i></span> 的建议，在打包之前最好先创建一个 <code>DSORG=FB,LRECL=80,BLKSIZE=3120</code> 的文件供 TRANSMIT 用作输出文件。</p>
@@ -417,7 +417,7 @@
 <ul>
 <li>DATASET (‘output.dataset.name’) - 将 XMIT 档案解包至指定位置，可简写为 DA ()</li>
 <li>DELETE - 删除该 XMIT 档案</li>
-<li> END - 退出，不执行任何操作</li>
+<li>END - 退出，不执行任何操作</li>
 </ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaWJtLmNvbS9zdXBwb3J0L2tub3dsZWRnZWNlbnRlci9lbi9TU0xUQldfMi4xLjAvY29tLmlibS56b3MudjJyMS5pa2pjNTAwL3RyYW5zbWkuaHRt">TRANSMIT command<i class="fa fa-external-link-alt"></i></span></li>

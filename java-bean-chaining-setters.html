@@ -25,15 +25,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.2","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX() 方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
+    <meta name="description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 Java bean 中实现 setter 的链式调用">
 <meta property="og:url" content="https://www.boris1993.com/java-bean-chaining-setters.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX() 方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
+<meta property="og:description" content="在经年累月的开发中，你是不是已经对动辄数行的.setXXX()方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-24T07:08:36.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.680Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.625Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="代码技巧">
@@ -332,7 +332,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,7 +375,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code> 方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
+    <div class="post-body" itemprop="articleBody"><p>在经年累月的开发中，你是不是已经对动辄数行的<code>.setXXX()</code>方法厌烦了呢？在这篇博文中，我将介绍一个小技巧，可以稍稍让你的代码变得美观一些。</p>
 <span id="more"></span>
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常来说，一个 POJO 大致上会是这样的</p>
@@ -387,7 +387,7 @@
 <p>上面这三行 set 方法，本来没干什么事，却要写 3 行代码六十多个字，是不是看起来很难受，写起来很费劲？</p>
 <p>那么，这时候就可以通过链式调用 setter 来显著减少代码行数。</p>
 <h2 id="Setter的链式调用"><a href="#Setter的链式调用" class="headerlink" title="Setter的链式调用"></a>Setter 的链式调用</h2><p>首先，要实现链式调用 setter，就得稍微修改一下 setter 方法。放心，改动量是很小的，对业务是没有影响的，操作也是一劳永逸的。</p>
-<p>具体做法呢，就是让 setter 返回这个 POJO 类型，而不是 void，然后将 <code>this</code> 返回，比如这样：</p>
+<p>具体做法呢，就是让 setter 返回这个 POJO 类型，而不是 void，然后将<code>this</code>返回，比如这样：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Student <span class="title function_">setName</span><span class="params">(String name)</span> {</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Student <span class="title function_">setAge</span><span class="params">(Integer age)</span> {</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Student <span class="title function_">setScore</span><span class="params">(Integer score)</span> {</span><br><span class="line">    <span class="built_in">this</span>.score = score;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>然后，在创建对象的时候，就可以这样：</p>
@@ -399,12 +399,12 @@
 <p>是啥呢？</p>
 <p>Lombok！</p>
 <h2 id="用Lombok实现setter的链式调用"><a href="#用Lombok实现setter的链式调用" class="headerlink" title="用Lombok实现setter的链式调用"></a>用 Lombok 实现 setter 的链式调用</h2><p>Lombok 是一个自动生成模版代码的工具，像构造方法啊、getter 和 setter 啊，都可以用一个或多个注解来代替，然后在编译期由 Lombok 替你写这部分的代码。如果你还没用过，那么请务必学习和试用一下，它可以为你省下那些浪费在模版代码上的时间。</p>
-<p>在引入了 Lombok 之后，你就可以把上文的 <code>Student</code> 类重构成这样子了：</p>
+<p>在引入了 Lombok 之后，你就可以把上文的<code>Student</code>类重构成这样子了：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Accessors(chain = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> {</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Integer score;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>是的，你不再需要去写 getter 和 setter 了，更不需要一个个的去修改来让它支持链式调用了。只需要两个注解，就可以完成上面的一大片工作。</p>
-<p>第一行的 <code>@Data</code> 注解，是一系列注解的集合，用来生成一系列的模版代码。由于这不是本文重点，所以就不再展开说了。</p>
-<p>第二行的 <code>@Accessors</code> 注解，就是这里的重点了，它用来设定 Lombok 应该怎样生成 setter 和 getter 代码。而其中的 <code>chain</code> 属性，就是打开链式 setter 的开关，将它打开之后，就可以生成支持链式调用的 setter 方法。</p>
+<p>第一行的<code>@Data</code>注解，是一系列注解的集合，用来生成一系列的模版代码。由于这不是本文重点，所以就不再展开说了。</p>
+<p>第二行的<code>@Accessors</code>注解，就是这里的重点了，它用来设定 Lombok 应该怎样生成 setter 和 getter 代码。而其中的<code>chain</code>属性，就是打开链式 setter 的开关，将它打开之后，就可以生成支持链式调用的 setter 方法。</p>
 <p>然后，你就可以像上文一样，去享受链式调用了。</p>
 
     </div>

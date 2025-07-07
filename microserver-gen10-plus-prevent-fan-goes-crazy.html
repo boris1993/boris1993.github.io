@@ -33,7 +33,7 @@
 <meta property="og:description" content="今年元旦我把之前用的 Gen 8 换成了 Gen 10 Plus。后来想着现在性能上去了，可以把 NAS 的功能也合并进来，于是就把给 NAS 用的两块机械硬盘迁进了 Gen 10 Plus 里。但就在这之后，我发现它的风扇时不时就会突然狂转一分多钟，然后再降回平时的转速。而且这个问题不分白天黑夜，甚至有一次大半夜把我吵醒，不胜其烦。终于在上周，我找到了问题的根源，并彻底解决了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-22T22:14:39.000Z">
-<meta property="article:modified_time" content="2025-07-07T14:54:40.685Z">
+<meta property="article:modified_time" content="2025-07-07T15:07:23.627Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Gen 10 Plus">
 <meta name="twitter:card" content="summary">
@@ -331,7 +331,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,13 +386,13 @@
 <p>可惜，并没有任何好转。风扇依旧时不时开始跟李有田似的狂飙，唯一区别是风扇能刹住车（为李有田默哀一秒……</p>
 <p>后来我觉得，会不会是硬盘在跑 PT 的时候真的太热了？但是我也在下载的时候摸过硬盘，那个温度撑死只能算温热，怎么想也不会造成整机过热啊？但是本着 “能解决问题就行，哪怕再花点钱” 的想法，我开始找用来替换的 4TB 2.5 寸 SATA 接口固态硬盘。结果…… 并不理想，现在京东自营只找到了三款。更难受的是，根据论坛上的赛博邻居反馈，其中两款是数据火葬场；而剩下的那款，一块盘要卖我两千多块，也就是说两块盘加起来比我买这台 Gen 10 Plus 都贵。所以，换硬盘这个方案也被否了。</p>
 <p>正巧就在这个时候，它又开始狂飙。我想，iLO 里面不是能看见温度吗？那赶紧看看是啥玩意这么热呗？这一看，才找到了问题的根源。</p>
-<h2 id="问题根源及解决方案"><a href="#问题根源及解决方案" class="headerlink" title="问题根源及解决方案"></a>问题根源及解决方案</h2><p>趁着风扇狂飙之际，我进入了 iLO 的温度页面，发现有个传感器 <code>12 - AHCI Max HD</code> 的当前温度是 50°C，而它的警告阈值是 60°C，严重错误阈值是 70°C。也就是说，这时候 BIOS 发现这个东西烫的要挂掉了，所以就要赶紧让风扇转起来散热。等了一会风扇慢下来之后，我发现这个传感器的值变成了 35°C，而且怎么刷新都不变。</p>
-<p>搁网上一顿冲浪之后找到了<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vaHBlc2MvcHVibGljL2RvY0Rpc3BsYXk/ZG9jSWQ9YTAwMDgzMTU0ZW5fdXMmZG9jTG9jYWxlPWVuX1VT">惠普的一篇通告<i class="fa fa-external-link-alt"></i></span>，从这里得知这并不是一个物理上的传感器，它检测到的温度是通过惠普的一个叫 <code>Agentless Management Service</code> 的软件组件向主板汇报的。此外还找到<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGl0YWNoaS5jby5qcC9wcm9kdWN0cy9pdC9oYTgwMDB2L3N1cHBvcnQvcHJvZHVjdGluZm8vYXJ0aWNsZS5odG1sP2lkPUFEVi0yMDI0LTAwMTY=">日立的一个类似的通告<i class="fa fa-external-link-alt"></i></span>说硬盘在 AHCI 模式下会导致风扇转速异常升高。</p>
+<h2 id="问题根源及解决方案"><a href="#问题根源及解决方案" class="headerlink" title="问题根源及解决方案"></a>问题根源及解决方案</h2><p>趁着风扇狂飙之际，我进入了 iLO 的温度页面，发现有个传感器<code>12 - AHCI Max HD</code>的当前温度是 50°C，而它的警告阈值是 60°C，严重错误阈值是 70°C。也就是说，这时候 BIOS 发现这个东西烫的要挂掉了，所以就要赶紧让风扇转起来散热。等了一会风扇慢下来之后，我发现这个传感器的值变成了 35°C，而且怎么刷新都不变。</p>
+<p>搁网上一顿冲浪之后找到了<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vaHBlc2MvcHVibGljL2RvY0Rpc3BsYXk/ZG9jSWQ9YTAwMDgzMTU0ZW5fdXMmZG9jTG9jYWxlPWVuX1VT">惠普的一篇通告<i class="fa fa-external-link-alt"></i></span>，从这里得知这并不是一个物理上的传感器，它检测到的温度是通过惠普的一个叫<code>Agentless Management Service</code>的软件组件向主板汇报的。此外还找到<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGl0YWNoaS5jby5qcC9wcm9kdWN0cy9pdC9oYTgwMDB2L3N1cHBvcnQvcHJvZHVjdGluZm8vYXJ0aWNsZS5odG1sP2lkPUFEVi0yMDI0LTAwMTY=">日立的一个类似的通告<i class="fa fa-external-link-alt"></i></span>说硬盘在 AHCI 模式下会导致风扇转速异常升高。</p>
 <p>到 ESXi 里面检查了之后，发现我用的惠普定制系统里面是带着 AMS 组件的。这时候我灵机一动，既然是因为 AMS 汇报了错误的温度才导致这个问题，而要让 AMS 汇报正确的温度，那我就得把硬盘换成 HPE 认证的盘，可想而知这玩意没准会相当贵，而且作为个人用户都不一定买得到。那如果我把 AMS 卸了，让传感器拿不到数据呢？</p>
 <p>说干就干。保险起见我先去了惠普支持网站，下载好了最新版的 AMS 软件包，一旦出了问题我还可以把它再装回去。然后回到 ESXi，开启 SSH。</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到AMS的软件包名</span></span><br><span class="line">[root@ESXi:~] esxcli software vib list | grep ams</span><br><span class="line"><span class="comment"># 这个是给Gen 10系列用的</span></span><br><span class="line">amsd 701.11.8.5.22-1OEM.701.0.0.16850804 HPE VMwareAccepted 2023-08-08</span><br><span class="line"><span class="comment"># 这个是给Gen 11系列用的</span></span><br><span class="line">amsdv 701.11.3.0.17-1OEM.701.0.0.16850804 HPE VMwareAccepted 2023-06-12</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分别给这俩都卸了</span></span><br><span class="line"><span class="comment"># 命令输出我已经忘了，而且这不重要，就不写了</span></span><br><span class="line">[root@ESXi:~] esxcli software vib remove -n amsdv</span><br><span class="line">[root@ESXi:~] esxcli software vib remove -n amsd</span><br></pre></td></tr></tbody></table></figure>
 
-<p>两条卸载命令都成功之后，逐个关掉虚拟机，然后重启 ESXi 使修改生效。果不其然，重启之后，iLO 系统信息里面显示 <code>Agentless Management Service</code> 不可用，温度页面里 <code>12 - AHCI HD Max</code> 传感器也消失了。经过一星期的测试，风扇也确实没再狂飙过。问题解决！</p>
+<p>两条卸载命令都成功之后，逐个关掉虚拟机，然后重启 ESXi 使修改生效。果不其然，重启之后，iLO 系统信息里面显示<code>Agentless Management Service</code>不可用，温度页面里<code>12 - AHCI HD Max</code>传感器也消失了。经过一星期的测试，风扇也确实没再狂飙过。问题解决！</p>
 <h2 id="一点碎碎念"><a href="#一点碎碎念" class="headerlink" title="一点碎碎念"></a>一点碎碎念</h2><p>尽管这个解决方案远称不上完美，甚至有点 “解决提出问题的人” 的感觉。但这应该是权衡利弊之后的最优解。买 HPE 认证硬盘？拜托我只是拿它存电影而已，虽然要是全丢了也挺心疼，但它们确实不值这个钱。卖掉 Gen 10 Plus 再自己组一套 NAS？那又太折腾了，我实在懒得搞。而且就算夏天天气热起来之后，我毕竟也不是重度 PT 玩家，大部分时间硬盘都是空载的，我相信它不会变得很热，不会因为俩机械硬盘搞炸整台服务器。</p>
 
     </div>

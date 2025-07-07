@@ -326,7 +326,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -440,7 +440,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -554,7 +554,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -673,7 +673,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -718,11 +718,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>联动<a href="/tools/nginx/resolving-nginx-sni-issue.html">上一篇博文</a>，在解决了 OpenResty 上那个 SNI 的问题之后，我们发现有一个 Java 应用也有类似的问题。而最后发现，这是因为我们当前版本的 Java 中有一个 bug……</p>
-<p>简单来说，就是在 <code>Java 1.8u141</code> 之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code> 方法会破坏 SNI，而正好我们的代码里有这么一行：</p>
+<p>简单来说，就是在<code>Java 1.8u141</code>之前，<code>HttpsURLConnection#setDefaultHostnameVerifier()</code>方法会破坏 SNI，而正好我们的代码里有这么一行：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></tbody></table></figure>
 
 <p>翻了下框架的代码，发现如果我不设定这个值，框架也调用这个方法来指定它默认的 hostname verifier；而如果我传个 null，那么它会抛个异常给我。所以，代码层面没有很方便的解决方案。</p>
-<p>无奈，最后决定，先临时换了个没开启 SNI 的域名，暂时解决掉问题，然后升级 Java 到 <code>1.8u181</code>，一劳永逸。</p>
+<p>无奈，最后决定，先临时换了个没开启 SNI 的域名，暂时解决掉问题，然后升级 Java 到<code>1.8u181</code>，一劳永逸。</p>
 <hr>
 <p>终于，我也有机会理直气壮地喊出 “这是 Java 的 bug” 了！（笑</p>
 <p>[^1]: <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzA4MTc5MzQvZXh0ZW5kZWQtc2VydmVyLW5hbWUtc25pLWV4dGVuc2lvbi1ub3Qtc2VudC13aXRoLWpkazEtOC0wLWJ1dC1zZW5kLXdpdGgtamRrMS03">Extended server_name (SNI Extension) not sent with jdk1.8.0 but send with jdk1.7.0<i class="fa fa-external-link-alt"></i></span><br>[^2]: <span class="exturl" data-url="aHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3NlL0pESy04MDcyNDY0">Custom HostnameVerifier disables SNI support on client in Java 8<i class="fa fa-external-link-alt"></i></span></p>
@@ -788,7 +788,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -902,7 +902,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -947,8 +947,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>前段时间在网上看到了一个叫 “甜糖星愿计划” 的东西，声称可以通过贡献闲置带宽来获得积分。正好我有个 NAS，正好我的宽带一天从白天闲到黑夜，不如利用起来，少少挣一些零花钱。</p>
-<p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code> 上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
-<p>本文提到的操作全部基于 Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用 <code>Docker</code> 和 <code>docker-compose</code>。</p>
+<p>需要注意的一点是，本文提到的镜像仅在我的<code>群晖DS218+</code>上测试过，虽然镜像中未使用任何群晖限定的依赖，理论上适用于任何 x86 架构的平台，但并不保证运行效果。而且本文目标平台是 x86，如果你拥有 ARM 平台的机器，那根本不需要废这个劲，你可以直接运行甜糖星愿的可执行程序。</p>
+<p>本文提到的操作全部基于 Docker，故在按照本文操作前，请先确保你已经拥有足够的知识来使用<code>Docker</code>和<code>docker-compose</code>。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/run-tiantang-on-synology-docker.html#more" rel="contents">
@@ -1018,7 +1018,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1132,7 +1132,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1176,7 +1176,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用 <code>@Value()</code> 注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。</p>
+          <p>我们在开发过程中，为了保证项目的灵活性，经常会选择将一些值放在配置文件中，并在代码中将它注入并使用。将值注入代码最常见的一种方法，则是使用<code>@Value()</code>注解搭配 SpEL 直接注入我们需要的属性。但是鲁迅先生有云：从来如此，便对吗？这里，我想介绍一个我个人认为更好的实践：通过配置类来注入属性的值。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/spring-injecting-property-value-with-configuration-bean.html#more" rel="contents">
@@ -1246,7 +1246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1291,7 +1291,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。</p>
-<p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为 <code>v6.0.2</code> 或后续版本，因为本文涉及的功能是在 <code>v6.0.2</code> 引入的。</p>
+<p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为<code>v6.0.2</code>或后续版本，因为本文涉及的功能是在<code>v6.0.2</code>引入的。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/hexo-next-enable-google-adsense.html#more" rel="contents">
@@ -1361,7 +1361,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-07-07 22:54:40" itemprop="dateModified" datetime="2025-07-07T22:54:40+08:00">2025-07-07</time>
+      <time title="修改时间：2025-07-07 23:07:23" itemprop="dateModified" datetime="2025-07-07T23:07:23+08:00">2025-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1405,7 +1405,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了 <code>unable to find valid certification path to requested target</code> 的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。</p>
+          <p>今天我在从公司的 Maven 私库上下载依赖时，Maven 报出了<code>unable to find valid certification path to requested target</code>的问题，经查询是因为没有将私库使用的自签名证书导入到 Java 的 keystore。这里写一下我的两个解决方案，方便发生了同样问题的人参考。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/maven-unable-to-find-valid-certification-path-to-requested-target.html#more" rel="contents">
