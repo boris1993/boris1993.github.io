@@ -218,7 +218,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,7 +229,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">188</span>
+        <span class="site-state-item-count">191</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -290,6 +290,144 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/filter-vs-interceptor.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/filter-vs-interceptor.html" class="post-title-link" itemprop="url">Filter 与 interceptor 的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-13 15:36:21" itemprop="dateCreated datePublished" datetime="2022-12-13T15:36:21+08:00">2022-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/filter-vs-interceptor.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/filter-vs-interceptor.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/filter-vs-interceptor.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><ul>
+<li><code>Filter</code>是<code>Servlet</code>规范制定的，受<code>Servlet</code>容器支持，接口定义在<code>javax.servlet</code>包中。</li>
+<li><code>Filter</code>是被 Web Server（如<code>Tomcat</code>）调用。</li>
+<li><code>Filter</code> 需要在 <code>web.xml</code> 中定义之后才会起作用。</li>
+<li><code>Filter</code>只在请求的前后起作用，<code>Servlet</code>对于<code>Filter</code>来说是一个黑盒。</li>
+<li><code>Filter</code>的执行顺序是：<ul>
+<li><code>void init(FilterConfig)</code> - 容器在初始化<code>Filter</code>时调用，在<code>Filter</code>生命周期内仅会被调用一次。方法可以抛出<code>ServletException</code>。</li>
+<li><code>doFilter(ServletRequest, ServletResponse, FilterChain)</code> - Web 容器每一次请求都会调用该方法。该方法将容器的请求和响应作为参数传递进来， <code>FilterChain</code>用来调用下一个<code>Filter</code>。</li>
+<li><code>void destroy()</code> - 当容器销毁 Filter 实例时调用该方法，可以在方法中销毁资源，该方法在 Filter 的生命周期只会被调用一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Interceptor"><a href="#Interceptor" class="headerlink" title="Interceptor"></a>Interceptor</h2><ul>
+<li><code>Interceptor</code>是<code>Spring</code>容器内的，由<code>Spring</code>框架提供支持。接口<code>HandlerInterceptor</code>定义在<code>org.springframework.web.servlet</code>包中。</li>
+<li><code>Interceptor</code>是被<code>Spring</code>调用。</li>
+<li><code>Interceptor</code>可以深入到方法前后、异常抛出前后等，比起<code>Filter</code>有更大的弹性。</li>
+<li><code>Interceptor</code>还允许用户介入请求的生命周期，可以在请求过程中获取信息，通常与请求更加耦合。</li>
+<li><code>Interceptor</code>的执行顺序是：<ul>
+<li>请求到达<code>DispatcherServlet</code></li>
+<li><code>DispatcherServlet</code>将请求发送至<code>Interceptor</code>，<code>Interceptor</code>执行<code>preHandle()</code>方法</li>
+<li>请求到达<code>Controller</code></li>
+<li>请求结束后，<code>Interceptor</code>执行<code>postHandle()</code>方法</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/filter-vs-interceptor.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/setting-up-tailscale.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -326,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -440,7 +578,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -554,7 +692,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -668,7 +806,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -787,7 +925,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -902,7 +1040,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1016,7 +1154,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1132,7 +1270,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1246,7 +1384,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-26 23:54:29" itemprop="dateModified" datetime="2025-08-26T23:54:29+08:00">2025-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1294,121 +1432,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/spring-injecting-property-value-with-configuration-bean.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/hexo-next-enable-google-adsense.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hexo-next-enable-google-adsense.html" class="post-title-link" itemprop="url">在 NexT 主题中接入 Google AdSense</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-04-05 14:58:01" itemprop="dateCreated datePublished" datetime="2020-04-05T14:58:01+08:00">2020-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:57:55" itemprop="dateModified" datetime="2025-08-22T15:57:55+08:00">2025-08-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/playing/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/hexo-next-enable-google-adsense.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/hexo-next-enable-google-adsense.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/hexo-next-enable-google-adsense.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这个博客从建站到现在，也差不多有两三年时间了，一直以来也都是一种 “用爱发电” 的状况，看到其他博主都开始通过接入广告联盟来挣零花钱，说不心动那是不可能的。所以就研究了一下怎么在这个博客里面接入 Google AdSense。</p>
-<p>在使用本文介绍的方法前，请检查您的 NexT 主题版本是否为<code>v6.0.2</code>或后续版本，因为本文涉及的功能是在<code>v6.0.2</code>引入的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/hexo-next-enable-google-adsense.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
