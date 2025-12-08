@@ -29,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/translation-docker-pid-1-and-tini.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -119,15 +110,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/index.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/about/index.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -137,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
+    <loc>https://www.boris1993.com/categories/index.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -218,6 +200,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/swiftui-trigger-haptic-feedback-when-changing-tabs.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tomcat-deploy-to-root.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -236,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/swiftui-trigger-haptic-feedback-when-changing-tabs.html</loc>
+    <loc>https://www.boris1993.com/tomcat-servlet-context-listener.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -263,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
+    <loc>https://www.boris1993.com/routeros-mss-clamping.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -273,15 +264,6 @@
   
   <url>
     <loc>https://www.boris1993.com/routeros-setup-wireguard.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/routeros-mss-clamping.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -371,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/macos-manage-softwares-with-homebrew-bundle.html</loc>
+    <loc>https://www.boris1993.com/specify-different-git-config-for-different-environments.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -524,6 +506,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/redis-sentinel-in-docker.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/java-servlet-4-session-tracking.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -533,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
+    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -542,7 +533,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/java-servlet-5-filter.html</loc>
+    <loc>https://www.boris1993.com/java-spring-autoconfiguration.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -623,6 +614,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/macos-install-x11-client.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -632,7 +632,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/linux-server-security-measures.html</loc>
+    <loc>https://www.boris1993.com/macos-manage-softwares-with-homebrew-bundle.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -677,6 +677,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/java-read-src-linkedlist.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -705,15 +714,6 @@
   
   <url>
     <loc>https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/java-read-src-hashmap.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -758,7 +758,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
+    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -767,7 +767,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html</loc>
+    <loc>https://www.boris1993.com/illegal-mix-of-collations.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -794,6 +794,15 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/install-elk-part-logstash.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/java-8-sni-bug.html</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -804,15 +813,6 @@
   
   <url>
     <loc>https://www.boris1993.com/java-bean-chaining-setters.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/install-elk-part-logstash.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -866,7 +866,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/java-jvm-runtime-data-areas.html</loc>
+    <loc>https://www.boris1993.com/java-jvm-reference.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -875,7 +875,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/java-jvm-reference.html</loc>
+    <loc>https://www.boris1993.com/java-jvm-runtime-data-areas.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -903,24 +903,6 @@
   
   <url>
     <loc>https://www.boris1993.com/java-multi-threading-how-to.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
-    
-    <lastmod>2025-12-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -1064,7 +1046,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
+    <loc>https://www.boris1993.com/access-to-fiber-optic-modem-through-lan.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -1073,7 +1055,7 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/access-to-fiber-optic-modem-through-lan.html</loc>
+    <loc>https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html</loc>
     
     <lastmod>2025-12-08</lastmod>
     
@@ -1190,6 +1172,24 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/designing-and-implementing-a-short-url-service.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/disable-vercel-deployment-notification.html</loc>
+    
+    <lastmod>2025-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/.well-known/nostr.json</loc>
     
     <lastmod>2025-12-08</lastmod>
@@ -1217,20 +1217,6 @@
 
   
   <url>
-    <loc>https://www.boris1993.com/tags/setcap/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/low-numbered-ports/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tags/%E5%85%89%E7%8C%AB/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -1246,6 +1232,20 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/RouterOS/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/setcap/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/low-numbered-ports/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1679,14 +1679,14 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/JDBC/</loc>
+    <loc>https://www.boris1993.com/tags/Spring/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/Spring/</loc>
+    <loc>https://www.boris1993.com/tags/JDBC/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1714,6 +1714,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tags/Logstash/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tags/Java-8/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -1729,13 +1736,6 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/SNI/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/Logstash/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1840,6 +1840,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tags/HashMap/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -1855,13 +1862,6 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/Timer/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/HashMap/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1945,6 +1945,13 @@
   </url>
   
   <url>
+    <loc>https://www.boris1993.com/tags/Linux/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.boris1993.com/tags/XQuartz/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -1953,13 +1960,6 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/X11/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.boris1993.com/tags/Linux/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2183,13 +2183,6 @@
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/tags/Wireguard/</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.boris1993.com/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -2205,6 +2198,13 @@
   
   <url>
     <loc>https://www.boris1993.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.boris1993.com/tags/Wireguard/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2556,14 +2556,14 @@
 
   
   <url>
-    <loc>https://www.boris1993.com/categories/tips/</loc>
+    <loc>https://www.boris1993.com/categories/playing/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.boris1993.com/categories/playing/</loc>
+    <loc>https://www.boris1993.com/categories/tips/</loc>
     <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
