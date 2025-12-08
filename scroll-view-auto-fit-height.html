@@ -11,9 +11,6 @@
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
-  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
-  <meta name="yandex-verification" content="4d238d70128aa114">
-  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -23,18 +20,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="根据微信小程序 scroll-view 文档所述，scroll-view必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？">
+    <meta name="description" content="根据微信小程序scroll-view文档所述，scroll-view必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信小程序 scroll-view 填满剩余可用高度">
+<meta property="og:title" content="微信小程序scroll-view填满剩余可用高度">
 <meta property="og:url" content="https://www.boris1993.com/scroll-view-auto-fit-height.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="根据微信小程序 scroll-view 文档所述，scroll-view必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？">
+<meta property="og:description" content="根据微信小程序scroll-view文档所述，scroll-view必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/scroll-view/page-design.png">
 <meta property="article:published_time" content="2018-08-10T07:35:33.000Z">
-<meta property="article:modified_time" content="2025-12-07T15:54:15.795Z">
+<meta property="article:modified_time" content="2025-12-08T14:59:10.673Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="scroll-view">
 <meta property="article:tag" content="小程序">
@@ -45,24 +42,21 @@
 <link rel="canonical" href="https://www.boris1993.com/scroll-view-auto-fit-height.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/scroll-view-auto-fit-height.html","path":"scroll-view-auto-fit-height.html","title":"微信小程序 scroll-view 填满剩余可用高度"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/scroll-view-auto-fit-height.html","path":"scroll-view-auto-fit-height.html","title":"微信小程序scroll-view填满剩余可用高度"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>微信小程序 scroll-view 填满剩余可用高度 | Code Life</title>
+<title>微信小程序scroll-view填满剩余可用高度 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js" defer></script>
 
-  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
-  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
 
 
   <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
 
 
 
-  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
 
 
   
@@ -70,7 +64,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -210,7 +203,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84API"><span class="nav-number">2.</span> <span class="nav-text">需要的 API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%92%B8%E8%B5%B7%E8%A2%96%E5%AD%90%E5%BC%80%E5%A7%8B%E5%B9%B2"><span class="nav-number">3.</span> <span class="nav-text">撸起袖子开始干</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84API"><span class="nav-number">2.</span> <span class="nav-text">需要的API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%92%B8%E8%B5%B7%E8%A2%96%E5%AD%90%E5%BC%80%E5%A7%8B%E5%B9%B2"><span class="nav-number">3.</span> <span class="nav-text">撸起袖子开始干</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,12 +239,6 @@
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
       </span>
       <span class="links-of-author-item">
@@ -259,6 +246,9 @@
       </span>
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5iaWxpYmlsaS5jb20vMzYzMzM3NA==" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;3633374"><i class="fab fa-bilibili fa-fw"></i>Bilibili</span>
       </span>
   </div>
   <div class="cc-license animated" itemprop="license">
@@ -311,12 +301,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="微信小程序 scroll-view 填满剩余可用高度 | Code Life">
+      <meta itemprop="name" content="微信小程序scroll-view填满剩余可用高度 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          微信小程序 scroll-view 填满剩余可用高度
+          微信小程序scroll-view填满剩余可用高度
         </h1>
 
         <div class="post-meta-container">
@@ -334,7 +324,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-07 23:54:15" itemprop="dateModified" datetime="2025-12-07T23:54:15+08:00">2025-12-07</time>
+      <time title="修改时间：2025-12-08 22:59:10" itemprop="dateModified" datetime="2025-12-08T22:59:10+08:00">2025-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,22 +367,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>根据<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2NvbXBvbmVudC9zY3JvbGwtdmlldy5odG1s">微信小程序 scroll-view 文档<i class="fa fa-external-link-alt"></i></span>所述，<code>scroll-view</code>必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？</p>
+    <div class="post-body" itemprop="articleBody"><p>根据<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2NvbXBvbmVudC9zY3JvbGwtdmlldy5odG1s">微信小程序scroll-view文档<i class="fa fa-external-link-alt"></i></span>所述，<code>scroll-view</code>必须给定一个固定高度。那么如果我们想要让它自动填充剩余高度，该怎么办呢？</p>
 <span id="more"></span>
 
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在说出我的解决方案之前，先来看一下我的页面设计，以便于理解。</p>
 <p><img data-src="https://blog-static.boris1993.com/scroll-view/page-design.png" alt="Page Design"></p>
 <p>如图所示，我将这个页面分成了三部分：最顶部的导航栏<code>navbar</code>，用于显示概要信息的<code>header</code>，以及本文的主角<code>scroll-view</code>。可见，<code>scroll-view</code>位于页面的最下方，如果我直接给它设定一个固定的高度，那么在不同尺寸的屏幕上，就可能会有高度过小而在下方留白，或者高度过大超出屏幕下边界的可能。那么，自动计算<code>scroll-view</code>的高度，看起来是一个可行的办法。</p>
 <p>思路有了，接下来就开始挑趁手的工具吧！</p>
-<h1 id="需要的API"><a href="#需要的API" class="headerlink" title="需要的API"></a>需要的 API</h1><p>首先，在计算过程中，整个页面的高度是必须要有的。而小程序的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2FwaS9zeXN0ZW1pbmZvLmh0bWwjd3hnZXRzeXN0ZW1pbmZvb2JqZWN0"> wx.getSystemInfo API<i class="fa fa-external-link-alt"></i></span>正好可以提供这样的功能。</p>
-<p>其次，我们还得想办法拿到<code>scroll-view</code>上面各个组件的高度。小程序虽然没有 DOM 操作，但也提供<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2FwaS93eG1sLW5vZGVzLWluZm8uaHRtbA=="> WXML 节点信息<i class="fa fa-external-link-alt"></i></span>的 API。</p>
+<h1 id="需要的API"><a href="#需要的API" class="headerlink" title="需要的API"></a>需要的API</h1><p>首先，在计算过程中，整个页面的高度是必须要有的。而小程序的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2FwaS9zeXN0ZW1pbmZvLmh0bWwjd3hnZXRzeXN0ZW1pbmZvb2JqZWN0">wx.getSystemInfo API<i class="fa fa-external-link-alt"></i></span>正好可以提供这样的功能。</p>
+<p>其次，我们还得想办法拿到<code>scroll-view</code>上面各个组件的高度。小程序虽然没有DOM操作，但也提供<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLndlaXhpbi5xcS5jb20vbWluaXByb2dyYW0vZGV2L2FwaS93eG1sLW5vZGVzLWluZm8uaHRtbA==">WXML节点信息<i class="fa fa-external-link-alt"></i></span>的API。</p>
 <h1 id="撸起袖子开始干"><a href="#撸起袖子开始干" class="headerlink" title="撸起袖子开始干"></a>撸起袖子开始干</h1><p>既然工具有了，那么，talk is cheap, I’ll show you the code!</p>
 <p>当然，简洁起见，我只会写出相关的代码，其余的代码我将直接略掉。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>({</span><br><span class="line">    <span class="attr">data</span>: {</span><br><span class="line">        <span class="comment">// 页面总高度将会放在这里</span></span><br><span class="line">        <span class="attr">windowHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// navbar的高度</span></span><br><span class="line">        <span class="attr">navbarHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// header的高度</span></span><br><span class="line">        <span class="attr">headerHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// scroll-view的高度</span></span><br><span class="line">        <span class="attr">scrollViewHeight</span>: <span class="number">0</span></span><br><span class="line">    },</span><br><span class="line">    <span class="attr">onLoad</span>: <span class="keyword">function</span>(<span class="params">option</span>) {</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先取出页面高度 windowHeight</span></span><br><span class="line">        wx.<span class="title function_">getSystemInfo</span>({</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) {</span><br><span class="line">                that.<span class="title function_">setData</span>({</span><br><span class="line">                    <span class="attr">windowHeight</span>: res.<span class="property">windowHeight</span></span><br><span class="line">                });</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 然后取出navbar和header的高度</span></span><br><span class="line">        <span class="comment">// 根据文档，先创建一个SelectorQuery对象实例</span></span><br><span class="line">        <span class="keyword">let</span> query = wx.<span class="title function_">createSelectorQuery</span>().<span class="title function_">in</span>(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="comment">// 然后逐个取出navbar和header的节点信息</span></span><br><span class="line">        <span class="comment">// 选择器的语法与jQuery语法相同</span></span><br><span class="line">        query.<span class="title function_">select</span>(<span class="string">'#navbar'</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line">        query.<span class="title function_">select</span>(<span class="string">'#header'</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行上面所指定的请求，结果会按照顺序存放于一个数组中，在callback的第一个参数中返回</span></span><br><span class="line">        query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> {</span><br><span class="line">            <span class="comment">// 分别取出navbar和header的高度</span></span><br><span class="line">            <span class="keyword">let</span> navbarHeight = res[<span class="number">0</span>].<span class="property">height</span>;</span><br><span class="line">            <span class="keyword">let</span> headerHeight = res[<span class="number">1</span>].<span class="property">height</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后就是做个减法</span></span><br><span class="line">            <span class="keyword">let</span> scrollViewHeight = <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">windowHeight</span> - navbarHeight - headerHeight;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 算出来之后存到data对象里面</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setData</span>({</span><br><span class="line">                <span class="attr">scrollViewHeight</span>: scrollViewHeight</span><br><span class="line">            });</span><br><span class="line">        });</span><br><span class="line">    }</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="comment">// 页面总高度将会放在这里</span></span><br><span class="line">        <span class="attr">windowHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// navbar的高度</span></span><br><span class="line">        <span class="attr">navbarHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// header的高度</span></span><br><span class="line">        <span class="attr">headerHeight</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// scroll-view的高度</span></span><br><span class="line">        <span class="attr">scrollViewHeight</span>: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">onLoad</span>: <span class="keyword">function</span>(<span class="params">option</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先取出页面高度 windowHeight</span></span><br><span class="line">        wx.<span class="title function_">getSystemInfo</span>(&#123;</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">                that.<span class="title function_">setData</span>(&#123;</span><br><span class="line">                    <span class="attr">windowHeight</span>: res.<span class="property">windowHeight</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 然后取出navbar和header的高度</span></span><br><span class="line">        <span class="comment">// 根据文档，先创建一个SelectorQuery对象实例</span></span><br><span class="line">        <span class="keyword">let</span> query = wx.<span class="title function_">createSelectorQuery</span>().<span class="title function_">in</span>(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="comment">// 然后逐个取出navbar和header的节点信息</span></span><br><span class="line">        <span class="comment">// 选择器的语法与jQuery语法相同</span></span><br><span class="line">        query.<span class="title function_">select</span>(<span class="string">&#x27;#navbar&#x27;</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line">        query.<span class="title function_">select</span>(<span class="string">&#x27;#header&#x27;</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行上面所指定的请求，结果会按照顺序存放于一个数组中，在callback的第一个参数中返回</span></span><br><span class="line">        query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 分别取出navbar和header的高度</span></span><br><span class="line">            <span class="keyword">let</span> navbarHeight = res[<span class="number">0</span>].<span class="property">height</span>;</span><br><span class="line">            <span class="keyword">let</span> headerHeight = res[<span class="number">1</span>].<span class="property">height</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后就是做个减法</span></span><br><span class="line">            <span class="keyword">let</span> scrollViewHeight = <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">windowHeight</span> - navbarHeight - headerHeight;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 算出来之后存到data对象里面</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">                <span class="attr">scrollViewHeight</span>: scrollViewHeight</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>至于 WXML 里面，就还是使用双大括号来将<code>data</code>部分的<code>scrollViewHeight</code>的值绑定到<code>height</code>属性上面就是了。</p>
+<p>至于WXML里面，就还是使用双大括号来将<code>data</code>部分的<code>scrollViewHeight</code>的值绑定到<code>height</code>属性上面就是了。</p>
 <p>需要注意的是，上面计算出来的值，单位是<code>px</code>而不是<code>rpx</code>。</p>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">style</span>=<span class="string">"height: {{scrollViewHeight}}px"</span> <span class="attr">scroll-y</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- scroll-view里面的内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">style</span>=<span class="string">&quot;height: &#123;&#123;scrollViewHeight&#125;&#125;px&quot;</span> <span class="attr">scroll-y</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- scroll-view里面的内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>这样，我们就得到了一个可以自动填满屏幕最下方剩余空间的<code>scroll-view</code>啦～</p>
 
@@ -448,13 +438,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/set-up-caddy-server.html" rel="prev" title="配置 Caddy 作为静态网站服务器和前置代理">
-                  <i class="fa fa-angle-left"></i> 配置 Caddy 作为静态网站服务器和前置代理
+                <a href="/set-up-caddy-server.html" rel="prev" title="配置Caddy作为静态网站服务器和前置代理">
+                  <i class="fa fa-angle-left"></i> 配置Caddy作为静态网站服务器和前置代理
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/caddy-and-github-custom-domain.html" rel="next" title="记一个 Caddy 和 GitHub 自定义域名的坑">
-                  记一个 Caddy 和 GitHub 自定义域名的坑 <i class="fa fa-angle-right"></i>
+                <a href="/caddy-and-github-custom-domain.html" rel="next" title="记一个Caddy和GitHub自定义域名的坑">
+                  记一个Caddy和GitHub自定义域名的坑 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

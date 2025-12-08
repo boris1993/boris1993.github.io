@@ -11,9 +11,6 @@
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
-  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
-  <meta name="yandex-verification" content="4d238d70128aa114">
-  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -23,14 +20,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手 MicroServer Gen8 折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
+    <meta name="description" content="上个月冲动消费，入手了一台HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改Linux总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手MicroServer Gen8折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二手 MicroServer Gen8 折腾记 (1 &#x2F; n) - 初始化服务器">
+<meta property="og:title" content="二手MicroServer Gen8折腾记(1&#x2F;n) - 初始化服务器">
 <meta property="og:url" content="https://www.boris1993.com/setting-up-microserver-gen8.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手 MicroServer Gen8 折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
+<meta property="og:description" content="上个月冲动消费，入手了一台HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改Linux总是玩的不那么爽。现在心愿实现，开始折腾。 本篇为二手MicroServer Gen8折腾记的第一篇，记录拿到服务器之后做的一些初始化的工作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/ilo_address.jpg">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/upoad_ilo4_firmware.jpg">
@@ -45,7 +42,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/vmware-product-patches.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/to-be-continued.png">
 <meta property="article:published_time" content="2022-12-18T19:01:45.000Z">
-<meta property="article:modified_time" content="2025-12-07T15:54:15.796Z">
+<meta property="article:modified_time" content="2025-12-08T14:59:10.673Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Gen8">
 <meta property="article:tag" content="二手MicroServer Gen8折腾记">
@@ -56,24 +53,21 @@
 <link rel="canonical" href="https://www.boris1993.com/setting-up-microserver-gen8.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8.html","path":"setting-up-microserver-gen8.html","title":"二手 MicroServer Gen8 折腾记 (1 / n) - 初始化服务器"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/setting-up-microserver-gen8.html","path":"setting-up-microserver-gen8.html","title":"二手MicroServer Gen8折腾记(1/n) - 初始化服务器"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>二手 MicroServer Gen8 折腾记 (1 / n) - 初始化服务器 | Code Life</title>
+<title>二手MicroServer Gen8折腾记(1/n) - 初始化服务器 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js" defer></script>
 
-  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
-  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
 
 
   <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
 
 
 
-  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
 
 
   
@@ -81,7 +75,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -221,7 +214,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BD%AEiLO"><span class="nav-number">1.</span> <span class="nav-text">重置 iLO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0iLO%E5%9B%BA%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">更新 iLO 固件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8DiLO%E9%99%8D%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">修复 iLO 降级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AERAID"><span class="nav-number">4.</span> <span class="nav-text">配置 RAID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85ESXi"><span class="nav-number">5.</span> <span class="nav-text">装 ESXi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%A2%E9%98%B5%E5%88%97%E5%8D%A1%E9%A9%B1%E5%8A%A8%EF%BC%8C%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.</span> <span class="nav-text">换阵列卡驱动，更新系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><span class="nav-number">7.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BD%AEiLO"><span class="nav-number">1.</span> <span class="nav-text">重置iLO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0iLO%E5%9B%BA%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">更新iLO固件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8DiLO%E9%99%8D%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">修复iLO降级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AERAID"><span class="nav-number">4.</span> <span class="nav-text">配置RAID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85ESXi"><span class="nav-number">5.</span> <span class="nav-text">装ESXi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%A2%E9%98%B5%E5%88%97%E5%8D%A1%E9%A9%B1%E5%8A%A8%EF%BC%8C%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.</span> <span class="nav-text">换阵列卡驱动，更新系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><span class="nav-number">7.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,12 +250,6 @@
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
       </span>
       <span class="links-of-author-item">
@@ -270,6 +257,9 @@
       </span>
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5iaWxpYmlsaS5jb20vMzYzMzM3NA==" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;3633374"><i class="fab fa-bilibili fa-fw"></i>Bilibili</span>
       </span>
   </div>
   <div class="cc-license animated" itemprop="license">
@@ -322,12 +312,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="二手 MicroServer Gen8 折腾记 (1 &#x2F; n) - 初始化服务器 | Code Life">
+      <meta itemprop="name" content="二手MicroServer Gen8折腾记(1&#x2F;n) - 初始化服务器 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          二手 MicroServer Gen8 折腾记 (1 / n) - 初始化服务器
+          二手MicroServer Gen8折腾记(1/n) - 初始化服务器
         </h1>
 
         <div class="post-meta-container">
@@ -345,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-07 23:54:15" itemprop="dateModified" datetime="2025-12-07T23:54:15+08:00">2025-12-07</time>
+      <time title="修改时间：2025-12-08 22:59:10" itemprop="dateModified" datetime="2025-12-08T22:59:10+08:00">2025-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -388,87 +378,87 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>上个月冲动消费，入手了一台 HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改 Linux 总是玩的不那么爽。现在心愿实现，开始折腾。</p>
-<p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手 MicroServer Gen8 折腾记</a>的第一篇，记录拿到服务器之后做的一些初始化的工作。</p>
+    <div class="post-body" itemprop="articleBody"><p>上个月冲动消费，入手了一台HPE ProLiant MicroServer Gen8。其实我早想搞一台正经的服务器来玩了，因为群晖的魔改Linux总是玩的不那么爽。现在心愿实现，开始折腾。</p>
+<p>本篇为<a href="/tags/%E4%BA%8C%E6%89%8BMicroServer-Gen8%E6%8A%98%E8%85%BE%E8%AE%B0/">二手MicroServer Gen8折腾记</a>的第一篇，记录拿到服务器之后做的一些初始化的工作。</p>
 <span id="more"></span>
 
-<h2 id="重置iLO"><a href="#重置iLO" class="headerlink" title="重置iLO"></a>重置 iLO</h2><p>到手之后，我发现我把事想简单了，服务器一般只给一个 VGA 口，而这台也不例外，然而，我这里没有一个能接 VGA 口的设备。是的，你没看错。不止显示器没有 VGA 口，连电视也没有。遂果断下单了一个 VGA 到 HDMI 转接器。第二天收到快递，兴冲冲的接上，却发现只能显示 POST 画面，之后无论是正常继续启动，还是进 RBSU（ROM based setup utility），电视上都是无信号。事到如此，接显示器这条路算是堵死了。别问我为什么不买个支持 VGA 的显示器，你自己想想这成本划得来么？</p>
-<p>虽然接显示器不行，但是天无绝人之路啊，地球人都知道，正经服务器上都有一个带外管理系统，Gen 8 也不例外，带有惠普的 iLO（Integrated Lights-out）带外管理模块。iLO 的地址在 POST 界面左下角有显示，</p>
+<h2 id="重置iLO"><a href="#重置iLO" class="headerlink" title="重置iLO"></a>重置iLO</h2><p>到手之后，我发现我把事想简单了，服务器一般只给一个VGA口，而这台也不例外，然而，我这里没有一个能接VGA口的设备。是的，你没看错。不止显示器没有VGA口，连电视也没有。遂果断下单了一个VGA到HDMI转接器。第二天收到快递，兴冲冲的接上，却发现只能显示POST画面，之后无论是正常继续启动，还是进RBSU（ROM based setup utility），电视上都是无信号。事到如此，接显示器这条路算是堵死了。别问我为什么不买个支持VGA的显示器，你自己想想这成本划得来么？</p>
+<p>虽然接显示器不行，但是天无绝人之路啊，地球人都知道，正经服务器上都有一个带外管理系统，Gen 8也不例外，带有惠普的iLO（Integrated Lights-out）带外管理模块。iLO的地址在POST界面左下角有显示，</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ilo_address.jpg"></p>
-<p>但是这个地址跟我的网络不在一个网段啊？没办法，拎出来一台带网口的笔记本电脑，把电脑跟 iLO 直连，给电脑配置静态 IP 为<code>10.132.190.34</code>，子网掩码<code>255.0.0.0</code>，试一试，果然能 ping 通，问题解决。开玩笑，哥们可是网络工程专业的。</p>
-<p>接下来就要重置 iLO，省得因为上任机主的配置引出什么别的麻烦。但是问题又出现了，不知道什么原因，iLO 的网页不是打不开，就是报错<code>Connection with iLO cannot be established</code>。一顿上网冲浪之后，发现还可以用 SSH 连接，果断掏出<code>putty</code>，好在上任没改 iLO 的默认管理员密码，不然我就真的抓瞎了。</p>
-<p>登进去之后，反手就是一个<code>Reset /map1</code>来重置 iLO 的所有配置，过了一会 iLO 重启完毕，再次 SSH 登录，把 DHCP 打开，这样我就能给 iLO 分配一个我的内网的地址了。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;/&gt;hpiLO-&gt; cd /map1/dhcpendpt1</span><br><span class="line"></span><br><span class="line">status=0</span><br><span class="line">status_tag=COMMAND COMPLETED</span><br><span class="line">Tue Dec 20 15:13:47 2022</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/map1/dhcpendpt1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/map1/dhcpendpt1&gt;hpiLO-&gt; set EnabledState=yes</span><br><span class="line"></span><br><span class="line">status=0</span><br><span class="line">status_tag=COMMAND COMPLETED</span><br><span class="line">Tue Dec 20 15:14:28 2022</span><br><span class="line"></span><br><span class="line">Network settings change applied.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Settings change applied, iLO 4 will now be reset.</span><br><span class="line">Logged Out: It may take several minutes before you can log back in.</span><br><span class="line"></span><br><span class="line">CLI session stopped</span><br></pre></td></tr></tbody></table></figure>
+<p>但是这个地址跟我的网络不在一个网段啊？没办法，拎出来一台带网口的笔记本电脑，把电脑跟iLO直连，给电脑配置静态IP为<code>10.132.190.34</code>，子网掩码<code>255.0.0.0</code>，试一试，果然能ping通，问题解决。开玩笑，哥们可是网络工程专业的。</p>
+<p>接下来就要重置iLO，省得因为上任机主的配置引出什么别的麻烦。但是问题又出现了，不知道什么原因，iLO的网页不是打不开，就是报错<code>Connection with iLO cannot be established</code>。一顿上网冲浪之后，发现还可以用SSH连接，果断掏出<code>putty</code>，好在上任没改iLO的默认管理员密码，不然我就真的抓瞎了。</p>
+<p>登进去之后，反手就是一个<code>Reset /map1</code>来重置iLO的所有配置，过了一会iLO重启完毕，再次SSH登录，把DHCP打开，这样我就能给iLO分配一个我的内网的地址了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;/&gt;hpiLO-&gt; cd /map1/dhcpendpt1</span><br><span class="line"></span><br><span class="line">status=0</span><br><span class="line">status_tag=COMMAND COMPLETED</span><br><span class="line">Tue Dec 20 15:13:47 2022</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/map1/dhcpendpt1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/map1/dhcpendpt1&gt;hpiLO-&gt; set EnabledState=yes</span><br><span class="line"></span><br><span class="line">status=0</span><br><span class="line">status_tag=COMMAND COMPLETED</span><br><span class="line">Tue Dec 20 15:14:28 2022</span><br><span class="line"></span><br><span class="line">Network settings change applied.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Settings change applied, iLO 4 will now be reset.</span><br><span class="line">Logged Out: It may take several minutes before you can log back in.</span><br><span class="line"></span><br><span class="line">CLI session stopped</span><br></pre></td></tr></table></figure>
 
-<p>然后 iLO 会自动重启，过几分钟重启完成之后，就能在路由器里面看到 iLO 分配的地址了。</p>
-<h2 id="更新iLO固件"><a href="#更新iLO固件" class="headerlink" title="更新iLO固件"></a>更新 iLO 固件</h2><p>上面一顿操作重置 iLO 之后，很神奇地，iLO 的 web 端能正常打开了。那么接下来，我就要升级 iLO 固件的版本，因为自带的 iLO 版本太低，反正自己用着玩，用新不用旧。</p>
-<p>到<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vY29ubmVjdC9zL3Byb2R1Y3Q/bGFuZ3VhZ2U9ZW5fVVMma21wbW9pZD0xMDA5MTQzODUzJnRhYj1kcml2ZXJzQW5kU29mdHdhcmUjdD1Ecml2ZXJzYW5kU29mdHdhcmU="> HPE Integrated Lights-Out 4 (iLO 4)<i class="fa fa-external-link-alt"></i></span>这里进入<code>Online ROM Flash Component for Windows x64 - HPE Integrated Lights-Out 4</code>下载最新的 iLO 4 固件。目前最新版是<code>2.81</code>。下载好安装程序之后，打开运行，选择<code>Extract</code>把安装包解压缩到一个地方。<code>Install</code>是不能用的，因为只能在服务器上才能自动安装。解压后可以看到一个叫<code>ilo4_281.bin</code>的文件，这个就是 iLO 的固件。</p>
-<p>进入 iLO 控制台的<code>Administration -&gt; Firmware</code>页面，<code>File</code>里面选择<code>ilo4_281.bin</code>这个文件。</p>
+<p>然后iLO会自动重启，过几分钟重启完成之后，就能在路由器里面看到iLO分配的地址了。</p>
+<h2 id="更新iLO固件"><a href="#更新iLO固件" class="headerlink" title="更新iLO固件"></a>更新iLO固件</h2><p>上面一顿操作重置iLO之后，很神奇地，iLO的web端能正常打开了。那么接下来，我就要升级iLO固件的版本，因为自带的iLO版本太低，反正自己用着玩，用新不用旧。</p>
+<p>到<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vY29ubmVjdC9zL3Byb2R1Y3Q/bGFuZ3VhZ2U9ZW5fVVMma21wbW9pZD0xMDA5MTQzODUzJnRhYj1kcml2ZXJzQW5kU29mdHdhcmUjdD1Ecml2ZXJzYW5kU29mdHdhcmU=">HPE Integrated Lights-Out 4 (iLO 4)<i class="fa fa-external-link-alt"></i></span>这里进入<code>Online ROM Flash Component for Windows x64 - HPE Integrated Lights-Out 4</code>下载最新的iLO 4固件。目前最新版是<code>2.81</code>。下载好安装程序之后，打开运行，选择<code>Extract</code>把安装包解压缩到一个地方。<code>Install</code>是不能用的，因为只能在服务器上才能自动安装。解压后可以看到一个叫<code>ilo4_281.bin</code>的文件，这个就是iLO的固件。</p>
+<p>进入iLO控制台的<code>Administration -&gt; Firmware</code>页面，<code>File</code>里面选择<code>ilo4_281.bin</code>这个文件。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/upoad_ilo4_firmware.jpg"></p>
 <p>然后点<code>Upload</code>，静等固件上传和更新完成即可。期间不要刷新页面或者关掉页面内的进度条弹窗，地球人都知道，刷机期间手贱就是找事。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/upgrading_ilo4_firmware.jpg"></p>
-<h2 id="修复iLO降级"><a href="#修复iLO降级" class="headerlink" title="修复iLO降级"></a>修复 iLO 降级</h2><p>iLO 重启之后，我看到一条报错说<code>iLO Self-Test reports a problem with: Embedded Flash/SD-CARD</code>，在网上一顿冲浪之后，说可以尝试在<code>Diagnostics</code>页面里 Reset iLO 来修复。</p>
+<h2 id="修复iLO降级"><a href="#修复iLO降级" class="headerlink" title="修复iLO降级"></a>修复iLO降级</h2><p>iLO重启之后，我看到一条报错说<code>iLO Self-Test reports a problem with: Embedded Flash/SD-CARD</code>，在网上一顿冲浪之后，说可以尝试在<code>Diagnostics</code>页面里Reset iLO来修复。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/fixing-embedded-flash-error.png"></p>
-<p>但是我在 Reset 之后，问题依旧存在，按照网上的说法来看，应该是硬件有问题，要更换板载 Flash 了。</p>
-<p>更新：发现了另一篇博客<span class="exturl" data-url="aHR0cHM6Ly9zeXNhZG1pbmd1aWRlcy5vcmcvMjAxOC8wOC8yNi9maXgtaWxvLWhwLWVycm9yLWVtYmVkZGVkLWZsYXNoLXNkLWNhcmQtZW1iZWRkZWQtbWVkaWEtbWFuYWdlci1mYWlsZWQtaW5pdGlhbGl6YXRpb24v"> [Fix] ILO HP Error – Embedded Flash/SD-CARD: Embedded media manager failed initialization<i class="fa fa-external-link-alt"></i></span>，说强制格式化 NAND 可以修复，我试了下，格式化并重启之后，一开始虽然显示正常，但几分钟后依旧会报同样错误。</p>
-<p>此外根据<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vaHBlc2MvcHVibGljL2RvY0Rpc3BsYXk/ZG9jSWQ9YzA0OTk2MDk3"> HPE 官方的 advisory<i class="fa fa-external-link-alt"></i></span>：</p>
+<p>但是我在Reset之后，问题依旧存在，按照网上的说法来看，应该是硬件有问题，要更换板载Flash了。</p>
+<p>更新：发现了另一篇博客<span class="exturl" data-url="aHR0cHM6Ly9zeXNhZG1pbmd1aWRlcy5vcmcvMjAxOC8wOC8yNi9maXgtaWxvLWhwLWVycm9yLWVtYmVkZGVkLWZsYXNoLXNkLWNhcmQtZW1iZWRkZWQtbWVkaWEtbWFuYWdlci1mYWlsZWQtaW5pdGlhbGl6YXRpb24v">[Fix] ILO HP Error – Embedded Flash&#x2F;SD-CARD: Embedded media manager failed initialization<i class="fa fa-external-link-alt"></i></span>，说强制格式化NAND可以修复，我试了下，格式化并重启之后，一开始虽然显示正常，但几分钟后依旧会报同样错误。</p>
+<p>此外根据<span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmhwZS5jb20vaHBlc2MvcHVibGljL2RvY0Rpc3BsYXk/ZG9jSWQ9YzA0OTk2MDk3">HPE官方的advisory<i class="fa fa-external-link-alt"></i></span>：</p>
 <blockquote>
 <p>Step 1) Upgrade the iLO 4 firmware to version 2.61<br>Step 2) Perform a NAND format<br>Step 3) Check the iLO status If the iLO status is normal, then skip to Step 6 If the iLO status is still degraded, continue to Step 4<br>Step 4) Schedule downtime; AC power-cycle and repeat the NAND format<br>Step 5) Check the iLO status If the iLO status is normal, continue to<br>Step 6 If the iLO status is still degraded, then skip to Step 7<br>Step 6) Perform these final steps if the system board does not need to be replaced: Reboot the server; reinstall IP; and refresh the server in OneView (if server is managed by OneView)<br>Step 7) If steps 1-4 did not resolve the degraded iLO, replace the system board.</p>
 </blockquote>
 <p>确实走到了<code>Step 7</code>，只能<code>replace the system board</code>。╮(╯▽╰)╭</p>
-<h2 id="配置RAID"><a href="#配置RAID" class="headerlink" title="配置RAID"></a>配置 RAID</h2><blockquote>
-<p>这一部分因为不方便复现，故使用<span class="exturl" data-url="aHR0cHM6Ly93d3cuZW9vbC5uZXQvP3A9NjU="> HP MicroServer Gen8 不疼使用教程 - Eddie’s Blog<i class="fa fa-external-link-alt"></i></span>的文章配图用作参考。向 Eddie 表示由衷的感谢！</p>
+<h2 id="配置RAID"><a href="#配置RAID" class="headerlink" title="配置RAID"></a>配置RAID</h2><blockquote>
+<p>这一部分因为不方便复现，故使用<span class="exturl" data-url="aHR0cHM6Ly93d3cuZW9vbC5uZXQvP3A9NjU=">HP MicroServer Gen8不疼使用教程 - Eddie’s Blog<i class="fa fa-external-link-alt"></i></span>的文章配图用作参考。向Eddie表示由衷的感谢！</p>
 </blockquote>
-<p>我在 3 和 4 盘位插了两块 1TB 的固态硬盘，1 和 2 盘位暂时空下来。这么做的原因是，1 和 2 盘位是 SATA-3，3 和 4 盘位是 SATA-2，所以我打算把更快的接口留给日后拓展更大容量的机械硬盘，而固态硬盘本身读写速度就很快，插在一个慢点的接口上也不会造成很大的性能问题。</p>
-<p>插硬盘之前要先关机，因为 Gen 8 的硬盘位是不支持热插拔的。插好硬盘后开机，在 POST 界面出现<code>HP Dynamic Smart Array B120i</code>的初始化信息时敲 F5 来进入 RAID 配置页面。这里可以多敲几次来保证成功率，就像进 BIOS 敲 del 那样。如果进入成功，就会看到一个写着 HP 的大球，这时候系统正在加载 RAID 卡的配置界面。</p>
+<p>我在3和4盘位插了两块1TB的固态硬盘，1和2盘位暂时空下来。这么做的原因是，1和2盘位是SATA-3，3和4盘位是SATA-2，所以我打算把更快的接口留给日后拓展更大容量的机械硬盘，而固态硬盘本身读写速度就很快，插在一个慢点的接口上也不会造成很大的性能问题。</p>
+<p>插硬盘之前要先关机，因为Gen 8的硬盘位是不支持热插拔的。插好硬盘后开机，在POST界面出现<code>HP Dynamic Smart Array B120i</code>的初始化信息时敲F5来进入RAID配置页面。这里可以多敲几次来保证成功率，就像进BIOS敲del那样。如果进入成功，就会看到一个写着HP的大球，这时候系统正在加载RAID卡的配置界面。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/smart-storage-administrator-loading.png"></p>
-<p>进来之后，就可以点<code>Dynamic Smart Array B120i RAID</code>页面的<code>Configure</code>按钮来配置 RAID 了。</p>
+<p>进来之后，就可以点<code>Dynamic Smart Array B120i RAID</code>页面的<code>Configure</code>按钮来配置RAID了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/configure-raid.png"></p>
-<h2 id="装ESXi"><a href="#装ESXi" class="headerlink" title="装ESXi"></a>装 ESXi</h2><p>前面洋洋洒洒整了一大堆，但那都是前置任务。到这一步开始主线，装系统。Gen 8 主板上带了一个 TF 卡槽和一个 USB 2.0 接口。起初我打算把 ESXi 装在 TF 卡里面的，但是试了一张之前用过的老卡，安装慢的令人发指，又试了一张几个月前买的卡，结果 ESXi 安装程序发现不了，怀疑是系统没识别。我懒得折腾卡了，遂拿出一个闲置的 U 盘，插在了主板的 USB 口上。</p>
+<h2 id="装ESXi"><a href="#装ESXi" class="headerlink" title="装ESXi"></a>装ESXi</h2><p>前面洋洋洒洒整了一大堆，但那都是前置任务。到这一步开始主线，装系统。Gen 8主板上带了一个TF卡槽和一个USB 2.0接口。起初我打算把ESXi装在TF卡里面的，但是试了一张之前用过的老卡，安装慢的令人发指，又试了一张几个月前买的卡，结果ESXi安装程序发现不了，怀疑是系统没识别。我懒得折腾卡了，遂拿出一个闲置的U盘，插在了主板的USB口上。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/usb_stick_inside.JPEG"></p>
-<p>至于 ESXi 系统，我选择了惠普定制的版本，毕竟不知道 VMWare 官方版跟定制版差别在哪，还不如直接选厂商定制的版本来的方便。镜像可以到<span class="exturl" data-url="aHR0cHM6Ly9jdXN0b21lcmNvbm5lY3Qudm13YXJlLmNvbS9kb3dubG9hZHMvZGV0YWlscz9kb3dubG9hZEdyb3VwPU9FTS1FU1hJNjVVMi1IUEUmcHJvZHVjdElkPTYxNA==">这里<i class="fa fa-external-link-alt"></i></span>下载，记得要选<code>Pre-Gen9 Custom Image</code>。下载好 Install CD 之后，进入 iLO 的远程控制台，HTML5 的就行，然后点击标题栏的光盘按钮，选<code>CD/DVD - Local *.iso file</code>，就可以把 ESXi 的安装盘插进服务器的虚拟光驱。</p>
+<p>至于ESXi系统，我选择了惠普定制的版本，毕竟不知道VMWare官方版跟定制版差别在哪，还不如直接选厂商定制的版本来的方便。镜像可以到<span class="exturl" data-url="aHR0cHM6Ly9jdXN0b21lcmNvbm5lY3Qudm13YXJlLmNvbS9kb3dubG9hZHMvZGV0YWlscz9kb3dubG9hZEdyb3VwPU9FTS1FU1hJNjVVMi1IUEUmcHJvZHVjdElkPTYxNA==">这里<i class="fa fa-external-link-alt"></i></span>下载，记得要选<code>Pre-Gen9 Custom Image</code>。下载好Install CD之后，进入iLO的远程控制台，HTML5的就行，然后点击标题栏的光盘按钮，选<code>CD/DVD - Local *.iso file</code>，就可以把ESXi的安装盘插进服务器的虚拟光驱。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ilo_remote_dvd.png"></p>
-<p>打开服务器电源之后，就会正常从光盘启动进入 ESXi 的安装程序。安装步骤很简单，这里就不再赘述了，唯一要注意的就是选对安装位置，因为安装程序会把一整块盘当作系统盘，所以我个人建议把它装在 TF 卡或者 U 盘里。也不用担心 TF 卡或者 U 盘会降低系统性能，我这里实测没有什么明显难忍的性能问题。</p>
+<p>打开服务器电源之后，就会正常从光盘启动进入ESXi的安装程序。安装步骤很简单，这里就不再赘述了，唯一要注意的就是选对安装位置，因为安装程序会把一整块盘当作系统盘，所以我个人建议把它装在TF卡或者U盘里。也不用担心TF卡或者U盘会降低系统性能，我这里实测没有什么明显难忍的性能问题。</p>
 <h2 id="换阵列卡驱动，更新系统"><a href="#换阵列卡驱动，更新系统" class="headerlink" title="换阵列卡驱动，更新系统"></a>换阵列卡驱动，更新系统</h2><blockquote>
 <p>这里参考了<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3JlYWQvY3Y4ODU2NTY1">第三篇：虚拟化层 - MicroServer Gen8 + ESXi Server 6.5u3 部署踩坑记 - 天一先生的游牧生活<i class="fa fa-external-link-alt"></i></span>，这里向作者表示感谢！</p>
 </blockquote>
-<p>装好 ESXi 之后，我先装上了<code>Ubuntu Server 22.10</code>和<code>Windows Server 2019 Datacenter</code>。用了一段时间，总感觉有点奇怪，尽管说这是好多年前的机器，性能不强我是有心理准备的，但也不至于点个开始菜单都要好几秒，打开资源管理器也要将近半分钟。今天等待程序载入的时候看了眼任务管理器，发现磁盘占用率竟然 100%，要知道我这是两块固态硬盘组的阵列诶！既然有问题，就上网搜一搜呗，这不冲浪不知道，一冲浪吓一跳，惠普给<code>ESXi 6.x</code>打包的<code>B120i</code>板载阵列卡驱动有性能问题，会导致磁盘读写异常缓慢。针对这个问题，网上最普遍的一个解决方案就是把阵列卡驱动退回到<code>ESXi 5.x</code>中的最后一个版本<code>5.5.0-88</code>。</p>
+<p>装好ESXi之后，我先装上了<code>Ubuntu Server 22.10</code>和<code>Windows Server 2019 Datacenter</code>。用了一段时间，总感觉有点奇怪，尽管说这是好多年前的机器，性能不强我是有心理准备的，但也不至于点个开始菜单都要好几秒，打开资源管理器也要将近半分钟。今天等待程序载入的时候看了眼任务管理器，发现磁盘占用率竟然100%，要知道我这是两块固态硬盘组的阵列诶！既然有问题，就上网搜一搜呗，这不冲浪不知道，一冲浪吓一跳，惠普给<code>ESXi 6.x</code>打包的<code>B120i</code>板载阵列卡驱动有性能问题，会导致磁盘读写异常缓慢。针对这个问题，网上最普遍的一个解决方案就是把阵列卡驱动退回到<code>ESXi 5.x</code>中的最后一个版本<code>5.5.0-88</code>。</p>
 <p>那话不多说，搞它！</p>
-<p>首先，把所有虚拟机关机，全部关机后，在 ESXi 的<code>主机</code>页面里，点击<code>操作</code>菜单中的<code>进入维护模式</code>；在点击<code>操作</code>菜单，进入<code>服务</code>，选择<code>启用 Secure Shell(SSH)</code>，因为后面要 SSH 进 ESXi 里面安装驱动。</p>
-<p>下载<code>http://downloads.hpe.com/pub/softlib2/software1/pubsw-linux/p1749737361/v98767/hpvsa-5.5.0-88.zip</code>，完成后，解压这个 ZIP 包，得到驱动本体<code>scsi-hpvsa-5.5.0-88OEM.550.0.0.1331820.x86_64.vib</code>。将这个<code>vib</code>文件上传到 ESXi 的<code>/var/log/vmware</code>目录下。上传成功后，SSH 进入 ESXi，执行如下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载当前版本的驱动</span></span><br><span class="line">esxcli software vib remove -n scsi-hpvsa -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装5.5.0-88版驱动</span></span><br><span class="line">esxcli software vib install -v file:scsi-hpvsa-5.5.0-88OEM.550.0.0.1331820.x86_64.vib --force --no-sig-check --maintenance-mode</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启ESXi</span></span><br><span class="line">reboot</span><br></pre></td></tr></tbody></table></figure>
+<p>首先，把所有虚拟机关机，全部关机后，在ESXi的<code>主机</code>页面里，点击<code>操作</code>菜单中的<code>进入维护模式</code>；在点击<code>操作</code>菜单，进入<code>服务</code>，选择<code>启用 Secure Shell(SSH)</code>，因为后面要SSH进ESXi里面安装驱动。</p>
+<p>下载<code>http://downloads.hpe.com/pub/softlib2/software1/pubsw-linux/p1749737361/v98767/hpvsa-5.5.0-88.zip</code>，完成后，解压这个ZIP包，得到驱动本体<code>scsi-hpvsa-5.5.0-88OEM.550.0.0.1331820.x86_64.vib</code>。将这个<code>vib</code>文件上传到ESXi的<code>/var/log/vmware</code>目录下。上传成功后，SSH进入ESXi，执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载当前版本的驱动</span></span><br><span class="line">esxcli software vib remove -n scsi-hpvsa -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装5.5.0-88版驱动</span></span><br><span class="line">esxcli software vib install -v file:scsi-hpvsa-5.5.0-88OEM.550.0.0.1331820.x86_64.vib --force --no-sig-check --maintenance-mode</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启ESXi</span></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
-<p>重启完了，进 ESXi 看了眼驱动，发现 RAID 也没认出来，驱动也变成<code>vmw_achi</code>了，这是没认出来阵列卡驱动啊。搜了一下，发现可以强制禁用<code>vmw_ahci</code>，于是再进 SSH，执行<code>esxcli system module set --enabled=false --module=vmw_ahci</code>这条命令，再重启之后，RAID 回来了，驱动也变成<code>hpvsa</code>了。</p>
+<p>重启完了，进ESXi看了眼驱动，发现RAID也没认出来，驱动也变成<code>vmw_achi</code>了，这是没认出来阵列卡驱动啊。搜了一下，发现可以强制禁用<code>vmw_ahci</code>，于是再进SSH，执行<code>esxcli system module set --enabled=false --module=vmw_ahci</code>这条命令，再重启之后，RAID回来了，驱动也变成<code>hpvsa</code>了。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/confirm-b120i-driver.png"></p>
 <p>如果你在禁用<code>vmw_ahci</code>之后还不能成功加载<code>hpvsa</code>驱动，那么就得先执行<code>esxcli software vib remove -n scsi-hpvsa -f</code>来卸掉它，重启之后再重装。这时候千万不能操作硬盘，否则可能造成数据损毁。</p>
-<p>换驱动的时候了解到，VMWare 也会给 ESXi 推出一些系统修正补丁，那有补丁当然要打啊。一开始我想着参照<span class="exturl" data-url="aHR0cHM6Ly9lc3hpLXBhdGNoZXMudi1mcm9udC5kZS9FU1hpLTYuNS4wLmh0bWw="> ESXi 6.5 - VMware ESXi Patch Tracker<i class="fa fa-external-link-alt"></i></span>这个网站给的命令在线更新，但是一直报<code>Got no data from process</code>这个错误，<span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdGllcy52bXdhcmUuY29tL3Q1L0VTWGktRGlzY3Vzc2lvbnMvZXN4Y2xpLXNvZnR3YXJlLXByb2ZpbGUtdXBkYXRlLWZhaWxzLXdpdGgtcXVvdC1Hb3Qtbm8tZGF0YS1mcm9tL3RkLXAvMjg0NzQ3OA==">VMWare Communities<i class="fa fa-external-link-alt"></i></span>上面也有人遇到同样的错误，解决方法是下载补丁然后手动安装。</p>
+<p>换驱动的时候了解到，VMWare也会给ESXi推出一些系统修正补丁，那有补丁当然要打啊。一开始我想着参照<span class="exturl" data-url="aHR0cHM6Ly9lc3hpLXBhdGNoZXMudi1mcm9udC5kZS9FU1hpLTYuNS4wLmh0bWw=">ESXi 6.5 - VMware ESXi Patch Tracker<i class="fa fa-external-link-alt"></i></span>这个网站给的命令在线更新，但是一直报<code>Got no data from process</code>这个错误，<span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdGllcy52bXdhcmUuY29tL3Q1L0VTWGktRGlzY3Vzc2lvbnMvZXN4Y2xpLXNvZnR3YXJlLXByb2ZpbGUtdXBkYXRlLWZhaWxzLXdpdGgtcXVvdC1Hb3Qtbm8tZGF0YS1mcm9tL3RkLXAvMjg0NzQ3OA==">VMWare Communities<i class="fa fa-external-link-alt"></i></span>上面也有人遇到同样的错误，解决方法是下载补丁然后手动安装。</p>
 <blockquote>
-<p>关于<code>Got no data from process</code>这个错误，根据<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFraXZvLmNvbS9ibG9nL2hvdy10by11cGdyYWRlLWZyb20tdm13YXJlLXZzcGhlcmUtZXN4aS02LTctdG8tNy0wLw=="> How to Upgrade from VMware vSphere ESXi 6.7 to 7.0<i class="fa fa-external-link-alt"></i></span>中的描述：</p>
+<p>关于<code>Got no data from process</code>这个错误，根据<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFraXZvLmNvbS9ibG9nL2hvdy10by11cGdyYWRlLWZyb20tdm13YXJlLXZzcGhlcmUtZXN4aS02LTctdG8tNy0wLw==">How to Upgrade from VMware vSphere ESXi 6.7 to 7.0<i class="fa fa-external-link-alt"></i></span>中的描述：</p>
 <blockquote>
 <p>If you see the error message:</p>
-<p>Got no data from process: LANG=en_US.UTF-8 /usr/lib/vmware/esxcli-software profile.update  -d “<span class="exturl" data-url="aHR0cHM6Ly9ob3N0dXBkYXRlLnZtd2FyZS5jb20vc29mdHdhcmUvVlVNL1BST0RVQ1RJT04vbWFpbi92bXctZGVwb3QtaW5kZXgueG1s">https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml<i class="fa fa-external-link-alt"></i></span>“ -p “ESXi-7.0.0-15843807-standard”,</p>
+<p>Got no data from process: LANG&#x3D;en_US.UTF-8 &#x2F;usr&#x2F;lib&#x2F;vmware&#x2F;esxcli-software profile.update  -d “<span class="exturl" data-url="aHR0cHM6Ly9ob3N0dXBkYXRlLnZtd2FyZS5jb20vc29mdHdhcmUvVlVNL1BST0RVQ1RJT04vbWFpbi92bXctZGVwb3QtaW5kZXgueG1s">https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml<i class="fa fa-external-link-alt"></i></span>“ -p “ESXi-7.0.0-15843807-standard”,</p>
 <p>check whether there is a persistent scratch partition. There may not be a persistent scratch partition if you’re running ESXi from a USB flash drive. </p>
 </blockquote>
-<p>而根据<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFraXZvLmNvbS9ibG9nL3J1bi1lc3hpLWZyb20tdXNiLWZsYXNoLWRyaXZlLWd1aWRlLw=="> How to Run ESXi from a USB Flash Drive<i class="fa fa-external-link-alt"></i></span>所说：</p>
+<p>而根据<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFraXZvLmNvbS9ibG9nL3J1bi1lc3hpLWZyb20tdXNiLWZsYXNoLWRyaXZlLWd1aWRlLw==">How to Run ESXi from a USB Flash Drive<i class="fa fa-external-link-alt"></i></span>所说：</p>
 <blockquote>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/esxi-partition-map-hard-drive.webp" alt="Installing ESXi on an 8-GB drive (or bigger)"><br>If ESXi is installed on a USB flash drive or SD card whose size is 8 GB or more, partitions #2 and #3 are not created. The Scratch directory used to store logs is linked to the /tmp/scratch directory that is located on the RAM drive. </p>
+<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/esxi-partition-map-hard-drive.webp" alt="Installing ESXi on an 8-GB drive (or bigger)"><br>If ESXi is installed on a USB flash drive or SD card whose size is 8 GB or more, partitions #2 and #3 are not created. The Scratch directory used to store logs is linked to the &#x2F;tmp&#x2F;scratch directory that is located on the RAM drive. </p>
 </blockquote>
-<p>也就是说，如果把 ESXi 装在大于等于 8GB 的 TF 卡或者 U 盘里面的话，就会缺少一个<code>scratch</code>分区。</p>
-<p>另外根据这个分区图，我还发现，如果把 ESXi 装在硬盘里的话，它会把剩余空间作为数据存储，而不是像网上一些文章说的只用来装系统，这个我后面有时间会再测试一下。</p>
+<p>也就是说，如果把ESXi装在大于等于8GB的TF卡或者U盘里面的话，就会缺少一个<code>scratch</code>分区。</p>
+<p>另外根据这个分区图，我还发现，如果把ESXi装在硬盘里的话，它会把剩余空间作为数据存储，而不是像网上一些文章说的只用来装系统，这个我后面有时间会再测试一下。</p>
 </blockquote>
-<p>那么，首先到<span class="exturl" data-url="aHR0cHM6Ly9jdXN0b21lcmNvbm5lY3Qudm13YXJlLmNvbS9wYXRjaA=="> Product Patches<i class="fa fa-external-link-alt"></i></span>这里，Product 选<code>ESXi (Embeeded and Installable)</code>，Version 选<code>6.5.0</code>（如果你装的不一样，以你为准），点 Search 后会列出一堆补丁，选最新那个，点 Download Now 来下载补丁的 ZIP 包。然后点<code>View Details</code>，我们要在详细信息页面找到 Image Profile 的名字。</p>
+<p>那么，首先到<span class="exturl" data-url="aHR0cHM6Ly9jdXN0b21lcmNvbm5lY3Qudm13YXJlLmNvbS9wYXRjaA==">Product Patches<i class="fa fa-external-link-alt"></i></span>这里，Product选<code>ESXi (Embeeded and Installable)</code>，Version选<code>6.5.0</code>（如果你装的不一样，以你为准），点Search后会列出一堆补丁，选最新那个，点Download Now来下载补丁的ZIP包。然后点<code>View Details</code>，我们要在详细信息页面找到Image Profile的名字。</p>
 <p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vmware-product-patches.png"></p>
 <blockquote>
-<p>关于什么是 Image Profile：<br>VMWare 文档说：Image profiles define the set of VIBs that an ESXi installation or update process uses.<br>也就是说，Image Profile 定义了包里的哪些 VIB 会被安装。<br>每个补丁包中都会带有 2~4 个 Image Profile，根据<span class="exturl" data-url="aHR0cHM6Ly93d3cudmlydGVuLm5ldC92bXdhcmUvdm13YXJlLWVzeGktaW1hZ2UtcHJvZmlsZXMv"> VMware ESXi Image Profiles<i class="fa fa-external-link-alt"></i></span>的描述，各个 Image Profile 的含义是：</p>
+<p>关于什么是Image Profile：<br>VMWare文档说：Image profiles define the set of VIBs that an ESXi installation or update process uses.<br>也就是说，Image Profile定义了包里的哪些VIB会被安装。<br>每个补丁包中都会带有2~4个Image Profile，根据<span class="exturl" data-url="aHR0cHM6Ly93d3cudmlydGVuLm5ldC92bXdhcmUvdm13YXJlLWVzeGktaW1hZ2UtcHJvZmlsZXMv">VMware ESXi Image Profiles<i class="fa fa-external-link-alt"></i></span>的描述，各个Image Profile的含义是：</p>
 <ol>
 <li>ESXi-5.5.0-20140704001-standard - 包含全部补丁</li>
-<li>ESXi-5.5.0-20140704001-no-tools - 包含除了 VMware Tools 之外的全部补丁</li>
+<li>ESXi-5.5.0-20140704001-no-tools - 包含除了VMware Tools之外的全部补丁</li>
 <li>ESXi-5.5.0-20140701001s-standard - 只包含安全补丁</li>
-<li>ESXi-5.5.0-20140701001s-no-tools - 只包含安全补丁，同时没有 VMware Tools</li>
+<li>ESXi-5.5.0-20140701001s-no-tools - 只包含安全补丁，同时没有VMware Tools</li>
 </ol>
 </blockquote>
-<p>因为我要更新所有的 VIB，所以我将要用<code>ESXi-6.5.0-20221004001-standard</code>这个 Image Profile。SSH 进 ESXi，执行<code>esxcli software profile update -p ESXi-6.5.0-20221004001-standard -d /vmfs/volumes/63a1b271-3340b157-711e-d0bf9c4694d8/ESXi650-202210001.zip</code>开始安装（记得把<code>-d</code>参数指定的绝对路径改为你的机器上面的路径）。安装过程比较耗时间，这期间可以<code>tail -f /var/log/esxupdate.log</code>来看 ESXi 正在干什么，毕竟看着日志在跑，心里也有底，不然总害怕系统是不是死掉了。</p>
-<p>更新成功后，<code>esxcli</code>会打出来哪些包被更新了，但是实在是太多，我根本懒得看，直接重启。重启之后，ESXi 能正常进系统，存储和虚拟机都正常载入，说明没出啥毛病。这时候就可以退出维护模式，给虚拟机开机。有一说一，现在不管是开机还是打开什么东西，反应确实快了不少，看来驱动导致的硬盘性能问题已经成功解决。</p>
+<p>因为我要更新所有的VIB，所以我将要用<code>ESXi-6.5.0-20221004001-standard</code>这个Image Profile。SSH进ESXi，执行<code>esxcli software profile update -p ESXi-6.5.0-20221004001-standard -d /vmfs/volumes/63a1b271-3340b157-711e-d0bf9c4694d8/ESXi650-202210001.zip</code>开始安装（记得把<code>-d</code>参数指定的绝对路径改为你的机器上面的路径）。安装过程比较耗时间，这期间可以<code>tail -f /var/log/esxupdate.log</code>来看ESXi正在干什么，毕竟看着日志在跑，心里也有底，不然总害怕系统是不是死掉了。</p>
+<p>更新成功后，<code>esxcli</code>会打出来哪些包被更新了，但是实在是太多，我根本懒得看，直接重启。重启之后，ESXi能正常进系统，存储和虚拟机都正常载入，说明没出啥毛病。这时候就可以退出维护模式，给虚拟机开机。有一说一，现在不管是开机还是打开什么东西，反应确实快了不少，看来驱动导致的硬盘性能问题已经成功解决。</p>
 <h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><p><img data-src="https://blog-static.boris1993.com/to-be-continued.png"></p>
 
     </div>
@@ -523,8 +513,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/are-servlet-and-spring-mvc-thread-safe.html" rel="prev" title="Servlet 和 Spring MVC 是不是线程安全的">
-                  <i class="fa fa-angle-left"></i> Servlet 和 Spring MVC 是不是线程安全的
+                <a href="/are-servlet-and-spring-mvc-thread-safe.html" rel="prev" title="Servlet和Spring MVC是不是线程安全的">
+                  <i class="fa fa-angle-left"></i> Servlet和Spring MVC是不是线程安全的
                 </a>
             </div>
             <div class="post-nav-item">

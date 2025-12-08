@@ -11,9 +11,6 @@
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
-  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
-  <meta name="yandex-verification" content="4d238d70128aa114">
-  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -23,17 +20,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。 这篇博文将介绍一些后面会用到的接口和类。">
+    <meta name="description" content="Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。 这篇博文将介绍一些后面会用到的接口和类。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="循序渐进写一个 Servlet (1) - 介绍相关的接口和类">
+<meta property="og:title" content="循序渐进写一个Servlet(1) - 介绍相关的接口和类">
 <meta property="og:url" content="https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。 这篇博文将介绍一些后面会用到的接口和类。">
+<meta property="og:description" content="Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。 这篇博文将介绍一些后面会用到的接口和类。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-06T02:04:38.000Z">
-<meta property="article:modified_time" content="2025-12-07T15:54:15.791Z">
+<meta property="article:modified_time" content="2025-12-08T14:59:10.670Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Servlet">
@@ -43,24 +40,21 @@
 <link rel="canonical" href="https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html","path":"java-servlet-1-introducing-classes-and-interfaces.html","title":"循序渐进写一个 Servlet (1) - 介绍相关的接口和类"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/java-servlet-1-introducing-classes-and-interfaces.html","path":"java-servlet-1-introducing-classes-and-interfaces.html","title":"循序渐进写一个Servlet(1) - 介绍相关的接口和类"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>循序渐进写一个 Servlet (1) - 介绍相关的接口和类 | Code Life</title>
+<title>循序渐进写一个Servlet(1) - 介绍相关的接口和类 | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js" defer></script>
 
-  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
-  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
 
 
   <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
 
 
 
-  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
 
 
   
@@ -68,7 +62,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -244,12 +237,6 @@
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
       </span>
       <span class="links-of-author-item">
@@ -257,6 +244,9 @@
       </span>
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5iaWxpYmlsaS5jb20vMzYzMzM3NA==" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;3633374"><i class="fab fa-bilibili fa-fw"></i>Bilibili</span>
       </span>
   </div>
   <div class="cc-license animated" itemprop="license">
@@ -309,12 +299,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="循序渐进写一个 Servlet (1) - 介绍相关的接口和类 | Code Life">
+      <meta itemprop="name" content="循序渐进写一个Servlet(1) - 介绍相关的接口和类 | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          循序渐进写一个 Servlet (1) - 介绍相关的接口和类
+          循序渐进写一个Servlet(1) - 介绍相关的接口和类
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +322,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-07 23:54:15" itemprop="dateModified" datetime="2025-12-07T23:54:15+08:00">2025-12-07</time>
+      <time title="修改时间：2025-12-08 22:59:10" itemprop="dateModified" datetime="2025-12-08T22:59:10+08:00">2025-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -375,47 +365,47 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Servlet（Server Applet），全称 Java Servlet，是用 Java 编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。本系列将一步步地写出一个 Servlet 程序。</p>
+    <div class="post-body" itemprop="articleBody"><p>Servlet（Server Applet），全称Java Servlet，是用Java编写的服务器端程序。其主要功能在于交互式地浏览和修改数据，生成动态Web内容。本系列将一步步地写出一个Servlet程序。</p>
 <p>这篇博文将介绍一些后面会用到的接口和类。</p>
 <span id="more"></span>
 
-<h1 id="常用的类和接口"><a href="#常用的类和接口" class="headerlink" title="常用的类和接口"></a>常用的类和接口</h1><h2 id="javax-servlet-Servlet"><a href="#javax-servlet-Servlet" class="headerlink" title="javax.servlet.Servlet"></a><code>javax.servlet.Servlet</code></h2><p><code>javax.servlet.Servlet</code>是一个接口，它定义了一个 servlet 必须要实现的方法，包括如何初始化一个 servlet，如何让这个 servlet 处理请求，以及如何将这个 servlet 从容器中移除，即 “生命周期方法”。它们被调用的顺序，即 servlet 的生命周期，是这样的：</p>
+<h1 id="常用的类和接口"><a href="#常用的类和接口" class="headerlink" title="常用的类和接口"></a>常用的类和接口</h1><h2 id="javax-servlet-Servlet"><a href="#javax-servlet-Servlet" class="headerlink" title="javax.servlet.Servlet"></a><code>javax.servlet.Servlet</code></h2><p><code>javax.servlet.Servlet</code>是一个接口，它定义了一个servlet必须要实现的方法，包括如何初始化一个servlet，如何让这个servlet处理请求，以及如何将这个servlet从容器中移除，即“生命周期方法”。它们被调用的顺序，即servlet的生命周期，是这样的：</p>
 <ol>
-<li>容器生成这个 servlet 的对象，然后调用其<code>init()</code>方法完成初始化步骤</li>
+<li>容器生成这个servlet的对象，然后调用其<code>init()</code>方法完成初始化步骤</li>
 <li>当收到请求之后，会调用其<code>service()</code>方法来处理请求</li>
-<li>当这个 servlet 停止服务时，<code>destroy()</code>方法会被调用并准备销毁</li>
+<li>当这个servlet停止服务时，<code>destroy()</code>方法会被调用并准备销毁</li>
 </ol>
-<p>Servlet 的启动时间由<code>web.xml</code>中<code>load-on-startup</code>属性决定，当值为负数或未设定该属性时，容器可以自由决定何时初始化该 servlet；当值为零或正整数时，容器需要在启动时就初始化该 servlet，此时该属性的值代表初始化的优先级，值越小优先级越高，对于有相同优先级的 servlet，容器可以自行决定加载顺序。</p>
-<p>当应用被重新部署，或者在容器停机时，servlet 会被销毁，同时 servet 无法被手动销毁。</p>
+<p>Servlet的启动时间由<code>web.xml</code>中<code>load-on-startup</code>属性决定，当值为负数或未设定该属性时，容器可以自由决定何时初始化该servlet；当值为零或正整数时，容器需要在启动时就初始化该servlet，此时该属性的值代表初始化的优先级，值越小优先级越高，对于有相同优先级的servlet，容器可以自行决定加载顺序。</p>
+<p>当应用被重新部署，或者在容器停机时，servlet会被销毁，同时servet无法被手动销毁。</p>
 <p>除了生命周期方法外，<code>Servlet</code>接口还有两个方法：</p>
 <ol>
-<li><code>getServletConfig()</code>可以让 servlet 取到启动相关的信息</li>
-<li><code>getServletInfo()</code>用来获取 servlet 相关的信息，如作者、版本号、版权信息等</li>
+<li><code>getServletConfig()</code>可以让servlet取到启动相关的信息</li>
+<li><code>getServletInfo()</code>用来获取servlet相关的信息，如作者、版本号、版权信息等</li>
 </ol>
-<h2 id="javax-servlet-GenericServlet"><a href="#javax-servlet-GenericServlet" class="headerlink" title="javax.servlet.GenericServlet"></a><code>javax.servlet.GenericServlet</code></h2><p><code>GenericServlet</code>类是一个抽象类，定义了一个协议无关的，通用的 servlet 实现。</p>
+<h2 id="javax-servlet-GenericServlet"><a href="#javax-servlet-GenericServlet" class="headerlink" title="javax.servlet.GenericServlet"></a><code>javax.servlet.GenericServlet</code></h2><p><code>GenericServlet</code>类是一个抽象类，定义了一个协议无关的，通用的servlet实现。</p>
 <p>它预置了<code>ServletConfig</code>接口的实现，并且简易实现了<code>Servlet</code>接口中的<code>init()</code>方法和<code>destroy()</code>方法，开发人员只需要覆盖<code>service()</code>方法。</p>
-<h2 id="javax-servlet-http-HttpServlet"><a href="#javax-servlet-http-HttpServlet" class="headerlink" title="javax.servlet.http.HttpServlet"></a><code>javax.servlet.http.HttpServlet</code></h2><p><code>HttpServlet</code>类提供了一个用于处理 HTTP 请求的 servlet 基类。一个<code>HttpServlet</code>的子类至少需要覆盖一个方法，而且通常是覆盖如下几个方法：</p>
+<h2 id="javax-servlet-http-HttpServlet"><a href="#javax-servlet-http-HttpServlet" class="headerlink" title="javax.servlet.http.HttpServlet"></a><code>javax.servlet.http.HttpServlet</code></h2><p><code>HttpServlet</code>类提供了一个用于处理HTTP请求的servlet基类。一个<code>HttpServlet</code>的子类至少需要覆盖一个方法，而且通常是覆盖如下几个方法：</p>
 <ol>
 <li><code>doGet()</code>，以实现对<code>HTTP GET</code>请求的处理</li>
 <li><code>doPost()</code>，以实现对<code>HTTP POST</code>请求的处理</li>
 <li><code>doPut()</code>，以实现对<code>HTTP PUT</code>请求的处理</li>
 <li><code>doDelete()</code>，以实现对<code>HTTP DELETE</code>请求的处理</li>
-<li><code>init()</code>和<code>destroy()</code>，以管理 servlet 生命周期内所需的资源</li>
-<li><code>getServletInfo()</code>，可以用来自定义 servlet 返回哪些关于自身的信息</li>
+<li><code>init()</code>和<code>destroy()</code>，以管理servlet生命周期内所需的资源</li>
+<li><code>getServletInfo()</code>，可以用来自定义servlet返回哪些关于自身的信息</li>
 </ol>
-<p>此外，不建议直接覆盖<code>service()</code>方法，因为<code>HttpServlet#service()</code>方法中已经实现了根据 HTTP 请求类型调用对应的<code>doXXX()</code>方法。</p>
-<p>如果某个 HTTP 方法对应的<code>doXXX()</code>方法没有被覆盖，则视为该 servlet 不支持这个 HTTP 方法。如在没有覆盖<code>doGet()</code>时收到<code>HTTP GET</code>请求，则会返回<code>HTTP 405 METHOD NOT ALLOWED (对应HTTP 1.1)</code>错误码，或<code>HTTP 400 BAD REQUEST (对应其他HTTP版本)</code>错误码。</p>
+<p>此外，不建议直接覆盖<code>service()</code>方法，因为<code>HttpServlet#service()</code>方法中已经实现了根据HTTP请求类型调用对应的<code>doXXX()</code>方法。</p>
+<p>如果某个HTTP方法对应的<code>doXXX()</code>方法没有被覆盖，则视为该servlet不支持这个HTTP方法。如在没有覆盖<code>doGet()</code>时收到<code>HTTP GET</code>请求，则会返回<code>HTTP 405 METHOD NOT ALLOWED (对应HTTP 1.1)</code>错误码，或<code>HTTP 400 BAD REQUEST (对应其他HTTP版本)</code>错误码。</p>
 <p>需要注意的是，<code>HttpServlet</code>类并没有实现<code>HTTP CONNECT</code>和<code>HTTP PATCH</code>方法。当请求这两个方法，或其他非<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSFRUUC9NZXRob2Rz">标准<i class="fa fa-external-link-alt"></i></span>方法时，将会返回<code>HTTP 501 NOT IMPLEMENTED</code>错误码。</p>
 <h1 id="常用的常量"><a href="#常用的常量" class="headerlink" title="常用的常量"></a>常用的常量</h1><ul>
-<li>HTTP 方法相关的常量位于<code>HttpServlet</code>类中，是 String 类型，命名规则为<code>METHOD_方法</code>，如<code>METHOD_GET</code></li>
-<li> HTTP 状态码相关的常量位于<code>HttpServletResponse</code>类中，是 int 类型，命名规则为<code>SC_状态码名</code>，如<code>SC_OK</code>、<code>SC_NOT_FOUND</code></li>
+<li>HTTP方法相关的常量位于<code>HttpServlet</code>类中，是String类型，命名规则为<code>METHOD_方法</code>，如<code>METHOD_GET</code></li>
+<li>HTTP状态码相关的常量位于<code>HttpServletResponse</code>类中，是int类型，命名规则为<code>SC_状态码名</code>，如<code>SC_OK</code>、<code>SC_NOT_FOUND</code></li>
 </ul>
 <h1 id="系列博文"><a href="#系列博文" class="headerlink" title="系列博文"></a>系列博文</h1><ul>
-<li><a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html">循序渐进写一个 Servlet (1) - 介绍相关的接口和类</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-2-first-servlet.html">循序渐进写一个 Servlet (2) - 第一个 servlet</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html">循序渐进写一个 Servlet (3) - 分别处理 GET 和 POST</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-4-session-tracking.html">循序渐进写一个 Servlet (4) - 会话追踪</a></li>
-<li><a href="/projects/java/Servlet/java-servlet-5-filter.html">循序渐进写一个 Servlet (5) - Filter</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-1-introducing-classes-and-interfaces.html">循序渐进写一个Servlet(1) - 介绍相关的接口和类</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-2-first-servlet.html">循序渐进写一个Servlet(2) - 第一个servlet</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-3-handle-get-and-post.html">循序渐进写一个Servlet(3) - 分别处理GET和POST</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-4-session-tracking.html">循序渐进写一个Servlet(4) - 会话追踪</a></li>
+<li><a href="/projects/java/Servlet/java-servlet-5-filter.html">循序渐进写一个Servlet(5) - Filter</a></li>
 </ul>
 
     </div>
@@ -470,13 +460,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/java-servlet-2-first-servlet.html" rel="prev" title="循序渐进写一个 Servlet (2) - 第一个 servlet">
-                  <i class="fa fa-angle-left"></i> 循序渐进写一个 Servlet (2) - 第一个 servlet
+                <a href="/java-servlet-2-first-servlet.html" rel="prev" title="循序渐进写一个Servlet(2) - 第一个servlet">
+                  <i class="fa fa-angle-left"></i> 循序渐进写一个Servlet(2) - 第一个servlet
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/java-servlet-3-handle-get-and-post.html" rel="next" title="循序渐进写一个 Servlet (3) - 分别处理 GET 和 POST">
-                  循序渐进写一个 Servlet (3) - 分别处理 GET 和 POST <i class="fa fa-angle-right"></i>
+                <a href="/java-servlet-3-handle-get-and-post.html" rel="next" title="循序渐进写一个Servlet(3) - 分别处理GET和POST">
+                  循序渐进写一个Servlet(3) - 分别处理GET和POST <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -11,9 +11,6 @@
   <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/manifest.json">
   <meta name="google-site-verification" content="Qw4beUdi9l3fPhazbrJKcO9VcGWuWFHjBwL2YXsV9FU">
-  <meta name="msvalidate.01" content="DCD6E61D797D51CEBCD35C313C708277">
-  <meta name="yandex-verification" content="4d238d70128aa114">
-  <meta name="baidu-site-verification" content="M3sM0Zbhyh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -23,19 +20,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.26.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件Visual GC来监控 Java 应用的垃圾回收情况。">
+    <meta name="description" content="我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件Visual GC来监控Java应用的垃圾回收情况。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 VisualVM 监控应用 GC">
+<meta property="og:title" content="使用VisualVM监控应用GC">
 <meta property="og:url" content="https://www.boris1993.com/monitor-gc-with-visual-vm.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件Visual GC来监控 Java 应用的垃圾回收情况。">
+<meta property="og:description" content="我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件Visual GC来监控Java应用的垃圾回收情况。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog-static.boris1993.com/monitor-gc-with-visualvm/install-visual-gc.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/monitor-gc-with-visualvm/monitor-gc.png">
 <meta property="article:published_time" content="2020-02-09T09:38:42.000Z">
-<meta property="article:modified_time" content="2025-12-07T15:54:15.793Z">
+<meta property="article:modified_time" content="2025-12-08T14:59:10.672Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="VisualVM">
@@ -46,24 +43,21 @@
 <link rel="canonical" href="https://www.boris1993.com/monitor-gc-with-visual-vm.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/monitor-gc-with-visual-vm.html","path":"monitor-gc-with-visual-vm.html","title":"使用 VisualVM 监控应用 GC"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.boris1993.com/monitor-gc-with-visual-vm.html","path":"monitor-gc-with-visual-vm.html","title":"使用VisualVM监控应用GC"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>使用 VisualVM 监控应用 GC | Code Life</title>
+<title>使用VisualVM监控应用GC | Code Life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJTESLRX7L"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-JJTESLRX7L","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js" defer></script>
 
-  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
-  <script async src="https://hm.baidu.com/hm.js?35c0dde4dcb72e943e5fd12fe7cd8bf0"></script>
 
 
   <script data-pjax defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;e5bcb451049d4b529efd7ecdab37dbc5&quot;}'></script>
 
 
 
-  <script async defer data-website-id="93d2d7ff-da5c-45eb-8af7-4def0f4a7c29" src="https://umami.boris1993.com/script.js"></script>
 
 
   
@@ -71,7 +65,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -247,12 +240,6 @@
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmlzMTk5Mw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;boris1993"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9ib3Jpc196aGFvXzkz" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;boris_zhao_93"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2JvcmlzLnpoYW8uOTM=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;boris.zhao.93"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
-      </span>
-      <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8zODMzODU4L2JvcmlzMTk5Mw==" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3833858&#x2F;boris1993"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
       </span>
       <span class="links-of-author-item">
@@ -260,6 +247,9 @@
       </span>
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9ib3Jpcy56aGFv" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;boris.zhao"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5iaWxpYmlsaS5jb20vMzYzMzM3NA==" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;3633374"><i class="fab fa-bilibili fa-fw"></i>Bilibili</span>
       </span>
   </div>
   <div class="cc-license animated" itemprop="license">
@@ -312,12 +302,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="使用 VisualVM 监控应用 GC | Code Life">
+      <meta itemprop="name" content="使用VisualVM监控应用GC | Code Life">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用 VisualVM 监控应用 GC
+          使用VisualVM监控应用GC
         </h1>
 
         <div class="post-meta-container">
@@ -335,7 +325,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-07 23:54:15" itemprop="dateModified" datetime="2025-12-07T23:54:15+08:00">2025-12-07</time>
+      <time title="修改时间：2025-12-08 22:59:10" itemprop="dateModified" datetime="2025-12-08T22:59:10+08:00">2025-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -378,23 +368,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>我们知道，使用 VisualVM 可以监控 Java 应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用 VisualVM 的插件<code>Visual GC</code>来监控 Java 应用的垃圾回收情况。</p>
+    <div class="post-body" itemprop="articleBody"><p>我们知道，使用VisualVM可以监控Java应用的各种运行时信息，包括资源占用、正在运行的线程等等。本文将简单介绍如何使用VisualVM的插件<code>Visual GC</code>来监控Java应用的垃圾回收情况。</p>
 <span id="more"></span>
 
-<h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装<code>Visual GC</code>插件</h2><p>因为<code>Visual GC</code>插件并不是随 VisualVM 附带的，需要到插件商店下载。</p>
-<p>点击<code>Tools</code>–&gt;<code>Plugins</code> 打开插件管理窗口，进入<code>Available Plugins</code>，在左侧窗格中勾选<code>Visual GC</code>，点击<code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启 VisualVM。</p>
+<h2 id="安装Visual-GC插件"><a href="#安装Visual-GC插件" class="headerlink" title="安装Visual GC插件"></a>安装<code>Visual GC</code>插件</h2><p>因为<code>Visual GC</code>插件并不是随VisualVM附带的，需要到插件商店下载。</p>
+<p>点击<code>Tools</code>–&gt;<code>Plugins</code>打开插件管理窗口，进入<code>Available Plugins</code>，在左侧窗格中勾选<code>Visual GC</code>，点击<code>Install</code>，同意许可协议后，稍等片刻即可完成安装。安装完成之后无需重启VisualVM。</p>
 <p><img data-src="https://blog-static.boris1993.com/monitor-gc-with-visualvm/install-visual-gc.png" alt="Install Visual GC"></p>
-<h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在 VisualVM 的<code>Applications</code>窗格中双击要监控的应用，然后在右侧窗格中进入<code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p>
+<h2 id="监控垃圾回收"><a href="#监控垃圾回收" class="headerlink" title="监控垃圾回收"></a>监控垃圾回收</h2><p>安装完成后，在VisualVM的<code>Applications</code>窗格中双击要监控的应用，然后在右侧窗格中进入<code>Visual GC</code>，即可以图形化的方式查看当前该应用中各个内存区域的情况。</p>
 <p><img data-src="https://blog-static.boris1993.com/monitor-gc-with-visualvm/monitor-gc.png" alt="Monitor GC"></p>
 <p>窗格中的<code>Spaces</code>部分展示的是当前各个区域的占用情况；<code>Graphs</code>部分则包括：</p>
 <ul>
 <li><code>Compile Time</code>：编译时间，包括编译的次数，和累计的编译时间。图表中的一次脉冲就代表一次编译，脉冲越宽代表编译时间越长</li>
-<li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类 (<code>loaded</code>)，卸载了多少个类 (<code>unloaded</code>)，和累计用于类加载的时间</li>
+<li><code>Class Loader Time</code>：类加载时间，包括加载了多少个类(<code>loaded</code>)，卸载了多少个类(<code>unloaded</code>)，和累计用于类加载的时间</li>
 <li><code>GC Time</code>：垃圾回收时间，包括垃圾回收的次数，垃圾回收消耗的时间，和上一次垃圾回收的原因</li>
-<li><code>Eden Space</code>：Eden 区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li>
+<li><code>Eden Space</code>：Eden区的空间，括号中第一位是最大容量，第二位是当前容量，其后冒号跟着的是当前使用了的大小，再往后是发生垃圾回收的次数，和垃圾回收消耗的时间</li>
 <li><code>Survivor 0</code>和<code>Survivor 1</code>：两个<code>Survivor</code>区的空间，同样包括最大容量、当前容量，和当前使用了的大小</li>
 <li><code>Old Gen</code>：老年代的空间，同样包括最大容量、当前容量、当前使用了的大小、发生垃圾回收的次数，和垃圾回收消耗的时间</li>
-<li><code>Metaspace</code>：Metaspace 的空间 (如果使用的是 Java 1.7 及之前版本，这里则是<code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li>
+<li><code>Metaspace</code>：Metaspace的空间(如果使用的是Java 1.7及之前版本，这里则是<code>Perm Gen</code>)，包括最大容量、当前容量，和当前使用了的大小</li>
 </ul>
 
     </div>
@@ -449,13 +439,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/java-jvm-reference.html" rel="prev" title="简谈 JVM 中的几种引用">
-                  <i class="fa fa-angle-left"></i> 简谈 JVM 中的几种引用
+                <a href="/java-jvm-reference.html" rel="prev" title="简谈JVM中的几种引用">
+                  <i class="fa fa-angle-left"></i> 简谈JVM中的几种引用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/git-commandline-unescape-chinese-characters.html" rel="next" title="解决命令行中 Git 显示中文文件名乱码">
-                  解决命令行中 Git 显示中文文件名乱码 <i class="fa fa-angle-right"></i>
+                <a href="/git-commandline-unescape-chinese-characters.html" rel="next" title="解决命令行中Git显示中文文件名乱码">
+                  解决命令行中Git显示中文文件名乱码 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
