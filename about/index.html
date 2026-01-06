@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://apps.foldingathome.org/awards?user=650987489&type=wus">
 <meta property="og:image" content="https://apps.foldingathome.org/awards?user=650987489">
 <meta property="article:published_time" content="2017-11-18T18:01:51.000Z">
-<meta property="article:modified_time" content="2026-01-06T16:48:40.914Z">
+<meta property="article:modified_time" content="2026-01-06T17:01:48.836Z">
 <meta property="article:author" content="Boris Zhao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://www.boincstats.com/signature/-1/bam/36477/sig.png">
@@ -92,7 +92,7 @@
     let shouldBypassRedirection = false;
 
     let searchParams = new URLSearchParams(window.location.search);
-    shouldBypassRedirection = searchParams.get(bypassRedirectionQueryParam) == "1";
+    shouldBypassRedirection = searchParams.has('bypassRedirection');
 
     // Redirect to the main site from other sites like GitHub pages or GitEE pages
     if (!location.href.match("http(s{0,1}):\/\/(localhost|www.boris1993.com)") && !shouldBypassRedirection) {
