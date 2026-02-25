@@ -212,7 +212,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,7 +223,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">191</span>
+        <span class="site-state-item-count">193</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -281,6 +281,121 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-jvm-reference.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
+      <meta itemprop="name" content="Boris Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Life">
+      <meta itemprop="description" content="Boris has arrived!">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Code Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-jvm-reference.html" class="post-title-link" itemprop="url">简谈JVM中的几种引用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-07 11:36:26" itemprop="dateCreated datePublished" datetime="2020-02-07T11:36:26+08:00">2020-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/java-jvm-reference.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/java-jvm-reference.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/java-jvm-reference.html"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在<a href="/projects/java/fundamentals/java-gc-algorithms.html">Java的垃圾回收算法</a>一文中，我们知道JVM是根据一个对象有没有被引用来判断要不要对其进行垃圾回收的。但是，如果我们为了提升垃圾回收的效率，想要再把垃圾回收的条件更细化一些，比如只在内存非常紧张的时候才回收某些对象，那么光靠一个粗略的“引用”，就显得心有余而力不足了。所以，在<code>JDK 1.2</code>版本之后，Java扩充了引用的概念，将其扩充成了<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code>四个更细化的概念。</p>
+<p>本文将参考《深入理解Java虚拟机(第3版)》中<code>再谈引用</code>一节，简述一下这四种引用的概念，以及被引用的对象何时会被垃圾回收器回收。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-jvm-reference.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/java-understand-parallel-gc-logs.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -431,7 +546,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -546,7 +661,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -661,7 +776,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -775,7 +890,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -884,7 +999,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -999,7 +1114,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1113,7 +1228,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1228,7 +1343,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
+      <time title="修改时间：2026-02-25 13:39:31" itemprop="dateModified" datetime="2026-02-25T13:39:31+08:00">2026-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1274,129 +1389,6 @@
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 业务异常基类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">BaseBizException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseBizException</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 覆盖fillInStackTrace()方法，抹掉异常中的堆栈跟踪信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> Throwable <span class="title function_">fillInStackTrace</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.boris1993.com/column-flags-in-mysql-workbench.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon/avatar.jpeg">
-      <meta itemprop="name" content="Boris Zhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Life">
-      <meta itemprop="description" content="Boris has arrived!">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | Code Life">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/column-flags-in-mysql-workbench.html" class="post-title-link" itemprop="url">MySQL Workbench中各个列属性的含义</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-12-14 11:22:29" itemprop="dateCreated datePublished" datetime="2019-12-14T11:22:29+08:00">2019-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-14 15:20:47" itemprop="dateModified" datetime="2026-02-14T15:20:47+08:00">2026-02-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">学知识</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/column-flags-in-mysql-workbench.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/column-flags-in-mysql-workbench.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/column-flags-in-mysql-workbench.html"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><code>PK</code>: 主键(Primary Key)</li>
-<li><code>NN</code>: 非空(Not Null)</li>
-<li><code>UQ</code>: 唯一索引(Unique Index)</li>
-<li><code>BIN</code>: 二进制(Binary) 将数据储存为二进制字符串</li>
-<li><code>UN</code>: 无符号的(Unsigned)</li>
-<li><code>ZF</code>: 零填充的(Zero Fill) 如：INT(5)的列中，<code>12</code>会被填充为<code>00012</code></li>
-<li><code>AI</code>: 自增长的(Auto Increment)</li>
-<li><code>G</code>: 生成出来的(Generated) 如：根据公式从其它列中生成的数据</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/column-flags-in-mysql-workbench.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
