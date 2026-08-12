@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/6.1.14/fancybox/fancybox.css" integrity="sha256-mdaMxrItEW6hMIVJJNPKuX0B7KCSJQVEv3mVY4N2we4=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.29.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.29.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="在处理业务数据时，偶尔会需要从一系列逗号分隔的数据中取出各个元素并去重。本文将介绍如何通过Java 8中的FlatMap简化这个操作。">
 <meta property="og:type" content="article">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/4-sort.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/5-collect.png">
 <meta property="article:published_time" content="2019-09-26T08:30:56.000Z">
-<meta property="article:modified_time" content="2026-08-12T12:41:56.593Z">
+<meta property="article:modified_time" content="2026-08-12T12:46:31.082Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="FlatMap">
 <meta property="article:tag" content="Java">
@@ -69,7 +69,6 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/6.1.14/fancybox/fancybox.umd.js" integrity="sha256-QnJV4HT5r8i89ovZGRD86iynZqHerEbT2xt69vDM36I=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -330,7 +329,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-08-12 20:41:56" itemprop="dateModified" datetime="2026-08-12T20:41:56+08:00">2026-08-12</time>
+      <time title="修改时间：2026-08-12 20:46:31" itemprop="dateModified" datetime="2026-08-12T20:46:31+08:00">2026-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -429,15 +428,15 @@
 
 <p>如果上面代码的注释还是无法让您理解，那么，我还准备了每一步流操作的示意图。(感谢<code>Intellij IDEA</code>提供了这个强大的功能)</p>
 <p>首先，在<code>map</code>方法中，<code>List</code>的每个元素都会根据逗号分隔，并生成一个<code>String[]</code>对象。</p>
-<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
+<p><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/0-split.png" alt="Split"></p>
 <p><code>flatmap</code>方法会将上面<code>map</code>方法返回的各个流“拼接”成为一个流，即“展平”。</p>
-<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
+<p><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/1-flatmap.png" alt="FlatMap"></p>
 <p>接下来继续使用<code>map</code>方法，对流中的每个元素进行<code>trim</code>操作。</p>
-<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
+<p><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/2-trim.png" alt="Trim"></p>
 <p>然后调用<code>distinct</code>和<code>sorted</code>方法实现去重和排序。</p>
-<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
+<p><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/3-distinct.png" alt="Distinct"><br><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/4-sort.png" alt="Sort"></p>
 <p>最后，使用<code>collect</code>方法，将流中的数据“收集”到一个<code>List</code>中。</p>
-<p><img data-src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
+<p><img src="https://blog-static.boris1993.com/flatten-a-group-of-data-by-flatmap/5-collect.png" alt="Collect"></p>
 
     </div>
 

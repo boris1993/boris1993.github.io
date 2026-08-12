@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/6.1.14/fancybox/fancybox.css" integrity="sha256-mdaMxrItEW6hMIVJJNPKuX0B7KCSJQVEv3mVY4N2we4=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.29.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.29.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="我之前宽带一直都是光猫拨号，电脑和NAS直连光猫，光猫下挂个二级无线路由器来给其他设备联网，但我早就对这个拓扑不爽了，主要原因是自己花大钱买的AC86U派不上用场，只能干点边缘的杂活，而且搞两套局域网怎么看都挺恶心的。之前也试过把路由器改成AP模式，让所有设备都直连光猫，但是万恶的电信光猫限制了设备数，只有前5台机器能上网，其它的机器虽然能拿到地址，但是上网必定超时。那现在既然有了台服务器，那干脆">
 <meta property="og:type" content="article">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png">
 <meta property="article:published_time" content="2023-02-14T09:51:37.000Z">
-<meta property="article:modified_time" content="2026-08-12T12:41:56.602Z">
+<meta property="article:modified_time" content="2026-08-12T12:46:31.088Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Gen8">
 <meta property="article:tag" content="RouterOS">
@@ -74,7 +74,6 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/6.1.14/fancybox/fancybox.umd.js" integrity="sha256-QnJV4HT5r8i89ovZGRD86iynZqHerEbT2xt69vDM36I=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
@@ -335,7 +334,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-08-12 20:41:56" itemprop="dateModified" datetime="2026-08-12T20:41:56+08:00">2026-08-12</time>
+      <time title="修改时间：2026-08-12 20:46:31" itemprop="dateModified" datetime="2026-08-12T20:46:31+08:00">2026-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,11 +385,11 @@
 <h2 id="获取光猫中的配置"><a href="#获取光猫中的配置" class="headerlink" title="获取光猫中的配置"></a>获取光猫中的配置</h2><p>我找装维师傅说要玩猫棒，需要进后台看参数，师傅就把密码查给我了。</p>
 <p>用超级密码登录光猫后台，把LOID、PPPoE的用户名和密码（密码需要base64解码才能得到真实的密码）、IPv6前缀长度记在一个文档里备查。</p>
 <h2 id="准备猫棒"><a href="#准备猫棒" class="headerlink" title="准备猫棒"></a>准备猫棒</h2><p>因为我懒得找运营商的装维师傅给我改桥接（之前沟通过，师傅说要先换光猫，新光猫又得等），也考虑到留着原来的光猫配置不变的话，在我折腾翻车的时候也不需要再找装维师傅改回路由模式，直接把光纤接回去就能恢复网络，所以我直接在淘宝上买了根ODI的猫棒。又因为服务器上没有SFP口，我也不想再买个网卡，就顺便一起买了个光电转换器。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/converter-picture-on-taobao.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/converter-picture-on-taobao.png"></p>
 <p>之前了解到，光纤的端面接口有PC、UPC、APC三种，之所以选择ODI的光猫，就是因为我们一般宽带光纤的端面是UPC的，而诺基亚和阿尔卡特之类的猫棒是APC接口，还要套个转换器才行，硬插进去可能会损坏光纤，但ODI这款采用的就是UPC接口，不用再买转换器。<strong>但是我无法保证覆盖所有情况，如果你也想用猫棒，请一定提前跟店家和装维师傅确认好，如果顶坏了光纤端面，你只能喊装维师傅来给你重新做接头，别无他法！</strong></p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/types-of-fiber-connector.jpg"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/types-of-fiber-connector.jpg"></p>
 <p>抓住光纤的蓝色滑套，往后抽，就可以把光纤从光猫上拔出来，然后对准接口插进猫棒，再把猫棒插进光电转换器，然后接上网线和电源，就可以了。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-and-converter.jpg"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-and-converter.jpg"></p>
 <p>稍等几分钟等猫棒开机，开机之后，转换器在猫棒方向的灯会亮起来。这时候先把网线跟电脑连起来，给电脑分配一个<code>192.168.1.0/24</code>范围的地址（当然别用<code>192.168.1.1</code>，那是猫棒后台的地址），然后用浏览器打开<code>192.168.1.1</code>，就能看见猫棒后台的登陆页面了。账号和密码找商家要，我这款是<code>admin/admin</code>，但不保证所有ODI猫棒都是这一对账号密码。登陆进去后，进入<code>Settings</code>页面，填入<code>LOID</code>，点<code>Apply Changes</code>，然后进入<code>Commit/Reboot</code>页面，点<code>Commit and Reboot</code>按钮保存配置并重启，猫棒端就配置完成了。</p>
 <p>不过电信、联通、移动的光猫注册方式各有不同，上面说的操作都是针对电信的。其他运营商可以参考猫棒商家发的文档，或参考网上其他人的成功案例。这里引用猫棒说明中的一部分内容：</p>
 <blockquote>
@@ -399,9 +398,9 @@
 <p>★注册-高级：（GPON&#x2F;XGPON&#x2F;XGSPON）<br>厂商 ID&#x2F;Vendor ID：如 HWTC&#x2F;华为、FHTT&#x2F;烽火、ZTEG&#x2F;中兴、SCTY&#x2F;天邑、YHTC&#x2F;友华<br>设备型号<br>OUI：6 位<br>设备标号：一般为 17 位<br>软件版本号<br>ONT 版本&#x2F;硬件版本号</p>
 <p>★注册-高级：（EPON&#x2F;10G EPON）<br>设备型号<br>ONT 版本&#x2F;硬件版本号</p>
 </blockquote>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/pon-stick-settings-loid.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/pon-stick-settings-loid.png"></p>
 <p>本来重启之后，应该先看一下ONU状态是不是<code>O5</code>来着，但是当时我忘了看，直接电脑上拨号成功，间接也证明了LOID注册成功。不过还是放个文档里扒出来的图好了。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-status-o5.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/ponstick-status-o5.png"></p>
 <h2 id="安装RouterOS"><a href="#安装RouterOS" class="headerlink" title="安装RouterOS"></a>安装RouterOS</h2><p>一开始我以为装这玩意跟装别的系统没啥区别，就ISO一挂，顺着向导装就行。可看了文档发现，RouterOS有一个专门面向虚拟平台的版本，叫<code>Cloud Hosted Router (CHR)</code>，在<span class="exturl" data-url="aHR0cHM6Ly9taWtyb3Rpay5jb20vZG93bmxvYWQ=">官网的下载页面<i class="fa fa-external-link-alt"></i></span>下载<code>OVA Template</code>，然后导入ESXi就行。具体的安装方法可以看<span class="exturl" data-url="aHR0cHM6Ly93aWtpLm1pa3JvdGlrLmNvbS93aWtpL01hbnVhbDpDSFJfVk1XYXJlX2luc3RhbGxhdGlvbiNIb3dfdG9fSW5zdGFsbF9DbG91ZF9Ib3N0ZWRfUm91dGVyX29uX1ZNV2FyZV9FU1hpXzYuNQ==">Mikrotik的Wiki<i class="fa fa-external-link-alt"></i></span>。</p>
 <p><code>RouterOS CHR</code>作为一个付费的系统，当然也需要买授权才能用。买授权的方法也可以跟着<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLm1pa3JvdGlrLmNvbS9kb2NzL3BhZ2VzL3ZpZXdwYWdlLmFjdGlvbj9wYWdlSWQ9MTgzNTAyMzQjQ2xvdWRIb3N0ZWRSb3V0ZXIoQ0hSKS1HZXR0aW5ndGhlTGljZW5zZQ==">Mikrotik的Wiki<i class="fa fa-external-link-alt"></i></span>操作，就是注意别买成<code>RouterOS</code>的Key，这两者是不通用的。</p>
 <p>另外安装之后，如果你更改了RouterOS的CPU数量，那么内存大小也要跟着调整。<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLm1pa3JvdGlrLmNvbS9kb2NzL3BhZ2VzL3ZpZXdwYWdlLmFjdGlvbj9wYWdlSWQ9MTgzNTAyMzQjQ2xvdWRIb3N0ZWRSb3V0ZXIoQ0hSKS1TeXN0ZW1SZXF1aXJlbWVudHM=">官方文档<i class="fa fa-external-link-alt"></i></span>提供了如下公式：</p>
@@ -411,16 +410,16 @@
 <p>我因为没注意到这个信息，只把CPU改成了4核心，但内存还是160MB，导致几乎每24小时就会出一次<code>kernel failure in previous boot</code>错误，为这事我还给MikroTik开了个工单……</p>
 <h2 id="配置ESXi的网络"><a href="#配置ESXi的网络" class="headerlink" title="配置ESXi的网络"></a>配置ESXi的网络</h2><p>如果我没记错的话，ESXi一开始只给Ethernet 1口做了配置，我们得手动给Ethernet 2配置虚拟网络。</p>
 <p>首先到<code>网络</code>的<code>虚拟交换机</code>页面，创建一个新的虚拟交换机，名字按自己喜好起就行，比如我就顺着已有的<code>vSwitch0</code>给它命名<code>vSwitch1</code>。然后点进<code>vSwitch1</code>，点<code>添加上行链路</code>，把<code>vmnic1</code>分配给它，这样在ESXi里面就可以用这个接口了。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/esxi-vswitch1.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/esxi-vswitch1.png"></p>
 <p>然后到<code>端口组</code>页面，添加一个新的端口组<code>VM Network 2</code>，虚拟交换机选择刚创建的<code>vSwitch1</code>。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-network-2.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-network-2.png"></p>
 <p>接下来点进虚拟机<code>RouterOS</code>，关机之后编辑设置，给它添加一个网络适配器，然后给<code>网络适配器1</code>分配<code>VM Network 2</code>，给<code>网络适配器2</code>分配<code>VM Network 1</code>，保存，开机。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-routeros-settings.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/vm-routeros-settings.png"></p>
 <h2 id="配置RouterOS"><a href="#配置RouterOS" class="headerlink" title="配置RouterOS"></a>配置RouterOS</h2><p>如果猫棒的ONU状态是O5，那就可以把转换器连到Gen 8的Ethernet 2口上了。你问为啥不是Ethernet 1？因为Ethernet 1我改成了与iLO共享，所以只能拿Ethernet 2当WAN口。下面进入RouterOS，开始配置软路由。</p>
 <h3 id="首次登录"><a href="#首次登录" class="headerlink" title="首次登录"></a>首次登录</h3><p>第一次登录的时候，因为我并不知道路由器的地址，所以没办法用IP地址打开RouterOS的配置页面，但MikroTik很贴心的提供了用MAC地址连接的功能。在WinBox的Neighbors页面双击RouterOS的条目，用<code>admin</code>用户和空密码登录就可以。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-login-with-mac-address.png"></p>
 <p>为了后面分的清楚，我先到<code>Interfaces</code>页面，把LAN口和WAN口对应接口的名字改了过来，毕竟默认的<code>ether1</code>和<code>ether2</code>不如<code>LAN</code>和<code>WAN</code>看的清楚。通常来说观察接口的<code>Tx</code>和<code>Rx</code>就能分清哪个是LAN口，因为这时候没配置拨号，WAN口的流量通常只会是0。如果分不清，那就先把Gen 8的Ethernet 1拔了。</p>
-<p><img data-src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png" alt="请暂时忽略China Telecom和wireguard1"></p>
+<p><img src="https://blog-static.boris1993.com/setting-up-microserver-gen8/routeros-interfaces.png" alt="请暂时忽略China Telecom和wireguard1"></p>
 <h3 id="规划地址范围，配置DHCP、DNS"><a href="#规划地址范围，配置DHCP、DNS" class="headerlink" title="规划地址范围，配置DHCP、DNS"></a>规划地址范围，配置DHCP、DNS</h3><p>在配置DHCP服务器前，要先规划好自己的局域网的网段。地址范围可以从IPv4的三个私有地址范围<code>10.0.0.0/8</code>、<code>172.16.0.0/12</code>和<code>192.168.0.0/16</code>之间选，一定不要作死用公网网段（比如一些无能IT给路由器配了个<code>1.1.1.1</code>），不然我很难说你的网络会出什么奇怪的问题。我干脆就遵循之前的网络，用了<code>192.168.1.0/24</code>段作为我的内网网段。</p>
 <p>确定好地址范围之后，就可以用这条命令给LAN口指定一个静态IP地址：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/ip/address/<span class="built_in">add</span> \</span><br><span class="line">  <span class="attribute">interface</span>=LAN \</span><br><span class="line">  <span class="attribute">address</span>=192.168.1.3/24 \</span><br><span class="line">  <span class="attribute">network</span>=192.168.1.0</span><br></pre></td></tr></table></figure>
