@@ -3,7 +3,7 @@ title: "SwiftUI学习记录 - 使用Alamofire加载JSON并初始化列表"
 source: https://www.boris1993.com/swiftui-initialize-list-with-remote-data.html
 date: 2023-10-28
 updated: 2026-10-10
-tags: [iOS开发, SwiftUI, List, Alamofire]
+tags: [SwiftUI, List, Alamofire, iOS开发]
 categories: [学知识]
 ---
 
