@@ -3,7 +3,7 @@ title: "使用Tailscale部署虚拟局域网"
 source: https://www.boris1993.com/setting-up-tailscale.html
 date: 2022-10-24
 updated: 2026-10-10
-tags: [Tailscale, 内网穿透, VPN, Virtual LAN, 虚拟局域网]
+tags: [Tailscale, VPN, Virtual LAN, 虚拟局域网, 内网穿透]
 categories: [瞎折腾]
 ---
 

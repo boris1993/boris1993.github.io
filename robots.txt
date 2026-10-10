@@ -11,3 +11,4 @@ Disallow: /vendors/
 Disallow: /fancybox/
 Sitemap: https://www.boris1993.com/sitemap.xml
 Sitemap: https://www.boris1993.com/baidusitemap.xml
+Content-Signal: ai-train=no, search=yes, ai-input=yes

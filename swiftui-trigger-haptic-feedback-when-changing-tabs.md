@@ -3,7 +3,7 @@ title: "SwiftUI学习记录 - 切换TabView的tab时触发震动反馈"
 source: https://www.boris1993.com/swiftui-trigger-haptic-feedback-when-changing-tabs.html
 date: 2023-02-05
 updated: 2026-10-10
-tags: [SwiftUI, iOS开发, TabView, Haptic Feedback, 震动反馈]
+tags: [iOS开发, SwiftUI, TabView, Haptic Feedback, 震动反馈]
 categories: [学知识]
 ---
 

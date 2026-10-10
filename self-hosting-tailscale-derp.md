@@ -3,7 +3,7 @@ title: "自建Tailscale的DERP节点"
 source: https://www.boris1993.com/self-hosting-tailscale-derp.html
 date: 2023-02-08
 updated: 2026-10-10
-tags: [Tailscale, DERP, 内网穿透]
+tags: [Tailscale, 内网穿透, DERP]
 categories: [瞎折腾]
 ---
 
