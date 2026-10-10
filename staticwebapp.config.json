@@ -1,1 +1,1 @@
-{"responseOverrides":{"404":{"rewrite":"/404.html","statusCode":200}}}
+{"globalHeaders":{"Link":"</llms.txt>; rel=\"describedby\"","Vary":"Accept"},"mimeTypes":{".md":"text/markdown"},"responseOverrides":{"404":{"rewrite":"/404.html","statusCode":200}}}
