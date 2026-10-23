@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://blog-static.boris1993.com/caddy/caddy-download-choose-license.png">
 <meta property="og:image" content="https://blog-static.boris1993.com/caddy/caddy-download-methods.png">
 <meta property="article:published_time" content="2018-07-19T08:42:30.000Z">
-<meta property="article:modified_time" content="2026-10-23T08:57:28.848Z">
+<meta property="article:modified_time" content="2026-10-23T09:06:00.448Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="Caddy">
 <meta property="article:tag" content="WebServer">
@@ -329,7 +329,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-10-23 16:57:28" itemprop="dateModified" datetime="2026-10-23T16:57:28+08:00">2026-10-23</time>
+      <time title="修改时间：2026-10-23 17:06:00" itemprop="dateModified" datetime="2026-10-23T17:06:00+08:00">2026-10-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -443,10 +443,10 @@
 <p>这里我配置Caddy从<code>https://github.com/boris1993/boris1993.github.io.git</code>这个仓库拉取静态页面文件，这就是本博客所在的GitHub仓库，拉去之后文件将被放到<code>/var/www</code>目录下。因为我要实现博客文件自动更新，所以这里的地址需要与<code>root</code>指令配置的位置相同。</p>
 <p><code>hook</code>参数配置Caddy使用<code>www.boris1993.tk/hook</code>作为WebHook的监听地址，这个hook的访问密码是<code>hook.password</code>，并且使用下一行中的<code>hook_type</code>指令显式指定Hook的类型是<code>github</code>，也就是来自GitHub的hook。</p>
 <p>这样配置完毕后，还需要为远程Git仓库配置hook，然后才可以实现自动更新。具体配置方式请参考Git仓库服务商的文档。</p>
-<h2 id="配置Caddy作为前置代理"><a href="#配置Caddy作为前置代理" class="headerlink" title="配置Caddy作为前置代理"></a>配置Caddy作为前置代理</h2><p>一部分代理工具，比如v2ray，支持使用一个HTTP服务器作为其前置代理，Caddy就可以实现这样的功能。本示例中我配置Caddy作为v2ray的WebSocket代理，配置文件片段如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy /v2ray localhost:12345 &#123;</span><br><span class="line">    websocket</span><br><span class="line">    header_upstream -Origin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置Caddy作为前置代理"><a href="#配置Caddy作为前置代理" class="headerlink" title="配置Caddy作为前置代理"></a>配置Caddy作为前置代理</h2><p>一部分代理工具，支持使用一个HTTP服务器作为其前置代理，Caddy就可以实现这样的功能。本示例中我配置Caddy作为它的WebSocket代理，配置文件片段如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxy /frontProxy localhost:12345 &#123;</span><br><span class="line">    websocket</span><br><span class="line">    header_upstream -Origin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这段配置指定了将<code>/v2ray</code>这个路径作为<code>localhost:12345</code>这个地址的前置代理，代理协议为<code>websocket</code>。具体的配置方法请参考被代理程序的文档。</p>
+<p>这段配置指定了将<code>/frontProxy</code>这个路径作为<code>localhost:12345</code>这个地址的前置代理，代理协议为<code>websocket</code>。具体的配置方法请参考被代理程序的文档。</p>
 <h2 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h2><p><code>hook.service</code>插件可以一键生成<code>systemd</code>格式的自启动配置文件，只需要如下命令即可完成配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">caddy -service install -conf /etc/caddy/Caddyfile</span><br></pre></td></tr></table></figure>
 

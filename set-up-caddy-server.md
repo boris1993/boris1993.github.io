@@ -199,16 +199,16 @@ git https://github.com/boris1993/boris1993.github.io.git {
 
 ## 配置Caddy作为前置代理
 
-一部分代理工具，比如v2ray，支持使用一个HTTP服务器作为其前置代理，Caddy就可以实现这样的功能。本示例中我配置Caddy作为v2ray的WebSocket代理，配置文件片段如下：
+一部分代理工具，支持使用一个HTTP服务器作为其前置代理，Caddy就可以实现这样的功能。本示例中我配置Caddy作为它的WebSocket代理，配置文件片段如下：
 
 ```plaintext
-proxy /v2ray localhost:12345 {
+proxy /frontProxy localhost:12345 {
     websocket
     header_upstream -Origin
 }
 ```
 
-这段配置指定了将`/v2ray`这个路径作为`localhost:12345`这个地址的前置代理，代理协议为`websocket`。具体的配置方法请参考被代理程序的文档。
+这段配置指定了将`/frontProxy`这个路径作为`localhost:12345`这个地址的前置代理，代理协议为`websocket`。具体的配置方法请参考被代理程序的文档。
 
 ## 配置开机自启动
 
