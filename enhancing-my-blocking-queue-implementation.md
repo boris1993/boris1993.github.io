@@ -2,7 +2,7 @@
 title: "自己实现一个BlockingQueue并优化"
 source: https://www.boris1993.com/enhancing-my-blocking-queue-implementation.html
 date: 2025-03-26
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, BlockingQueue]
 categories: [学知识]
 ---

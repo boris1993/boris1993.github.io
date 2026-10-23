@@ -2,7 +2,7 @@
 title: "关闭Vercel的部署结果通知"
 source: https://www.boris1993.com/disable-vercel-deployment-notification.html
 date: 2023-02-02
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Vercel]
 categories: [小技巧]
 ---

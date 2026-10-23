@@ -2,7 +2,7 @@
 title: "Spring Boot启动过程中的后置处理"
 source: https://www.boris1993.com/spring-boot-application-start-up-post-processing.html
 date: 2024-01-14
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, Spring Boot]
 categories: [学知识]
 ---

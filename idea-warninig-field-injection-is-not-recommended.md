@@ -2,7 +2,7 @@
 title: "IDEA警告Field injection is not recommended"
 source: https://www.boris1993.com/idea-warninig-field-injection-is-not-recommended.html
 date: 2019-11-29
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, Spring]
 categories: [学知识]
 ---

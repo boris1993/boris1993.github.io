@@ -2,7 +2,7 @@
 title: "100块自制短信转发器"
 source: https://www.boris1993.com/building-a-sms-forwarder-with-air780e.html
 date: 2023-03-21
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [LuatOS, 合宙, 短信转发, Air780E, ESP32S3]
 categories: [瞎折腾]
 ---

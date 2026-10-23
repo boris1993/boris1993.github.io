@@ -2,7 +2,7 @@
 title: "从umami v1迁移到v2"
 source: https://www.boris1993.com/migrating-to-umami-v2.html
 date: 2023-04-18
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [umami, analytics]
 categories: [瞎折腾]
 ---

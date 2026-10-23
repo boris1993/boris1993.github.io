@@ -2,7 +2,7 @@
 title: "从字节码看synchronized关键字是怎么工作的"
 source: https://www.boris1993.com/how-synchronized-works-in-java.html
 date: 2023-04-05
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, 面试问题, syncronized]
 categories: [学知识]
 ---

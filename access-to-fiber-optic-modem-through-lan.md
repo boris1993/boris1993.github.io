@@ -2,7 +2,7 @@
 title: "配置RouterOS从内网访问光猫"
 source: https://www.boris1993.com/access-to-fiber-optic-modem-through-lan.html
 date: 2025-07-24
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [光猫, 桥接, RouterOS]
 categories: [瞎折腾]
 ---

@@ -2,7 +2,7 @@
 title: "我的信用卡优化记录 - 2025年"
 source: https://www.boris1993.com/credit-card-clean-up-2025.html
 date: 2025-06-20
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [信用卡, 薅羊毛]
 categories: [生活记录]
 ---

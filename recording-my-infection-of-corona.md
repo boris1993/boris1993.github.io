@@ -2,7 +2,7 @@
 title: "我的新冠感染纪实"
 source: https://www.boris1993.com/recording-my-infection-of-corona.html
 date: 2022-12-24
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [新冠肺炎, 奥密克戎, Omicron]
 categories: [生活记录]
 ---

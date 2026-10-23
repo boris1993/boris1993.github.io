@@ -6,6 +6,7 @@ This file lists Markdown versions of every page for AI/LLM consumption.
 
 ## Posts
 
+- [记一次在MacBook上瞎折腾YubiKey把自己锁在外面的救援](https://www.boris1993.com/macos-recover-from-required-pin-to-enable-touch-id.md): 前两天拿着YubiKey瞎折腾玩，给我的MacBook配上了用它登录，配完了又担心将来忘了这件事给自己找麻烦，于是又解绑了。尽管当时用 sc_auth list 确认了账户已经没有绑定的智能卡，但刚刚打开电脑的时候，却发现macOS要我输入…
 - [修复被切换成RNDIS模式后改不回来的大疆4G模块](https://www.boris1993.com/dji-4g-module-recover-from-rndis-mode.md): 上回书 说到可以把大疆4G模块变成iPad的外置网卡，帖子发出来之后，有好奇宝宝找我说，把 usbnet 改成3之后改不回来了，给 Quectel USB AT Port 发指令只会返回乱码。那这篇帖子就是解决这个问题的。
 - [让iPad用一代大疆4G模块上网](https://www.boris1993.com/dji-4g-module-for-ipad-networking.md): 跟风买了个大疆4G模块，给iPad当外置网卡用，省得次次还得拿手机开热点。 话说这算不算花小钱办大事，毕竟蜂窝版的要比WiFi版的贵一千多块呢，这70块就搞定了。
 - [拍记血压 —— 给血压计拍照就能记录血压](https://www.boris1993.com/bpsnap.md): 我做了一个微信小程序，叫「拍记血压」。 起因很简单：我看到我妈每天量完血压，都要拿纸把测量结果写下来。这样确实能记，但每次都要写在纸上也挺麻烦，而且纸一丢，之前的记录也就没了。所以我这个程序员儿子就有了这么一个想法，量完血压后，拿手机拍一下…

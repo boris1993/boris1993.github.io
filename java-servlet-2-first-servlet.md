@@ -2,7 +2,7 @@
 title: "循序渐进写一个Servlet(2) - 第一个servlet"
 source: https://www.boris1993.com/java-servlet-2-first-servlet.html
 date: 2019-03-06
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, Servlet]
 categories: [学知识]
 ---

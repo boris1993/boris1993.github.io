@@ -2,7 +2,7 @@
 title: "在Java中如何实现在多个线程全部完成后再执行后续的代码"
 source: https://www.boris1993.com/java-how-to-wait-for-threads-before-continuing.html
 date: 2023-04-05
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, 多线程, 面试, CountDownLatch, Future]
 categories: [学知识]
 ---

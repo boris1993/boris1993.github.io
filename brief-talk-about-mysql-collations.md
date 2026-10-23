@@ -2,7 +2,7 @@
 title: "浅谈MySQL中的校对规则(collation)"
 source: https://www.boris1993.com/brief-talk-about-mysql-collations.html
 date: 2019-12-14
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [MySQL, collation]
 categories: [学知识]
 ---

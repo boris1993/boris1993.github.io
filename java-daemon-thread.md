@@ -2,7 +2,7 @@
 title: "快速理解Java中的守护线程"
 source: https://www.boris1993.com/java-daemon-thread.html
 date: 2023-04-15
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, 多线程, 守护线程, 面试, daemon thread]
 categories: [学知识]
 ---

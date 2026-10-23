@@ -2,7 +2,7 @@
 title: "二手MicroServer Gen8折腾记(2/n) - 配置RouterOS软路由"
 source: https://www.boris1993.com/setting-up-microserver-gen8-routeros.html
 date: 2023-02-14
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [RouterOS, 二手MicroServer Gen8折腾记, Gen8, 软路由]
 categories: [瞎折腾]
 ---

@@ -2,7 +2,7 @@
 title: "JVM运行时的数据区域"
 source: https://www.boris1993.com/java-jvm-runtime-data-areas.html
 date: 2019-03-27
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, JVM, 内存模型]
 categories: [学知识]
 ---

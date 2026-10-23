@@ -2,7 +2,7 @@
 title: "在macOS中通过SSH进行X11转发"
 source: https://www.boris1993.com/macos-install-x11-client.html
 date: 2018-08-17
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [XQuartz, X11]
 categories: [瞎折腾]
 ---

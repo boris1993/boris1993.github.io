@@ -2,7 +2,7 @@
 title: "在Spring Boot应用中启用HTTPS"
 source: https://www.boris1993.com/spring-boot-enable-https.html
 date: 2019-12-17
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, Spring Boot]
 categories: [学知识]
 ---

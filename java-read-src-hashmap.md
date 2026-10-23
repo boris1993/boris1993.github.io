@@ -2,7 +2,7 @@
 title: "Java源码阅读 - HashMap"
 source: https://www.boris1993.com/java-read-src-hashmap.html
 date: 2020-01-06
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, HashMap]
 categories: [学知识]
 ---

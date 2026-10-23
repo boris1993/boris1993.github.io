@@ -2,7 +2,7 @@
 title: "Java的垃圾回收算法"
 source: https://www.boris1993.com/java-gc-algorithms.html
 date: 2019-03-28
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, 垃圾回收, GC]
 categories: [学知识]
 ---

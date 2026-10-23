@@ -2,7 +2,7 @@
 title: "记给Ubuntu的LVM卷扩容"
 source: https://www.boris1993.com/expanding-ubuntu-lvm-partition.html
 date: 2024-12-09
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Ubuntu, LVM]
 categories: [小技巧]
 ---

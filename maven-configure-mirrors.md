@@ -2,7 +2,7 @@
 title: "为Maven配置阿里云镜像和代理服务器"
 source: https://www.boris1993.com/maven-configure-mirrors.html
 date: 2017-12-11
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Maven]
 categories: [小技巧]
 ---

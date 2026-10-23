@@ -2,7 +2,7 @@
 title: "在群晖的Docker环境中运行甜糖星愿服务"
 source: https://www.boris1993.com/run-tiantang-on-synology-docker.html
 date: 2021-01-04
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [甜糖星愿, 甜糖]
 categories: [瞎折腾]
 ---

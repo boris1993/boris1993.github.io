@@ -2,7 +2,7 @@
 title: "在TypeScript的catch代码块中获取错误信息"
 source: https://www.boris1993.com/translation-get-a-catch-block-error-message-with-typescript.html
 date: 2024-06-21
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [TypeScript]
 categories: [翻译]
 ---

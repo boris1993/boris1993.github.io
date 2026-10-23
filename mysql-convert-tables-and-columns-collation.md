@@ -2,7 +2,7 @@
 title: "在MySQL中修改表和列的排序规则"
 source: https://www.boris1993.com/mysql-convert-tables-and-columns-collation.html
 date: 2019-08-22
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [MySQL, collation]
 categories: [小技巧]
 ---

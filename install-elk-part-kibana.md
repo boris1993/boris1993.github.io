@@ -2,7 +2,7 @@
 title: "搭建ELK日志平台 - 安装Kibana"
 source: https://www.boris1993.com/install-elk-part-kibana.html
 date: 2018-02-27
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [ELK, Kibana]
 categories: [瞎折腾]
 ---

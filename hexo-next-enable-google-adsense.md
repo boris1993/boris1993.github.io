@@ -2,7 +2,7 @@
 title: "在NexT主题中接入Google AdSense"
 source: https://www.boris1993.com/hexo-next-enable-google-adsense.html
 date: 2020-04-05
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [hexo, NexT, adsense]
 categories: [瞎折腾]
 ---

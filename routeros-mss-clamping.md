@@ -2,7 +2,7 @@
 title: "在RouterOS中配置MSS Clamping解决部分网站图片无法加载的问题"
 source: https://www.boris1993.com/routeros-mss-clamping.html
 date: 2023-05-14
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [RouterOS, 二手MicroServer Gen8折腾记, Gen8, 软路由]
 categories: [瞎折腾]
 ---

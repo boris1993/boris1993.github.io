@@ -2,7 +2,7 @@
 title: "Java的内部类和private修饰符"
 source: https://www.boris1993.com/java-inner-class-and-private-identifier.html
 date: 2020-02-24
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, 内部类]
 categories: [学知识]
 ---

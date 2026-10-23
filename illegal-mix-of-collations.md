@@ -2,7 +2,7 @@
 title: "JDBC错误Illegal mix of collations解决方法"
 source: https://www.boris1993.com/illegal-mix-of-collations.html
 date: 2019-08-22
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [Java, JDBC]
 categories: [学知识]
 ---

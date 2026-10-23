@@ -2,7 +2,7 @@
 title: "通过Hexo博客完成NIP-05验证"
 source: https://www.boris1993.com/nostr-nip-05-with-hexo.html
 date: 2023-02-04
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [nostr, NIP-05, Damus]
 categories: [瞎折腾]
 ---

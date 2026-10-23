@@ -2,7 +2,7 @@
 title: "二手MicroServer Gen8折腾记(1/n) - 初始化服务器"
 source: https://www.boris1993.com/setting-up-microserver-gen8.html
 date: 2022-12-18
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [二手MicroServer Gen8折腾记, Gen8]
 categories: [瞎折腾]
 ---

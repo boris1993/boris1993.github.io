@@ -2,7 +2,7 @@
 title: "拍记血压 —— 给血压计拍照就能记录血压"
 source: https://www.boris1993.com/bpsnap.html
 date: 2026-07-20
-updated: 2026-10-10
+updated: 2026-10-23
 tags: [血压, 记录血压, 拍记血压, BPSnap]
 categories: [其他]
 ---
