@@ -73,6 +73,12 @@ boke.lu · 博客收录展示平台~
 
 [](https://www.bokelianmeng.com)
 
+若梦博客
+
+每一个博客，都是精神的驿站
+
+[](https://www.rmbk.cc)
+
 传送门
 
 独立博客传送门
