@@ -55,6 +55,12 @@ Harrison的童年
 
 [](https://bloginc.cn)
 
+博客录
+
+boke.lu · 博客收录展示平台~
+
+[](https://boke.lu)
+
 传送门
 
 独立博客传送门
