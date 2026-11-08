@@ -67,6 +67,12 @@ boke.lu · 博客收录展示平台~
 
 [](https://www.blogplanet.cn)
 
+博客联盟
+
+专门为独立博客提供收录、导航和聚合服务的非营利性平台
+
+[](https://www.bokelianmeng.com)
+
 传送门
 
 独立博客传送门
