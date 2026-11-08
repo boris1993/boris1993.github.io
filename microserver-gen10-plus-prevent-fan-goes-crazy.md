@@ -2,7 +2,7 @@
 title: "防止MicroServer Gen 10 Plus的风扇突然狂飙"
 source: https://www.boris1993.com/microserver-gen10-plus-prevent-fan-goes-crazy.html
 date: 2025-03-22
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Gen 10 Plus]
 categories: [瞎折腾]
 ---

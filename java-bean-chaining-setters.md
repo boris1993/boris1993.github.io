@@ -2,7 +2,7 @@
 title: "在Java bean中实现setter的链式调用"
 source: https://www.boris1993.com/java-bean-chaining-setters.html
 date: 2019-09-24
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 代码技巧]
 categories: [小技巧]
 ---

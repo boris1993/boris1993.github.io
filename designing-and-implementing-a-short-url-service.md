@@ -2,7 +2,7 @@
 title: "设计并实现一个简易的短URL服务"
 source: https://www.boris1993.com/designing-and-implementing-a-short-url-service.html
 date: 2023-02-03
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [短链接]
 categories: [学知识]
 ---

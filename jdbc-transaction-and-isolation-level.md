@@ -2,7 +2,7 @@
 title: "JDBC的事务和隔离级别"
 source: https://www.boris1993.com/jdbc-transaction-and-isolation-level.html
 date: 2019-02-27
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, JDBC, Transaction, Isolation level]
 categories: [学知识]
 ---

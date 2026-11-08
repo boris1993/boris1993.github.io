@@ -2,7 +2,7 @@
 title: "记一次在MacBook上瞎折腾YubiKey把自己锁在外面的救援"
 source: https://www.boris1993.com/macos-recover-from-required-pin-to-enable-touch-id.html
 date: 2026-10-22
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [macOS, MacBook, YubiKey]
 categories: [瞎折腾]
 ---

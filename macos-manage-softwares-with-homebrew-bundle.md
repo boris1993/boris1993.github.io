@@ -2,7 +2,7 @@
 title: "使用Homebrew Bundle管理电脑上安装的软件"
 source: https://www.boris1993.com/macos-manage-softwares-with-homebrew-bundle.html
 date: 2024-03-18
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [macOS, Homebrew]
 categories: [瞎折腾]
 ---

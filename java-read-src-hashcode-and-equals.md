@@ -2,7 +2,7 @@
 title: "Java源码阅读 - equals和hashCode方法"
 source: https://www.boris1993.com/java-read-src-hashcode-and-equals.html
 date: 2020-01-06
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, LinkedList]
 categories: [学知识]
 ---

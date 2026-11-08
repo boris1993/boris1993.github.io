@@ -2,7 +2,7 @@
 title: "循序渐进写一个Servlet(5) - Filter"
 source: https://www.boris1993.com/java-servlet-5-filter.html
 date: 2019-03-13
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, Servlet, Filter]
 categories: [学知识]
 ---

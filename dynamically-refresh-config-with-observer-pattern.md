@@ -2,7 +2,7 @@
 title: "利用观察者模式实现动态刷新Bean中的配置"
 source: https://www.boris1993.com/dynamically-refresh-config-with-observer-pattern.html
 date: 2025-03-21
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [设计模式, 观察者模式]
 categories: [学知识]
 ---

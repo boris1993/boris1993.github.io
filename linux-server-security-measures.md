@@ -2,7 +2,7 @@
 title: "购买新的Linux服务器后需要做的安全措施"
 source: https://www.boris1993.com/linux-server-security-measures.html
 date: 2018-09-02
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Linux]
 categories: [瞎折腾]
 ---

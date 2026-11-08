@@ -2,7 +2,7 @@
 title: "Servlet和Spring MVC是不是线程安全的"
 source: https://www.boris1993.com/are-servlet-and-spring-mvc-thread-safe.html
 date: 2022-12-14
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 多线程, 线程安全]
 categories: [学知识]
 ---

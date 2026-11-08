@@ -2,7 +2,7 @@
 title: "为了改桥接，我决定破解中兴F450G V2光猫"
 source: https://www.boris1993.com/hacking-zte-f450g-v2-onu.html
 date: 2023-03-16
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [光猫, 桥接, F450G]
 categories: [瞎折腾]
 ---

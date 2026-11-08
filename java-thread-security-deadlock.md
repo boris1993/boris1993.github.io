@@ -2,7 +2,7 @@
 title: "Java的线程安全，以及死锁"
 source: https://www.boris1993.com/java-thread-security-deadlock.html
 date: 2022-12-14
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 多线程, 线程安全, 死锁]
 categories: [学知识]
 ---

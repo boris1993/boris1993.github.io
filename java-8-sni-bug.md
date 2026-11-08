@@ -2,7 +2,7 @@
 title: "Java 8的一个SNI的bug"
 source: https://www.boris1993.com/java-8-sni-bug.html
 date: 2021-11-24
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java 8, bug, SNI]
 categories: [学知识]
 ---

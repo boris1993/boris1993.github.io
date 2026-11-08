@@ -2,7 +2,7 @@
 title: "实操基金转托管 —— 从天弘转到招商银行"
 source: https://www.boris1993.com/transfer-of-custody-out-from-tianhong-to-cmb.html
 date: 2026-02-13
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [基金, 转托管]
 categories: [瞎折腾]
 ---

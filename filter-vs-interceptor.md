@@ -2,7 +2,7 @@
 title: "Filter与interceptor的区别"
 source: https://www.boris1993.com/filter-vs-interceptor.html
 date: 2022-12-13
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, Servlet, Spring MVC, Filter, Interceptor]
 categories: [学知识]
 ---

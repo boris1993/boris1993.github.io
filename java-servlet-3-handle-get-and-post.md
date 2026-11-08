@@ -2,7 +2,7 @@
 title: "循序渐进写一个Servlet(3) - 分别处理GET和POST"
 source: https://www.boris1993.com/java-servlet-3-handle-get-and-post.html
 date: 2019-03-08
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, Servlet]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "使用TRANSMIT和RECEIVE命令打包、解包文件"
 source: https://www.boris1993.com/zos-xmit.html
 date: 2017-11-19
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Mainframe, z/OS, TRANSMIT, XMIT, RECEIVE]
 categories: [学知识]
 ---

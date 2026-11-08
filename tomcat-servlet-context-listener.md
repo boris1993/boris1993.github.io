@@ -2,7 +2,7 @@
 title: "监听Tomcat的启动、停止事件"
 source: https://www.boris1993.com/tomcat-servlet-context-listener.html
 date: 2018-08-15
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Tomcat]
 categories: [学知识]
 ---

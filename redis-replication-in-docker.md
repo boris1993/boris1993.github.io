@@ -2,7 +2,7 @@
 title: "使用Docker配置Redis主从复制"
 source: https://www.boris1993.com/redis-replication-in-docker.html
 date: 2019-05-23
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Redis]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "Java如何创建和运行多线程"
 source: https://www.boris1993.com/java-multi-threading-how-to.html
 date: 2019-02-28
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 多线程]
 categories: [学知识]
 ---

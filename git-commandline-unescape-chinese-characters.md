@@ -2,7 +2,7 @@
 title: "解决命令行中Git显示中文文件名乱码"
 source: https://www.boris1993.com/git-commandline-unescape-chinese-characters.html
 date: 2020-02-10
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Git]
 categories: [小技巧]
 ---

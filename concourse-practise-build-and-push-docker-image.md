@@ -2,7 +2,7 @@
 title: "Concourse实战 - 监控GitHub release并自动构建镜像"
 source: https://www.boris1993.com/concourse-practise-build-and-push-docker-image.html
 date: 2023-01-29
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [concourse, concourse-ci, vault]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "搭建ELK日志平台 - 安装Elastic Search"
 source: https://www.boris1993.com/install-elk-part-es.html
 date: 2018-02-04
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [ELK, Elastic Search]
 categories: [瞎折腾]
 ---

@@ -2,7 +2,7 @@
 title: "去掉自定义异常中的堆栈跟踪信息"
 source: https://www.boris1993.com/java-remove-stack-trace-in-customized-exceptions.html
 date: 2019-12-17
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 代码技巧]
 categories: [小技巧]
 ---

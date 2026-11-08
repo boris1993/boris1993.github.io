@@ -2,7 +2,7 @@
 title: "微信小程序scroll-view填满剩余可用高度"
 source: https://www.boris1993.com/scroll-view-auto-fit-height.html
 date: 2018-08-10
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [小程序, scroll-view]
 categories: [学知识]
 ---

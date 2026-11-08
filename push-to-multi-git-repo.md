@@ -2,7 +2,7 @@
 title: "Git连接多个远程仓库"
 source: https://www.boris1993.com/push-to-multi-git-repo.html
 date: 2017-12-12
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Git]
 categories: [小技巧]
 ---

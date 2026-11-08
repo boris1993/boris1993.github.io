@@ -2,7 +2,7 @@
 title: "学习Concourse CI - 使用变量"
 source: https://www.boris1993.com/concourse-using-vars.html
 date: 2020-03-20
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [concourse, concourse-ci, vault]
 categories: [学知识]
 ---

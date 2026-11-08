@@ -2,7 +2,7 @@
 title: "记一次抢救被force push的GitHub仓库"
 source: https://www.boris1993.com/rescuing-my-github-repo-from-force-push.html
 date: 2022-10-17
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [GitHub, git, force push, 恢复GitHub仓库]
 categories: [瞎折腾]
 ---

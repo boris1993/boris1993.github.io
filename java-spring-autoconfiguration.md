@@ -2,7 +2,7 @@
 title: "Spring Boot 自动配置的原理"
 source: https://www.boris1993.com/java-spring-autoconfiguration.html
 date: 2020-02-20
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, Spring Boot]
 categories: [学知识]
 ---

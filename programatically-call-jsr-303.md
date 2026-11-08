@@ -2,7 +2,7 @@
 title: "手动编写代码调用JSR-303 Bean Validation"
 source: https://www.boris1993.com/programatically-call-jsr-303.html
 date: 2020-01-06
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, 代码技巧]
 categories: [小技巧]
 ---

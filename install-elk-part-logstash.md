@@ -2,7 +2,7 @@
 title: "搭建ELK日志平台 - 安装Logstash"
 source: https://www.boris1993.com/install-elk-part-logstash.html
 date: 2018-02-26
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [ELK, Logstash]
 categories: [瞎折腾]
 ---

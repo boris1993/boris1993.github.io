@@ -2,7 +2,7 @@
 title: "在Spring Boot应用中配置统一的请求响应"
 source: https://www.boris1993.com/generify-response-format-in-spring-boot-applications.html
 date: 2019-12-21
-updated: 2026-10-23
+updated: 2026-11-08
 tags: [Java, Spring Boot, 统一响应]
 categories: [小技巧]
 ---
