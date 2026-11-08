@@ -43,6 +43,12 @@ Harrison的童年
 
 [](https://www.foreverblog.cn/go.html)
 
+开往
+
+开往-友链接力
+
+[](https://www.travellings.cn/go.html)
+
 欢迎交换友链，以下是本站信息：
 
 | 项目 | 内容 |
