@@ -2,7 +2,7 @@
 title: "配置Tomcat监控class和lib变更并自动重新加载"
 source: https://www.boris1993.com/tomcat-monitor-classes-and-auto-reload.html
 date: 2019-03-01
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Tomcat]
 categories: [小技巧]
 ---

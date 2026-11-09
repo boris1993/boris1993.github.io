@@ -2,7 +2,7 @@
 title: "在Java中为什么不推荐在代码中直接写字符串值"
 source: https://www.boris1993.com/java-why-prefer-string-constants-over-literals.html
 date: 2025-03-06
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java]
 categories: [学知识]
 ---

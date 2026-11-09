@@ -2,7 +2,7 @@
 title: "在Google Cloud Logging的日志输出中增加类名、方法名和行数"
 source: https://www.boris1993.com/gcp-logging-show-class-and-method-name.html
 date: 2020-08-30
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, Spring Boot, Google Cloud Logging, Stackdriver]
 categories: [小技巧]
 ---

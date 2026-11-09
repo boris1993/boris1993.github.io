@@ -2,7 +2,7 @@
 title: "Java源码阅读 - Timer"
 source: https://www.boris1993.com/java-read-src-timer.html
 date: 2023-12-19
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, Timer]
 categories: [学知识]
 ---

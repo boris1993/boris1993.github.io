@@ -2,7 +2,7 @@
 title: "MySQL的最左匹配原则"
 source: https://www.boris1993.com/mysql-leftmost-prefix.html
 date: 2023-04-17
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [MySQL, 面试, 最左匹配原则, leftmost prefix]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "记一个Caddy和GitHub自定义域名的坑"
 source: https://www.boris1993.com/caddy-and-github-custom-domain.html
 date: 2018-08-10
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Caddy, GitHub, Custom domain]
 categories: [瞎折腾]
 ---

@@ -2,7 +2,7 @@
 title: "简谈JVM中的几种引用"
 source: https://www.boris1993.com/java-jvm-reference.html
 date: 2020-02-07
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, JVM]
 categories: [学知识]
 ---

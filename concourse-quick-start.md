@@ -2,7 +2,7 @@
 title: "学习Concourse CI - 快速入门"
 source: https://www.boris1993.com/concourse-quick-start.html
 date: 2020-03-10
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [concourse, concourse-ci]
 categories: [学知识]
 ---

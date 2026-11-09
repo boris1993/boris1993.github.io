@@ -2,7 +2,7 @@
 title: "Docker中的PID 1和tini：为什么你的容器不响应Ctrl-C"
 source: https://www.boris1993.com/translation-docker-pid-1-and-tini.html
 date: 2025-06-07
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Docker, tini]
 categories: [翻译]
 ---

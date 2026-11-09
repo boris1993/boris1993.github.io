@@ -2,7 +2,7 @@
 title: "在Dev Container里写Hexo博客"
 source: https://www.boris1993.com/hexo-in-dev-container.html
 date: 2024-12-25
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Hexo, Dev Container]
 categories: [瞎折腾]
 ---

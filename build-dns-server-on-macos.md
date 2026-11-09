@@ -2,7 +2,7 @@
 title: "在macOS中搭建自己的DNS服务器"
 source: https://www.boris1993.com/build-dns-server-on-macos.html
 date: 2018-05-09
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [DNS Server]
 categories: [瞎折腾]
 ---

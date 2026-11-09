@@ -2,7 +2,7 @@
 title: "为webapp设定单独的context.xml"
 source: https://www.boris1993.com/customize-context-xml-for-individual-webapp.html
 date: 2019-03-01
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Tomcat]
 categories: [小技巧]
 ---

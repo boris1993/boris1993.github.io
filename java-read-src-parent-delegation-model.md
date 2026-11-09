@@ -2,7 +2,7 @@
 title: "Java源码阅读 - 类加载的双亲委派模型"
 source: https://www.boris1993.com/java-read-src-parent-delegation-model.html
 date: 2023-12-13
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, 双亲委派, 类加载]
 categories: [学知识]
 ---

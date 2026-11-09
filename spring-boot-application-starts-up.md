@@ -2,7 +2,7 @@
 title: "Spring Boot启动流程分析"
 source: https://www.boris1993.com/spring-boot-application-starts-up.html
 date: 2024-01-06
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, Spring Boot]
 categories: [学知识]
 ---

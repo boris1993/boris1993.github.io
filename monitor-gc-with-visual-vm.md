@@ -2,7 +2,7 @@
 title: "使用VisualVM监控应用GC"
 source: https://www.boris1993.com/monitor-gc-with-visual-vm.html
 date: 2020-02-09
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, VisualVM]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "使用Docker配置Redis哨兵"
 source: https://www.boris1993.com/redis-sentinel-in-docker.html
 date: 2019-06-05
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Redis]
 categories: [学知识]
 ---

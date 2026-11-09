@@ -2,7 +2,7 @@
 title: "让nohup不输出 appending output to 'nohup.out'"
 source: https://www.boris1993.com/suppress-appending-to-nohup-out-message.html
 date: 2019-12-27
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Linux, nohup]
 categories: [小技巧]
 ---

@@ -2,7 +2,7 @@
 title: "MySQL Workbench中各个列属性的含义"
 source: https://www.boris1993.com/column-flags-in-mysql-workbench.html
 date: 2019-12-14
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [MySQL, column flag]
 categories: [学知识]
 ---

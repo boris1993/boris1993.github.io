@@ -2,7 +2,7 @@
 title: "使用Coze工作流将小红书笔记保存至Notion - 工作流配置"
 source: https://www.boris1993.com/save_rednote_to_notion_with_coze_workflow.html
 date: 2025-06-08
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [小红书, 工作流, Coze, 智能体]
 categories: [瞎折腾]
 ---

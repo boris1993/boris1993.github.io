@@ -2,7 +2,7 @@
 title: "Java多线程概念"
 source: https://www.boris1993.com/java-multi-threading-concepts.html
 date: 2019-03-03
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, 多线程]
 categories: [学知识]
 ---

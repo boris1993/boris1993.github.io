@@ -2,7 +2,7 @@
 title: "利用Grafana监控RouterOS运行状态"
 source: https://www.boris1993.com/monitoring-routeros-with-grafana.html
 date: 2023-11-18
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [RouterOS, Prometheus, Grafana]
 categories: [瞎折腾]
 ---

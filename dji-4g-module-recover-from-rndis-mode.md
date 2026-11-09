@@ -2,7 +2,7 @@
 title: "修复被切换成RNDIS模式后改不回来的大疆4G模块"
 source: https://www.boris1993.com/dji-4g-module-recover-from-rndis-mode.html
 date: 2026-08-09
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [大疆4G模块]
 categories: [瞎折腾]
 ---

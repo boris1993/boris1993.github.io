@@ -2,7 +2,7 @@
 title: "深入了解Redis的Pub/Sub"
 source: https://www.boris1993.com/translation-redis-pubsub-in-depth.html
 date: 2025-03-15
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Redis, Pub/Sub]
 categories: [翻译]
 ---

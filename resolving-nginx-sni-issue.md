@@ -2,7 +2,7 @@
 title: "记一次修复生产环境中nginx出现的SNI相关的问题"
 source: https://www.boris1993.com/resolving-nginx-sni-issue.html
 date: 2021-11-21
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [SNI, nginx, OpenResty]
 categories: [学知识]
 ---

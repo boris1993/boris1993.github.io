@@ -2,7 +2,7 @@
 title: "使用FlatMap“展平”一系列数据"
 source: https://www.boris1993.com/flatten-a-group-of-data-by-flatmap.html
 date: 2019-09-26
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, 代码技巧, FlatMap]
 categories: [小技巧]
 ---

@@ -2,7 +2,7 @@
 title: "让MyBatis把查询结果以Map形式返回"
 source: https://www.boris1993.com/mybatis-return-query-results-in-a-map.html
 date: 2019-09-12
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Java, MyBatis]
 categories: [学知识]
 ---

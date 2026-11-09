@@ -2,7 +2,7 @@
 title: "分环境为Git指定单独的配置"
 source: https://www.boris1993.com/specify-different-git-config-for-different-environments.html
 date: 2019-09-18
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Git]
 categories: [小技巧]
 ---

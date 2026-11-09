@@ -2,7 +2,7 @@
 title: "更改Google Play市场使用的区域"
 source: https://www.boris1993.com/change-google-play-market-location.html
 date: 2017-11-21
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [Google, Google Play]
 categories: [其他]
 ---

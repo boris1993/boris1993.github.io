@@ -2,7 +2,7 @@
 title: "赛博养龙虾可以做什么 之 ～ 成为短篇小说作家 ～"
 source: https://www.boris1993.com/openclaw-story-writer.html
 date: 2026-03-16
-updated: 2026-11-08
+updated: 2026-11-09
 tags: [OpenClaw]
 categories: [瞎折腾]
 ---
