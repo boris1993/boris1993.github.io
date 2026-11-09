@@ -61,6 +61,12 @@ boke.lu · 博客收录展示平台~
 
 [](https://boke.lu)
 
+博友圈
+
+让我们跨越山海彼此相连，一起用文字打败时间！
+
+[](https://www.boyouquan.com/home)
+
 博客星球
 
 每一个博客都是一个独立星球！
