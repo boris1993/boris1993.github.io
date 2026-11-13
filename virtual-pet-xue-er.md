@@ -2,7 +2,7 @@
 title: "梦幻电子宠物 - 雪儿"
 source: https://www.boris1993.com/virtual-pet-xue-er.html
 date: 2023-11-27
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [电子宠物, 梦幻电子宠物, 雪儿, 小游戏]
 categories: [忆往昔]
 ---

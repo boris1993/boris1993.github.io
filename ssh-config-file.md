@@ -2,7 +2,7 @@
 title: "使用SSH config简化SSH连接"
 source: https://www.boris1993.com/ssh-config-file.html
 date: 2018-01-09
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Shell, SSH, ssh_config, ProxyCommand, ProxyJump, 跳板机]
 categories: [小技巧]
 ---

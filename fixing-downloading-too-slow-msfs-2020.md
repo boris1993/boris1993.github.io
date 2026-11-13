@@ -2,7 +2,7 @@
 title: "关闭IPv6或调整IPv6优先级以解决微软模拟飞行更新下载过慢的问题"
 source: https://www.boris1993.com/fixing-downloading-too-slow-msfs-2020.html
 date: 2021-12-05
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [微软模拟飞行, 微软模拟飞行更新慢, 微软模拟飞行下载慢]
 categories: [瞎折腾]
 ---

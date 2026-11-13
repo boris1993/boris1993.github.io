@@ -2,7 +2,7 @@
 title: "新玩具之文石Leaf3C电纸书阅读器"
 source: https://www.boris1993.com/new-toy-e-ink-reader-boox-leaf3c.html
 date: 2025-08-15
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [电纸书, 阅读器, 文石]
 categories: [瞎折腾]
 ---

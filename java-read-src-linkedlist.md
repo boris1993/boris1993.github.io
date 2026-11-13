@@ -2,7 +2,7 @@
 title: "Java源码阅读 - LinkedList"
 source: https://www.boris1993.com/java-read-src-linkedlist.html
 date: 2019-12-25
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, LinkedList]
 categories: [学知识]
 ---

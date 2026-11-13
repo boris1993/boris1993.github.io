@@ -2,7 +2,7 @@
 title: "在Spring中通过配置类注入配置文件的值"
 source: https://www.boris1993.com/spring-injecting-property-value-with-configuration-bean.html
 date: 2020-05-03
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, Spring Boot, ConfigurationProperties]
 categories: [小技巧]
 ---

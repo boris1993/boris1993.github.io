@@ -2,7 +2,7 @@
 title: "Shell脚本中 set -ex 命令的作用"
 source: https://www.boris1993.com/shell-set-ex.html
 date: 2019-02-15
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Shell]
 categories: [学知识]
 ---

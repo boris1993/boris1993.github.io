@@ -2,7 +2,7 @@
 title: "理解Java中的抽象队列同步器（AQS）"
 source: https://www.boris1993.com/java-understand-aqs.html
 date: 2024-01-17
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, Lock, AQS, 锁]
 categories: [学知识]
 ---

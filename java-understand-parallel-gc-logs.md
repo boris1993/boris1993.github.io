@@ -2,7 +2,7 @@
 title: "看懂ParallelGC的日志"
 source: https://www.boris1993.com/java-understand-parallel-gc-logs.html
 date: 2020-02-05
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, 垃圾回收, GC, JVM]
 categories: [学知识]
 ---

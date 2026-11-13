@@ -2,7 +2,7 @@
 title: "RouterOS配置Wireguard与阿里云ECS组网"
 source: https://www.boris1993.com/routeros-setup-wireguard.html
 date: 2023-11-10
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [RouterOS, Wireguard]
 categories: [瞎折腾]
 ---

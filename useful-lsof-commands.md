@@ -2,7 +2,7 @@
 title: "常用lsof命令备忘"
 source: https://www.boris1993.com/useful-lsof-commands.html
 date: 2017-12-26
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Shell, lsof]
 categories: [小技巧]
 ---

@@ -2,7 +2,7 @@
 title: "记我将博客的图片存储迁移到Backblaze"
 source: https://www.boris1993.com/migrating-blog-images-to-backblaze.html
 date: 2023-05-15
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [对象存储, OSS, 博客图片, 博客]
 categories: [瞎折腾]
 ---

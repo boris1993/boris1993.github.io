@@ -2,7 +2,7 @@
 title: "Java自定义注解"
 source: https://www.boris1993.com/java-customized-annotations.html
 date: 2019-03-15
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, 注解, Annotations]
 categories: [学知识]
 ---

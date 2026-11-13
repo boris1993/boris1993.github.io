@@ -2,7 +2,7 @@
 title: "配置Caddy作为静态网站服务器和前置代理"
 source: https://www.boris1993.com/set-up-caddy-server.html
 date: 2018-07-19
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Caddy, WebServer]
 categories: [瞎折腾]
 ---

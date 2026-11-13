@@ -2,7 +2,7 @@
 title: "在同一个类的两个方法内部互相调用中，如何使AOP生效"
 source: https://www.boris1993.com/spring-how-to-make-aop-effective-in-internal-calls.html
 date: 2025-03-10
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Spring, AOP]
 categories: [学知识]
 ---

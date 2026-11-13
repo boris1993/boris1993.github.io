@@ -26,15 +26,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.boris1993.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.29.1","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"vs2015","dark":"vs2015"},"prism":{"light":"prism-tomorrow","dark":"prism-tomorrow"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BP1VV29KGV","apiKey":"e96b072abb03747b3fbf7b25a408dce3","indexName":"blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="let path &#x3D; location.pathname;      if (path.match(&quot;\&#x2F;.+\&#x2F;.+\.html&quot;)) {         console.log(&quot;Redirecting to new path&quot;);                  pathParts &#x3D; path.split(&quot;&#x2F;&quot;);         lastPartOfPath &#x3D; pathP">
+    <meta name="description" content="let count &#x3D; 5;     let interval &#x3D; setInterval(() &#x3D;&gt; {         document.getElementById(&#39;timeout&#39;).textContent &#x3D; count;         count--;         if (count &#x3D;&#x3D;&#x3D; 0) {             clearInterval(interva">
 <meta property="og:type" content="website">
 <meta property="og:title" content="404">
 <meta property="og:url" content="https://www.boris1993.com/404.html">
 <meta property="og:site_name" content="Code Life">
-<meta property="og:description" content="let path &#x3D; location.pathname;      if (path.match(&quot;\&#x2F;.+\&#x2F;.+\.html&quot;)) {         console.log(&quot;Redirecting to new path&quot;);                  pathParts &#x3D; path.split(&quot;&#x2F;&quot;);         lastPartOfPath &#x3D; pathP">
+<meta property="og:description" content="let count &#x3D; 5;     let interval &#x3D; setInterval(() &#x3D;&gt; {         document.getElementById(&#39;timeout&#39;).textContent &#x3D; count;         count--;         if (count &#x3D;&#x3D;&#x3D; 0) {             clearInterval(interva">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-11T06:56:19.000Z">
-<meta property="article:modified_time" content="2026-11-09T05:34:50.475Z">
+<meta property="article:modified_time" content="2026-11-13T04:00:45.603Z">
 <meta property="article:author" content="Boris Zhao">
 <meta name="twitter:card" content="summary">
 
@@ -301,28 +301,15 @@
       
       <div class="post-body">
           <script>
-    let path = location.pathname;
-
-    if (path.match("\/.+\/.+\.html")) {
-        console.log("Redirecting to new path");
-        
-        pathParts = path.split("/");
-        lastPartOfPath = pathParts[pathParts.length - 1];
-
-        console.log(`Going to ${lastPartOfPath}`);
-
-        location.href = `/${lastPartOfPath}`;
-    } else {
-        let count = 5;
-        let interval = setInterval(() => {
-            document.getElementById('timeout').textContent = count;
-            count--;
-            if (count === 0) {
-                clearInterval(interval);
-                location.href = "/";
-            }
-        }, 1000);
-    }
+    let count = 5;
+    let interval = setInterval(() => {
+        document.getElementById('timeout').textContent = count;
+        count--;
+        if (count === 0) {
+            clearInterval(interval);
+            location.href = "/";
+        }
+    }, 1000);
 </script>
 
 

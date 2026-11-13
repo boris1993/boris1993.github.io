@@ -2,7 +2,7 @@
 title: "JVM的栈帧"
 source: https://www.boris1993.com/java-jvm-stack-frame.html
 date: 2019-04-02
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, JVM]
 categories: [学知识]
 ---

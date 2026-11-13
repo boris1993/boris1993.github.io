@@ -2,7 +2,7 @@
 title: "生产者与消费者问题在Java中的实现"
 source: https://www.boris1993.com/java-multi-threading-producer-consumer-problem.html
 date: 2019-03-11
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, 多线程]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "About"
 source: https://www.boris1993.com/about/
 date: 2017-11-18
-updated: 2026-11-09
+updated: 2026-11-13
 ---
 
 # About

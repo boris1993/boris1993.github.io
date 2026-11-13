@@ -2,7 +2,7 @@
 title: "Java源码阅读 - ArrayList"
 source: https://www.boris1993.com/java-read-src-arraylist.html
 date: 2019-03-22
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, ArrayList]
 categories: [学知识]
 ---

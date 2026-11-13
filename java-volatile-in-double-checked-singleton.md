@@ -2,7 +2,7 @@
 title: "volatile修饰符在双检锁单例模式中的作用"
 source: https://www.boris1993.com/java-volatile-in-double-checked-singleton.html
 date: 2023-12-10
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, volatile, singleton, 单例模式, 双检锁]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "循序渐进写一个Servlet(4) - 会话追踪"
 source: https://www.boris1993.com/java-servlet-4-session-tracking.html
 date: 2019-03-12
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, Servlet]
 categories: [学知识]
 ---

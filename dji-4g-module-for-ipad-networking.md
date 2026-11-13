@@ -2,7 +2,7 @@
 title: "让iPad用一代大疆4G模块上网"
 source: https://www.boris1993.com/dji-4g-module-for-ipad-networking.html
 date: 2026-07-27
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [大疆4G模块]
 categories: [瞎折腾]
 ---

@@ -2,7 +2,7 @@
 title: "Spring bean的作用域"
 source: https://www.boris1993.com/java-spring-bean-scopes.html
 date: 2020-02-22
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, Spring Boot]
 categories: [学知识]
 ---

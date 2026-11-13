@@ -2,7 +2,7 @@
 title: "为UWP的TextBlock实现鼠标悬浮时显示和隐藏内容"
 source: https://www.boris1993.com/uwp-textblock-show-and-hide-content-on-hover.html
 date: 2023-10-21
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [UWP, TextBlock]
 categories: [学知识]
 ---

@@ -2,7 +2,7 @@
 title: "Java线程池"
 source: https://www.boris1993.com/java-multi-threading-thread-pool.html
 date: 2019-03-04
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Java, 多线程]
 categories: [学知识]
 ---

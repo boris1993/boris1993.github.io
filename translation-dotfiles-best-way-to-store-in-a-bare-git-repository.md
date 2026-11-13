@@ -2,7 +2,7 @@
 title: "用裸git仓库管理点文件的最佳方式"
 source: https://www.boris1993.com/translation-dotfiles-best-way-to-store-in-a-bare-git-repository.html
 date: 2024-05-09
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [git, dotfiles, 点文件]
 categories: [翻译]
 ---

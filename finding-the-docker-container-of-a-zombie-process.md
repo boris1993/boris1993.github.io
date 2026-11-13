@@ -2,7 +2,7 @@
 title: "找到并处理Docker容器中的僵尸进程"
 source: https://www.boris1993.com/finding-the-docker-container-of-a-zombie-process.html
 date: 2024-09-19
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Docker, Zombie Process, 僵尸进程]
 categories: [小技巧]
 ---

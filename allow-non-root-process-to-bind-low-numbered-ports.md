@@ -2,7 +2,7 @@
 title: "如何允许非root进程绑定低位端口"
 source: https://www.boris1993.com/allow-non-root-process-to-bind-low-numbered-ports.html
 date: 2018-08-23
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [setcap, low numbered ports]
 categories: [小技巧]
 ---

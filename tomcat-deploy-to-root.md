@@ -2,7 +2,7 @@
 title: "如何将项目部署至Tomcat的根下"
 source: https://www.boris1993.com/tomcat-deploy-to-root.html
 date: 2018-01-12
-updated: 2026-11-09
+updated: 2026-11-13
 tags: [Tomcat]
 categories: [小技巧]
 ---
