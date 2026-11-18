@@ -2,7 +2,7 @@
 title: "友情链接"
 source: https://www.boris1993.com/friends/
 date: 2026-11-08
-updated: 2026-11-13
+updated: 2026-11-18
 ---
 
 # 友情链接
@@ -36,6 +36,12 @@ Harrison的童年
 阿喵小朋友
 
 [](https://neige.ren)
+
+木屐落在水洼了
+
+その人の声を 聞くだけで 失神しそうな
+
+[](https://mjt.asia)
 
 笔墨迹
 
@@ -102,6 +108,8 @@ boke.lu · 博客收录展示平台~
 开往-友链接力
 
 [](https://www.travellings.cn/go.html)
+
+## 本站信息
 
 欢迎交换友链，以下是本站信息：
 

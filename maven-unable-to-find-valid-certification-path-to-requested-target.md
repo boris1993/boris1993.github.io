@@ -2,7 +2,7 @@
 title: "解决Maven的unable to find valid certification path to requested target错误"
 source: https://www.boris1993.com/maven-unable-to-find-valid-certification-path-to-requested-target.html
 date: 2020-03-30
-updated: 2026-11-13
+updated: 2026-11-18
 tags: [Maven]
 categories: [小技巧]
 ---

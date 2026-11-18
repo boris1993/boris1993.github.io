@@ -2,7 +2,7 @@
 title: "突然情绪爆发，暴哭了一场"
 source: https://www.boris1993.com/i-cried-just-now.html
 date: 2019-08-18
-updated: 2026-11-13
+updated: 2026-11-18
 categories: [生活记录]
 ---
 

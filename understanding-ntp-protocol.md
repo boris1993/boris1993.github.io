@@ -2,7 +2,7 @@
 title: "简单理解NTP v3协议"
 source: https://www.boris1993.com/understanding-ntp-protocol.html
 date: 2022-09-07
-updated: 2026-11-13
+updated: 2026-11-18
 tags: [NTP]
 categories: [学知识]
 ---
