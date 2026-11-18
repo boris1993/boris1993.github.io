@@ -7,6 +7,17 @@ updated: 2026-11-18
 
 # 友情链接
 
+## 本站信息
+
+欢迎交换友链，以下是本站信息：
+
+| 项目 | 内容 |
+| --- | --- |
+| 名称 | Code Life |
+| 地址 | [https://www.boris1993.com](https://www.boris1993.com/) |
+| 描述 | Boris has arrived! |
+| 图标 | [https://www.boris1993.com/favicon.ico](https://www.boris1993.com/favicon.ico) |
+
 ## 大佬们
 
 微复习
@@ -112,14 +123,3 @@ boke.lu · 博客收录展示平台~
 开往-友链接力
 
 [](https://www.travellings.cn/go.html)
-
-## 本站信息
-
-欢迎交换友链，以下是本站信息：
-
-| 项目 | 内容 |
-| --- | --- |
-| 名称 | Code Life |
-| 地址 | [https://www.boris1993.com](https://www.boris1993.com/) |
-| 描述 | Boris has arrived! |
-| 图标 | [https://www.boris1993.com/favicon.ico](https://www.boris1993.com/favicon.ico) |
