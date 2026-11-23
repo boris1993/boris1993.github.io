@@ -33,7 +33,7 @@
 <meta property="og:description" content="熟悉Spring AOP的都知道，如果同一个类中的两个方法在内部互相调用，那么此时AOP是不会生效的，因为Spring AOP是通过代理类来实现的，而类内部的方法调用并不会走到代理对象。那么，有没有办法让内部调用的时候也让AOP生效呢？万能的ChatGPT告诉我，方法是有的，还有好几种。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-10T06:33:53.000Z">
-<meta property="article:modified_time" content="2026-11-23T06:31:33.599Z">
+<meta property="article:modified_time" content="2026-11-23T08:03:58.180Z">
 <meta property="article:author" content="Boris Zhao">
 <meta property="article:tag" content="AOP">
 <meta property="article:tag" content="Spring">
@@ -63,7 +63,7 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/6.1.14/fancybox/fancybox.umd.js" integrity="sha256-QnJV4HT5r8i89ovZGRD86iynZqHerEbT2xt69vDM36I=" crossorigin="anonymous" defer></script>
-<script src="/js/comments.js" defer></script><script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.57.0/lite/builds/browser.umd.js" integrity="sha256-NJrnXIMFVRGMM2IieD83YpTvsPPIFKKyj4K/MNyTRQU=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
 
@@ -333,7 +333,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-11-23 14:31:33" itemprop="dateModified" datetime="2026-11-23T14:31:33+08:00">2026-11-23</time>
+      <time title="修改时间：2026-11-23 16:03:58" itemprop="dateModified" datetime="2026-11-23T16:03:58+08:00">2026-11-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -367,20 +367,6 @@
       <span class="post-meta-item-text">阅读次数：</span>
       <span class="waline-pageview-count" data-path="/spring-how-to-make-aop-effective-in-internal-calls.html"></span>
     </span>
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/spring-how-to-make-aop-effective-in-internal-calls.html#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="spring-how-to-make-aop-effective-in-internal-calls.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
   
 </div>
 
@@ -477,24 +463,7 @@
 
 
 
-      <div class="tabs tabs-comment">
-        <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-waline">waline</a></li>
-            <li class="tab"><a href="#comment-disqus">disqus</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane waline" id="comment-waline">
-              <div class="comments" id="waline"></div>
-            </div>
-            <div class="tab-pane disqus" id="comment-disqus">
-              
-  <div class="comments" id="disqus_thread">
-    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-  </div>
-  
-            </div>
-        </div>
-      </div>
+    <div class="comments" id="waline"></div>
 </div>
   </main>
 
@@ -540,8 +509,6 @@ document.addEventListener('page:loaded', () => {
   );
 });
 </script>
-<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"codelife-boris1993","count":true,"i18n":{"disqus":"disqus"}}</script>
-<script src="/js/third-party/comments/disqus.js" defer></script>
 
 </body>
 </html>
